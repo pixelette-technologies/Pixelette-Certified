@@ -113,8 +113,8 @@ export default function Certifications({ variant = "dark" }: { variant?: "dark" 
                   onClick={() => setSelectedCert(cert)}
                   className={`w-full h-full text-left group rounded-2xl p-6 flex flex-col transition-all duration-500 hover:-translate-y-2 ${
                     isDark
-                      ? "bg-white/[0.04] backdrop-blur-md border border-white/10 hover:bg-white/[0.08] hover:border-accent/20 hover:shadow-glow"
-                      : "bg-white/80 backdrop-blur-md border border-gray-200 hover:border-accent/30 hover:shadow-glow"
+                      ? "bg-transparent hover:bg-white/[0.04] hover:shadow-glow"
+                      : "bg-transparent hover:bg-white/40 hover:shadow-glow"
                   }`}
                 >
                   <span className={`inline-block text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full mb-3 ${
