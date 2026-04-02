@@ -231,6 +231,88 @@ export default function AboutContent() {
         </div>
       </section>
 
+      {/* Meet the Team */}
+      <section className="relative py-20 lg:py-28 bg-surface overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-surface via-white to-surface" />
+        <div className="absolute top-[30%] left-[-5%] w-[400px] h-[400px] rounded-full bg-accent/[0.04] blur-[100px] animate-float-slow" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
+          <SectionHeading
+            label="Our Team"
+            title="The people behind your certification"
+            description="Senior consultants with real-world experience across information security, privacy, AI governance, and ethical hacking."
+            dark={false}
+          />
+
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
+            {[
+              {
+                name: "Muhammad Waleed",
+                role: "Lead Consultant & Founder",
+                credentials: ["ISO 27001 Lead Auditor (IRCA)", "AIGP", "FIP", "CIPP/US", "CIPM", "CISA", "CEH"],
+                bio: "Over a decade of experience in information security, privacy, and AI governance. Leads all certification engagements and audit preparation.",
+              },
+              {
+                name: "To Be Announced",
+                role: "Senior ISO Consultant",
+                credentials: ["ISO 27001 Lead Implementer", "ISO 22301", "CISSP"],
+                bio: "Specialist in ISMS implementation for technology companies. Manages documentation builds and controls implementation across all ISO standards.",
+              },
+              {
+                name: "To Be Announced",
+                role: "Privacy & GDPR Lead",
+                credentials: ["CIPP/E", "CIPM", "GDPR Practitioner"],
+                bio: "Leads all data privacy engagements including GDPR compliance programmes, DPIAs, and vDPO retainers for UK and EU clients.",
+              },
+              {
+                name: "To Be Announced",
+                role: "Cybersecurity Analyst",
+                credentials: ["CEH", "OSCP", "Cyber Essentials Assessor"],
+                bio: "Conducts penetration testing, vulnerability assessments, and Cyber Essentials certification assessments across web, API, and network environments.",
+              },
+            ].map((member) => (
+              <motion.div key={member.name + member.role} variants={staggerItem}>
+                <div className="white-glass rounded-2xl p-6 h-full flex flex-col text-center group hover:-translate-y-2 transition-all duration-500">
+                  {/* Avatar placeholder */}
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-accent/20 to-accent-light/10 border-2 border-accent/20 flex items-center justify-center mx-auto mb-4 group-hover:border-accent/50 group-hover:shadow-glow transition-all duration-500">
+                    <span className="text-2xl font-extrabold gradient-text">
+                      {member.name === "To Be Announced" ? "?" : member.name.split(" ").map(n => n[0]).join("")}
+                    </span>
+                  </div>
+
+                  <h3 className="font-bold text-primary text-lg group-hover:text-accent-dark transition-colors duration-300">
+                    {member.name}
+                  </h3>
+                  <p className="text-accent-dark text-sm font-semibold mt-1 mb-3">{member.role}</p>
+
+                  {/* Credentials */}
+                  <div className="flex flex-wrap justify-center gap-1.5 mb-4">
+                    {member.credentials.slice(0, 4).map((cred) => (
+                      <span key={cred} className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-accent/10 text-accent-dark border border-accent/15">
+                        {cred}
+                      </span>
+                    ))}
+                    {member.credentials.length > 4 && (
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gray-100 text-gray-500">
+                        +{member.credentials.length - 4} more
+                      </span>
+                    )}
+                  </div>
+
+                  <p className="text-gray-600 text-sm leading-relaxed flex-1">{member.bio}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* Verifiable Certifications */}
       <Certifications variant="dark" />
 
