@@ -26,7 +26,7 @@ const services = [
 
 export default function Footer() {
   return (
-    <footer className="relative bg-gradient-to-b from-[#021e1f] to-[#011415] overflow-hidden" role="contentinfo">
+    <footer className="relative bg-gradient-to-b from-[#032e2f] to-[#011415] overflow-hidden" role="contentinfo">
       {/* Top glow line */}
       <div className="absolute top-0 inset-x-0 divider-glow" />
       {/* Floating orb */}

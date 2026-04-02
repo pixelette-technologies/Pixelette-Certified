@@ -108,22 +108,15 @@ export default function Certifications({ variant = "dark" }: { variant?: "dark" 
             className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
           >
             {certifications.map((cert) => (
-              <motion.div key={cert.title} variants={staggerItem}>
+              <motion.div key={cert.title} variants={staggerItem} className="h-full">
                 <button
                   onClick={() => setSelectedCert(cert)}
-                  className={`w-full text-left group rounded-2xl p-6 transition-all duration-500 hover:-translate-y-2 ${
+                  className={`w-full h-full text-left group rounded-2xl p-6 flex flex-col transition-all duration-500 hover:-translate-y-2 ${
                     isDark
-                      ? "glass-card hover:shadow-glow-lg"
-                      : "white-glass hover:shadow-glow"
+                      ? "bg-white/[0.04] backdrop-blur-md border border-white/10 hover:bg-white/[0.08] hover:border-accent/20 hover:shadow-glow"
+                      : "bg-white/80 backdrop-blur-md border border-gray-200 hover:border-accent/30 hover:shadow-glow"
                   }`}
                 >
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-all duration-500 ${
-                    isDark
-                      ? "bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 group-hover:border-accent/50 group-hover:shadow-glow"
-                      : "bg-gradient-to-br from-accent/15 to-accent-light/5 border border-accent/15 group-hover:border-accent/40"
-                  }`}>
-                    <Award className="h-6 w-6 text-accent" />
-                  </div>
                   <span className={`inline-block text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full mb-3 ${
                     isDark
                       ? "bg-accent/10 text-accent border border-accent/20"
@@ -141,7 +134,7 @@ export default function Certifications({ variant = "dark" }: { variant?: "dark" 
                   <p className={`text-xs ${isDark ? "text-gray-500" : "text-gray-500"}`}>
                     {cert.issuer}
                   </p>
-                  <span className={`mt-3 text-xs font-semibold inline-flex items-center gap-1 ${
+                  <span className={`mt-auto pt-3 text-xs font-semibold inline-flex items-center gap-1 ${
                     isDark ? "text-accent" : "text-accent-dark"
                   }`}>
                     View certificate <ExternalLink className="h-3 w-3" />

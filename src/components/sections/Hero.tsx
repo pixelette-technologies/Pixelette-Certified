@@ -22,7 +22,7 @@ export default function Hero() {
       </div>
 
       {/* Top gradient fade */}
-      <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-[#021e1f] to-transparent z-[1]" />
+      <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-[#032e2f] to-transparent z-[1]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-20 lg:py-28 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         {/* Left content */}
@@ -95,7 +95,7 @@ export default function Hero() {
       </div>
 
       {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-[#021e1f] to-transparent z-[1]" />
+      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-[#032e2f] to-transparent z-[1]" />
     </section>
   );
 }

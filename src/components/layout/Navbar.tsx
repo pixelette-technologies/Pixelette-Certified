@@ -32,8 +32,8 @@ export default function Navbar() {
       className={cn(
         "sticky top-0 z-50 transition-all duration-500",
         scrolled
-          ? "bg-gradient-to-r from-[#021e1f]/95 via-primary/90 to-[#021e1f]/95 backdrop-blur-xl shadow-2xl shadow-black/30 border-b border-accent/10"
-          : "bg-gradient-to-r from-[#021e1f]/60 via-primary/50 to-[#021e1f]/60 backdrop-blur-md"
+          ? "bg-gradient-to-r from-[#032e2f]/95 via-primary/90 to-[#032e2f]/95 backdrop-blur-xl shadow-2xl shadow-black/30 border-b border-accent/10"
+          : "bg-gradient-to-r from-[#032e2f]/60 via-primary/50 to-[#032e2f]/60 backdrop-blur-md"
       )}
     >
       {/* Top accent line */}
@@ -87,7 +87,7 @@ export default function Navbar() {
                         exit={{ opacity: 0, y: -4 }}
                         transition={{ duration: 0.2 }}
                         className="fixed left-0 right-0 top-[73px] z-50
-                          bg-[#021e1f]/80 backdrop-blur-2xl saturate-150 border-b border-accent/10
+                          bg-[#032e2f]/80 backdrop-blur-2xl saturate-150 border-b border-accent/10
                           shadow-2xl shadow-black/40"
                       >
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-5">
