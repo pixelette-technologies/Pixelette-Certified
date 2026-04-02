@@ -249,32 +249,20 @@ export default function AboutContent() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+            className="grid sm:grid-cols-2 gap-8 max-w-2xl mx-auto"
           >
             {[
               {
+                name: "Asif Rana Ashiq",
+                role: "CEO & Founder",
+                credentials: [],
+                bio: "Founder of Pixelette Group with over a decade of experience building technology solutions across the UK, Middle East, and Europe. Established Pixelette Certified to help UK technology companies achieve compliance faster and at a fair price.",
+              },
+              {
                 name: "Muhammad Waleed",
-                role: "Lead Consultant & Founder",
+                role: "Lead Consultant",
                 credentials: ["ISO 27001 Lead Auditor (IRCA)", "AIGP", "FIP", "CIPP/US", "CIPM", "CISA", "CEH"],
-                bio: "Over a decade of experience in information security, privacy, and AI governance. Leads all certification engagements and audit preparation.",
-              },
-              {
-                name: "To Be Announced",
-                role: "Senior ISO Consultant",
-                credentials: ["ISO 27001 Lead Implementer", "ISO 22301", "CISSP"],
-                bio: "Specialist in ISMS implementation for technology companies. Manages documentation builds and controls implementation across all ISO standards.",
-              },
-              {
-                name: "To Be Announced",
-                role: "Privacy & GDPR Lead",
-                credentials: ["CIPP/E", "CIPM", "GDPR Practitioner"],
-                bio: "Leads all data privacy engagements including GDPR compliance programmes, DPIAs, and vDPO retainers for UK and EU clients.",
-              },
-              {
-                name: "To Be Announced",
-                role: "Cybersecurity Analyst",
-                credentials: ["CEH", "OSCP", "Cyber Essentials Assessor"],
-                bio: "Conducts penetration testing, vulnerability assessments, and Cyber Essentials certification assessments across web, API, and network environments.",
+                bio: "Leads all certification engagements and audit preparation. Expert in information security, privacy, AI governance, and ethical hacking with hands-on experience across ISO 27001, ISO 42001, GDPR, and penetration testing.",
               },
             ].map((member) => (
               <motion.div key={member.name + member.role} variants={staggerItem}>
