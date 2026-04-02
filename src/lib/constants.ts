@@ -5,8 +5,9 @@ export const SITE_CONFIG = {
     "UK-based ISO certification and compliance consultancy. ISO 27001, Cyber Essentials, GDPR, vCISO, AI Governance. Expert-led. Built for technology companies.",
   url: "https://pixelettecertified.co.uk",
   email: "info@pixelettecertified.co.uk",
-  phone: "+44 (0) 20 7946 0958",
-  phoneTel: "+442079460958",
+  phone: "+44 (0) 000 000 0000",
+  phoneTel: "+440000000000",
+  // TODO: Replace with real phone number before go-live
   address: "London, United Kingdom",
   regions: ["UK", "Ireland", "UAE", "EU"],
   social: {

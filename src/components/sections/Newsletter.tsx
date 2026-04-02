@@ -7,6 +7,7 @@ import { fadeInUp } from "@/lib/animations";
 
 export default function Newsletter() {
   const [email, setEmail] = useState("");
+  const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   async function handleSubmit(e: React.FormEvent) {
@@ -59,25 +60,26 @@ export default function Newsletter() {
             </p>
           </motion.div>
         ) : (
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-            <div className="relative flex-1">
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500 pointer-events-none" />
-              <input
-                type="email"
-                required
-                placeholder="your@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-white/5 border border-white/10
-                  text-white placeholder:text-gray-500 text-sm
-                  focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/30
-                  transition-all duration-300"
-                disabled={status === "loading"}
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={status === "loading"}
+          <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+            <div className="flex flex-col sm:flex-row gap-3">
+              <div className="relative flex-1">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500 pointer-events-none" />
+                <input
+                  type="email"
+                  required
+                  placeholder="your@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-white/5 border border-white/10
+                    text-white placeholder:text-gray-500 text-sm
+                    focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/30
+                    transition-all duration-300"
+                  disabled={status === "loading"}
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={status === "loading" || !consent}
               className="px-6 py-3.5 rounded-xl font-semibold text-sm text-white
                 bg-gradient-to-r from-accent to-accent-dark
                 shadow-glow-accent hover:shadow-glow-lg
@@ -88,7 +90,21 @@ export default function Newsletter() {
               {status === "loading" ? "Subscribing..." : (
                 <>Subscribe <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" /></>
               )}
-            </button>
+              </button>
+            </div>
+            <label className="flex items-start gap-2.5 mt-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={consent}
+                onChange={(e) => setConsent(e.target.checked)}
+                required
+                className="mt-0.5 h-4 w-4 shrink-0 rounded border-white/20 bg-white/5 accent-accent"
+              />
+              <span className="text-xs text-gray-500 leading-relaxed text-left">
+                I agree to receive compliance insights from Pixelette Certified per our{" "}
+                <a href="/privacy-policy" className="text-accent hover:text-accent-light underline">Privacy Policy</a>.
+              </span>
+            </label>
           </form>
         )}
 

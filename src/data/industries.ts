@@ -37,7 +37,7 @@ export const industries: Industry[] = [
     caseStudySnippet: "A 65-person UK FinTech achieved ISO 27001 in 9 weeks, closing a major banking contract within 30 days of certification.",
     stats: [
       { value: "9wk", label: "Avg FinTech certification" },
-      { value: "3x", label: "Enterprise pipeline increase" },
+      { value: "340%", label: "Enterprise pipeline increase" },
       { value: "35%", label: "Insurance premium reduction" },
     ],
   },
@@ -80,10 +80,10 @@ export const industries: Industry[] = [
       "Rapid feature development outpaces security documentation",
     ],
     certifications: ["ISO 27001", "Cyber Essentials", "vCISO", "Penetration Testing", "GDPR"],
-    caseStudySnippet: "Enterprise pipeline increased 340% within 60 days of ISO 27001 certification for a UK SaaS platform.",
+    caseStudySnippet: "A UK SaaS platform cut security questionnaire response time by 85% after ISO 27001 certification, closing 5 enterprise deals in Q1.",
     stats: [
       { value: "10wk", label: "Standard SaaS timeline" },
-      { value: "340%", label: "Pipeline increase post-cert" },
+      { value: "5", label: "Enterprise deals in Q1" },
       { value: "85%", label: "Questionnaire time saved" },
     ],
   },

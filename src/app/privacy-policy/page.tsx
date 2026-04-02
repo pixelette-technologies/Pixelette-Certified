@@ -37,7 +37,7 @@ export default function PrivacyPolicyPage() {
             <p>We collect the following personal data when you interact with our website:</p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
               <li><strong className="text-white">Contact form submissions:</strong> name, email address, company name, phone number, service interest, and message content.</li>
-              <li><strong className="text-white">Chatbot interactions:</strong> messages exchanged with our AI compliance assistant (Clara). No personal data is stored beyond the browser session.</li>
+              <li><strong className="text-white">Live chat interactions:</strong> messages exchanged with our website chat assistant. Chat messages are processed in your browser session only and are not stored on our servers.</li>
               <li><strong className="text-white">Website analytics:</strong> anonymised usage data including pages visited, time on site, referral source, and device type (via Vercel Analytics or Google Analytics 4).</li>
               <li><strong className="text-white">Cookies:</strong> essential cookies for site functionality and optional analytics cookies. See our <Link href="/cookie-policy" className="text-accent hover:text-accent-light transition-colors">Cookie Policy</Link> for details.</li>
             </ul>

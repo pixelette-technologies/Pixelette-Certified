@@ -97,45 +97,24 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
       {/* ─── Overview ─── */}
       <section className="py-20 lg:py-28 bg-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <motion.div
-              variants={fadeInLeft}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <SectionHeading
-                label="Overview"
-                title="What is this service?"
-                dark={false}
-                centered={false}
-                className="mb-6"
-              />
-              <p className="text-gray-600 text-lg leading-relaxed">
-                {service.longDescription}
-              </p>
-            </motion.div>
-
-            <motion.div
-              variants={fadeInRight}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="grid grid-cols-2 gap-4"
-            >
-              {service.features.slice(0, 4).map((feature, i) => (
-                <div
-                  key={i}
-                  className="rounded-2xl bg-white border border-gray-100 shadow-lg shadow-black/5 p-6"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center mb-3">
-                    <Check className="h-5 w-5 text-accent" />
-                  </div>
-                  <p className="text-sm font-semibold text-primary">{feature}</p>
-                </div>
-              ))}
-            </motion.div>
-          </div>
+          <motion.div
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto"
+          >
+            <SectionHeading
+              label="Overview"
+              title="What is this service?"
+              dark={false}
+              centered
+              className="mb-6"
+            />
+            <p className="text-gray-600 text-lg leading-relaxed text-center">
+              {service.longDescription}
+            </p>
+          </motion.div>
         </div>
       </section>
 

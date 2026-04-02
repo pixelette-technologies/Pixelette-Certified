@@ -373,7 +373,7 @@ export const services: Service[] = [
   {
     slug: "penetration-testing",
     title: "Penetration Testing (VAPT)",
-    shortTitle: "Pen Testing",
+    shortTitle: "Penetration Testing",
     description: "Find your weaknesses before attackers do.",
     longDescription:
       "Our Vulnerability Assessment and Penetration Testing (VAPT) service identifies security weaknesses in your applications, networks, and infrastructure before attackers exploit them. Conducted by CREST-certified testers using industry-standard methodologies.",

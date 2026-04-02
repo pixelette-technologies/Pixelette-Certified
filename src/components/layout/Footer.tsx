@@ -14,6 +14,8 @@ const quickLinks = [
 const services = [
   { label: "ISO 27001", href: "/services/iso-27001" },
   { label: "ISO 22301", href: "/services/iso-22301" },
+  { label: "ISO 9001", href: "/services/iso-9001" },
+  { label: "ISO 14001", href: "/services/iso-14001" },
   { label: "ISO 42001 (AI)", href: "/services/iso-42001" },
   { label: "Cyber Essentials", href: "/services/cyber-essentials" },
   { label: "vCISO", href: "/services/vciso" },

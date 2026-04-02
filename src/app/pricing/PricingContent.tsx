@@ -56,6 +56,13 @@ const certificationPricing: PricingRow[] = [
     enterprise: "£19,000",
   },
   {
+    service: "ISO 14001",
+    href: "/services/iso-14001",
+    essentials: "£8,000",
+    professional: "£13,000",
+    enterprise: "£20,000",
+  },
+  {
     service: "Cyber Essentials",
     href: "/services/cyber-essentials",
     essentials: "£1,800",
@@ -104,6 +111,12 @@ const retainerPricing: RetainerRow[] = [
     price: "£7,500",
     note: "per month — 22-30 hrs/month",
   },
+  {
+    service: "vDPO",
+    href: "/services/vdpo",
+    price: "£2,000",
+    note: "per month — 8-10 hrs/month",
+  },
 ];
 
 interface OneOffRow {
@@ -115,7 +128,7 @@ interface OneOffRow {
 
 const oneOffPricing: OneOffRow[] = [
   {
-    service: "Penetration Test",
+    service: "Penetration Testing",
     href: "/services/penetration-testing",
     price: "£2,800",
     note: "per application",
