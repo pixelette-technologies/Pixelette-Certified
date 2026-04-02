@@ -18,7 +18,7 @@ export default function HomePage() {
           "@context": "https://schema.org",
           "@type": "WebSite",
           name: "Pixelette Certified",
-          url: "https://pixelettecertified.co.uk",
+          url: "https://pixelettecertified.com",
           description:
             "UK-based ISO certification and compliance consultancy. ISO 27001, Cyber Essentials, GDPR, vCISO, AI Governance.",
         }}

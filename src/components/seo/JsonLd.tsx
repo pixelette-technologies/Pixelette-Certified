@@ -18,13 +18,13 @@ export function OrganizationSchema() {
         "@context": "https://schema.org",
         "@type": "Organization",
         name: "Pixelette Certified",
-        url: "https://pixelettecertified.co.uk",
-        logo: "https://pixelettecertified.co.uk/logos/logo-green-text.svg",
+        url: "https://pixelettecertified.com",
+        logo: "https://pixelettecertified.com/logos/logo-green-text.svg",
         description:
           "UK-based ISO certification and compliance consultancy. ISO 27001, Cyber Essentials, GDPR, vCISO, AI Governance.",
         contactPoint: {
           "@type": "ContactPoint",
-          email: "info@pixelettecertified.co.uk",
+          email: "info@pixelettecertified.com",
           contactType: "sales",
           availableLanguage: "English",
         },

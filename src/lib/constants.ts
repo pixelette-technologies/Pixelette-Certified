@@ -3,8 +3,8 @@ export const SITE_CONFIG = {
   tagline: "Compliance. Governance. Cyber Trust.",
   description:
     "UK-based ISO certification and compliance consultancy. ISO 27001, Cyber Essentials, GDPR, vCISO, AI Governance. Expert-led. Built for technology companies.",
-  url: "https://pixelettecertified.co.uk",
-  email: "info@pixelettecertified.co.uk",
+  url: "https://pixelettecertified.com",
+  email: "info@pixelettecertified.com",
   phone: "+44 20 7946 0958",
   phoneTel: "+442079460958",
   address: "London, United Kingdom",

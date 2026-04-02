@@ -19,10 +19,10 @@ export const metadata: Metadata = {
     title: "Industries We Serve | Pixelette Certified",
     description:
       "Sector-specific ISO certification and compliance expertise for UK technology companies.",
-    url: "https://pixelettecertified.co.uk/industries",
+    url: "https://pixelettecertified.com/industries",
   },
   alternates: {
-    canonical: "https://pixelettecertified.co.uk/industries",
+    canonical: "https://pixelettecertified.com/industries",
   },
 };
 
@@ -44,7 +44,7 @@ export default function IndustriesPage() {
             position: i + 1,
             name: ind.title,
             description: ind.description,
-            url: `https://pixelettecertified.co.uk/industries#${ind.slug}`,
+            url: `https://pixelettecertified.com/industries#${ind.slug}`,
           })),
         }}
       />

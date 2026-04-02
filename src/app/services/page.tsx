@@ -20,10 +20,10 @@ export const metadata: Metadata = {
     title: "Our Services | Pixelette Certified",
     description:
       "ISO certification, cybersecurity, and compliance services for UK technology companies.",
-    url: "https://pixelettecertified.co.uk/services",
+    url: "https://pixelettecertified.com/services",
   },
   alternates: {
-    canonical: "https://pixelettecertified.co.uk/services",
+    canonical: "https://pixelettecertified.com/services",
   },
 };
 
@@ -68,7 +68,7 @@ export default function ServicesPage() {
           "@type": "ItemList",
           name: "Pixelette Certified Services",
           description: "ISO certification, cybersecurity, and compliance services.",
-          url: "https://pixelettecertified.co.uk/services",
+          url: "https://pixelettecertified.com/services",
           itemListElement: services.map((service, i) => ({
             "@type": "ListItem",
             position: i + 1,
@@ -76,7 +76,7 @@ export default function ServicesPage() {
               "@type": "Service",
               name: service.title,
               description: service.description,
-              url: `https://pixelettecertified.co.uk/services/${service.slug}`,
+              url: `https://pixelettecertified.com/services/${service.slug}`,
             },
           })),
         }}

@@ -12,10 +12,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: service.seo.title,
     description: service.seo.description,
-    url: `https://pixelettecertified.co.uk/services/${service.slug}`,
+    url: `https://pixelettecertified.com/services/${service.slug}`,
   },
   alternates: {
-    canonical: `https://pixelettecertified.co.uk/services/${service.slug}`,
+    canonical: `https://pixelettecertified.com/services/${service.slug}`,
   },
 };
 
@@ -31,9 +31,9 @@ export default function GDPRPrivacyPage() {
           provider: {
             "@type": "Organization",
             name: "Pixelette Certified",
-            url: "https://pixelettecertified.co.uk",
+            url: "https://pixelettecertified.com",
           },
-          url: `https://pixelettecertified.co.uk/services/${service.slug}`,
+          url: `https://pixelettecertified.com/services/${service.slug}`,
           areaServed: ["GB", "IE", "AE", "EU"],
           hasOfferCatalog: {
             "@type": "OfferCatalog",

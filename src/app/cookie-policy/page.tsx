@@ -128,8 +128,8 @@ export default function CookiePolicyPage() {
             <h2 className="text-xl font-bold text-white mb-3">6. Contact Us</h2>
             <p>
               If you have questions about our use of cookies, please contact us at{" "}
-              <a href="mailto:privacy@pixelettecertified.co.uk" className="text-accent hover:text-accent-light transition-colors">
-                privacy@pixelettecertified.co.uk
+              <a href="mailto:privacy@pixelettecertified.com" className="text-accent hover:text-accent-light transition-colors">
+                privacy@pixelettecertified.com
               </a>{" "}
               or visit our{" "}
               <Link href="/privacy-policy" className="text-accent hover:text-accent-light transition-colors">

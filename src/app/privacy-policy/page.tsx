@@ -26,8 +26,8 @@ export default function PrivacyPolicyPage() {
             </p>
             <p className="mt-2">
               <strong className="text-white">Email:</strong>{" "}
-              <a href="mailto:privacy@pixelettecertified.co.uk" className="text-accent hover:text-accent-light transition-colors">
-                privacy@pixelettecertified.co.uk
+              <a href="mailto:privacy@pixelettecertified.com" className="text-accent hover:text-accent-light transition-colors">
+                privacy@pixelettecertified.com
               </a>
             </p>
           </section>
@@ -101,8 +101,8 @@ export default function PrivacyPolicyPage() {
             </ul>
             <p className="mt-2">
               To exercise any of these rights, email{" "}
-              <a href="mailto:privacy@pixelettecertified.co.uk" className="text-accent hover:text-accent-light transition-colors">
-                privacy@pixelettecertified.co.uk
+              <a href="mailto:privacy@pixelettecertified.com" className="text-accent hover:text-accent-light transition-colors">
+                privacy@pixelettecertified.com
               </a>.
               We will respond within 30 days.
             </p>

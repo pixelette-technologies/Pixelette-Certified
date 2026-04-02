@@ -57,11 +57,11 @@ export default function BlogPostClient({
             publisher: {
               "@type": "Organization",
               name: "Pixelette Certified",
-              url: "https://pixelettecertified.co.uk",
+              url: "https://pixelettecertified.com",
             },
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://pixelettecertified.co.uk/blog/${post.slug}`,
+              "@id": `https://pixelettecertified.com/blog/${post.slug}`,
             },
           }}
         />
