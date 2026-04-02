@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Award, X, ExternalLink } from "lucide-react";
+import { X, ExternalLink } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { staggerContainer, staggerItem } from "@/lib/animations";
 
@@ -105,7 +105,7 @@ export default function Certifications({ variant = "dark" }: { variant?: "dark" 
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch"
           >
             {certifications.map((cert) => (
               <motion.div key={cert.title} variants={staggerItem} className="h-full">
