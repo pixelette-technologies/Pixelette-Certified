@@ -1,0 +1,209 @@
+import {
+  Landmark, Cpu, Heart, GraduationCap, ShoppingCart,
+  Building2, Scale, Factory, Plane, Wifi,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+
+export interface Industry {
+  slug: string;
+  title: string;
+  shortTitle: string;
+  description: string;
+  longDescription: string;
+  icon: LucideIcon;
+  challenges: string[];
+  certifications: string[];
+  caseStudySnippet: string;
+  stats: { value: string; label: string }[];
+}
+
+export const industries: Industry[] = [
+  {
+    slug: "fintech",
+    title: "FinTech & Financial Services",
+    shortTitle: "FinTech",
+    description: "Enterprise clients and regulators demand certified security. We get FinTechs audit-ready in weeks, not months.",
+    longDescription:
+      "Financial technology companies operate under intense scrutiny from regulators, enterprise banking partners, and investors. FCA expectations, PSD2 requirements, and enterprise procurement security questionnaires all demand formal certification. Without ISO 27001, your pipeline stalls at the security review stage.",
+    icon: Landmark,
+    challenges: [
+      "Enterprise banks require ISO 27001 as a non-negotiable procurement condition",
+      "FCA expectations around data governance and operational resilience are increasing",
+      "Cyber insurance underwriters demand certified security posture for favourable premiums",
+      "Series B+ investors scrutinise information security governance during due diligence",
+      "PCI DSS, SOC 2, and ISO 27001 overlap creates compliance fatigue without expert guidance",
+    ],
+    certifications: ["ISO 27001", "Cyber Essentials Plus", "ISO 22301", "GDPR", "vCISO"],
+    caseStudySnippet: "A 65-person UK FinTech achieved ISO 27001 in 9 weeks, closing a major banking contract within 30 days of certification.",
+    stats: [
+      { value: "9wk", label: "Avg FinTech certification" },
+      { value: "3x", label: "Enterprise pipeline increase" },
+      { value: "35%", label: "Insurance premium reduction" },
+    ],
+  },
+  {
+    slug: "ai-technology",
+    title: "AI & Machine Learning Companies",
+    shortTitle: "AI & ML",
+    description: "ISO 42001 AI governance is the new competitive edge. Be among the first certified AI companies in the UK.",
+    longDescription:
+      "AI companies face a unique compliance landscape. The EU AI Act, enterprise AI procurement requirements, and growing public scrutiny around responsible AI all demand formal governance frameworks. ISO 42001 is the standard that proves you build AI responsibly — and the companies that achieve it now gain a structural advantage.",
+    icon: Cpu,
+    challenges: [
+      "EU AI Act compliance deadlines are approaching with significant penalties for non-compliance",
+      "Enterprise clients are adding AI governance questions to security questionnaires",
+      "Bias, fairness, and transparency requirements need structured assessment frameworks",
+      "Investors are scrutinising AI risk management in due diligence",
+      "GDPR Article 22 automated decision-making obligations overlap with AI governance",
+    ],
+    certifications: ["ISO 42001", "ISO 27001", "GDPR", "vCISO"],
+    caseStudySnippet: "A 40-person AI SaaS platform achieved dual ISO 42001 + ISO 27001 certification in 14 weeks, leveraging 60% control overlap.",
+    stats: [
+      { value: "1st", label: "Among first UK AI consultancies" },
+      { value: "60%", label: "Control overlap leveraged" },
+      { value: "14wk", label: "Dual certification timeline" },
+    ],
+  },
+  {
+    slug: "saas-technology",
+    title: "SaaS & Technology Platforms",
+    shortTitle: "SaaS",
+    description: "ISO 27001 is the ticket to enterprise sales. Stop losing deals to certified competitors.",
+    longDescription:
+      "SaaS companies scaling into the enterprise market hit the same wall: procurement teams require ISO 27001 as a minimum security standard. Every month without certification is pipeline lost to competitors who already have it. We specialise in getting SaaS platforms from zero to certified in 10 weeks.",
+    icon: Wifi,
+    challenges: [
+      "Enterprise procurement requires ISO 27001 as a first-pass filter",
+      "Security questionnaires consume 40+ engineering hours per month",
+      "Multi-tenant architecture creates unique scope and control requirements",
+      "SOC 2 demand from US clients adds to the compliance burden",
+      "Rapid feature development outpaces security documentation",
+    ],
+    certifications: ["ISO 27001", "Cyber Essentials", "vCISO", "Penetration Testing", "GDPR"],
+    caseStudySnippet: "Enterprise pipeline increased 340% within 60 days of ISO 27001 certification for a UK SaaS platform.",
+    stats: [
+      { value: "10wk", label: "Standard SaaS timeline" },
+      { value: "340%", label: "Pipeline increase post-cert" },
+      { value: "85%", label: "Questionnaire time saved" },
+    ],
+  },
+  {
+    slug: "healthcare",
+    title: "Healthcare & HealthTech",
+    shortTitle: "Healthcare",
+    description: "NHS supply chain compliance and patient data protection require certified security. We deliver both.",
+    longDescription:
+      "Healthcare technology companies operate in one of the most regulated environments in the UK. NHS Digital supply chain requirements mandate Cyber Essentials, while private healthcare clients and insurers require ISO 27001. Patient data sensitivity adds GDPR obligations that demand formal privacy governance.",
+    icon: Heart,
+    challenges: [
+      "NHS Digital supply chain mandates Cyber Essentials for all technology suppliers",
+      "Private healthcare clients require ISO 27001 for data processing agreements",
+      "Patient data sensitivity demands rigorous GDPR compliance and DPIAs",
+      "Multi-site operations complicate scope and control consistency",
+      "Clinical safety standards intersect with information security requirements",
+    ],
+    certifications: ["Cyber Essentials Plus", "ISO 27001", "ISO 22301", "GDPR", "vDPO"],
+    caseStudySnippet: "A 120-person HealthTech achieved Cyber Essentials in 3 weeks and ISO 27001 in 12 weeks, securing NHS framework eligibility.",
+    stats: [
+      { value: "3wk", label: "Cyber Essentials timeline" },
+      { value: "12wk", label: "ISO 27001 timeline" },
+      { value: "100%", label: "Contract renewals secured" },
+    ],
+  },
+  {
+    slug: "professional-services",
+    title: "Professional Services & Consulting",
+    shortTitle: "Prof. Services",
+    description: "Demonstrate trust and governance excellence to enterprise clients with formal certification.",
+    longDescription:
+      "Professional services firms — law firms, accountancies, management consultancies, and recruitment agencies — handle sensitive client data daily. Enterprise clients increasingly require ISO 27001 and formal data protection governance from their professional service providers.",
+    icon: Building2,
+    challenges: [
+      "Enterprise clients mandate ISO 27001 for professional service suppliers",
+      "Handling sensitive client data creates significant liability exposure",
+      "Multi-office operations require consistent security governance",
+      "Regulatory bodies are increasing expectations around data protection",
+      "Competitive differentiation requires demonstrable security posture",
+    ],
+    certifications: ["ISO 27001", "ISO 9001", "Cyber Essentials", "GDPR", "vCISO"],
+    caseStudySnippet: "A multi-office consultancy unified fragmented security practices under ISO 27001 and ISO 9001 in a combined 14-week engagement.",
+    stats: [
+      { value: "14wk", label: "Combined ISO timeline" },
+      { value: "£0", label: "Major audit findings cost" },
+      { value: "25%", label: "Below market pricing" },
+    ],
+  },
+  {
+    slug: "government-suppliers",
+    title: "Government & Public Sector Suppliers",
+    shortTitle: "Gov Suppliers",
+    description: "Cyber Essentials is mandatory. ISO 27001 wins frameworks. We handle both.",
+    longDescription:
+      "Any company selling to the UK government must hold Cyber Essentials certification. For higher-assurance contracts — defence, NHS, critical infrastructure — Cyber Essentials Plus and ISO 27001 are required. We fast-track government suppliers through both certifications.",
+    icon: Scale,
+    challenges: [
+      "Cyber Essentials is mandatory for all UK government contract suppliers",
+      "Higher-assurance contracts require Cyber Essentials Plus and ISO 27001",
+      "Framework deadlines create urgent certification timelines",
+      "MOD and defence sector contracts require additional security clearances",
+      "Annual renewal requirements demand ongoing compliance management",
+    ],
+    certifications: ["Cyber Essentials", "Cyber Essentials Plus", "ISO 27001", "ISO 22301", "vCISO"],
+    caseStudySnippet: "Achieved Cyber Essentials in 2 weeks to meet an NHS framework deadline, then ISO 27001 within 10 weeks.",
+    stats: [
+      { value: "2wk", label: "Fastest CE certification" },
+      { value: "10wk", label: "ISO 27001 follow-on" },
+      { value: "100%", label: "Framework eligibility" },
+    ],
+  },
+  {
+    slug: "ecommerce-retail",
+    title: "E-Commerce & Retail Technology",
+    shortTitle: "E-Commerce",
+    description: "Protect customer data, meet payment security standards, and build buyer trust.",
+    longDescription:
+      "E-commerce and retail technology companies process millions of transactions and store sensitive customer data. Payment card industry requirements, GDPR obligations, and enterprise retail partner security expectations all demand formal compliance. ISO 27001 and Cyber Essentials build the trust that drives conversion.",
+    icon: ShoppingCart,
+    challenges: [
+      "Payment processing requires formal security governance",
+      "GDPR obligations around customer data are significant",
+      "Enterprise retail partners require ISO 27001 for integration",
+      "Data breach risk directly impacts brand trust and revenue",
+      "Multi-channel operations create complex data flow requirements",
+    ],
+    certifications: ["ISO 27001", "Cyber Essentials", "GDPR", "Penetration Testing", "vCISO"],
+    caseStudySnippet: "An e-commerce platform reduced data breach insurance premiums by 40% and onboarded 3 enterprise retail partners post-certification.",
+    stats: [
+      { value: "40%", label: "Insurance premium reduction" },
+      { value: "10wk", label: "Certification timeline" },
+      { value: "3", label: "Enterprise partners gained" },
+    ],
+  },
+  {
+    slug: "education",
+    title: "Education & EdTech",
+    shortTitle: "EdTech",
+    description: "Protect student data, meet DfE requirements, and win institutional contracts.",
+    longDescription:
+      "Education technology companies handle some of the most sensitive data categories — children's personal information. DfE standards, institutional procurement requirements, and GDPR children's data provisions all demand formal security and privacy governance.",
+    icon: GraduationCap,
+    challenges: [
+      "Children's data requires heightened GDPR protections and DPIAs",
+      "DfE and institutional procurement demand formal security certification",
+      "Multi-academy trusts and universities require ISO 27001 from suppliers",
+      "Safeguarding obligations intersect with data protection requirements",
+      "International expansion requires compliance across multiple jurisdictions",
+    ],
+    certifications: ["ISO 27001", "Cyber Essentials", "GDPR", "vDPO", "ISO 9001"],
+    caseStudySnippet: "An EdTech platform serving 200+ schools achieved ISO 27001 and GDPR compliance, unlocking multi-academy trust contracts.",
+    stats: [
+      { value: "200+", label: "Schools protected" },
+      { value: "11wk", label: "Certification timeline" },
+      { value: "100%", label: "GDPR children's compliance" },
+    ],
+  },
+];
+
+export function getIndustryBySlug(slug: string): Industry | undefined {
+  return industries.find((i) => i.slug === slug);
+}
