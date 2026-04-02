@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Certifications from "@/components/sections/Certifications";
 import {
   Shield,
   Award,
@@ -229,6 +230,9 @@ export default function AboutContent() {
           </motion.div>
         </div>
       </section>
+
+      {/* Verifiable Certifications */}
+      <Certifications variant="light" />
 
       {/* Why Choose Us */}
       <section className="py-20 lg:py-28 bg-surface">
