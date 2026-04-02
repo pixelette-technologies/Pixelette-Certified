@@ -232,7 +232,7 @@ export default function AboutContent() {
       </section>
 
       {/* Verifiable Certifications */}
-      <Certifications variant="light" />
+      <Certifications variant="dark" />
 
       {/* Why Choose Us */}
       <section className="py-20 lg:py-28 bg-surface">
