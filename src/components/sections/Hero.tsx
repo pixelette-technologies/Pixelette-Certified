@@ -81,9 +81,9 @@ export default function Hero() {
             {/* Inner circle with glass */}
             <div className="absolute inset-20 rounded-full glass-card flex items-center justify-center">
               <img
-                src="/logos/logo-white-text.svg"
+                src="/logos/favicon.svg"
                 alt="Pixelette Certified"
-                className="w-44 opacity-90"
+                className="w-28 opacity-90"
               />
             </div>
             {/* Orbiting dots */}
