@@ -84,7 +84,7 @@ export const services: Service[] = [
     relatedSlugs: ["cyber-essentials", "vciso", "gdpr-privacy"],
     seo: {
       title: "ISO 27001 Certification UK | 10 Weeks | From £8,500",
-      description: "Get ISO 27001 certified in 10 weeks with UK-based experts. 98% first-attempt pass rate. Gap analysis, ISMS documentation, audit support. From £8,500.",
+      description: "Get ISO 27001 certified in 10 weeks. UK-based expert-led implementation from gap analysis to Stage 2 audit. Fixed fee from £8,500. 98% first-attempt pass rate.",
       keywords: ["ISO 27001 certification UK", "ISO 27001 consultant", "ISMS implementation", "information security certification"],
     },
   },
@@ -249,8 +249,8 @@ export const services: Service[] = [
     ],
     relatedSlugs: ["iso-27001", "gdpr-privacy", "vciso"],
     seo: {
-      title: "ISO 42001 AI Governance Certification UK | First UK Consultancy",
-      description: "ISO 42001 AI governance certification. Responsible AI management, EU AI Act compliance, bias assessment. One of the first UK consultancies to formally offer ISO 42001.",
+      title: "ISO 42001 AI Governance Certification UK | Pixelette",
+      description: "Achieve ISO 42001 AI governance certification in 14 weeks. One of the only UK consultancies formally offering ISO 42001. EU AI Act ready.",
       keywords: ["ISO 42001 certification", "AI governance", "AIMS", "EU AI Act compliance", "responsible AI"],
     },
   },
@@ -288,8 +288,8 @@ export const services: Service[] = [
     ],
     relatedSlugs: ["iso-27001", "penetration-testing", "vciso"],
     seo: {
-      title: "Cyber Essentials Certification UK | From £1,800 | 3 Weeks",
-      description: "Cyber Essentials and CE+ certification in 3 weeks. UK government-backed cybersecurity standard. Required for government contracts. From £1,800.",
+      title: "Cyber Essentials Certification UK | From £1,800",
+      description: "UK government-backed Cyber Essentials and Cyber Essentials Plus certification. From £1,800. Fast-track 2–3 week delivery for government suppliers and NHS.",
       keywords: ["Cyber Essentials certification", "Cyber Essentials Plus", "UK government certification", "cybersecurity certification"],
     },
   },
@@ -328,8 +328,8 @@ export const services: Service[] = [
     ],
     relatedSlugs: ["iso-27001", "vdpo", "penetration-testing"],
     seo: {
-      title: "Virtual CISO (vCISO) Service UK | From £2,800/month",
-      description: "Virtual CISO service for UK technology companies. Board-level security leadership on a flexible retainer. From £2,800/month.",
+      title: "Virtual CISO (vCISO) UK | From £2,800/month",
+      description: "Senior security leadership without the full-time hire. vCISO retainers from £2,800/month. Board-level strategy, risk management, and compliance governance.",
       keywords: ["vCISO UK", "virtual CISO", "fractional CISO", "security leadership"],
     },
   },
@@ -442,8 +442,8 @@ export const services: Service[] = [
     ],
     relatedSlugs: ["vdpo", "iso-27001", "iso-42001"],
     seo: {
-      title: "GDPR Compliance & Data Privacy Service UK",
-      description: "GDPR compliance and data privacy services for UK businesses. Privacy programme design, DPIAs, ROPA, and staff training. From £5,500.",
+      title: "GDPR Compliance Services UK | Pixelette Certified",
+      description: "Turn GDPR obligations into a competitive advantage. UK data protection compliance, DPIAs, and data mapping. Expert-led. Fixed fee from £5,500.",
       keywords: ["GDPR compliance UK", "data privacy", "data protection", "GDPR consultant"],
     },
   },

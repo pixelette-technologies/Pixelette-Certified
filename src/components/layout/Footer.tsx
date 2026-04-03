@@ -38,7 +38,7 @@ export default function Footer() {
             <Link href="/" aria-label="Pixelette Certified Home">
               <img
                 src="/logos/logo-white-text.svg"
-                alt="Pixelette Certified"
+                alt="Pixelette Certified — ISO 27001 and Compliance Consultancy UK"
                 className="h-10 w-auto mb-4"
               />
             </Link>

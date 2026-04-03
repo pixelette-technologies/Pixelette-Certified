@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getServiceBySlug } from "@/data/services";
 import ServicePageTemplate from "@/components/sections/ServicePageTemplate";
 import JsonLd from "@/components/seo/JsonLd";
+import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 
 const service = getServiceBySlug("vciso")!;
 
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
 export default function VCISOPage() {
   return (
     <>
+      <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Services", href: "/services" }, { name: "vCISO" }]} />
       <JsonLd
         data={{
           "@context": "https://schema.org",

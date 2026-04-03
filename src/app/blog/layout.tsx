@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog | Insights on ISO Certification, Cybersecurity & Compliance",
+  title: "Compliance & ISO Certification Blog | Pixelette Certified",
   description:
-    "Expert guides and insights on ISO 27001, Cyber Essentials, GDPR, AI governance, and compliance for UK technology companies. Pixelette Certified blog.",
+    "Expert insights on ISO 27001, Cyber Essentials, GDPR and AI governance for UK technology companies. Written by certified compliance practitioners.",
   openGraph: {
-    title: "Blog | Pixelette Certified",
+    title: "Compliance & ISO Certification Blog | Pixelette Certified",
     description:
-      "Expert guides and insights on ISO certification, cybersecurity, and compliance for UK technology companies.",
+      "Expert insights on ISO 27001, Cyber Essentials, GDPR and AI governance for UK technology companies. Written by certified compliance practitioners.",
     type: "website",
   },
 };

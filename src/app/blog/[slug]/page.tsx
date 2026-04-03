@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import BlogPostClient from "./BlogPostClient";
+import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 
 interface BlogPostData {
   slug: string;
@@ -220,5 +221,10 @@ export default async function BlogPostPage({
 
   const relatedPosts = getRelatedPosts(post.relatedSlugs);
 
-  return <BlogPostClient post={post} relatedPosts={relatedPosts} />;
+  return (
+    <>
+      <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Blog", href: "/blog" }, { name: post.title }]} />
+      <BlogPostClient post={post} relatedPosts={relatedPosts} />
+    </>
+  );
 }

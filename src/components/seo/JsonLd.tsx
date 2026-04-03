@@ -16,18 +16,27 @@ export function OrganizationSchema() {
     <JsonLd
       data={{
         "@context": "https://schema.org",
-        "@type": "Organization",
+        "@type": "ProfessionalService",
         name: "Pixelette Certified",
         url: "https://pixelettecertified.com",
-        logo: "https://pixelettecertified.com/logos/logo-green-text.svg",
-        description:
-          "UK-based ISO certification and compliance consultancy. ISO 27001, Cyber Essentials, GDPR, vCISO, AI Governance.",
-        contactPoint: {
-          "@type": "ContactPoint",
-          email: "info@pixelettecertified.com",
-          contactType: "sales",
-          availableLanguage: "English",
+        logo: "https://pixelettecertified.com/logos/logo-white-text.svg",
+        telephone: "+442079460958",
+        email: "info@pixelettecertified.com",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "London",
+          addressRegion: "England",
+          addressCountry: "GB",
         },
+        areaServed: ["GB", "IE", "AE", "EU"],
+        serviceType: [
+          "ISO 27001 Certification",
+          "ISO 42001 AI Governance Certification",
+          "Cyber Essentials Certification",
+          "GDPR Compliance",
+          "Virtual CISO",
+          "Penetration Testing",
+        ],
         sameAs: [
           "https://www.linkedin.com/company/pixelette-certified",
         ],
@@ -35,7 +44,6 @@ export function OrganizationSchema() {
           "@type": "Organization",
           name: "Pixelette Group",
         },
-        areaServed: ["GB", "IE", "AE", "EU"],
       }}
     />
   );

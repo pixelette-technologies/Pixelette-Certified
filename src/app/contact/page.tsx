@@ -1,17 +1,40 @@
 import type { Metadata } from "next";
 import ContactContent from "./ContactContent";
+import JsonLd from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Book a Free Gap Analysis",
+  title: "Contact Pixelette Certified | Free ISO 27001 Gap Analysis UK",
   description:
-    "Get in touch with Pixelette Certified. Book a free gap analysis, request a quote, or speak with a compliance consultant. London, UK.",
+    "Book a free 30-minute gap analysis with Pixelette Certified. UK-based ISO 27001, ISO 42001, Cyber Essentials and GDPR consultancy. Response within 1 working day.",
   openGraph: {
-    title: "Contact Pixelette Certified",
+    title: "Contact Pixelette Certified | Free ISO 27001 Gap Analysis UK",
     description:
-      "Book a free 30-minute gap analysis. No obligation, no sales pressure. Find out where your compliance gaps are and what certification requires.",
+      "Book a free 30-minute gap analysis with Pixelette Certified. UK-based ISO 27001, ISO 42001, Cyber Essentials and GDPR consultancy.",
+    url: "https://pixelettecertified.com/contact",
   },
+  alternates: { canonical: "https://pixelettecertified.com/contact" },
 };
 
 export default function ContactPage() {
-  return <ContactContent />;
+  return (
+    <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "ContactPage",
+          name: "Contact Pixelette Certified",
+          description:
+            "Book a free gap analysis with Pixelette Certified, UK ISO 27001 and compliance consultancy.",
+          url: "https://pixelettecertified.com/contact",
+          mainEntity: {
+            "@type": "Organization",
+            name: "Pixelette Certified",
+            telephone: "+442079460958",
+            email: "info@pixelettecertified.com",
+          },
+        }}
+      />
+      <ContactContent />
+    </>
+  );
 }

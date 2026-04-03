@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import {
   Mail,
   Phone,
@@ -12,6 +13,7 @@ import {
   Shield,
   Clock,
   FileSearch,
+  Award,
 } from "lucide-react";
 import SectionLabel from "@/components/ui/SectionLabel";
 import Card from "@/components/ui/Card";
@@ -112,7 +114,7 @@ export default function ContactContent() {
         >
           <SectionLabel className="mb-4 block">Contact</SectionLabel>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-6">
-            Let&apos;s talk about your compliance goals
+            Contact Pixelette Certified — Book Your Free Gap Analysis
           </h1>
           <p className="text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
             Whether you need a quick question answered or want to book a free
@@ -134,9 +136,13 @@ export default function ContactContent() {
               className="lg:col-span-3"
             >
               <Card variant="glass" hover={false}>
-                <h2 className="text-2xl font-bold text-white mb-6">
-                  Send us a message
+                <h2 className="text-2xl font-bold text-white mb-4">
+                  Book a Free ISO 27001 Gap Analysis
                 </h2>
+
+                <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                  Fill in the form below and a member of our compliance team will respond within 1 working day. Most clients book their first paid engagement within 2 weeks of their gap analysis call.
+                </p>
 
                 {status === "success" ? (
                   <div className="flex flex-col items-center text-center py-12">
@@ -394,7 +400,7 @@ export default function ContactContent() {
                 <p className="text-gray-400 text-sm leading-relaxed mb-3">
                   A gap analysis is a structured assessment of your current
                   policies, processes, and controls against the requirements of
-                  your target standard (e.g. ISO 27001).
+                  your target standard — <Link href="/services/iso-27001" className="text-accent hover:text-accent-light transition-colors">ISO 27001</Link>, ISO 42001, <Link href="/services/cyber-essentials" className="text-accent hover:text-accent-light transition-colors">Cyber Essentials</Link>, or <Link href="/services/gdpr-privacy" className="text-accent hover:text-accent-light transition-colors">GDPR</Link> — and it is completely free.
                 </p>
                 <p className="text-gray-400 text-sm leading-relaxed">
                   The output is a clear report showing where you meet
@@ -413,15 +419,19 @@ export default function ContactContent() {
                   {[
                     {
                       icon: Shield,
-                      text: "ISO 27001 certified practice with IRCA Lead Auditors",
+                      text: "ISO 27001 Lead Auditor certified team — CQI / IRCA registered",
                     },
                     {
                       icon: Clock,
-                      text: "98% first-attempt pass rate across all standards",
+                      text: "98% first-attempt audit pass rate across ISO 27001, ISO 42001, and Cyber Essentials",
                     },
                     {
                       icon: Send,
-                      text: "Response within 1 working day, always",
+                      text: "Response within 1 working day — guaranteed",
+                    },
+                    {
+                      icon: Award,
+                      text: "8 active certifications held across PECB, ISACA, IAPP, and CQI/IRCA",
                     },
                   ].map((item) => (
                     <li
@@ -436,6 +446,37 @@ export default function ContactContent() {
               </Card>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* What happens after you contact us */}
+      <section className="py-12 lg:py-20">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+          <motion.div
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <Card variant="glass" hover={false}>
+              <h2 className="text-2xl font-bold text-white mb-4">
+                What happens after you contact us
+              </h2>
+              <p className="text-gray-400 text-sm leading-relaxed mb-4">
+                Within 1 working day, a senior compliance consultant will review your enquiry and respond directly. We will ask a few questions about your organisation, your target certification — <Link href="/services/iso-27001" className="text-accent hover:text-accent-light transition-colors">ISO 27001</Link>, ISO 42001, <Link href="/services/cyber-essentials" className="text-accent hover:text-accent-light transition-colors">Cyber Essentials</Link>, or <Link href="/services/gdpr-privacy" className="text-accent hover:text-accent-light transition-colors">GDPR</Link> — and your timeline. From there we will schedule your free 30-minute gap analysis call and give you a clear, honest assessment of what it will take. Timeline, cost, and scope. No sales pressure. No obligation.
+              </p>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                Not sure which certification you need? View our{" "}
+                <Link href="/services" className="text-accent hover:text-accent-light transition-colors">
+                  full services
+                </Link>{" "}
+                or explore{" "}
+                <Link href="/industries" className="text-accent hover:text-accent-light transition-colors">
+                  by industry
+                </Link>.
+              </p>
+            </Card>
+          </motion.div>
         </div>
       </section>
     </>

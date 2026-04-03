@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Case Studies | ISO Certification Success Stories",
+  title: "ISO Certification Case Studies | Pixelette Certified",
   description:
-    "See how UK technology companies achieved ISO 27001, Cyber Essentials, and ISO 42001 certification with Pixelette Certified. Real results, real timelines.",
+    "Real results. UK technology companies certified in weeks with measurable ROI. ISO 27001, ISO 42001, and Cyber Essentials case studies.",
   openGraph: {
-    title: "Case Studies | Pixelette Certified",
+    title: "ISO Certification Case Studies | Pixelette Certified",
     description:
-      "ISO certification success stories from UK technology companies.",
+      "Real results. UK technology companies certified in weeks with measurable ROI. ISO 27001, ISO 42001, and Cyber Essentials case studies.",
     type: "website",
   },
 };
