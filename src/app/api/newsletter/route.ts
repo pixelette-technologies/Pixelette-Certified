@@ -17,13 +17,19 @@ export async function POST(request: Request) {
       to: ["partnerships@pixelette.tech"],
       subject: `New newsletter subscriber: ${email}`,
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <div style="background: #044143; padding: 24px; border-radius: 8px 8px 0 0;">
-            <h1 style="color: #14AAA9; margin: 0; font-size: 20px;">New Newsletter Subscriber</h1>
+        <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #044143; border-radius: 12px; overflow: hidden;">
+          <div style="background: linear-gradient(135deg, #032e2f 0%, #044143 50%, #065456 100%); padding: 32px; text-align: center; border-bottom: 2px solid #14AAA9;">
+            <img src="https://pixelettecertified.com/logos/logo-white-text.svg" alt="Pixelette Certified" style="height: 40px; margin-bottom: 16px;" />
+            <h1 style="color: #14AAA9; margin: 0; font-size: 22px; font-weight: 700;">New Newsletter Subscriber</h1>
+            <p style="color: rgba(255,255,255,0.5); margin: 8px 0 0; font-size: 13px;">${new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })} at ${new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })}</p>
           </div>
-          <div style="background: #f8fafa; padding: 24px; border: 1px solid #e0e0e0; border-top: none; border-radius: 0 0 8px 8px;">
-            <p style="color: #333;"><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-            <p style="color: #666; font-size: 13px;">Subscribed via pixelettecertified.com newsletter form.</p>
+          <div style="padding: 32px; text-align: center;">
+            <p style="color: rgba(255,255,255,0.5); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 8px;">Subscriber Email</p>
+            <p style="margin: 0;"><a href="mailto:${email}" style="color: #14AAA9; text-decoration: none; font-size: 18px; font-weight: 700;">${email}</a></p>
+            <p style="color: rgba(255,255,255,0.4); font-size: 13px; margin: 16px 0 0;">Subscribed via pixelettecertified.com newsletter form</p>
+          </div>
+          <div style="background: #032e2f; padding: 20px 32px; text-align: center; border-top: 1px solid rgba(20,170,169,0.15);">
+            <p style="color: rgba(255,255,255,0.3); font-size: 12px; margin: 0;">Pixelette Certified — Compliance. Governance. Cyber Trust.</p>
           </div>
         </div>
       `,
@@ -35,23 +41,56 @@ export async function POST(request: Request) {
       to: [email],
       subject: "Welcome to Pixelette Certified Insights",
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <div style="background: #044143; padding: 24px; border-radius: 8px 8px 0 0;">
-            <h1 style="color: #14AAA9; margin: 0; font-size: 20px;">You're subscribed!</h1>
+        <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #044143; border-radius: 12px; overflow: hidden;">
+          <div style="background: linear-gradient(135deg, #032e2f 0%, #044143 50%, #065456 100%); padding: 32px; text-align: center; border-bottom: 2px solid #14AAA9;">
+            <img src="https://pixelettecertified.com/logos/logo-white-text.svg" alt="Pixelette Certified" style="height: 40px; margin-bottom: 16px;" />
+            <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 700;">You're subscribed!</h1>
+            <p style="color: #14AAA9; margin: 8px 0 0; font-size: 14px;">Welcome to Pixelette Certified Insights</p>
           </div>
-          <div style="background: #f8fafa; padding: 24px; border: 1px solid #e0e0e0; border-top: none; border-radius: 0 0 8px 8px;">
-            <p style="color: #333; line-height: 1.6;">Thank you for subscribing to compliance insights from Pixelette Certified.</p>
-            <p style="color: #333; line-height: 1.6;">You'll receive monthly updates on:</p>
-            <ul style="color: #333; line-height: 1.8;">
-              <li>ISO certification trends and regulatory changes</li>
-              <li>Cybersecurity best practices for UK businesses</li>
-              <li>AI governance and EU AI Act updates</li>
-              <li>Practical compliance guides and checklists</li>
-            </ul>
-            <p style="color: #333; line-height: 1.6;">In the meantime, explore our latest resources:</p>
-            <p><a href="https://pixelettecertified.com/blog" style="color: #14AAA9; font-weight: bold;">Read our Blog →</a></p>
-            <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 20px 0;" />
-            <p style="color: #999; font-size: 12px;">Pixelette Certified — Compliance. Governance. Cyber Trust.<br/>You can unsubscribe at any time by replying to this email.</p>
+
+          <div style="padding: 32px;">
+            <p style="color: rgba(255,255,255,0.85); line-height: 1.7; font-size: 15px; margin: 0 0 20px;">Thank you for subscribing. You'll receive monthly insights on compliance, cybersecurity, and AI governance — written by our consultants, not a marketing team.</p>
+
+            <p style="color: rgba(255,255,255,0.5); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 12px;">What you'll receive</p>
+
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr>
+                <td style="padding: 10px 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                  <span style="color: #14AAA9; font-weight: 700;">📋</span>
+                  <span style="color: rgba(255,255,255,0.85); font-size: 14px; margin-left: 8px;">ISO certification trends & regulatory changes</span>
+                </td>
+              </tr>
+              <tr><td style="height: 6px;"></td></tr>
+              <tr>
+                <td style="padding: 10px 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                  <span style="color: #14AAA9; font-weight: 700;">🔒</span>
+                  <span style="color: rgba(255,255,255,0.85); font-size: 14px; margin-left: 8px;">Cybersecurity best practices for UK businesses</span>
+                </td>
+              </tr>
+              <tr><td style="height: 6px;"></td></tr>
+              <tr>
+                <td style="padding: 10px 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                  <span style="color: #14AAA9; font-weight: 700;">🤖</span>
+                  <span style="color: rgba(255,255,255,0.85); font-size: 14px; margin-left: 8px;">AI governance & EU AI Act updates</span>
+                </td>
+              </tr>
+              <tr><td style="height: 6px;"></td></tr>
+              <tr>
+                <td style="padding: 10px 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                  <span style="color: #14AAA9; font-weight: 700;">✅</span>
+                  <span style="color: rgba(255,255,255,0.85); font-size: 14px; margin-left: 8px;">Practical compliance guides & checklists</span>
+                </td>
+              </tr>
+            </table>
+
+            <div style="text-align: center; margin-top: 28px;">
+              <a href="https://pixelettecertified.com/blog" style="display: inline-block; background: #14AAA9; color: #ffffff; text-decoration: none; padding: 12px 32px; border-radius: 8px; font-weight: 600; font-size: 14px;">Read Our Latest Articles →</a>
+            </div>
+          </div>
+
+          <div style="background: #032e2f; padding: 20px 32px; text-align: center; border-top: 1px solid rgba(20,170,169,0.15);">
+            <p style="color: rgba(255,255,255,0.3); font-size: 12px; margin: 0;">Pixelette Certified — Compliance. Governance. Cyber Trust.</p>
+            <p style="color: rgba(255,255,255,0.2); font-size: 11px; margin: 6px 0 0;">You can unsubscribe at any time by replying to this email.</p>
           </div>
         </div>
       `,
