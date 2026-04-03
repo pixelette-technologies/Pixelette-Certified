@@ -78,6 +78,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${manrope.variable} h-full antialiased`}>
       <head>
+        <meta name="google-site-verification" content="C7bI6NnGsWlyxSL7Ax2Ii72eg_y9UtjRDR2KbJCu4gg" />
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-VX5PH3RWRB" />
         <script
           dangerouslySetInnerHTML={{
