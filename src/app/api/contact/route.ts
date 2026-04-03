@@ -41,7 +41,7 @@ export async function POST(request: Request) {
     // Send email to Pixelette Certified team
     await resend.emails.send({
       from: "Pixelette Certified <noreply@pixelettecertified.com>",
-      to: ["info@pixelettecertified.com"],
+      to: ["partnerships@pixelette.tech"],
       replyTo: email.trim(),
       subject: `New enquiry from ${name.trim()} — ${service}`,
       html: `

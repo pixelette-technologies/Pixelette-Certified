@@ -15,10 +15,18 @@ export default function Newsletter() {
     if (!email.trim()) return;
     setStatus("loading");
 
-    // Simulate submission — replace with real email service
-    await new Promise((r) => setTimeout(r, 800));
-    setStatus("success");
-    setEmail("");
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+      if (!res.ok) throw new Error();
+      setStatus("success");
+      setEmail("");
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
