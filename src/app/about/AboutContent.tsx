@@ -113,12 +113,10 @@ export default function AboutContent() {
         >
           <SectionLabel className="mb-4 block">About Us</SectionLabel>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-6">
-            We built Pixelette Certified because UK technology companies deserve
-            better than slow, expensive, generic compliance consultancy.
+            We built Pixelette Certified because businesses everywhere deserve better than slow, expensive, generic compliance consultancy.
           </h1>
           <p className="text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            Founded by the team behind Pixelette Group, we combine over a decade
-            of technology delivery experience with deep compliance expertise.
+            Founded by the team behind Pixelette Group, we combine over a decade of technology and business delivery experience with deep, practitioner-level compliance expertise.
           </p>
         </motion.div>
       </section>
@@ -135,35 +133,20 @@ export default function AboutContent() {
             >
               <SectionLabel className="mb-3 block">Our Story</SectionLabel>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-6">
-                From building technology to securing it
+                From building businesses to protecting them
               </h2>
               <div className="space-y-4 text-gray-300 leading-relaxed text-lg">
                 <p>
-                  Pixelette Group has spent over 10 years building technology
-                  solutions for businesses across the UK, Middle East, and
-                  Europe. We have delivered platforms, mobile applications, AI
-                  systems, and cloud infrastructure for startups through to
-                  enterprise clients.
+                  Pixelette Group has spent over 10 years delivering technology solutions for businesses across the UK, Middle East, Europe, North America, and Asia Pacific. We have built platforms, mobile applications, AI systems, and cloud infrastructure for organisations ranging from early-stage startups to large enterprise clients — across banking, healthcare, logistics, manufacturing, professional services, and beyond.
                 </p>
                 <p>
-                  Along the way, we saw a pattern that frustrated us. Technology
-                  companies, many of them our own clients, were losing contracts
-                  because they could not produce an ISO 27001 certificate. They
-                  were failing procurement questionnaires, missing out on
-                  government tenders, and losing enterprise deals to competitors
-                  who had their compliance in order.
+                  Along the way, we saw a pattern that frustrated us. Businesses across every industry and every geography were losing contracts, failing procurement, and missing growth opportunities — not because their product was poor, but because they could not produce the right certification.
                 </p>
                 <p>
-                  The compliance consultancies they turned to were slow,
-                  expensive, and designed for manufacturing firms. They did not
-                  understand SaaS, cloud-native architectures, or how modern
-                  technology companies actually operate.
+                  The compliance consultancies they turned to were slow, expensive, and built for a different era. They did not understand modern business models, diverse industries, or the urgency of global regulatory pressure.
                 </p>
                 <p>
-                  We started Pixelette Certified to change that. A compliance
-                  consultancy built by technologists, for technologists. Fast,
-                  transparent, and designed specifically for the companies that
-                  are building the future.
+                  We started Pixelette Certified to change that. A compliance consultancy built by practitioners, for businesses of every kind. Fast, structured, and designed for organisations that cannot afford to lose six months waiting for a certificate they needed yesterday — in any industry, in any market, anywhere in the world.
                 </p>
               </div>
             </motion.div>

@@ -8,21 +8,21 @@ import { staggerContainer, staggerItem } from "@/lib/animations";
 const testimonials = [
   {
     quote:
-      "We needed ISO 27001 to close a contract with a major UK bank. Pixelette Certified got us through Stage 2 in 9 weeks. The deal closed within 30 days of certification.",
+      "We needed ISO 27001 to close a contract with a major bank. Pixelette Certified got us through Stage 2 in 9 weeks. The deal closed within 30 days of certification.",
     author: "CTO",
-    company: "60-person UK FinTech",
+    company: "FinTech",
     rating: 5,
   },
   {
     quote:
-      "We had been putting off ISO 27001 for two years because every consultant we spoke to made it sound like an 8-month project. It took 11 weeks.",
+      "We had been putting off ISO 27001 for two years because every consultant we spoke to made it sound like an 8-month project. It took 11 weeks. The process was clear, structured, and genuinely painless.",
     author: "Head of Engineering",
-    company: "UK SaaS Platform",
+    company: "SaaS Platform",
     rating: 5,
   },
   {
     quote:
-      "The vCISO service means we have a senior security voice in every board conversation without the cost of a full-time CISO. It has changed how seriously our enterprise clients take us.",
+      "The vCISO service means we have a senior security voice in every board conversation without the cost of a full-time CISO. It has changed how seriously our enterprise clients take us globally.",
     author: "CEO",
     company: "AI Technology Company",
     rating: 5,
@@ -39,8 +39,8 @@ export default function Testimonials() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
         <SectionHeading
           label="Client Success"
-          title="Trusted by UK technology companies"
-          description="Our clients pass first time. Here is what they say."
+          title="Trusted by businesses worldwide"
+          description="Our clients pass their audits first time. Here is what they say."
         />
 
         <motion.div

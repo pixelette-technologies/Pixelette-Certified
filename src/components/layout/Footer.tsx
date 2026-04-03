@@ -45,7 +45,7 @@ export default function Footer() {
             <p className="text-sm text-gray-400 mb-6 leading-relaxed">
               {SITE_CONFIG.tagline}
               <br />
-              UK-based ISO certification and compliance consultancy built for technology companies.
+              Global ISO certification and compliance consultancy, trusted across every industry.
             </p>
             <div className="flex gap-3">
               <a
@@ -127,9 +127,9 @@ export default function Footer() {
               </li>
             </ul>
             <div className="glass-card rounded-xl p-4">
-              <p className="text-sm font-semibold text-white mb-2">Free 30-Min Consultation</p>
+              <p className="text-sm font-semibold text-white mb-2">Free 30-Minute Consultation</p>
               <p className="text-xs text-gray-400 mb-3">
-                Find out which certification is right for your business.
+                Find out which certification is right for your business — wherever you are in the world.
               </p>
               <Link
                 href="/contact"

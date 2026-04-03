@@ -172,6 +172,11 @@ const pricingFAQs = [
     answer:
       "ISO certifications require annual surveillance audits (Year 1 and Year 2) and a full re-certification audit in Year 3. Our Professional and Enterprise tiers include surveillance audit support. We also offer vCISO retainers for ongoing security governance between audits.",
   },
+  {
+    question: "Do you work with clients outside the UK?",
+    answer:
+      "Yes. We deliver compliance engagements to clients worldwide. Our consultants work remotely with clients across Europe, the Middle East, North America, Asia Pacific, and beyond. Where local in-person support is required, we can arrange it. The certifications we deliver — ISO 27001, ISO 42001, ISO 9001, ISO 22301, and others — are internationally recognised standards accepted by enterprise procurement teams and regulators worldwide.",
+  },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -224,8 +229,7 @@ export default function PricingContent() {
             Straightforward pricing. No surprises.
           </h1>
           <p className="text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            Every price is published. Every engagement is fixed-fee. You know
-            exactly what you are paying before any work begins.
+            Every price is published. Every engagement is fixed-fee. You know exactly what you are paying before any work begins — regardless of where your business is located.
           </p>
         </motion.div>
       </section>
@@ -249,7 +253,7 @@ export default function PricingContent() {
                 body audit fees are separate and typically range from{" "}
                 <strong className="text-white">£4,500 &ndash; £8,000</strong>{" "}
                 depending on the standard, organisation size, and chosen
-                certification body.
+                certification body. Prices are shown in GBP. We serve clients globally and can advise on local certification body options in your region.
               </p>
             </Card>
           </motion.div>

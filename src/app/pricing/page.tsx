@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import PricingContent from "./PricingContent";
 
 export const metadata: Metadata = {
-  title: "Compliance Certification Pricing | Pixelette Certified UK",
+  title: "Pricing | Transparent Global Compliance Consultancy Fees | Pixelette Certified",
   description:
-    "Transparent, fixed-fee pricing for ISO 27001, ISO 42001, Cyber Essentials and GDPR. No hidden fees. Essentials from £8,500. Published pricing — no surprises.",
+    "Fixed-fee compliance certification pricing for businesses worldwide. ISO 27001, ISO 42001, Cyber Essentials, GDPR, ISO 9001 and more. No hidden fees. Essentials from £8,500. Globally delivered.",
   openGraph: {
-    title: "Compliance Certification Pricing | Pixelette Certified UK",
+    title: "Pricing | Transparent Global Compliance Consultancy Fees | Pixelette Certified",
     description:
-      "Transparent, fixed-fee pricing for ISO 27001, ISO 42001, Cyber Essentials and GDPR. No hidden fees. Essentials from £8,500. Published pricing — no surprises.",
+      "Fixed-fee compliance certification pricing for businesses worldwide. ISO 27001, ISO 42001, Cyber Essentials, GDPR, ISO 9001 and more. No hidden fees. Essentials from £8,500. Globally delivered.",
   },
 };
 

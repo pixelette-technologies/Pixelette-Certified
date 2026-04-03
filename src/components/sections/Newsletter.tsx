@@ -51,8 +51,8 @@ export default function Newsletter() {
           Stay ahead on compliance
         </h2>
         <p className="text-gray-400 mb-8 leading-relaxed">
-          Get monthly insights on ISO certification, cybersecurity regulations,
-          and AI governance — written by our consultants, not a marketing team.
+          Get monthly insights on ISO certification, cybersecurity regulations, AI governance,
+          and global compliance trends — written by our consultants, not a marketing team.
         </p>
 
         {status === "success" ? (

@@ -11,21 +11,21 @@ const painPoints = [
     icon: AlertTriangle,
     title: "Lost Contracts",
     description:
-      "Every day, UK technology companies lose enterprise deals because they cannot answer 'Are you ISO 27001 certified?'",
+      "Every day, businesses across every sector and every geography lose enterprise deals because they cannot answer: 'Are you ISO 27001 certified?' Procurement teams reject uncertified suppliers automatically. The question is never even asked twice.",
     gradient: "from-red-500/10 to-orange-500/5",
   },
   {
     icon: TrendingDown,
     title: "Stalled Investment",
     description:
-      "Investors move on when your data governance is unclear. Compliance gaps signal risk that VCs and PEs do not tolerate.",
+      "Investors move on when your data governance is unclear. Compliance gaps signal operational risk that venture capital firms, private equity, and strategic investors will not accept — regardless of how strong your product is.",
     gradient: "from-amber-500/10 to-yellow-500/5",
   },
   {
     icon: ShieldOff,
     title: "Failed Onboarding",
     description:
-      "NHS Trusts, banks, and government bodies cannot add you to their supplier list without the right certifications in place.",
+      "Enterprise clients, government bodies, regulated industries, and healthcare networks worldwide cannot onboard uncertified suppliers. Without the right certifications, you are locked out before the conversation starts — in every market, in every sector.",
     gradient: "from-accent/10 to-accent-light/5",
   },
 ];
@@ -40,7 +40,7 @@ export default function ProblemSection() {
         <SectionHeading
           label="The Problem"
           title="Your next big deal is waiting on a certificate you don't have yet."
-          description="The cost of not being certified is not the fee you save. It is every deal that goes to a competitor who is already certified."
+          description="The cost of not being certified is not the fee you save. It is every deal that goes to a competitor who is already certified. Every procurement gate you fail. Every contract you lose before you even get to a conversation."
         />
 
         <motion.div

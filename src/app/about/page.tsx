@@ -3,13 +3,13 @@ import AboutContent from "./AboutContent";
 import JsonLd from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "About Pixelette Certified | ISO Compliance Experts UK",
+  title: "About Pixelette Certified | Global ISO Certification & Compliance Experts",
   description:
-    "Pixelette Certified is a UK compliance consultancy built by technologists. ISO 27001 certified practice with IRCA Lead Auditors. 50+ certifications delivered. 98% pass rate.",
+    "Pixelette Certified is a global ISO certification and compliance consultancy serving businesses across every industry. 50+ certifications delivered. 98% first-attempt pass rate. Expert-led. Fixed fee. Globally delivered.",
   openGraph: {
-    title: "About Pixelette Certified | ISO Compliance Experts UK",
+    title: "About Pixelette Certified | Global ISO Certification & Compliance Experts",
     description:
-      "Pixelette Certified is a UK compliance consultancy built by technologists. ISO 27001 certified practice with IRCA Lead Auditors. 50+ certifications delivered. 98% pass rate.",
+      "Pixelette Certified is a global ISO certification and compliance consultancy serving businesses across every industry. 50+ certifications delivered. 98% first-attempt pass rate. Expert-led. Fixed fee. Globally delivered.",
   },
   alternates: {
     canonical: "https://pixelettecertified.com/about",

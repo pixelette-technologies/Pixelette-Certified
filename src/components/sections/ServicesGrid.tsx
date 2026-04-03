@@ -31,7 +31,7 @@ export default function ServicesGrid() {
         <SectionHeading
           label="Our Services"
           title="Everything you need to get compliant"
-          description="From ISO certification to ongoing security leadership, we cover the full compliance landscape."
+          description="From ISO certification to ongoing security leadership, we cover the full compliance landscape for businesses across every industry, in every market."
         />
 
         <motion.div

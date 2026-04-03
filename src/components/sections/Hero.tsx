@@ -33,7 +33,7 @@ export default function Hero() {
         >
           <span className="inline-flex items-center gap-2 text-accent text-sm font-bold uppercase tracking-widest mb-6 px-4 py-2 rounded-full border border-accent/20 bg-accent/5 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-            ISO 27001 &middot; Cyber Essentials &middot; GDPR &middot; vCISO &middot; AI Governance
+            ISO 27001 &middot; ISO 42001 &middot; Cyber Essentials &middot; GDPR &middot; ISO 9001 &middot; ISO 22301 &middot; vCISO &middot; AI Governance
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-6xl font-extrabold tracking-tight leading-[1.08] mb-6">
             <span className="gradient-text-white">Your business certified.</span>
@@ -43,9 +43,9 @@ export default function Hero() {
             <span className="gradient-text">Your compliance — done.</span>
           </h1>
           <p className="text-lg text-gray-400 mb-8 max-w-xl leading-relaxed">
-            UK-based. Expert-led. Built for technology companies. We get you
+            Expert-led. Globally delivered. Built for every industry. We get you
             certified in as little as 10 weeks, so you can win enterprise
-            contracts and close deals faster.
+            contracts, pass procurement, and close deals faster — wherever in the world you operate.
           </p>
           <div className="flex flex-wrap gap-4">
             <Button href="/contact" size="lg">

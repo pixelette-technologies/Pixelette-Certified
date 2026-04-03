@@ -14,6 +14,7 @@ import {
   Clock,
   FileSearch,
   Award,
+  Globe,
 } from "lucide-react";
 import SectionLabel from "@/components/ui/SectionLabel";
 import Card from "@/components/ui/Card";
@@ -42,6 +43,7 @@ interface FormState {
   email: string;
   company: string;
   phone: string;
+  country: string;
   service: string;
   message: string;
   gdprConsent: boolean;
@@ -53,6 +55,7 @@ export default function ContactContent() {
     email: "",
     company: "",
     phone: "",
+    country: "",
     service: "",
     message: "",
     gdprConsent: false,
@@ -84,7 +87,7 @@ export default function ContactContent() {
       }
 
       setStatus("success");
-      setForm({ name: "", email: "", company: "", phone: "", service: "", message: "", gdprConsent: false });
+      setForm({ name: "", email: "", company: "", phone: "", country: "", service: "", message: "", gdprConsent: false });
     } catch (err) {
       setStatus("error");
       setErrorMsg(err instanceof Error ? err.message : "Something went wrong.");
@@ -114,11 +117,10 @@ export default function ContactContent() {
         >
           <SectionLabel className="mb-4 block">Contact</SectionLabel>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-6">
-            Contact Pixelette Certified — Book Your Free Gap Analysis
+            Book your free gap analysis — wherever you are in the world.
           </h1>
           <p className="text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            Whether you need a quick question answered or want to book a free
-            gap analysis, we are here to help.
+            Whether you are based in London or Lagos, Dubai or Dublin, New York or Nairobi — we are here to help. Fill in the form and a senior compliance consultant will respond within 1 working day.
           </p>
         </motion.div>
       </section>
@@ -141,7 +143,7 @@ export default function ContactContent() {
                 </h2>
 
                 <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                  Fill in the form below and a member of our compliance team will respond within 1 working day. Most clients book their first paid engagement within 2 weeks of their gap analysis call.
+                  Tell us about your organisation, your target certification, and your timeline. We will review your enquiry and come back to you within 1 working day with a clear, honest assessment of your next steps. No sales pressure. No obligation.
                 </p>
 
                 {status === "success" ? (
@@ -237,6 +239,24 @@ export default function ContactContent() {
                           className={inputClasses}
                         />
                       </div>
+                    </div>
+
+                    <div>
+                      <label
+                        htmlFor="country"
+                        className="block text-sm font-semibold text-gray-300 mb-1.5"
+                      >
+                        Country / Region
+                      </label>
+                      <input
+                        id="country"
+                        name="country"
+                        type="text"
+                        placeholder="e.g. United Kingdom, UAE, United States..."
+                        value={form.country}
+                        onChange={handleChange}
+                        className={inputClasses}
+                      />
                     </div>
 
                     <div>
@@ -397,16 +417,8 @@ export default function ContactContent() {
                     What is a Gap Analysis?
                   </h3>
                 </div>
-                <p className="text-gray-400 text-sm leading-relaxed mb-3">
-                  A gap analysis is a structured assessment of your current
-                  policies, processes, and controls against the requirements of
-                  your target standard — <Link href="/services/iso-27001" className="text-accent hover:text-accent-light transition-colors">ISO 27001</Link>, ISO 42001, <Link href="/services/cyber-essentials" className="text-accent hover:text-accent-light transition-colors">Cyber Essentials</Link>, or <Link href="/services/gdpr-privacy" className="text-accent hover:text-accent-light transition-colors">GDPR</Link> — and it is completely free.
-                </p>
                 <p className="text-gray-400 text-sm leading-relaxed">
-                  The output is a clear report showing where you meet
-                  requirements, where you have gaps, and a prioritised roadmap
-                  to close those gaps. It is the fastest way to understand your
-                  path to certification.
+                  A gap analysis is a structured assessment of your current policies, processes, and controls against the requirements of your target certification standard — ISO 27001, ISO 42001, ISO 9001, ISO 22301, Cyber Essentials, GDPR, or any other standard you are pursuing. The output is a clear report showing where you meet requirements, where you have gaps, and a prioritised roadmap to close them. It is the fastest way to understand your path to certification — regardless of your industry, your size, or your location. And it is completely free.
                 </p>
               </Card>
 
@@ -419,19 +431,23 @@ export default function ContactContent() {
                   {[
                     {
                       icon: Shield,
-                      text: "ISO 27001 Lead Auditor certified team — CQI / IRCA registered",
+                      text: "ISO 27001 Lead Auditor certified team — CQI and IRCA registered",
                     },
                     {
                       icon: Clock,
                       text: "98% first-attempt audit pass rate across ISO 27001, ISO 42001, and Cyber Essentials",
                     },
                     {
-                      icon: Send,
-                      text: "Response within 1 working day — guaranteed",
+                      icon: Globe,
+                      text: "Global delivery — clients served across the UK, UAE, EU, Americas, and APAC",
                     },
                     {
                       icon: Award,
                       text: "8 active certifications held across PECB, ISACA, IAPP, and CQI/IRCA",
+                    },
+                    {
+                      icon: Send,
+                      text: "Response within 1 working day — guaranteed",
                     },
                   ].map((item) => (
                     <li
@@ -463,7 +479,7 @@ export default function ContactContent() {
                 What happens after you contact us
               </h2>
               <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                Within 1 working day, a senior compliance consultant will review your enquiry and respond directly. We will ask a few questions about your organisation, your target certification — <Link href="/services/iso-27001" className="text-accent hover:text-accent-light transition-colors">ISO 27001</Link>, ISO 42001, <Link href="/services/cyber-essentials" className="text-accent hover:text-accent-light transition-colors">Cyber Essentials</Link>, or <Link href="/services/gdpr-privacy" className="text-accent hover:text-accent-light transition-colors">GDPR</Link> — and your timeline. From there we will schedule your free 30-minute gap analysis call and give you a clear, honest assessment of what it will take. Timeline, cost, and scope. No sales pressure. No obligation.
+                Within 1 working day, a senior compliance consultant will review your enquiry and respond directly. We will ask a few focused questions about your organisation, your target certification — ISO 27001, ISO 42001, ISO 9001, Cyber Essentials, GDPR, or another standard — and your timeline and budget. From there we will schedule your free 30-minute gap analysis call and give you a clear, honest assessment of your path to certification. Timeline, cost, and scope — confirmed upfront. No surprises.
               </p>
               <p className="text-gray-400 text-sm leading-relaxed">
                 Not sure which certification you need? View our{" "}

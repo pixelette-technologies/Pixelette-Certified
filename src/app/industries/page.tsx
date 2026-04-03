@@ -4,9 +4,9 @@ import IndustriesContent from "./IndustriesContent";
 import JsonLd from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Compliance for UK Tech Companies | Pixelette Certified",
+  title: "Industries We Serve | Global Compliance Expertise | Pixelette Certified",
   description:
-    "Sector-specific ISO certification and compliance for FinTech, SaaS, AI, HealthTech and government suppliers. Specialist expertise by industry.",
+    "Pixelette Certified delivers ISO certification and compliance consultancy to businesses across every industry — FinTech, healthcare, manufacturing, logistics, legal, energy, education, retail, and more. Globally delivered.",
   keywords: [
     "ISO certification by industry",
     "FinTech compliance UK",
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
     "government supplier certification",
   ],
   openGraph: {
-    title: "Compliance for UK Tech Companies | Pixelette Certified",
+    title: "Industries We Serve | Global Compliance Expertise | Pixelette Certified",
     description:
-      "Sector-specific ISO certification and compliance for FinTech, SaaS, AI, HealthTech and government suppliers. Specialist expertise by industry.",
+      "Pixelette Certified delivers ISO certification and compliance consultancy to businesses across every industry — FinTech, healthcare, manufacturing, logistics, legal, energy, education, retail, and more. Globally delivered.",
     url: "https://pixelettecertified.com/industries",
   },
   alternates: {

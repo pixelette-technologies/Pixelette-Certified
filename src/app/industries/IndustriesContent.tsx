@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import {
   ArrowRight, Landmark, Cpu, Heart, GraduationCap, ShoppingCart,
-  Building2, Scale, Wifi, CheckCircle,
+  Building2, Scale, Wifi, CheckCircle, Factory, Truck, Gavel, Zap, Radio,
 } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Card from "@/components/ui/Card";
@@ -21,6 +21,11 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   "government-suppliers": Scale,
   "ecommerce-retail": ShoppingCart,
   education: GraduationCap,
+  manufacturing: Factory,
+  logistics: Truck,
+  legal: Gavel,
+  energy: Zap,
+  telecommunications: Radio,
 };
 
 interface IndustryData {

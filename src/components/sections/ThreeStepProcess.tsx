@@ -11,21 +11,21 @@ const steps = [
     icon: Search,
     title: "We assess where you are",
     description:
-      "A free gap analysis identifies exactly what you have, what you need, and how long it will take. No jargon. No surprises. Just a clear starting point.",
+      "A free gap analysis identifies exactly what you have, what you need, and how long it will take. No jargon. No surprises. Just a clear starting point — whether you are pursuing ISO 27001, ISO 42001, ISO 9001, Cyber Essentials, or any other standard.",
   },
   {
     num: "02",
     icon: Wrench,
     title: "We do the work",
     description:
-      "Our consultants write the documentation, build the controls, train your team, and prepare you for the external audit. Your engineers stay focused on the product.",
+      "Our consultants write the documentation, build the controls, train your team, and prepare you for the external audit. Your team stays focused on running your business. We handle every aspect of the compliance process.",
   },
   {
     num: "03",
     icon: Award,
     title: "You get certified",
     description:
-      "We stand alongside you in the Stage 1 and Stage 2 audits. When you pass — and our clients pass first time — you have a certification that opens doors.",
+      "We stand alongside you through the Stage 1 and Stage 2 audits. When you pass — and our clients pass first time — you have a globally recognised certification that opens doors to enterprise contracts, government frameworks, and new markets.",
   },
 ];
 
@@ -41,7 +41,7 @@ export default function ThreeStepProcess() {
         <SectionHeading
           label="How We Work"
           title="Three steps to certification"
-          description="Simple, transparent, and designed to keep your business moving."
+          description="Simple, transparent, and designed to keep your business moving — no matter where you are in the world or what industry you operate in."
           dark={false}
         />
 

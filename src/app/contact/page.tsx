@@ -3,13 +3,13 @@ import ContactContent from "./ContactContent";
 import JsonLd from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Contact Pixelette Certified | Free ISO 27001 Gap Analysis UK",
+  title: "Contact Pixelette Certified | Free Gap Analysis | Global Compliance Consultancy",
   description:
-    "Book a free 30-minute gap analysis with Pixelette Certified. UK-based ISO 27001, ISO 42001, Cyber Essentials and GDPR consultancy. Response within 1 working day.",
+    "Book a free 30-minute gap analysis with Pixelette Certified. Global ISO 27001, ISO 42001, Cyber Essentials and GDPR consultancy serving businesses across every industry worldwide. Response within 1 working day.",
   openGraph: {
-    title: "Contact Pixelette Certified | Free ISO 27001 Gap Analysis UK",
+    title: "Contact Pixelette Certified | Free Gap Analysis | Global Compliance Consultancy",
     description:
-      "Book a free 30-minute gap analysis with Pixelette Certified. UK-based ISO 27001, ISO 42001, Cyber Essentials and GDPR consultancy.",
+      "Book a free 30-minute gap analysis with Pixelette Certified. Global ISO 27001, ISO 42001, Cyber Essentials and GDPR consultancy serving businesses across every industry worldwide.",
     url: "https://pixelettecertified.com/contact",
   },
   alternates: { canonical: "https://pixelettecertified.com/contact" },

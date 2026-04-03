@@ -47,9 +47,9 @@ export const services: Service[] = [
     slug: "iso-27001",
     title: "ISO 27001 Certification",
     shortTitle: "ISO 27001",
-    description: "Get certified in 10 weeks. The global standard for information security.",
+    description: "The global standard for information security management. Get certified in 10 weeks.",
     longDescription:
-      "ISO 27001 is the international standard for information security management. It defines the requirements for an Information Security Management System (ISMS) — a structured framework of policies, procedures, and controls that protects your organisation's information assets. For UK technology companies, ISO 27001 has become the de facto requirement for selling to enterprise clients, winning government contracts, passing investor due diligence, and qualifying for cyber insurance at favourable rates.",
+      "ISO 27001 is the international standard for information security management. It defines the requirements for an Information Security Management System (ISMS) — a structured framework of policies, procedures, and controls that protects your organisation's information assets. For UK technology companies, ISO 27001 has become the de facto requirement for selling to enterprise clients, winning government contracts, passing investor due diligence, and qualifying for cyber insurance at favourable rates. Whether you are a SaaS platform targeting enterprise clients, a healthcare provider seeking NHS supply chain approval, a FinTech navigating FCA or DORA requirements, a manufacturer seeking supply chain inclusion, or any other organisation that handles sensitive data — ISO 27001 is your foundation.",
     icon: Shield,
     category: "iso",
     features: [
@@ -92,7 +92,7 @@ export const services: Service[] = [
     slug: "iso-22301",
     title: "ISO 22301 Certification",
     shortTitle: "ISO 22301",
-    description: "Business continuity certification. Stay operational when it matters most.",
+    description: "Business continuity certification. Demonstrate resilience and stay operational when it matters most.",
     longDescription:
       "ISO 22301 is the international standard for Business Continuity Management Systems (BCMS). It helps your organisation prepare for, respond to, and recover from disruptions — whether cyber attacks, supply chain failures, natural disasters, or infrastructure outages.",
     icon: ShieldCheck,
@@ -134,7 +134,7 @@ export const services: Service[] = [
     slug: "iso-9001",
     title: "ISO 9001 Certification",
     shortTitle: "ISO 9001",
-    description: "Quality management certification. Demonstrate consistent delivery excellence.",
+    description: "Quality management certification. Prove consistent delivery excellence to clients worldwide.",
     longDescription:
       "ISO 9001 is the world's most widely adopted quality management standard. It demonstrates that your organisation consistently delivers products and services that meet customer and regulatory requirements.",
     icon: Globe,
@@ -175,7 +175,7 @@ export const services: Service[] = [
     slug: "iso-14001",
     title: "ISO 14001 Certification",
     shortTitle: "ISO 14001",
-    description: "Environmental management certification. Lead on sustainability.",
+    description: "Environmental management certification. Lead on sustainability and meet ESG obligations.",
     longDescription:
       "ISO 14001 is the international standard for Environmental Management Systems (EMS). It provides a framework for managing environmental responsibilities systematically, reducing your environmental footprint, and demonstrating commitment to sustainability.",
     icon: Leaf,
@@ -216,7 +216,7 @@ export const services: Service[] = [
     slug: "iso-42001",
     title: "ISO 42001 AI Governance Certification",
     shortTitle: "ISO 42001",
-    description: "AI governance certification. Lead the way in responsible AI.",
+    description: "AI governance certification. Lead responsibly in the era of artificial intelligence.",
     longDescription:
       "ISO 42001 is the international standard for Artificial Intelligence Management Systems (AIMS). Published in 2023, it defines requirements for responsible AI governance — covering risk management, transparency, accountability, ethical AI use, and continuous improvement of AI systems. For UK and EU technology companies building AI products, ISO 42001 is rapidly becoming what ISO 27001 was five years ago.",
     icon: Brain,
@@ -258,7 +258,7 @@ export const services: Service[] = [
     slug: "cyber-essentials",
     title: "Cyber Essentials Certification",
     shortTitle: "Cyber Essentials",
-    description: "The UK government-backed cybersecurity certification every business needs.",
+    description: "The UK government-backed cybersecurity certification. Essential for public sector supply chains.",
     longDescription:
       "Cyber Essentials is a UK government-backed certification scheme that protects organisations against the most common cyber attacks. It covers five technical controls: firewalls, secure configuration, user access control, malware protection, and patch management. If you sell to the UK government or work in the public sector supply chain, Cyber Essentials is your first and fastest step.",
     icon: Lock,
@@ -297,7 +297,7 @@ export const services: Service[] = [
     slug: "vciso",
     title: "Virtual CISO (vCISO)",
     shortTitle: "vCISO",
-    description: "Senior security leadership, without the senior hire.",
+    description: "Senior security leadership, without the senior hire. A fractional CISO for your business.",
     longDescription:
       "A Chief Information Security Officer (CISO) is one of the most important roles in a modern technology company. A Virtual CISO gives you everything a full-time CISO provides — board-level security strategy, risk management, compliance governance, supplier security oversight, incident response leadership — at a monthly retainer that scales with your needs.",
     icon: UserCheck,
@@ -337,7 +337,7 @@ export const services: Service[] = [
     slug: "vdpo",
     title: "Virtual DPO (vDPO)",
     shortTitle: "vDPO",
-    description: "Your dedicated Data Protection Officer, on demand.",
+    description: "Your dedicated Data Protection Officer, on demand. Expert privacy leadership at a fraction of the cost.",
     longDescription:
       "Under GDPR, many organisations are required to appoint a Data Protection Officer. Our vDPO service provides a qualified, experienced DPO on a flexible retainer — handling data subject requests, maintaining your ROPA, advising on DPIAs, and ensuring your privacy programme stays compliant.",
     icon: FileSearch,
@@ -374,7 +374,7 @@ export const services: Service[] = [
     slug: "penetration-testing",
     title: "Penetration Testing (VAPT)",
     shortTitle: "Penetration Testing",
-    description: "Find your weaknesses before attackers do.",
+    description: "Find your vulnerabilities before attackers do. Expert-led security testing for any environment.",
     longDescription:
       "Our Vulnerability Assessment and Penetration Testing (VAPT) service identifies security weaknesses in your applications, networks, and infrastructure before attackers exploit them. Conducted by CREST-certified testers using industry-standard methodologies.",
     icon: Bug,
@@ -412,7 +412,7 @@ export const services: Service[] = [
     slug: "gdpr-privacy",
     title: "GDPR & Data Privacy",
     shortTitle: "GDPR & Privacy",
-    description: "Turn your data obligations into a competitive advantage.",
+    description: "Turn your data protection obligations into a competitive advantage across any jurisdiction.",
     longDescription:
       "Our GDPR and data privacy service helps organisations build robust privacy programmes that go beyond basic compliance. We transform your data protection obligations into a competitive advantage — demonstrating to clients, partners, and regulators that you take data seriously.",
     icon: Scale,

@@ -2,13 +2,13 @@ export const SITE_CONFIG = {
   name: "Pixelette Certified",
   tagline: "Compliance. Governance. Cyber Trust.",
   description:
-    "UK-based ISO certification and compliance consultancy. ISO 27001, Cyber Essentials, GDPR, vCISO, AI Governance. Expert-led. Built for technology companies.",
+    "Get certified in as little as 10 weeks. Pixelette Certified delivers ISO 27001, ISO 42001, Cyber Essentials, GDPR, ISO 9001, ISO 22301 and more to businesses across every industry, worldwide. Fixed fee. 98% first-attempt pass rate.",
   url: "https://pixelettecertified.com",
   email: "info@pixelettecertified.com",
   phone: "+44 20 7946 0958",
   phoneTel: "+442079460958",
-  address: "London, United Kingdom",
-  regions: ["UK", "Ireland", "UAE", "EU"],
+  address: "London, United Kingdom · Serving clients globally",
+  regions: ["UK", "UAE", "EU", "Americas", "APAC"],
   social: {
     linkedin: "https://www.linkedin.com/company/pixelette-certified",
     twitter: "https://twitter.com/pixelettecert",
@@ -30,7 +30,7 @@ export const TRUST_STATS: { value: string; suffix?: string; label: string }[] = 
   { value: "50+", label: "ISO Certifications Delivered" },
   { value: "98%", label: "First-Attempt Audit Pass Rate" },
   { value: "10", suffix: " Weeks", label: "Average to Certification" },
-  { value: "4", suffix: " Regions", label: "UK · Ireland · UAE · EU" },
+  { value: "Global", label: "UK · UAE · EU · Americas · APAC" },
 ];
 
 interface NavChild {

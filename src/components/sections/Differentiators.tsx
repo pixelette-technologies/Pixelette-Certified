@@ -9,27 +9,27 @@ import { staggerContainer, staggerItem } from "@/lib/animations";
 const differentiators = [
   {
     icon: Zap,
-    title: "10 weeks to ISO 27001",
+    title: "10 weeks to certification",
     description:
-      "Most consultancies take 6 months. We have built a process that gets UK technology companies certified in 10 weeks without cutting corners.",
+      "Most consultancies take 6 months. We have engineered a process that gets businesses certified in 10 weeks without cutting corners — regardless of your industry, size, or geography.",
   },
   {
     icon: Puzzle,
     title: "One partner for everything",
     description:
-      "ISO, vCISO, GDPR, VAPT. One relationship, one commercial arrangement, one team that understands your entire security and compliance picture.",
+      "ISO 27001, ISO 42001, ISO 9001, ISO 22301, vCISO, GDPR, Cyber Essentials, Penetration Testing. One relationship, one commercial arrangement, one team that understands your entire compliance picture.",
   },
   {
     icon: PoundSterling,
-    title: "Enterprise quality, scale-up pricing",
+    title: "Global delivery, transparent pricing",
     description:
-      "Our delivery model means you get the same quality as the big London consultancies at 25–35% below their rates.",
+      "We serve clients across the UK, UAE, EU, Americas, and Asia Pacific. Every price is fixed and published upfront. You know exactly what you are paying before any work begins — no hourly billing, no scope creep, no surprises.",
   },
   {
     icon: Brain,
     title: "Built for the AI era",
     description:
-      "We are one of the only UK consultancies formally offering ISO 42001 AI governance. If you are building with AI, we understand your compliance landscape.",
+      "We are one of the very few consultancies globally offering ISO 42001 AI governance certification. If you are building with AI, deploying AI, or selling AI solutions to regulated sectors, we understand your compliance landscape better than anyone.",
   },
 ];
 
