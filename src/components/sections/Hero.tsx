@@ -31,9 +31,9 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
         >
-          <span className="inline-flex items-center gap-2 text-accent text-sm font-bold uppercase tracking-widest mb-6 px-4 py-2 rounded-full border border-accent/20 bg-accent/5 backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-            ISO 27001 &middot; ISO 42001 &middot; Cyber Essentials &middot; GDPR &middot; ISO 9001 &middot; ISO 22301 &middot; vCISO &middot; AI Governance
+          <span className="inline-flex items-center gap-2 text-accent text-xs sm:text-sm font-bold uppercase tracking-widest mb-6 px-4 py-2 rounded-full border border-accent/20 bg-accent/5 backdrop-blur-sm flex-wrap justify-center">
+            <span className="w-2 h-2 rounded-full bg-accent animate-pulse shrink-0" />
+            ISO 27001 &middot; ISO 42001 &middot; Cyber Essentials &middot; GDPR &middot; vCISO
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-6xl font-extrabold tracking-tight leading-[1.08] mb-6">
             <span className="gradient-text-white">Your business certified.</span>
