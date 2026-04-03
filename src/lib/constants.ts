@@ -10,7 +10,7 @@ export const SITE_CONFIG = {
   address: "London, United Kingdom · Serving clients globally",
   regions: ["UK", "UAE", "EU", "Americas", "APAC"],
   social: {
-    linkedin: "https://www.linkedin.com/company/pixelette-certified",
+    linkedin: "https://www.linkedin.com/company/pixelette-certified/about/?viewAsMember=true",
     twitter: "https://twitter.com/pixelettecert",
   },
 } as const;
