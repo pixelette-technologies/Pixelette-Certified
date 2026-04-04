@@ -7,7 +7,7 @@ export const SITE_CONFIG = {
   email: "info@pixelettecertified.com",
   phone: "+44 20 7946 0958",
   phoneTel: "+442079460958",
-  address: "London, United Kingdom · Serving clients globally",
+  address: "66 Paul Street, London, EC2A 4NA, United Kingdom",
   regions: ["UK", "UAE", "EU", "Americas", "APAC"],
   social: {
     linkedin: "https://www.linkedin.com/company/pixelette-certified/about/?viewAsMember=true",

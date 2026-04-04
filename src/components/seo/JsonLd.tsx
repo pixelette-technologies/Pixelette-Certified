@@ -24,7 +24,9 @@ export function OrganizationSchema() {
         email: "info@pixelettecertified.com",
         address: {
           "@type": "PostalAddress",
+          streetAddress: "66 Paul Street",
           addressLocality: "London",
+          postalCode: "EC2A 4NA",
           addressRegion: "England",
           addressCountry: "GB",
         },
