@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 
-const ChatWidget = dynamic(() => import("@/components/chatbot/ChatWidget"), {
+const AliceWidget = dynamic(() => import("@/components/alice/AliceWidget"), {
   ssr: false,
 });
 
@@ -13,7 +13,7 @@ const CustomCursor = dynamic(() => import("@/components/ui/CustomCursor"), {
 export default function ClientShell() {
   return (
     <>
-      <ChatWidget />
+      <AliceWidget />
       <CustomCursor />
     </>
   );
