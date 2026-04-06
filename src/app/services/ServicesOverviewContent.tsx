@@ -132,7 +132,7 @@ export default function ServicesOverviewContent({ groupedServices }: ServicesOve
                           isDark ? "text-accent" : "text-accent-dark"
                         }`}
                       >
-                        {service.pricing[0]?.price}
+                        Fixed-fee engagement
                       </p>
 
                       <span

@@ -49,7 +49,7 @@ export default function ParticleNetwork() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // Intersection Observer — pause when off-screen
+    // Intersection Observer, pause when off-screen
     const observer = new IntersectionObserver(
       ([entry]) => {
         isVisibleRef.current = entry.isIntersecting;

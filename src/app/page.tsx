@@ -20,7 +20,7 @@ export default function HomePage() {
           name: "Pixelette Certified",
           url: "https://pixelettecertified.com",
           description:
-            "UK-based ISO certification and compliance consultancy. ISO 27001, Cyber Essentials, GDPR, vCISO, AI Governance.",
+            "UK-headquartered ISO certification and compliance consultancy. ISO 27001, ISO 42001, Cyber Essentials, GDPR, vCISO, vDPO, SOC 2, penetration testing, and AI governance. Globally delivered across UK, UAE, Saudi Arabia, Qatar, EU, Americas, and APAC.",
         }}
       />
       <Hero />

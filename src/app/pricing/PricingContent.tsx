@@ -1,9 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Info, ArrowRight } from "lucide-react";
+import {
+  Shield,
+  FileCheck,
+  Users,
+  Award,
+  ArrowRight,
+  CheckCircle2,
+  Info,
+} from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
-import SectionLabel from "@/components/ui/SectionLabel";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import Accordion from "@/components/ui/Accordion";
@@ -15,189 +22,82 @@ import {
 } from "@/lib/animations";
 
 /* ------------------------------------------------------------------ */
-/*  Pricing data                                                       */
+/*  Data                                                               */
 /* ------------------------------------------------------------------ */
 
-interface PricingRow {
-  service: string;
-  href: string;
-  essentials: string | null;
-  professional: string | null;
-  enterprise: string | null;
-}
-
-const certificationPricing: PricingRow[] = [
+const promises = [
   {
-    service: "ISO 27001",
-    href: "/services/iso-27001",
-    essentials: "£8,500",
-    professional: "£13,500",
-    enterprise: "£22,000",
+    icon: FileCheck,
+    title: "Fixed-fee proposal before any work begins",
+    description:
+      "Every engagement is scoped to your specific organisation, team size, existing controls, sector, and objectives. You receive a detailed fixed-fee proposal with full transparency on what is and is not included.",
   },
   {
-    service: "ISO 22301",
-    href: "/services/iso-22301",
-    essentials: "£9,500",
-    professional: "£14,500",
-    enterprise: "£24,000",
+    icon: Shield,
+    title: "No hourly billing, no scope creep, no surprises",
+    description:
+      "Once your proposal is agreed, the price is locked. No unexpected invoices, no additional charges for revisions, no hourly clock ticking in the background.",
   },
   {
-    service: "ISO 42001",
-    href: "/services/iso-42001",
-    essentials: "£10,000",
-    professional: "£15,500",
-    enterprise: "£26,000",
-  },
-  {
-    service: "ISO 9001",
-    href: "/services/iso-9001",
-    essentials: "£7,500",
-    professional: "£12,000",
-    enterprise: "£19,000",
-  },
-  {
-    service: "ISO 14001",
-    href: "/services/iso-14001",
-    essentials: "£8,000",
-    professional: "£13,000",
-    enterprise: "£20,000",
-  },
-  {
-    service: "Cyber Essentials",
-    href: "/services/cyber-essentials",
-    essentials: "£1,800",
-    professional: null,
-    enterprise: null,
-  },
-  {
-    service: "Cyber Essentials Plus",
-    href: "/services/cyber-essentials",
-    essentials: "£3,200",
-    professional: null,
-    enterprise: null,
-  },
-  {
-    service: "GDPR & Privacy",
-    href: "/services/gdpr-privacy",
-    essentials: "£5,500",
-    professional: "£9,000",
-    enterprise: "£16,000",
+    icon: Award,
+    title: "We beat any comparable quote by at least 10%",
+    description:
+      "When comparing quotes from compliance consultancies, bring us the number. We will deliver the same quality of certified outcome, with our 98% pass rate and practitioner-led delivery, at a price that beats any comparable proposal.",
   },
 ];
 
-interface RetainerRow {
-  service: string;
-  href: string;
-  price: string;
-  note: string;
-}
-
-const retainerPricing: RetainerRow[] = [
-  {
-    service: "vCISO Basic",
-    href: "/services/vciso",
-    price: "£2,800",
-    note: "per month — 10-12 hrs/month",
-  },
-  {
-    service: "vCISO Standard",
-    href: "/services/vciso",
-    price: "£4,200",
-    note: "per month — 18-22 hrs/month",
-  },
-  {
-    service: "vCISO Enterprise",
-    href: "/services/vciso",
-    price: "£7,500",
-    note: "per month — 22-30 hrs/month",
-  },
-  {
-    service: "vDPO",
-    href: "/services/vdpo",
-    price: "£2,000",
-    note: "per month — 8-10 hrs/month",
-  },
+const included = [
+  "Scoping and gap analysis, no additional charge",
+  "All documentation, policies, and procedures, written by certified practitioners",
+  "Implementation consultancy throughout the build phase",
+  "Internal audit before Stage 2",
+  "Stage 1 and Stage 2 external audit accompaniment",
+  "Post-certification support, included for the first 90 days",
+  "For SME engagements: certification body audit fee included in the project price",
 ];
 
-interface OneOffRow {
-  service: string;
-  href: string;
-  price: string;
-  note: string;
-}
-
-const oneOffPricing: OneOffRow[] = [
-  {
-    service: "Penetration Testing",
-    href: "/services/penetration-testing",
-    price: "£2,800",
-    note: "per application",
-  },
-  {
-    service: "Gap Analysis",
-    href: "/contact",
-    price: "£1,500",
-    note: "standalone assessment",
-  },
+const multiCertOverlaps = [
+  { combo: "ISO 27001 + ISO 42001", overlap: "60% control overlap" },
+  { combo: "ISO 27001 + ISO 27701", overlap: "Natural privacy extension" },
+  { combo: "ISO 27001 + ISO 22301", overlap: "40-50% documentation overlap" },
+  { combo: "ISO 9001 + ISO 14001", overlap: "Substantial management system overlap" },
 ];
 
 const pricingFAQs = [
   {
-    question: "Are certification body fees included in these prices?",
+    question: "How is your pricing structured?",
     answer:
-      "No. All prices shown are Pixelette Certified consultancy fees. Certification body (CB) audit fees are separate and typically range from £4,500 to £8,000 depending on the standard, your organisation size, and the certification body you choose. We can recommend UKAS-accredited certification bodies and help you obtain competitive quotes.",
+      "Every engagement is scoped individually and priced as a fixed-fee project. You receive a full proposal before any work begins, no hourly billing, no scope creep charges, no surprise invoices. We commit to beating any comparable quote by at least 10%.",
   },
   {
-    question: "What is the difference between Essentials, Professional, and Enterprise tiers?",
+    question: "Are certification body fees included?",
     answer:
-      "Essentials covers the core implementation: gap analysis, documentation, risk assessment, internal audit, and audit support. Professional adds staff training, post-certification support (typically 6 months vCISO or Year 1 surveillance support). Enterprise is for larger or regulated organisations and includes extended vCISO retainers, multi-site coverage, and Year 1 + 2 surveillance audit support.",
+      "For SME engagements, the certification body audit fee is included in our project price. For larger organisations, CB fees are separate, typically £4,500 to £8,000 depending on the standard, your organisation size, and the chosen certification body. We recommend UKAS-accredited certification bodies and help you obtain competitive quotes.",
   },
   {
     question: "Do you offer payment plans?",
     answer:
-      "Yes. We offer milestone-based payment for all certification projects. Typically: 30% at kickoff, 40% at documentation delivery, and 30% at certification. For retainer services (vCISO, vDPO), we invoice monthly.",
+      "Yes. Payment plans are available, typically structured as an initial deposit at kickoff followed by milestone-based payments. Speak to our team to arrange terms that work for your business.",
   },
   {
     question: "What if we need multiple certifications?",
     answer:
-      "We offer significant discounts for bundled certifications. ISO 27001 + ISO 22301, for example, shares 40-50% of documentation and controls. Contact us for a custom quote and we will build a combined timeline that saves you time and money.",
+      "Multi-certification engagements benefit from significant control overlap, ISO 27001 + ISO 42001 share 60% of controls, ISO 27001 + ISO 27701 integrate naturally, ISO 9001 + ISO 14001 overlap substantially. We price combined engagements efficiently and typically deliver dual certifications faster than two sequential projects.",
   },
   {
     question: "Is the gap analysis really free?",
     answer:
-      "The initial 30-minute gap analysis consultation is free and delivered remotely. This gives you a high-level view of your current position and what certification requires. The standalone £1,500 gap analysis is a detailed, documented assessment with a formal remediation roadmap.",
+      "Yes. The free gap analysis is a 30-minute call with a senior consultant. We assess your current posture, identify applicable standards for your business and jurisdiction, establish a realistic timeline, and provide an indicative cost. No obligation. No sales pressure.",
   },
   {
     question: "What happens after we get certified?",
     answer:
-      "ISO certifications require annual surveillance audits (Year 1 and Year 2) and a full re-certification audit in Year 3. Our Professional and Enterprise tiers include surveillance audit support. We also offer vCISO retainers for ongoing security governance between audits.",
+      "ISO certificates are valid for 3 years subject to annual surveillance audits. We offer surveillance audit accompaniment, vCISO retainers for ongoing governance, vDPO retainers for data protection, and managed advisory subscriptions to keep your programme current and improving.",
   },
   {
     question: "Do you work with clients outside the UK?",
     answer:
-      "Yes. We deliver compliance engagements to clients worldwide. Our consultants work remotely with clients across Europe, the Middle East, North America, Asia Pacific, and beyond. Where local in-person support is required, we can arrange it. The certifications we deliver — ISO 27001, ISO 42001, ISO 9001, ISO 22301, and others — are internationally recognised standards accepted by enterprise procurement teams and regulators worldwide.",
-  },
-];
-
-/* ------------------------------------------------------------------ */
-/*  Tier descriptions for mobile cards                                 */
-/* ------------------------------------------------------------------ */
-
-const tiers = [
-  {
-    name: "Essentials",
-    audience: "Startups & SMEs up to 50 employees",
-    description: "Core implementation: gap analysis, documentation, risk assessment, internal audit, and full audit support.",
-  },
-  {
-    name: "Professional",
-    audience: "Scale-ups with 50-150 employees",
-    description: "Everything in Essentials plus staff training, vCISO support, and Year 1 surveillance audit coverage.",
-  },
-  {
-    name: "Enterprise",
-    audience: "150+ employees or regulated sectors",
-    description: "Full-service engagement with extended vCISO, multi-site coverage, GDPR alignment, and Year 1 + 2 surveillance.",
+      "Yes. We deliver globally, with active engagements across the UK, UAE, Saudi Arabia, Qatar, EU, Americas, and Asia Pacific. Our UK credentials are internationally recognised, and we have specific expertise in Gulf regulatory frameworks including SAMA CSF, NCA ECC/CCC, and QCB/NIA.",
   },
 ];
 
@@ -224,19 +124,95 @@ export default function PricingContent() {
           animate="visible"
           className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center"
         >
-          <SectionLabel className="mb-4 block">Pricing</SectionLabel>
+          <span className="inline-block text-xs font-bold uppercase tracking-widest text-accent px-3 py-1 rounded-full border border-accent/20 bg-accent/5 mb-6">
+            Pricing
+          </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-6">
-            Straightforward pricing. No surprises.
+            Transparent pricing, scoped to your business
           </h1>
-          <p className="text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            Every price is published. Every engagement is fixed-fee. You know exactly what you are paying before any work begins — regardless of where your business is located.
+          <p className="text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed mb-8">
+            We do not publish price lists because no two engagements are identical.
+            What we guarantee: a fixed-fee proposal before work starts, full
+            transparency, and a commitment to beat any comparable quote by at least 10%.
           </p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Button href="/contact" size="lg">
+              Book Your Free Gap Analysis
+            </Button>
+            <Button href="/contact" variant="secondary" size="lg">
+              Have a quote? We will beat it by 10%
+            </Button>
+          </div>
         </motion.div>
       </section>
 
-      {/* Certification body note */}
-      <section className="pb-8">
+      {/* Our pricing promise */}
+      <section className="py-12 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <SectionHeading
+            label="Our Promise"
+            title="How we price every engagement"
+            description="Every proposal is scoped to your specific organisation, team size, existing controls, sector, and objectives."
+          />
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid md:grid-cols-3 gap-6"
+          >
+            {promises.map((item) => (
+              <motion.div key={item.title} variants={staggerItem}>
+                <Card variant="glass" className="h-full">
+                  <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center mb-4">
+                    <item.icon className="h-6 w-6 text-accent" />
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    {item.description}
+                  </p>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* What is included */}
+      <section className="py-12 lg:py-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <SectionHeading
+            label="Included"
+            title="What every engagement delivers"
+            description="Regardless of the standard or your organisation size, every Pixelette Certified engagement includes:"
+          />
+          <motion.div
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <Card variant="glass" hover={false}>
+              <ul className="space-y-4">
+                {included.map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                    <span className="text-gray-300 text-sm leading-relaxed">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Certification body fees note */}
+      <section className="pb-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <motion.div
             variants={fadeInUp}
             initial="hidden"
@@ -247,52 +223,53 @@ export default function PricingContent() {
               <div className="shrink-0 mt-0.5">
                 <Info className="h-5 w-5 text-accent" />
               </div>
-              <p className="text-gray-300 text-sm leading-relaxed">
-                <strong className="text-white">Important:</strong> All prices
-                shown are Pixelette Certified consultancy fees. Certification
-                body audit fees are separate and typically range from{" "}
-                <strong className="text-white">£4,500 &ndash; £8,000</strong>{" "}
-                depending on the standard, organisation size, and chosen
-                certification body. Prices are shown in GBP. We serve clients globally and can advise on local certification body options in your region.
-              </p>
+              <div>
+                <p className="text-gray-300 text-sm leading-relaxed mb-2">
+                  <strong className="text-white">Certification body audit fees:</strong>{" "}
+                  For SME engagements, the certification body audit fee is included in
+                  the project price. For larger organisations, CB fees are separate,
+                  typically{" "}
+                  <strong className="text-white">£4,500 to £8,000</strong>{" "}
+                  depending on the standard, your organisation size, and the chosen
+                  certification body. We recommend UKAS-accredited certification bodies
+                  and can help you obtain competitive quotes.
+                </p>
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  <strong className="text-white">Payment plans:</strong>{" "}
+                  Available for all engagements. Typically structured as an initial
+                  deposit at kickoff followed by milestone-based payments.
+                </p>
+              </div>
             </Card>
           </motion.div>
         </div>
       </section>
 
-      {/* Tier descriptions */}
+      {/* Multi-certification savings */}
       <section className="py-12 lg:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <SectionHeading
+            label="Multi-Certification"
+            title="Combined certifications save time and money"
+            description="Many ISO standards share significant control overlap. We price combined engagements efficiently and typically deliver dual certifications faster than two sequential projects."
+          />
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            className="grid md:grid-cols-3 gap-6"
+            className="grid sm:grid-cols-2 gap-4"
           >
-            {tiers.map((tier, i) => (
-              <motion.div key={tier.name} variants={staggerItem}>
-                <Card
-                  variant={i === 1 ? "dark" : "glass"}
-                  hover={false}
-                  className={
-                    i === 1
-                      ? "border-accent/40 ring-1 ring-accent/20"
-                      : ""
-                  }
-                >
-                  {i === 1 && (
-                    <span className="inline-block text-xs font-bold uppercase tracking-widest text-accent mb-3">
-                      Most Popular
-                    </span>
-                  )}
-                  <h3 className="text-xl font-bold text-white mb-1">
-                    {tier.name}
-                  </h3>
-                  <p className="text-sm text-accent mb-3">{tier.audience}</p>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    {tier.description}
-                  </p>
+            {multiCertOverlaps.map((item) => (
+              <motion.div key={item.combo} variants={staggerItem}>
+                <Card variant="glass" hover={false} className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center shrink-0">
+                    <Users className="h-5 w-5 text-accent" />
+                  </div>
+                  <div>
+                    <p className="text-white font-semibold text-sm">{item.combo}</p>
+                    <p className="text-accent text-xs">{item.overlap}</p>
+                  </div>
                 </Card>
               </motion.div>
             ))}
@@ -300,216 +277,34 @@ export default function PricingContent() {
         </div>
       </section>
 
-      {/* Certification pricing table */}
+      {/* How to get started */}
       <section className="py-12 lg:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <SectionHeading
-            label="Certification Services"
-            title="ISO, Cyber Essentials & GDPR"
-            description="Fixed-fee packages from gap analysis through to certification."
-          />
-
-          {/* Desktop table */}
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <motion.div
             variants={fadeInUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="hidden md:block"
           >
-            <div className="rounded-2xl border border-white/10 overflow-hidden">
-              <table className="w-full text-left">
-                <thead>
-                  <tr className="bg-white/5">
-                    <th className="px-6 py-4 text-sm font-bold text-gray-400 uppercase tracking-wider">
-                      Service
-                    </th>
-                    <th className="px-6 py-4 text-sm font-bold text-gray-400 uppercase tracking-wider text-center">
-                      Essentials
-                    </th>
-                    <th className="px-6 py-4 text-sm font-bold text-accent uppercase tracking-wider text-center">
-                      Professional
-                    </th>
-                    <th className="px-6 py-4 text-sm font-bold text-gray-400 uppercase tracking-wider text-center">
-                      Enterprise
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-white/5">
-                  {certificationPricing.map((row) => (
-                    <tr
-                      key={row.service}
-                      className="hover:bg-white/[0.02] transition-colors"
-                    >
-                      <td className="px-6 py-4">
-                        <a
-                          href={row.href}
-                          className="text-white font-semibold hover:text-accent transition-colors inline-flex items-center gap-1.5 group"
-                        >
-                          {row.service}
-                          <ArrowRight className="h-3.5 w-3.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                        </a>
-                      </td>
-                      <td className="px-6 py-4 text-center">
-                        {row.essentials ? (
-                          <span className="text-white font-semibold">
-                            {row.essentials}
-                          </span>
-                        ) : (
-                          <span className="text-gray-600">&mdash;</span>
-                        )}
-                      </td>
-                      <td className="px-6 py-4 text-center bg-accent/[0.03]">
-                        {row.professional ? (
-                          <span className="text-white font-semibold">
-                            {row.professional}
-                          </span>
-                        ) : (
-                          <span className="text-gray-600">&mdash;</span>
-                        )}
-                      </td>
-                      <td className="px-6 py-4 text-center">
-                        {row.enterprise ? (
-                          <span className="text-white font-semibold">
-                            {row.enterprise}
-                          </span>
-                        ) : (
-                          <span className="text-gray-600">&mdash;</span>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-accent px-3 py-1 rounded-full border border-accent/20 bg-accent/5 mb-6">
+              Get Started
+            </span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-6">
+              Your free 30-minute gap analysis
+            </h2>
+            <p className="text-gray-300 max-w-2xl mx-auto leading-relaxed mb-8">
+              Every engagement begins with a free, no-obligation gap analysis. In 30
+              minutes, our consultants will assess your current posture, identify which
+              standards apply, provide a realistic timeline, and confirm our commitment
+              to beat any comparable quote by at least 10%. Most clients book their first
+              paid engagement within two weeks.
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Button href="/contact" size="lg">
+                Book Your Free Gap Analysis
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
             </div>
-          </motion.div>
-
-          {/* Mobile cards */}
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="md:hidden space-y-4"
-          >
-            {certificationPricing.map((row) => (
-              <motion.div key={row.service} variants={staggerItem}>
-                <Card variant="glass" hover={false}>
-                  <a
-                    href={row.href}
-                    className="text-white font-bold text-lg hover:text-accent transition-colors mb-3 block"
-                  >
-                    {row.service}
-                  </a>
-                  <div className="space-y-2 text-sm">
-                    {row.essentials && (
-                      <div className="flex justify-between">
-                        <span className="text-gray-400">Essentials</span>
-                        <span className="text-white font-semibold">
-                          {row.essentials}
-                        </span>
-                      </div>
-                    )}
-                    {row.professional && (
-                      <div className="flex justify-between">
-                        <span className="text-accent">Professional</span>
-                        <span className="text-white font-semibold">
-                          {row.professional}
-                        </span>
-                      </div>
-                    )}
-                    {row.enterprise && (
-                      <div className="flex justify-between">
-                        <span className="text-gray-400">Enterprise</span>
-                        <span className="text-white font-semibold">
-                          {row.enterprise}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Retainer pricing */}
-      <section className="py-12 lg:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <SectionHeading
-            label="Advisory Retainers"
-            title="Virtual CISO (vCISO)"
-            description="Senior security leadership on a flexible monthly retainer."
-          />
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid md:grid-cols-3 gap-6"
-          >
-            {retainerPricing.map((item, i) => (
-              <motion.div key={item.service} variants={staggerItem}>
-                <Card
-                  variant={i === 1 ? "dark" : "glass"}
-                  className={`h-full ${
-                    i === 1 ? "border-accent/40 ring-1 ring-accent/20" : ""
-                  }`}
-                >
-                  <h3 className="text-lg font-bold text-white mb-1">
-                    {item.service}
-                  </h3>
-                  <div className="flex items-baseline gap-1 mb-2">
-                    <span className="text-3xl font-extrabold text-accent">
-                      {item.price}
-                    </span>
-                    <span className="text-sm text-gray-400">/mo</span>
-                  </div>
-                  <p className="text-sm text-gray-400 mb-4">{item.note}</p>
-                  <Button href={item.href} variant="secondary" size="sm" className="w-full">
-                    Learn more
-                  </Button>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* One-off services */}
-      <section className="py-12 lg:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <SectionHeading
-            label="One-Off Services"
-            title="Testing & assessment"
-            description="Standalone engagements for specific security needs."
-          />
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto"
-          >
-            {oneOffPricing.map((item) => (
-              <motion.div key={item.service} variants={staggerItem}>
-                <Card variant="glass" className="h-full text-center">
-                  <h3 className="text-lg font-bold text-white mb-1">
-                    {item.service}
-                  </h3>
-                  <div className="flex items-baseline justify-center gap-1 mb-2">
-                    <span className="text-3xl font-extrabold text-accent">
-                      {item.price}
-                    </span>
-                  </div>
-                  <p className="text-sm text-gray-400 mb-4">{item.note}</p>
-                  <Button href={item.href} variant="secondary" size="sm" className="w-full">
-                    Learn more
-                  </Button>
-                </Card>
-              </motion.div>
-            ))}
           </motion.div>
         </div>
       </section>
@@ -534,8 +329,8 @@ export default function PricingContent() {
 
       {/* CTA */}
       <CTASection
-        headline="Not sure which tier is right for you?"
-        description="Book a free 30-minute gap analysis call. We will assess your current position, recommend the right services and tier, and give you a clear timeline and cost. No obligation."
+        headline="Ready to get started?"
+        description="Book a free 30-minute gap analysis call. We will assess your current position, recommend the right services, and give you a clear timeline. No obligation. No sales pressure."
       />
     </>
   );

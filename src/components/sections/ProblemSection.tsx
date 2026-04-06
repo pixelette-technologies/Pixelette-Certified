@@ -18,14 +18,14 @@ const painPoints = [
     icon: TrendingDown,
     title: "Stalled Investment",
     description:
-      "Investors move on when your data governance is unclear. Compliance gaps signal operational risk that venture capital firms, private equity, and strategic investors will not accept — regardless of how strong your product is.",
+      "Investors move on when your data governance is unclear. Compliance gaps signal operational risk that venture capital firms, private equity, and strategic investors will not accept, regardless of how strong your product is.",
     gradient: "from-amber-500/10 to-yellow-500/5",
   },
   {
     icon: ShieldOff,
     title: "Failed Onboarding",
     description:
-      "Enterprise clients, government bodies, regulated industries, and healthcare networks worldwide cannot onboard uncertified suppliers. Without the right certifications, you are locked out before the conversation starts — in every market, in every sector.",
+      "Enterprise clients, government bodies, regulated industries, and healthcare networks worldwide cannot onboard uncertified suppliers. Without the right certifications, you are locked out before the conversation starts, in every market, in every sector.",
     gradient: "from-accent/10 to-accent-light/5",
   },
 ];

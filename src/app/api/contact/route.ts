@@ -43,7 +43,7 @@ export async function POST(request: Request) {
       from: "Pixelette Certified <noreply@pixelettecertified.com>",
       to: ["partnerships@pixelette.tech"],
       replyTo: email.trim(),
-      subject: `New enquiry from ${name.trim()} — ${service}`,
+      subject: `New enquiry from ${name.trim()}, ${service}`,
       html: `
         <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #044143; border-radius: 12px; overflow: hidden;">
           <!-- Header with logo -->
@@ -92,7 +92,7 @@ export async function POST(request: Request) {
 
           <!-- Footer -->
           <div style="background: #032e2f; padding: 20px 32px; text-align: center; border-top: 1px solid rgba(20,170,169,0.15);">
-            <p style="color: rgba(255,255,255,0.3); font-size: 12px; margin: 0;">Pixelette Certified — Compliance. Governance. Cyber Trust.</p>
+            <p style="color: rgba(255,255,255,0.3); font-size: 12px; margin: 0;">Pixelette Certified, Compliance. Governance. Cyber Trust.</p>
             <p style="color: rgba(255,255,255,0.2); font-size: 11px; margin: 6px 0 0;">pixelettecertified.com</p>
           </div>
         </div>
@@ -103,7 +103,7 @@ export async function POST(request: Request) {
     await resend.emails.send({
       from: "Pixelette Certified <noreply@pixelettecertified.com>",
       to: [email.trim()],
-      subject: "We've received your enquiry — Pixelette Certified",
+      subject: "We've received your enquiry, Pixelette Certified",
       html: `
         <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #044143; border-radius: 12px; overflow: hidden;">
           <!-- Header -->
@@ -145,7 +145,7 @@ export async function POST(request: Request) {
 
           <!-- Footer -->
           <div style="background: #032e2f; padding: 20px 32px; text-align: center; border-top: 1px solid rgba(20,170,169,0.15);">
-            <p style="color: rgba(255,255,255,0.3); font-size: 12px; margin: 0;">Pixelette Certified — Compliance. Governance. Cyber Trust.</p>
+            <p style="color: rgba(255,255,255,0.3); font-size: 12px; margin: 0;">Pixelette Certified, Compliance. Governance. Cyber Trust.</p>
             <p style="color: rgba(255,255,255,0.2); font-size: 11px; margin: 6px 0 0;">pixelettecertified.com</p>
           </div>
         </div>

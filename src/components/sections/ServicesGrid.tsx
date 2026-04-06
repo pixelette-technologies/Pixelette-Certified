@@ -47,7 +47,7 @@ export default function ServicesGrid() {
               <motion.div key={service.slug} variants={staggerItem}>
                 <Link
                   href={`/services/${service.slug}`}
-                  aria-label={`Learn more about ${service.shortTitle} — ${service.description}`}
+                  aria-label={`Learn more about ${service.shortTitle}, ${service.description}`}
                   className="group flex flex-col h-full rounded-2xl p-6 glass-card transition-all duration-500 hover:-translate-y-2"
                 >
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mb-4 group-hover:border-accent/50 group-hover:shadow-glow transition-all duration-500">

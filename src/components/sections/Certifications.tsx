@@ -18,7 +18,7 @@ const certifications = [
   },
   {
     title: "ISO/IEC 42001 Lead Auditor",
-    issuer: "PECB — Professional Evaluation and Certification Board",
+    issuer: "PECB, Professional Evaluation and Certification Board",
     holder: "Muhammad Waleed",
     date: "October 2025",
     certNumber: "",
@@ -27,7 +27,7 @@ const certifications = [
   },
   {
     title: "AI Governance Professional (AIGP)",
-    issuer: "IAPP — International Association of Privacy Professionals",
+    issuer: "IAPP, International Association of Privacy Professionals",
     holder: "Muhammad Waleed",
     date: "May 2025",
     certNumber: "",
@@ -36,7 +36,7 @@ const certifications = [
   },
   {
     title: "Fellow of Information Privacy (FIP)",
-    issuer: "IAPP — International Association of Privacy Professionals",
+    issuer: "IAPP, International Association of Privacy Professionals",
     holder: "Muhammad Waleed",
     date: "September 2025",
     certNumber: "",
@@ -45,7 +45,7 @@ const certifications = [
   },
   {
     title: "Certified Information Privacy Professional (CIPP/US)",
-    issuer: "IAPP — International Association of Privacy Professionals",
+    issuer: "IAPP, International Association of Privacy Professionals",
     holder: "Muhammad Waleed",
     date: "August 2025",
     certNumber: "",
@@ -54,7 +54,7 @@ const certifications = [
   },
   {
     title: "Certified Information Privacy Manager (CIPM)",
-    issuer: "IAPP — International Association of Privacy Professionals",
+    issuer: "IAPP, International Association of Privacy Professionals",
     holder: "Muhammad Waleed",
     date: "February 2024",
     certNumber: "",
@@ -62,7 +62,7 @@ const certifications = [
     badge: "IAPP CIPM",
   },
   {
-    title: "CISA — Certified Information Systems Auditor",
+    title: "CISA, Certified Information Systems Auditor",
     issuer: "ISACA",
     holder: "Muhammad Waleed",
     date: "July 2024",
@@ -71,7 +71,7 @@ const certifications = [
     badge: "ISACA CISA",
   },
   {
-    title: "CEH — Certified Ethical Hacker",
+    title: "CEH, Certified Ethical Hacker",
     issuer: "EC-Council",
     holder: "Muhammad Waleed",
     date: "March 2018",
@@ -169,8 +169,8 @@ export default function Certifications({ variant = "dark" }: { variant?: "dark" 
                 <div>
                   <h3 className="font-bold text-white text-lg">{selectedCert.title}</h3>
                   <p className="text-sm text-gray-400">
-                    {selectedCert.issuer} &middot; {selectedCert.holder} &middot; {selectedCert.date}
-                    {selectedCert.certNumber && ` · #${selectedCert.certNumber}`}
+                    {selectedCert.issuer}, {selectedCert.holder}, {selectedCert.date}
+                    {selectedCert.certNumber && `, #${selectedCert.certNumber}`}
                   </p>
                 </div>
                 <button

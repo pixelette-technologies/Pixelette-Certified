@@ -188,7 +188,7 @@ export default function IndustriesContent({ industries }: IndustriesContentProps
               },
               {
                 title: "Regulatory Mapping",
-                description: "FCA, NHS Digital, DfE, EU AI Act — we map your certification to the regulations your industry faces.",
+                description: "FCA, NHS Digital, DfE, EU AI Act, we map your certification to the regulations your industry faces.",
               },
               {
                 title: "Auditor Expectations",
@@ -196,7 +196,7 @@ export default function IndustriesContent({ industries }: IndustriesContentProps
               },
               {
                 title: "Client Requirements",
-                description: "We understand what your enterprise clients actually need to see — not just the certificate, but the evidence behind it.",
+                description: "We understand what your enterprise clients actually need to see, not just the certificate, but the evidence behind it.",
               },
               {
                 title: "Dual Certifications",

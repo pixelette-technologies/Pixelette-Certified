@@ -52,7 +52,7 @@ export default function CaseStudyClient({ study }: { study: CaseStudyData }) {
               ))}
             </div>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">{study.client}</h1>
-            <p className="text-gray-400 text-lg">{study.industry} &middot; {study.employees} &middot; {study.timeline}</p>
+            <p className="text-gray-400 text-lg">{study.industry}, {study.employees}, {study.timeline}</p>
           </motion.div>
         </div>
       </section>

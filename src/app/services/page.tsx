@@ -48,6 +48,31 @@ const categories = [
     label: "Privacy & Data Protection",
     description: "Turn your data obligations into a competitive advantage.",
   },
+  {
+    key: "grc" as const,
+    label: "GRC & Regulatory Frameworks",
+    description: "SOC 2, SAMA CSF, NCA ECC/CCC, QCB/NIA, sector-specific and regional regulatory compliance.",
+  },
+  {
+    key: "architecture" as const,
+    label: "Security Architecture",
+    description: "Zero Trust, Active Directory hardening, and cloud security architecture design.",
+  },
+  {
+    key: "bcdr" as const,
+    label: "Business Continuity & Disaster Recovery",
+    description: "BIA, BRA, and DR planning to ensure your organisation can withstand disruption.",
+  },
+  {
+    key: "ai-governance" as const,
+    label: "AI Governance",
+    description: "AI risk assessment and governance aligned to NIST AI RMF and the EU AI Act.",
+  },
+  {
+    key: "managed" as const,
+    label: "Managed Advisory",
+    description: "Continuous GRC advisory subscription. White-label available for partners and MSPs.",
+  },
 ];
 
 const groupedServices = categories

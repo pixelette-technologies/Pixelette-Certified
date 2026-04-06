@@ -15,7 +15,7 @@ interface CTASectionProps {
 
 export default function CTASection({
   headline = "Start with a free gap analysis.",
-  description = "No obligation. No sales pressure. In 30 minutes, you will know exactly where your compliance gaps are, which standards apply to your business and jurisdiction, and what a realistic timeline and cost looks like — wherever in the world you operate.",
+  description = "No obligation. No sales pressure. In 30 minutes, you will know exactly where your compliance gaps are, which standards apply to your business and jurisdiction, and what a realistic timeline and cost looks like, wherever in the world you operate.",
   primaryCta = "Book Your Free Gap Analysis",
   primaryHref = "/contact",
   secondaryCta = "Talk to a Consultant",

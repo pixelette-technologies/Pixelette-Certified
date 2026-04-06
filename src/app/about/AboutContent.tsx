@@ -35,21 +35,33 @@ const credentials = [
   },
   {
     icon: Award,
-    title: "ISO 27001 Lead Auditors (IRCA)",
+    title: "ISO 27001:2022 Lead Auditor (IRCA)",
     description:
-      "Our team includes IRCA-registered Lead Auditors who have conducted hundreds of audits across technology companies.",
+      "CQI and IRCA via IQMS Learning / DAS Certification, IRCA-registered, the gold standard for ISO 27001 lead auditors.",
+  },
+  {
+    icon: Brain,
+    title: "ISO 42001 Lead Auditor (PECB)",
+    description:
+      "PECB-certified ISO 42001 Lead Auditor, AI governance certification authority. Among the first in the UK market.",
   },
   {
     icon: Scale,
-    title: "GDPR Qualified (CIPP/E)",
+    title: "IAPP Privacy Certifications",
     description:
-      "Certified Information Privacy Professionals (Europe) ensuring your data protection programme meets the highest standards.",
+      "AIGP (AI Governance Professional), FIP (Fellow of Information Privacy), CIPP/US, and CIPM, the most comprehensive IAPP credential set available.",
+  },
+  {
+    icon: Award,
+    title: "CISA & CEH",
+    description:
+      "ISACA CISA (Certified Information Systems Auditor) and EC-Council CEH (Certified Ethical Hacker), underpinning our audit and penetration testing delivery.",
   },
   {
     icon: Users,
     title: "CQI Corporate Member",
     description:
-      "Chartered Quality Institute corporate membership demonstrates our commitment to quality management excellence.",
+      "Chartered Quality Institute corporate membership demonstrating quality management commitment across all engagements.",
   },
 ];
 
@@ -68,9 +80,9 @@ const differentiators = [
   },
   {
     icon: PoundSterling,
-    title: "Transparent pricing",
+    title: "No pricing surprises",
     description:
-      "Fixed-fee engagements published on our website. No hourly surprises, no scope creep charges, no invoices you did not expect.",
+      "Fixed-fee proposals before any work begins. No hourly billing, no scope creep. We commit to beating any comparable quote by at least 10%.",
   },
   {
     icon: Brain,
@@ -80,9 +92,9 @@ const differentiators = [
   },
   {
     icon: Globe,
-    title: "Multi-region delivery",
+    title: "Global delivery, UK credentialled",
     description:
-      "UK, Ireland, UAE, and EU. We support technology companies wherever they operate and wherever their clients require compliance.",
+      "UK, UAE, Saudi Arabia, Qatar, EU, Americas, and Asia Pacific. Our UK-based certifications and credentials are recognised worldwide.",
   },
   {
     icon: Clock,
@@ -137,16 +149,16 @@ export default function AboutContent() {
               </h2>
               <div className="space-y-4 text-gray-300 leading-relaxed text-lg">
                 <p>
-                  Pixelette Group has spent over 10 years delivering technology solutions for businesses across the UK, Middle East, Europe, North America, and Asia Pacific. We have built platforms, mobile applications, AI systems, and cloud infrastructure for organisations ranging from early-stage startups to large enterprise clients — across banking, healthcare, logistics, manufacturing, professional services, and beyond.
+                  Pixelette Group has spent over 10 years delivering technology solutions for businesses across the UK, Middle East, Europe, North America, and Asia Pacific. We have built platforms, mobile applications, AI systems, and cloud infrastructure for organisations ranging from early-stage startups to large enterprise clients, across banking, healthcare, logistics, manufacturing, professional services, and beyond.
                 </p>
                 <p>
-                  Along the way, we saw a pattern that frustrated us. Businesses across every industry and every geography were losing contracts, failing procurement, and missing growth opportunities — not because their product was poor, but because they could not produce the right certification.
+                  Along the way, we saw a pattern that frustrated us. Businesses across every industry and every geography were losing contracts, failing procurement, and missing growth opportunities, not because their product was poor, but because they could not produce the right certification.
                 </p>
                 <p>
                   The compliance consultancies they turned to were slow, expensive, and built for a different era. They did not understand modern business models, diverse industries, or the urgency of global regulatory pressure.
                 </p>
                 <p>
-                  We started Pixelette Certified to change that. A compliance consultancy built by practitioners, for businesses of every kind. Fast, structured, and designed for organisations that cannot afford to lose six months waiting for a certificate they needed yesterday — in any industry, in any market, anywhere in the world.
+                  We started Pixelette Certified to change that. A compliance consultancy built by practitioners, for businesses of every kind. Fast, structured, and designed for organisations that cannot afford to lose six months waiting for a certificate they needed yesterday, in any industry, in any market, anywhere in the world.
                 </p>
               </div>
             </motion.div>
@@ -161,7 +173,7 @@ export default function AboutContent() {
                 { value: "10+", label: "Years in technology" },
                 { value: "50+", label: "Certifications delivered" },
                 { value: "98%", label: "First-attempt pass rate" },
-                { value: "4", label: "Regions served" },
+                { value: "Global", label: "Worldwide delivery" },
               ].map((stat) => (
                 <Card
                   key={stat.label}
@@ -239,13 +251,13 @@ export default function AboutContent() {
                 name: "Asif Rana Ashiq",
                 role: "CEO & Founder",
                 credentials: [],
-                bio: "Founder of Pixelette Group with over a decade of experience building technology solutions across the UK, Middle East, and Europe. Established Pixelette Certified to help UK technology companies achieve compliance faster and at a fair price.",
+                bio: "Founder of the Pixelette Group with over a decade of experience building technology solutions across the UK, Middle East, and Europe. Established Pixelette Certified to give businesses of every size access to world-class compliance expertise at a fair price, delivered without the delays and overheads of traditional consultancy.",
               },
               {
                 name: "Muhammad Waleed",
                 role: "Lead Consultant",
-                credentials: ["ISO 27001 Lead Auditor (IRCA)", "AIGP", "FIP", "CIPP/US", "CIPM", "CISA", "CEH"],
-                bio: "Leads all certification engagements and audit preparation. Expert in information security, privacy, AI governance, and ethical hacking with hands-on experience across ISO 27001, ISO 42001, GDPR, and penetration testing.",
+                credentials: ["ISO 27001 Lead Auditor (IRCA)", "ISO 42001 Lead Auditor (PECB)", "AIGP", "FIP", "CIPP/US", "CIPM", "CISA", "CEH"],
+                bio: "Leads all certification engagements and audit preparation. Muhammad holds ISO 27001 Lead Auditor (IRCA), ISO 42001 Lead Auditor (PECB), AIGP, FIP, CIPP/US, CIPM (all IAPP), CISA (ISACA), and CEH (EC-Council) credentials, one of the most comprehensively certified compliance practitioners in the UK market.",
               },
             ].map((member) => (
               <motion.div key={member.name + member.role} variants={staggerItem}>

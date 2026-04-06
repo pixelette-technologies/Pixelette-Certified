@@ -6,7 +6,7 @@ import JsonLd from "@/components/seo/JsonLd";
 export const metadata: Metadata = {
   title: "Industries We Serve | Global Compliance Expertise | Pixelette Certified",
   description:
-    "Pixelette Certified delivers ISO certification and compliance consultancy to businesses across every industry — FinTech, healthcare, manufacturing, logistics, legal, energy, education, retail, and more. Globally delivered.",
+    "Pixelette Certified delivers ISO certification and compliance consultancy to businesses across every industry, FinTech, healthcare, manufacturing, logistics, legal, energy, education, retail, and more. Globally delivered.",
   keywords: [
     "ISO certification by industry",
     "FinTech compliance UK",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Industries We Serve | Global Compliance Expertise | Pixelette Certified",
     description:
-      "Pixelette Certified delivers ISO certification and compliance consultancy to businesses across every industry — FinTech, healthcare, manufacturing, logistics, legal, energy, education, retail, and more. Globally delivered.",
+      "Pixelette Certified delivers ISO certification and compliance consultancy to businesses across every industry, FinTech, healthcare, manufacturing, logistics, legal, energy, education, retail, and more. Globally delivered.",
     url: "https://pixelettecertified.com/industries",
   },
   alternates: {

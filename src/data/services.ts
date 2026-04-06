@@ -29,7 +29,7 @@ export interface Service {
   description: string;
   longDescription: string;
   icon: LucideIcon;
-  category: "iso" | "cyber" | "advisory" | "privacy";
+  category: "iso" | "cyber" | "advisory" | "privacy" | "grc" | "architecture" | "bcdr" | "ai-governance" | "managed";
   features: string[];
   process: ProcessStep[];
   pricing: PricingTier[];
@@ -49,7 +49,7 @@ export const services: Service[] = [
     shortTitle: "ISO 27001",
     description: "The global standard for information security management. Get certified in 10 weeks.",
     longDescription:
-      "ISO 27001 is the international standard for information security management. It defines the requirements for an Information Security Management System (ISMS) — a structured framework of policies, procedures, and controls that protects your organisation's information assets. For UK technology companies, ISO 27001 has become the de facto requirement for selling to enterprise clients, winning government contracts, passing investor due diligence, and qualifying for cyber insurance at favourable rates. Whether you are a SaaS platform targeting enterprise clients, a healthcare provider seeking NHS supply chain approval, a FinTech navigating FCA or DORA requirements, a manufacturer seeking supply chain inclusion, or any other organisation that handles sensitive data — ISO 27001 is your foundation.",
+      "ISO 27001 is the international standard for information security management. It defines the requirements for an Information Security Management System (ISMS), a structured framework of policies, procedures, and controls that protects your organisation's information assets. For UK technology companies, ISO 27001 has become the de facto requirement for selling to enterprise clients, winning government contracts, passing investor due diligence, and qualifying for cyber insurance at favourable rates. Whether you are a SaaS platform targeting enterprise clients, a healthcare provider seeking NHS supply chain approval, a FinTech navigating FCA or DORA requirements, a manufacturer seeking supply chain inclusion, or any other organisation that handles sensitive data, ISO 27001 is your foundation.",
     icon: Shield,
     category: "iso",
     features: [
@@ -70,9 +70,9 @@ export const services: Service[] = [
       { week: "Weeks 10–12", title: "External Audit", description: "Stage 1 documentation review and Stage 2 compliance audit. Certificate issued." },
     ],
     pricing: [
-      { name: "Essentials", audience: "Startups and SMEs up to 50 employees", price: "From £8,500", features: ["Gap analysis", "ISMS documentation", "SoA", "Risk register", "1 internal audit", "Stage 1 + Stage 2 support"] },
-      { name: "Professional", audience: "Scale-ups 50–150 employees", price: "From £13,500", features: ["Everything in Essentials", "Staff training", "6-month vCISO Basic", "Surveillance audit support Year 1"] },
-      { name: "Enterprise", audience: "150+ employees or regulated sectors", price: "From £22,000", features: ["Everything in Professional", "vCISO Standard 12 months", "GDPR alignment layer", "Year 1 + 2 surveillance"] },
+      { name: "Essentials", audience: "Startups and SMEs up to 50 employees", price: "Scoped to your business", features: ["Gap analysis", "ISMS documentation", "SoA", "Risk register", "1 internal audit", "Stage 1 + Stage 2 support"] },
+      { name: "Professional", audience: "Scale-ups 50–150 employees", price: "Scoped to your business", features: ["Everything in Essentials", "Staff training", "6-month vCISO Basic", "Surveillance audit support Year 1"] },
+      { name: "Enterprise", audience: "150+ employees or regulated sectors", price: "Scoped to your business", features: ["Everything in Professional", "vCISO Standard 12 months", "GDPR alignment layer", "Year 1 + 2 surveillance"] },
     ],
     faqs: [
       { question: "How long does ISO 27001 take?", answer: "Our standard implementation runs 10–12 weeks from kickoff to Stage 2 audit. Complex organisations or those with significant existing gaps may take 14–16 weeks." },
@@ -83,8 +83,8 @@ export const services: Service[] = [
     ],
     relatedSlugs: ["cyber-essentials", "vciso", "gdpr-privacy"],
     seo: {
-      title: "ISO 27001 Certification UK | 10 Weeks | From £8,500",
-      description: "Get ISO 27001 certified in 10 weeks. UK-based expert-led implementation from gap analysis to Stage 2 audit. Fixed fee from £8,500. 98% first-attempt pass rate.",
+      title: "ISO 27001 Certification UK | 10 Weeks | Fixed Fee",
+      description: "Get ISO 27001 certified in 10 weeks. UK-based expert-led implementation from gap analysis to Stage 2 audit. Fixed-fee engagement. 98% first-attempt pass rate.",
       keywords: ["ISO 27001 certification UK", "ISO 27001 consultant", "ISMS implementation", "information security certification"],
     },
   },
@@ -94,7 +94,7 @@ export const services: Service[] = [
     shortTitle: "ISO 22301",
     description: "Business continuity certification. Demonstrate resilience and stay operational when it matters most.",
     longDescription:
-      "ISO 22301 is the international standard for Business Continuity Management Systems (BCMS). It helps your organisation prepare for, respond to, and recover from disruptions — whether cyber attacks, supply chain failures, natural disasters, or infrastructure outages.",
+      "ISO 22301 is the international standard for Business Continuity Management Systems (BCMS). It helps your organisation prepare for, respond to, and recover from disruptions, whether cyber attacks, supply chain failures, natural disasters, or infrastructure outages.",
     icon: ShieldCheck,
     category: "iso",
     features: [
@@ -115,12 +115,12 @@ export const services: Service[] = [
       { week: "Weeks 10–12", title: "External Audit", description: "Stage 1 and Stage 2 certification audit. Certificate issued." },
     ],
     pricing: [
-      { name: "Essentials", audience: "SMEs up to 50 employees", price: "From £9,500", features: ["Gap analysis", "BCMS documentation", "BIA", "BC plans", "Internal audit", "Audit support"] },
-      { name: "Professional", audience: "50–150 employees", price: "From £14,500", features: ["Everything in Essentials", "Exercise programme", "Staff training", "Year 1 surveillance support"] },
-      { name: "Enterprise", audience: "150+ employees", price: "From £24,000", features: ["Everything in Professional", "Multi-site coverage", "Integrated DR planning", "Year 1 + 2 surveillance"] },
+      { name: "Essentials", audience: "SMEs up to 50 employees", price: "Scoped to your business", features: ["Gap analysis", "BCMS documentation", "BIA", "BC plans", "Internal audit", "Audit support"] },
+      { name: "Professional", audience: "50–150 employees", price: "Scoped to your business", features: ["Everything in Essentials", "Exercise programme", "Staff training", "Year 1 surveillance support"] },
+      { name: "Enterprise", audience: "150+ employees", price: "Scoped to your business", features: ["Everything in Professional", "Multi-site coverage", "Integrated DR planning", "Year 1 + 2 surveillance"] },
     ],
     faqs: [
-      { question: "What is the difference between ISO 22301 and ISO 27001?", answer: "ISO 27001 focuses on information security management. ISO 22301 focuses on business continuity — ensuring your organisation can continue operating during and after a disruption. Many organisations pursue both as they are complementary." },
+      { question: "What is the difference between ISO 22301 and ISO 27001?", answer: "ISO 27001 focuses on information security management. ISO 22301 focuses on business continuity, ensuring your organisation can continue operating during and after a disruption. Many organisations pursue both as they are complementary." },
       { question: "How long does ISO 22301 certification take?", answer: "Typically 10–14 weeks depending on your organisation's complexity and existing business continuity measures." },
     ],
     relatedSlugs: ["iso-27001", "iso-9001", "vciso"],
@@ -157,9 +157,9 @@ export const services: Service[] = [
       { week: "Weeks 10–12", title: "External Audit", description: "Stage 1 and Stage 2 certification audit." },
     ],
     pricing: [
-      { name: "Essentials", audience: "SMEs up to 50 employees", price: "From £7,500", features: ["Gap analysis", "QMS documentation", "Process mapping", "Internal audit", "Audit support"] },
-      { name: "Professional", audience: "50–150 employees", price: "From £12,000", features: ["Everything in Essentials", "Staff training", "Performance metrics setup", "Year 1 surveillance"] },
-      { name: "Enterprise", audience: "150+ employees", price: "From £19,000", features: ["Everything in Professional", "Multi-site coverage", "Integrated management system", "Year 1 + 2 surveillance"] },
+      { name: "Essentials", audience: "SMEs up to 50 employees", price: "Scoped to your business", features: ["Gap analysis", "QMS documentation", "Process mapping", "Internal audit", "Audit support"] },
+      { name: "Professional", audience: "50–150 employees", price: "Scoped to your business", features: ["Everything in Essentials", "Staff training", "Performance metrics setup", "Year 1 surveillance"] },
+      { name: "Enterprise", audience: "150+ employees", price: "Scoped to your business", features: ["Everything in Professional", "Multi-site coverage", "Integrated management system", "Year 1 + 2 surveillance"] },
     ],
     faqs: [
       { question: "Is ISO 9001 relevant for technology companies?", answer: "Absolutely. ISO 9001 demonstrates that your development processes, service delivery, and customer support meet consistently high standards. Many enterprise procurement teams require it." },
@@ -167,7 +167,7 @@ export const services: Service[] = [
     relatedSlugs: ["iso-27001", "iso-14001", "iso-22301"],
     seo: {
       title: "ISO 9001 Quality Management Certification UK",
-      description: "ISO 9001 certification for UK businesses. Quality management system implementation, audit support, and continuous improvement. From £7,500.",
+      description: "ISO 9001 certification for UK businesses. Quality management system implementation, audit support, and continuous improvement. Fixed-fee engagement.",
       keywords: ["ISO 9001 certification UK", "quality management", "QMS"],
     },
   },
@@ -198,9 +198,9 @@ export const services: Service[] = [
       { week: "Weeks 10–12", title: "External Audit", description: "Certification body audit. Certificate issued." },
     ],
     pricing: [
-      { name: "Essentials", audience: "SMEs", price: "From £8,000", features: ["Gap analysis", "EMS documentation", "Aspects register", "Internal audit", "Audit support"] },
-      { name: "Professional", audience: "50–150 employees", price: "From £13,000", features: ["Everything in Essentials", "Staff training", "Monitoring programme", "Year 1 surveillance"] },
-      { name: "Enterprise", audience: "150+ employees", price: "From £20,000", features: ["Everything in Professional", "Multi-site", "Integrated management system", "Year 1 + 2 surveillance"] },
+      { name: "Essentials", audience: "SMEs", price: "Scoped to your business", features: ["Gap analysis", "EMS documentation", "Aspects register", "Internal audit", "Audit support"] },
+      { name: "Professional", audience: "50–150 employees", price: "Scoped to your business", features: ["Everything in Essentials", "Staff training", "Monitoring programme", "Year 1 surveillance"] },
+      { name: "Enterprise", audience: "150+ employees", price: "Scoped to your business", features: ["Everything in Professional", "Multi-site", "Integrated management system", "Year 1 + 2 surveillance"] },
     ],
     faqs: [
       { question: "Why do tech companies need ISO 14001?", answer: "Data centres, office operations, and supply chains all have environmental impacts. ISO 14001 demonstrates responsible environmental management to clients, investors, and regulators increasingly focused on ESG." },
@@ -218,7 +218,7 @@ export const services: Service[] = [
     shortTitle: "ISO 42001",
     description: "AI governance certification. Lead responsibly in the era of artificial intelligence.",
     longDescription:
-      "ISO 42001 is the international standard for Artificial Intelligence Management Systems (AIMS). Published in 2023, it defines requirements for responsible AI governance — covering risk management, transparency, accountability, ethical AI use, and continuous improvement of AI systems. For UK and EU technology companies building AI products, ISO 42001 is rapidly becoming what ISO 27001 was five years ago.",
+      "ISO 42001 is the international standard for Artificial Intelligence Management Systems (AIMS). Published in 2023, it defines requirements for responsible AI governance, covering risk management, transparency, accountability, ethical AI use, and continuous improvement of AI systems. For UK and EU technology companies building AI products, ISO 42001 is rapidly becoming what ISO 27001 was five years ago.",
     icon: Brain,
     category: "iso",
     features: [
@@ -239,12 +239,12 @@ export const services: Service[] = [
       { week: "Weeks 11–14", title: "External Audit", description: "Certification body audit. Certificate issued." },
     ],
     pricing: [
-      { name: "Essentials", audience: "AI startups up to 50 employees", price: "From £10,000", features: ["Gap analysis", "AIMS documentation", "AI risk assessment", "Internal audit", "Audit support"] },
-      { name: "Professional", audience: "Scale-ups 50–150 employees", price: "From £15,500", features: ["Everything in Essentials", "EU AI Act mapping", "Staff training", "Year 1 surveillance"] },
-      { name: "Enterprise", audience: "150+ or regulated AI", price: "From £26,000", features: ["Everything in Professional", "Multi-system coverage", "Board advisory", "Year 1 + 2 surveillance"] },
+      { name: "Essentials", audience: "AI startups up to 50 employees", price: "Scoped to your business", features: ["Gap analysis", "AIMS documentation", "AI risk assessment", "Internal audit", "Audit support"] },
+      { name: "Professional", audience: "Scale-ups 50–150 employees", price: "Scoped to your business", features: ["Everything in Essentials", "EU AI Act mapping", "Staff training", "Year 1 surveillance"] },
+      { name: "Enterprise", audience: "150+ or regulated AI", price: "Scoped to your business", features: ["Everything in Professional", "Multi-system coverage", "Board advisory", "Year 1 + 2 surveillance"] },
     ],
     faqs: [
-      { question: "Who needs ISO 42001?", answer: "Any company that builds, deploys, or integrates AI systems — especially those selling to enterprise clients, operating in regulated sectors, or subject to the EU AI Act." },
+      { question: "Who needs ISO 42001?", answer: "Any company that builds, deploys, or integrates AI systems, especially those selling to enterprise clients, operating in regulated sectors, or subject to the EU AI Act." },
       { question: "Is ISO 42001 mandatory?", answer: "Not yet, but the EU AI Act references ISO 42001 as a primary compliance framework. Enterprise clients are starting to require it in procurement questionnaires, similar to how ISO 27001 became a requirement for SaaS companies." },
     ],
     relatedSlugs: ["iso-27001", "gdpr-privacy", "vciso"],
@@ -279,17 +279,17 @@ export const services: Service[] = [
       { week: "Week 3", title: "Certification", description: "Complete self-assessment (CE) or technical assessment (CE+). Certificate issued." },
     ],
     pricing: [
-      { name: "Cyber Essentials", audience: "All businesses", price: "From £1,800", features: ["Gap analysis", "Remediation guidance", "Self-assessment preparation", "Submission management"] },
-      { name: "Cyber Essentials Plus", audience: "Higher-assurance requirements", price: "From £3,200", features: ["Everything in CE", "External vulnerability scanning", "Configuration testing", "Hands-on technical assessment"] },
+      { name: "Cyber Essentials", audience: "All businesses", price: "Scoped to your business", features: ["Gap analysis", "Remediation guidance", "Self-assessment preparation", "Submission management"] },
+      { name: "Cyber Essentials Plus", audience: "Higher-assurance requirements", price: "Scoped to your business", features: ["Everything in CE", "External vulnerability scanning", "Configuration testing", "Hands-on technical assessment"] },
     ],
     faqs: [
-      { question: "What is the difference between CE and CE Plus?", answer: "Cyber Essentials is a self-assessment verified by a certifying body. Cyber Essentials Plus includes external hands-on technical testing — vulnerability scanning and configuration testing by an assessor." },
+      { question: "What is the difference between CE and CE Plus?", answer: "Cyber Essentials is a self-assessment verified by a certifying body. Cyber Essentials Plus includes external hands-on technical testing, vulnerability scanning and configuration testing by an assessor." },
       { question: "How quickly can we get certified?", answer: "Cyber Essentials typically takes 2–3 weeks. Cyber Essentials Plus takes 4–6 weeks due to the external testing component." },
     ],
     relatedSlugs: ["iso-27001", "penetration-testing", "vciso"],
     seo: {
-      title: "Cyber Essentials Certification UK | From £1,800",
-      description: "UK government-backed Cyber Essentials and Cyber Essentials Plus certification. From £1,800. Fast-track 2–3 week delivery for government suppliers and NHS.",
+      title: "Cyber Essentials Certification UK | Fixed Fee",
+      description: "UK government-backed Cyber Essentials and Cyber Essentials Plus certification. Fixed-fee. Fast-track 2–3 week delivery for government suppliers and NHS.",
       keywords: ["Cyber Essentials certification", "Cyber Essentials Plus", "UK government certification", "cybersecurity certification"],
     },
   },
@@ -299,7 +299,7 @@ export const services: Service[] = [
     shortTitle: "vCISO",
     description: "Senior security leadership, without the senior hire. A fractional CISO for your business.",
     longDescription:
-      "A Chief Information Security Officer (CISO) is one of the most important roles in a modern technology company. A Virtual CISO gives you everything a full-time CISO provides — board-level security strategy, risk management, compliance governance, supplier security oversight, incident response leadership — at a monthly retainer that scales with your needs.",
+      "A Chief Information Security Officer (CISO) is one of the most important roles in a modern technology company. A Virtual CISO gives you everything a full-time CISO provides, board-level security strategy, risk management, compliance governance, supplier security oversight, incident response leadership, at a monthly retainer that scales with your needs.",
     icon: UserCheck,
     category: "advisory",
     features: [
@@ -318,18 +318,18 @@ export const services: Service[] = [
       { week: "Ongoing", title: "Retainer", description: "Monthly advisory, board reports, risk management, questionnaire support." },
     ],
     pricing: [
-      { name: "vCISO Basic", audience: "Post-certification governance", price: "From £2,800/mo", features: ["10–12 hrs/month", "Monthly security review", "Board report", "Policy maintenance", "Email support"] },
-      { name: "vCISO Standard", audience: "Active enterprise sales", price: "From £4,200/mo", features: ["18–22 hrs/month", "All Basic features", "Security questionnaire management", "Incident response planning", "Quarterly risk register update"] },
-      { name: "vCISO Enterprise", audience: "Regulated / pre-IPO", price: "From £7,500/mo", features: ["22–30 hrs/month", "All Standard features", "On-site presence", "Board presentation", "M&A security due diligence"] },
+      { name: "vCISO Basic", audience: "Post-certification governance", price: "Monthly retainer", features: ["10–12 hrs/month", "Monthly security review", "Board report", "Policy maintenance", "Email support"] },
+      { name: "vCISO Standard", audience: "Active enterprise sales", price: "Monthly retainer", features: ["18–22 hrs/month", "All Basic features", "Security questionnaire management", "Incident response planning", "Quarterly risk register update"] },
+      { name: "vCISO Enterprise", audience: "Regulated / pre-IPO", price: "Monthly retainer", features: ["22–30 hrs/month", "All Standard features", "On-site presence", "Board presentation", "M&A security due diligence"] },
     ],
     faqs: [
-      { question: "How is a vCISO different from a consultant?", answer: "A consultant delivers a project and leaves. A vCISO is an ongoing senior security leader embedded in your business — attending board meetings, managing your security programme, and being accountable for outcomes." },
+      { question: "How is a vCISO different from a consultant?", answer: "A consultant delivers a project and leaves. A vCISO is an ongoing senior security leader embedded in your business, attending board meetings, managing your security programme, and being accountable for outcomes." },
       { question: "Can we scale up or down?", answer: "Yes. vCISO retainers are flexible. You can move between tiers as your needs change, with 30 days notice." },
     ],
     relatedSlugs: ["iso-27001", "vdpo", "penetration-testing"],
     seo: {
-      title: "Virtual CISO (vCISO) UK | From £2,800/month",
-      description: "Senior security leadership without the full-time hire. vCISO retainers from £2,800/month. Board-level strategy, risk management, and compliance governance.",
+      title: "Virtual CISO (vCISO) UK | Monthly Retainer",
+      description: "Senior security leadership without the full-time hire. vCISO retainers on a flexible monthly basis. Board-level strategy, risk management, and compliance governance.",
       keywords: ["vCISO UK", "virtual CISO", "fractional CISO", "security leadership"],
     },
   },
@@ -339,7 +339,7 @@ export const services: Service[] = [
     shortTitle: "vDPO",
     description: "Your dedicated Data Protection Officer, on demand. Expert privacy leadership at a fraction of the cost.",
     longDescription:
-      "Under GDPR, many organisations are required to appoint a Data Protection Officer. Our vDPO service provides a qualified, experienced DPO on a flexible retainer — handling data subject requests, maintaining your ROPA, advising on DPIAs, and ensuring your privacy programme stays compliant.",
+      "Under GDPR, many organisations are required to appoint a Data Protection Officer. Our vDPO service provides a qualified, experienced DPO on a flexible retainer, handling data subject requests, maintaining your ROPA, advising on DPIAs, and ensuring your privacy programme stays compliant.",
     icon: FileSearch,
     category: "advisory",
     features: [
@@ -358,7 +358,7 @@ export const services: Service[] = [
       { week: "Ongoing", title: "Retainer", description: "Ongoing DPO duties, DSR management, compliance monitoring." },
     ],
     pricing: [
-      { name: "vDPO", audience: "All organisations", price: "From £2,000/mo", features: ["8–10 hrs/month", "ROPA maintenance", "DSR handling", "DPIA advisory", "Privacy policy reviews", "Email support"] },
+      { name: "vDPO", audience: "All organisations", price: "Monthly retainer", features: ["8–10 hrs/month", "ROPA maintenance", "DSR handling", "DPIA advisory", "Privacy policy reviews", "Email support"] },
     ],
     faqs: [
       { question: "Do we legally need a DPO?", answer: "Under GDPR Article 37, you need a DPO if you are a public authority, carry out large-scale systematic monitoring, or process special category data at scale. Even if not legally required, having a DPO demonstrates strong data governance." },
@@ -366,7 +366,7 @@ export const services: Service[] = [
     relatedSlugs: ["gdpr-privacy", "vciso", "iso-27001"],
     seo: {
       title: "Virtual DPO (vDPO) Service UK | GDPR Data Protection Officer",
-      description: "Virtual Data Protection Officer service. GDPR compliance, DSR management, DPIAs, and ongoing DPO duties. From £2,000/month.",
+      description: "Virtual Data Protection Officer service. GDPR compliance, DSR management, DPIAs, and ongoing DPO duties. Monthly retainer.",
       keywords: ["vDPO UK", "virtual DPO", "data protection officer", "GDPR DPO"],
     },
   },
@@ -395,7 +395,7 @@ export const services: Service[] = [
       { week: "Week 4", title: "Reporting", description: "Detailed findings report with CVSS scores, executive summary, remediation guidance." },
     ],
     pricing: [
-      { name: "Web/API Test", audience: "Single application", price: "From £2,800/app", features: ["OWASP Top 10 testing", "API endpoint testing", "CVSS-scored report", "Remediation guidance", "Re-test included"] },
+      { name: "Web/API Test", audience: "Single application", price: "Per application", features: ["OWASP Top 10 testing", "API endpoint testing", "CVSS-scored report", "Remediation guidance", "Re-test included"] },
     ],
     faqs: [
       { question: "How often should we do pen testing?", answer: "At minimum annually, and after any significant changes to your applications or infrastructure. Many compliance frameworks (ISO 27001, PCI DSS) require at least annual testing." },
@@ -404,7 +404,7 @@ export const services: Service[] = [
     relatedSlugs: ["cyber-essentials", "iso-27001", "vciso"],
     seo: {
       title: "Penetration Testing UK | VAPT | Web, API & Network Testing",
-      description: "Professional penetration testing for UK businesses. Web application, API, and network security testing. CVSS-scored reports. From £2,800.",
+      description: "Professional penetration testing for UK businesses. Web application, API, and network security testing. CVSS-scored reports. Fixed-fee engagement.",
       keywords: ["penetration testing UK", "VAPT", "web application testing", "API security testing"],
     },
   },
@@ -414,7 +414,7 @@ export const services: Service[] = [
     shortTitle: "GDPR & Privacy",
     description: "Turn your data protection obligations into a competitive advantage across any jurisdiction.",
     longDescription:
-      "Our GDPR and data privacy service helps organisations build robust privacy programmes that go beyond basic compliance. We transform your data protection obligations into a competitive advantage — demonstrating to clients, partners, and regulators that you take data seriously.",
+      "Our GDPR and data privacy service helps organisations build robust privacy programmes that go beyond basic compliance. We transform your data protection obligations into a competitive advantage, demonstrating to clients, partners, and regulators that you take data seriously.",
     icon: Scale,
     category: "privacy",
     features: [
@@ -433,9 +433,9 @@ export const services: Service[] = [
       { week: "Weeks 6–8", title: "Implementation", description: "Policies implemented, consent mechanisms updated, staff trained." },
     ],
     pricing: [
-      { name: "Essentials", audience: "SMEs", price: "From £5,500", features: ["GDPR assessment", "Privacy policies", "ROPA", "Breach procedures", "Staff training"] },
-      { name: "Professional", audience: "Scale-ups", price: "From £9,000", features: ["Everything in Essentials", "DPIAs", "International transfers", "Quarterly reviews"] },
-      { name: "Enterprise", audience: "Regulated organisations", price: "From £16,000", features: ["Everything in Professional", "vDPO service", "ICO liaison", "Multi-jurisdiction"] },
+      { name: "Essentials", audience: "SMEs", price: "Scoped to your business", features: ["GDPR assessment", "Privacy policies", "ROPA", "Breach procedures", "Staff training"] },
+      { name: "Professional", audience: "Scale-ups", price: "Scoped to your business", features: ["Everything in Essentials", "DPIAs", "International transfers", "Quarterly reviews"] },
+      { name: "Enterprise", audience: "Regulated organisations", price: "Scoped to your business", features: ["Everything in Professional", "vDPO service", "ICO liaison", "Multi-jurisdiction"] },
     ],
     faqs: [
       { question: "Is GDPR still relevant after Brexit?", answer: "Yes. The UK has its own version (UK GDPR) which mirrors EU GDPR. If you process data of UK residents or trade with the EU, GDPR compliance is essential." },
@@ -443,9 +443,265 @@ export const services: Service[] = [
     relatedSlugs: ["vdpo", "iso-27001", "iso-42001"],
     seo: {
       title: "GDPR Compliance Services UK | Pixelette Certified",
-      description: "Turn GDPR obligations into a competitive advantage. UK data protection compliance, DPIAs, and data mapping. Expert-led. Fixed fee from £5,500.",
+      description: "Turn GDPR obligations into a competitive advantage. UK data protection compliance, DPIAs, and data mapping. Expert-led. Fixed-fee engagement.",
       keywords: ["GDPR compliance UK", "data privacy", "data protection", "GDPR consultant"],
     },
+  },
+  /* ────── New services from Master Document v1.1 ────── */
+
+  {
+    slug: "iso-27701",
+    title: "ISO 27701 Privacy Information Management",
+    shortTitle: "ISO 27701",
+    description: "The privacy extension to ISO 27001. Establishes a Privacy Information Management System aligned with GDPR and global privacy regulations.",
+    longDescription: "ISO 27701 extends ISO 27001 to cover privacy management, establishing requirements for a Privacy Information Management System (PIMS). It provides a structured framework for managing personal data aligned with GDPR, CCPA, and other global privacy regulations. Typically implemented alongside or after ISO 27001.",
+    icon: Shield,
+    category: "iso",
+    features: ["Privacy policies and procedures aligned to ISO 27701", "PIMS implementation consultancy", "Integration with existing ISO 27001 ISMS", "Internal audit and Stage 1 and Stage 2 certification audit accompaniment"],
+    process: [
+      { week: "Week 1", title: "Kickoff & Gap Analysis", description: "Assess current privacy posture against ISO 27701 requirements." },
+      { week: "Weeks 2–5", title: "PIMS Documentation", description: "Privacy policies, procedures, and PIMS documentation built." },
+      { week: "Weeks 6–8", title: "Implementation", description: "Integration with existing ISMS, staff training, controls implemented." },
+      { week: "Week 9", title: "Internal Audit", description: "Full pre-audit review conducted." },
+      { week: "Weeks 10–12", title: "External Audit", description: "Stage 1 and Stage 2 certification audit." },
+    ],
+    pricing: [
+      { name: "Standard", audience: "Organisations with existing ISO 27001", price: "Scoped to your business", features: ["Gap analysis", "PIMS documentation", "ISMS integration", "Internal audit", "Audit support"] },
+    ],
+    faqs: [
+      { question: "Do we need ISO 27001 first?", answer: "ISO 27701 is an extension to ISO 27001. You can implement them together or add ISO 27701 after achieving ISO 27001 certification." },
+    ],
+    relatedSlugs: ["iso-27001", "gdpr-privacy", "vdpo"],
+    seo: { title: "ISO 27701 Privacy Certification UK", description: "ISO 27701 privacy information management certification. Extends ISO 27001 with GDPR-aligned privacy governance.", keywords: ["ISO 27701", "PIMS", "privacy certification"] },
+  },
+  {
+    slug: "soc-2",
+    title: "SOC 2 Compliance",
+    shortTitle: "SOC 2",
+    description: "Trust Services Criteria compliance for technology companies serving US enterprise clients and investors.",
+    longDescription: "SOC 2 Type I assesses whether controls are suitably designed. SOC 2 Type II verifies controls operate effectively over an audit period. The gold standard for technology companies demonstrating security assurance to US enterprise clients.",
+    icon: ShieldCheck,
+    category: "grc",
+    features: ["Trust Services Criteria gap analysis", "Controls framework design and documentation", "Policy and procedure drafting", "Evidence collection programme", "Audit readiness and examiner liaison", "SOC 2 Compliance Report issued"],
+    process: [
+      { week: "Weeks 1–2", title: "Gap Analysis", description: "Trust Services Criteria assessment and controls mapping." },
+      { week: "Weeks 3–6", title: "Controls Design", description: "Documentation, policies, and controls implementation." },
+      { week: "Weeks 7–10", title: "Implementation", description: "Evidence collection and audit readiness preparation." },
+    ],
+    pricing: [
+      { name: "Type I", audience: "Point-in-time controls assessment", price: "Scoped to your business", features: ["Controls design review", "Policy documentation", "Readiness assessment"] },
+      { name: "Type II", audience: "Operational effectiveness over audit period", price: "Scoped to your business", features: ["Full implementation", "Evidence programme", "Compliance Report issued"] },
+    ],
+    faqs: [
+      { question: "What is the difference between SOC 2 Type I and Type II?", answer: "Type I is a point-in-time assessment of controls design. Type II verifies controls operated effectively over a period (typically 6-12 months). Most US enterprise clients require Type II." },
+    ],
+    relatedSlugs: ["iso-27001", "vciso", "penetration-testing"],
+    seo: { title: "SOC 2 Compliance UK", description: "SOC 2 Type I and Type II compliance for technology companies. Trust Services Criteria implementation and audit support.", keywords: ["SOC 2", "SOC 2 Type II", "Trust Services Criteria"] },
+  },
+  {
+    slug: "sama-csf",
+    title: "SAMA CSF Compliance",
+    shortTitle: "SAMA CSF",
+    description: "Mandatory cybersecurity framework for Saudi Arabian financial institutions regulated by the Saudi Arabian Monetary Authority.",
+    longDescription: "The SAMA Cybersecurity Framework is mandatory for all financial institutions regulated by the Saudi Arabian Monetary Authority, including banks, insurance companies, and financial market infrastructure. Pixelette Certified delivers full SAMA CSF compliance implementation.",
+    icon: Shield,
+    category: "grc",
+    features: ["SAMA CSF controls gap analysis across all four domains", "Cybersecurity policies and procedures drafting", "Controls implementation consultancy", "Regulatory examination readiness assessment", "Banking sector compliance programme design"],
+    process: [
+      { week: "Month 1", title: "Gap Analysis", description: "Controls gap analysis across all SAMA CSF domains." },
+      { week: "Months 2–3", title: "Implementation", description: "Policies, procedures, and controls implemented." },
+      { week: "Month 4", title: "Readiness", description: "Regulatory examination readiness assessment." },
+    ],
+    pricing: [
+      { name: "Enterprise", audience: "Saudi financial institutions", price: "Scoped to your business", features: ["Full SAMA CSF implementation", "Regulatory readiness", "Banking sector expertise"] },
+    ],
+    faqs: [],
+    relatedSlugs: ["iso-27001", "iso-22301", "vciso"],
+    seo: { title: "SAMA CSF Compliance", description: "SAMA Cybersecurity Framework compliance for Saudi Arabian banks and financial institutions.", keywords: ["SAMA CSF", "Saudi Arabia banking compliance"] },
+  },
+  {
+    slug: "nca-ecc",
+    title: "NCA ECC / CCC Compliance",
+    shortTitle: "NCA ECC/CCC",
+    description: "Essential Cybersecurity Controls and Cloud Cybersecurity Controls for Saudi government entities and critical infrastructure.",
+    longDescription: "The NCA Essential Cybersecurity Controls apply to all Saudi government entities and critical national infrastructure. The NCA Cloud Cybersecurity Controls apply to cloud service providers in the Kingdom. Both are mandatory regulatory requirements.",
+    icon: Lock,
+    category: "grc",
+    features: ["NCA ECC/CCC gap analysis across all control domains", "Controls implementation and documentation", "Critical infrastructure and cloud security compliance", "Regulatory reporting and audit readiness support"],
+    process: [
+      { week: "Month 1", title: "Assessment", description: "Gap analysis across all NCA control domains." },
+      { week: "Months 2–3", title: "Implementation", description: "Controls implementation and documentation." },
+    ],
+    pricing: [
+      { name: "Enterprise", audience: "Saudi government and critical infrastructure", price: "Scoped to your business", features: ["Full NCA ECC/CCC implementation", "Regulatory reporting support"] },
+    ],
+    faqs: [],
+    relatedSlugs: ["sama-csf", "iso-27001", "vciso"],
+    seo: { title: "NCA ECC/CCC Compliance", description: "NCA Essential Cybersecurity Controls and Cloud Controls for Saudi Arabia.", keywords: ["NCA ECC", "NCA CCC", "Saudi cybersecurity"] },
+  },
+  {
+    slug: "qcb-nia",
+    title: "QCB / NIA Compliance",
+    shortTitle: "QCB/NIA",
+    description: "Qatar Central Bank cybersecurity requirements and National Information Assurance framework for Qatari financial institutions.",
+    longDescription: "The Qatar Central Bank Cybersecurity Requirements and the National Information Assurance framework are the primary regulatory cybersecurity obligations for financial institutions and government entities in Qatar.",
+    icon: Shield,
+    category: "grc",
+    features: ["QCB Cybersecurity Requirements gap analysis", "NIA framework alignment and documentation", "Financial sector regulatory compliance programme", "Regulatory reporting and audit preparation"],
+    process: [
+      { week: "Month 1", title: "Assessment", description: "Gap analysis against QCB and NIA requirements." },
+      { week: "Months 2–3", title: "Implementation", description: "Controls implementation and regulatory documentation." },
+    ],
+    pricing: [
+      { name: "Enterprise", audience: "Qatar financial institutions", price: "Scoped to your business", features: ["Full QCB/NIA compliance implementation"] },
+    ],
+    faqs: [],
+    relatedSlugs: ["sama-csf", "iso-27001", "vciso"],
+    seo: { title: "QCB/NIA Compliance Qatar", description: "Qatar Central Bank and National Information Assurance compliance for Qatari financial institutions.", keywords: ["QCB", "NIA", "Qatar banking compliance"] },
+  },
+  {
+    slug: "zero-trust",
+    title: "Zero Trust Architecture Design",
+    shortTitle: "Zero Trust",
+    description: "Vendor-neutral Zero Trust architecture design based on NIST SP 800-207 and CISA principles.",
+    longDescription: "Zero Trust Architecture replaces the traditional perimeter-based security model with a 'never trust, always verify' approach. Delivered as a vendor-neutral architecture design applicable to any technology stack.",
+    icon: Lock,
+    category: "architecture",
+    features: ["Zero Trust maturity assessment", "Identity and access management architecture", "Micro-segmentation and network design", "Endpoint security framework", "Data protection architecture", "Implementation roadmap"],
+    process: [
+      { week: "Weeks 1–2", title: "Assessment", description: "Current-state analysis and maturity assessment." },
+      { week: "Weeks 3–4", title: "Design", description: "Architecture design across identity, network, and data layers." },
+      { week: "Weeks 5–6", title: "Roadmap", description: "Implementation roadmap and documentation delivered." },
+    ],
+    pricing: [
+      { name: "Standard", audience: "All organisations", price: "Scoped to your business", features: ["Maturity assessment", "Architecture design", "Implementation roadmap"] },
+    ],
+    faqs: [],
+    relatedSlugs: ["iso-27001", "vciso", "penetration-testing"],
+    seo: { title: "Zero Trust Architecture Design", description: "Vendor-neutral Zero Trust architecture design. NIST SP 800-207 aligned.", keywords: ["Zero Trust", "NIST 800-207", "security architecture"] },
+  },
+  {
+    slug: "ad-hardening",
+    title: "Active Directory Hardening",
+    shortTitle: "AD Hardening",
+    description: "Systematic hardening of Active Directory and Azure AD / Entra ID environments to reduce domain compromise risk.",
+    longDescription: "Active Directory remains one of the most targeted attack surfaces in enterprise environments. AD hardening addresses critical misconfigurations, privilege escalation paths, and attack vectors including pass-the-hash, Kerberoasting, and AD persistence techniques.",
+    icon: Lock,
+    category: "architecture",
+    features: ["AD configuration review and gap analysis", "Privileged access management design", "Group Policy hardening", "Service account security review", "Domain controller hardening", "Prioritised remediation report"],
+    process: [
+      { week: "Weeks 1–2", title: "Review", description: "Configuration review and vulnerability assessment." },
+      { week: "Weeks 3–4", title: "Remediation", description: "Hardening implementation and verification." },
+    ],
+    pricing: [
+      { name: "Per Domain", audience: "On-premise and cloud hybrid", price: "Scoped to your business", features: ["Full AD review", "Hardening implementation", "Remediation report"] },
+    ],
+    faqs: [],
+    relatedSlugs: ["penetration-testing", "vciso", "iso-27001"],
+    seo: { title: "Active Directory Hardening", description: "Active Directory and Azure AD security hardening for enterprise environments.", keywords: ["AD hardening", "Active Directory security", "Entra ID"] },
+  },
+  {
+    slug: "cloud-security-architecture",
+    title: "Cloud Security Architecture",
+    shortTitle: "Cloud Security",
+    description: "Security architecture design for AWS, Azure, GCP, and hybrid cloud environments.",
+    longDescription: "Cloud Security Architecture engagements design or redesign the security posture of your cloud environment, covering identity, network, data, and operations security across hybrid and multi-cloud deployments.",
+    icon: Globe,
+    category: "architecture",
+    features: ["Current-state cloud security assessment", "Target-state architecture design", "Landing zone and account structure design", "CSA Cloud Controls Matrix alignment", "Architecture document and implementation roadmap"],
+    process: [
+      { week: "Weeks 1–2", title: "Assessment", description: "Current cloud security posture review." },
+      { week: "Weeks 3–4", title: "Design", description: "Target architecture design across all cloud layers." },
+      { week: "Weeks 5–6", title: "Documentation", description: "Architecture document and roadmap delivered." },
+    ],
+    pricing: [
+      { name: "Standard", audience: "AWS, Azure, GCP, hybrid", price: "Scoped to your business", features: ["Assessment", "Architecture design", "Implementation roadmap"] },
+    ],
+    faqs: [],
+    relatedSlugs: ["zero-trust", "penetration-testing", "iso-27001"],
+    seo: { title: "Cloud Security Architecture", description: "Cloud security architecture for AWS, Azure, and GCP environments.", keywords: ["cloud security", "AWS security", "Azure security"] },
+  },
+  {
+    slug: "bia-bra",
+    title: "Business Impact Analysis & Risk Assessment",
+    shortTitle: "BIA / BRA",
+    description: "Identify critical functions, recovery priorities, and the threats most likely to cause disruption to your operations.",
+    longDescription: "A Business Impact Analysis identifies and quantifies the effects of disruption on critical business functions. The Business Risk Assessment identifies the threats most likely to cause those disruptions. ISO 22301 aligned.",
+    icon: Scale,
+    category: "bcdr",
+    features: ["Critical business function mapping", "MAO, RTO, and RPO determination", "Business risk and threat assessment", "Interdependency mapping", "Formal BIA and BRA documentation"],
+    process: [
+      { week: "Week 1", title: "Scoping", description: "Critical functions and services identified." },
+      { week: "Weeks 2–3", title: "Analysis", description: "Impact analysis and risk assessment conducted." },
+    ],
+    pricing: [
+      { name: "Standard", audience: "Up to 5 business functions", price: "Scoped to your business", features: ["BIA", "BRA", "Formal documentation"] },
+    ],
+    faqs: [],
+    relatedSlugs: ["iso-22301", "vciso", "iso-27001"],
+    seo: { title: "Business Impact Analysis", description: "BIA and BRA services aligned to ISO 22301 requirements.", keywords: ["BIA", "BRA", "business impact analysis"] },
+  },
+  {
+    slug: "dr-planning",
+    title: "Disaster Recovery Planning",
+    shortTitle: "DR Planning",
+    description: "Actionable DR runbooks and recovery procedures ensuring IT systems can be restored within defined objectives.",
+    longDescription: "Disaster Recovery Planning translates BIA and BRA findings into actionable DR runbooks and recovery procedures, ensuring IT systems and critical data can be restored within defined recovery objectives.",
+    icon: ShieldCheck,
+    category: "bcdr",
+    features: ["DR strategy aligned to RTO, RPO, and MAO targets", "DR runbook development", "Backup and replication strategy review", "DR testing plan and exercise design", "ISO 22301 integration"],
+    process: [
+      { week: "Weeks 1–2", title: "Strategy", description: "DR strategy design aligned to recovery objectives." },
+      { week: "Weeks 3–4", title: "Runbooks", description: "Step-by-step recovery procedures developed." },
+      { week: "Weeks 5–6", title: "Testing", description: "DR testing plan designed and initial exercise conducted." },
+    ],
+    pricing: [
+      { name: "Standard", audience: "Up to 5 IT systems", price: "Scoped to your business", features: ["DR strategy", "Runbooks", "Testing plan"] },
+    ],
+    faqs: [],
+    relatedSlugs: ["iso-22301", "bia-bra", "vciso"],
+    seo: { title: "Disaster Recovery Planning", description: "DR planning and runbook development aligned to ISO 22301.", keywords: ["disaster recovery", "DR planning", "RTO RPO"] },
+  },
+  {
+    slug: "ai-risk-assessment",
+    title: "AI Risk Assessment",
+    shortTitle: "AI Risk Assessment",
+    description: "Structured evaluation of AI system risks against the NIST AI Risk Management Framework, with EU AI Act alignment.",
+    longDescription: "An AI Risk Assessment provides a structured evaluation of risks associated with your AI systems, covering technical, operational, ethical, privacy, and regulatory dimensions. Conducted against the NIST AI RMF.",
+    icon: Brain,
+    category: "ai-governance",
+    features: ["AI system inventory and classification by EU AI Act risk tier", "NIST AI RMF GOVERN, MAP, MEASURE, MANAGE assessment", "Bias, fairness, and transparency review", "Data governance and privacy risk assessment", "AI security and adversarial robustness review", "Prioritised recommendations report"],
+    process: [
+      { week: "Week 1", title: "Inventory", description: "AI systems inventoried and classified by risk tier." },
+      { week: "Week 2", title: "Assessment", description: "NIST AI RMF assessment across all functions." },
+      { week: "Week 3", title: "Report", description: "Risk assessment report with prioritised recommendations." },
+    ],
+    pricing: [
+      { name: "Standard", audience: "Up to 5 AI systems", price: "Scoped to your business", features: ["System inventory", "NIST AI RMF assessment", "Recommendations report"] },
+    ],
+    faqs: [],
+    relatedSlugs: ["iso-42001", "iso-27001", "vciso"],
+    seo: { title: "AI Risk Assessment", description: "AI risk assessment against NIST AI RMF with EU AI Act alignment.", keywords: ["AI risk assessment", "NIST AI RMF", "EU AI Act"] },
+  },
+  {
+    slug: "managed-advisory",
+    title: "Managed Cybersecurity Advisory",
+    shortTitle: "Managed Advisory",
+    description: "Continuous GRC advisory subscription delivered by certified practitioners. White-label available for partners and MSPs.",
+    longDescription: "A white-label-compatible monthly subscription providing continuous governance, risk, and compliance advisory across your security and privacy programme. Designed for post-certification organisations and businesses with ongoing regulatory obligations.",
+    icon: UserCheck,
+    category: "managed",
+    features: ["Monthly GRC advisory sessions", "Regulatory horizon scanning", "Risk register review and reporting", "Policy maintenance and updates", "Incident guidance and regulatory notification advisory", "On-demand expert access"],
+    process: [
+      { week: "Month 1", title: "Onboarding", description: "Full security posture assessment and priority roadmap." },
+      { week: "Ongoing", title: "Monthly Advisory", description: "Regular advisory sessions, policy reviews, and regulatory updates." },
+    ],
+    pricing: [
+      { name: "Subscription", audience: "Post-certification organisations", price: "Monthly retainer", features: ["GRC advisory", "Horizon scanning", "On-demand access", "White-label available"] },
+    ],
+    faqs: [],
+    relatedSlugs: ["vciso", "vdpo", "iso-27001"],
+    seo: { title: "Managed Cybersecurity Advisory", description: "Continuous GRC advisory subscription. White-label available for MSPs and partners.", keywords: ["managed GRC", "cybersecurity advisory", "compliance subscription"] },
   },
 ];
 

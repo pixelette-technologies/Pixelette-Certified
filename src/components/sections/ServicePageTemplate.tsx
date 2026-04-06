@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Check, ArrowRight, Clock, PoundSterling, Shield, ShieldCheck, Globe, Leaf, Brain, Lock, UserCheck, FileSearch, Bug, Scale } from "lucide-react";
+import { Check, ArrowRight, Clock, Shield, ShieldCheck, Globe, Leaf, Brain, Lock, UserCheck, FileSearch, Bug, Scale } from "lucide-react";
 import type { Service } from "@/data/services";
 import { getRelatedServices } from "@/data/services";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -34,7 +34,6 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 
 export default function ServicePageTemplate({ service }: ServicePageTemplateProps) {
   const relatedServices = getRelatedServices(service.relatedSlugs);
-  const startingPrice = service.pricing[0]?.price ?? "";
   const IconComponent = iconMap[service.slug] || Shield;
 
   return (
@@ -74,8 +73,8 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
           {/* Stats row */}
           <div className="flex flex-wrap justify-center gap-8 mb-10">
             <div className="flex items-center gap-2 text-gray-300">
-              <PoundSterling className="h-5 w-5 text-accent" />
-              <span className="font-semibold text-white">{startingPrice}</span>
+              <Shield className="h-5 w-5 text-accent" />
+              <span className="font-semibold text-white">Fixed-fee engagement</span>
             </div>
             <div className="flex items-center gap-2 text-gray-300">
               <Clock className="h-5 w-5 text-accent" />
@@ -244,7 +243,7 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
                       {tier.audience}
                     </p>
 
-                    <div className="text-3xl font-extrabold mb-6">{tier.price}</div>
+                    <div className="text-lg font-semibold mb-6">{tier.price}</div>
 
                     <ul className="space-y-3 flex-1 mb-8">
                       {tier.features.map((feat, fi) => (
