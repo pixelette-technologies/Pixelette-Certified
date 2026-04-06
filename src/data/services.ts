@@ -29,7 +29,7 @@ export interface Service {
   description: string;
   longDescription: string;
   icon: LucideIcon;
-  category: "iso" | "cyber" | "advisory" | "privacy" | "grc" | "architecture" | "bcdr" | "ai-governance" | "managed";
+  category: "iso" | "cyber" | "advisory" | "privacy" | "grc" | "architecture" | "bcdr" | "ai-governance";
   features: string[];
   process: ProcessStep[];
   pricing: PricingTier[];
@@ -690,7 +690,7 @@ export const services: Service[] = [
     description: "Continuous GRC advisory subscription delivered by certified practitioners. White-label available for partners and MSPs.",
     longDescription: "A white-label-compatible monthly subscription providing continuous governance, risk, and compliance advisory across your security and privacy programme. Designed for post-certification organisations and businesses with ongoing regulatory obligations.",
     icon: UserCheck,
-    category: "managed",
+    category: "ai-governance",
     features: ["Monthly GRC advisory sessions", "Regulatory horizon scanning", "Risk register review and reporting", "Policy maintenance and updates", "Incident guidance and regulatory notification advisory", "On-demand expert access"],
     process: [
       { week: "Month 1", title: "Onboarding", description: "Full security posture assessment and priority roadmap." },

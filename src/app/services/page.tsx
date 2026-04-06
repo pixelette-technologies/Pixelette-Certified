@@ -65,13 +65,8 @@ const categories = [
   },
   {
     key: "ai-governance" as const,
-    label: "AI Governance",
-    description: "AI risk assessment and governance aligned to NIST AI RMF and the EU AI Act.",
-  },
-  {
-    key: "managed" as const,
-    label: "Managed Advisory",
-    description: "Continuous GRC advisory subscription. White-label available for partners and MSPs.",
+    label: "AI Governance & Managed Advisory",
+    description: "AI risk assessment aligned to NIST AI RMF and the EU AI Act, plus continuous GRC advisory subscriptions with white-label options.",
   },
 ];
 
