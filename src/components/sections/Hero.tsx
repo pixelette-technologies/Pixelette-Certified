@@ -32,7 +32,7 @@ export default function Hero() {
           animate="visible"
         >
           <div className="flex flex-wrap gap-2 mb-6">
-            {["ISO 27001", "ISO 42001", "Cyber Essentials", "GDPR", "ISO 9001", "ISO 22301", "vCISO", "AI Governance"].map((tag) => (
+            {["ISO 27001", "ISO 42001", "Cyber Essentials", "GDPR", "ISO 9001", "ISO 22301", "ISO 14001", "vCISO", "vDPO", "Penetration Testing", "SOC 2", "AI Governance"].map((tag) => (
               <span key={tag} className="text-accent text-[10px] sm:text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-accent/20 bg-accent/5 backdrop-blur-sm">
                 {tag}
               </span>

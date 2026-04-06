@@ -21,9 +21,9 @@ const differentiators = [
   },
   {
     icon: PoundSterling,
-    title: "Global delivery, transparent pricing",
+    title: "No pricing surprises — ever",
     description:
-      "We serve clients across the UK, UAE, EU, Americas, and Asia Pacific. Every price is fixed and published upfront. You know exactly what you are paying before any work begins — no hourly billing, no scope creep, no surprises.",
+      "Every engagement receives a fixed-fee proposal before any work begins. No hourly billing, no scope creep. We commit to beating any comparable quote by at least 10%. Globally delivered across the UK, UAE, Saudi Arabia, Qatar, EU, Americas, and Asia Pacific.",
   },
   {
     icon: Brain,

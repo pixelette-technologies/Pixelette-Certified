@@ -8,7 +8,7 @@ export const SITE_CONFIG = {
   phone: "+44 20 7946 0958",
   phoneTel: "+442079460958",
   address: "66 Paul Street, London, EC2A 4NA, United Kingdom",
-  regions: ["UK", "UAE", "EU", "Americas", "APAC"],
+  regions: ["UK", "UAE", "Saudi Arabia", "Qatar", "EU", "Americas", "APAC"],
   social: {
     linkedin: "https://www.linkedin.com/company/pixelette-certified/about/?viewAsMember=true",
     twitter: "https://twitter.com/pixelettecert",
@@ -30,7 +30,7 @@ export const TRUST_STATS: { value: string; suffix?: string; label: string }[] = 
   { value: "50+", label: "ISO Certifications Delivered" },
   { value: "98%", label: "First-Attempt Audit Pass Rate" },
   { value: "10", suffix: " Weeks", label: "Average to Certification" },
-  { value: "Global", label: "UK · UAE · EU · Americas · APAC" },
+  { value: "Global", label: "UK · UAE · Saudi Arabia · Qatar · EU · Americas · APAC" },
 ];
 
 interface NavChild {
