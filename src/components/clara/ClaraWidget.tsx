@@ -1,22 +1,31 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import ClaraChat from "./ClaraChat";
 
 export default function ClaraWidget() {
   const [isOpen, setIsOpen] = useState(false);
+  const closeRef = useRef<(() => void) | null>(null);
 
-  const close = useCallback(() => setIsOpen(false), []);
+  const handleCloseClick = useCallback(() => {
+    if (closeRef.current) {
+      closeRef.current();
+    } else {
+      setIsOpen(false);
+    }
+  }, []);
+
+  const forceClose = useCallback(() => setIsOpen(false), []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isOpen) close();
+      if (e.key === "Escape" && isOpen) handleCloseClick();
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, close]);
+  }, [isOpen, handleCloseClick]);
 
   return (
     <>
@@ -48,13 +57,11 @@ export default function ClaraWidget() {
               aria-label="Open chat with Clara"
               title="Chat with Clara about certifications"
             >
-              {/* Shield logo */}
               <img
                 src="/logos/favicon.svg"
                 alt="Clara"
                 className="w-8 h-8 group-hover:scale-110 transition-transform duration-300"
               />
-              {/* Pulse ring */}
               <span className="absolute inset-0 rounded-full bg-[#C9A84C] animate-ping opacity-15" />
             </button>
           </motion.div>
@@ -83,7 +90,6 @@ export default function ClaraWidget() {
             <div className="flex items-center justify-between px-5 py-4 border-b border-white/10
               bg-gradient-to-r from-[#0A1628] to-[#0d1e35] shrink-0 z-10">
               <div className="flex items-center gap-3">
-                {/* Shield avatar */}
                 <div className="w-9 h-9 rounded-full bg-[#0A1628] border border-[#C9A84C]/40
                   flex items-center justify-center shrink-0 p-1.5">
                   <img src="/logos/favicon.svg" alt="Clara" className="w-full h-full" />
@@ -94,7 +100,7 @@ export default function ClaraWidget() {
                 </div>
               </div>
               <button
-                onClick={close}
+                onClick={handleCloseClick}
                 className="p-3 min-w-[44px] min-h-[44px] rounded-lg hover:bg-white/10 text-gray-400
                   hover:text-white transition-colors flex items-center justify-center"
                 aria-label="Close chat"
@@ -104,7 +110,7 @@ export default function ClaraWidget() {
             </div>
 
             {/* Chat area */}
-            <ClaraChat />
+            <ClaraChat onClose={forceClose} onCloseRefReady={(fn) => { closeRef.current = fn; }} />
           </motion.div>
         )}
       </AnimatePresence>

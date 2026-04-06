@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Send, Loader2 } from "lucide-react";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { cn } from "@/lib/utils";
@@ -11,17 +11,41 @@ const WELCOME_MESSAGE =
 
 const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
-export default function ClaraChat() {
+interface ClaraChatProps {
+  onClose: () => void;
+  onCloseRefReady: (fn: () => void) => void;
+}
+
+export default function ClaraChat({ onClose, onCloseRefReady }: ClaraChatProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([
     { role: "assistant", content: WELCOME_MESSAGE },
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [sessionId, setSessionId] = useState<string | null>(null);
+  const [conversationId, setConversationId] = useState<string | null>(null);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [historyLoaded, setHistoryLoaded] = useState(false);
+  const [showClosePopup, setShowClosePopup] = useState(false);
+  const [ratingSubmitted, setRatingSubmitted] = useState(false);
+  const [ratingState, setRatingState] = useState<"idle" | "submitting" | "done">("idle");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const visitorMessageCount = messages.filter((m) => m.role === "user").length;
+
+  const handleCloseClick = useCallback(() => {
+    if (visitorMessageCount >= 3 && !ratingSubmitted && ratingState === "idle") {
+      setShowClosePopup(true);
+    } else {
+      onClose();
+    }
+  }, [visitorMessageCount, ratingSubmitted, ratingState, onClose]);
+
+  // Register the close handler with the parent widget
+  useEffect(() => {
+    onCloseRefReady(handleCloseClick);
+  }, [handleCloseClick, onCloseRefReady]);
 
   // Load session ID and conversation history on mount
   useEffect(() => {
@@ -49,6 +73,43 @@ export default function ClaraChat() {
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
+
+  const handleRatingClick = async (rating: "helpful" | "not_helpful") => {
+    if (!conversationId) {
+      onClose();
+      return;
+    }
+
+    setRatingState("submitting");
+
+    try {
+      const response = await fetch("/api/clara/rating", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ conversationId, rating }),
+      });
+
+      if (response.ok) {
+        setRatingState("done");
+        setRatingSubmitted(true);
+        setTimeout(() => {
+          setShowClosePopup(false);
+          onClose();
+        }, 1000);
+      } else {
+        setShowClosePopup(false);
+        onClose();
+      }
+    } catch {
+      setShowClosePopup(false);
+      onClose();
+    }
+  };
+
+  const handleSkipRating = () => {
+    setShowClosePopup(false);
+    onClose();
+  };
 
   const handleSend = async (text?: string) => {
     const msg = text || input.trim();
@@ -90,18 +151,12 @@ export default function ClaraChat() {
         if (data.error === "turnstile_required" || data.error === "turnstile_failed") {
           setMessages((prev) => [
             ...prev,
-            {
-              role: "assistant",
-              content: "Unable to verify your browser. Please refresh the page and try again.",
-            },
+            { role: "assistant", content: "Unable to verify your browser. Please refresh the page and try again." },
           ]);
         } else {
           setMessages((prev) => [
             ...prev,
-            {
-              role: "assistant",
-              content: data.message || "Access denied. Please try again.",
-            },
+            { role: "assistant", content: data.message || "Access denied. Please try again." },
           ]);
         }
       } else if (res.ok && data.reply) {
@@ -110,22 +165,19 @@ export default function ClaraChat() {
           setSessionId(data.sessionId);
           localStorage.setItem("clara_session_id", data.sessionId);
         }
+        if (data.conversationId && !conversationId) {
+          setConversationId(data.conversationId);
+        }
       } else {
         setMessages((prev) => [
           ...prev,
-          {
-            role: "assistant",
-            content: data.error || "I'm having a brief technical issue. Please try again in a moment.",
-          },
+          { role: "assistant", content: data.error || "I'm having a brief technical issue. Please try again in a moment." },
         ]);
       }
     } catch {
       setMessages((prev) => [
         ...prev,
-        {
-          role: "assistant",
-          content: "I'm having a brief technical issue. Please try again in a moment.",
-        },
+        { role: "assistant", content: "I'm having a brief technical issue. Please try again in a moment." },
       ]);
     } finally {
       setIsLoading(false);
@@ -141,26 +193,19 @@ export default function ClaraChat() {
   }
 
   return (
-    <div className="flex flex-col flex-1 min-h-0">
+    <div className="flex flex-col flex-1 min-h-0 relative">
       {/* Messages */}
       <div className="flex-1 min-h-0 overflow-y-auto px-4 py-4 space-y-3">
         {messages.map((msg, i) => (
-          <div
-            key={i}
-            className={cn("flex", msg.role === "user" ? "justify-end" : "justify-start")}
-          >
-            <div
-              className={cn(
-                "max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed",
-                msg.role === "user"
-                  ? "bg-[#C9A84C] text-[#0A1628] rounded-br-sm font-medium"
-                  : "bg-white/10 text-gray-200 rounded-bl-sm"
-              )}
-            >
+          <div key={i} className={cn("flex", msg.role === "user" ? "justify-end" : "justify-start")}>
+            <div className={cn(
+              "max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed",
+              msg.role === "user"
+                ? "bg-[#C9A84C] text-[#0A1628] rounded-br-sm font-medium"
+                : "bg-white/10 text-gray-200 rounded-bl-sm"
+            )}>
               {msg.role === "assistant" && (
-                <span className="block text-[10px] font-bold uppercase tracking-wider text-[#C9A84C] mb-1">
-                  Clara
-                </span>
+                <span className="block text-[10px] font-bold uppercase tracking-wider text-[#C9A84C] mb-1">Clara</span>
               )}
               {msg.content}
             </div>
@@ -171,18 +216,9 @@ export default function ClaraChat() {
             <div className="bg-white/10 rounded-2xl rounded-bl-sm px-4 py-3">
               <div className="flex items-center gap-2">
                 <div className="flex gap-1">
-                  <span
-                    className="w-1.5 h-1.5 rounded-full bg-[#C9A84C]/70 animate-bounce"
-                    style={{ animationDelay: "0ms" }}
-                  />
-                  <span
-                    className="w-1.5 h-1.5 rounded-full bg-[#C9A84C]/70 animate-bounce"
-                    style={{ animationDelay: "150ms" }}
-                  />
-                  <span
-                    className="w-1.5 h-1.5 rounded-full bg-[#C9A84C]/70 animate-bounce"
-                    style={{ animationDelay: "300ms" }}
-                  />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A84C]/70 animate-bounce" style={{ animationDelay: "0ms" }} />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A84C]/70 animate-bounce" style={{ animationDelay: "150ms" }} />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A84C]/70 animate-bounce" style={{ animationDelay: "300ms" }} />
                 </div>
                 <span className="text-xs italic text-gray-400">Clara is thinking...</span>
               </div>
@@ -194,13 +230,7 @@ export default function ClaraChat() {
 
       {/* Input — pinned at bottom */}
       <div className="px-4 pb-4 pt-2 border-t border-white/10 shrink-0">
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSend();
-          }}
-          className="flex gap-2"
-        >
+        <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} className="flex gap-2">
           <input
             ref={inputRef}
             type="text"
@@ -221,35 +251,66 @@ export default function ClaraChat() {
               flex items-center justify-center text-[#0A1628] transition-colors shrink-0"
             aria-label="Send message"
           >
-            {isLoading ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              <Send className="h-4 w-4" />
-            )}
+            {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
           </button>
         </form>
       </div>
 
-      {/* Turnstile — invisible, runs in background */}
+      {/* Turnstile — invisible */}
       {siteKey && (
-        <div style={{
-          visibility: "hidden",
-          position: "absolute",
-          pointerEvents: "none",
-          width: 0,
-          height: 0,
-          overflow: "hidden",
-        }}>
+        <div style={{ visibility: "hidden", position: "absolute", pointerEvents: "none", width: 0, height: 0, overflow: "hidden" }}>
           <Turnstile
             siteKey={siteKey}
             onSuccess={(token) => setTurnstileToken(token)}
             onError={() => setTurnstileToken(null)}
             onExpire={() => setTurnstileToken(null)}
-            options={{
-              theme: "dark",
-              size: "invisible",
-            }}
+            options={{ theme: "dark", size: "invisible" }}
           />
+        </div>
+      )}
+
+      {/* Close confirmation popup */}
+      {showClosePopup && (
+        <div
+          className="absolute inset-0 z-50 flex items-center justify-center"
+          style={{ backgroundColor: "rgba(10, 22, 40, 0.85)", backdropFilter: "blur(4px)" }}
+        >
+          <div className="bg-[#0A1628] border border-[#C9A84C] rounded-lg p-6 shadow-2xl" style={{ width: "280px" }}>
+            {ratingState === "done" ? (
+              <div className="text-center py-4">
+                <div className="text-[#C9A84C] text-4xl mb-2">{"\u2713"}</div>
+                <div className="text-white text-base font-medium">Thanks for your feedback</div>
+              </div>
+            ) : (
+              <>
+                <h3 className="text-white text-lg font-semibold mb-1 text-center">Was Clara helpful?</h3>
+                <p className="text-gray-400 text-xs mb-5 text-center">Your feedback helps us improve</p>
+                <div className="flex gap-3 mb-3">
+                  <button
+                    onClick={() => handleRatingClick("helpful")}
+                    disabled={ratingState === "submitting"}
+                    className="flex-1 bg-green-600 hover:bg-green-700 text-white py-2.5 px-4 rounded-lg font-medium disabled:opacity-50 transition-colors"
+                  >
+                    {"\uD83D\uDC4D"} Yes
+                  </button>
+                  <button
+                    onClick={() => handleRatingClick("not_helpful")}
+                    disabled={ratingState === "submitting"}
+                    className="flex-1 bg-gray-600 hover:bg-gray-700 text-white py-2.5 px-4 rounded-lg font-medium disabled:opacity-50 transition-colors"
+                  >
+                    {"\uD83D\uDC4E"} No
+                  </button>
+                </div>
+                <button
+                  onClick={handleSkipRating}
+                  disabled={ratingState === "submitting"}
+                  className="w-full text-gray-400 hover:text-gray-200 text-sm py-1 disabled:opacity-50"
+                >
+                  Skip
+                </button>
+              </>
+            )}
+          </div>
         </div>
       )}
     </div>

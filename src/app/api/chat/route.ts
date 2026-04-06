@@ -23,6 +23,7 @@ import {
 import { checkRateLimit, extractClientIp } from "@/lib/clara/rateLimit";
 import { verifyTurnstileToken } from "@/lib/clara/turnstile";
 import { getSupabaseServer } from "@/lib/clara/supabase";
+import { generateAIQualityCheck, saveQualityCheck } from "@/lib/clara/qualityCheck";
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -285,6 +286,23 @@ export async function POST(request: Request) {
                 console.error("[Clara Notifications] Slack notification failed:", err);
               }
             }
+
+            // Fire AI quality check in the background (non-blocking)
+            console.log(`[Clara Quality] Triggering AI quality check for conversation ${conversation.conversationId}`);
+            generateAIQualityCheck(messages)
+              .then((aiResult) => {
+                if (aiResult) {
+                  return saveQualityCheck({
+                    conversationId: conversation.conversationId,
+                    aiScore: aiResult.score,
+                    aiNotes: aiResult.notes,
+                  });
+                }
+                return null;
+              })
+              .catch((err) => {
+                console.error("[Clara Quality] Background quality check failed:", err);
+              });
           }
         }
       } catch (err) {
@@ -296,6 +314,7 @@ export async function POST(request: Request) {
       reply: cleanReply,
       captured: hasCaptured ? captured : undefined,
       sessionId: conversation.sessionId,
+      conversationId: conversation.conversationId || undefined,
     });
   } catch (error) {
     console.error("Clara chat error:", error);

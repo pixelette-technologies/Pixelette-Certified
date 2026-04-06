@@ -33,8 +33,23 @@ export interface ChatResponse {
   reply: string;
   captured?: CapturedFields;
   sessionId: string;
+  conversationId?: string;
 }
 
 export interface ChatErrorResponse {
   error: string;
+}
+
+export interface QualityCheckInput {
+  conversationId: string;
+  aiScore?: number;
+  aiNotes?: string;
+  visitorRating?: "helpful" | "not_helpful";
+  visitorRatedAt?: string;
+}
+
+export interface AIQualityCheckResult {
+  score: number;
+  notes: string;
+  rawResponse: string;
 }
