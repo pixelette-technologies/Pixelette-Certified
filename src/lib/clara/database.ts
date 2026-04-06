@@ -8,6 +8,7 @@ interface ConversationResult {
   conversationId: string;
   sessionId: string;
   messages: ChatMessage[];
+  wasCreated: boolean;
 }
 
 interface ConversationMetadata {
@@ -39,11 +40,11 @@ export async function getOrCreateConversation(
       .eq("session_id", sessionId)
       .order("started_at", { ascending: false })
       .limit(1)
-      .single();
+      .maybeSingle();
 
     if (!error && data) {
       const messages = Array.isArray(data.messages) ? (data.messages as ChatMessage[]) : [];
-      return { conversationId: data.id, sessionId: data.session_id, messages };
+      return { conversationId: data.id, sessionId: data.session_id, messages, wasCreated: false };
     }
 
     if (error) {
@@ -67,10 +68,10 @@ export async function getOrCreateConversation(
 
   if (error || !data) {
     console.error("[Clara DB] Failed to create conversation:", error?.message);
-    return { conversationId: "", sessionId: newSessionId, messages: [] };
+    return { conversationId: "", sessionId: newSessionId, messages: [], wasCreated: true };
   }
 
-  return { conversationId: data.id, sessionId: data.session_id, messages: [] };
+  return { conversationId: data.id, sessionId: data.session_id, messages: [], wasCreated: true };
 }
 
 export async function appendMessagesToConversation(

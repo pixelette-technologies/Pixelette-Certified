@@ -9,6 +9,7 @@ export interface ChatRequest {
   message: string;
   history?: ChatMessage[];
   sessionId?: string;
+  turnstileToken?: string;
 }
 
 export interface CapturedFields {

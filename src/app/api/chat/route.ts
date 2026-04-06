@@ -21,6 +21,8 @@ import {
   formatScrapedContentForClaude,
 } from "@/lib/clara/scraper";
 import { checkRateLimit, extractClientIp } from "@/lib/clara/rateLimit";
+import { verifyTurnstileToken } from "@/lib/clara/turnstile";
+import { getSupabaseServer } from "@/lib/clara/supabase";
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -56,8 +58,8 @@ export async function POST(request: Request) {
     }
 
     // Rate limiting — check before any database or Claude API calls
+    const ip = extractClientIp(request);
     if (process.env.CLARA_RATE_LIMIT_ENABLED === "true") {
-      const ip = extractClientIp(request);
       const rateResult = checkRateLimit(ip);
 
       if (!rateResult.allowed) {
@@ -91,6 +93,46 @@ export async function POST(request: Request) {
     const conversation = await getOrCreateConversation(body.sessionId || null, {
       language: "en",
     });
+
+    // Turnstile verification — only on newly created conversations
+    const turnstileEnabled = process.env.CLARA_TURNSTILE_ENABLED === "true";
+    if (turnstileEnabled && conversation.wasCreated) {
+      if (!body.turnstileToken) {
+        console.warn(`[Clara Turnstile] First message missing token for conversation ${conversation.conversationId}`);
+        // Clean up orphan conversation row
+        if (conversation.conversationId) {
+          const supabase = getSupabaseServer();
+          await supabase.from("conversations").delete().eq("id", conversation.conversationId);
+        }
+        return NextResponse.json(
+          {
+            error: "turnstile_required",
+            message: "Human verification is required to start a conversation.",
+          },
+          { status: 403 }
+        );
+      }
+
+      const verification = await verifyTurnstileToken(body.turnstileToken, ip);
+      if (!verification.success) {
+        console.warn(`[Clara Turnstile] Verification failed for conversation ${conversation.conversationId}: ${verification.errorCodes?.join(", ")}`);
+        // Clean up orphan conversation row
+        if (conversation.conversationId) {
+          const supabase = getSupabaseServer();
+          await supabase.from("conversations").delete().eq("id", conversation.conversationId);
+        }
+        return NextResponse.json(
+          {
+            error: "turnstile_failed",
+            message: "Human verification failed. Please refresh the page and try again.",
+            codes: verification.errorCodes,
+          },
+          { status: 403 }
+        );
+      }
+
+      console.log(`[Clara Turnstile] Verified first message for conversation ${conversation.conversationId}`);
+    }
 
     // Use database messages as authoritative history, fall back to request history
     let history: ChatMessage[] = conversation.messages;
@@ -130,7 +172,6 @@ export async function POST(request: Request) {
         role: "user",
         content: `[SYSTEM NOTE] The visitor just shared a website URL and we scraped the following content for you to analyse. Use this to make intelligent certification recommendations. If the site looks like a personal blog, hobby site, or clearly not a commercial business, follow Part 9 of your instructions and be honest about it not needing certifications.\n\n${scrapedContext}`,
       });
-      // Claude expects alternating roles, so add a brief assistant acknowledgement
       messages.push({
         role: "assistant",
         content: "I have reviewed the website content. Let me respond to the visitor now.",
@@ -180,7 +221,7 @@ export async function POST(request: Request) {
         if (result && result.leadId) {
           const oldRank = result.oldClassification
             ? CLASSIFICATION_RANK[result.oldClassification] ?? 0
-            : -1; // -1 for new leads so any non-cold classification triggers
+            : -1;
           const newRank = CLASSIFICATION_RANK[result.newClassification] ?? 0;
           const willNotify = newRank > oldRank && newRank >= 1;
 
@@ -193,11 +234,9 @@ export async function POST(request: Request) {
           });
 
           if (willNotify) {
-            // Classification upgraded to warm or above — send notifications
             console.log("[Clara Chat] Firing notification for lead:", result.leadId);
             const summary = await generateConversationSummary(messages);
 
-            // Email fires for all escalations (warm, hot, urgent)
             try {
               const emailResult = await sendLeadNotification({
                 leadId: result.leadId,
@@ -224,7 +263,6 @@ export async function POST(request: Request) {
               console.error("[Clara Notifications] Email notification failed:", err);
             }
 
-            // Slack fires only for hot and urgent
             if (result.newClassification === "hot" || result.newClassification === "urgent") {
               try {
                 const slackResult = await sendSlackNotification({
