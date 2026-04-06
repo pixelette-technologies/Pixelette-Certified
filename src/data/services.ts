@@ -70,9 +70,9 @@ export const services: Service[] = [
       { week: "Weeks 10–12", title: "External Audit", description: "Stage 1 documentation review and Stage 2 compliance audit. Certificate issued." },
     ],
     pricing: [
-      { name: "Essentials", audience: "Startups and SMEs up to 50 employees", price: "From £8,500", features: ["Gap analysis", "ISMS documentation", "SoA", "Risk register", "1 internal audit", "Stage 1 + Stage 2 support"] },
-      { name: "Professional", audience: "Scale-ups 50–150 employees", price: "From £13,500", features: ["Everything in Essentials", "Staff training", "6-month vCISO Basic", "Surveillance audit support Year 1"] },
-      { name: "Enterprise", audience: "150+ employees or regulated sectors", price: "From £22,000", features: ["Everything in Professional", "vCISO Standard 12 months", "GDPR alignment layer", "Year 1 + 2 surveillance"] },
+      { name: "Essentials", audience: "Startups and SMEs up to 50 employees", price: "Scoped to your business", features: ["Gap analysis", "ISMS documentation", "SoA", "Risk register", "1 internal audit", "Stage 1 + Stage 2 support"] },
+      { name: "Professional", audience: "Scale-ups 50–150 employees", price: "Scoped to your business", features: ["Everything in Essentials", "Staff training", "6-month vCISO Basic", "Surveillance audit support Year 1"] },
+      { name: "Enterprise", audience: "150+ employees or regulated sectors", price: "Scoped to your business", features: ["Everything in Professional", "vCISO Standard 12 months", "GDPR alignment layer", "Year 1 + 2 surveillance"] },
     ],
     faqs: [
       { question: "How long does ISO 27001 take?", answer: "Our standard implementation runs 10–12 weeks from kickoff to Stage 2 audit. Complex organisations or those with significant existing gaps may take 14–16 weeks." },
@@ -83,8 +83,8 @@ export const services: Service[] = [
     ],
     relatedSlugs: ["cyber-essentials", "vciso", "gdpr-privacy"],
     seo: {
-      title: "ISO 27001 Certification UK | 10 Weeks | From £8,500",
-      description: "Get ISO 27001 certified in 10 weeks. UK-based expert-led implementation from gap analysis to Stage 2 audit. Fixed fee from £8,500. 98% first-attempt pass rate.",
+      title: "ISO 27001 Certification UK | 10 Weeks | Fixed Fee",
+      description: "Get ISO 27001 certified in 10 weeks. UK-based expert-led implementation from gap analysis to Stage 2 audit. Fixed-fee engagement. 98% first-attempt pass rate.",
       keywords: ["ISO 27001 certification UK", "ISO 27001 consultant", "ISMS implementation", "information security certification"],
     },
   },
@@ -115,9 +115,9 @@ export const services: Service[] = [
       { week: "Weeks 10–12", title: "External Audit", description: "Stage 1 and Stage 2 certification audit. Certificate issued." },
     ],
     pricing: [
-      { name: "Essentials", audience: "SMEs up to 50 employees", price: "From £9,500", features: ["Gap analysis", "BCMS documentation", "BIA", "BC plans", "Internal audit", "Audit support"] },
-      { name: "Professional", audience: "50–150 employees", price: "From £14,500", features: ["Everything in Essentials", "Exercise programme", "Staff training", "Year 1 surveillance support"] },
-      { name: "Enterprise", audience: "150+ employees", price: "From £24,000", features: ["Everything in Professional", "Multi-site coverage", "Integrated DR planning", "Year 1 + 2 surveillance"] },
+      { name: "Essentials", audience: "SMEs up to 50 employees", price: "Scoped to your business", features: ["Gap analysis", "BCMS documentation", "BIA", "BC plans", "Internal audit", "Audit support"] },
+      { name: "Professional", audience: "50–150 employees", price: "Scoped to your business", features: ["Everything in Essentials", "Exercise programme", "Staff training", "Year 1 surveillance support"] },
+      { name: "Enterprise", audience: "150+ employees", price: "Scoped to your business", features: ["Everything in Professional", "Multi-site coverage", "Integrated DR planning", "Year 1 + 2 surveillance"] },
     ],
     faqs: [
       { question: "What is the difference between ISO 22301 and ISO 27001?", answer: "ISO 27001 focuses on information security management. ISO 22301 focuses on business continuity — ensuring your organisation can continue operating during and after a disruption. Many organisations pursue both as they are complementary." },
@@ -157,9 +157,9 @@ export const services: Service[] = [
       { week: "Weeks 10–12", title: "External Audit", description: "Stage 1 and Stage 2 certification audit." },
     ],
     pricing: [
-      { name: "Essentials", audience: "SMEs up to 50 employees", price: "From £7,500", features: ["Gap analysis", "QMS documentation", "Process mapping", "Internal audit", "Audit support"] },
-      { name: "Professional", audience: "50–150 employees", price: "From £12,000", features: ["Everything in Essentials", "Staff training", "Performance metrics setup", "Year 1 surveillance"] },
-      { name: "Enterprise", audience: "150+ employees", price: "From £19,000", features: ["Everything in Professional", "Multi-site coverage", "Integrated management system", "Year 1 + 2 surveillance"] },
+      { name: "Essentials", audience: "SMEs up to 50 employees", price: "Scoped to your business", features: ["Gap analysis", "QMS documentation", "Process mapping", "Internal audit", "Audit support"] },
+      { name: "Professional", audience: "50–150 employees", price: "Scoped to your business", features: ["Everything in Essentials", "Staff training", "Performance metrics setup", "Year 1 surveillance"] },
+      { name: "Enterprise", audience: "150+ employees", price: "Scoped to your business", features: ["Everything in Professional", "Multi-site coverage", "Integrated management system", "Year 1 + 2 surveillance"] },
     ],
     faqs: [
       { question: "Is ISO 9001 relevant for technology companies?", answer: "Absolutely. ISO 9001 demonstrates that your development processes, service delivery, and customer support meet consistently high standards. Many enterprise procurement teams require it." },
@@ -167,7 +167,7 @@ export const services: Service[] = [
     relatedSlugs: ["iso-27001", "iso-14001", "iso-22301"],
     seo: {
       title: "ISO 9001 Quality Management Certification UK",
-      description: "ISO 9001 certification for UK businesses. Quality management system implementation, audit support, and continuous improvement. From £7,500.",
+      description: "ISO 9001 certification for UK businesses. Quality management system implementation, audit support, and continuous improvement. Fixed-fee engagement.",
       keywords: ["ISO 9001 certification UK", "quality management", "QMS"],
     },
   },
@@ -198,9 +198,9 @@ export const services: Service[] = [
       { week: "Weeks 10–12", title: "External Audit", description: "Certification body audit. Certificate issued." },
     ],
     pricing: [
-      { name: "Essentials", audience: "SMEs", price: "From £8,000", features: ["Gap analysis", "EMS documentation", "Aspects register", "Internal audit", "Audit support"] },
-      { name: "Professional", audience: "50–150 employees", price: "From £13,000", features: ["Everything in Essentials", "Staff training", "Monitoring programme", "Year 1 surveillance"] },
-      { name: "Enterprise", audience: "150+ employees", price: "From £20,000", features: ["Everything in Professional", "Multi-site", "Integrated management system", "Year 1 + 2 surveillance"] },
+      { name: "Essentials", audience: "SMEs", price: "Scoped to your business", features: ["Gap analysis", "EMS documentation", "Aspects register", "Internal audit", "Audit support"] },
+      { name: "Professional", audience: "50–150 employees", price: "Scoped to your business", features: ["Everything in Essentials", "Staff training", "Monitoring programme", "Year 1 surveillance"] },
+      { name: "Enterprise", audience: "150+ employees", price: "Scoped to your business", features: ["Everything in Professional", "Multi-site", "Integrated management system", "Year 1 + 2 surveillance"] },
     ],
     faqs: [
       { question: "Why do tech companies need ISO 14001?", answer: "Data centres, office operations, and supply chains all have environmental impacts. ISO 14001 demonstrates responsible environmental management to clients, investors, and regulators increasingly focused on ESG." },
@@ -239,9 +239,9 @@ export const services: Service[] = [
       { week: "Weeks 11–14", title: "External Audit", description: "Certification body audit. Certificate issued." },
     ],
     pricing: [
-      { name: "Essentials", audience: "AI startups up to 50 employees", price: "From £10,000", features: ["Gap analysis", "AIMS documentation", "AI risk assessment", "Internal audit", "Audit support"] },
-      { name: "Professional", audience: "Scale-ups 50–150 employees", price: "From £15,500", features: ["Everything in Essentials", "EU AI Act mapping", "Staff training", "Year 1 surveillance"] },
-      { name: "Enterprise", audience: "150+ or regulated AI", price: "From £26,000", features: ["Everything in Professional", "Multi-system coverage", "Board advisory", "Year 1 + 2 surveillance"] },
+      { name: "Essentials", audience: "AI startups up to 50 employees", price: "Scoped to your business", features: ["Gap analysis", "AIMS documentation", "AI risk assessment", "Internal audit", "Audit support"] },
+      { name: "Professional", audience: "Scale-ups 50–150 employees", price: "Scoped to your business", features: ["Everything in Essentials", "EU AI Act mapping", "Staff training", "Year 1 surveillance"] },
+      { name: "Enterprise", audience: "150+ or regulated AI", price: "Scoped to your business", features: ["Everything in Professional", "Multi-system coverage", "Board advisory", "Year 1 + 2 surveillance"] },
     ],
     faqs: [
       { question: "Who needs ISO 42001?", answer: "Any company that builds, deploys, or integrates AI systems — especially those selling to enterprise clients, operating in regulated sectors, or subject to the EU AI Act." },
@@ -279,8 +279,8 @@ export const services: Service[] = [
       { week: "Week 3", title: "Certification", description: "Complete self-assessment (CE) or technical assessment (CE+). Certificate issued." },
     ],
     pricing: [
-      { name: "Cyber Essentials", audience: "All businesses", price: "From £1,800", features: ["Gap analysis", "Remediation guidance", "Self-assessment preparation", "Submission management"] },
-      { name: "Cyber Essentials Plus", audience: "Higher-assurance requirements", price: "From £3,200", features: ["Everything in CE", "External vulnerability scanning", "Configuration testing", "Hands-on technical assessment"] },
+      { name: "Cyber Essentials", audience: "All businesses", price: "Scoped to your business", features: ["Gap analysis", "Remediation guidance", "Self-assessment preparation", "Submission management"] },
+      { name: "Cyber Essentials Plus", audience: "Higher-assurance requirements", price: "Scoped to your business", features: ["Everything in CE", "External vulnerability scanning", "Configuration testing", "Hands-on technical assessment"] },
     ],
     faqs: [
       { question: "What is the difference between CE and CE Plus?", answer: "Cyber Essentials is a self-assessment verified by a certifying body. Cyber Essentials Plus includes external hands-on technical testing — vulnerability scanning and configuration testing by an assessor." },
@@ -288,8 +288,8 @@ export const services: Service[] = [
     ],
     relatedSlugs: ["iso-27001", "penetration-testing", "vciso"],
     seo: {
-      title: "Cyber Essentials Certification UK | From £1,800",
-      description: "UK government-backed Cyber Essentials and Cyber Essentials Plus certification. From £1,800. Fast-track 2–3 week delivery for government suppliers and NHS.",
+      title: "Cyber Essentials Certification UK | Fixed Fee",
+      description: "UK government-backed Cyber Essentials and Cyber Essentials Plus certification. Fixed-fee. Fast-track 2–3 week delivery for government suppliers and NHS.",
       keywords: ["Cyber Essentials certification", "Cyber Essentials Plus", "UK government certification", "cybersecurity certification"],
     },
   },
@@ -318,9 +318,9 @@ export const services: Service[] = [
       { week: "Ongoing", title: "Retainer", description: "Monthly advisory, board reports, risk management, questionnaire support." },
     ],
     pricing: [
-      { name: "vCISO Basic", audience: "Post-certification governance", price: "From £2,800/mo", features: ["10–12 hrs/month", "Monthly security review", "Board report", "Policy maintenance", "Email support"] },
-      { name: "vCISO Standard", audience: "Active enterprise sales", price: "From £4,200/mo", features: ["18–22 hrs/month", "All Basic features", "Security questionnaire management", "Incident response planning", "Quarterly risk register update"] },
-      { name: "vCISO Enterprise", audience: "Regulated / pre-IPO", price: "From £7,500/mo", features: ["22–30 hrs/month", "All Standard features", "On-site presence", "Board presentation", "M&A security due diligence"] },
+      { name: "vCISO Basic", audience: "Post-certification governance", price: "Monthly retainer", features: ["10–12 hrs/month", "Monthly security review", "Board report", "Policy maintenance", "Email support"] },
+      { name: "vCISO Standard", audience: "Active enterprise sales", price: "Monthly retainer", features: ["18–22 hrs/month", "All Basic features", "Security questionnaire management", "Incident response planning", "Quarterly risk register update"] },
+      { name: "vCISO Enterprise", audience: "Regulated / pre-IPO", price: "Monthly retainer", features: ["22–30 hrs/month", "All Standard features", "On-site presence", "Board presentation", "M&A security due diligence"] },
     ],
     faqs: [
       { question: "How is a vCISO different from a consultant?", answer: "A consultant delivers a project and leaves. A vCISO is an ongoing senior security leader embedded in your business — attending board meetings, managing your security programme, and being accountable for outcomes." },
@@ -328,8 +328,8 @@ export const services: Service[] = [
     ],
     relatedSlugs: ["iso-27001", "vdpo", "penetration-testing"],
     seo: {
-      title: "Virtual CISO (vCISO) UK | From £2,800/month",
-      description: "Senior security leadership without the full-time hire. vCISO retainers from £2,800/month. Board-level strategy, risk management, and compliance governance.",
+      title: "Virtual CISO (vCISO) UK | Monthly Retainer",
+      description: "Senior security leadership without the full-time hire. vCISO retainers on a flexible monthly basis. Board-level strategy, risk management, and compliance governance.",
       keywords: ["vCISO UK", "virtual CISO", "fractional CISO", "security leadership"],
     },
   },
@@ -358,7 +358,7 @@ export const services: Service[] = [
       { week: "Ongoing", title: "Retainer", description: "Ongoing DPO duties, DSR management, compliance monitoring." },
     ],
     pricing: [
-      { name: "vDPO", audience: "All organisations", price: "From £2,000/mo", features: ["8–10 hrs/month", "ROPA maintenance", "DSR handling", "DPIA advisory", "Privacy policy reviews", "Email support"] },
+      { name: "vDPO", audience: "All organisations", price: "Monthly retainer", features: ["8–10 hrs/month", "ROPA maintenance", "DSR handling", "DPIA advisory", "Privacy policy reviews", "Email support"] },
     ],
     faqs: [
       { question: "Do we legally need a DPO?", answer: "Under GDPR Article 37, you need a DPO if you are a public authority, carry out large-scale systematic monitoring, or process special category data at scale. Even if not legally required, having a DPO demonstrates strong data governance." },
@@ -366,7 +366,7 @@ export const services: Service[] = [
     relatedSlugs: ["gdpr-privacy", "vciso", "iso-27001"],
     seo: {
       title: "Virtual DPO (vDPO) Service UK | GDPR Data Protection Officer",
-      description: "Virtual Data Protection Officer service. GDPR compliance, DSR management, DPIAs, and ongoing DPO duties. From £2,000/month.",
+      description: "Virtual Data Protection Officer service. GDPR compliance, DSR management, DPIAs, and ongoing DPO duties. Monthly retainer.",
       keywords: ["vDPO UK", "virtual DPO", "data protection officer", "GDPR DPO"],
     },
   },
@@ -395,7 +395,7 @@ export const services: Service[] = [
       { week: "Week 4", title: "Reporting", description: "Detailed findings report with CVSS scores, executive summary, remediation guidance." },
     ],
     pricing: [
-      { name: "Web/API Test", audience: "Single application", price: "From £2,800/app", features: ["OWASP Top 10 testing", "API endpoint testing", "CVSS-scored report", "Remediation guidance", "Re-test included"] },
+      { name: "Web/API Test", audience: "Single application", price: "Per application", features: ["OWASP Top 10 testing", "API endpoint testing", "CVSS-scored report", "Remediation guidance", "Re-test included"] },
     ],
     faqs: [
       { question: "How often should we do pen testing?", answer: "At minimum annually, and after any significant changes to your applications or infrastructure. Many compliance frameworks (ISO 27001, PCI DSS) require at least annual testing." },
@@ -404,7 +404,7 @@ export const services: Service[] = [
     relatedSlugs: ["cyber-essentials", "iso-27001", "vciso"],
     seo: {
       title: "Penetration Testing UK | VAPT | Web, API & Network Testing",
-      description: "Professional penetration testing for UK businesses. Web application, API, and network security testing. CVSS-scored reports. From £2,800.",
+      description: "Professional penetration testing for UK businesses. Web application, API, and network security testing. CVSS-scored reports. Fixed-fee engagement.",
       keywords: ["penetration testing UK", "VAPT", "web application testing", "API security testing"],
     },
   },
@@ -433,9 +433,9 @@ export const services: Service[] = [
       { week: "Weeks 6–8", title: "Implementation", description: "Policies implemented, consent mechanisms updated, staff trained." },
     ],
     pricing: [
-      { name: "Essentials", audience: "SMEs", price: "From £5,500", features: ["GDPR assessment", "Privacy policies", "ROPA", "Breach procedures", "Staff training"] },
-      { name: "Professional", audience: "Scale-ups", price: "From £9,000", features: ["Everything in Essentials", "DPIAs", "International transfers", "Quarterly reviews"] },
-      { name: "Enterprise", audience: "Regulated organisations", price: "From £16,000", features: ["Everything in Professional", "vDPO service", "ICO liaison", "Multi-jurisdiction"] },
+      { name: "Essentials", audience: "SMEs", price: "Scoped to your business", features: ["GDPR assessment", "Privacy policies", "ROPA", "Breach procedures", "Staff training"] },
+      { name: "Professional", audience: "Scale-ups", price: "Scoped to your business", features: ["Everything in Essentials", "DPIAs", "International transfers", "Quarterly reviews"] },
+      { name: "Enterprise", audience: "Regulated organisations", price: "Scoped to your business", features: ["Everything in Professional", "vDPO service", "ICO liaison", "Multi-jurisdiction"] },
     ],
     faqs: [
       { question: "Is GDPR still relevant after Brexit?", answer: "Yes. The UK has its own version (UK GDPR) which mirrors EU GDPR. If you process data of UK residents or trade with the EU, GDPR compliance is essential." },
@@ -443,7 +443,7 @@ export const services: Service[] = [
     relatedSlugs: ["vdpo", "iso-27001", "iso-42001"],
     seo: {
       title: "GDPR Compliance Services UK | Pixelette Certified",
-      description: "Turn GDPR obligations into a competitive advantage. UK data protection compliance, DPIAs, and data mapping. Expert-led. Fixed fee from £5,500.",
+      description: "Turn GDPR obligations into a competitive advantage. UK data protection compliance, DPIAs, and data mapping. Expert-led. Fixed-fee engagement.",
       keywords: ["GDPR compliance UK", "data privacy", "data protection", "GDPR consultant"],
     },
   },
