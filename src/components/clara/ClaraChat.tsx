@@ -2,12 +2,14 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Send, Loader2 } from "lucide-react";
+import { Turnstile } from "@marsidev/react-turnstile";
 import { cn } from "@/lib/utils";
 import type { ChatMessage } from "@/lib/clara/types";
 
 const WELCOME_MESSAGE =
   "Hi, I'm Clara, your AI accreditation advisor at Pixelette Certified. I help businesses figure out which certifications they need and why they matter. To get started, what is your name?";
 
+const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 export default function ClaraChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([
@@ -16,6 +18,7 @@ export default function ClaraChat() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [sessionId, setSessionId] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [historyLoaded, setHistoryLoaded] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -25,7 +28,6 @@ export default function ClaraChat() {
     const stored = localStorage.getItem("clara_session_id");
     if (stored) {
       setSessionId(stored);
-      // Fetch previous messages from database
       fetch(`/api/chat/history?sessionId=${encodeURIComponent(stored)}`)
         .then((res) => res.json())
         .then((data) => {
@@ -33,9 +35,7 @@ export default function ClaraChat() {
             setMessages(data.messages);
           }
         })
-        .catch(() => {
-          // Silently fail — keep the welcome message
-        })
+        .catch(() => {})
         .finally(() => setHistoryLoaded(true));
     } else {
       setHistoryLoaded(true);
@@ -60,18 +60,51 @@ export default function ClaraChat() {
     setIsLoading(true);
 
     try {
-      // Build history from all previous messages (excluding the one we just added)
       const history = messages.map((m) => ({ role: m.role, content: m.content }));
+
+      const requestBody: {
+        message: string;
+        history: { role: string; content: string }[];
+        sessionId?: string;
+        turnstileToken?: string;
+      } = {
+        message: msg,
+        history,
+      };
+
+      if (sessionId) {
+        requestBody.sessionId = sessionId;
+      } else if (turnstileToken) {
+        requestBody.turnstileToken = turnstileToken;
+      }
 
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: msg, history, sessionId }),
+        body: JSON.stringify(requestBody),
       });
 
       const data = await res.json();
 
-      if (res.ok && data.reply) {
+      if (res.status === 403) {
+        if (data.error === "turnstile_required" || data.error === "turnstile_failed") {
+          setMessages((prev) => [
+            ...prev,
+            {
+              role: "assistant",
+              content: "Unable to verify your browser. Please refresh the page and try again.",
+            },
+          ]);
+        } else {
+          setMessages((prev) => [
+            ...prev,
+            {
+              role: "assistant",
+              content: data.message || "Access denied. Please try again.",
+            },
+          ]);
+        }
+      } else if (res.ok && data.reply) {
         setMessages((prev) => [...prev, { role: "assistant", content: data.reply }]);
         if (data.sessionId && data.sessionId !== sessionId) {
           setSessionId(data.sessionId);
@@ -196,6 +229,29 @@ export default function ClaraChat() {
           </button>
         </form>
       </div>
+
+      {/* Turnstile — invisible, runs in background */}
+      {siteKey && (
+        <div style={{
+          visibility: "hidden",
+          position: "absolute",
+          pointerEvents: "none",
+          width: 0,
+          height: 0,
+          overflow: "hidden",
+        }}>
+          <Turnstile
+            siteKey={siteKey}
+            onSuccess={(token) => setTurnstileToken(token)}
+            onError={() => setTurnstileToken(null)}
+            onExpire={() => setTurnstileToken(null)}
+            options={{
+              theme: "dark",
+              size: "invisible",
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }
