@@ -67,29 +67,36 @@ export default function ServicesOverviewContent({ groupedServices }: ServicesOve
       </section>
 
       {/* ─── Service Categories ─── */}
-      {groupedServices.map((category, catIdx) => (
-        <section
-          key={category.key}
-          className={catIdx % 2 === 0 ? "py-20 lg:py-28 bg-surface" : "py-20 lg:py-28 bg-primary"}
-        >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <SectionHeading
-              label={category.label}
-              title={category.label}
-              description={category.description}
-              dark={catIdx % 2 !== 0}
-            />
+      {groupedServices.map((category, catIdx) => {
+        const isDark = catIdx % 2 !== 0;
+        const isSmallCategory = category.services.length <= 2;
+        return (
+          <section
+            key={category.key}
+            className={`${isSmallCategory ? "py-12 lg:py-16" : "py-20 lg:py-28"} ${isDark ? "bg-primary" : "bg-surface"}`}
+          >
+            <div className="max-w-7xl mx-auto px-4 sm:px-6">
+              <SectionHeading
+                label={category.label}
+                title={category.label}
+                description={category.description}
+                dark={isDark}
+              />
 
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
-            >
-              {category.services.map((service) => {
-                const isDark = catIdx % 2 !== 0;
-                return (
+              <motion.div
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                className={`grid gap-6 ${
+                  category.services.length === 1
+                    ? "max-w-md mx-auto"
+                    : category.services.length === 2
+                    ? "sm:grid-cols-2 max-w-2xl mx-auto"
+                    : "sm:grid-cols-2 lg:grid-cols-3"
+                }`}
+              >
+                {category.services.map((service) => (
                   <motion.div key={service.slug} variants={staggerItem}>
                     <Link
                       href={`/services/${service.slug}`}
@@ -99,39 +106,23 @@ export default function ServicesOverviewContent({ groupedServices }: ServicesOve
                           : "bg-white border border-gray-100 shadow-lg shadow-black/5 hover:shadow-2xl"
                       }`}
                     >
-                      <div
-                        className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-colors ${
-                          isDark
-                            ? "bg-accent/10 group-hover:bg-accent/20"
-                            : "bg-accent/10 group-hover:bg-accent/20"
-                        }`}
-                      >
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-accent/10 group-hover:bg-accent/20 transition-colors">
                         {(() => { const Ic = iconMap[service.slug] || Shield; return <Ic className="h-6 w-6 text-accent" />; })()}
                       </div>
 
                       <h3
                         className={`font-bold mb-2 transition-colors ${
-                          isDark
-                            ? "text-white group-hover:text-accent"
-                            : "text-primary group-hover:text-accent-dark"
+                          isDark ? "text-white group-hover:text-accent" : "text-primary group-hover:text-accent-dark"
                         }`}
                       >
                         {service.shortTitle}
                       </h3>
 
-                      <p
-                        className={`text-sm mb-3 flex-1 ${
-                          isDark ? "text-gray-400" : "text-gray-600"
-                        }`}
-                      >
+                      <p className={`text-sm mb-3 flex-1 ${isDark ? "text-gray-400" : "text-gray-600"}`}>
                         {service.description}
                       </p>
 
-                      <p
-                        className={`text-sm font-semibold mb-4 ${
-                          isDark ? "text-accent" : "text-accent-dark"
-                        }`}
-                      >
+                      <p className={`text-sm font-semibold mb-4 ${isDark ? "text-accent" : "text-accent-dark"}`}>
                         Fixed-fee engagement
                       </p>
 
@@ -144,12 +135,12 @@ export default function ServicesOverviewContent({ groupedServices }: ServicesOve
                       </span>
                     </Link>
                   </motion.div>
-                );
-              })}
-            </motion.div>
-          </div>
-        </section>
-      ))}
+                ))}
+              </motion.div>
+            </div>
+          </section>
+        );
+      })}
 
       {/* ─── CTA ─── */}
       <CTASection />
