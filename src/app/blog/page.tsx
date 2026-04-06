@@ -139,7 +139,7 @@ export default function BlogPage() {
                   <div className="flex items-center justify-between pt-4 border-t border-white/10">
                     <div className="flex items-center gap-3 text-xs text-gray-500">
                       <time dateTime={post.date}>{formatDate(post.date)}</time>
-                      <span aria-hidden="true">&middot;</span>
+                      <span aria-hidden="true">,</span>
                       <span>{post.readingTime}</span>
                     </div>
                     <span className="text-accent text-sm font-semibold">

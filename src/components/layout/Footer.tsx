@@ -5,7 +5,6 @@ import { SITE_CONFIG } from "@/lib/constants";
 const quickLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
-  { label: "Pricing", href: "/pricing" },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
@@ -146,7 +145,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-xs text-gray-500">
-            &copy; {new Date().getFullYear()} Pixelette Group &middot; Pixelette Certified. All rights reserved.
+            &copy; {new Date().getFullYear()} Pixelette Group, Pixelette Certified. All rights reserved.
           </p>
           <div className="flex gap-4 text-xs text-gray-500">
             <Link href="/privacy-policy" className="hover:text-accent transition-colors">

@@ -169,8 +169,8 @@ export default function Certifications({ variant = "dark" }: { variant?: "dark" 
                 <div>
                   <h3 className="font-bold text-white text-lg">{selectedCert.title}</h3>
                   <p className="text-sm text-gray-400">
-                    {selectedCert.issuer} &middot; {selectedCert.holder} &middot; {selectedCert.date}
-                    {selectedCert.certNumber && ` · #${selectedCert.certNumber}`}
+                    {selectedCert.issuer}, {selectedCert.holder}, {selectedCert.date}
+                    {selectedCert.certNumber && `, #${selectedCert.certNumber}`}
                   </p>
                 </div>
                 <button

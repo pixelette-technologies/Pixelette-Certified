@@ -104,7 +104,7 @@ export default function CaseStudiesPage() {
                       {study.client}
                     </h3>
                     <p className="text-sm text-gray-400">
-                      {study.industry} &middot; {study.employees}
+                      {study.industry}, {study.employees}
                     </p>
                   </div>
 

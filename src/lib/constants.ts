@@ -30,7 +30,7 @@ export const TRUST_STATS: { value: string; suffix?: string; label: string }[] = 
   { value: "50+", label: "ISO Certifications Delivered" },
   { value: "98%", label: "First-Attempt Audit Pass Rate" },
   { value: "10", suffix: " Weeks", label: "Average to Certification" },
-  { value: "Global", label: "UK · UAE · Saudi Arabia · Qatar · EU · Americas · APAC" },
+  { value: "Global", label: "UK, UAE, Saudi Arabia, Qatar, EU, Americas, APAC" },
 ];
 
 interface NavChild {
@@ -64,7 +64,6 @@ export const NAV_ITEMS: NavItem[] = [
     ],
   },
   { label: "Industries", href: "/industries" },
-  { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Blog", href: "/blog" },

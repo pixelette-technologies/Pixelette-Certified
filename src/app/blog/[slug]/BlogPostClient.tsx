@@ -105,13 +105,13 @@ export default function BlogPostClient({
               </div>
               <div>
                 <span className="text-white font-medium">{post.author}</span>
-                <span className="mx-1">&middot;</span>
+                <span className="mx-1">,</span>
                 <span>{post.authorRole}</span>
               </div>
             </div>
-            <span aria-hidden="true">&middot;</span>
+            <span aria-hidden="true">,</span>
             <time dateTime={post.date}>{formatDate(post.date)}</time>
-            <span aria-hidden="true">&middot;</span>
+            <span aria-hidden="true">,</span>
             <span>{post.readingTime}</span>
           </div>
         </motion.header>
