@@ -77,12 +77,12 @@ export default function CookiePolicyPage() {
                 <tbody className="divide-y divide-white/5">
                   <tr>
                     <td className="px-4 py-2 text-accent">_ga, _ga_*</td>
-                    <td className="px-4 py-2">Google Analytics 4 — anonymised usage tracking</td>
+                    <td className="px-4 py-2">Google Analytics 4, anonymised usage tracking</td>
                     <td className="px-4 py-2">2 years</td>
                   </tr>
                   <tr>
                     <td className="px-4 py-2 text-accent">va_*</td>
-                    <td className="px-4 py-2">Vercel Analytics — page performance monitoring</td>
+                    <td className="px-4 py-2">Vercel Analytics, page performance monitoring</td>
                     <td className="px-4 py-2">Session</td>
                   </tr>
                 </tbody>

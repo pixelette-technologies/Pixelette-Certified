@@ -51,7 +51,7 @@ const categories = [
   {
     key: "grc" as const,
     label: "GRC & Regulatory Frameworks",
-    description: "SOC 2, SAMA CSF, NCA ECC/CCC, QCB/NIA — sector-specific and regional regulatory compliance.",
+    description: "SOC 2, SAMA CSF, NCA ECC/CCC, QCB/NIA, sector-specific and regional regulatory compliance.",
   },
   {
     key: "architecture" as const,

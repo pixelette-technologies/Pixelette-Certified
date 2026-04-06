@@ -45,7 +45,7 @@ export default function Navbar() {
           <Link href="/" className="shrink-0" aria-label="Pixelette Certified Home">
             <img
               src="/logos/logo-white-text.svg"
-              alt="Pixelette Certified — ISO 27001 and Compliance Consultancy UK"
+              alt="Pixelette Certified, ISO 27001 and Compliance Consultancy UK"
               className="h-10 w-auto"
             />
           </Link>

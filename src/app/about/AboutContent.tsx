@@ -37,25 +37,25 @@ const credentials = [
     icon: Award,
     title: "ISO 27001:2022 Lead Auditor (IRCA)",
     description:
-      "CQI and IRCA via IQMS Learning / DAS Certification — IRCA-registered, the gold standard for ISO 27001 lead auditors.",
+      "CQI and IRCA via IQMS Learning / DAS Certification, IRCA-registered, the gold standard for ISO 27001 lead auditors.",
   },
   {
     icon: Brain,
     title: "ISO 42001 Lead Auditor (PECB)",
     description:
-      "PECB-certified ISO 42001 Lead Auditor — AI governance certification authority. Among the first in the UK market.",
+      "PECB-certified ISO 42001 Lead Auditor, AI governance certification authority. Among the first in the UK market.",
   },
   {
     icon: Scale,
     title: "IAPP Privacy Certifications",
     description:
-      "AIGP (AI Governance Professional), FIP (Fellow of Information Privacy), CIPP/US, and CIPM — the most comprehensive IAPP credential set available.",
+      "AIGP (AI Governance Professional), FIP (Fellow of Information Privacy), CIPP/US, and CIPM, the most comprehensive IAPP credential set available.",
   },
   {
     icon: Award,
     title: "CISA & CEH",
     description:
-      "ISACA CISA (Certified Information Systems Auditor) and EC-Council CEH (Certified Ethical Hacker) — underpinning our audit and penetration testing delivery.",
+      "ISACA CISA (Certified Information Systems Auditor) and EC-Council CEH (Certified Ethical Hacker), underpinning our audit and penetration testing delivery.",
   },
   {
     icon: Users,
@@ -149,16 +149,16 @@ export default function AboutContent() {
               </h2>
               <div className="space-y-4 text-gray-300 leading-relaxed text-lg">
                 <p>
-                  Pixelette Group has spent over 10 years delivering technology solutions for businesses across the UK, Middle East, Europe, North America, and Asia Pacific. We have built platforms, mobile applications, AI systems, and cloud infrastructure for organisations ranging from early-stage startups to large enterprise clients — across banking, healthcare, logistics, manufacturing, professional services, and beyond.
+                  Pixelette Group has spent over 10 years delivering technology solutions for businesses across the UK, Middle East, Europe, North America, and Asia Pacific. We have built platforms, mobile applications, AI systems, and cloud infrastructure for organisations ranging from early-stage startups to large enterprise clients, across banking, healthcare, logistics, manufacturing, professional services, and beyond.
                 </p>
                 <p>
-                  Along the way, we saw a pattern that frustrated us. Businesses across every industry and every geography were losing contracts, failing procurement, and missing growth opportunities — not because their product was poor, but because they could not produce the right certification.
+                  Along the way, we saw a pattern that frustrated us. Businesses across every industry and every geography were losing contracts, failing procurement, and missing growth opportunities, not because their product was poor, but because they could not produce the right certification.
                 </p>
                 <p>
                   The compliance consultancies they turned to were slow, expensive, and built for a different era. They did not understand modern business models, diverse industries, or the urgency of global regulatory pressure.
                 </p>
                 <p>
-                  We started Pixelette Certified to change that. A compliance consultancy built by practitioners, for businesses of every kind. Fast, structured, and designed for organisations that cannot afford to lose six months waiting for a certificate they needed yesterday — in any industry, in any market, anywhere in the world.
+                  We started Pixelette Certified to change that. A compliance consultancy built by practitioners, for businesses of every kind. Fast, structured, and designed for organisations that cannot afford to lose six months waiting for a certificate they needed yesterday, in any industry, in any market, anywhere in the world.
                 </p>
               </div>
             </motion.div>
@@ -257,7 +257,7 @@ export default function AboutContent() {
                 name: "Muhammad Waleed",
                 role: "Lead Consultant",
                 credentials: ["ISO 27001 Lead Auditor (IRCA)", "ISO 42001 Lead Auditor (PECB)", "AIGP", "FIP", "CIPP/US", "CIPM", "CISA", "CEH"],
-                bio: "Leads all certification engagements and audit preparation. Muhammad holds ISO 27001 Lead Auditor (IRCA), ISO 42001 Lead Auditor (PECB), AIGP, FIP, CIPP/US, CIPM (all IAPP), CISA (ISACA), and CEH (EC-Council) credentials — one of the most comprehensively certified compliance practitioners in the UK market.",
+                bio: "Leads all certification engagements and audit preparation. Muhammad holds ISO 27001 Lead Auditor (IRCA), ISO 42001 Lead Auditor (PECB), AIGP, FIP, CIPP/US, CIPM (all IAPP), CISA (ISACA), and CEH (EC-Council) credentials, one of the most comprehensively certified compliance practitioners in the UK market.",
               },
             ].map((member) => (
               <motion.div key={member.name + member.role} variants={staggerItem}>

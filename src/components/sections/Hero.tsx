@@ -43,12 +43,12 @@ export default function Hero() {
             <br />
             <span className="gradient-text-white">Your data protected.</span>
             <br />
-            <span className="gradient-text">Your compliance — done.</span>
+            <span className="gradient-text">Your compliance, done.</span>
           </h1>
           <p className="text-lg text-gray-400 mb-8 max-w-xl leading-relaxed">
             Expert-led. Globally delivered. Built for every industry. We get you
             certified in as little as 10 weeks, so you can win enterprise
-            contracts, pass procurement, and close deals faster — wherever in the world you operate.
+            contracts, pass procurement, and close deals faster, wherever in the world you operate.
           </p>
           <div className="flex flex-wrap gap-4">
             <Button href="/contact" size="lg">
@@ -62,7 +62,7 @@ export default function Hero() {
 {/* Stats moved to TrustBar section below hero */}
         </motion.div>
 
-        {/* Right visual — animated concentric rings with glow */}
+        {/* Right visual, animated concentric rings with glow */}
         <motion.div
           variants={fadeInRight}
           initial="hidden"

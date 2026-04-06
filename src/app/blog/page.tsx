@@ -20,7 +20,7 @@ export const blogPosts: BlogPost[] = [
     slug: "iso-27001-complete-guide-2026",
     title: "ISO 27001 in 2026: The Complete Guide for UK Technology Companies",
     description:
-      "Everything you need to know about ISO 27001 certification in 2026 — updated requirements, costs, timelines, and what UK tech companies must prepare for.",
+      "Everything you need to know about ISO 27001 certification in 2026, updated requirements, costs, timelines, and what UK tech companies must prepare for.",
     date: "2026-03-15",
     category: "ISO 27001",
     readingTime: "12 min read",
@@ -38,7 +38,7 @@ export const blogPosts: BlogPost[] = [
     slug: "enterprise-security-questionnaire-without-iso-27001",
     title: "How to Answer an Enterprise Security Questionnaire Without ISO 27001",
     description:
-      "Strategies for handling security questionnaires when you do not yet have ISO 27001 — and why getting certified makes the process ten times easier.",
+      "Strategies for handling security questionnaires when you do not yet have ISO 27001, and why getting certified makes the process ten times easier.",
     date: "2026-02-28",
     category: "Advisory",
     readingTime: "7 min read",
@@ -56,7 +56,7 @@ export const blogPosts: BlogPost[] = [
     slug: "real-cost-iso-27001-certification-uk",
     title: "The Real Cost of ISO 27001 Certification in the UK",
     description:
-      "A transparent breakdown of ISO 27001 certification costs in 2026 — consultancy fees, certification body fees, tooling, and the hidden costs nobody mentions.",
+      "A transparent breakdown of ISO 27001 certification costs in 2026, consultancy fees, certification body fees, tooling, and the hidden costs nobody mentions.",
     date: "2026-02-12",
     category: "ISO 27001",
     readingTime: "9 min read",

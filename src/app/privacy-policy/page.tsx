@@ -91,13 +91,13 @@ export default function PrivacyPolicyPage() {
             <h2 className="text-xl font-bold text-white mb-3">7. Your Rights</h2>
             <p>Under UK GDPR, you have the following rights:</p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
-              <li><strong className="text-white">Right of access</strong> — request a copy of your personal data.</li>
-              <li><strong className="text-white">Right to rectification</strong> — request correction of inaccurate data.</li>
-              <li><strong className="text-white">Right to erasure</strong> — request deletion of your data.</li>
-              <li><strong className="text-white">Right to restrict processing</strong> — request limitation of how we use your data.</li>
-              <li><strong className="text-white">Right to data portability</strong> — receive your data in a structured format.</li>
-              <li><strong className="text-white">Right to object</strong> — object to processing based on legitimate interests.</li>
-              <li><strong className="text-white">Right to withdraw consent</strong> — withdraw consent at any time without affecting prior processing.</li>
+              <li><strong className="text-white">Right of access</strong>, request a copy of your personal data.</li>
+              <li><strong className="text-white">Right to rectification</strong>, request correction of inaccurate data.</li>
+              <li><strong className="text-white">Right to erasure</strong>, request deletion of your data.</li>
+              <li><strong className="text-white">Right to restrict processing</strong>, request limitation of how we use your data.</li>
+              <li><strong className="text-white">Right to data portability</strong>, receive your data in a structured format.</li>
+              <li><strong className="text-white">Right to object</strong>, object to processing based on legitimate interests.</li>
+              <li><strong className="text-white">Right to withdraw consent</strong>, withdraw consent at any time without affecting prior processing.</li>
             </ul>
             <p className="mt-2">
               To exercise any of these rights, email{" "}

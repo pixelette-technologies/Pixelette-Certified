@@ -19,9 +19,9 @@ const quickActions = [
 const FALLBACK_RESPONSES: Record<string, string> = {
   default:
     "Thanks for your question! For a detailed answer tailored to your situation, I'd recommend booking a free 30-minute gap analysis call with one of our consultants. Would you like me to help you set that up?",
-  iso: "Based on what most UK technology companies need, ISO 27001 is usually the right starting point — it's required by enterprise clients globally. If you also sell to UK government, you'll want Cyber Essentials too. Our typical implementation runs 10–12 weeks from £8,500. Want me to book a free gap analysis call to assess your specific situation?",
+  iso: "Based on what most UK technology companies need, ISO 27001 is usually the right starting point, it's required by enterprise clients globally. If you also sell to UK government, you'll want Cyber Essentials too. Our typical implementation runs 10–12 weeks from £8,500. Want me to book a free gap analysis call to assess your specific situation?",
   cost: "Our ISO 27001 fees start from £8,500, with total cost including certification body audit fees typically £13,000–£18,000 for most SMEs. Cyber Essentials starts from £1,800. vCISO retainers start from £2,800/month. Want a more specific estimate? A free gap analysis call can give you an exact figure.",
-  time: "Our standard ISO 27001 implementation runs 10–12 weeks from kickoff to Stage 2 audit. Cyber Essentials takes just 2–3 weeks. More complex organisations may take 14–16 weeks. The timeline depends on your current security posture — a free gap analysis call will give you a specific timeline.",
+  time: "Our standard ISO 27001 implementation runs 10–12 weeks from kickoff to Stage 2 audit. Cyber Essentials takes just 2–3 weeks. More complex organisations may take 14–16 weeks. The timeline depends on your current security posture, a free gap analysis call will give you a specific timeline.",
   hello: "Hi! I'm Clara, your compliance assistant at Pixelette Certified. I can help you understand which certification you need, what it costs, and how long it takes. What would you like to know?",
 };
 
@@ -44,7 +44,7 @@ export default function ChatWidget() {
     {
       role: "assistant",
       content:
-        "Hi — I'm Clara. Most people come here because a client or investor has asked for a certification they don't have yet. Is that what brought you here?",
+        "Hi, I'm Clara. Most people come here because a client or investor has asked for a certification they don't have yet. Is that what brought you here?",
     },
   ]);
   const [input, setInput] = useState("");

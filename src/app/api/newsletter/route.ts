@@ -29,7 +29,7 @@ export async function POST(request: Request) {
             <p style="color: rgba(255,255,255,0.4); font-size: 13px; margin: 16px 0 0;">Subscribed via pixelettecertified.com newsletter form</p>
           </div>
           <div style="background: #032e2f; padding: 20px 32px; text-align: center; border-top: 1px solid rgba(20,170,169,0.15);">
-            <p style="color: rgba(255,255,255,0.3); font-size: 12px; margin: 0;">Pixelette Certified — Compliance. Governance. Cyber Trust.</p>
+            <p style="color: rgba(255,255,255,0.3); font-size: 12px; margin: 0;">Pixelette Certified, Compliance. Governance. Cyber Trust.</p>
           </div>
         </div>
       `,
@@ -49,7 +49,7 @@ export async function POST(request: Request) {
           </div>
 
           <div style="padding: 32px;">
-            <p style="color: rgba(255,255,255,0.85); line-height: 1.7; font-size: 15px; margin: 0 0 20px;">Thank you for subscribing. You'll receive monthly insights on compliance, cybersecurity, and AI governance — written by our consultants, not a marketing team.</p>
+            <p style="color: rgba(255,255,255,0.85); line-height: 1.7; font-size: 15px; margin: 0 0 20px;">Thank you for subscribing. You'll receive monthly insights on compliance, cybersecurity, and AI governance, written by our consultants, not a marketing team.</p>
 
             <p style="color: rgba(255,255,255,0.5); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 12px;">What you'll receive</p>
 
@@ -89,7 +89,7 @@ export async function POST(request: Request) {
           </div>
 
           <div style="background: #032e2f; padding: 20px 32px; text-align: center; border-top: 1px solid rgba(20,170,169,0.15);">
-            <p style="color: rgba(255,255,255,0.3); font-size: 12px; margin: 0;">Pixelette Certified — Compliance. Governance. Cyber Trust.</p>
+            <p style="color: rgba(255,255,255,0.3); font-size: 12px; margin: 0;">Pixelette Certified, Compliance. Governance. Cyber Trust.</p>
             <p style="color: rgba(255,255,255,0.2); font-size: 11px; margin: 6px 0 0;">You can unsubscribe at any time by replying to this email.</p>
           </div>
         </div>

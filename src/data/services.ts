@@ -49,7 +49,7 @@ export const services: Service[] = [
     shortTitle: "ISO 27001",
     description: "The global standard for information security management. Get certified in 10 weeks.",
     longDescription:
-      "ISO 27001 is the international standard for information security management. It defines the requirements for an Information Security Management System (ISMS) — a structured framework of policies, procedures, and controls that protects your organisation's information assets. For UK technology companies, ISO 27001 has become the de facto requirement for selling to enterprise clients, winning government contracts, passing investor due diligence, and qualifying for cyber insurance at favourable rates. Whether you are a SaaS platform targeting enterprise clients, a healthcare provider seeking NHS supply chain approval, a FinTech navigating FCA or DORA requirements, a manufacturer seeking supply chain inclusion, or any other organisation that handles sensitive data — ISO 27001 is your foundation.",
+      "ISO 27001 is the international standard for information security management. It defines the requirements for an Information Security Management System (ISMS), a structured framework of policies, procedures, and controls that protects your organisation's information assets. For UK technology companies, ISO 27001 has become the de facto requirement for selling to enterprise clients, winning government contracts, passing investor due diligence, and qualifying for cyber insurance at favourable rates. Whether you are a SaaS platform targeting enterprise clients, a healthcare provider seeking NHS supply chain approval, a FinTech navigating FCA or DORA requirements, a manufacturer seeking supply chain inclusion, or any other organisation that handles sensitive data, ISO 27001 is your foundation.",
     icon: Shield,
     category: "iso",
     features: [
@@ -94,7 +94,7 @@ export const services: Service[] = [
     shortTitle: "ISO 22301",
     description: "Business continuity certification. Demonstrate resilience and stay operational when it matters most.",
     longDescription:
-      "ISO 22301 is the international standard for Business Continuity Management Systems (BCMS). It helps your organisation prepare for, respond to, and recover from disruptions — whether cyber attacks, supply chain failures, natural disasters, or infrastructure outages.",
+      "ISO 22301 is the international standard for Business Continuity Management Systems (BCMS). It helps your organisation prepare for, respond to, and recover from disruptions, whether cyber attacks, supply chain failures, natural disasters, or infrastructure outages.",
     icon: ShieldCheck,
     category: "iso",
     features: [
@@ -120,7 +120,7 @@ export const services: Service[] = [
       { name: "Enterprise", audience: "150+ employees", price: "Scoped to your business", features: ["Everything in Professional", "Multi-site coverage", "Integrated DR planning", "Year 1 + 2 surveillance"] },
     ],
     faqs: [
-      { question: "What is the difference between ISO 22301 and ISO 27001?", answer: "ISO 27001 focuses on information security management. ISO 22301 focuses on business continuity — ensuring your organisation can continue operating during and after a disruption. Many organisations pursue both as they are complementary." },
+      { question: "What is the difference between ISO 22301 and ISO 27001?", answer: "ISO 27001 focuses on information security management. ISO 22301 focuses on business continuity, ensuring your organisation can continue operating during and after a disruption. Many organisations pursue both as they are complementary." },
       { question: "How long does ISO 22301 certification take?", answer: "Typically 10–14 weeks depending on your organisation's complexity and existing business continuity measures." },
     ],
     relatedSlugs: ["iso-27001", "iso-9001", "vciso"],
@@ -218,7 +218,7 @@ export const services: Service[] = [
     shortTitle: "ISO 42001",
     description: "AI governance certification. Lead responsibly in the era of artificial intelligence.",
     longDescription:
-      "ISO 42001 is the international standard for Artificial Intelligence Management Systems (AIMS). Published in 2023, it defines requirements for responsible AI governance — covering risk management, transparency, accountability, ethical AI use, and continuous improvement of AI systems. For UK and EU technology companies building AI products, ISO 42001 is rapidly becoming what ISO 27001 was five years ago.",
+      "ISO 42001 is the international standard for Artificial Intelligence Management Systems (AIMS). Published in 2023, it defines requirements for responsible AI governance, covering risk management, transparency, accountability, ethical AI use, and continuous improvement of AI systems. For UK and EU technology companies building AI products, ISO 42001 is rapidly becoming what ISO 27001 was five years ago.",
     icon: Brain,
     category: "iso",
     features: [
@@ -244,7 +244,7 @@ export const services: Service[] = [
       { name: "Enterprise", audience: "150+ or regulated AI", price: "Scoped to your business", features: ["Everything in Professional", "Multi-system coverage", "Board advisory", "Year 1 + 2 surveillance"] },
     ],
     faqs: [
-      { question: "Who needs ISO 42001?", answer: "Any company that builds, deploys, or integrates AI systems — especially those selling to enterprise clients, operating in regulated sectors, or subject to the EU AI Act." },
+      { question: "Who needs ISO 42001?", answer: "Any company that builds, deploys, or integrates AI systems, especially those selling to enterprise clients, operating in regulated sectors, or subject to the EU AI Act." },
       { question: "Is ISO 42001 mandatory?", answer: "Not yet, but the EU AI Act references ISO 42001 as a primary compliance framework. Enterprise clients are starting to require it in procurement questionnaires, similar to how ISO 27001 became a requirement for SaaS companies." },
     ],
     relatedSlugs: ["iso-27001", "gdpr-privacy", "vciso"],
@@ -283,7 +283,7 @@ export const services: Service[] = [
       { name: "Cyber Essentials Plus", audience: "Higher-assurance requirements", price: "Scoped to your business", features: ["Everything in CE", "External vulnerability scanning", "Configuration testing", "Hands-on technical assessment"] },
     ],
     faqs: [
-      { question: "What is the difference between CE and CE Plus?", answer: "Cyber Essentials is a self-assessment verified by a certifying body. Cyber Essentials Plus includes external hands-on technical testing — vulnerability scanning and configuration testing by an assessor." },
+      { question: "What is the difference between CE and CE Plus?", answer: "Cyber Essentials is a self-assessment verified by a certifying body. Cyber Essentials Plus includes external hands-on technical testing, vulnerability scanning and configuration testing by an assessor." },
       { question: "How quickly can we get certified?", answer: "Cyber Essentials typically takes 2–3 weeks. Cyber Essentials Plus takes 4–6 weeks due to the external testing component." },
     ],
     relatedSlugs: ["iso-27001", "penetration-testing", "vciso"],
@@ -299,7 +299,7 @@ export const services: Service[] = [
     shortTitle: "vCISO",
     description: "Senior security leadership, without the senior hire. A fractional CISO for your business.",
     longDescription:
-      "A Chief Information Security Officer (CISO) is one of the most important roles in a modern technology company. A Virtual CISO gives you everything a full-time CISO provides — board-level security strategy, risk management, compliance governance, supplier security oversight, incident response leadership — at a monthly retainer that scales with your needs.",
+      "A Chief Information Security Officer (CISO) is one of the most important roles in a modern technology company. A Virtual CISO gives you everything a full-time CISO provides, board-level security strategy, risk management, compliance governance, supplier security oversight, incident response leadership, at a monthly retainer that scales with your needs.",
     icon: UserCheck,
     category: "advisory",
     features: [
@@ -323,7 +323,7 @@ export const services: Service[] = [
       { name: "vCISO Enterprise", audience: "Regulated / pre-IPO", price: "Monthly retainer", features: ["22–30 hrs/month", "All Standard features", "On-site presence", "Board presentation", "M&A security due diligence"] },
     ],
     faqs: [
-      { question: "How is a vCISO different from a consultant?", answer: "A consultant delivers a project and leaves. A vCISO is an ongoing senior security leader embedded in your business — attending board meetings, managing your security programme, and being accountable for outcomes." },
+      { question: "How is a vCISO different from a consultant?", answer: "A consultant delivers a project and leaves. A vCISO is an ongoing senior security leader embedded in your business, attending board meetings, managing your security programme, and being accountable for outcomes." },
       { question: "Can we scale up or down?", answer: "Yes. vCISO retainers are flexible. You can move between tiers as your needs change, with 30 days notice." },
     ],
     relatedSlugs: ["iso-27001", "vdpo", "penetration-testing"],
@@ -339,7 +339,7 @@ export const services: Service[] = [
     shortTitle: "vDPO",
     description: "Your dedicated Data Protection Officer, on demand. Expert privacy leadership at a fraction of the cost.",
     longDescription:
-      "Under GDPR, many organisations are required to appoint a Data Protection Officer. Our vDPO service provides a qualified, experienced DPO on a flexible retainer — handling data subject requests, maintaining your ROPA, advising on DPIAs, and ensuring your privacy programme stays compliant.",
+      "Under GDPR, many organisations are required to appoint a Data Protection Officer. Our vDPO service provides a qualified, experienced DPO on a flexible retainer, handling data subject requests, maintaining your ROPA, advising on DPIAs, and ensuring your privacy programme stays compliant.",
     icon: FileSearch,
     category: "advisory",
     features: [
@@ -414,7 +414,7 @@ export const services: Service[] = [
     shortTitle: "GDPR & Privacy",
     description: "Turn your data protection obligations into a competitive advantage across any jurisdiction.",
     longDescription:
-      "Our GDPR and data privacy service helps organisations build robust privacy programmes that go beyond basic compliance. We transform your data protection obligations into a competitive advantage — demonstrating to clients, partners, and regulators that you take data seriously.",
+      "Our GDPR and data privacy service helps organisations build robust privacy programmes that go beyond basic compliance. We transform your data protection obligations into a competitive advantage, demonstrating to clients, partners, and regulators that you take data seriously.",
     icon: Scale,
     category: "privacy",
     features: [
@@ -503,7 +503,7 @@ export const services: Service[] = [
     title: "SAMA CSF Compliance",
     shortTitle: "SAMA CSF",
     description: "Mandatory cybersecurity framework for Saudi Arabian financial institutions regulated by the Saudi Arabian Monetary Authority.",
-    longDescription: "The SAMA Cybersecurity Framework is mandatory for all financial institutions regulated by the Saudi Arabian Monetary Authority — including banks, insurance companies, and financial market infrastructure. Pixelette Certified delivers full SAMA CSF compliance implementation.",
+    longDescription: "The SAMA Cybersecurity Framework is mandatory for all financial institutions regulated by the Saudi Arabian Monetary Authority, including banks, insurance companies, and financial market infrastructure. Pixelette Certified delivers full SAMA CSF compliance implementation.",
     icon: Shield,
     category: "grc",
     features: ["SAMA CSF controls gap analysis across all four domains", "Cybersecurity policies and procedures drafting", "Controls implementation consultancy", "Regulatory examination readiness assessment", "Banking sector compliance programme design"],
@@ -605,7 +605,7 @@ export const services: Service[] = [
     title: "Cloud Security Architecture",
     shortTitle: "Cloud Security",
     description: "Security architecture design for AWS, Azure, GCP, and hybrid cloud environments.",
-    longDescription: "Cloud Security Architecture engagements design or redesign the security posture of your cloud environment — covering identity, network, data, and operations security across hybrid and multi-cloud deployments.",
+    longDescription: "Cloud Security Architecture engagements design or redesign the security posture of your cloud environment, covering identity, network, data, and operations security across hybrid and multi-cloud deployments.",
     icon: Globe,
     category: "architecture",
     features: ["Current-state cloud security assessment", "Target-state architecture design", "Landing zone and account structure design", "CSA Cloud Controls Matrix alignment", "Architecture document and implementation roadmap"],
@@ -646,7 +646,7 @@ export const services: Service[] = [
     title: "Disaster Recovery Planning",
     shortTitle: "DR Planning",
     description: "Actionable DR runbooks and recovery procedures ensuring IT systems can be restored within defined objectives.",
-    longDescription: "Disaster Recovery Planning translates BIA and BRA findings into actionable DR runbooks and recovery procedures — ensuring IT systems and critical data can be restored within defined recovery objectives.",
+    longDescription: "Disaster Recovery Planning translates BIA and BRA findings into actionable DR runbooks and recovery procedures, ensuring IT systems and critical data can be restored within defined recovery objectives.",
     icon: ShieldCheck,
     category: "bcdr",
     features: ["DR strategy aligned to RTO, RPO, and MAO targets", "DR runbook development", "Backup and replication strategy review", "DR testing plan and exercise design", "ISO 22301 integration"],
@@ -667,7 +667,7 @@ export const services: Service[] = [
     title: "AI Risk Assessment",
     shortTitle: "AI Risk Assessment",
     description: "Structured evaluation of AI system risks against the NIST AI Risk Management Framework, with EU AI Act alignment.",
-    longDescription: "An AI Risk Assessment provides a structured evaluation of risks associated with your AI systems — covering technical, operational, ethical, privacy, and regulatory dimensions. Conducted against the NIST AI RMF.",
+    longDescription: "An AI Risk Assessment provides a structured evaluation of risks associated with your AI systems, covering technical, operational, ethical, privacy, and regulatory dimensions. Conducted against the NIST AI RMF.",
     icon: Brain,
     category: "ai-governance",
     features: ["AI system inventory and classification by EU AI Act risk tier", "NIST AI RMF GOVERN, MAP, MEASURE, MANAGE assessment", "Bias, fairness, and transparency review", "Data governance and privacy risk assessment", "AI security and adversarial robustness review", "Prioritised recommendations report"],

@@ -37,7 +37,7 @@ export default function Footer() {
             <Link href="/" aria-label="Pixelette Certified Home">
               <img
                 src="/logos/logo-white-text.svg"
-                alt="Pixelette Certified — ISO 27001 and Compliance Consultancy UK"
+                alt="Pixelette Certified, ISO 27001 and Compliance Consultancy UK"
                 className="h-10 w-auto mb-4"
               />
             </Link>
@@ -128,7 +128,7 @@ export default function Footer() {
             <div className="glass-card rounded-xl p-4">
               <p className="text-sm font-semibold text-white mb-2">Free 30-Minute Consultation</p>
               <p className="text-xs text-gray-400 mb-3">
-                Find out which certification is right for your business — wherever you are in the world.
+                Find out which certification is right for your business, wherever you are in the world.
               </p>
               <Link
                 href="/contact"

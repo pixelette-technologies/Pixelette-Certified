@@ -117,10 +117,10 @@ export default function ContactContent() {
         >
           <SectionLabel className="mb-4 block">Contact</SectionLabel>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-6">
-            Book your free gap analysis — wherever you are in the world.
+            Book your free gap analysis, wherever you are in the world.
           </h1>
           <p className="text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            Whether you are based in London or Lagos, Dubai or Dublin, New York or Nairobi — we are here to help. Fill in the form and a senior compliance consultant will respond within 1 working day.
+            Whether you are based in London or Lagos, Dubai or Dublin, New York or Nairobi, we are here to help. Fill in the form and a senior compliance consultant will respond within 1 working day.
           </p>
         </motion.div>
       </section>
@@ -418,7 +418,7 @@ export default function ContactContent() {
                   </h3>
                 </div>
                 <p className="text-gray-400 text-sm leading-relaxed">
-                  A gap analysis is a structured assessment of your current policies, processes, and controls against the requirements of your target certification standard — ISO 27001, ISO 42001, ISO 9001, ISO 22301, Cyber Essentials, GDPR, or any other standard you are pursuing. The output is a clear report showing where you meet requirements, where you have gaps, and a prioritised roadmap to close them. It is the fastest way to understand your path to certification — regardless of your industry, your size, or your location. And it is completely free.
+                  A gap analysis is a structured assessment of your current policies, processes, and controls against the requirements of your target certification standard, ISO 27001, ISO 42001, ISO 9001, ISO 22301, Cyber Essentials, GDPR, or any other standard you are pursuing. The output is a clear report showing where you meet requirements, where you have gaps, and a prioritised roadmap to close them. It is the fastest way to understand your path to certification, regardless of your industry, your size, or your location. And it is completely free.
                 </p>
               </Card>
 
@@ -431,7 +431,7 @@ export default function ContactContent() {
                   {[
                     {
                       icon: Shield,
-                      text: "ISO 27001 Lead Auditor certified team — CQI and IRCA registered",
+                      text: "ISO 27001 Lead Auditor certified team, CQI and IRCA registered",
                     },
                     {
                       icon: Clock,
@@ -439,7 +439,7 @@ export default function ContactContent() {
                     },
                     {
                       icon: Globe,
-                      text: "Global delivery — clients served across the UK, UAE, EU, Americas, and APAC",
+                      text: "Global delivery, clients served across the UK, UAE, EU, Americas, and APAC",
                     },
                     {
                       icon: Award,
@@ -447,7 +447,7 @@ export default function ContactContent() {
                     },
                     {
                       icon: Send,
-                      text: "Response within 1 working day — guaranteed",
+                      text: "Response within 1 working day, guaranteed",
                     },
                   ].map((item) => (
                     <li
@@ -479,7 +479,7 @@ export default function ContactContent() {
                 What happens after you contact us
               </h2>
               <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                Within 1 working day, a senior compliance consultant will review your enquiry and respond directly. We will ask a few focused questions about your organisation, your target certification — ISO 27001, ISO 42001, ISO 9001, Cyber Essentials, GDPR, or another standard — and your timeline and budget. From there we will schedule your free 30-minute gap analysis call and give you a clear, honest assessment of your path to certification. Timeline, cost, and scope — confirmed upfront. No surprises.
+                Within 1 working day, a senior compliance consultant will review your enquiry and respond directly. We will ask a few focused questions about your organisation, your target certification, ISO 27001, ISO 42001, ISO 9001, Cyber Essentials, GDPR, or another standard, and your timeline and budget. From there we will schedule your free 30-minute gap analysis call and give you a clear, honest assessment of your path to certification. Timeline, cost, and scope, confirmed upfront. No surprises.
               </p>
               <p className="text-gray-400 text-sm leading-relaxed">
                 Not sure which certification you need? View our{" "}

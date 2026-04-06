@@ -47,7 +47,7 @@ export const industries: Industry[] = [
     shortTitle: "AI & ML",
     description: "ISO 42001 AI governance is the new competitive edge. Be among the first certified AI companies in the UK.",
     longDescription:
-      "AI companies face a unique compliance landscape. The EU AI Act, enterprise AI procurement requirements, and growing public scrutiny around responsible AI all demand formal governance frameworks. ISO 42001 is the standard that proves you build AI responsibly — and the companies that achieve it now gain a structural advantage.",
+      "AI companies face a unique compliance landscape. The EU AI Act, enterprise AI procurement requirements, and growing public scrutiny around responsible AI all demand formal governance frameworks. ISO 42001 is the standard that proves you build AI responsibly, and the companies that achieve it now gain a structural advantage.",
     icon: Cpu,
     challenges: [
       "EU AI Act compliance deadlines are approaching with significant penalties for non-compliance",
@@ -116,7 +116,7 @@ export const industries: Industry[] = [
     shortTitle: "Prof. Services",
     description: "Demonstrate trust and governance excellence to enterprise clients with formal certification.",
     longDescription:
-      "Professional services firms — law firms, accountancies, management consultancies, and recruitment agencies — handle sensitive client data daily. Enterprise clients increasingly require ISO 27001 and formal data protection governance from their professional service providers.",
+      "Professional services firms, law firms, accountancies, management consultancies, and recruitment agencies, handle sensitive client data daily. Enterprise clients increasingly require ISO 27001 and formal data protection governance from their professional service providers.",
     icon: Building2,
     challenges: [
       "Enterprise clients mandate ISO 27001 for professional service suppliers",
@@ -139,7 +139,7 @@ export const industries: Industry[] = [
     shortTitle: "Gov Suppliers",
     description: "Cyber Essentials is mandatory. ISO 27001 wins frameworks. We handle both.",
     longDescription:
-      "Any company selling to the UK government must hold Cyber Essentials certification. For higher-assurance contracts — defence, NHS, critical infrastructure — Cyber Essentials Plus and ISO 27001 are required. We fast-track government suppliers through both certifications.",
+      "Any company selling to the UK government must hold Cyber Essentials certification. For higher-assurance contracts, defence, NHS, critical infrastructure, Cyber Essentials Plus and ISO 27001 are required. We fast-track government suppliers through both certifications.",
     icon: Scale,
     challenges: [
       "Cyber Essentials is mandatory for all UK government contract suppliers",
@@ -185,7 +185,7 @@ export const industries: Industry[] = [
     shortTitle: "EdTech",
     description: "Protect student data, meet DfE requirements, and win institutional contracts.",
     longDescription:
-      "Education technology companies handle some of the most sensitive data categories — children's personal information. DfE standards, institutional procurement requirements, and GDPR children's data provisions all demand formal security and privacy governance.",
+      "Education technology companies handle some of the most sensitive data categories, children's personal information. DfE standards, institutional procurement requirements, and GDPR children's data provisions all demand formal security and privacy governance.",
     icon: GraduationCap,
     challenges: [
       "Children's data requires heightened GDPR protections and DPIAs",
@@ -226,8 +226,8 @@ export const industries: Industry[] = [
     slug: "logistics",
     title: "Logistics & Supply Chain",
     shortTitle: "Logistics",
-    description: "Cross-border operations require compliance that keeps pace with your supply chain — across every country you move goods through.",
-    longDescription: "Cross-border operations require compliance that keeps pace with your supply chain — across every country you move goods through.",
+    description: "Cross-border operations require compliance that keeps pace with your supply chain, across every country you move goods through.",
+    longDescription: "Cross-border operations require compliance that keeps pace with your supply chain, across every country you move goods through.",
     icon: Truck,
     challenges: [
       "Multinational clients require ISO 27001 and ISO 22301 from all logistics and supply chain partners before onboarding",
@@ -246,8 +246,8 @@ export const industries: Industry[] = [
     slug: "legal",
     title: "Legal & Professional Services",
     shortTitle: "Legal",
-    description: "Client privilege is sacred. Certified information security proves you treat it that way — to every client, regulator, and auditor.",
-    longDescription: "Client privilege is sacred. Certified information security proves you treat it that way — to every client, regulator, and auditor.",
+    description: "Client privilege is sacred. Certified information security proves you treat it that way, to every client, regulator, and auditor.",
+    longDescription: "Client privilege is sacred. Certified information security proves you treat it that way, to every client, regulator, and auditor.",
     icon: Gavel,
     challenges: [
       "Law firms, accountancy practices, and advisory firms handle privileged and sensitive client data requiring formal, certified security controls",

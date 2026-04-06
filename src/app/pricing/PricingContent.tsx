@@ -42,17 +42,17 @@ const promises = [
     icon: Award,
     title: "We beat any comparable quote by at least 10%",
     description:
-      "When comparing quotes from compliance consultancies, bring us the number. We will deliver the same quality of certified outcome — with our 98% pass rate and practitioner-led delivery — at a price that beats any comparable proposal.",
+      "When comparing quotes from compliance consultancies, bring us the number. We will deliver the same quality of certified outcome, with our 98% pass rate and practitioner-led delivery, at a price that beats any comparable proposal.",
   },
 ];
 
 const included = [
-  "Scoping and gap analysis — no additional charge",
-  "All documentation, policies, and procedures — written by certified practitioners",
+  "Scoping and gap analysis, no additional charge",
+  "All documentation, policies, and procedures, written by certified practitioners",
   "Implementation consultancy throughout the build phase",
   "Internal audit before Stage 2",
   "Stage 1 and Stage 2 external audit accompaniment",
-  "Post-certification support — included for the first 90 days",
+  "Post-certification support, included for the first 90 days",
   "For SME engagements: certification body audit fee included in the project price",
 ];
 
@@ -67,12 +67,12 @@ const pricingFAQs = [
   {
     question: "How is your pricing structured?",
     answer:
-      "Every engagement is scoped individually and priced as a fixed-fee project. You receive a full proposal before any work begins — no hourly billing, no scope creep charges, no surprise invoices. We commit to beating any comparable quote by at least 10%.",
+      "Every engagement is scoped individually and priced as a fixed-fee project. You receive a full proposal before any work begins, no hourly billing, no scope creep charges, no surprise invoices. We commit to beating any comparable quote by at least 10%.",
   },
   {
     question: "Are certification body fees included?",
     answer:
-      "For SME engagements, the certification body audit fee is included in our project price. For larger organisations, CB fees are separate — typically £4,500 to £8,000 depending on the standard, your organisation size, and the chosen certification body. We recommend UKAS-accredited certification bodies and help you obtain competitive quotes.",
+      "For SME engagements, the certification body audit fee is included in our project price. For larger organisations, CB fees are separate, typically £4,500 to £8,000 depending on the standard, your organisation size, and the chosen certification body. We recommend UKAS-accredited certification bodies and help you obtain competitive quotes.",
   },
   {
     question: "Do you offer payment plans?",
@@ -82,7 +82,7 @@ const pricingFAQs = [
   {
     question: "What if we need multiple certifications?",
     answer:
-      "Multi-certification engagements benefit from significant control overlap — ISO 27001 + ISO 42001 share 60% of controls, ISO 27001 + ISO 27701 integrate naturally, ISO 9001 + ISO 14001 overlap substantially. We price combined engagements efficiently and typically deliver dual certifications faster than two sequential projects.",
+      "Multi-certification engagements benefit from significant control overlap, ISO 27001 + ISO 42001 share 60% of controls, ISO 27001 + ISO 27701 integrate naturally, ISO 9001 + ISO 14001 overlap substantially. We price combined engagements efficiently and typically deliver dual certifications faster than two sequential projects.",
   },
   {
     question: "Is the gap analysis really free?",
@@ -97,7 +97,7 @@ const pricingFAQs = [
   {
     question: "Do you work with clients outside the UK?",
     answer:
-      "Yes. We deliver globally — with active engagements across the UK, UAE, Saudi Arabia, Qatar, EU, Americas, and Asia Pacific. Our UK credentials are internationally recognised, and we have specific expertise in Gulf regulatory frameworks including SAMA CSF, NCA ECC/CCC, and QCB/NIA.",
+      "Yes. We deliver globally, with active engagements across the UK, UAE, Saudi Arabia, Qatar, EU, Americas, and Asia Pacific. Our UK credentials are internationally recognised, and we have specific expertise in Gulf regulatory frameworks including SAMA CSF, NCA ECC/CCC, and QCB/NIA.",
   },
 ];
 
@@ -227,7 +227,7 @@ export default function PricingContent() {
                 <p className="text-gray-300 text-sm leading-relaxed mb-2">
                   <strong className="text-white">Certification body audit fees:</strong>{" "}
                   For SME engagements, the certification body audit fee is included in
-                  the project price. For larger organisations, CB fees are separate —
+                  the project price. For larger organisations, CB fees are separate,
                   typically{" "}
                   <strong className="text-white">£4,500 to £8,000</strong>{" "}
                   depending on the standard, your organisation size, and the chosen
