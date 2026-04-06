@@ -1,29 +1,29 @@
-// Clara chat API route - handles POST requests from the chat widget
+// Alice chat API route - handles POST requests from the chat widget
 
 import { NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
-import type { ChatRequest, ChatMessage, ChatResponse, ChatErrorResponse } from "@/lib/clara/types";
-import { CLARA_SYSTEM_PROMPT } from "@/lib/clara/systemPrompt";
-import { extractFields } from "@/lib/clara/extractFields";
+import type { ChatRequest, ChatMessage, ChatResponse, ChatErrorResponse } from "@/lib/alice/types";
+import { ALICE_SYSTEM_PROMPT } from "@/lib/alice/systemPrompt";
+import { extractFields } from "@/lib/alice/extractFields";
 import {
   getOrCreateConversation,
   appendMessagesToConversation,
   upsertLeadForConversation,
-} from "@/lib/clara/database";
+} from "@/lib/alice/database";
 import {
   sendLeadNotification,
   sendSlackNotification,
   generateConversationSummary,
-} from "@/lib/clara/notifications";
+} from "@/lib/alice/notifications";
 import {
   extractUrlFromMessage,
   scrapeWebsite,
   formatScrapedContentForClaude,
-} from "@/lib/clara/scraper";
-import { checkRateLimit, extractClientIp } from "@/lib/clara/rateLimit";
-import { verifyTurnstileToken } from "@/lib/clara/turnstile";
-import { getSupabaseServer } from "@/lib/clara/supabase";
-import { generateAIQualityCheck, saveQualityCheck } from "@/lib/clara/qualityCheck";
+} from "@/lib/alice/scraper";
+import { checkRateLimit, extractClientIp } from "@/lib/alice/rateLimit";
+import { verifyTurnstileToken } from "@/lib/alice/turnstile";
+import { getSupabaseServer } from "@/lib/alice/supabase";
+import { generateAIQualityCheck, saveQualityCheck } from "@/lib/alice/qualityCheck";
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -60,14 +60,14 @@ export async function POST(request: Request) {
 
     // Rate limiting — check before any database or Claude API calls
     const ip = extractClientIp(request);
-    if (process.env.CLARA_RATE_LIMIT_ENABLED === "true") {
+    if (process.env.ALICE_RATE_LIMIT_ENABLED === "true") {
       const rateResult = checkRateLimit(ip);
 
       if (!rateResult.allowed) {
         const maskedIp = ip.includes(".")
           ? ip.split(".").slice(0, 2).join(".") + ".*.*"
           : ip.split(":").slice(0, 2).join(":") + ":*";
-        console.warn(`[Clara Rate Limit] Blocked IP ${maskedIp}: ${rateResult.reason}`);
+        console.warn(`[Alice Rate Limit] Blocked IP ${maskedIp}: ${rateResult.reason}`);
 
         const retryAfter = Math.ceil(
           (rateResult.resetAt.getTime() - Date.now()) / 1000
@@ -96,10 +96,10 @@ export async function POST(request: Request) {
     });
 
     // Turnstile verification — only on newly created conversations
-    const turnstileEnabled = process.env.CLARA_TURNSTILE_ENABLED === "true";
+    const turnstileEnabled = process.env.ALICE_TURNSTILE_ENABLED === "true";
     if (turnstileEnabled && conversation.wasCreated) {
       if (!body.turnstileToken) {
-        console.warn(`[Clara Turnstile] First message missing token for conversation ${conversation.conversationId}`);
+        console.warn(`[Alice Turnstile] First message missing token for conversation ${conversation.conversationId}`);
         // Clean up orphan conversation row
         if (conversation.conversationId) {
           const supabase = getSupabaseServer();
@@ -116,7 +116,7 @@ export async function POST(request: Request) {
 
       const verification = await verifyTurnstileToken(body.turnstileToken, ip);
       if (!verification.success) {
-        console.warn(`[Clara Turnstile] Verification failed for conversation ${conversation.conversationId}: ${verification.errorCodes?.join(", ")}`);
+        console.warn(`[Alice Turnstile] Verification failed for conversation ${conversation.conversationId}: ${verification.errorCodes?.join(", ")}`);
         // Clean up orphan conversation row
         if (conversation.conversationId) {
           const supabase = getSupabaseServer();
@@ -132,7 +132,7 @@ export async function POST(request: Request) {
         );
       }
 
-      console.log(`[Clara Turnstile] Verified first message for conversation ${conversation.conversationId}`);
+      console.log(`[Alice Turnstile] Verified first message for conversation ${conversation.conversationId}`);
     }
 
     // Use database messages as authoritative history, fall back to request history
@@ -155,13 +155,13 @@ export async function POST(request: Request) {
       const detectedUrl = extractUrlFromMessage(trimmedMessage);
       if (detectedUrl) {
         scrapedUrl = detectedUrl;
-        console.log("[Clara Scraper] URL detected in message:", detectedUrl);
+        console.log("[Alice Scraper] URL detected in message:", detectedUrl);
         const scraped = await scrapeWebsite(detectedUrl);
         scrapedContext = formatScrapedContentForClaude(scraped);
-        console.log(`[Clara Scraper] Scrape result: success=${scraped.success}, words=${scraped.wordCount}`);
+        console.log(`[Alice Scraper] Scrape result: success=${scraped.success}, words=${scraped.wordCount}`);
       }
     } catch (err) {
-      console.error("[Clara Scraper] Scraping failed:", err);
+      console.error("[Alice Scraper] Scraping failed:", err);
     }
 
     // Build messages array for Claude
@@ -184,7 +184,7 @@ export async function POST(request: Request) {
     const response = await anthropic.messages.create({
       model: "claude-sonnet-4-6",
       max_tokens: 1024,
-      system: CLARA_SYSTEM_PROMPT,
+      system: ALICE_SYSTEM_PROMPT,
       messages,
     });
 
@@ -200,7 +200,7 @@ export async function POST(request: Request) {
     try {
       await appendMessagesToConversation(conversation.conversationId, userMsg, assistantMsg);
     } catch (err) {
-      console.error("[Clara DB] appendMessagesToConversation failed:", err);
+      console.error("[Alice DB] appendMessagesToConversation failed:", err);
     }
 
     // Auto-populate website from scraped URL if not already captured
@@ -226,7 +226,7 @@ export async function POST(request: Request) {
           const newRank = CLASSIFICATION_RANK[result.newClassification] ?? 0;
           const willNotify = newRank > oldRank && newRank >= 1;
 
-          console.log("[Clara Chat] Notification check:", {
+          console.log("[Alice Chat] Notification check:", {
             oldClassification: result.oldClassification,
             newClassification: result.newClassification,
             oldRank,
@@ -235,7 +235,7 @@ export async function POST(request: Request) {
           });
 
           if (willNotify) {
-            console.log("[Clara Chat] Firing notification for lead:", result.leadId);
+            console.log("[Alice Chat] Firing notification for lead:", result.leadId);
             const summary = await generateConversationSummary(messages);
 
             try {
@@ -259,9 +259,9 @@ export async function POST(request: Request) {
                 conversationSummary: summary,
                 messageCount: messages.length,
               });
-              console.log("[Clara Chat] Email notification result:", emailResult);
+              console.log("[Alice Chat] Email notification result:", emailResult);
             } catch (err) {
-              console.error("[Clara Notifications] Email notification failed:", err);
+              console.error("[Alice Notifications] Email notification failed:", err);
             }
 
             if (result.newClassification === "hot" || result.newClassification === "urgent") {
@@ -281,14 +281,14 @@ export async function POST(request: Request) {
                   breakdown: result.breakdown,
                   conversationSummary: summary,
                 });
-                console.log("[Clara Chat] Slack notification result:", slackResult);
+                console.log("[Alice Chat] Slack notification result:", slackResult);
               } catch (err) {
-                console.error("[Clara Notifications] Slack notification failed:", err);
+                console.error("[Alice Notifications] Slack notification failed:", err);
               }
             }
 
             // Fire AI quality check in the background (non-blocking)
-            console.log(`[Clara Quality] Triggering AI quality check for conversation ${conversation.conversationId}`);
+            console.log(`[Alice Quality] Triggering AI quality check for conversation ${conversation.conversationId}`);
             generateAIQualityCheck(messages)
               .then((aiResult) => {
                 if (aiResult) {
@@ -301,12 +301,12 @@ export async function POST(request: Request) {
                 return null;
               })
               .catch((err) => {
-                console.error("[Clara Quality] Background quality check failed:", err);
+                console.error("[Alice Quality] Background quality check failed:", err);
               });
           }
         }
       } catch (err) {
-        console.error("[Clara DB] upsertLeadForConversation failed:", err);
+        console.error("[Alice DB] upsertLeadForConversation failed:", err);
       }
     }
 
@@ -317,7 +317,7 @@ export async function POST(request: Request) {
       conversationId: conversation.conversationId || undefined,
     });
   } catch (error) {
-    console.error("Clara chat error:", error);
+    console.error("Alice chat error:", error);
     return NextResponse.json<ChatErrorResponse>(
       { error: "I am having a brief technical issue. Please try again in a moment." },
       { status: 500 }

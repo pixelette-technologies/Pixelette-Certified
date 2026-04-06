@@ -1,10 +1,10 @@
 // Temporary rate limit diagnostic route — remove before production
 
 import { NextResponse } from "next/server";
-import { checkRateLimit, extractClientIp, resetRateLimits } from "@/lib/clara/rateLimit";
+import { checkRateLimit, extractClientIp, resetRateLimits } from "@/lib/alice/rateLimit";
 
 export async function GET(request: Request) {
-  if (process.env.CLARA_DEV_ENDPOINTS_ENABLED !== 'true') {
+  if (process.env.ALICE_DEV_ENDPOINTS_ENABLED !== 'true') {
     return new Response('Not found', { status: 404 });
   }
 
@@ -24,7 +24,7 @@ export async function GET(request: Request) {
 }
 
 export async function DELETE() {
-  if (process.env.CLARA_DEV_ENDPOINTS_ENABLED !== 'true') {
+  if (process.env.ALICE_DEV_ENDPOINTS_ENABLED !== 'true') {
     return new Response('Not found', { status: 404 });
   }
 

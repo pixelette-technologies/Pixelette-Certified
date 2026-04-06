@@ -1,8 +1,8 @@
-// Clara database helpers - conversation storage and lead management
+// Alice database helpers - conversation storage and lead management
 
-import { getSupabaseServer } from "@/lib/clara/supabase";
-import { calculateLeadScore } from "@/lib/clara/scoring";
-import type { ChatMessage, CapturedFields } from "@/lib/clara/types";
+import { getSupabaseServer } from "@/lib/alice/supabase";
+import { calculateLeadScore } from "@/lib/alice/scoring";
+import type { ChatMessage, CapturedFields } from "@/lib/alice/types";
 
 interface ConversationResult {
   conversationId: string;
@@ -48,7 +48,7 @@ export async function getOrCreateConversation(
     }
 
     if (error) {
-      console.error("[Clara DB] Failed to look up conversation, creating new one:", error.message);
+      console.error("[Alice DB] Failed to look up conversation, creating new one:", error.message);
     }
   }
 
@@ -67,7 +67,7 @@ export async function getOrCreateConversation(
     .single();
 
   if (error || !data) {
-    console.error("[Clara DB] Failed to create conversation:", error?.message);
+    console.error("[Alice DB] Failed to create conversation:", error?.message);
     return { conversationId: "", sessionId: newSessionId, messages: [], wasCreated: true };
   }
 
@@ -90,7 +90,7 @@ export async function appendMessagesToConversation(
     .single();
 
   if (fetchError || !data) {
-    console.error("[Clara DB] Failed to load conversation for append:", fetchError?.message);
+    console.error("[Alice DB] Failed to load conversation for append:", fetchError?.message);
     return;
   }
 
@@ -107,11 +107,11 @@ export async function appendMessagesToConversation(
     .eq("id", conversationId);
 
   if (updateError) {
-    console.error("[Clara DB] Failed to append messages:", updateError.message);
+    console.error("[Alice DB] Failed to append messages:", updateError.message);
   }
 }
 
-// Valid lead table columns — filter out any extra fields Clara invents
+// Valid lead table columns — filter out any extra fields Alice invents
 const VALID_LEAD_FIELDS = new Set([
   "name", "email", "phone", "company", "website", "industry", "country",
   "team_size", "existing_certifications", "certification_interest",
@@ -163,7 +163,7 @@ export async function upsertLeadForConversation(
     .maybeSingle();
 
   if (lookupError && lookupError.code !== "PGRST116") {
-    console.error("[Clara DB] Failed to look up existing lead:", lookupError.message);
+    console.error("[Alice DB] Failed to look up existing lead:", lookupError.message);
   }
 
   if (existingLead) {
@@ -207,7 +207,7 @@ export async function upsertLeadForConversation(
         .eq("id", existingLead.id);
 
       if (updateError) {
-        console.error("[Clara DB] Failed to update lead:", updateError.message);
+        console.error("[Alice DB] Failed to update lead:", updateError.message);
       }
     }
 
@@ -244,7 +244,7 @@ export async function upsertLeadForConversation(
     .single();
 
   if (insertError || !newLead) {
-    console.error("[Clara DB] Failed to insert lead:", insertError?.message);
+    console.error("[Alice DB] Failed to insert lead:", insertError?.message);
     return null;
   }
 
@@ -255,7 +255,7 @@ export async function upsertLeadForConversation(
       .eq("id", conversationId);
 
     if (linkError) {
-      console.error("[Clara DB] Failed to link lead to conversation:", linkError.message);
+      console.error("[Alice DB] Failed to link lead to conversation:", linkError.message);
     }
   }
 

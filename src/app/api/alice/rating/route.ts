@@ -1,8 +1,8 @@
-// Visitor rating endpoint — stores visitor feedback on Clara's helpfulness
+// Visitor rating endpoint — stores visitor feedback on Alice's helpfulness
 
 import { NextResponse } from "next/server";
-import { saveQualityCheck } from "@/lib/clara/qualityCheck";
-import { getSupabaseServer } from "@/lib/clara/supabase";
+import { saveQualityCheck } from "@/lib/alice/qualityCheck";
+import { getSupabaseServer } from "@/lib/alice/supabase";
 
 export async function POST(request: Request) {
   try {
@@ -51,11 +51,11 @@ export async function POST(request: Request) {
       );
     }
 
-    console.log(`[Clara Quality] Visitor rated conversation ${conversationId}: ${rating}`);
+    console.log(`[Alice Quality] Visitor rated conversation ${conversationId}: ${rating}`);
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("[Clara Quality] Rating endpoint error:", error);
+    console.error("[Alice Quality] Rating endpoint error:", error);
     return NextResponse.json(
       { error: "server_error" },
       { status: 500 }

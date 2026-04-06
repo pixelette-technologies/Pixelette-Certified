@@ -1,4 +1,4 @@
-// Rate limiting for Clara's chat API - in-memory sliding window per IP
+// Rate limiting for Alice's chat API - in-memory sliding window per IP
 
 const LIMITS = {
   MINUTE_MAX: 20,

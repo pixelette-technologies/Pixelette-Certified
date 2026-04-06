@@ -1,12 +1,12 @@
 // Temporary Supabase connection test route — remove before production
 
 import { NextResponse } from "next/server";
-import { getSupabaseServer } from "@/lib/clara/supabase";
+import { getSupabaseServer } from "@/lib/alice/supabase";
 
 const EXPECTED_TABLES = ["conversations", "leads", "quality_checks", "questions_log"];
 
 export async function GET() {
-  if (process.env.CLARA_DEV_ENDPOINTS_ENABLED !== 'true') {
+  if (process.env.ALICE_DEV_ENDPOINTS_ENABLED !== 'true') {
     return new Response('Not found', { status: 404 });
   }
 
@@ -44,7 +44,7 @@ export async function GET() {
 
     return NextResponse.json({
       status: "ok",
-      message: "Clara schema verified",
+      message: "Alice schema verified",
       tables: found.sort(),
       counts: {
         conversations: conversationCount ?? 0,

@@ -1,4 +1,4 @@
-// Website scraper - fetches and parses visitor websites for Clara's analysis
+// Website scraper - fetches and parses visitor websites for Alice's analysis
 
 import axios from "axios";
 import * as cheerio from "cheerio";
@@ -88,7 +88,7 @@ export async function scrapeWebsite(url: string): Promise<ScrapedWebsite> {
       timeout: 5000,
       maxContentLength: 5 * 1024 * 1024,
       headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; ClaraBot/1.0; +https://pixelettecertified.com)",
+        "User-Agent": "Mozilla/5.0 (compatible; AliceBot/1.0; +https://pixelettecertified.com)",
         Accept: "text/html,application/xhtml+xml",
       },
       validateStatus: (status) => status < 400,
@@ -145,14 +145,14 @@ export async function scrapeWebsite(url: string): Promise<ScrapedWebsite> {
     } else {
       result.error = err instanceof Error ? err.message : "Unknown scraping error";
     }
-    console.error(`[Clara Scraper] Failed to scrape ${url}: ${result.error}`);
+    console.error(`[Alice Scraper] Failed to scrape ${url}: ${result.error}`);
   }
 
   return result;
 }
 
 /**
- * Format scraped website content as context for Clara's Claude API call.
+ * Format scraped website content as context for Alice's Claude API call.
  */
 export function formatScrapedContentForClaude(scraped: ScrapedWebsite): string {
   if (!scraped.success) {

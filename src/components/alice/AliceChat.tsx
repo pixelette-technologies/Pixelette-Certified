@@ -4,19 +4,19 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { Send, Loader2 } from "lucide-react";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { cn } from "@/lib/utils";
-import type { ChatMessage } from "@/lib/clara/types";
+import type { ChatMessage } from "@/lib/alice/types";
 
 const WELCOME_MESSAGE =
-  "Hi, I'm Clara, your AI accreditation advisor at Pixelette Certified. I help businesses figure out which certifications they need and why they matter. To get started, what is your name?";
+  "Hi, I'm Alice, your AI accreditation advisor at Pixelette Certified. I help businesses figure out which certifications they need and why they matter. To get started, what is your name?";
 
 const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
-interface ClaraChatProps {
+interface AliceChatProps {
   onClose: () => void;
   onCloseRefReady: (fn: () => void) => void;
 }
 
-export default function ClaraChat({ onClose, onCloseRefReady }: ClaraChatProps) {
+export default function AliceChat({ onClose, onCloseRefReady }: AliceChatProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([
     { role: "assistant", content: WELCOME_MESSAGE },
   ]);
@@ -49,7 +49,7 @@ export default function ClaraChat({ onClose, onCloseRefReady }: ClaraChatProps) 
 
   // Load session ID and conversation history on mount
   useEffect(() => {
-    const stored = localStorage.getItem("clara_session_id");
+    const stored = localStorage.getItem("alice_session_id");
     if (stored) {
       setSessionId(stored);
       fetch(`/api/chat/history?sessionId=${encodeURIComponent(stored)}`)
@@ -83,7 +83,7 @@ export default function ClaraChat({ onClose, onCloseRefReady }: ClaraChatProps) 
     setRatingState("submitting");
 
     try {
-      const response = await fetch("/api/clara/rating", {
+      const response = await fetch("/api/alice/rating", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ conversationId, rating }),
@@ -163,7 +163,7 @@ export default function ClaraChat({ onClose, onCloseRefReady }: ClaraChatProps) 
         setMessages((prev) => [...prev, { role: "assistant", content: data.reply }]);
         if (data.sessionId && data.sessionId !== sessionId) {
           setSessionId(data.sessionId);
-          localStorage.setItem("clara_session_id", data.sessionId);
+          localStorage.setItem("alice_session_id", data.sessionId);
         }
         if (data.conversationId && !conversationId) {
           setConversationId(data.conversationId);
@@ -205,7 +205,7 @@ export default function ClaraChat({ onClose, onCloseRefReady }: ClaraChatProps) 
                 : "bg-white/10 text-gray-200 rounded-bl-sm"
             )}>
               {msg.role === "assistant" && (
-                <span className="block text-[10px] font-bold uppercase tracking-wider text-[#C9A84C] mb-1">Clara</span>
+                <span className="block text-[10px] font-bold uppercase tracking-wider text-[#C9A84C] mb-1">Alice</span>
               )}
               {msg.content}
             </div>
@@ -220,7 +220,7 @@ export default function ClaraChat({ onClose, onCloseRefReady }: ClaraChatProps) 
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C9A84C]/70 animate-bounce" style={{ animationDelay: "150ms" }} />
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C9A84C]/70 animate-bounce" style={{ animationDelay: "300ms" }} />
                 </div>
-                <span className="text-xs italic text-gray-400">Clara is thinking...</span>
+                <span className="text-xs italic text-gray-400">Alice is thinking...</span>
               </div>
             </div>
           </div>
@@ -283,7 +283,7 @@ export default function ClaraChat({ onClose, onCloseRefReady }: ClaraChatProps) 
               </div>
             ) : (
               <>
-                <h3 className="text-white text-lg font-semibold mb-1 text-center">Was Clara helpful?</h3>
+                <h3 className="text-white text-lg font-semibold mb-1 text-center">Was Alice helpful?</h3>
                 <p className="text-gray-400 text-xs mb-5 text-center">Your feedback helps us improve</p>
                 <div className="flex gap-3 mb-3">
                   <button

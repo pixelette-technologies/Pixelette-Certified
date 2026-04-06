@@ -1,12 +1,12 @@
 // Temporary scoring test route — remove before production
 
 import { NextResponse } from "next/server";
-import { getSupabaseServer } from "@/lib/clara/supabase";
-import { calculateLeadScore } from "@/lib/clara/scoring";
-import type { ChatMessage, CapturedFields } from "@/lib/clara/types";
+import { getSupabaseServer } from "@/lib/alice/supabase";
+import { calculateLeadScore } from "@/lib/alice/scoring";
+import type { ChatMessage, CapturedFields } from "@/lib/alice/types";
 
 export async function POST(request: Request) {
-  if (process.env.CLARA_DEV_ENDPOINTS_ENABLED !== 'true') {
+  if (process.env.ALICE_DEV_ENDPOINTS_ENABLED !== 'true') {
     return new Response('Not found', { status: 404 });
   }
 

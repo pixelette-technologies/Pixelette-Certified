@@ -1,4 +1,4 @@
-// Clara TypeScript types - message, conversation, lead, and configuration interfaces
+// Alice TypeScript types - message, conversation, lead, and configuration interfaces
 
 export interface ChatMessage {
   role: "user" | "assistant";

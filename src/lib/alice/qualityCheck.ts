@@ -1,17 +1,17 @@
 // AI quality self-check and visitor rating persistence
 
 import Anthropic from "@anthropic-ai/sdk";
-import { getSupabaseServer } from "@/lib/clara/supabase";
-import type { ChatMessage, QualityCheckInput, AIQualityCheckResult } from "@/lib/clara/types";
+import { getSupabaseServer } from "@/lib/alice/supabase";
+import type { ChatMessage, QualityCheckInput, AIQualityCheckResult } from "@/lib/alice/types";
 
-const QUALITY_SYSTEM_PROMPT = `You are a quality auditor reviewing a conversation between Clara (an AI Accreditation Advisor for Pixelette Certified) and a potential client. Your job is to rate Clara's performance on a scale of 1 to 10 and note any issues or missed opportunities.
+const QUALITY_SYSTEM_PROMPT = `You are a quality auditor reviewing a conversation between Alice (an AI Accreditation Advisor for Pixelette Certified) and a potential client. Your job is to rate Alice's performance on a scale of 1 to 10 and note any issues or missed opportunities.
 
 Respond in this exact format, nothing else:
 SCORE: <number from 1 to 10>
-NOTES: <one or two sentences describing what Clara did well and what could be improved>
+NOTES: <one or two sentences describing what Alice did well and what could be improved>
 
 Rate based on:
-- Did Clara follow discovery-before-prescription approach?
+- Did Alice follow discovery-before-prescription approach?
 - Was the tone warm but not pushy?
 - Were pricing and timelines quoted accurately per her knowledge base?
 - Did she move toward the gap analysis call naturally?
@@ -27,7 +27,7 @@ export async function generateAIQualityCheck(
     });
 
     const transcript = conversationMessages
-      .map((m) => `${m.role === "user" ? "Visitor" : "Clara"}: ${m.content}`)
+      .map((m) => `${m.role === "user" ? "Visitor" : "Alice"}: ${m.content}`)
       .join("\n\n");
 
     const response = await anthropic.messages.create({
@@ -41,14 +41,14 @@ export async function generateAIQualityCheck(
     const rawResponse = textBlock?.text || "";
 
     if (!rawResponse) {
-      console.warn("[Clara Quality] Empty response from quality check");
+      console.warn("[Alice Quality] Empty response from quality check");
       return null;
     }
 
     // Parse score
     const scoreMatch = rawResponse.match(/SCORE:\s*(\d+)/i);
     if (!scoreMatch) {
-      console.warn("[Clara Quality] Could not parse score from response:", rawResponse);
+      console.warn("[Alice Quality] Could not parse score from response:", rawResponse);
       return null;
     }
     const score = Math.max(1, Math.min(10, parseInt(scoreMatch[1], 10)));
@@ -59,7 +59,7 @@ export async function generateAIQualityCheck(
 
     return { score, notes, rawResponse };
   } catch (err) {
-    console.error("[Clara Quality] AI quality check failed:", err);
+    console.error("[Alice Quality] AI quality check failed:", err);
     return null;
   }
 }
@@ -92,7 +92,7 @@ export async function saveQualityCheck(
         .eq("id", existing.id);
 
       if (error) {
-        console.error("[Clara Quality] Failed to update quality check:", error.message);
+        console.error("[Alice Quality] Failed to update quality check:", error.message);
         return { success: false, error: error.message };
       }
     } else {
@@ -105,16 +105,16 @@ export async function saveQualityCheck(
         });
 
       if (error) {
-        console.error("[Clara Quality] Failed to insert quality check:", error.message);
+        console.error("[Alice Quality] Failed to insert quality check:", error.message);
         return { success: false, error: error.message };
       }
     }
 
-    console.log(`[Clara Quality] Saved quality check for conversation ${input.conversationId}`);
+    console.log(`[Alice Quality] Saved quality check for conversation ${input.conversationId}`);
     return { success: true };
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
-    console.error("[Clara Quality] saveQualityCheck failed:", message);
+    console.error("[Alice Quality] saveQualityCheck failed:", message);
     return { success: false, error: message };
   }
 }

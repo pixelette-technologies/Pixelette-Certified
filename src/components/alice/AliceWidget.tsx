@@ -3,9 +3,9 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
-import ClaraChat from "./ClaraChat";
+import AliceChat from "./AliceChat";
 
-export default function ClaraWidget() {
+export default function AliceWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const closeRef = useRef<(() => void) | null>(null);
 
@@ -54,12 +54,12 @@ export default function ClaraWidget() {
                 rounded-full shadow-lg hover:shadow-xl
                 flex items-center justify-center transition-all duration-300
                 hover:-translate-y-1 hover:bg-[#111f38] relative shrink-0 p-3"
-              aria-label="Open chat with Clara"
-              title="Chat with Clara about certifications"
+              aria-label="Open chat with Alice"
+              title="Chat with Alice about certifications"
             >
               <img
                 src="/logos/favicon.svg"
-                alt="Clara"
+                alt="Alice"
                 className="w-8 h-8 group-hover:scale-110 transition-transform duration-300"
               />
               <span className="absolute inset-0 rounded-full bg-[#C9A84C] animate-ping opacity-15" />
@@ -92,10 +92,10 @@ export default function ClaraWidget() {
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-full bg-[#0A1628] border border-[#C9A84C]/40
                   flex items-center justify-center shrink-0 p-1.5">
-                  <img src="/logos/favicon.svg" alt="Clara" className="w-full h-full" />
+                  <img src="/logos/favicon.svg" alt="Alice" className="w-full h-full" />
                 </div>
                 <div>
-                  <div className="font-bold text-white text-sm">Clara</div>
+                  <div className="font-bold text-white text-sm">Alice</div>
                   <div className="text-[11px] text-gray-400">AI Accreditation Advisor</div>
                 </div>
               </div>
@@ -110,7 +110,7 @@ export default function ClaraWidget() {
             </div>
 
             {/* Chat area */}
-            <ClaraChat onClose={forceClose} onCloseRefReady={(fn) => { closeRef.current = fn; }} />
+            <AliceChat onClose={forceClose} onCloseRefReady={(fn) => { closeRef.current = fn; }} />
           </motion.div>
         )}
       </AnimatePresence>

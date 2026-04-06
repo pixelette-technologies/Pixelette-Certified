@@ -1,6 +1,6 @@
-// Extracts structured captured fields from Clara's response and returns a clean reply
+// Extracts structured captured fields from Alice's response and returns a clean reply
 
-import type { CapturedFields } from "@/lib/clara/types";
+import type { CapturedFields } from "@/lib/alice/types";
 
 interface ExtractionResult {
   cleanReply: string;

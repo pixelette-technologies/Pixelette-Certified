@@ -1,8 +1,8 @@
 // Returns conversation history for a given session ID
 
 import { NextResponse } from "next/server";
-import { getSupabaseServer } from "@/lib/clara/supabase";
-import type { ChatMessage } from "@/lib/clara/types";
+import { getSupabaseServer } from "@/lib/alice/supabase";
+import type { ChatMessage } from "@/lib/alice/types";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);

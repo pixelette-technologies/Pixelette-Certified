@@ -13,7 +13,7 @@ export async function verifyTurnstileToken(
 ): Promise<TurnstileVerificationResult> {
   const secretKey = process.env.TURNSTILE_SECRET_KEY;
   if (!secretKey) {
-    console.error("[Clara Turnstile] TURNSTILE_SECRET_KEY not configured");
+    console.error("[Alice Turnstile] TURNSTILE_SECRET_KEY not configured");
     return { success: false, errorCodes: ["missing_secret_key"] };
   }
 
@@ -49,7 +49,7 @@ export async function verifyTurnstileToken(
     };
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
-    console.error(`[Clara Turnstile] Verification request failed: ${message}`);
+    console.error(`[Alice Turnstile] Verification request failed: ${message}`);
     return { success: false, errorCodes: ["verification_error"] };
   }
 }

@@ -5,7 +5,7 @@ import Anthropic from "@anthropic-ai/sdk";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const FROM_ADDRESS = "Clara <clara@pixelettecertified.com>";
+const FROM_ADDRESS = "Alice <alice@pixelettecertified.com>";
 
 interface LeadNotificationInput {
   leadId: string;
@@ -45,18 +45,18 @@ const SUGGESTED_ACTIONS: Record<string, string> = {
 export async function sendLeadNotification(
   input: LeadNotificationInput
 ): Promise<{ sent: boolean; error?: string }> {
-  console.log("[Clara Notifications] sendLeadNotification called", {
+  console.log("[Alice Notifications] sendLeadNotification called", {
     leadId: input.leadId,
     classification: input.classification,
     score: input.score,
-    toEmail: process.env.CLARA_ADMIN_EMAIL,
+    toEmail: process.env.ALICE_ADMIN_EMAIL,
     fromEmail: FROM_ADDRESS,
   });
 
-  const adminEmail = process.env.CLARA_ADMIN_EMAIL;
+  const adminEmail = process.env.ALICE_ADMIN_EMAIL;
   if (!adminEmail) {
-    console.error("[Clara Notifications] CLARA_ADMIN_EMAIL not set");
-    return { sent: false, error: "CLARA_ADMIN_EMAIL not configured" };
+    console.error("[Alice Notifications] ALICE_ADMIN_EMAIL not set");
+    return { sent: false, error: "ALICE_ADMIN_EMAIL not configured" };
   }
 
   const displayName = input.name || "Anonymous visitor";
@@ -134,13 +134,13 @@ METADATA
   Received at:       ${timestamp}
 
 -----------------------------------------------
-Sent by Clara — AI Accreditation Advisor
+Sent by Alice — AI Accreditation Advisor
 Pixelette Certified
 pixelettecertified.com
 `.trim();
 
   try {
-    console.log("[Clara Notifications] About to call Resend API with payload:", {
+    console.log("[Alice Notifications] About to call Resend API with payload:", {
       from: FROM_ADDRESS,
       to: [adminEmail],
       subject,
@@ -153,10 +153,10 @@ pixelettecertified.com
       text: body,
     });
 
-    console.log("[Clara Notifications] Resend raw response:", JSON.stringify(response, null, 2));
+    console.log("[Alice Notifications] Resend raw response:", JSON.stringify(response, null, 2));
 
     if (response.error) {
-      console.error("[Clara Notifications] Resend rejected send:", response.error);
+      console.error("[Alice Notifications] Resend rejected send:", response.error);
       return {
         sent: false,
         error: `${response.error.name || "resend_error"}: ${response.error.message || "Unknown error"}`,
@@ -164,15 +164,15 @@ pixelettecertified.com
     }
 
     if (response.data && response.data.id) {
-      console.log("[Clara Notifications] Resend accepted send, email ID:", response.data.id);
+      console.log("[Alice Notifications] Resend accepted send, email ID:", response.data.id);
       return { sent: true };
     }
 
-    console.warn("[Clara Notifications] Unexpected Resend response shape:", response);
+    console.warn("[Alice Notifications] Unexpected Resend response shape:", response);
     return { sent: false, error: "Unexpected Resend response shape" };
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
-    console.error("[Clara Notifications] Failed to send email (exception):", message);
+    console.error("[Alice Notifications] Failed to send email (exception):", message);
     return { sent: false, error: message };
   }
 }
@@ -186,21 +186,21 @@ export async function generateConversationSummary(
     });
 
     const transcript = messages
-      .map((m) => `${m.role === "user" ? "Visitor" : "Clara"}: ${m.content}`)
+      .map((m) => `${m.role === "user" ? "Visitor" : "Alice"}: ${m.content}`)
       .join("\n\n");
 
     const response = await anthropic.messages.create({
       model: "claude-sonnet-4-6",
       max_tokens: 400,
       system:
-        "You are summarising a conversation between a visitor and Clara, an AI accreditation advisor for Pixelette Certified. Produce a concise summary in 5-7 bullet points covering: who the visitor is and what they do, their primary certification need, urgency signals and deadlines, pain points or triggers mentioned, any objections raised, and key next action. Use plain English. No preamble. Start directly with the bullets.",
+        "You are summarising a conversation between a visitor and Alice, an AI accreditation advisor for Pixelette Certified. Produce a concise summary in 5-7 bullet points covering: who the visitor is and what they do, their primary certification need, urgency signals and deadlines, pain points or triggers mentioned, any objections raised, and key next action. Use plain English. No preamble. Start directly with the bullets.",
       messages: [{ role: "user", content: transcript }],
     });
 
     const textBlock = response.content.find((block) => block.type === "text");
     return textBlock?.text || "Summary generation failed. See full transcript in database.";
   } catch (err) {
-    console.error("[Clara Notifications] Summary generation failed:", err);
+    console.error("[Alice Notifications] Summary generation failed:", err);
     return "Summary generation failed. See full transcript in database.";
   }
 }
@@ -227,9 +227,9 @@ export async function sendSlackNotification(
   input: SlackNotificationInput
 ): Promise<{ sent: boolean; error?: string }> {
   try {
-    const webhookUrl = process.env.CLARA_SLACK_WEBHOOK_URL;
+    const webhookUrl = process.env.ALICE_SLACK_WEBHOOK_URL;
     if (!webhookUrl) {
-      console.log("[Clara Notifications] Slack webhook URL not configured");
+      console.log("[Alice Notifications] Slack webhook URL not configured");
       return { sent: false, error: "webhook_url_missing" };
     }
 
@@ -282,7 +282,7 @@ export async function sendSlackNotification(
             {
               type: "context",
               elements: [
-                { type: "mrkdwn", text: "Sent by Clara \u2014 AI Accreditation Advisor at Pixelette Certified" },
+                { type: "mrkdwn", text: "Sent by Alice \u2014 AI Accreditation Advisor at Pixelette Certified" },
               ],
             },
           ],
@@ -299,15 +299,15 @@ export async function sendSlackNotification(
     const body = await res.text();
 
     if (res.status === 200 && body === "ok") {
-      console.log(`[Clara Notifications] Slack accepted notification for lead: ${input.leadId}`);
+      console.log(`[Alice Notifications] Slack accepted notification for lead: ${input.leadId}`);
       return { sent: true };
     }
 
-    console.error(`[Clara Notifications] Slack rejected notification: status=${res.status} body=${body}`);
+    console.error(`[Alice Notifications] Slack rejected notification: status=${res.status} body=${body}`);
     return { sent: false, error: body };
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
-    console.error(`[Clara Notifications] Slack notification failed (exception): ${message}`);
+    console.error(`[Alice Notifications] Slack notification failed (exception): ${message}`);
     return { sent: false, error: message };
   }
 }

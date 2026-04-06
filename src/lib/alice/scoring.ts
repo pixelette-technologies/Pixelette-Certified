@@ -1,6 +1,6 @@
 // Lead scoring logic - calculates qualification score from conversation signals
 
-import type { CapturedFields, ChatMessage } from "@/lib/clara/types";
+import type { CapturedFields, ChatMessage } from "@/lib/alice/types";
 
 interface ScoreBreakdownItem {
   signal: string;
