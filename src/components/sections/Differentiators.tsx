@@ -11,25 +11,25 @@ const differentiators = [
     icon: Zap,
     title: "10 weeks to certification",
     description:
-      "Most consultancies take 6 months. We have engineered a process that gets businesses certified in 10 weeks without cutting corners — regardless of your industry, size, or geography.",
+      "Most consultancies take 5 to 8 months. We have engineered a structured process that gets businesses certified in 10 weeks without cutting corners.",
   },
   {
     icon: Puzzle,
     title: "One partner for everything",
     description:
-      "ISO 27001, ISO 42001, ISO 9001, ISO 22301, vCISO, GDPR, Cyber Essentials, Penetration Testing. One relationship, one commercial arrangement, one team that understands your entire compliance picture.",
+      "ISO certification, penetration testing, vCISO, vDPO, GDPR, AI governance, SOC 2, and managed advisory under one commercial relationship.",
   },
   {
     icon: PoundSterling,
-    title: "Global delivery, transparent pricing",
+    title: "No pricing surprises",
     description:
-      "We serve clients across the UK, UAE, EU, Americas, and Asia Pacific. Every price is fixed and published upfront. You know exactly what you are paying before any work begins — no hourly billing, no scope creep, no surprises.",
+      "Fixed-fee proposals before any work begins. No hourly billing, no scope creep. We commit to beating any comparable quote by at least 10%.",
   },
   {
     icon: Brain,
-    title: "Built for the AI era",
+    title: "AI governance pioneers",
     description:
-      "We are one of the very few consultancies globally offering ISO 42001 AI governance certification. If you are building with AI, deploying AI, or selling AI solutions to regulated sectors, we understand your compliance landscape better than anyone.",
+      "Among the first UK consultancies offering ISO 42001 AI governance certification, with a PECB-certified ISO 42001 Lead Auditor on the team.",
   },
 ];
 
