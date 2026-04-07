@@ -1,9 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, Shield, ShieldCheck, Globe, Leaf, Brain, Lock, UserCheck, FileSearch, Bug, Scale } from "lucide-react";
 import type { Service } from "@/data/services";
+import Button from "@/components/ui/Button";
+import CTASection from "@/components/sections/CTASection";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   "iso-27001": Shield,
@@ -17,17 +18,12 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   "penetration-testing": Bug,
   "gdpr-privacy": Scale,
 };
-import SectionHeading from "@/components/ui/SectionHeading";
-import SectionLabel from "@/components/ui/SectionLabel";
-import Button from "@/components/ui/Button";
-import CTASection from "@/components/sections/CTASection";
-import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
 
 interface CategoryGroup {
   key: string;
   label: string;
   description: string;
-  services: Omit<Service, 'icon'>[];
+  services: Omit<Service, "icon">[];
 }
 
 interface ServicesOverviewContentProps {
@@ -57,12 +53,7 @@ export default function ServicesOverviewContent({ groupedServices }: ServicesOve
         />
         <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-accent/5 blur-3xl pointer-events-none" />
 
-        <motion.div
-          variants={fadeInUp}
-          initial="hidden"
-          animate="visible"
-          className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center"
-        >
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-6">
             Our Services
           </h1>
@@ -72,84 +63,62 @@ export default function ServicesOverviewContent({ groupedServices }: ServicesOve
           <Button href="/contact" size="lg">
             See Your 10-Week Certification Roadmap
           </Button>
-        </motion.div>
+        </div>
       </section>
 
-      {/* ─── Service Categories ─── */}
-      {groupedServices.map((category, catIdx) => {
-        const isDark = catIdx % 2 !== 0;
-        const isSmallCategory = category.services.length <= 2;
-        return (
-          <section
-            key={category.key}
-            className={`${isSmallCategory ? "py-12 lg:py-16" : "py-20 lg:py-28"} ${isDark ? "bg-primary" : "bg-surface"}`}
-          >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6">
-              <SectionHeading
-                label={category.label}
-                title={category.label}
-                description={category.description}
-                dark={isDark}
-              />
-
-              <motion.div
-                variants={staggerContainer}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-                className={`grid gap-6 ${
-                  category.services.length === 1
-                    ? "max-w-md mx-auto"
-                    : category.services.length === 2
-                    ? "sm:grid-cols-2 max-w-2xl mx-auto"
-                    : "sm:grid-cols-2 lg:grid-cols-3"
-                }`}
+      {/* ─── Categories Grid ─── */}
+      <section className="bg-gray-50 py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="grid md:grid-cols-2 gap-6">
+            {groupedServices.map((category) => (
+              <div
+                key={category.key}
+                className="bg-white border border-gray-200 rounded-xl p-6 lg:p-8"
               >
-                {category.services.map((service) => (
-                  <motion.div key={service.slug} variants={staggerItem}>
-                    <Link
-                      href={serviceHref(service.slug)}
-                      className={`group flex flex-col h-full rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 ${
-                        isDark
-                          ? "bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10"
-                          : "bg-white border border-gray-100 shadow-lg shadow-black/5 hover:shadow-2xl"
-                      }`}
-                    >
-                      <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-accent/10 group-hover:bg-accent/20 transition-colors">
-                        {(() => { const Ic = iconMap[service.slug] || Shield; return <Ic className="h-6 w-6 text-accent" />; })()}
-                      </div>
+                {/* Category header */}
+                <p className="text-[10px] font-bold uppercase tracking-widest text-accent mb-1">
+                  {category.label}
+                </p>
+                <h2 className="text-lg font-bold text-primary mb-1">
+                  {category.label}
+                </h2>
+                <p className="text-sm text-gray-500 mb-5 leading-relaxed">
+                  {category.description}
+                </p>
 
-                      <h3
-                        className={`font-bold mb-2 transition-colors ${
-                          isDark ? "text-white group-hover:text-accent" : "text-primary group-hover:text-accent-dark"
-                        }`}
+                {/* Service cards inside category */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {category.services.map((service) => {
+                    const Ic = iconMap[service.slug] || Shield;
+                    return (
+                      <Link
+                        key={service.slug}
+                        href={serviceHref(service.slug)}
+                        className="group flex flex-col h-full bg-gray-50 border border-gray-100 rounded-lg p-4 hover:border-accent/30 hover:shadow-md transition-all duration-200"
                       >
-                        {service.shortTitle}
-                      </h3>
-
-                      <p className={`text-sm mb-3 flex-1 ${isDark ? "text-gray-400" : "text-gray-600"}`}>
-                        {service.description}
-                      </p>
-
-                      <p className={`text-sm font-semibold mb-4 ${isDark ? "text-accent" : "text-accent-dark"}`}>
-                        Fixed-fee engagement
-                      </p>
-
-                      <span
-                        className={`text-sm font-semibold inline-flex items-center gap-1 group-hover:gap-2 transition-all ${
-                          isDark ? "text-accent" : "text-accent-dark"
-                        }`}
-                      >
-                        Learn more <ArrowRight className="h-4 w-4" />
-                      </span>
-                    </Link>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </div>
-          </section>
-        );
-      })}
+                        <div className="flex items-center gap-2.5 mb-2">
+                          <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
+                            <Ic className="h-4 w-4 text-accent" />
+                          </div>
+                          <h3 className="font-semibold text-sm text-primary group-hover:text-accent-dark transition-colors leading-tight">
+                            {service.shortTitle}
+                          </h3>
+                        </div>
+                        <p className="text-xs text-gray-500 mb-3 flex-1 leading-relaxed line-clamp-2">
+                          {service.description}
+                        </p>
+                        <span className="text-xs font-semibold text-accent-dark inline-flex items-center gap-1 group-hover:gap-1.5 transition-all">
+                          Learn more <ArrowRight className="h-3 w-3" />
+                        </span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ─── CTA ─── */}
       <CTASection />
