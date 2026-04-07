@@ -188,7 +188,7 @@ export default function BlogPostClient({
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button href="/contact" variant="primary" size="lg">
-                Book Free Consultation
+                See Your 10-Week Certification Roadmap
               </Button>
               <Button href="/services/iso-27001" variant="secondary" size="lg">
                 View Services

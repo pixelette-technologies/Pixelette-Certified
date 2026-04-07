@@ -23,7 +23,7 @@ const differentiators = [
     icon: PoundSterling,
     title: "No pricing surprises",
     description:
-      "Fixed-fee proposals before any work begins. No hourly billing, no scope creep. We commit to beating any comparable quote by at least 10%.",
+      "Fixed-fee proposals before any work begins. No hourly billing. No scope creep. Every engagement scoped to your business, your sector, and your audit body, with 90 days post-certification support included as standard.",
   },
   {
     icon: Brain,

@@ -30,7 +30,7 @@ export default function ServicesGrid() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
         <SectionHeading
           label="Our Services"
-          title="Everything you need to get compliant"
+          title="One Partner for ISO, Cyber Security, AI Governance, and Privacy"
           description="From ISO certification to ongoing security leadership, we cover the full compliance landscape for businesses across every industry, in every market."
         />
 

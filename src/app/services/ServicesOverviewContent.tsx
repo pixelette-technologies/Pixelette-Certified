@@ -58,10 +58,10 @@ export default function ServicesOverviewContent({ groupedServices }: ServicesOve
             Our Services
           </h1>
           <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed mb-8">
-            From ISO certification to ongoing security leadership, we cover the full compliance landscape for UK technology companies.
+            Everything You Need to Be Enterprise-Ready. ISO certification, cybersecurity, AI governance, and privacy compliance. UK-headquartered, globally delivered, across every sector.
           </p>
           <Button href="/contact" size="lg">
-            Book Free Gap Analysis
+            See Your 10-Week Certification Roadmap
           </Button>
         </motion.div>
       </section>

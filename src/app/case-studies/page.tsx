@@ -171,7 +171,7 @@ export default function CaseStudiesPage() {
               your current position and design a roadmap to certification.
             </p>
             <Button href="/contact" variant="primary" size="lg">
-              Book Free Consultation
+              See Your 10-Week Certification Roadmap
             </Button>
           </div>
         </motion.div>

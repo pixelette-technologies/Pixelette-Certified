@@ -39,7 +39,7 @@ export default function Testimonials() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
         <SectionHeading
           label="Client Success"
-          title="Trusted by businesses worldwide"
+          title="Trusted by Technology Companies Winning Enterprise Contracts"
           description="Our clients pass their audits first time. Here is what they say."
         />
 

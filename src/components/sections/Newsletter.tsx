@@ -48,7 +48,7 @@ export default function Newsletter() {
         </div>
 
         <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-3 gradient-text-white">
-          Stay ahead on compliance
+          Compliance Intelligence for Enterprise-Ready Businesses
         </h2>
         <p className="text-gray-300 mb-8 leading-relaxed">
           Get monthly insights on ISO certification, cybersecurity regulations, AI governance,

@@ -215,7 +215,7 @@ export default function BlogPage() {
         <SectionHeading
           label="Blog"
           title="Insights & Guides"
-          description="Expert perspectives on ISO certification, cybersecurity, compliance, and AI governance for UK technology companies."
+          description="Compliance Intelligence, Strategic thinking on certification, procurement, AI governance, and enterprise readiness. Written by UK-credentialled practitioners, for businesses operating in any market."
         />
 
         <motion.div
@@ -276,7 +276,7 @@ export default function BlogPage() {
               certification needs.
             </p>
             <Button href="/contact" variant="primary" size="lg">
-              Book Free Consultation
+              See Your 10-Week Certification Roadmap
             </Button>
           </div>
         </motion.div>

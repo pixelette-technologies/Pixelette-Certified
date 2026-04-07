@@ -138,7 +138,7 @@ export default function PricingContent() {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Button href="/contact" size="lg">
-              Book Your Free Gap Analysis
+              See Your 10-Week Certification Roadmap
             </Button>
             <Button href="/contact" variant="secondary" size="lg">
               Have a quote? We will beat it by 10%
@@ -302,7 +302,7 @@ export default function PricingContent() {
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button href="/contact" size="lg">
-                Book Your Free Gap Analysis
+                See Your 10-Week Certification Roadmap
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Button>
             </div>

@@ -40,7 +40,7 @@ export default function ThreeStepProcess() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
         <SectionHeading
           label="How We Work"
-          title="Three steps to certification"
+          title="Certified in Three Steps, So You Can Focus on Winning Deals"
           description="Simple, transparent, and designed to keep your business moving, no matter where you are in the world or what industry you operate in."
           dark={false}
         />

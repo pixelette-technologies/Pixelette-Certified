@@ -150,7 +150,7 @@ export default function Navbar() {
           {/* CTA + Mobile toggle */}
           <div className="flex items-center gap-3">
             <Button href="/contact" size="sm" className="hidden sm:inline-flex">
-              Free Gap Analysis
+              Book Your Assessment
             </Button>
 
             <button
@@ -232,7 +232,7 @@ export default function Navbar() {
                 )}
                 <div className="pt-3 px-4">
                   <Button href="/contact" size="md" className="w-full justify-center">
-                    Free Gap Analysis
+                    Book Your Assessment
                   </Button>
                 </div>
               </div>
