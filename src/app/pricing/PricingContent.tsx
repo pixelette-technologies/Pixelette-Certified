@@ -41,9 +41,9 @@ const promises = [
   },
   {
     icon: Award,
-    title: "We beat any comparable quote by at least 10%",
+    title: "90 days post-certification support included",
     description:
-      "When comparing quotes from compliance consultancies, bring us the number. We will deliver the same quality of certified outcome, with our 98% pass rate and practitioner-led delivery, at a price that beats any comparable proposal.",
+      "Every engagement scoped to your business, your sector, and your audit body. 90 days post-certification support included as standard, with surveillance audit accompaniment and ongoing advisory available.",
   },
 ];
 
@@ -68,7 +68,7 @@ const pricingFAQs = [
   {
     question: "How is your pricing structured?",
     answer:
-      "Every engagement is scoped individually and priced as a fixed-fee project. You receive a full proposal before any work begins, no hourly billing, no scope creep charges, no surprise invoices. We commit to beating any comparable quote by at least 10%.",
+      "Every engagement is scoped individually and priced as a fixed-fee project. You receive a full proposal before any work begins. No hourly billing, no scope creep charges, no surprise invoices. Every engagement scoped to your business, your sector, and your audit body, with 90 days post-certification support included as standard.",
   },
   {
     question: "Are certification body fees included?",
@@ -134,14 +134,14 @@ export default function PricingContent() {
           <p className="text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed mb-8">
             We do not publish price lists because no two engagements are identical.
             What we guarantee: a fixed-fee proposal before work starts, full
-            transparency, and a commitment to beat any comparable quote by at least 10%.
+            transparency, no hourly billing, no scope creep, and 90 days post-certification support included as standard.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Button href="/contact" size="lg">
               See Your 10-Week Certification Roadmap
             </Button>
             <Button href="/contact" variant="secondary" size="lg">
-              Have a quote? We will beat it by 10%
+              Talk to a Consultant
             </Button>
           </div>
         </motion.div>
@@ -296,9 +296,8 @@ export default function PricingContent() {
             <p className="text-gray-300 max-w-2xl mx-auto leading-relaxed mb-8">
               Every engagement begins with a free, no-obligation gap analysis. In 30
               minutes, our consultants will assess your current posture, identify which
-              standards apply, provide a realistic timeline, and confirm our commitment
-              to beat any comparable quote by at least 10%. Most clients book their first
-              paid engagement within two weeks.
+              standards apply, and provide a realistic timeline and fixed-fee proposal.
+              Most clients book their first paid engagement within two weeks.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button href="/contact" size="lg">
