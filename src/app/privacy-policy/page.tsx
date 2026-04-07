@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "How Pixelette Certified collects, uses, and protects your personal data under UK GDPR.",
   robots: { index: true, follow: true },
+  alternates: {
+    canonical: "https://pixelettecertified.com/privacy-policy",
+  },
 };
 
 export default function PrivacyPolicyPage() {

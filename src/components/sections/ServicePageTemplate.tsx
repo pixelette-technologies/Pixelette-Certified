@@ -10,6 +10,7 @@ import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import Accordion from "@/components/ui/Accordion";
 import CTASection from "@/components/sections/CTASection";
+import FaqSchema from "@/components/seo/FaqSchema";
 import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer, staggerItem, scaleIn } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 
@@ -283,6 +284,7 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
               title="Frequently asked questions"
               dark={false}
             />
+            <FaqSchema faqs={service.faqs} />
             <Accordion items={service.faqs} dark={false} />
           </div>
         </section>

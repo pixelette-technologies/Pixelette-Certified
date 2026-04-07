@@ -147,6 +147,9 @@ export async function generateMetadata({
   return {
     title: `${study.client} | ${study.certifications.join(" + ")} Case Study`,
     description,
+    alternates: {
+      canonical: `https://pixelettecertified.com/case-studies/${slug}`,
+    },
     openGraph: {
       title: `${study.client} Case Study | Pixelette Certified`,
       description,

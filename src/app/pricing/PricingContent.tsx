@@ -15,6 +15,7 @@ import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import Accordion from "@/components/ui/Accordion";
 import CTASection from "@/components/sections/CTASection";
+import FaqSchema from "@/components/seo/FaqSchema";
 import {
   fadeInUp,
   staggerContainer,
@@ -322,6 +323,7 @@ export default function PricingContent() {
             whileInView="visible"
             viewport={{ once: true }}
           >
+            <FaqSchema faqs={pricingFAQs} />
             <Accordion items={pricingFAQs} />
           </motion.div>
         </div>

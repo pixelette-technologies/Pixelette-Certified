@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Cookie Policy",
   description: "How Pixelette Certified uses cookies and similar technologies on our website.",
   robots: { index: true, follow: true },
+  alternates: {
+    canonical: "https://pixelettecertified.com/cookie-policy",
+  },
 };
 
 export default function CookiePolicyPage() {

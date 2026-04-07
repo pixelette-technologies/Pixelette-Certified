@@ -192,6 +192,9 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.description,
+    alternates: {
+      canonical: `https://pixelettecertified.com/blog/${slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.description,

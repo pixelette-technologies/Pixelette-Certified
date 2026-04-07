@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Hero from "@/components/sections/Hero";
 import TrustBar from "@/components/sections/TrustBar";
 import ProblemSection from "@/components/sections/ProblemSection";
@@ -9,6 +10,12 @@ import Certifications from "@/components/sections/Certifications";
 import Newsletter from "@/components/sections/Newsletter";
 import CTASection from "@/components/sections/CTASection";
 import JsonLd from "@/components/seo/JsonLd";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://pixelettecertified.com",
+  },
+};
 
 export default function HomePage() {
   return (
