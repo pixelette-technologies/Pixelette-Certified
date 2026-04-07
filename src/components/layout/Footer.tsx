@@ -10,18 +10,6 @@ const quickLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
-const services = [
-  { label: "ISO 27001", href: "/services/iso-27001" },
-  { label: "ISO 22301", href: "/services/iso-22301" },
-  { label: "ISO 9001", href: "/services/iso-9001" },
-  { label: "ISO 14001", href: "/services/iso-14001" },
-  { label: "ISO 42001 (AI)", href: "/services/iso-42001" },
-  { label: "Cyber Essentials", href: "/services/cyber-essentials" },
-  { label: "vCISO", href: "/services/vciso" },
-  { label: "vDPO", href: "/services/vdpo" },
-  { label: "Penetration Testing", href: "/services/penetration-testing" },
-  { label: "GDPR & Privacy", href: "/services/gdpr-privacy" },
-];
 
 export default function Footer() {
   return (
@@ -89,19 +77,45 @@ export default function Footer() {
           {/* Services */}
           <div>
             <h3 className="font-bold text-lg mb-4 text-accent">Our Services</h3>
-            <ul className="space-y-2.5">
-              {services.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-gray-400 hover:text-accent transition-colors inline-flex items-center gap-1 group"
-                  >
-                    <ArrowRight className="h-3 w-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" />
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <div className="grid grid-cols-2 gap-x-6 gap-y-2">
+              <ul className="space-y-2.5">
+                {[
+                  { label: "ISO 27001", href: "/services/iso-27001" },
+                  { label: "ISO 42001 (AI)", href: "/services/iso-42001" },
+                  { label: "ISO 9001", href: "/services/iso-9001" },
+                  { label: "ISO 22301", href: "/services/iso-22301" },
+                  { label: "GDPR & Privacy", href: "/services/gdpr-privacy" },
+                ].map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="text-sm text-gray-400 hover:text-accent transition-colors inline-flex items-center gap-1 group">
+                      <ArrowRight className="h-3 w-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" />
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <ul className="space-y-2.5">
+                {[
+                  { label: "vCISO", href: "/services/vciso" },
+                  { label: "vDPO", href: "/services/vdpo" },
+                  { label: "Cyber Essentials", href: "/services/cyber-essentials" },
+                  { label: "Pen Testing", href: "/services/penetration-testing" },
+                  { label: "SOC 2", href: "/services/soc-2" },
+                ].map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="text-sm text-gray-400 hover:text-accent transition-colors inline-flex items-center gap-1 group">
+                      <ArrowRight className="h-3 w-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" />
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="mt-4">
+              <Link href="/services" className="text-sm text-gray-400 hover:text-accent transition-colors inline-flex items-center gap-1">
+                View all services <ArrowRight className="h-3 w-3" />
+              </Link>
+            </div>
           </div>
 
           {/* Contact */}
