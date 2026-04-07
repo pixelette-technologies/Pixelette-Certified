@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, Phone, MapPin, ArrowRight, ExternalLink } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/constants";
 
@@ -23,9 +24,11 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <Link href="/" aria-label="Pixelette Certified Home">
-              <img
+              <Image
                 src="/logos/logo-white-text.svg"
                 alt="Pixelette Certified, ISO 27001 and Compliance Consultancy UK"
+                width={200}
+                height={40}
                 className="h-10 w-auto mb-4"
               />
             </Link>

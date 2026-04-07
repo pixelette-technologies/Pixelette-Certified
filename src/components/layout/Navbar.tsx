@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
@@ -43,9 +44,12 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-[72px]">
           {/* Logo */}
           <Link href="/" className="shrink-0" aria-label="Pixelette Certified Home">
-            <img
+            <Image
               src="/logos/logo-white-text.svg"
               alt="Pixelette Certified, ISO 27001 and Compliance Consultancy UK"
+              width={200}
+              height={40}
+              priority
               className="h-10 w-auto"
             />
           </Link>

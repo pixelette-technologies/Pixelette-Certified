@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import Button from "@/components/ui/Button";
 import { fadeInLeft, fadeInRight } from "@/lib/animations";
 
@@ -80,9 +81,12 @@ export default function Hero() {
             <div className="absolute inset-12 rounded-full border border-accent/25 animate-pulse" style={{ animationDuration: "2s" }} />
             {/* Inner circle with glass */}
             <div className="absolute inset-20 rounded-full glass-card flex items-center justify-center">
-              <img
+              <Image
                 src="/logos/favicon.svg"
                 alt="Pixelette Certified"
+                width={112}
+                height={134}
+                priority
                 className="w-28 opacity-90"
               />
             </div>

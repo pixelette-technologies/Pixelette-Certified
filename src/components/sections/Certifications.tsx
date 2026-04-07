@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ExternalLink } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -184,9 +185,11 @@ export default function Certifications({ variant = "dark" }: { variant?: "dark" 
 
               {/* Certificate image */}
               <div className="overflow-auto max-h-[calc(90vh-80px)] p-4 flex justify-center bg-white/5">
-                <img
+                <Image
                   src={selectedCert.image}
                   alt={`${selectedCert.title} certificate for ${selectedCert.holder}`}
+                  width={800}
+                  height={600}
                   className="max-w-full h-auto rounded-lg shadow-2xl"
                 />
               </div>
