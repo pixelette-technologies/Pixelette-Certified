@@ -17,57 +17,66 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
-    slug: "iso-27001-complete-guide-2026",
-    title: "ISO 27001 in 2026: The Complete Guide for UK Technology Companies",
+    slug: "iso-27001-security-questionnaire",
+    title: "We Just Got Asked for ISO 27001 in a Security Questionnaire. What Now?",
     description:
-      "Everything you need to know about ISO 27001 certification in 2026, updated requirements, costs, timelines, and what UK tech companies must prepare for.",
-    date: "2026-03-15",
+      "Your buyer just sent a security questionnaire asking for ISO 27001. You don't have it. This guide shows exactly what to do next and how to stay in the deal.",
+    date: "2026-04-07",
     category: "ISO 27001",
-    readingTime: "12 min read",
+    readingTime: "7 min read",
   },
   {
-    slug: "cyber-essentials-vs-iso-27001",
-    title: "Cyber Essentials vs ISO 27001: Which Does Your Business Actually Need?",
+    slug: "iso-27001-10-weeks-vs-6-months",
+    title: "ISO 27001 in 10 Weeks vs 6 Months: What Actually Changes?",
     description:
-      "A practical comparison of the two most common UK certifications. When Cyber Essentials is enough, when you need ISO 27001, and when you need both.",
-    date: "2026-03-08",
-    category: "Compliance",
+      "The 10-week timeline is not a marketing gimmick. This guide explains what a structured fast-track compresses, what it does not, and how to tell a real fast-track from corner-cutting.",
+    date: "2026-04-06",
+    category: "ISO 27001",
+    readingTime: "7 min read",
+  },
+  {
+    slug: "real-cost-not-being-iso-27001-certified",
+    title: "The Real Cost of NOT Being ISO 27001 Certified",
+    description:
+      "Every founder asks how much ISO 27001 costs. The right question is how much it costs not to have it. This guide puts a number on the second question.",
+    date: "2026-04-05",
+    category: "ISO 27001",
+    readingTime: "7 min read",
+  },
+  {
+    slug: "customer-asked-ai-governance",
+    title: "Our Customer Just Asked About Our AI Governance. We Don't Have Any.",
+    description:
+      "Enterprise buyers and investors are asking about AI governance with increasing regularity. If you build or deploy AI, ISO 42001 is the answer. Here is what to do this week.",
+    date: "2026-04-04",
+    category: "AI Governance",
+    readingTime: "8 min read",
+  },
+  {
+    slug: "iso-27001-or-soc-2-uk-saas",
+    title: "ISO 27001 or SOC 2? A Straight Answer for UK SaaS Selling into US Enterprise",
+    description:
+      "A UK SaaS company closes its first US deal and discovers SOC 2 is the default. This guide explains whether to hold one or both, and in what order.",
+    date: "2026-04-03",
+    category: "SOC 2",
     readingTime: "8 min read",
   },
   {
     slug: "enterprise-security-questionnaire-without-iso-27001",
     title: "How to Answer an Enterprise Security Questionnaire Without ISO 27001",
     description:
-      "Strategies for handling security questionnaires when you do not yet have ISO 27001, and why getting certified makes the process ten times easier.",
-    date: "2026-02-28",
+      "A tactical guide for handling enterprise security questionnaires when you do not yet hold ISO 27001, with a free response framework template.",
+    date: "2026-04-02",
     category: "Advisory",
-    readingTime: "7 min read",
+    readingTime: "8 min read",
   },
   {
-    slug: "iso-42001-ai-companies",
-    title: "ISO 42001: Why AI Companies Need This Certification Now",
+    slug: "iso-27001-uk-fintech-fca-dora",
+    title: "ISO 27001 for UK Fintech: What the FCA and DORA Actually Require",
     description:
-      "The EU AI Act is coming. ISO 42001 is the governance framework that proves your AI is built responsibly. Here is what you need to know.",
-    date: "2026-02-20",
-    category: "AI Governance",
-    readingTime: "10 min read",
-  },
-  {
-    slug: "real-cost-iso-27001-certification-uk",
-    title: "The Real Cost of ISO 27001 Certification in the UK",
-    description:
-      "A transparent breakdown of ISO 27001 certification costs in 2026, consultancy fees, certification body fees, tooling, and the hidden costs nobody mentions.",
-    date: "2026-02-12",
-    category: "ISO 27001",
-    readingTime: "9 min read",
-  },
-  {
-    slug: "vciso-vs-full-time-ciso",
-    title: "vCISO vs Full-Time CISO: What UK Scale-Ups Actually Need",
-    description:
-      "When does a virtual CISO make sense versus hiring full-time? A data-driven comparison for UK scale-ups from Series A to Series C.",
-    date: "2026-02-05",
-    category: "vCISO",
+      "FCA operational resilience, DORA compliance, and ISO 27001 for fintech. This guide maps the real regulatory requirements to the certification framework.",
+    date: "2026-04-01",
+    category: "FinTech",
     readingTime: "8 min read",
   },
 ];
