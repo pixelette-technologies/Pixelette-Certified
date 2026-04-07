@@ -47,9 +47,8 @@ export default function ThreeStepProcess() {
 
         <motion.div
           variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          initial="visible"
+          animate="visible"
           className="grid md:grid-cols-3 gap-8 relative"
         >
           {/* Connecting line (desktop only) */}

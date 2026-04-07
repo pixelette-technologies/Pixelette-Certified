@@ -11,9 +11,8 @@ export default function TrustBar() {
       <div className="absolute top-0 inset-x-0 divider-glow" />
       <motion.div
         variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
+        initial="visible"
+        animate="visible"
         className="max-w-7xl mx-auto px-4 sm:px-6"
       >
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">

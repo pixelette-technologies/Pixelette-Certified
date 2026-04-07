@@ -45,8 +45,8 @@ export default function ProblemSection() {
 
         <motion.div
           variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
+          initial="visible"
+          animate="visible"
           viewport={{ once: true, margin: "-100px" }}
           className="grid md:grid-cols-3 gap-6"
         >
