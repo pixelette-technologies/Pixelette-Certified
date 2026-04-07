@@ -62,12 +62,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const servicePages: MetadataRoute.Sitemap = services.map((service) => ({
-    url: `${baseUrl}/services/${service.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly",
-    priority: 0.8,
-  }));
+  const SERVICE_PAGES_WITH_ROUTES = new Set([
+    "iso-27001", "iso-22301", "iso-9001", "iso-14001", "iso-42001",
+    "cyber-essentials", "vciso", "vdpo", "penetration-testing", "gdpr-privacy",
+  ]);
+
+  const servicePages: MetadataRoute.Sitemap = services
+    .filter((service) => SERVICE_PAGES_WITH_ROUTES.has(service.slug))
+    .map((service) => ({
+      url: `${baseUrl}/services/${service.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    }));
 
   return [...staticPages, ...servicePages];
 }
