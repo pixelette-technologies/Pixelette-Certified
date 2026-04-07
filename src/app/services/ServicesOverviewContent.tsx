@@ -34,6 +34,15 @@ interface ServicesOverviewContentProps {
   groupedServices: CategoryGroup[];
 }
 
+const PAGES_WITH_ROUTES = new Set([
+  "iso-27001", "iso-22301", "iso-9001", "iso-14001", "iso-42001",
+  "cyber-essentials", "vciso", "vdpo", "penetration-testing", "gdpr-privacy",
+]);
+
+function serviceHref(slug: string): string {
+  return PAGES_WITH_ROUTES.has(slug) ? `/services/${slug}` : "/contact";
+}
+
 export default function ServicesOverviewContent({ groupedServices }: ServicesOverviewContentProps) {
   return (
     <>
@@ -99,7 +108,7 @@ export default function ServicesOverviewContent({ groupedServices }: ServicesOve
                 {category.services.map((service) => (
                   <motion.div key={service.slug} variants={staggerItem}>
                     <Link
-                      href={`/services/${service.slug}`}
+                      href={serviceHref(service.slug)}
                       className={`group flex flex-col h-full rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 ${
                         isDark
                           ? "bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10"

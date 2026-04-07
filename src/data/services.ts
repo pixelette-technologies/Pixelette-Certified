@@ -536,7 +536,7 @@ export const services: Service[] = [
       { name: "Enterprise", audience: "Saudi government and critical infrastructure", price: "Scoped to your business", features: ["Full NCA ECC/CCC implementation", "Regulatory reporting support"] },
     ],
     faqs: [],
-    relatedSlugs: ["sama-csf", "iso-27001", "vciso"],
+    relatedSlugs: ["iso-27001", "iso-22301", "vciso"],
     seo: { title: "NCA ECC/CCC Compliance", description: "NCA Essential Cybersecurity Controls and Cloud Controls for Saudi Arabia.", keywords: ["NCA ECC", "NCA CCC", "Saudi cybersecurity"] },
   },
   {
@@ -556,7 +556,7 @@ export const services: Service[] = [
       { name: "Enterprise", audience: "Qatar financial institutions", price: "Scoped to your business", features: ["Full QCB/NIA compliance implementation"] },
     ],
     faqs: [],
-    relatedSlugs: ["sama-csf", "iso-27001", "vciso"],
+    relatedSlugs: ["iso-27001", "iso-22301", "vciso"],
     seo: { title: "QCB/NIA Compliance Qatar", description: "Qatar Central Bank and National Information Assurance compliance for Qatari financial institutions.", keywords: ["QCB", "NIA", "Qatar banking compliance"] },
   },
   {
@@ -618,7 +618,7 @@ export const services: Service[] = [
       { name: "Standard", audience: "AWS, Azure, GCP, hybrid", price: "Scoped to your business", features: ["Assessment", "Architecture design", "Implementation roadmap"] },
     ],
     faqs: [],
-    relatedSlugs: ["zero-trust", "penetration-testing", "iso-27001"],
+    relatedSlugs: ["penetration-testing", "iso-27001", "vciso"],
     seo: { title: "Cloud Security Architecture", description: "Cloud security architecture for AWS, Azure, and GCP environments.", keywords: ["cloud security", "AWS security", "Azure security"] },
   },
   {
@@ -659,7 +659,7 @@ export const services: Service[] = [
       { name: "Standard", audience: "Up to 5 IT systems", price: "Scoped to your business", features: ["DR strategy", "Runbooks", "Testing plan"] },
     ],
     faqs: [],
-    relatedSlugs: ["iso-22301", "bia-bra", "vciso"],
+    relatedSlugs: ["iso-22301", "iso-27001", "vciso"],
     seo: { title: "Disaster Recovery Planning", description: "DR planning and runbook development aligned to ISO 22301.", keywords: ["disaster recovery", "DR planning", "RTO RPO"] },
   },
   {

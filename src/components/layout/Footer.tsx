@@ -103,7 +103,7 @@ export default function Footer() {
                   { label: "vDPO", href: "/services/vdpo" },
                   { label: "Cyber Essentials", href: "/services/cyber-essentials" },
                   { label: "Pen Testing", href: "/services/penetration-testing" },
-                  { label: "SOC 2", href: "/services/soc-2" },
+                  { label: "SOC 2", href: "/contact" },
                 ].map((link) => (
                   <li key={link.href}>
                     <Link href={link.href} className="text-sm text-gray-400 hover:text-accent transition-colors inline-flex items-center gap-1 group">
