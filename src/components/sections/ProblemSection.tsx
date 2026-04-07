@@ -57,7 +57,7 @@ export default function ProblemSection() {
                   <point.icon className="h-7 w-7 text-accent" />
                 </div>
                 <h3 className="text-xl font-bold mb-3 gradient-text-white">{point.title}</h3>
-                <p className="text-gray-400 leading-relaxed">{point.description}</p>
+                <p className="text-gray-300 leading-relaxed">{point.description}</p>
               </Card>
             </motion.div>
           ))}

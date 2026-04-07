@@ -38,8 +38,8 @@ export default function Newsletter() {
 
       <motion.div
         variants={fadeInUp}
-        initial="hidden"
-        whileInView="visible"
+        initial="visible"
+        animate="visible"
         viewport={{ once: true }}
         className="relative z-10 max-w-2xl mx-auto px-4 sm:px-6 text-center"
       >
@@ -50,7 +50,7 @@ export default function Newsletter() {
         <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-3 gradient-text-white">
           Stay ahead on compliance
         </h2>
-        <p className="text-gray-400 mb-8 leading-relaxed">
+        <p className="text-gray-300 mb-8 leading-relaxed">
           Get monthly insights on ISO certification, cybersecurity regulations, AI governance,
           and global compliance trends, written by our consultants, not a marketing team.
         </p>
@@ -63,7 +63,7 @@ export default function Newsletter() {
           >
             <CheckCircle className="h-10 w-10 text-accent mb-3" />
             <p className="font-semibold text-white text-lg">You&apos;re subscribed!</p>
-            <p className="text-gray-400 text-sm mt-1">
+            <p className="text-gray-300 text-sm mt-1">
               Check your inbox for a confirmation email.
             </p>
           </motion.div>
@@ -71,7 +71,7 @@ export default function Newsletter() {
           <form onSubmit={handleSubmit} className="max-w-md mx-auto">
             <div className="flex flex-col sm:flex-row gap-3">
               <div className="relative flex-1">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500 pointer-events-none" />
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-300 pointer-events-none" />
                 <input
                   type="email"
                   required
@@ -79,7 +79,7 @@ export default function Newsletter() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-white/5 border border-white/10
-                    text-white placeholder:text-gray-500 text-sm
+                    text-white placeholder:text-gray-300 text-sm
                     focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/30
                     transition-all duration-300"
                   disabled={status === "loading"}
@@ -108,7 +108,7 @@ export default function Newsletter() {
                 required
                 className="mt-0.5 h-4 w-4 shrink-0 rounded border-white/20 bg-white/5 accent-accent"
               />
-              <span className="text-xs text-gray-500 leading-relaxed text-left">
+              <span className="text-xs text-gray-300 leading-relaxed text-left">
                 I agree to receive compliance insights from Pixelette Certified per our{" "}
                 <a href="/privacy-policy" className="text-accent hover:text-accent-light underline">Privacy Policy</a>.
               </span>

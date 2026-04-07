@@ -48,8 +48,8 @@ export default function Differentiators() {
 
         <motion.div
           variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
+          initial="visible"
+          animate="visible"
           viewport={{ once: true, margin: "-100px" }}
           className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
         >

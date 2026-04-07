@@ -46,7 +46,7 @@ export default function Hero() {
             <br />
             <span className="gradient-text">Your compliance, done.</span>
           </h1>
-          <p className="text-lg text-gray-400 mb-8 max-w-xl leading-relaxed">
+          <p className="text-lg text-gray-300 mb-8 max-w-xl leading-relaxed">
             Expert-led. Globally delivered. Built for every industry. We get you
             certified in as little as 10 weeks, so you can win enterprise
             contracts, pass procurement, and close deals faster, wherever in the world you operate.

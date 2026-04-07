@@ -42,8 +42,8 @@ export default function CTASection({
 
       <motion.div
         variants={fadeInUp}
-        initial="hidden"
-        whileInView="visible"
+        initial="visible"
+        animate="visible"
         viewport={{ once: true }}
         className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 text-center"
       >
@@ -52,7 +52,7 @@ export default function CTASection({
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight mb-6 gradient-text-white">
             {headline}
           </h2>
-          <p className="text-lg text-gray-400 mb-8 leading-relaxed">
+          <p className="text-lg text-gray-300 mb-8 leading-relaxed">
             {description}
           </p>
           <div className="flex flex-wrap justify-center gap-4">

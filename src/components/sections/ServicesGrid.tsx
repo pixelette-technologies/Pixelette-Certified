@@ -36,8 +36,8 @@ export default function ServicesGrid() {
 
         <motion.div
           variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
+          initial="visible"
+          animate="visible"
           viewport={{ once: true, margin: "-100px" }}
           className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
         >
@@ -56,7 +56,7 @@ export default function ServicesGrid() {
                   <h3 className="font-bold text-white mb-2 group-hover:text-accent transition-colors duration-300">
                     {service.shortTitle}
                   </h3>
-                  <p className="text-sm text-gray-400 mb-4 flex-1">
+                  <p className="text-sm text-gray-300 mb-4 flex-1">
                     {service.description}
                   </p>
                   <span className="text-sm font-semibold text-accent inline-flex items-center gap-1 group-hover:gap-2 transition-all duration-300">

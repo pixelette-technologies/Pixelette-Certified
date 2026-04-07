@@ -45,8 +45,8 @@ export default function Testimonials() {
 
         <motion.div
           variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
+          initial="visible"
+          animate="visible"
           viewport={{ once: true, margin: "-100px" }}
           className="grid md:grid-cols-3 gap-6"
         >
@@ -66,7 +66,7 @@ export default function Testimonials() {
                 </p>
                 <div className="mt-6 pt-4 border-t border-white/10">
                   <p className="font-semibold gradient-text-white">{t.author}</p>
-                  <p className="text-sm text-gray-500">{t.company}</p>
+                  <p className="text-sm text-gray-300">{t.company}</p>
                 </div>
               </div>
             </motion.div>

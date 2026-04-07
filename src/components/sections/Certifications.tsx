@@ -103,8 +103,8 @@ export default function Certifications({ variant = "dark" }: { variant?: "dark" 
 
           <motion.div
             variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
+            initial="visible"
+            animate="visible"
             viewport={{ once: true, margin: "-100px" }}
             className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch"
           >
@@ -132,7 +132,7 @@ export default function Certifications({ variant = "dark" }: { variant?: "dark" 
                   }`}>
                     {cert.title}
                   </h3>
-                  <p className={`text-xs ${isDark ? "text-gray-500" : "text-gray-500"}`}>
+                  <p className={`text-xs ${isDark ? "text-gray-300" : "text-gray-300"}`}>
                     {cert.issuer}
                   </p>
                   <span className={`mt-auto pt-3 text-xs font-semibold inline-flex items-center gap-1 ${
@@ -169,14 +169,14 @@ export default function Certifications({ variant = "dark" }: { variant?: "dark" 
               <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
                 <div>
                   <h3 className="font-bold text-white text-lg">{selectedCert.title}</h3>
-                  <p className="text-sm text-gray-400">
+                  <p className="text-sm text-gray-300">
                     {selectedCert.issuer}, {selectedCert.holder}, {selectedCert.date}
                     {selectedCert.certNumber && `, #${selectedCert.certNumber}`}
                   </p>
                 </div>
                 <button
                   onClick={() => setSelectedCert(null)}
-                  className="p-2 rounded-lg hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
+                  className="p-2 rounded-lg hover:bg-white/10 text-gray-300 hover:text-white transition-colors"
                   aria-label="Close certificate view"
                 >
                   <X className="h-5 w-5" />

@@ -54,7 +54,7 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
 
         <motion.div
           variants={fadeInUp}
-          initial="hidden"
+          initial="visible"
           animate="visible"
           className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center"
         >
@@ -99,8 +99,8 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div
             variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
+            initial="visible"
+            animate="visible"
             viewport={{ once: true }}
             className="max-w-3xl mx-auto"
           >
@@ -129,8 +129,8 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
 
           <motion.div
             variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
+            initial="visible"
+            animate="visible"
             viewport={{ once: true, margin: "-100px" }}
             className="grid sm:grid-cols-2 gap-4"
           >
@@ -169,8 +169,8 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
                 <motion.div
                   key={i}
                   variants={fadeInUp}
-                  initial="hidden"
-                  whileInView="visible"
+                  initial="visible"
+                  animate="visible"
                   viewport={{ once: true }}
                   className="relative flex gap-6 md:gap-8"
                 >
@@ -211,8 +211,8 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
 
           <motion.div
             variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
+            initial="visible"
+            animate="visible"
             viewport={{ once: true }}
             className={cn(
               "grid gap-6",
@@ -302,8 +302,8 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
 
             <motion.div
               variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
+              initial="visible"
+              animate="visible"
               viewport={{ once: true }}
               className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
             >
