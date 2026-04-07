@@ -90,6 +90,7 @@ export default function RootLayout({
             `,
           }}
         />
+        <script src="https://analytics.ahrefs.com/analytics.js" data-key="NrhMy8upP8sv8uHS6EOSmg" async />
       </head>
       <body className="min-h-full flex flex-col font-sans">
         <a href="#main-content" className="skip-to-content">
