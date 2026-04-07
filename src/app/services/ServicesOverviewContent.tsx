@@ -67,22 +67,22 @@ export default function ServicesOverviewContent({ groupedServices }: ServicesOve
       </section>
 
       {/* ─── Categories Grid ─── */}
-      <section className="bg-gray-50 py-16 lg:py-20">
+      <section className="bg-primary py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid md:grid-cols-2 gap-6">
             {groupedServices.map((category) => (
               <div
                 key={category.key}
-                className="bg-white border border-gray-200 rounded-xl p-6 lg:p-8"
+                className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 lg:p-8"
               >
                 {/* Category header */}
                 <p className="text-[10px] font-bold uppercase tracking-widest text-accent mb-1">
                   {category.label}
                 </p>
-                <h2 className="text-lg font-bold text-primary mb-1">
+                <h2 className="text-lg font-bold text-white mb-1">
                   {category.label}
                 </h2>
-                <p className="text-sm text-gray-500 mb-5 leading-relaxed">
+                <p className="text-sm text-gray-400 mb-5 leading-relaxed">
                   {category.description}
                 </p>
 
@@ -94,20 +94,20 @@ export default function ServicesOverviewContent({ groupedServices }: ServicesOve
                       <Link
                         key={service.slug}
                         href={serviceHref(service.slug)}
-                        className="group flex flex-col h-full bg-gray-50 border border-gray-100 rounded-lg p-4 hover:border-accent/30 hover:shadow-md transition-all duration-200"
+                        className="group flex flex-col h-full bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/10 hover:border-accent/30 transition-all duration-200"
                       >
                         <div className="flex items-center gap-2.5 mb-2">
                           <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
                             <Ic className="h-4 w-4 text-accent" />
                           </div>
-                          <h3 className="font-semibold text-sm text-primary group-hover:text-accent-dark transition-colors leading-tight">
+                          <h3 className="font-semibold text-sm text-white group-hover:text-accent transition-colors leading-tight">
                             {service.shortTitle}
                           </h3>
                         </div>
-                        <p className="text-xs text-gray-500 mb-3 flex-1 leading-relaxed line-clamp-2">
+                        <p className="text-xs text-gray-400 mb-3 flex-1 leading-relaxed line-clamp-2">
                           {service.description}
                         </p>
-                        <span className="text-xs font-semibold text-accent-dark inline-flex items-center gap-1 group-hover:gap-1.5 transition-all">
+                        <span className="text-xs font-semibold text-accent inline-flex items-center gap-1 group-hover:gap-1.5 transition-all">
                           Learn more <ArrowRight className="h-3 w-3" />
                         </span>
                       </Link>
