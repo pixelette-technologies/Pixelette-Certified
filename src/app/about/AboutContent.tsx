@@ -293,6 +293,16 @@ export default function AboutContent() {
               </motion.div>
             ))}
           </motion.div>
+
+          {/* Capacity statements */}
+          <div className="mt-12 max-w-3xl mx-auto space-y-4">
+            <p className="text-gray-600 text-sm leading-relaxed text-center">
+              Backed by Pixelette Group's decade-long technology delivery team across the UK, Middle East, Europe, North America, and Asia Pacific, giving every engagement access to specialist input across SaaS, cloud infrastructure, AI systems, and software architecture.
+            </p>
+            <p className="text-gray-600 text-sm leading-relaxed text-center">
+              We deliberately operate a low-volume, senior-led model. Every engagement is led by a credentialled practitioner, never handed to a junior. This is the engine behind our 98% first-attempt pass rate.
+            </p>
+          </div>
         </div>
       </section>
 
