@@ -7,7 +7,6 @@ import ThreeStepProcess from "@/components/sections/ThreeStepProcess";
 import ServicesGrid from "@/components/sections/ServicesGrid";
 import Differentiators from "@/components/sections/Differentiators";
 import Testimonials from "@/components/sections/Testimonials";
-import Certifications from "@/components/sections/Certifications";
 import Newsletter from "@/components/sections/Newsletter";
 import CTASection from "@/components/sections/CTASection";
 import JsonLd from "@/components/seo/JsonLd";
@@ -150,7 +149,6 @@ export default function HomePage() {
       </section>
 
       <Testimonials />
-      <Certifications />
       <Newsletter />
       <CTASection />
     </>
