@@ -45,7 +45,7 @@ const caseStudiesData: Record<string, CaseStudyData> = {
   },
   "ai-saas-iso-42001-iso-27001": {
     slug: "ai-saas-iso-42001-iso-27001",
-    seoTitle: "AI SaaS ISO 42001 + 27001 Case Study | Pixelette",
+    seoTitle: "AI SaaS ISO 42001 Case Study | Pixelette Certified",
     client: "AI SaaS Platform",
     industry: "Artificial Intelligence",
     employees: "40 employees",

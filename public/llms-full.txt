@@ -1,0 +1,67 @@
+# Pixelette Certified — Full Page Directory
+
+> UK-headquartered ISO certification and compliance consultancy operated by Pixelette Group Ltd (Companies House 07251823). Fixed-fee. Senior-led. 98% first-attempt pass rate. 50+ certifications delivered. Office: 66 Paul Street, London, EC2A 4NA. Contact: info@pixelettecertified.com. This file lists every page on pixelettecertified.com; see /llms.txt for the summary version.
+
+## Core Pages
+
+- [Home](https://pixelettecertified.com): Overview of services, commercial impact of certification, the Pixelette Pass-First Guarantee, and testimonials.
+- [Our Services](https://pixelettecertified.com/services): Full catalogue across ISO certification, cybersecurity, AI governance, and privacy compliance.
+- [About](https://pixelettecertified.com/about): Company story, team (Asif Rana Ashiq, CEO & Founder; Muhammad Waleed, Lead Consultant holding ISO 27001 Lead Auditor IRCA, ISO 42001 Lead Auditor PECB, AIGP, FIP, CIPP/US, CIPM, CISA, CEH), ISO 27001 Certified Practice status, CQI corporate membership.
+- [Industries](https://pixelettecertified.com/industries): Sector pages for FinTech, healthcare, SaaS, manufacturing, legal, logistics, energy, education, retail, and government suppliers.
+- [Pricing](https://pixelettecertified.com/pricing): Fixed-fee model, no hourly billing, 90 days post-certification support included.
+- [Contact](https://pixelettecertified.com/contact): Book a free 30-minute gap analysis. Response within 1 working day.
+- [Case Studies](https://pixelettecertified.com/case-studies): Client certification outcomes.
+- [Blog](https://pixelettecertified.com/blog): Practitioner-written guides on certification and compliance.
+- [Privacy Policy](https://pixelettecertified.com/privacy-policy)
+- [Cookie Policy](https://pixelettecertified.com/cookie-policy)
+
+## Services
+
+- [ISO 27001 Certification](https://pixelettecertified.com/services/iso-27001): Information Security Management System. 10-week implementation, fixed fee.
+- [ISO 22301 Certification](https://pixelettecertified.com/services/iso-22301): Business Continuity Management System, disaster recovery, resilience.
+- [ISO 9001 Certification](https://pixelettecertified.com/services/iso-9001): Quality Management System.
+- [ISO 14001 Certification](https://pixelettecertified.com/services/iso-14001): Environmental Management System, ESG obligations.
+- [ISO 42001 AI Governance](https://pixelettecertified.com/services/iso-42001): AI Management System, EU AI Act aligned, PECB-certified Lead Auditor, 14-week delivery.
+- [Cyber Essentials](https://pixelettecertified.com/services/cyber-essentials): UK government-backed certification, CE and CE Plus, 2-3 week delivery.
+- [vCISO](https://pixelettecertified.com/services/vciso): Virtual Chief Information Security Officer on a monthly retainer.
+- [vDPO](https://pixelettecertified.com/services/vdpo): Virtual Data Protection Officer, GDPR compliance, DSRs, DPIAs, ICO liaison.
+- [Penetration Testing](https://pixelettecertified.com/services/penetration-testing): VAPT for web, API, network, and cloud. CVSS-scored reports.
+- [GDPR & Privacy](https://pixelettecertified.com/services/gdpr-privacy): UK and EU GDPR compliance programmes.
+
+## Case Studies
+
+- [UK FinTech ISO 27001](https://pixelettecertified.com/case-studies/uk-fintech-iso-27001): 65-employee Series A payments company certified in 9 weeks with zero major findings.
+- [AI SaaS ISO 42001 + ISO 27001](https://pixelettecertified.com/case-studies/ai-saas-iso-42001-iso-27001): 40-employee AI company achieved dual certification in 14 weeks leveraging 60% control overlap.
+- [Healthcare Tech Cyber Essentials + ISO 27001](https://pixelettecertified.com/case-studies/healthcare-tech-cyber-essentials-iso-27001): 120-employee EHR provider: Cyber Essentials in 3 weeks for NHS supply chain, ISO 27001 in 12 weeks across three offices.
+
+## Blog Guides
+
+- [ISO 27001 in a Security Questionnaire — What Now?](https://pixelettecertified.com/blog/iso-27001-security-questionnaire): The 72-hour action plan when a buyer asks for ISO 27001 you do not yet hold.
+- [ISO 27001 in 10 Weeks vs 6 Months](https://pixelettecertified.com/blog/iso-27001-10-weeks-vs-6-months): What a structured fast-track compresses and what it does not.
+- [The Real Cost of NOT Being ISO 27001 Certified](https://pixelettecertified.com/blog/real-cost-not-being-iso-27001-certified): Quantifying lost deals, questionnaire hours, and insurance premiums.
+- [Our Customer Just Asked About Our AI Governance](https://pixelettecertified.com/blog/customer-asked-ai-governance): Why buyers now ask, and what to do this week.
+- [ISO 27001 or SOC 2 for UK SaaS](https://pixelettecertified.com/blog/iso-27001-or-soc-2-uk-saas): Sequencing both credentials for UK and US markets.
+- [Answering Security Questionnaires Without ISO 27001](https://pixelettecertified.com/blog/enterprise-security-questionnaire-without-iso-27001): A tactical response framework.
+- [ISO 27001 for UK FinTech: FCA and DORA](https://pixelettecertified.com/blog/iso-27001-uk-fintech-fca-dora): Mapping regulatory requirements to certification.
+- [ISO 27001 for UK HealthTech: NHS DSPT and DTAC](https://pixelettecertified.com/blog/iso-27001-uk-healthtech-nhs): The four NHS assurance frameworks and where ISO 27001 fits.
+- [ISO 27001 for AI Companies: Why ISO 42001 Alone Is Not Enough](https://pixelettecertified.com/blog/iso-27001-ai-companies-iso-42001): The two standards cover different risk domains.
+- [ISO 27001 for Legal Firms: SRA Expectations](https://pixelettecertified.com/blog/iso-27001-legal-firms-sra): Client audits as the dominant procurement gate.
+- [Security Posture in Investor Due Diligence](https://pixelettecertified.com/blog/investor-asked-security-posture): What Series B and later funds look for.
+- [Cyber Insurance Premiums and ISO 27001](https://pixelettecertified.com/blog/cyber-insurance-premium-increased): How underwriters price certified vs uncertified businesses.
+- [ISO 27001 vs Cyber Essentials Plus](https://pixelettecertified.com/blog/iso-27001-vs-cyber-essentials-plus): Which buyers need which credential.
+- [Vanta vs Drata vs a Real Consultancy](https://pixelettecertified.com/blog/vanta-drata-vs-real-consultancy): What compliance automation tools do and do not do.
+- [Why ISO 27001 Projects Run Over Budget](https://pixelettecertified.com/blog/iso-27001-projects-over-budget): Four proposal-stage red flags.
+- [Can a 20-Person Company Get ISO 27001?](https://pixelettecertified.com/blog/20-person-company-iso-27001): How the standard scales to small organisations.
+- [EU AI Act Preparation for UK Companies](https://pixelettecertified.com/blog/eu-ai-act-uk-companies): Obligations and a 90-day action plan.
+- [ISO 42001 vs the EU AI Act](https://pixelettecertified.com/blog/iso-42001-vs-eu-ai-act): The structural relationship between the standard and the regulation.
+
+## Blog Categories
+
+- [ISO 27001 articles](https://pixelettecertified.com/blog/category/iso-27001)
+- [AI Governance articles](https://pixelettecertified.com/blog/category/ai-governance)
+- [SOC 2 articles](https://pixelettecertified.com/blog/category/soc-2)
+- [Advisory articles](https://pixelettecertified.com/blog/category/advisory)
+- [FinTech articles](https://pixelettecertified.com/blog/category/fintech)
+- [Healthcare articles](https://pixelettecertified.com/blog/category/healthcare)
+- [Legal articles](https://pixelettecertified.com/blog/category/legal)
+- [Compliance articles](https://pixelettecertified.com/blog/category/compliance)

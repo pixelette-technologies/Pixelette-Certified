@@ -9,6 +9,7 @@ import {
 import SectionHeading from "@/components/ui/SectionHeading";
 import Card from "@/components/ui/Card";
 import CTASection from "@/components/sections/CTASection";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -51,6 +52,9 @@ export default function IndustriesContent({ industries }: IndustriesContentProps
         <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-accent/[0.04] blur-[100px] animate-float-slower" />
         <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] rounded-full bg-accent-light/[0.03] blur-[80px] animate-float-slow" />
 
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 mb-8">
+          <Breadcrumbs dark items={[{ name: "Industries" }]} />
+        </div>
         <motion.div
           variants={fadeInUp}
           initial="hidden"

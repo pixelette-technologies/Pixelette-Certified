@@ -16,6 +16,7 @@ import Button from "@/components/ui/Button";
 import Accordion from "@/components/ui/Accordion";
 import CTASection from "@/components/sections/CTASection";
 import FaqSchema from "@/components/seo/FaqSchema";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import {
   fadeInUp,
   staggerContainer,
@@ -119,6 +120,9 @@ export default function PricingContent() {
             backgroundSize: "40px 40px",
           }}
         />
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 mb-8">
+          <Breadcrumbs dark items={[{ name: "Pricing" }]} />
+        </div>
         <motion.div
           variants={fadeInUp}
           initial="hidden"

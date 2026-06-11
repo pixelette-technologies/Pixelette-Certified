@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import SectionLabel from "@/components/ui/SectionLabel";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import Card from "@/components/ui/Card";
 import CTASection from "@/components/sections/CTASection";
 import {
@@ -116,6 +117,9 @@ export default function AboutContent() {
             backgroundSize: "40px 40px",
           }}
         />
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 mb-8">
+          <Breadcrumbs dark items={[{ name: "About" }]} />
+        </div>
         <motion.div
           variants={fadeInUp}
           initial="hidden"

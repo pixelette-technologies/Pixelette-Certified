@@ -21,8 +21,12 @@ export async function generateMetadata({
     return { title: "Category Not Found" };
   }
 
+  const titleBase = `${result.category} Articles, Guides & Insights`;
   return {
-    title: `${result.category} Articles | Pixelette Certified Blog`,
+    title:
+      titleBase.length > 38
+        ? `${result.category} Articles & Guides | Pixelette Certified`
+        : `${titleBase} | Pixelette Certified`,
     description: `Guides and insights on ${result.category} from Pixelette Certified. Practitioner-written articles on certification, compliance and AI governance.`,
     alternates: {
       canonical: `https://pixelettecertified.com/blog/category/${slug}`,

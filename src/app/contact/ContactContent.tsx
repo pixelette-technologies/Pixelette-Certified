@@ -17,6 +17,7 @@ import {
   Globe,
 } from "lucide-react";
 import SectionLabel from "@/components/ui/SectionLabel";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import { fadeInUp, fadeInLeft, fadeInRight } from "@/lib/animations";
@@ -109,6 +110,9 @@ export default function ContactContent() {
             backgroundSize: "40px 40px",
           }}
         />
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 mb-8">
+          <Breadcrumbs dark items={[{ name: "Contact" }]} />
+        </div>
         <motion.div
           variants={fadeInUp}
           initial="hidden"

@@ -40,6 +40,17 @@ Core services: ISO 27001 (information security), ISO 42001 (AI governance), ISO 
 - [About](https://pixelettecertified.com/about): Company background, team credentials, ISO 27001 Certified Practice status.
 - [Industries](https://pixelettecertified.com/industries): Sector-specific compliance: FinTech, healthcare, SaaS, manufacturing, legal, logistics, government.
 - [Case Studies](https://pixelettecertified.com/case-studies): Client outcomes and certification journeys.
-- [Blog](https://pixelettecertified.com/blog): ISO and compliance guides for technology companies.
+- [Blog](https://pixelettecertified.com/blog): ISO and compliance guides for technology companies, organised into category archives (ISO 27001, AI Governance, SOC 2, Advisory, FinTech, Healthcare, Legal, Compliance).
 - [Pricing](https://pixelettecertified.com/pricing): Fixed-fee model explained.
 - [Contact](https://pixelettecertified.com/contact): Book a free 30-minute gap analysis.
+
+## Case Studies
+
+- [UK FinTech ISO 27001](https://pixelettecertified.com/case-studies/uk-fintech-iso-27001): Series A payments company certified in 9 weeks, zero major audit findings.
+- [AI SaaS ISO 42001 + ISO 27001](https://pixelettecertified.com/case-studies/ai-saas-iso-42001-iso-27001): Dual certification in 14 weeks, among the first UK AI companies certified to ISO 42001.
+- [Healthcare Tech Cyber Essentials + ISO 27001](https://pixelettecertified.com/case-studies/healthcare-tech-cyber-essentials-iso-27001): Cyber Essentials in 3 weeks for NHS supply chain, ISO 27001 in 12 weeks across three offices.
+
+## Optional
+
+- [Full page directory](https://pixelettecertified.com/llms-full.txt): Complete list of every page including all 18 blog guides and category archives.
+- [Sitemap](https://pixelettecertified.com/sitemap.xml)

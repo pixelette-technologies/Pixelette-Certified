@@ -5,6 +5,7 @@ import { ArrowRight, Shield, ShieldCheck, Globe, Leaf, Brain, Lock, UserCheck, F
 import type { Service } from "@/data/services";
 import Button from "@/components/ui/Button";
 import CTASection from "@/components/sections/CTASection";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   "iso-27001": Shield,
@@ -53,6 +54,9 @@ export default function ServicesOverviewContent({ groupedServices }: ServicesOve
         />
         <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-accent/5 blur-3xl pointer-events-none" />
 
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 mb-8">
+          <Breadcrumbs dark items={[{ name: "Services" }]} />
+        </div>
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-6">
             Our Services

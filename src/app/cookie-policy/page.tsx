@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Cookie Policy",
@@ -14,6 +15,9 @@ export default function CookiePolicyPage() {
   return (
     <article className="py-24 lg:py-32">
       <div className="max-w-3xl mx-auto px-4 sm:px-6">
+        <div className="mb-8">
+          <Breadcrumbs dark items={[{ name: "Cookie Policy" }]} />
+        </div>
         <h1 className="text-4xl md:text-5xl font-extrabold gradient-text-white tracking-tight mb-4">
           Cookie Policy
         </h1>
