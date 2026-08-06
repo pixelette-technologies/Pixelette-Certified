@@ -22,22 +22,10 @@ import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import { fadeInUp, fadeInLeft, fadeInRight } from "@/lib/animations";
 import { SITE_CONFIG } from "@/lib/constants";
+import { Turnstile } from "@marsidev/react-turnstile";
+import { SERVICE_OPTIONS, CONSENT_NOTICE, CONTACT_LIMITS } from "@/lib/contact/constants";
 
-const serviceOptions = [
-  "ISO 27001 Certification",
-  "ISO 22301 Certification",
-  "ISO 42001 AI Governance",
-  "ISO 9001 Quality Management",
-  "ISO 14001 Environmental",
-  "Cyber Essentials / CE+",
-  "GDPR & Data Privacy",
-  "Virtual CISO (vCISO)",
-  "Virtual DPO (vDPO)",
-  "Penetration Testing",
-  "Gap Analysis",
-  "Multiple Services",
-  "Other / Not Sure",
-];
+const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 interface FormState {
   name: string;
@@ -63,6 +51,9 @@ export default function ContactContent() {
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  // Honeypot: kept out of FormState so it is never treated as a real field.
+  const [honeypot, setHoneypot] = useState("");
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -79,7 +70,7 @@ export default function ContactContent() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, website: honeypot, turnstileToken }),
       });
 
       if (!res.ok) {
@@ -169,6 +160,24 @@ export default function ContactContent() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-5">
+                    {/* Honeypot — hidden from humans; any submission that fills
+                        it is silently dropped on the server. */}
+                    <div
+                      aria-hidden="true"
+                      style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}
+                    >
+                      <label htmlFor="website">Leave this field empty</label>
+                      <input
+                        id="website"
+                        name="website"
+                        type="text"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={honeypot}
+                        onChange={(e) => setHoneypot(e.target.value)}
+                      />
+                    </div>
+
                     <div className="grid sm:grid-cols-2 gap-5">
                       <div>
                         <label
@@ -182,6 +191,7 @@ export default function ContactContent() {
                           name="name"
                           type="text"
                           required
+                          maxLength={CONTACT_LIMITS.name.max}
                           placeholder="Your name"
                           value={form.name}
                           onChange={handleChange}
@@ -200,6 +210,7 @@ export default function ContactContent() {
                           name="email"
                           type="email"
                           required
+                          maxLength={CONTACT_LIMITS.email.max}
                           placeholder="you@company.com"
                           value={form.email}
                           onChange={handleChange}
@@ -220,6 +231,7 @@ export default function ContactContent() {
                           id="company"
                           name="company"
                           type="text"
+                          maxLength={CONTACT_LIMITS.company.max}
                           placeholder="Your company name"
                           value={form.company}
                           onChange={handleChange}
@@ -237,6 +249,7 @@ export default function ContactContent() {
                           id="phone"
                           name="phone"
                           type="tel"
+                          maxLength={CONTACT_LIMITS.phone.max}
                           placeholder="+44 ..."
                           value={form.phone}
                           onChange={handleChange}
@@ -256,6 +269,7 @@ export default function ContactContent() {
                         id="country"
                         name="country"
                         type="text"
+                        maxLength={CONTACT_LIMITS.country.max}
                         placeholder="e.g. United Kingdom, UAE, United States..."
                         value={form.country}
                         onChange={handleChange}
@@ -280,7 +294,7 @@ export default function ContactContent() {
                         <option value="" className="bg-primary">
                           Select a service...
                         </option>
-                        {serviceOptions.map((opt) => (
+                        {SERVICE_OPTIONS.map((opt) => (
                           <option key={opt} value={opt} className="bg-primary">
                             {opt}
                           </option>
@@ -299,6 +313,7 @@ export default function ContactContent() {
                         id="message"
                         name="message"
                         required
+                        maxLength={CONTACT_LIMITS.message.max}
                         rows={5}
                         placeholder="Tell us about your project, timeline, and any specific requirements..."
                         value={form.message}
@@ -333,6 +348,23 @@ export default function ContactContent() {
                         </a>. <span className="text-accent">*</span>
                       </label>
                     </div>
+
+                    {/* Transparency notice: lawful basis, retention, and how to withdraw */}
+                    <p className="text-xs text-gray-500 leading-relaxed">{CONSENT_NOTICE}</p>
+
+                    {/* Invisible Cloudflare Turnstile — same setup Alice uses.
+                        Verified server-side when CONTACT_TURNSTILE_ENABLED=true. */}
+                    {siteKey && (
+                      <div style={{ visibility: "hidden", position: "absolute", pointerEvents: "none", width: 0, height: 0, overflow: "hidden" }}>
+                        <Turnstile
+                          siteKey={siteKey}
+                          onSuccess={(token) => setTurnstileToken(token)}
+                          onError={() => setTurnstileToken(null)}
+                          onExpire={() => setTurnstileToken(null)}
+                          options={{ theme: "dark", size: "invisible" }}
+                        />
+                      </div>
+                    )}
 
                     {status === "error" && (
                       <div className="flex items-center gap-2 text-red-400 text-sm">

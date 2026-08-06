@@ -1,49 +1,155 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { validateContact, escapeHtml } from "@/lib/contact/validation";
+import { CONSENT_STATEMENT, PRIVACY_POLICY_VERSION } from "@/lib/contact/constants";
+import { checkContactRateLimit } from "@/lib/contact/rateLimit";
+import { extractClientIp } from "@/lib/alice/rateLimit";
+import { verifyTurnstileToken } from "@/lib/alice/turnstile";
+import { getSupabaseServer } from "@/lib/alice/supabase";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-interface ContactPayload {
-  name?: string;
-  email?: string;
-  company?: string;
-  phone?: string;
-  service?: string;
-  message?: string;
+// Governance toggles.
+// - Rate limiting is on by default (pure in-memory, nothing to provision); set
+//   CONTACT_RATE_LIMIT_ENABLED="false" to disable.
+// - Turnstile is off unless CONTACT_TURNSTILE_ENABLED="true" AND the shared
+//   TURNSTILE_SECRET_KEY / NEXT_PUBLIC_TURNSTILE_SITE_KEY are configured (same
+//   keys Alice uses). This mirrors the opt-in pattern in the chat route.
+const RATE_LIMIT_ENABLED = process.env.CONTACT_RATE_LIMIT_ENABLED !== "false";
+const TURNSTILE_ENABLED = process.env.CONTACT_TURNSTILE_ENABLED === "true";
+
+function maskIp(ip: string): string {
+  if (ip.includes(".")) return ip.split(".").slice(0, 2).join(".") + ".*.*";
+  if (ip.includes(":")) return ip.split(":").slice(0, 2).join(":") + ":*";
+  return "unknown";
 }
 
-function isValidEmail(email: string): boolean {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+interface ContactPayload {
+  gdprConsent?: unknown;
+  turnstileToken?: unknown;
+  website?: unknown; // honeypot — must stay empty
 }
 
 export async function POST(request: Request) {
   try {
-    const body = (await request.json()) as ContactPayload;
-    const { name, email, message } = body;
-
-    if (!name || typeof name !== "string" || name.trim().length < 2) {
-      return NextResponse.json({ error: "Please provide your full name." }, { status: 400 });
-    }
-    if (!email || typeof email !== "string" || !isValidEmail(email.trim())) {
-      return NextResponse.json({ error: "Please provide a valid email address." }, { status: 400 });
-    }
-    if (!message || typeof message !== "string" || message.trim().length < 10) {
-      return NextResponse.json({ error: "Please provide a message (at least 10 characters)." }, { status: 400 });
-    }
-    if (name.length > 200 || email.length > 320 || message.length > 5000) {
-      return NextResponse.json({ error: "Input too long." }, { status: 400 });
+    let body: ContactPayload & Record<string, unknown>;
+    try {
+      body = (await request.json()) as ContactPayload & Record<string, unknown>;
+    } catch {
+      return NextResponse.json({ error: "Invalid request." }, { status: 400 });
     }
 
-    const company = body.company?.trim() || "Not provided";
-    const phone = body.phone?.trim() || "Not provided";
-    const service = body.service?.trim() || "Not specified";
+    const ip = extractClientIp(request);
 
-    // Send email to Pixelette Certified team
+    // 1. Rate limiting — cheapest gate, before any heavier work.
+    if (RATE_LIMIT_ENABLED) {
+      const rate = checkContactRateLimit(ip);
+      if (!rate.allowed) {
+        console.warn(`[Contact] Rate limit hit for ${maskIp(ip)}: ${rate.reason}`);
+        const retryAfter = Math.max(
+          Math.ceil((rate.resetAt.getTime() - Date.now()) / 1000),
+          1
+        );
+        return NextResponse.json(
+          { error: "Too many requests. Please wait a moment and try again." },
+          { status: 429, headers: { "Retry-After": String(retryAfter) } }
+        );
+      }
+    }
+
+    // 2. Honeypot — a hidden field no human sees. If it is filled, silently
+    //    accept-and-drop so bots cannot tell they were caught.
+    const honeypot = typeof body.website === "string" ? body.website.trim() : "";
+    if (honeypot) {
+      console.warn(`[Contact] Honeypot triggered for ${maskIp(ip)} — dropping submission.`);
+      return NextResponse.json(
+        { success: true, message: "Your message has been received." },
+        { status: 200 }
+      );
+    }
+
+    // 3. Consent must be explicitly granted — enforced server-side, not just in
+    //    the browser.
+    if (body.gdprConsent !== true) {
+      return NextResponse.json(
+        { error: "Please confirm you consent to us processing your data to respond to your enquiry." },
+        { status: 400 }
+      );
+    }
+
+    // 4. Validate and normalise all fields (server is the source of truth).
+    const result = validateContact(body);
+    if (!result.ok) {
+      return NextResponse.json({ error: result.error }, { status: 400 });
+    }
+    const data = result.data;
+
+    // 5. Bot verification via Cloudflare Turnstile (when enabled).
+    let turnstileVerified = false;
+    if (TURNSTILE_ENABLED) {
+      const token = typeof body.turnstileToken === "string" ? body.turnstileToken : "";
+      if (!token) {
+        return NextResponse.json(
+          { error: "Human verification is required. Please refresh the page and try again." },
+          { status: 403 }
+        );
+      }
+      const verification = await verifyTurnstileToken(token, ip);
+      if (!verification.success) {
+        console.warn(`[Contact] Turnstile failed for ${maskIp(ip)}: ${verification.errorCodes?.join(", ")}`);
+        return NextResponse.json(
+          { error: "Human verification failed. Please refresh the page and try again." },
+          { status: 403 }
+        );
+      }
+      turnstileVerified = true;
+    }
+
+    // 6. Persist the enquiry + consent audit record (best-effort: a logging
+    //    failure must not lose the customer's enquiry, so we continue to email).
+    const consentTimestamp = new Date().toISOString();
+    try {
+      const supabase = getSupabaseServer();
+      const { error: dbError } = await supabase.from("contact_submissions").insert({
+        name: data.name,
+        email: data.email,
+        company: data.company || null,
+        phone: data.phone || null,
+        country: data.country || null,
+        service: data.service || null,
+        message: data.message,
+        consent_given: true,
+        consent_text: CONSENT_STATEMENT,
+        privacy_policy_version: PRIVACY_POLICY_VERSION,
+        consent_timestamp: consentTimestamp,
+        source: "contact_form",
+        user_agent: request.headers.get("user-agent")?.slice(0, 500) || null,
+        turnstile_verified: turnstileVerified,
+      });
+      if (dbError) {
+        console.error("[Contact] Failed to persist submission:", dbError.message);
+      }
+    } catch (err) {
+      console.error("[Contact] Supabase insert threw:", err);
+    }
+
+    // 7. Notify the team and confirm to the sender. All interpolated user values
+    //    are HTML-escaped to prevent markup injection into the emails.
+    const safe = {
+      name: escapeHtml(data.name),
+      email: escapeHtml(data.email),
+      company: escapeHtml(data.company || "Not provided"),
+      phone: escapeHtml(data.phone || "Not provided"),
+      country: escapeHtml(data.country || "Not provided"),
+      service: escapeHtml(data.service || "Not specified"),
+      message: escapeHtml(data.message),
+    };
+
     await resend.emails.send({
       from: "Pixelette Certified <noreply@pixelettecertified.com>",
       to: ["partnerships@pixelette.tech"],
-      replyTo: email.trim(),
-      subject: `New enquiry from ${name.trim()}, ${service}`,
+      replyTo: data.email,
+      subject: `New enquiry from ${data.name}, ${data.service || "Not specified"}`,
       html: `
         <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #044143; border-radius: 12px; overflow: hidden;">
           <!-- Header with logo -->
@@ -58,35 +164,44 @@ export async function POST(request: Request) {
             <table style="width: 100%; border-collapse: collapse;">
               <tr>
                 <td style="padding: 12px 16px; color: rgba(255,255,255,0.5); width: 110px; vertical-align: top; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Name</td>
-                <td style="padding: 12px 16px; color: #ffffff; font-size: 15px; font-weight: 600;">${name.trim()}</td>
+                <td style="padding: 12px 16px; color: #ffffff; font-size: 15px; font-weight: 600;">${safe.name}</td>
               </tr>
               <tr style="background: rgba(255,255,255,0.03);">
                 <td style="padding: 12px 16px; color: rgba(255,255,255,0.5); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Email</td>
-                <td style="padding: 12px 16px;"><a href="mailto:${email.trim()}" style="color: #14AAA9; text-decoration: none; font-size: 15px;">${email.trim()}</a></td>
+                <td style="padding: 12px 16px;"><a href="mailto:${safe.email}" style="color: #14AAA9; text-decoration: none; font-size: 15px;">${safe.email}</a></td>
               </tr>
               <tr>
                 <td style="padding: 12px 16px; color: rgba(255,255,255,0.5); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Company</td>
-                <td style="padding: 12px 16px; color: #ffffff; font-size: 15px;">${company}</td>
+                <td style="padding: 12px 16px; color: #ffffff; font-size: 15px;">${safe.company}</td>
               </tr>
               <tr style="background: rgba(255,255,255,0.03);">
                 <td style="padding: 12px 16px; color: rgba(255,255,255,0.5); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Phone</td>
-                <td style="padding: 12px 16px; color: #ffffff; font-size: 15px;">${phone}</td>
+                <td style="padding: 12px 16px; color: #ffffff; font-size: 15px;">${safe.phone}</td>
               </tr>
               <tr>
+                <td style="padding: 12px 16px; color: rgba(255,255,255,0.5); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Country</td>
+                <td style="padding: 12px 16px; color: #ffffff; font-size: 15px;">${safe.country}</td>
+              </tr>
+              <tr style="background: rgba(255,255,255,0.03);">
                 <td style="padding: 12px 16px; color: rgba(255,255,255,0.5); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Service</td>
-                <td style="padding: 12px 16px; color: #14AAA9; font-size: 15px; font-weight: 700;">${service}</td>
+                <td style="padding: 12px 16px; color: #14AAA9; font-size: 15px; font-weight: 700;">${safe.service}</td>
               </tr>
             </table>
 
             <!-- Message -->
             <div style="margin-top: 24px; padding: 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(20,170,169,0.2); border-radius: 8px;">
               <p style="color: rgba(255,255,255,0.5); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 8px;">Message</p>
-              <p style="color: #ffffff; line-height: 1.7; white-space: pre-wrap; margin: 0; font-size: 14px;">${message.trim()}</p>
+              <p style="color: #ffffff; line-height: 1.7; white-space: pre-wrap; margin: 0; font-size: 14px;">${safe.message}</p>
+            </div>
+
+            <!-- Consent record -->
+            <div style="margin-top: 16px; padding: 12px 16px; background: rgba(20,170,169,0.06); border: 1px solid rgba(20,170,169,0.15); border-radius: 8px;">
+              <p style="color: rgba(255,255,255,0.4); font-size: 11px; margin: 0;">Consent recorded ${escapeHtml(consentTimestamp)} against Privacy Policy v${escapeHtml(PRIVACY_POLICY_VERSION)}.</p>
             </div>
 
             <!-- Reply button -->
             <div style="text-align: center; margin-top: 28px;">
-              <a href="mailto:${email.trim()}" style="display: inline-block; background: #14AAA9; color: #ffffff; text-decoration: none; padding: 12px 32px; border-radius: 8px; font-weight: 600; font-size: 14px;">Reply to ${name.trim()}</a>
+              <a href="mailto:${safe.email}" style="display: inline-block; background: #14AAA9; color: #ffffff; text-decoration: none; padding: 12px 32px; border-radius: 8px; font-weight: 600; font-size: 14px;">Reply to ${safe.name}</a>
             </div>
           </div>
 
@@ -102,20 +217,20 @@ export async function POST(request: Request) {
     // Send confirmation to the user
     await resend.emails.send({
       from: "Pixelette Certified <noreply@pixelettecertified.com>",
-      to: [email.trim()],
+      to: [data.email],
       subject: "We've received your enquiry, Pixelette Certified",
       html: `
         <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #044143; border-radius: 12px; overflow: hidden;">
           <!-- Header -->
           <div style="background: linear-gradient(135deg, #032e2f 0%, #044143 50%, #065456 100%); padding: 32px; text-align: center; border-bottom: 2px solid #14AAA9;">
             <img src="https://pixelettecertified.com/logos/logo-white-text.svg" alt="Pixelette Certified" style="height: 40px; margin-bottom: 16px;" />
-            <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 700;">Thank you, ${name.trim()}</h1>
+            <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 700;">Thank you, ${safe.name}</h1>
             <p style="color: #14AAA9; margin: 8px 0 0; font-size: 14px;">We have received your enquiry</p>
           </div>
 
           <!-- Body -->
           <div style="padding: 32px;">
-            <p style="color: rgba(255,255,255,0.85); line-height: 1.7; font-size: 15px; margin: 0 0 16px;">We have received your enquiry about <strong style="color: #14AAA9;">${service}</strong> and a member of our team will respond within one working day.</p>
+            <p style="color: rgba(255,255,255,0.85); line-height: 1.7; font-size: 15px; margin: 0 0 16px;">We have received your enquiry about <strong style="color: #14AAA9;">${safe.service}</strong> and a member of our team will respond within one working day.</p>
 
             <p style="color: rgba(255,255,255,0.85); line-height: 1.7; font-size: 15px; margin: 0 0 20px;">In the meantime, you may find these resources helpful:</p>
 
