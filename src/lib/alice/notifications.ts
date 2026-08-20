@@ -3,8 +3,6 @@
 import { Resend } from "resend";
 import Anthropic from "@anthropic-ai/sdk";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const FROM_ADDRESS = "Alice <alice@pixelettecertified.com>";
 
 interface LeadNotificationInput {
@@ -58,6 +56,14 @@ export async function sendLeadNotification(
     console.error("[Alice Notifications] ALICE_ADMIN_EMAIL not set");
     return { sent: false, error: "ALICE_ADMIN_EMAIL not configured" };
   }
+
+  const resendApiKey = process.env.RESEND_API_KEY;
+  if (!resendApiKey) {
+    console.error("[Alice Notifications] RESEND_API_KEY not set");
+    return { sent: false, error: "RESEND_API_KEY not configured" };
+  }
+
+  const resend = new Resend(resendApiKey);
 
   const displayName = input.name || "Anonymous visitor";
   const displayCompany = input.company ? `, ${input.company}` : "";

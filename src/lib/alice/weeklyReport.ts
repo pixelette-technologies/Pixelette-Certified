@@ -3,7 +3,6 @@
 import { Resend } from "resend";
 import { getSupabaseServer } from "@/lib/alice/supabase";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 const FROM_ADDRESS = "Alice <alice@pixelettecertified.com>";
 
 interface WeeklyReportResult {
@@ -13,7 +12,14 @@ interface WeeklyReportResult {
 }
 
 export async function generateAndSendWeeklyReport(): Promise<WeeklyReportResult> {
+  const resendApiKey = process.env.RESEND_API_KEY;
+  if (!resendApiKey) {
+    console.error("[Alice Weekly Report] RESEND_API_KEY not set");
+    return { success: false, leadsThisWeek: 0, error: "RESEND_API_KEY not configured" };
+  }
+
   try {
+    const resend = new Resend(resendApiKey);
     const supabase = getSupabaseServer();
     const sevenDaysAgo = new Date();
     sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);

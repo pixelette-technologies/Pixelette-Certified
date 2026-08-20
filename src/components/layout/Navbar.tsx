@@ -11,11 +11,17 @@ import { NAV_ITEMS } from "@/lib/constants";
 import Button from "@/components/ui/Button";
 
 export default function Navbar() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const [mobileMenu, setMobileMenu] = useState({ pathname, open: false });
+  const [servicesMenu, setServicesMenu] = useState({ pathname, open: false });
+  const [mobileServicesMenu, setMobileServicesMenu] = useState({ pathname, open: false });
+  const [scrolled, setScrolled] = useState(false);
+  const mobileOpen = mobileMenu.pathname === pathname && mobileMenu.open;
+  const servicesOpen = servicesMenu.pathname === pathname && servicesMenu.open;
+  const mobileServicesOpen = mobileServicesMenu.pathname === pathname && mobileServicesMenu.open;
+  const setMobileOpen = (open: boolean) => setMobileMenu({ pathname, open });
+  const setServicesOpen = (open: boolean) => setServicesMenu({ pathname, open });
+  const setMobileServicesOpen = (open: boolean) => setMobileServicesMenu({ pathname, open });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -23,10 +29,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    setMobileOpen(false);
-    setServicesOpen(false);
-  }, [pathname]);
 
   return (
     <header

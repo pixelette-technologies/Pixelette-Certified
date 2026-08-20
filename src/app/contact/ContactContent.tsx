@@ -22,10 +22,22 @@ import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import { fadeInUp, fadeInLeft, fadeInRight } from "@/lib/animations";
 import { SITE_CONFIG } from "@/lib/constants";
-import { Turnstile } from "@marsidev/react-turnstile";
-import { SERVICE_OPTIONS, CONSENT_NOTICE, CONTACT_LIMITS } from "@/lib/contact/constants";
 
-const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+const serviceOptions = [
+  "ISO 27001 Certification",
+  "ISO 22301 Certification",
+  "ISO 42001 AI Governance",
+  "ISO 9001 Quality Management",
+  "ISO 14001 Environmental",
+  "Cyber Essentials / CE+",
+  "GDPR & Data Privacy",
+  "Virtual CISO (vCISO)",
+  "Virtual DPO (vDPO)",
+  "Penetration Testing",
+  "Gap Analysis",
+  "Multiple Services",
+  "Other / Not Sure",
+];
 
 interface FormState {
   name: string;
@@ -36,9 +48,15 @@ interface FormState {
   service: string;
   message: string;
   gdprConsent: boolean;
+  _website: string;
 }
 
 export default function ContactContent() {
+  const privacyNoticeUrl = process.env.NEXT_PUBLIC_CERTIFIED_CONTACT_PRIVACY_NOTICE_URL?.trim() ?? "";
+  const noticeVersion = process.env.NEXT_PUBLIC_CERTIFIED_CONTACT_PRIVACY_NOTICE_VERSION?.trim() ?? "";
+  const consentText = process.env.NEXT_PUBLIC_CERTIFIED_CONTACT_CONSENT_TEXT?.trim() ?? "";
+  const governanceReady = Boolean(privacyNoticeUrl && noticeVersion && consentText);
+  const [formStartedAt, setFormStartedAt] = useState(() => new Date().toISOString());
   const [form, setForm] = useState<FormState>({
     name: "",
     email: "",
@@ -48,12 +66,11 @@ export default function ContactContent() {
     service: "",
     message: "",
     gdprConsent: false,
+    _website: "",
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
-  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  // Honeypot: kept out of FormState so it is never treated as a real field.
-  const [honeypot, setHoneypot] = useState("");
+  const [eventId, setEventId] = useState<string | null>(null);
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -67,10 +84,37 @@ export default function ContactContent() {
     setErrorMsg("");
 
     try {
+      const activeEventId = eventId ?? crypto.randomUUID();
+      if (!eventId) setEventId(activeEventId);
+      const params = new URLSearchParams(window.location.search);
+      let referrer = "";
+      try {
+        const parsed = new URL(document.referrer);
+        referrer = `${parsed.origin}${parsed.pathname}`;
+      } catch {
+        referrer = "";
+      }
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, website: honeypot, turnstileToken }),
+        body: JSON.stringify({
+          ...form,
+          entity: "CERTIFIED",
+          eventId: activeEventId,
+          noticeVersion,
+          formStartedAt,
+          sourcePage: window.location.pathname,
+          attribution: {
+            campaignId: params.get("campaign_id") ?? "",
+            utmSource: params.get("utm_source") ?? "",
+            utmMedium: params.get("utm_medium") ?? "",
+            utmCampaign: params.get("utm_campaign") ?? "",
+            utmContent: params.get("utm_content") ?? "",
+            utmTerm: params.get("utm_term") ?? "",
+            landingPage: window.location.pathname,
+            referrer,
+          },
+        }),
       });
 
       if (!res.ok) {
@@ -79,7 +123,9 @@ export default function ContactContent() {
       }
 
       setStatus("success");
-      setForm({ name: "", email: "", company: "", phone: "", country: "", service: "", message: "", gdprConsent: false });
+      setEventId(null);
+      setForm({ name: "", email: "", company: "", phone: "", country: "", service: "", message: "", gdprConsent: false, _website: "" });
+      setFormStartedAt(new Date().toISOString());
     } catch (err) {
       setStatus("error");
       setErrorMsg(err instanceof Error ? err.message : "Something went wrong.");
@@ -141,7 +187,12 @@ export default function ContactContent() {
                   Tell us about your organisation, your target certification, and your timeline. We will review your enquiry and come back to you within 1 working day with a clear, honest assessment of your next steps. No sales pressure. No obligation.
                 </p>
 
-                {status === "success" ? (
+                {!governanceReady ? (
+                  <div role="status" className="text-gray-300 py-8">
+                    The governed privacy notice and consent configuration must be approved before
+                    this form can accept enquiries.
+                  </div>
+                ) : status === "success" ? (
                   <div className="flex flex-col items-center text-center py-12">
                     <CheckCircle className="h-16 w-16 text-accent mb-4" />
                     <h3 className="text-xl font-bold text-white mb-2">
@@ -160,24 +211,11 @@ export default function ContactContent() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-5">
-                    {/* Honeypot — hidden from humans; any submission that fills
-                        it is silently dropped on the server. */}
-                    <div
-                      aria-hidden="true"
-                      style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}
-                    >
-                      <label htmlFor="website">Leave this field empty</label>
-                      <input
-                        id="website"
-                        name="website"
-                        type="text"
-                        tabIndex={-1}
-                        autoComplete="off"
-                        value={honeypot}
-                        onChange={(e) => setHoneypot(e.target.value)}
-                      />
+                    <div aria-hidden="true" className="absolute -left-[10000px]">
+                      <label htmlFor="certified-website">Website</label>
+                      <input id="certified-website" name="_website" tabIndex={-1} autoComplete="off"
+                        value={form._website} onChange={handleChange} />
                     </div>
-
                     <div className="grid sm:grid-cols-2 gap-5">
                       <div>
                         <label
@@ -191,7 +229,6 @@ export default function ContactContent() {
                           name="name"
                           type="text"
                           required
-                          maxLength={CONTACT_LIMITS.name.max}
                           placeholder="Your name"
                           value={form.name}
                           onChange={handleChange}
@@ -210,7 +247,6 @@ export default function ContactContent() {
                           name="email"
                           type="email"
                           required
-                          maxLength={CONTACT_LIMITS.email.max}
                           placeholder="you@company.com"
                           value={form.email}
                           onChange={handleChange}
@@ -231,7 +267,6 @@ export default function ContactContent() {
                           id="company"
                           name="company"
                           type="text"
-                          maxLength={CONTACT_LIMITS.company.max}
                           placeholder="Your company name"
                           value={form.company}
                           onChange={handleChange}
@@ -249,7 +284,6 @@ export default function ContactContent() {
                           id="phone"
                           name="phone"
                           type="tel"
-                          maxLength={CONTACT_LIMITS.phone.max}
                           placeholder="+44 ..."
                           value={form.phone}
                           onChange={handleChange}
@@ -269,7 +303,6 @@ export default function ContactContent() {
                         id="country"
                         name="country"
                         type="text"
-                        maxLength={CONTACT_LIMITS.country.max}
                         placeholder="e.g. United Kingdom, UAE, United States..."
                         value={form.country}
                         onChange={handleChange}
@@ -294,7 +327,7 @@ export default function ContactContent() {
                         <option value="" className="bg-primary">
                           Select a service...
                         </option>
-                        {SERVICE_OPTIONS.map((opt) => (
+                        {serviceOptions.map((opt) => (
                           <option key={opt} value={opt} className="bg-primary">
                             {opt}
                           </option>
@@ -313,7 +346,6 @@ export default function ContactContent() {
                         id="message"
                         name="message"
                         required
-                        maxLength={CONTACT_LIMITS.message.max}
                         rows={5}
                         placeholder="Tell us about your project, timeline, and any specific requirements..."
                         value={form.message}
@@ -337,9 +369,9 @@ export default function ContactContent() {
                         className="mt-1 h-4 w-4 shrink-0 rounded border-white/20 bg-white/5 text-accent accent-accent focus:ring-accent cursor-pointer"
                       />
                       <label htmlFor="gdprConsent" className="text-sm text-gray-400 leading-relaxed cursor-pointer">
-                        I agree to Pixelette Certified processing my personal data to respond to this enquiry, in accordance with our{" "}
+                        {consentText}{" "}
                         <a
-                          href="/privacy-policy"
+                          href={privacyNoticeUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-accent hover:text-accent-light transition-colors underline"
@@ -348,23 +380,6 @@ export default function ContactContent() {
                         </a>. <span className="text-accent">*</span>
                       </label>
                     </div>
-
-                    {/* Transparency notice: lawful basis, retention, and how to withdraw */}
-                    <p className="text-xs text-gray-500 leading-relaxed">{CONSENT_NOTICE}</p>
-
-                    {/* Invisible Cloudflare Turnstile — same setup Alice uses.
-                        Verified server-side when CONTACT_TURNSTILE_ENABLED=true. */}
-                    {siteKey && (
-                      <div style={{ visibility: "hidden", position: "absolute", pointerEvents: "none", width: 0, height: 0, overflow: "hidden" }}>
-                        <Turnstile
-                          siteKey={siteKey}
-                          onSuccess={(token) => setTurnstileToken(token)}
-                          onError={() => setTurnstileToken(null)}
-                          onExpire={() => setTurnstileToken(null)}
-                          options={{ theme: "dark", size: "invisible" }}
-                        />
-                      </div>
-                    )}
 
                     {status === "error" && (
                       <div className="flex items-center gap-2 text-red-400 text-sm">

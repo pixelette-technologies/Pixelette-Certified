@@ -14,10 +14,12 @@ function requireEnv(name: string): string {
 }
 
 // Browser client — safe for React components, respects RLS
-export const supabaseBrowser: SupabaseClient = createClient(
-  requireEnv("NEXT_PUBLIC_SUPABASE_URL"),
-  requireEnv("NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY")
-);
+export function getSupabaseBrowser(): SupabaseClient {
+  return createClient(
+    requireEnv("NEXT_PUBLIC_SUPABASE_URL"),
+    requireEnv("NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY")
+  );
+}
 
 // Server client factory — bypasses RLS, API routes only
 export function getSupabaseServer(): SupabaseClient {

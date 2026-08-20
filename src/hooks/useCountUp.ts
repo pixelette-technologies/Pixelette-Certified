@@ -6,18 +6,16 @@ export function useCountUp(target: number, duration: number = 2000, startOnView:
   const [count, setCount] = useState(0);
   const [hasStarted, setHasStarted] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const isActive = hasStarted || !startOnView;
 
   useEffect(() => {
-    if (!startOnView) {
-      setHasStarted(true);
-      return;
-    }
+    if (!startOnView || isActive) return;
     const el = ref.current;
     if (!el) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !hasStarted) {
+        if (entry.isIntersecting) {
           setHasStarted(true);
         }
       },
@@ -25,10 +23,10 @@ export function useCountUp(target: number, duration: number = 2000, startOnView:
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [hasStarted, startOnView]);
+  }, [isActive, startOnView]);
 
   useEffect(() => {
-    if (!hasStarted) return;
+    if (!isActive) return;
     let start: number | null = null;
     let raf: number;
 
@@ -44,7 +42,7 @@ export function useCountUp(target: number, duration: number = 2000, startOnView:
 
     raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);
-  }, [hasStarted, target, duration]);
+  }, [isActive, target, duration]);
 
   return { count, ref };
 }
