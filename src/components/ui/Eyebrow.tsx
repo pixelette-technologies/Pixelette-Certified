@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 interface EyebrowProps {
   children: React.ReactNode;
   className?: string;
-  /** brand = #056F62 (default) · muted = #62707F · dark = on .panel / .footer */
+  /** brand = --color-brand (default) · muted = --color-soft · dark = on .panel / .footer */
   tone?: "brand" | "muted" | "dark";
   as?: "span" | "div" | "p";
 }
