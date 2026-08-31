@@ -1,33 +1,25 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { staggerContainer, staggerItem } from "@/lib/animations";
 import { TRUST_STATS } from "@/lib/constants";
+import StatTile from "@/components/ui/StatTile";
 
+/**
+ * The guide's 4-up stat row on the alternate band. The old version was a
+ *  decorative strip whose figures were gradient-filled and scaled
+ * on hover; the guide states figures flat, in mono green over a grey label.
+ */
 export default function TrustBar() {
   return (
-    <section className="relative py-10 bg-gradient-to-r from-primary-dark/80 via-primary/60 to-primary-dark/80 backdrop-blur-xl border-y border-accent/10">
-      {/* Glow line top */}
-      <div className="absolute top-0 inset-x-0 divider-glow" />
-      <motion.div
-        variants={staggerContainer}
-        initial="visible"
-        animate="visible"
-        className="max-w-7xl mx-auto px-4 sm:px-6"
-      >
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
+    <section className="band-alt py-12 lg:py-14" aria-label="Track record">
+      <div className="wrap">
+        <div className="grid grid-cols-2 gap-3.5 md:grid-cols-4">
           {TRUST_STATS.map((stat) => (
-            <motion.div key={stat.label} variants={staggerItem} className="group">
-              <div className="text-2xl md:text-3xl font-extrabold gradient-text group-hover:scale-110 transition-transform duration-500">
-                {stat.value}{stat.suffix || ""}
-              </div>
-              <div className="text-xs md:text-sm text-gray-500 mt-1">{stat.label}</div>
-            </motion.div>
+            <StatTile
+              key={stat.label}
+              value={`${stat.value}${stat.suffix || ""}`}
+              label={stat.label}
+            />
           ))}
         </div>
-      </motion.div>
-      {/* Glow line bottom */}
-      <div className="absolute bottom-0 inset-x-0 divider-glow" />
+      </div>
     </section>
   );
 }

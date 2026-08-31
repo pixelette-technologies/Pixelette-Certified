@@ -1,27 +1,19 @@
-"use client";
-
-import { motion } from "framer-motion";
 import {
   Shield,
   FileCheck,
   Users,
   Award,
-  ArrowRight,
-  CheckCircle2,
   Info,
 } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
+import Eyebrow from "@/components/ui/Eyebrow";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import Accordion from "@/components/ui/Accordion";
 import CTASection from "@/components/sections/CTASection";
 import FaqSchema from "@/components/seo/FaqSchema";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import {
-  fadeInUp,
-  staggerContainer,
-  staggerItem,
-} from "@/lib/animations";
+import { ArrowRight, Check } from "@/components/ui/icons";
 
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
@@ -111,224 +103,144 @@ export default function PricingContent() {
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, #14AAA9 1px, transparent 0)",
-            backgroundSize: "40px 40px",
-          }}
-        />
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 mb-8">
-          <Breadcrumbs dark items={[{ name: "Pricing" }]} />
-        </div>
-        <motion.div
-          variants={fadeInUp}
-          initial="hidden"
-          animate="visible"
-          className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center"
-        >
-          <span className="inline-block text-xs font-bold uppercase tracking-widest text-accent px-3 py-1 rounded-full border border-accent/20 bg-accent/5 mb-6">
-            Pricing
-          </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-6">
-            Transparent pricing, scoped to your business
-          </h1>
-          <p className="text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed mb-8">
-            We do not publish price lists because no two engagements are identical.
-            What we guarantee: a fixed-fee proposal before work starts, full
-            transparency, no hourly billing, no scope creep, and 90 days post-certification support included as standard.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Button href="/contact" size="lg">
-              See Your 10-Week Certification Roadmap
-            </Button>
-            <Button href="/contact" variant="secondary" size="lg">
-              Talk to a Consultant
-            </Button>
+      <section className="wash-left">
+        <div className="wrap py-16 lg:py-24">
+          <Breadcrumbs items={[{ name: "Pricing" }]} />
+
+          <div className="mt-8 max-w-[52ch]">
+            <Eyebrow className="mb-5">Pricing</Eyebrow>
+            <h1 className="h1p">Transparent pricing, scoped to your business</h1>
+            <p className="lead mt-6">
+              We do not publish price lists because no two engagements are identical.
+              What we guarantee: a fixed-fee proposal before work starts, full
+              transparency, no hourly billing, no scope creep, and 90 days post-certification support included as standard.
+            </p>
+            <div className="mt-9 flex flex-wrap gap-3.5">
+              <Button href="/contact" size="lg">
+                See Your 10-Week Certification Roadmap
+              </Button>
+              <Button href="/contact" variant="secondary" size="lg">
+                Talk to a Consultant
+              </Button>
+            </div>
           </div>
-        </motion.div>
+        </div>
       </section>
 
       {/* Our pricing promise */}
-      <section className="py-12 lg:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="sec">
+        <div className="wrap">
           <SectionHeading
             label="Our Promise"
             title="How we price every engagement"
             description="Every proposal is scoped to your specific organisation, team size, existing controls, sector, and objectives."
           />
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid md:grid-cols-3 gap-6"
-          >
+          <div className="grid gap-3.5 md:grid-cols-3">
             {promises.map((item) => (
-              <motion.div key={item.title} variants={staggerItem}>
-                <Card variant="glass" className="h-full">
-                  <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center mb-4">
-                    <item.icon className="h-6 w-6 text-accent" />
-                  </div>
-                  <h3 className="text-lg font-bold text-white mb-3">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    {item.description}
-                  </p>
-                </Card>
-              </motion.div>
+              <Card key={item.title} className="flex h-full flex-col">
+                <item.icon className="h-5 w-5 text-brand" strokeWidth={1.6} aria-hidden="true" />
+                <h3 className="h4 mt-4">{item.title}</h3>
+                <p className="small mt-2.5">{item.description}</p>
+              </Card>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* What is included */}
-      <section className="py-12 lg:py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+      <section className="sec band-alt">
+        <div className="wrap max-w-[900px]">
           <SectionHeading
             label="Included"
             title="What every engagement delivers"
             description="Regardless of the standard or your organisation size, every Pixelette Certified engagement includes:"
           />
-          <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <Card variant="glass" hover={false}>
-              <ul className="space-y-4">
-                {included.map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                    <span className="text-gray-300 text-sm leading-relaxed">
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-          </motion.div>
-        </div>
-      </section>
+          <Card>
+            <ul className="list-none space-y-4">
+              {included.map((item) => (
+                <li key={item} className="flex gap-3">
+                  <span className="mt-1 shrink-0 text-brand">
+                    <Check size={16} />
+                  </span>
+                  <span className="small">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </Card>
 
-      {/* Certification body fees note */}
-      <section className="pb-8">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <Card variant="glass" hover={false} className="flex items-start gap-4">
-              <div className="shrink-0 mt-0.5">
-                <Info className="h-5 w-5 text-accent" />
-              </div>
-              <div>
-                <p className="text-gray-300 text-sm leading-relaxed mb-2">
-                  <strong className="text-white">Certification body audit fees:</strong>{" "}
-                  For SME engagements, the certification body audit fee is included in
-                  the project price. For larger organisations, CB fees are separate,
-                  typically{" "}
-                  <strong className="text-white">£4,500 to £8,000</strong>{" "}
-                  depending on the standard, your organisation size, and the chosen
-                  certification body. We recommend UKAS-accredited certification bodies
-                  and can help you obtain competitive quotes.
-                </p>
-                <p className="text-gray-300 text-sm leading-relaxed">
-                  <strong className="text-white">Payment plans:</strong>{" "}
-                  Available for all engagements. Typically structured as an initial
-                  deposit at kickoff followed by milestone-based payments.
-                </p>
-              </div>
-            </Card>
-          </motion.div>
+          {/* Certification body fees note */}
+          <Card className="mt-3.5 flex items-start gap-4">
+            <Info className="mt-1 h-5 w-5 shrink-0 text-brand" strokeWidth={1.6} aria-hidden="true" />
+            <div>
+              <p className="small">
+                <strong className="font-semibold text-ink">Certification body audit fees:</strong>{" "}
+                For SME engagements, the certification body audit fee is included in
+                the project price. For larger organisations, CB fees are separate,
+                typically{" "}
+                <strong className="font-semibold text-ink">£4,500 to £8,000</strong>{" "}
+                depending on the standard, your organisation size, and the chosen
+                certification body. We recommend UKAS-accredited certification bodies
+                and can help you obtain competitive quotes.
+              </p>
+              <p className="small mt-2.5">
+                <strong className="font-semibold text-ink">Payment plans:</strong>{" "}
+                Available for all engagements. Typically structured as an initial
+                deposit at kickoff followed by milestone-based payments.
+              </p>
+            </div>
+          </Card>
         </div>
       </section>
 
       {/* Multi-certification savings */}
-      <section className="py-12 lg:py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+      <section className="sec">
+        <div className="wrap max-w-[900px]">
           <SectionHeading
             label="Multi-Certification"
             title="Combined certifications save time and money"
             description="Many ISO standards share significant control overlap. We price combined engagements efficiently and typically deliver dual certifications faster than two sequential projects."
           />
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid sm:grid-cols-2 gap-4"
-          >
+          <div className="grid gap-3.5 sm:grid-cols-2">
             {multiCertOverlaps.map((item) => (
-              <motion.div key={item.combo} variants={staggerItem}>
-                <Card variant="glass" hover={false} className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center shrink-0">
-                    <Users className="h-5 w-5 text-accent" />
-                  </div>
-                  <div>
-                    <p className="text-white font-semibold text-sm">{item.combo}</p>
-                    <p className="text-accent text-xs">{item.overlap}</p>
-                  </div>
-                </Card>
-              </motion.div>
+              <div key={item.combo} className="card flex items-center gap-4 p-5">
+                <Users className="h-5 w-5 shrink-0 text-brand" strokeWidth={1.6} aria-hidden="true" />
+                <div>
+                  <p className="text-sm font-semibold text-ink">{item.combo}</p>
+                  <p className="mono mt-1 text-[11px] uppercase tracking-[0.08em] text-brand">
+                    {item.overlap}
+                  </p>
+                </div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* How to get started */}
-      <section className="py-12 lg:py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-accent px-3 py-1 rounded-full border border-accent/20 bg-accent/5 mb-6">
-              Get Started
-            </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-6">
-              Your free 30-minute gap analysis
-            </h2>
-            <p className="text-gray-300 max-w-2xl mx-auto leading-relaxed mb-8">
-              Every engagement begins with a free, no-obligation gap analysis. In 30
-              minutes, our consultants will assess your current posture, identify which
-              standards apply, and provide a realistic timeline and fixed-fee proposal.
-              Most clients book their first paid engagement within two weeks.
-            </p>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <Button href="/contact" size="lg">
-                See Your 10-Week Certification Roadmap
-                <ArrowRight className="h-4 w-4 ml-2" />
-              </Button>
-            </div>
-          </motion.div>
+      <section className="sec band-alt">
+        <div className="wrap max-w-[900px]">
+          <Eyebrow className="mb-5">Get Started</Eyebrow>
+          <h2 className="h2 max-w-[20ch]">Your free 30-minute gap analysis</h2>
+          <p className="body mt-5">
+            Every engagement begins with a free, no-obligation gap analysis. In 30
+            minutes, our consultants will assess your current posture, identify which
+            standards apply, and provide a realistic timeline and fixed-fee proposal.
+            Most clients book their first paid engagement within two weeks.
+          </p>
+          <div className="mt-9 flex flex-wrap gap-3.5">
+            <Button href="/contact" size="lg" iconRight={<ArrowRight size={16} />}>
+              See Your 10-Week Certification Roadmap
+            </Button>
+          </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="py-20 lg:py-28">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <SectionHeading
-            label="Pricing FAQ"
-            title="Common pricing questions"
-          />
-          <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <FaqSchema faqs={pricingFAQs} />
-            <Accordion items={pricingFAQs} />
-          </motion.div>
+      <section className="sec">
+        <div className="wrap max-w-[840px]">
+          <SectionHeading label="Pricing FAQ" title="Common pricing questions" />
+          <FaqSchema faqs={pricingFAQs} />
+          <Accordion items={pricingFAQs} />
         </div>
       </section>
 

@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { Close } from "@/components/ui/icons";
 import AliceChat from "./AliceChat";
 
 export default function AliceWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const closeRef = useRef<(() => void) | null>(null);
+  const reduce = useReducedMotion();
 
   const handleCloseClick = useCallback(() => {
     if (closeRef.current) {
@@ -36,37 +37,36 @@ export default function AliceWidget() {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             exit={{ scale: 0 }}
-            className="fixed bottom-6 right-6 z-50 flex items-center gap-3 group"
+            transition={reduce ? { duration: 0 } : undefined}
+            className="group fixed bottom-6 right-6 z-50 flex items-center gap-3"
           >
             {/* Hover label */}
             <span className="pointer-events-none whitespace-nowrap
-              bg-[#0A1628] border border-[#C9A84C]/50 text-white text-xs font-medium
-              px-4 py-2 rounded-xl shadow-lg
+              rounded-[4px] border border-[#1C4744] bg-[#06222B]
+              px-4 py-2 text-xs font-medium text-[#F2F5F4] shadow-lg
               opacity-0 translate-x-2
-              group-hover:opacity-100 group-hover:translate-x-0
-              transition-all duration-300 ease-out">
+              transition-all duration-300 ease-out
+              group-hover:translate-x-0 group-hover:opacity-100">
               Need help with certifications?
             </span>
 
             <button
               onClick={() => setIsOpen(true)}
-              className="w-16 h-16 bg-[#0A1628]
-                rounded-full shadow-lg hover:shadow-xl
-                flex items-center justify-center transition-all duration-300
-                hover:-translate-y-1 hover:bg-[#111f38] relative shrink-0 p-3"
+              className="relative flex h-14 w-14 shrink-0 items-center justify-center
+                rounded-full bg-[#056F62] p-3 shadow-lg transition-colors duration-200
+                hover:bg-[#045A4F]"
               aria-label="Open chat with Alice"
               title="Chat with Alice about certifications"
             >
               <img
                 src="/logos/favicon.svg"
                 alt="Alice"
-                width={32}
-                height={32}
+                width={28}
+                height={28}
                 loading="lazy"
                 decoding="async"
-                className="w-8 h-8 group-hover:scale-110 transition-transform duration-300"
+                className="h-7 w-7"
               />
-              <span className="absolute inset-0 rounded-full bg-[#C9A84C] animate-ping opacity-15" />
             </button>
           </motion.div>
         )}
@@ -76,40 +76,38 @@ export default function AliceWidget() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={reduce ? { duration: 0 } : { duration: 0.2 }}
             className="fixed z-50
               bottom-0 right-0 left-0 top-0
               h-[100dvh] w-full
               md:bottom-6 md:right-6 md:left-auto md:top-auto
               md:w-[400px] md:h-[600px]
-              rounded-none md:rounded-2xl shadow-2xl overflow-hidden
+              rounded-none md:rounded-[12px] shadow-2xl overflow-hidden
               flex flex-col
-              border-0 md:border border-white/10"
-            style={{ background: "linear-gradient(145deg, #0A1628 0%, #0d1e35 50%, #0A1628 100%)" }}
+              border-0 md:border border-[#1C4744]"
+            style={{ background: "#06222B" }}
           >
             {/* Header — pinned, never scrolls */}
-            <div className="flex items-center justify-between px-5 py-4 border-b border-white/10
-              bg-gradient-to-r from-[#0A1628] to-[#0d1e35] shrink-0 z-10">
+            <div className="z-10 flex shrink-0 items-center justify-between border-b border-[#123240] px-5 py-4">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-[#0A1628] border border-[#C9A84C]/40
-                  flex items-center justify-center shrink-0 p-1.5">
-                  <img src="/logos/favicon.svg" alt="Alice" width={36} height={36} loading="lazy" decoding="async" className="w-full h-full" />
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#1C4744] p-1.5">
+                  <img src="/logos/favicon.svg" alt="Alice" width={36} height={36} loading="lazy" decoding="async" className="h-full w-full" />
                 </div>
                 <div>
-                  <div className="font-bold text-white text-sm">Alice</div>
-                  <div className="text-[11px] text-gray-400">AI Accreditation Advisor</div>
+                  <div className="text-sm font-semibold text-[#F2F5F4]">Alice</div>
+                  <div className="mono text-[11px] tracking-[0.06em] text-[#9DB2BC]">AI Accreditation Advisor</div>
                 </div>
               </div>
               <button
                 onClick={handleCloseClick}
-                className="p-3 min-w-[44px] min-h-[44px] rounded-lg hover:bg-white/10 text-gray-400
-                  hover:text-white transition-colors flex items-center justify-center"
+                className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-[4px]
+                  p-3 text-[#9DB2BC] transition-colors hover:bg-[#123240] hover:text-[#F2F5F4]"
                 aria-label="Close chat"
               >
-                <X className="h-5 w-5" />
+                <Close size={18} />
               </button>
             </div>
 

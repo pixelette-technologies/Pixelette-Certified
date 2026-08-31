@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope } from "next/font/google";
+import { Newsreader, Outfit, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -7,14 +7,41 @@ import ClientShell from "@/components/layout/ClientShell";
 import { OrganizationSchema } from "@/components/seo/JsonLd";
 import { SITE_CONFIG } from "@/lib/constants";
 
-const manrope = Manrope({
+/* Display serif. Variable, so one file covers 300/400/500, and the opsz axis
+   (6..72) lets the browser adjust contrast with size — which is what the
+   pattern guide's own Google Fonts request asks for. */
+const newsreader = Newsreader({
   subsets: ["latin"],
-  variable: "--font-manrope",
+  weight: "variable",
+  axes: ["opsz"],
+  style: "normal",
+  variable: "--font-newsreader",
   display: "swap",
 });
 
+/* Body and UI sans. Variable: one file covers 300–700. */
+const outfit = Outfit({
+  subsets: ["latin"],
+  weight: "variable",
+  variable: "--font-outfit",
+  display: "swap",
+});
+
+/* Eyebrows, stat figures, table headers, form labels, metadata, citations.
+   IBM Plex Mono has no variable build on Google Fonts, so weight is required;
+   we ship only the two statics the system uses. preload:false because it never
+   carries the LCP element and this saves two blocking fetches on first paint. */
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  style: "normal",
+  variable: "--font-ibm-plex-mono",
+  display: "swap",
+  preload: false,
+});
+
 export const viewport: Viewport = {
-  themeColor: "#044143",
+  themeColor: "#FFFFFF",
   width: "device-width",
   initialScale: 1,
 };
@@ -79,7 +106,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${manrope.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${newsreader.variable} ${outfit.variable} ${plexMono.variable} h-full antialiased`}
+    >
       <head>
         <meta name="google-site-verification" content="C7bI6NnGsWlyxSL7Ax2Ii72eg_y9UtjRDR2KbJCu4gg" />
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-VX5PH3RWRB" />

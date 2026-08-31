@@ -1,104 +1,60 @@
-"use client";
-
-import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
-import Image from "next/image";
 import Button from "@/components/ui/Button";
-import { fadeInLeft, fadeInRight } from "@/lib/animations";
+import Pill from "@/components/ui/Pill";
 
-const ParticleNetwork = dynamic(() => import("@/components/canvas/ParticleNetwork"), {
-  ssr: false,
-});
+const certifications = [
+  "ISO 27001",
+  "ISO 42001",
+  "Cyber Essentials",
+  "GDPR",
+  "ISO 9001",
+  "ISO 22301",
+  "ISO 14001",
+  "vCISO",
+  "vDPO",
+  "Penetration Testing",
+  "SOC 2",
+  "AI Governance",
+];
 
+/**
+ * The guide's front-page hero (pattern guide page 01): centred, on the mint
+ * radial wash. The previous version was a two-column split with an animated
+ * concentric-ring medallion on the right; the guide has no such ornament, and
+ * removing it leaves the copy centred as the guide intends.
+ *
+ * Content and its order are unchanged: certification pills, then the two-part
+ * heading, then the lead, then the button pair.
+ */
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden min-h-[92vh] flex items-center bg-gradient-mesh">
-      {/* Background effects */}
-      <div className="absolute inset-0">
-        <ParticleNetwork />
-        {/* Floating gradient orbs */}
-        <div className="absolute top-[-10%] right-[-5%] w-[800px] h-[800px] rounded-full bg-accent/[0.04] blur-[120px] animate-float-slower" />
-        <div className="absolute bottom-[-15%] left-[-10%] w-[600px] h-[600px] rounded-full bg-accent-light/[0.03] blur-[100px] animate-float-slow" />
-        <div className="absolute top-[40%] left-[30%] w-[300px] h-[300px] rounded-full bg-accent/[0.02] blur-[80px] animate-pulse-glow" />
+    <section className="wash">
+      <div className="wrap py-20 text-center lg:py-28">
+        <div className="flex flex-wrap justify-center gap-2.5">
+          {certifications.map((tag) => (
+            <Pill key={tag}>{tag}</Pill>
+          ))}
+        </div>
+
+        <h1 className="h1 mx-auto mt-8 max-w-[22ch]">
+          <span className="block">
+            Your Next Enterprise Deal Is Waiting on a Certificate You Don&apos;t Have Yet.
+          </span>
+          <span className="mt-2 block text-brand">We Fix That in 10 Weeks.</span>
+        </h1>
+
+        <p className="lead mx-auto mt-7">
+          Enterprise contracts. Government frameworks. Investor due diligence. The deals
+          you&apos;re losing because you&apos;re not yet certified, we close that gap in 10 weeks.
+          Fixed fee. 98% first-attempt pass rate. UK-headquartered. Globally delivered.
+        </p>
+
+        <div className="mt-9 flex flex-wrap justify-center gap-3.5">
+          <Button href="/contact">See Your 10-Week Certification Roadmap</Button>
+          <Button href="/services" variant="secondary">
+            Talk to a Consultant
+          </Button>
+        </div>
       </div>
-
-      {/* Top gradient fade */}
-      <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-[#032e2f] to-transparent z-[1]" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-20 lg:py-28 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        {/* Left content */}
-        <motion.div
-          variants={fadeInLeft}
-          initial="hidden"
-          animate="visible"
-        >
-          <div className="flex flex-wrap gap-2 mb-6">
-            {["ISO 27001", "ISO 42001", "Cyber Essentials", "GDPR", "ISO 9001", "ISO 22301", "ISO 14001", "vCISO", "vDPO", "Penetration Testing", "SOC 2", "AI Governance"].map((tag) => (
-              <span key={tag} className="text-accent text-[10px] sm:text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-accent/20 bg-accent/5 backdrop-blur-sm">
-                {tag}
-              </span>
-            ))}
-          </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-6xl font-extrabold tracking-tight leading-[1.08] mb-6">
-            <span className="gradient-text-white">Your Next Enterprise Deal Is Waiting on a Certificate You Don&apos;t Have Yet.</span>
-            <br />
-            <span className="gradient-text">We Fix That in 10 Weeks.</span>
-          </h1>
-          <p className="text-lg text-gray-300 mb-8 max-w-xl leading-relaxed">
-            Enterprise contracts. Government frameworks. Investor due diligence. The deals you&apos;re losing because you&apos;re not yet certified, we close that gap in 10 weeks. Fixed fee. 98% first-attempt pass rate. UK-headquartered. Globally delivered.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <Button href="/contact" size="lg">
-              See Your 10-Week Certification Roadmap
-            </Button>
-            <Button href="/services" variant="secondary" size="lg">
-              Talk to a Consultant
-            </Button>
-          </div>
-
-          {/* Stats moved to TrustBar section below hero */}
-        </motion.div>
-
-        {/* Right visual, animated concentric rings with glow */}
-        <motion.div
-          variants={fadeInRight}
-          initial="hidden"
-          animate="visible"
-          className="hidden lg:flex items-center justify-center"
-        >
-          <div className="relative w-[420px] h-[420px]">
-            {/* Glow background */}
-            <div className="absolute inset-[-20%] rounded-full bg-accent/[0.06] blur-[60px] animate-pulse-glow" />
-            {/* Outer ring */}
-            <div className="absolute inset-0 rounded-full border border-accent/15 animate-ping" style={{ animationDuration: "3s" }} />
-            {/* Second ring */}
-            <div className="absolute inset-6 rounded-full border border-accent/20" />
-            {/* Third ring */}
-            <div className="absolute inset-12 rounded-full border border-accent/25 animate-pulse" style={{ animationDuration: "2s" }} />
-            {/* Inner circle with glass */}
-            <div className="absolute inset-20 rounded-full glass-card flex items-center justify-center">
-              <Image
-                src="/logos/favicon.svg"
-                alt="Pixelette Certified"
-                width={112}
-                height={134}
-                priority
-                className="w-28 opacity-90"
-              />
-            </div>
-            {/* Orbiting dots */}
-            <div className="absolute inset-0 animate-spin" style={{ animationDuration: "20s" }}>
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-accent shadow-glow-accent" />
-            </div>
-            <div className="absolute inset-0 animate-spin" style={{ animationDuration: "15s", animationDirection: "reverse" }}>
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-accent-light shadow-glow-accent" />
-            </div>
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-[#032e2f] to-transparent z-[1]" />
     </section>
   );
 }

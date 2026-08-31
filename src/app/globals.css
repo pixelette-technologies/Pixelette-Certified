@@ -1,296 +1,627 @@
 @import "tailwindcss";
 
-@theme inline {
-  --color-primary: #044143;
-  --color-primary-light: #065456;
-  --color-primary-dark: #032e2f;
-  --color-accent: #14AAA9;
-  --color-accent-light: #1cc4c3;
-  --color-accent-dark: #0e8786;
-  --color-surface: #f0f7f7;
-  --color-surface-dark: #03383a;
-  --color-glass: rgba(4, 65, 67, 0.6);
-  --color-glass-border: rgba(20, 170, 169, 0.2);
-  --font-sans: var(--font-manrope);
-}
+/* ============================================================================
+   PIXELETTE CERTIFIED — DESIGN FOUNDATION
+   Light, editorial, flat, static. Ported from docs/Pixelette_Web_Patterns.html.
 
+   Layering contract:
+     @layer components  ->  the guide's classes (.h1 .card .btn ...). Faithful
+                            ports, so markup can be pasted from the pattern
+                            guide unchanged.
+     @layer utilities   ->  Tailwind. ALWAYS wins over the above, so
+                            className="card p-0" behaves as expected.
+   Never write a component class outside @layer components: unlayered CSS beats
+   every Tailwind utility and you will spend an afternoon finding out why.
+   ========================================================================== */
+
+/* -- 1 - FONT STACKS -------------------------------------------------------
+   --font-newsreader / --font-outfit / --font-ibm-plex-mono are injected onto
+   <html> by next/font in src/app/layout.tsx. next/font bakes a metric-matched
+   fallback into each value; the extra families cover the window before the
+   custom property is defined.                                              */
 :root {
-  --background: #044143;
-  --foreground: #ffffff;
+  --font-display: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --font-ui: var(--font-outfit), "Helvetica Neue", Arial, sans-serif;
+  --font-data: var(--font-ibm-plex-mono), "SFMono-Regular", Consolas, monospace;
 }
 
-::selection {
-  background: rgba(20, 170, 169, 0.4);
-  color: #ffffff;
+/* inline is required: the values reference other custom properties, so they
+   must resolve at definition time. Note that inline theme vars are NOT emitted
+   to :root, which is why every component class below uses var(--font-display)
+   and never var(--font-serif). */
+@theme inline {
+  --font-sans: var(--font-ui);
+  --font-serif: var(--font-display);
+  --font-mono: var(--font-data);
 }
 
-html {
-  scroll-behavior: smooth;
+/* -- 2 - COLOUR, RADIUS, SHADOW, CONTAINER --------------------------------
+   static forces every token into :root even when no utility references it,
+   so the component classes below can safely use var(--color-line-card).     */
+@theme static {
+  /* brand */
+  --color-brand:       #056F62;
+  --color-brand-hover: #045A4F;
+  --color-brand-wash:  #C7EBDF;   /* hero radial inner stop */
+  --color-brand-tint:  #E4F4EF;   /* diagram / highlight fill */
+
+  /* text */
+  --color-ink:   #0A0A0A;
+  --color-body:  #414D5C;
+  --color-muted: #5D6B7D;
+  --color-soft:  #62707F;
+
+  /* surfaces */
+  --color-page: #FFFFFF;
+  --color-band: #F4F7FA;
+
+  /* rules and borders, light -> strong */
+  --color-line:        #E2E8EF;  /* section rules, td */
+  --color-line-card:   #DFE6EE;  /* card */
+  --color-line-pill:   #DDE4EC;  /* pill, input, th */
+  --color-line-strong: #C3D1DE;  /* btn2 border, emphasis cards */
+
+  /* dark - site footer */
+  --color-footer:         #06222B;
+  --color-footer-line:    #123240;
+  --color-footer-hover:   #0B2C36;
+  --color-footer-heading: #F2F5F4;
+  --color-footer-link:    #9DB2BC;
+  --color-footer-legal:   #7C93A0;
+  --color-footer-accent:  #6FE3CB;
+
+  /* dark - feature panel (.panel) */
+  --color-panel-from:     #04211F;
+  --color-panel-to:       #080F0F;
+  --color-panel-line:     #1C4744;
+  --color-panel-label:    #5F918B;
+  --color-panel-body:     #9BAEAB;
+  --color-panel-pill:     #7FA9A4;
+  --color-panel-cta:      #BFE9E3;
+  --color-panel-cta-line: #2A6460;
+
+  /* semantic */
+  --color-danger: #B42318;
+
+  /* radii - the system uses exactly two */
+  --radius-btn:  4px;
+  --radius-tile: 4px;
+  --radius-card: 12px;
+
+  /* shadows - the system uses exactly three */
+  --shadow-tile:    0 1px 2px rgba(10, 20, 19, .04);
+  --shadow-card:    0 1px 2px rgba(10, 20, 19, .04), 0 10px 28px -16px rgba(10, 20, 19, .16);
+  --shadow-feature: 0 2px 4px rgba(10, 20, 19, .04), 0 16px 40px -22px rgba(10, 20, 19, .22);
+
+  /* container -> max-w-wrap */
+  --container-wrap: 1160px;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-manrope), system-ui, sans-serif;
+/* -- 3 - FLUID SCALE -------------------------------------------------------
+   Interpolated 390px -> 1440px. Each clamp hits the guide's mobile value at
+   exactly 390px and its desktop value at exactly 1440px; the guide specifies
+   nothing between, so nothing between is invented. Anything the guide changes
+   discontinuously (font-weight, the hero wash) is in the media query in S7.  */
+:root {
+  --fs-h1:    clamp(2.25rem,   1.6rem    + 2.6667vw, 4rem);      /* 36 -> 64 */
+  --fs-h1p:   clamp(1.9375rem, 1.45rem   + 2vw,      3.25rem);   /* 31 -> 52 */
+  --fs-h2:    clamp(1.75rem,   1.425rem  + 1.3333vw, 2.625rem);  /* 28 -> 42 */
+  --fs-h3:    clamp(1.375rem,  1.3054rem + 0.2857vw, 1.5625rem); /* 22 -> 25 */
+  --fs-h4:    1.125rem;                                          /* 18, flat */
+  --fs-lead:  clamp(1.0625rem, 0.9929rem + 0.2857vw, 1.25rem);   /* 17 -> 20 */
+  --fs-body:  1rem;                                              /* 16, flat */
+  --fs-small: 0.875rem;                                          /* 14, flat */
+
+  --sec-y:    clamp(3.5rem, 2.5714rem + 3.8095vw, 6rem);         /* 56 -> 96 */
+  --sec-y-sm: clamp(2.5rem, 2.0357rem + 1.9048vw, 4rem);         /* 40 -> 64 */
+  --header-h: clamp(4rem,   3.6288rem + 1.5238vw, 5rem);         /* 64 -> 80 */
 }
 
-/* ============================================
-   GRADIENT & GLASS UTILITIES
-   ============================================ */
-
-/* Animated gradient border */
-@keyframes border-rotate {
-  0% { --border-angle: 0deg; }
-  100% { --border-angle: 360deg; }
-}
-
-@property --border-angle {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-
-.glass-card {
-  background: linear-gradient(
-    135deg,
-    rgba(20, 170, 169, 0.08) 0%,
-    rgba(4, 65, 67, 0.4) 50%,
-    rgba(20, 170, 169, 0.05) 100%
-  );
-  backdrop-filter: blur(20px) saturate(1.5);
-  -webkit-backdrop-filter: blur(20px) saturate(1.5);
-  border: 1px solid rgba(20, 170, 169, 0.15);
-  box-shadow:
-    0 0 0 1px rgba(20, 170, 169, 0.05),
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
-}
-
-.glass-card:hover {
-  background: linear-gradient(
-    135deg,
-    rgba(20, 170, 169, 0.12) 0%,
-    rgba(4, 65, 67, 0.5) 50%,
-    rgba(20, 170, 169, 0.08) 100%
-  );
-  border-color: rgba(20, 170, 169, 0.3);
-  box-shadow:
-    0 0 0 1px rgba(20, 170, 169, 0.1),
-    0 0 30px rgba(20, 170, 169, 0.1),
-    0 16px 48px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-}
-
-/* Animated border glow card */
-.glow-border {
-  position: relative;
-  background: linear-gradient(
-    160deg,
-    rgba(20, 170, 169, 0.06) 0%,
-    rgba(4, 65, 67, 0.3) 100%
-  );
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid transparent;
-  background-clip: padding-box;
-}
-
-.glow-border::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1px;
-  background: conic-gradient(
-    from var(--border-angle, 0deg),
-    transparent 40%,
-    rgba(20, 170, 169, 0.4) 50%,
-    transparent 60%
-  );
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  -webkit-mask-composite: xor;
-  animation: border-rotate 4s linear infinite;
-  pointer-events: none;
-}
-
-.glow-border:hover::before {
-  background: conic-gradient(
-    from var(--border-angle, 0deg),
-    transparent 20%,
-    rgba(20, 170, 169, 0.7) 50%,
-    transparent 80%
-  );
-}
-
-/* White glass card for light sections */
-.white-glass {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(240, 247, 247, 0.95) 100%
-  );
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(20, 170, 169, 0.12);
-  box-shadow:
-    0 4px 24px rgba(4, 65, 67, 0.08),
-    0 1px 3px rgba(4, 65, 67, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
-}
-
-.white-glass:hover {
-  border-color: rgba(20, 170, 169, 0.3);
-  box-shadow:
-    0 0 20px rgba(20, 170, 169, 0.08),
-    0 8px 40px rgba(4, 65, 67, 0.12),
-    0 2px 6px rgba(4, 65, 67, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
-}
-
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, #14AAA9 0%, #1cc4c3 40%, #14AAA9 80%, #0e8786 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  padding-bottom: 0.1em;
-  display: inline-block;
-}
-
-.gradient-text-white {
-  background: linear-gradient(135deg, #ffffff 0%, #e0f2f2 50%, #ffffff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  padding-bottom: 0.1em;
-  display: inline-block;
-}
-
-/* Glow shadow utilities */
-.shadow-glow {
-  box-shadow: 0 0 20px rgba(20, 170, 169, 0.15), 0 8px 32px rgba(0, 0, 0, 0.3);
-}
-
-.shadow-glow-lg {
-  box-shadow: 0 0 40px rgba(20, 170, 169, 0.2), 0 16px 48px rgba(0, 0, 0, 0.4);
-}
-
-.shadow-glow-accent {
-  box-shadow: 0 0 30px rgba(20, 170, 169, 0.3), 0 0 60px rgba(20, 170, 169, 0.1);
-}
-
-/* Section gradient backgrounds */
-.bg-gradient-dark {
-  background: linear-gradient(180deg, #032e2f 0%, #044143 50%, #032e2f 100%);
-}
-
-.bg-gradient-dark-reverse {
-  background: linear-gradient(180deg, #032e2f 0%, #044143 50%, #032e2f 100%);
-}
-
-.bg-gradient-radial {
-  background: radial-gradient(ellipse at 50% 0%, rgba(20, 170, 169, 0.08) 0%, transparent 60%),
-    linear-gradient(180deg, #032e2f 0%, #044143 50%, #032e2f 100%);
-}
-
-.bg-gradient-mesh {
-  background:
-    radial-gradient(ellipse at 20% 20%, rgba(20, 170, 169, 0.06) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 80%, rgba(20, 170, 169, 0.04) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(4, 65, 67, 0.5) 0%, transparent 70%),
-    linear-gradient(180deg, #032e2f 0%, #044143 100%);
-}
-
-/* Animated divider line */
-.divider-glow {
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(20, 170, 169, 0.4) 50%,
-    transparent 100%
-  );
-}
-
-/* Floating orbs for backgrounds */
-@keyframes float-slow {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  33% { transform: translateY(-20px) translateX(10px); }
-  66% { transform: translateY(10px) translateX(-10px); }
-}
-
-@keyframes float-slower {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(-30px) translateX(-15px); }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 0.6; transform: scale(1.05); }
-}
-
-.animate-float-slow {
-  animation: float-slow 8s ease-in-out infinite;
-}
-
-.animate-float-slower {
-  animation: float-slower 12s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 4s ease-in-out infinite;
-}
-
-/* ============================================
-   SCROLLBAR
-   ============================================ */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #032e2f;
-}
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #14AAA9, #0e8786);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #1cc4c3, #14AAA9);
-}
-
-/* ============================================
-   REDUCED MOTION
-   ============================================ */
-@media (prefers-reduced-motion: reduce) {
+/* -- 4 - BASE ------------------------------------------------------------- */
+@layer base {
   html {
-    scroll-behavior: auto;
+    scroll-behavior: smooth;
+    /* the header is sticky; without this, anchors land underneath it */
+    scroll-padding-top: calc(var(--header-h) + 16px);
+    scrollbar-color: var(--color-line-strong) var(--color-page);
   }
+
+  body {
+    background: var(--color-page);
+    color: var(--color-ink);
+    font-family: var(--font-ui);
+    font-size: 1rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Deliberate divergence from the guide: it sets a { color:#056F62 }
+     globally then overrides it inline everywhere. Under Preflight
+     (a { color: inherit }) that would turn the navbar, breadcrumbs and
+     footer green. Inline text links opt in with .link; .prose a is automatic. */
+
+  ::selection {
+    background: var(--color-brand-wash);
+    color: var(--color-ink);
+  }
+
+  /* The guide defines no focus styling at all - it is a static mockup. This is
+     the site's single focus ring; components must not remove it. */
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  .on-dark :focus-visible,
+  .panel :focus-visible,
+  .footer :focus-visible {
+    outline-color: var(--color-footer-accent);
+  }
+}
+
+/* -- 5 - COMPONENT CLASSES ------------------------------------------------
+   Faithful ports of docs/Pixelette_Web_Patterns.html. Class NAMES match the
+   guide byte-for-byte so guide markup pastes in and works.                  */
+@layer components {
+
+  /* 5.1 - Layout ------------------------------------------------------- */
+
+  /* 1160px capped, 20px gutters below, no media query */
+  .wrap {
+    width: min(var(--container-wrap), 100% - 40px);
+    margin-inline: auto;
+  }
+
+  .sec {
+    padding-block: var(--sec-y);
+    border-top: 1px solid var(--color-line);
+  }
+  .sec-sm { padding-block: var(--sec-y-sm); }
+
+  .rule { height: 1px; background: var(--color-line); }
+
+  /* 5.2 - Type --------------------------------------------------------- */
+
+  .h1 {
+    font-family: var(--font-display);
+    font-size: var(--fs-h1);
+    line-height: 1.05;
+    letter-spacing: -0.016em;
+    font-weight: 300;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  /* interior-page hero variant */
+  .h1p {
+    font-family: var(--font-display);
+    font-size: var(--fs-h1p);
+    line-height: 1.07;
+    letter-spacing: -0.015em;
+    font-weight: 300;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .h2 {
+    font-family: var(--font-display);
+    font-size: var(--fs-h2);
+    line-height: 1.14;
+    letter-spacing: -0.014em;
+    font-weight: 300;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .h3 {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    line-height: 1.26;
+    letter-spacing: -0.008em;
+    font-weight: 400;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  /* h4 is SANS. This is not a typo in the guide. */
+  .h4 {
+    font-family: var(--font-ui);
+    font-size: var(--fs-h4);
+    line-height: 1.3;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .lead {
+    font-size: var(--fs-lead);
+    line-height: 1.55;
+    color: var(--color-body);
+    max-width: 62ch;
+  }
+
+  .body {
+    font-size: var(--fs-body);
+    line-height: 1.65;
+    color: var(--color-body);
+    max-width: 66ch;
+  }
+
+  .small {
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    color: var(--color-muted);
+  }
+
+  .eyebrow {
+    font-family: var(--font-data);
+    font-size: 11px;
+    line-height: 1.2;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-brand);
+  }
+
+  /* source citation, sits under stat tiles */
+  .src {
+    font-family: var(--font-data);
+    font-size: 11.5px;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    color: var(--color-soft);
+  }
+
+  .mono { font-family: var(--font-data); }
+
+  /* Inline text link - opt-in, see the note in @layer base */
+  .link { color: var(--color-brand); text-decoration: none; }
+  .link:hover { color: var(--color-brand-hover); }
+
+  /* Preflight strips list markers; restore them where prose needs them. */
+  .list {
+    list-style: disc;
+    padding-left: 18px;
+    font-size: var(--fs-body);
+    line-height: 1.65;
+    color: var(--color-body);
+    max-width: 66ch;
+  }
+  .list > li + li { margin-top: 6px; }
+  .list-num { list-style: decimal; }
+
+  /* 5.3 - Long-form prose ----------------------------------------------
+     Replaces the dead prose/prose-invert/prose-lg in BlogPostClient.tsx:
+     @tailwindcss/typography is NOT installed, so those classes do nothing. */
+  .prose {
+    font-size: var(--fs-body);
+    line-height: 1.7;
+    color: var(--color-body);
+    max-width: 68ch;
+  }
+  .prose > * + *    { margin-top: 1.15em; }
+  .prose h2         { font-family: var(--font-display); font-size: var(--fs-h2); line-height: 1.14; letter-spacing: -0.014em; font-weight: 300; color: var(--color-ink); margin-top: 1.8em; }
+  .prose h3         { font-family: var(--font-display); font-size: var(--fs-h3); line-height: 1.26; letter-spacing: -0.008em; font-weight: 400; color: var(--color-ink); margin-top: 1.6em; }
+  .prose h4         { font-family: var(--font-ui); font-size: var(--fs-h4); font-weight: 600; color: var(--color-ink); margin-top: 1.5em; }
+  .prose strong     { color: var(--color-ink); font-weight: 600; }
+  .prose a          { color: var(--color-brand); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  .prose a:hover    { color: var(--color-brand-hover); }
+  .prose ul         { list-style: disc; padding-left: 18px; }
+  .prose ol         { list-style: decimal; padding-left: 20px; }
+  .prose li + li    { margin-top: 6px; }
+  .prose blockquote { border-left: 2px solid var(--color-brand); padding-left: 18px; color: var(--color-muted); }
+  .prose code       { font-family: var(--font-data); font-size: 0.9em; background: var(--color-band); border: 1px solid var(--color-line-pill); border-radius: 3px; padding: 1px 5px; }
+  .prose img        { border-radius: var(--radius-card); border: 1px solid var(--color-line-card); }
+  .prose hr         { border: 0; height: 1px; background: var(--color-line); margin-block: 2em; }
+
+  /* 5.4 - Surfaces ------------------------------------------------------ */
+
+  .card {
+    background: var(--color-page);
+    border: 1px solid var(--color-line-card);
+    border-radius: var(--radius-card);
+    padding: 28px;
+    box-shadow: var(--shadow-card);
+  }
+
+  /* highlighted / primary card - the guide's door treatment */
+  .card-feature {
+    border-color: var(--color-line-strong);
+    border-top: 3px solid var(--color-brand);
+    box-shadow: var(--shadow-feature);
+  }
+
+  .tile {
+    background: var(--color-page);
+    border: 1px solid var(--color-line-card);
+    border-radius: var(--radius-tile);
+    padding: 20px 22px;
+    box-shadow: var(--shadow-tile);
+  }
+  .tile b {
+    display: block;
+    font-family: var(--font-data);
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--color-brand);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .tile span {
+    display: block;
+    font-size: 13px;
+    color: var(--color-muted);
+    margin-top: 9px;
+    line-height: 1.4;
+  }
+
+  /* dark feature panel */
+  .panel {
+    background: linear-gradient(135deg, var(--color-panel-from) 0%, var(--color-panel-to) 64%);
+    border: 1px solid var(--color-panel-line);
+    border-radius: var(--radius-card);
+    padding: 34px 38px;
+    color: var(--color-panel-body);
+  }
+  .panel .eyebrow { color: var(--color-panel-label); }
+  .panel .h2,
+  .panel .h3,
+  .panel .h4      { color: #FFFFFF; }
+  .panel .small,
+  .panel .body    { color: var(--color-panel-body); }
+  .panel .pill    { border-color: var(--color-panel-line); color: var(--color-panel-pill); }
+
+  /* dark outline CTA, used inside .panel */
+  .btn-panel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    border: 1px solid var(--color-panel-cta-line);
+    color: var(--color-panel-cta);
+    font-weight: 500;
+    font-size: 15px;
+    padding: 13px 20px;
+    border-radius: var(--radius-btn);
+    min-height: 48px;
+  }
+
+  /* site footer */
+  .footer {
+    background: var(--color-footer);
+    border-top: 1px solid var(--color-footer-line);
+    color: var(--color-footer-link);
+  }
+  .footer .eyebrow { color: var(--color-footer-accent); }
+  .footer .pill    { border-color: #1B3D4A; color: var(--color-footer-link); }
+
+  /* section bands */
+  .band-alt {
+    background: var(--color-band);
+    border-top: 1px solid var(--color-line);
+  }
+  .band-closing {
+    background: linear-gradient(180deg, #FFFFFF 0%, #F4F7FA 100%);
+    border-top: 1px solid var(--color-line);
+  }
+
+  /* hero washes */
+  .wash      { background: radial-gradient(1200px 560px at 50% -20%, var(--color-brand-wash) 0%, var(--color-page) 65%); }
+  .wash-left { background: radial-gradient(900px 420px at 14% -20%, var(--color-brand-wash) 0%, var(--color-page) 60%); }
+
+  /* 5.5 - Controls ------------------------------------------------------ */
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--color-brand);
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.2;
+    padding: 16px 26px;
+    border-radius: var(--radius-btn);
+    min-height: 52px;
+    text-align: center;
+  }
+  .btn:hover { background: var(--color-brand-hover); }
+
+  .btn2 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--color-ink);
+    border: 1px solid var(--color-line-strong);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.2;
+    padding: 16px 26px;
+    border-radius: var(--radius-btn);
+    min-height: 52px;
+    text-align: center;
+  }
+  .btn2:hover { border-color: var(--color-brand); color: var(--color-brand); }
+
+  /* Not in the guide. Replaces the old ghost variant so call sites keep
+     working. Text-only, still a 44px tap target. */
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--color-brand);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.2;
+    padding: 0 4px;
+    border-radius: var(--radius-btn);
+    min-height: 44px;
+  }
+  .btn-ghost:hover { color: var(--color-brand-hover); }
+
+  /* light-button disabled state: opacity alone is near-invisible on white */
+  .btn:disabled,
+  .btn[aria-disabled="true"] {
+    background: var(--color-line-strong);
+    color: #FFFFFF;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-data);
+    font-size: 11px;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid var(--color-line-pill);
+    border-radius: 999px;
+    padding: 6px 12px;
+    color: var(--color-muted);
+    white-space: nowrap;
+  }
+  .pill-brand { border-color: var(--color-brand); color: var(--color-brand); }
+
+  /* 44px minimum tap target on any standalone inline link */
+  .flink {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 44px;
+  }
+
+  /* 5.6 - Tables -------------------------------------------------------- */
+
+  .table-wrap { overflow-x: auto; }
+
+  .table { width: 100%; border-collapse: collapse; }
+  .table th {
+    font-family: var(--font-data);
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    font-weight: 500;
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-line-pill);
+    white-space: nowrap;
+  }
+  .table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--color-line);
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--color-body);
+    vertical-align: top;
+  }
+  .table caption {
+    caption-side: top;
+    text-align: left;
+    font-family: var(--font-data);
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    padding-bottom: 12px;
+  }
+
+  /* 5.7 - Form controls -------------------------------------------------- */
+
+  .label {
+    display: block;
+    font-family: var(--font-data);
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: 8px;
+  }
+  .input,
+  .textarea,
+  .select {
+    display: block;
+    width: 100%;
+    background: var(--color-page);
+    border: 1px solid var(--color-line-pill);
+    border-radius: var(--radius-btn);
+    padding: 13px 14px;
+    min-height: 48px;
+    font-family: var(--font-ui);
+    font-size: 16px;           /* 16px minimum - anything smaller zooms on iOS */
+    line-height: 1.4;
+    color: var(--color-ink);
+  }
+  .input::placeholder,
+  .textarea::placeholder { color: var(--color-muted); }
+  .input:focus,
+  .textarea:focus,
+  .select:focus { border-color: var(--color-brand); }
+  .textarea { min-height: 132px; resize: vertical; }
+  .field-error { color: var(--color-danger); font-size: 13px; margin-top: 6px; }
+
+  /* 5.8 - Skip link ------------------------------------------------------ */
+  .skip-to-content {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 20px;
+    background: var(--color-brand);
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 0 0 var(--radius-btn) var(--radius-btn);
+    transition: top 0.2s;
+  }
+  /* :focus, not :focus-visible - the element is unreachable by pointer and
+     :focus-visible has been flaky here across browsers. */
+  .skip-to-content:focus { top: 0; }
+}
+
+/* -- 6 - UTILITIES --------------------------------------------------------
+   Only what Tailwind cannot already express.                               */
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .text-pretty  { text-wrap: pretty; }
+}
+
+/* -- 7 - THE ONE MEDIA QUERY ----------------------------------------------
+   Everything scalar is handled by clamp() in S3. This exists only for what
+   changes discontinuously at mobile: display headings get HEAVIER and tighter
+   (300 -> 400) because Newsreader Light is too fragile below ~30px, and the
+   hero wash re-aims.                                                        */
+@media (max-width: 767px) {
+  .h1, .h1p  { font-weight: 400; letter-spacing: -0.02em; line-height: 1.08; }
+  .h2        { font-weight: 400; line-height: 1.14; }
+  .card      { padding: 24px; }
+  .panel     { padding: 26px 24px; }
+  .wash,
+  .wash-left { background: radial-gradient(600px 320px at 30% -10%, var(--color-brand-wash) 0%, var(--color-page) 65%); }
+}
+
+/* -- 8 - REDUCED MOTION ---------------------------------------------------
+   NOTE: this neutralises CSS animation/transition only. framer-motion writes
+   inline transforms and is unaffected - the surviving motion components must
+   each call useReducedMotion().                                             */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
-/* ============================================
-   SKIP TO CONTENT
-   ============================================ */
-.skip-to-content {
-  position: absolute;
-  top: -100%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 9999;
-  padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, #14AAA9, #0e8786);
-  color: #ffffff;
-  border-radius: 0 0 0.5rem 0.5rem;
-  font-weight: 600;
-  transition: top 0.2s;
-}
-.skip-to-content:focus {
-  top: 0;
-}

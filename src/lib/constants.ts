@@ -19,12 +19,12 @@ export const SITE_CONFIG = {
 } as const;
 
 export const BRAND_COLORS = {
-  primary: "#044143",
-  primaryLight: "#065456",
-  primaryDark: "#032e2f",
-  accent: "#14AAA9",
-  accentLight: "#1cc4c3",
-  accentDark: "#0e8786",
+  primary: "#06222B",
+  primaryLight: "#123240",
+  primaryDark: "#04191F",
+  accent: "#056F62",
+  accentLight: "#6FE3CB",
+  accentDark: "#045A4F",
   black: "#000000",
   white: "#FFFFFF",
 } as const;

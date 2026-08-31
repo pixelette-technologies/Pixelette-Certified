@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import {
   Shield,
   Award,
@@ -14,17 +11,12 @@ import {
   Clock,
 } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
-import SectionLabel from "@/components/ui/SectionLabel";
+import Eyebrow from "@/components/ui/Eyebrow";
+import Pill from "@/components/ui/Pill";
+import StatTile from "@/components/ui/StatTile";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import Card from "@/components/ui/Card";
 import CTASection from "@/components/sections/CTASection";
-import {
-  fadeInUp,
-  fadeInLeft,
-  fadeInRight,
-  staggerContainer,
-  staggerItem,
-} from "@/lib/animations";
 
 const credentials = [
   {
@@ -104,205 +96,143 @@ const differentiators = [
   },
 ];
 
+const team = [
+  {
+    name: "Asif Rana Ashiq",
+    role: "CEO & Founder",
+    credentials: [] as string[],
+    bio: "Founder of the Pixelette Group with over a decade of experience building technology solutions across the UK, Middle East, and Europe. Established Pixelette Certified to give businesses of every size access to world-class compliance expertise at a fair price, delivered without the delays and overheads of traditional consultancy.",
+  },
+  {
+    name: "Muhammad Waleed",
+    role: "Lead Consultant",
+    credentials: ["ISO 27001 Lead Auditor (IRCA)", "ISO 42001 Lead Auditor (PECB)", "AIGP", "FIP", "CIPP/US", "CIPM", "CISA", "CEH"],
+    bio: "Leads all certification engagements and audit preparation. Holds ISO 27001 Lead Auditor (IRCA), ISO 42001 Lead Auditor (PECB), AIGP, FIP, CIPP/US, CIPM (all IAPP), CISA (ISACA), and CEH (EC-Council) credentials. One of the most comprehensively certified compliance practitioners in the UK market.",
+  },
+];
+
 export default function AboutContent() {
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, #14AAA9 1px, transparent 0)",
-            backgroundSize: "40px 40px",
-          }}
-        />
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 mb-8">
-          <Breadcrumbs dark items={[{ name: "About" }]} />
+      <section className="wash-left">
+        <div className="wrap py-16 lg:py-24">
+          <Breadcrumbs items={[{ name: "About" }]} />
+
+          <div className="mt-8 max-w-[56ch]">
+            <Eyebrow className="mb-5">About Us</Eyebrow>
+            <h1 className="h1p">
+              We built Pixelette Certified because businesses everywhere deserve better than slow, expensive, generic compliance consultancy.
+            </h1>
+            <p className="lead mt-6">
+              Founded by the team behind Pixelette Group, we combine over a decade of technology and business delivery experience with deep, practitioner-level compliance expertise.
+            </p>
+          </div>
         </div>
-        <motion.div
-          variants={fadeInUp}
-          initial="hidden"
-          animate="visible"
-          className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center"
-        >
-          <SectionLabel className="mb-4 block">About Us</SectionLabel>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-6">
-            We built Pixelette Certified because businesses everywhere deserve better than slow, expensive, generic compliance consultancy.
-          </h1>
-          <p className="text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            Founded by the team behind Pixelette Group, we combine over a decade of technology and business delivery experience with deep, practitioner-level compliance expertise.
-          </p>
-        </motion.div>
       </section>
 
       {/* Our Story */}
-      <section className="py-20 lg:py-28 bg-primary-dark/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <motion.div
-              variants={fadeInLeft}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <SectionLabel className="mb-3 block">Our Story</SectionLabel>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-6">
-                From building businesses to protecting them
-              </h2>
-              <div className="space-y-4 text-gray-300 leading-relaxed text-lg">
-                <p>
+      <section className="sec band-alt">
+        <div className="wrap">
+          <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
+            <div>
+              <Eyebrow className="mb-5">Our Story</Eyebrow>
+              <h2 className="h2 max-w-[20ch]">From building businesses to protecting them</h2>
+              <div className="mt-6 space-y-4">
+                <p className="body">
                   Pixelette Group has spent over 10 years delivering technology solutions for businesses across the UK, Middle East, Europe, North America, and Asia Pacific. We have built platforms, mobile applications, AI systems, and cloud infrastructure for organisations ranging from early-stage startups to large enterprise clients — across banking, healthcare, logistics, manufacturing, professional services, and beyond.
                 </p>
-                <p>
+                <p className="body">
                   Along the way, we saw a pattern that frustrated us. Businesses across every industry and every geography were losing contracts, failing procurement, and missing growth opportunities — not because their product was poor, but because they could not produce the right certification.
                 </p>
-                <p>
+                <p className="body">
                   The compliance consultancies they turned to were slow, expensive, and built for a different era. They did not understand modern business models, diverse industries, or the urgency of global regulatory pressure.
                 </p>
-                <p>
+                <p className="body">
                   We started Pixelette Certified to change that. A compliance consultancy built by practitioners, for businesses of every kind. Fast, structured, and designed for organisations that cannot afford to lose six months waiting for a certificate they needed yesterday — in any industry, in any market, anywhere in the world.
                 </p>
               </div>
-            </motion.div>
-            <motion.div
-              variants={fadeInRight}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="grid grid-cols-2 gap-4"
-            >
+            </div>
+
+            <div className="grid grid-cols-2 gap-3.5">
               {[
                 { value: "10+", label: "Years in technology" },
                 { value: "50+", label: "Certifications delivered" },
                 { value: "98%", label: "First-attempt pass rate" },
                 { value: "Global", label: "Worldwide delivery" },
               ].map((stat) => (
-                <Card
-                  key={stat.label}
-                  variant="glass"
-                  hover={false}
-                  className="text-center py-8"
-                >
-                  <div className="text-3xl lg:text-4xl font-extrabold text-accent mb-2">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-gray-400">{stat.label}</div>
-                </Card>
+                <StatTile key={stat.label} value={stat.value} label={stat.label} />
               ))}
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Credentials */}
-      <section className="py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="sec">
+        <div className="wrap">
           <SectionHeading
             label="Credentials"
             title="Qualified, certified, and accountable"
             description="Our consultants hold the industry's most respected qualifications. We do not just advise on compliance, we live it."
           />
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
-          >
+          <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
             {credentials.map((item) => (
-              <motion.div key={item.title} variants={staggerItem}>
-                <Card variant="glass" className="h-full text-center">
-                  <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-5">
-                    <item.icon className="h-7 w-7 text-accent" />
-                  </div>
-                  <h3 className="font-bold text-white text-lg mb-3">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    {item.description}
-                  </p>
-                </Card>
-              </motion.div>
+              <Card key={item.title} className="flex h-full flex-col">
+                <item.icon className="h-5 w-5 text-brand" strokeWidth={1.6} aria-hidden="true" />
+                <h3 className="h4 mt-4">{item.title}</h3>
+                <p className="small mt-2.5">{item.description}</p>
+              </Card>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Meet the Team */}
-      <section className="relative py-20 lg:py-28 bg-surface overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-surface via-white to-surface" />
-        <div className="absolute top-[30%] left-[-5%] w-[400px] h-[400px] rounded-full bg-accent/[0.04] blur-[100px] animate-float-slow" />
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="sec band-alt">
+        <div className="wrap">
           <SectionHeading
             label="Our Team"
             title="The people behind your certification"
             description="Senior consultants with real-world experience across information security, privacy, AI governance, and ethical hacking."
-            dark={false}
           />
 
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid sm:grid-cols-2 gap-8 max-w-2xl mx-auto"
-          >
-            {[
-              {
-                name: "Asif Rana Ashiq",
-                role: "CEO & Founder",
-                credentials: [],
-                bio: "Founder of the Pixelette Group with over a decade of experience building technology solutions across the UK, Middle East, and Europe. Established Pixelette Certified to give businesses of every size access to world-class compliance expertise at a fair price, delivered without the delays and overheads of traditional consultancy.",
-              },
-              {
-                name: "Muhammad Waleed",
-                role: "Lead Consultant",
-                credentials: ["ISO 27001 Lead Auditor (IRCA)", "ISO 42001 Lead Auditor (PECB)", "AIGP", "FIP", "CIPP/US", "CIPM", "CISA", "CEH"],
-                bio: "Leads all certification engagements and audit preparation. Holds ISO 27001 Lead Auditor (IRCA), ISO 42001 Lead Auditor (PECB), AIGP, FIP, CIPP/US, CIPM (all IAPP), CISA (ISACA), and CEH (EC-Council) credentials. One of the most comprehensively certified compliance practitioners in the UK market.",
-              },
-            ].map((member) => (
-              <motion.div key={member.name + member.role} variants={staggerItem}>
-                <div className="white-glass rounded-2xl p-6 h-full flex flex-col text-center group hover:-translate-y-2 transition-all duration-500">
-                  {/* Avatar placeholder */}
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-accent/20 to-accent-light/10 border-2 border-accent/20 flex items-center justify-center mx-auto mb-4 group-hover:border-accent/50 group-hover:shadow-glow transition-all duration-500">
-                    <span className="text-2xl font-extrabold gradient-text">
-                      {member.name === "To Be Announced" ? "?" : member.name.split(" ").map(n => n[0]).join("")}
-                    </span>
-                  </div>
+          <div className="grid max-w-3xl gap-3.5 sm:grid-cols-2">
+            {team.map((member) => (
+              <div key={member.name + member.role} className="card flex h-full flex-col">
+                {/* Initials */}
+                <div className="flex h-14 w-14 items-center justify-center rounded-full border border-line-strong">
+                  <span className="mono text-base font-medium text-brand">
+                    {member.name === "To Be Announced" ? "?" : member.name.split(" ").map((n) => n[0]).join("")}
+                  </span>
+                </div>
 
-                  <h3 className="font-bold text-primary text-lg group-hover:text-accent-dark transition-colors duration-300">
-                    {member.name}
-                  </h3>
-                  <p className="text-accent-dark text-sm font-semibold mt-1 mb-3">{member.role}</p>
+                <h3 className="h4 mt-5">{member.name}</h3>
+                <p className="mt-1 text-sm font-medium text-brand">{member.role}</p>
 
-                  {/* Credentials */}
-                  <div className="flex flex-wrap justify-center gap-1.5 mb-4">
+                {/* Credentials */}
+                {member.credentials.length > 0 && (
+                  <div className="mt-4 flex flex-wrap gap-2">
                     {member.credentials.slice(0, 4).map((cred) => (
-                      <span key={cred} className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-accent/10 text-accent-dark border border-accent/15">
-                        {cred}
-                      </span>
+                      <Pill key={cred}>{cred}</Pill>
                     ))}
                     {member.credentials.length > 4 && (
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gray-100 text-gray-500">
-                        +{member.credentials.length - 4} more
-                      </span>
+                      <Pill>+{member.credentials.length - 4} more</Pill>
                     )}
                   </div>
+                )}
 
-                  <p className="text-gray-600 text-sm leading-relaxed flex-1">{member.bio}</p>
-                </div>
-              </motion.div>
+                <p className="small mt-4 flex-1">{member.bio}</p>
+              </div>
             ))}
-          </motion.div>
+          </div>
 
           {/* Capacity statements */}
-          <div className="mt-12 max-w-3xl mx-auto space-y-4">
-            <p className="text-gray-600 text-sm leading-relaxed text-center">
+          <div className="mt-12 max-w-[72ch] space-y-4">
+            <p className="small">
               Backed by Pixelette Group&apos;s decade-long technology delivery team across the UK, Middle East, Europe, North America, and Asia Pacific, giving every engagement access to specialist input across SaaS, cloud infrastructure, AI systems, and software architecture.
             </p>
-            <p className="text-gray-600 text-sm leading-relaxed text-center">
+            <p className="small">
               We deliberately operate a low-volume, senior-led model. Every engagement is led by a credentialled practitioner, never handed to a junior. This is the engine behind our 98% first-attempt pass rate.
             </p>
           </div>
@@ -310,36 +240,21 @@ export default function AboutContent() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 lg:py-28 bg-surface">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="sec">
+        <div className="wrap">
           <SectionHeading
             label="Why Pixelette Certified"
             title="The unfair advantage your compliance deserves"
-            dark={false}
           />
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
+          <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
             {differentiators.map((item) => (
-              <motion.div key={item.title} variants={staggerItem}>
-                <Card variant="white" className="h-full">
-                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-5">
-                    <item.icon className="h-6 w-6 text-accent-dark" />
-                  </div>
-                  <h3 className="font-bold text-primary text-lg mb-3">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    {item.description}
-                  </p>
-                </Card>
-              </motion.div>
+              <Card key={item.title} className="flex h-full flex-col">
+                <item.icon className="h-5 w-5 text-brand" strokeWidth={1.6} aria-hidden="true" />
+                <h3 className="h4 mt-4">{item.title}</h3>
+                <p className="small mt-2.5">{item.description}</p>
+              </Card>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 

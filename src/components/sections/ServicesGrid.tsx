@@ -1,13 +1,10 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Shield, ShieldCheck, Globe, Leaf, Brain, Lock, UserCheck, FileSearch, Bug, Scale } from "lucide-react";
+import { Shield, ShieldCheck, Globe, Leaf, Brain, Lock, UserCheck, FileSearch, Bug, Scale } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { staggerContainer, staggerItem } from "@/lib/animations";
+import { ArrowRight } from "@/components/ui/icons";
 import { services } from "@/data/services";
 
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+const iconMap: Record<string, React.ComponentType<{ className?: string; strokeWidth?: number }>> = {
   "iso-27001": Shield,
   "iso-22301": ShieldCheck,
   "iso-9001": Globe,
@@ -27,58 +24,38 @@ const PAGES_WITH_ROUTES = new Set([
 
 export default function ServicesGrid() {
   return (
-    <section className="relative py-20 lg:py-28 bg-gradient-dark overflow-hidden">
-      {/* Floating orbs */}
-      <div className="absolute top-[10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-accent/[0.03] blur-[100px] animate-float-slow" />
-      <div className="absolute bottom-[10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-accent-light/[0.02] blur-[80px] animate-float-slower" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
+    <section className="sec">
+      <div className="wrap">
         <SectionHeading
           label="Our Services"
           title="One Partner for ISO, Cyber Security, AI Governance, and Privacy"
           description="From ISO certification to ongoing security leadership, we cover the full compliance landscape for businesses across every industry, in every market."
         />
 
-        <motion.div
-          variants={staggerContainer}
-          initial="visible"
-          animate="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
-        >
+        <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {services.filter((service) => PAGES_WITH_ROUTES.has(service.slug)).map((service) => {
             const IconComponent = iconMap[service.slug] || Shield;
             return (
-              <motion.div key={service.slug} variants={staggerItem}>
-                <Link
-                  href={`/services/${service.slug}`}
-                  aria-label={`Learn more about ${service.shortTitle}, ${service.description}`}
-                  className="group flex flex-col h-full rounded-2xl p-6 glass-card transition-all duration-500 hover:-translate-y-2"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mb-4 group-hover:border-accent/50 group-hover:shadow-glow transition-all duration-500">
-                    <IconComponent className="h-6 w-6 text-accent" />
-                  </div>
-                  <h3 className="font-bold text-white mb-2 group-hover:text-accent transition-colors duration-300">
-                    {service.shortTitle}
-                  </h3>
-                  <p className="text-sm text-gray-300 mb-4 flex-1">
-                    {service.description}
-                  </p>
-                  <span className="text-sm font-semibold text-accent inline-flex items-center gap-1 group-hover:gap-2 transition-all duration-300">
-                    Learn more <ArrowRight className="h-4 w-4" />
-                  </span>
-                </Link>
-              </motion.div>
+              <Link
+                key={service.slug}
+                href={`/services/${service.slug}`}
+                aria-label={`Learn more about ${service.shortTitle}, ${service.description}`}
+                className="card flex h-full flex-col p-6 transition-colors duration-150 hover:border-line-strong"
+              >
+                <IconComponent className="h-5 w-5 text-brand" strokeWidth={1.6} />
+                <h3 className="h4 mt-4">{service.shortTitle}</h3>
+                <p className="small mt-2 flex-1">{service.description}</p>
+                <span className="flink mt-4 text-sm font-medium text-brand">
+                  Learn more <ArrowRight size={14} />
+                </span>
+              </Link>
             );
           })}
-        </motion.div>
+        </div>
 
         <div className="mt-10 text-center">
-          <Link
-            href="/services"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent-light transition-colors"
-          >
-            View all services <ArrowRight className="h-4 w-4" />
+          <Link href="/services" className="flink text-sm font-medium text-brand hover:text-brand-hover">
+            View all services <ArrowRight size={14} />
           </Link>
         </div>
       </div>

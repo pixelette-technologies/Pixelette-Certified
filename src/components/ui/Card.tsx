@@ -1,48 +1,48 @@
 import { cn } from "@/lib/utils";
 
-type CardVariant = "glass" | "white" | "dark" | "glow";
+type CardVariant =
+  | "default" // .card
+  | "feature" // .card + 3px brand top border — highlighted pricing tier
+  | "flat" // .tile geometry: 4px radius, tighter padding, single hairline shadow
+  | "band" // card sitting on the alternate band
+  | "dark"; // .panel
 
 interface CardProps {
   children: React.ReactNode;
   variant?: CardVariant;
   className?: string;
+  /**
+   * Interactive affordance. The system is static, so this only strengthens the
+   * border on hover — no lift, no shadow change. Note the default is now false;
+   * it was true, which put hover:-translate-y-2 on every card on the site.
+   */
   hover?: boolean;
+  as?: "div" | "article" | "li";
 }
 
 export default function Card({
   children,
-  variant = "glass",
+  variant = "default",
   className,
-  hover = true,
+  hover = false,
+  as: Tag = "div",
 }: CardProps) {
-  if (variant === "glow") {
-    return (
-      <div
-        className={cn(
-          "glow-border rounded-2xl p-8 text-white transition-all duration-500",
-          hover && "hover:-translate-y-2 hover:shadow-glow-lg",
-          className
-        )}
-      >
-        {children}
-      </div>
-    );
-  }
+  const resolved = variant;
 
   return (
-    <div
+    <Tag
       className={cn(
-        "rounded-2xl p-8 transition-all duration-500",
-        variant === "glass" && "glass-card text-white",
-        variant === "white" && "white-glass text-primary",
-        variant === "dark" && "bg-gradient-to-br from-primary-dark to-primary border border-white/10 text-white shadow-glow",
-        hover && "hover:-translate-y-2",
-        hover && variant === "glass" && "hover:shadow-glow-lg",
-        hover && variant === "white" && "hover:shadow-glow",
+        resolved === "flat" ? "tile" : "card",
+        resolved === "feature" && "card-feature",
+        resolved === "band" && "bg-band",
+        resolved === "dark" && "panel",
+        hover && "transition-colors duration-150",
+        hover && resolved !== "dark" && "hover:border-line-strong",
+        hover && resolved === "dark" && "hover:border-panel-cta-line",
         className
       )}
     >
       {children}
-    </div>
+    </Tag>
   );
 }

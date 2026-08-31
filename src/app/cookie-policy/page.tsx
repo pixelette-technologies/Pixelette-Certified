@@ -13,19 +13,19 @@ export const metadata: Metadata = {
 
 export default function CookiePolicyPage() {
   return (
-    <article className="py-24 lg:py-32">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6">
+    <article className="py-16 lg:py-24">
+      <div className="wrap max-w-[820px]">
         <div className="mb-8">
-          <Breadcrumbs dark items={[{ name: "Cookie Policy" }]} />
+          <Breadcrumbs items={[{ name: "Cookie Policy" }]} />
         </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold gradient-text-white tracking-tight mb-4">
+        <h1 className="h1p mb-4">
           Cookie Policy
         </h1>
-        <p className="text-gray-400 mb-12">Last updated: 1 April 2026</p>
+        <p className="small mb-12">Last updated: 1 April 2026</p>
 
-        <div className="space-y-8 text-gray-300 leading-relaxed">
+        <div className="space-y-10 leading-relaxed text-body">
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">1. What Are Cookies</h2>
+            <h2 className="h3 mb-3">1. What Are Cookies</h2>
             <p>
               Cookies are small text files stored on your device when you visit a website. They help the
               website remember your preferences and understand how you interact with the site. We use cookies
@@ -34,9 +34,9 @@ export default function CookiePolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">2. Cookies We Use</h2>
+            <h2 className="h3 mb-3">2. Cookies We Use</h2>
 
-            <h3 className="text-lg font-semibold text-accent mt-4 mb-2">Essential Cookies</h3>
+            <h3 className="h4 mt-4 mb-2 text-brand">Essential Cookies</h3>
             <p>
               These cookies are necessary for the website to function and cannot be switched off. They are
               usually set in response to actions you take, such as setting your privacy preferences or
@@ -44,22 +44,22 @@ export default function CookiePolicyPage() {
               may not function as a result.
             </p>
             <div className="mt-3 overflow-x-auto">
-              <table className="w-full text-sm border border-white/10 rounded-lg overflow-hidden">
+              <table className="w-full overflow-hidden rounded-lg border border-line-card text-sm">
                 <thead>
-                  <tr className="bg-white/5">
-                    <th className="text-left px-4 py-2 font-semibold text-white">Cookie</th>
-                    <th className="text-left px-4 py-2 font-semibold text-white">Purpose</th>
-                    <th className="text-left px-4 py-2 font-semibold text-white">Duration</th>
+                  <tr className="bg-band">
+                    <th className="px-4 py-2 text-left font-semibold text-ink">Cookie</th>
+                    <th className="px-4 py-2 text-left font-semibold text-ink">Purpose</th>
+                    <th className="px-4 py-2 text-left font-semibold text-ink">Duration</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/5">
+                <tbody className="divide-y divide-line">
                   <tr>
-                    <td className="px-4 py-2 text-accent">__next_*</td>
+                    <td className="px-4 py-2 text-brand">__next_*</td>
                     <td className="px-4 py-2">Next.js framework session and routing</td>
                     <td className="px-4 py-2">Session</td>
                   </tr>
                   <tr>
-                    <td className="px-4 py-2 text-accent">cookie_consent</td>
+                    <td className="px-4 py-2 text-brand">cookie_consent</td>
                     <td className="px-4 py-2">Stores your cookie consent preference</td>
                     <td className="px-4 py-2">12 months</td>
                   </tr>
@@ -67,28 +67,28 @@ export default function CookiePolicyPage() {
               </table>
             </div>
 
-            <h3 className="text-lg font-semibold text-accent mt-6 mb-2">Analytics Cookies</h3>
+            <h3 className="h4 mt-6 mb-2 text-brand">Analytics Cookies</h3>
             <p>
               These cookies help us understand how visitors interact with our website by collecting and
               reporting information anonymously. We use this data to improve our site.
             </p>
             <div className="mt-3 overflow-x-auto">
-              <table className="w-full text-sm border border-white/10 rounded-lg overflow-hidden">
+              <table className="w-full overflow-hidden rounded-lg border border-line-card text-sm">
                 <thead>
-                  <tr className="bg-white/5">
-                    <th className="text-left px-4 py-2 font-semibold text-white">Cookie</th>
-                    <th className="text-left px-4 py-2 font-semibold text-white">Purpose</th>
-                    <th className="text-left px-4 py-2 font-semibold text-white">Duration</th>
+                  <tr className="bg-band">
+                    <th className="px-4 py-2 text-left font-semibold text-ink">Cookie</th>
+                    <th className="px-4 py-2 text-left font-semibold text-ink">Purpose</th>
+                    <th className="px-4 py-2 text-left font-semibold text-ink">Duration</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/5">
+                <tbody className="divide-y divide-line">
                   <tr>
-                    <td className="px-4 py-2 text-accent">_ga, _ga_*</td>
+                    <td className="px-4 py-2 text-brand">_ga, _ga_*</td>
                     <td className="px-4 py-2">Google Analytics 4, anonymised usage tracking</td>
                     <td className="px-4 py-2">2 years</td>
                   </tr>
                   <tr>
-                    <td className="px-4 py-2 text-accent">va_*</td>
+                    <td className="px-4 py-2 text-brand">va_*</td>
                     <td className="px-4 py-2">Vercel Analytics, page performance monitoring</td>
                     <td className="px-4 py-2">Session</td>
                   </tr>
@@ -98,7 +98,7 @@ export default function CookiePolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">3. Managing Cookies</h2>
+            <h2 className="h3 mb-3">3. Managing Cookies</h2>
             <p>
               You can control and delete cookies through your browser settings. Most browsers allow you to:
             </p>
@@ -115,7 +115,7 @@ export default function CookiePolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">4. Third-Party Cookies</h2>
+            <h2 className="h3 mb-3">4. Third-Party Cookies</h2>
             <p>
               We do not use third-party advertising cookies. The only third-party cookies on our site are
               from analytics providers (Google Analytics and Vercel Analytics), which collect anonymised
@@ -124,7 +124,7 @@ export default function CookiePolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">5. Changes to This Policy</h2>
+            <h2 className="h3 mb-3">5. Changes to This Policy</h2>
             <p>
               We may update this cookie policy from time to time. Any changes will be posted on this page
               with an updated revision date.
@@ -132,14 +132,14 @@ export default function CookiePolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">6. Contact Us</h2>
+            <h2 className="h3 mb-3">6. Contact Us</h2>
             <p>
               If you have questions about our use of cookies, please contact us at{" "}
-              <a href="mailto:privacy@pixelettecertified.com" className="text-accent hover:text-accent-light transition-colors">
+              <a href="mailto:privacy@pixelettecertified.com" className="link">
                 privacy@pixelettecertified.com
               </a>{" "}
               or visit our{" "}
-              <Link href="/privacy-policy" className="text-accent hover:text-accent-light transition-colors">
+              <Link href="/privacy-policy" className="link">
                 Privacy Policy
               </Link>.
             </p>

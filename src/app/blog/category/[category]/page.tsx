@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import SectionHeading from "@/components/ui/SectionHeading";
+import Pill from "@/components/ui/Pill";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import { allCategories, categorySlug, postsByCategorySlug } from "@/lib/categories";
 
@@ -54,55 +55,55 @@ export default async function BlogCategoryPage({
   const { category, posts } = result;
 
   return (
-    <section className="relative py-24 lg:py-32">
-      <div className="absolute inset-0 bg-gradient-to-b from-primary-dark via-primary to-primary-dark pointer-events-none" />
+    <>
+      <section className="wash-left">
+        <div className="wrap py-16 lg:py-24">
+          <Breadcrumbs items={[{ name: "Blog", href: "/blog" }, { name: category }]} />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <Breadcrumbs dark items={[{ name: "Blog", href: "/blog" }, { name: category }]} />
+          <SectionHeading
+            as="h1"
+            variant="h1p"
+            label="Category"
+            title={category}
+            description={`Guides and insights on ${category}, written by UK-credentialled compliance practitioners.`}
+            className="mt-8 mb-0"
+          />
         </div>
+      </section>
 
-        <SectionHeading
-          as="h1"
-          label="Category"
-          title={category}
-          description={`Guides and insights on ${category}, written by UK-credentialled compliance practitioners.`}
-        />
-
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => (
-            <Link key={post.slug} href={`/blog/${post.slug}`} className="block h-full">
-              <div className="h-full flex flex-col rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 p-6 hover:bg-white/10 transition-all duration-300">
-                <span className="inline-block self-start px-3 py-1 text-xs font-bold uppercase tracking-wider text-accent bg-accent/10 border border-accent/20 rounded-full mb-4">
-                  {post.category}
-                </span>
-                <h2 className="text-xl font-bold text-white mb-3 leading-tight">
-                  {post.title}
-                </h2>
-                <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-1">
-                  {post.description}
-                </p>
-                <div className="flex items-center gap-3 text-xs text-gray-500 pt-4 border-t border-white/10">
+      <section className="sec band-alt">
+        <div className="wrap">
+          <div className="grid gap-3.5 md:grid-cols-2 lg:grid-cols-3">
+            {posts.map((post) => (
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className="card flex h-full flex-col transition-colors duration-150 hover:border-line-strong"
+              >
+                <Pill tone="brand" className="self-start">{post.category}</Pill>
+                <h2 className="h4 mt-5 leading-snug">{post.title}</h2>
+                <p className="small mt-3 flex-1">{post.description}</p>
+                <div className="mono mt-6 flex items-center gap-3 border-t border-line pt-4 text-[11px] text-soft">
                   <span>{post.readingTime}</span>
                 </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
 
-        <div className="mt-16 flex flex-wrap items-center gap-2">
-          <span className="text-sm text-gray-500 mr-2">Browse by category:</span>
-          {allCategories().map((c) => (
-            <Link
-              key={c}
-              href={`/blog/category/${categorySlug(c)}`}
-              className="px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full border transition-colors text-gray-300 bg-white/5 border-white/10 hover:bg-white/10"
-            >
-              {c}
-            </Link>
-          ))}
+          <div className="mt-16 flex flex-wrap items-center gap-2">
+            <span className="small mr-2">Browse by category:</span>
+            {allCategories().map((c) => (
+              <Link
+                key={c}
+                href={`/blog/category/${categorySlug(c)}`}
+                className="pill min-h-[44px] transition-colors hover:border-brand hover:text-brand"
+              >
+                {c}
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

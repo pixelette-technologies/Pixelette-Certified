@@ -1,14 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import {
   Mail,
   Phone,
   MapPin,
   Send,
-  CheckCircle,
   AlertCircle,
   Shield,
   Clock,
@@ -16,11 +14,11 @@ import {
   Award,
   Globe,
 } from "lucide-react";
-import SectionLabel from "@/components/ui/SectionLabel";
+import Eyebrow from "@/components/ui/Eyebrow";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
-import { fadeInUp, fadeInLeft, fadeInRight } from "@/lib/animations";
+import { Check } from "@/components/ui/icons";
 import { SITE_CONFIG } from "@/lib/constants";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { SERVICE_OPTIONS, CONSENT_NOTICE, CONTACT_LIMITS } from "@/lib/contact/constants";
@@ -86,80 +84,58 @@ export default function ContactContent() {
     }
   }
 
-  const inputClasses =
-    "w-full rounded-lg bg-white/5 border border-white/10 px-4 py-3 text-white placeholder-gray-500 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors text-sm";
-
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-32 pb-12 lg:pt-40 lg:pb-16 overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, #14AAA9 1px, transparent 0)",
-            backgroundSize: "40px 40px",
-          }}
-        />
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 mb-8">
-          <Breadcrumbs dark items={[{ name: "Contact" }]} />
+      <section className="wash-left">
+        <div className="wrap py-16 lg:py-20">
+          <Breadcrumbs items={[{ name: "Contact" }]} />
+
+          <div className="mt-8 max-w-[52ch]">
+            <Eyebrow className="mb-5">Contact</Eyebrow>
+            <h1 className="h1p">Book your free gap analysis, wherever you are in the world.</h1>
+            <p className="lead mt-6">
+              Whether you are based in London or Lagos, Dubai or Dublin, New York or Nairobi, we are here to help. Fill in the form and a senior compliance consultant will respond within 1 working day.
+            </p>
+          </div>
         </div>
-        <motion.div
-          variants={fadeInUp}
-          initial="hidden"
-          animate="visible"
-          className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center"
-        >
-          <SectionLabel className="mb-4 block">Contact</SectionLabel>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-6">
-            Book your free gap analysis, wherever you are in the world.
-          </h1>
-          <p className="text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            Whether you are based in London or Lagos, Dubai or Dublin, New York or Nairobi, we are here to help. Fill in the form and a senior compliance consultant will respond within 1 working day.
-          </p>
-        </motion.div>
       </section>
 
       {/* Form + Info */}
-      <section className="py-12 lg:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
+      <section className="sec">
+        <div className="wrap">
+          {/* The guide puts the detail column left and the form right. The form
+              stays first in source order so keyboard and screen-reader users
+              reach it first; the columns are re-ordered visually at lg. */}
+          <div className="grid gap-12 lg:grid-cols-5 lg:gap-16">
             {/* Left: Form */}
-            <motion.div
-              variants={fadeInLeft}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="lg:col-span-3"
-            >
-              <Card variant="glass" hover={false}>
-                <h2 className="text-2xl font-bold text-white mb-4">
-                  Book a Free ISO 27001 Gap Analysis
-                </h2>
+            <div className="lg:order-2 lg:col-span-3">
+              <Card>
+                <h2 className="h3">Book a Free ISO 27001 Gap Analysis</h2>
 
-                <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                <p className="small mt-4">
                   Tell us about your organisation, your target certification, and your timeline. We will review your enquiry and come back to you within 1 working day with a clear, honest assessment of your next steps. No sales pressure. No obligation.
                 </p>
 
                 {status === "success" ? (
-                  <div className="flex flex-col items-center text-center py-12">
-                    <CheckCircle className="h-16 w-16 text-accent mb-4" />
-                    <h3 className="text-xl font-bold text-white mb-2">
-                      Message sent
-                    </h3>
-                    <p className="text-gray-400 max-w-sm">
+                  <div className="flex flex-col items-center py-12 text-center">
+                    <span className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full border border-brand text-brand">
+                      <Check size={20} />
+                    </span>
+                    <h3 className="h4">Message sent</h3>
+                    <p className="small mt-2 max-w-sm">
                       Thank you for getting in touch. A member of our team will
                       respond within one working day.
                     </p>
                     <button
                       onClick={() => setStatus("idle")}
-                      className="mt-6 text-accent hover:text-accent-light transition-colors text-sm font-semibold"
+                      className="mt-6 min-h-[44px] text-sm font-medium text-brand transition-colors hover:text-brand-hover"
                     >
                       Send another message
                     </button>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-5">
+                  <form onSubmit={handleSubmit} className="mt-8 space-y-5">
                     {/* Honeypot — hidden from humans; any submission that fills
                         it is silently dropped on the server. */}
                     <div
@@ -178,12 +154,9 @@ export default function ContactContent() {
                       />
                     </div>
 
-                    <div className="grid sm:grid-cols-2 gap-5">
+                    <div className="grid gap-5 sm:grid-cols-2">
                       <div>
-                        <label
-                          htmlFor="name"
-                          className="block text-sm font-semibold text-gray-300 mb-1.5"
-                        >
+                        <label htmlFor="name" className="label">
                           Full name *
                         </label>
                         <input
@@ -195,14 +168,11 @@ export default function ContactContent() {
                           placeholder="Your name"
                           value={form.name}
                           onChange={handleChange}
-                          className={inputClasses}
+                          className="input"
                         />
                       </div>
                       <div>
-                        <label
-                          htmlFor="email"
-                          className="block text-sm font-semibold text-gray-300 mb-1.5"
-                        >
+                        <label htmlFor="email" className="label">
                           Email address *
                         </label>
                         <input
@@ -214,17 +184,14 @@ export default function ContactContent() {
                           placeholder="you@company.com"
                           value={form.email}
                           onChange={handleChange}
-                          className={inputClasses}
+                          className="input"
                         />
                       </div>
                     </div>
 
-                    <div className="grid sm:grid-cols-2 gap-5">
+                    <div className="grid gap-5 sm:grid-cols-2">
                       <div>
-                        <label
-                          htmlFor="company"
-                          className="block text-sm font-semibold text-gray-300 mb-1.5"
-                        >
+                        <label htmlFor="company" className="label">
                           Company
                         </label>
                         <input
@@ -235,14 +202,11 @@ export default function ContactContent() {
                           placeholder="Your company name"
                           value={form.company}
                           onChange={handleChange}
-                          className={inputClasses}
+                          className="input"
                         />
                       </div>
                       <div>
-                        <label
-                          htmlFor="phone"
-                          className="block text-sm font-semibold text-gray-300 mb-1.5"
-                        >
+                        <label htmlFor="phone" className="label">
                           Phone number
                         </label>
                         <input
@@ -253,16 +217,13 @@ export default function ContactContent() {
                           placeholder="+44 ..."
                           value={form.phone}
                           onChange={handleChange}
-                          className={inputClasses}
+                          className="input"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label
-                        htmlFor="country"
-                        className="block text-sm font-semibold text-gray-300 mb-1.5"
-                      >
+                      <label htmlFor="country" className="label">
                         Country / Region
                       </label>
                       <input
@@ -273,15 +234,12 @@ export default function ContactContent() {
                         placeholder="e.g. United Kingdom, UAE, United States..."
                         value={form.country}
                         onChange={handleChange}
-                        className={inputClasses}
+                        className="input"
                       />
                     </div>
 
                     <div>
-                      <label
-                        htmlFor="service"
-                        className="block text-sm font-semibold text-gray-300 mb-1.5"
-                      >
+                      <label htmlFor="service" className="label">
                         Service interest
                       </label>
                       <select
@@ -289,13 +247,11 @@ export default function ContactContent() {
                         name="service"
                         value={form.service}
                         onChange={handleChange}
-                        className={`${inputClasses} appearance-none`}
+                        className="select"
                       >
-                        <option value="" className="bg-primary">
-                          Select a service...
-                        </option>
+                        <option value="">Select a service...</option>
                         {SERVICE_OPTIONS.map((opt) => (
-                          <option key={opt} value={opt} className="bg-primary">
+                          <option key={opt} value={opt}>
                             {opt}
                           </option>
                         ))}
@@ -303,10 +259,7 @@ export default function ContactContent() {
                     </div>
 
                     <div>
-                      <label
-                        htmlFor="message"
-                        className="block text-sm font-semibold text-gray-300 mb-1.5"
-                      >
+                      <label htmlFor="message" className="label">
                         Message *
                       </label>
                       <textarea
@@ -318,7 +271,7 @@ export default function ContactContent() {
                         placeholder="Tell us about your project, timeline, and any specific requirements..."
                         value={form.message}
                         onChange={handleChange}
-                        className={`${inputClasses} resize-none`}
+                        className="textarea"
                       />
                     </div>
 
@@ -334,23 +287,23 @@ export default function ContactContent() {
                         onChange={(e) =>
                           setForm((prev) => ({ ...prev, gdprConsent: e.target.checked }))
                         }
-                        className="mt-1 h-4 w-4 shrink-0 rounded border-white/20 bg-white/5 text-accent accent-accent focus:ring-accent cursor-pointer"
+                        className="mt-1 h-4 w-4 shrink-0 cursor-pointer rounded-[3px] border-line-strong accent-[var(--color-brand)]"
                       />
-                      <label htmlFor="gdprConsent" className="text-sm text-gray-400 leading-relaxed cursor-pointer">
+                      <label htmlFor="gdprConsent" className="small cursor-pointer">
                         I agree to Pixelette Certified processing my personal data to respond to this enquiry, in accordance with our{" "}
                         <a
                           href="/privacy-policy"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-accent hover:text-accent-light transition-colors underline"
+                          className="link underline"
                         >
                           Privacy Policy
-                        </a>. <span className="text-accent">*</span>
+                        </a>. <span className="text-brand">*</span>
                       </label>
                     </div>
 
                     {/* Transparency notice: lawful basis, retention, and how to withdraw */}
-                    <p className="text-xs text-gray-500 leading-relaxed">{CONSENT_NOTICE}</p>
+                    <p className="src">{CONSENT_NOTICE}</p>
 
                     {/* Invisible Cloudflare Turnstile — same setup Alice uses.
                         Verified server-side when CONTACT_TURNSTILE_ENABLED=true. */}
@@ -361,14 +314,14 @@ export default function ContactContent() {
                           onSuccess={(token) => setTurnstileToken(token)}
                           onError={() => setTurnstileToken(null)}
                           onExpire={() => setTurnstileToken(null)}
-                          options={{ theme: "dark", size: "invisible" }}
+                          options={{ theme: "light", size: "invisible" }}
                         />
                       </div>
                     )}
 
                     {status === "error" && (
-                      <div className="flex items-center gap-2 text-red-400 text-sm">
-                        <AlertCircle className="h-4 w-4 shrink-0" />
+                      <div className="field-error flex items-center gap-2" role="alert">
+                        <AlertCircle className="h-4 w-4 shrink-0" strokeWidth={1.6} />
                         <span>{errorMsg}</span>
                       </div>
                     )}
@@ -383,7 +336,7 @@ export default function ContactContent() {
                         "Sending..."
                       ) : (
                         <>
-                          <Send className="h-4 w-4" />
+                          <Send className="h-4 w-4" strokeWidth={1.6} />
                           Send Message &amp; Request Gap Analysis
                         </>
                       )}
@@ -391,79 +344,63 @@ export default function ContactContent() {
                   </form>
                 )}
               </Card>
-            </motion.div>
+            </div>
 
             {/* Right: Info */}
-            <motion.div
-              variants={fadeInRight}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="lg:col-span-2 space-y-6"
-            >
+            <div className="space-y-3.5 lg:order-1 lg:col-span-2">
               {/* Contact details */}
-              <Card variant="glass" hover={false}>
-                <h3 className="text-lg font-bold text-white mb-5">
-                  Contact information
-                </h3>
-                <ul className="space-y-4">
+              <Card>
+                <h3 className="h4">Contact information</h3>
+                <ul className="mt-5 list-none space-y-4">
                   <li className="flex items-start gap-3">
-                    <Mail className="h-5 w-5 text-accent mt-0.5 shrink-0" />
+                    <Mail className="mt-0.5 h-5 w-5 shrink-0 text-brand" strokeWidth={1.6} />
                     <div>
-                      <p className="text-sm text-gray-400">Email</p>
+                      <p className="small">Email</p>
                       <a
                         href={`mailto:${SITE_CONFIG.email}`}
-                        className="text-white hover:text-accent transition-colors font-medium"
+                        className="font-medium text-ink transition-colors hover:text-brand"
                       >
                         {SITE_CONFIG.email}
                       </a>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
-                    <Phone className="h-5 w-5 text-accent mt-0.5 shrink-0" />
+                    <Phone className="mt-0.5 h-5 w-5 shrink-0 text-brand" strokeWidth={1.6} />
                     <div>
-                      <p className="text-sm text-gray-400">Phone</p>
+                      <p className="small">Phone</p>
                       <a
                         href={`tel:${SITE_CONFIG.phoneTel}`}
-                        className="text-white hover:text-accent transition-colors font-medium"
+                        className="font-medium text-ink transition-colors hover:text-brand"
                       >
                         {SITE_CONFIG.phone}
                       </a>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
-                    <MapPin className="h-5 w-5 text-accent mt-0.5 shrink-0" />
+                    <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-brand" strokeWidth={1.6} />
                     <div>
-                      <p className="text-sm text-gray-400">Office</p>
-                      <p className="text-white font-medium">
-                        {SITE_CONFIG.address}
-                      </p>
+                      <p className="small">Office</p>
+                      <p className="font-medium text-ink">{SITE_CONFIG.address}</p>
                     </div>
                   </li>
                 </ul>
               </Card>
 
               {/* Gap Analysis explainer */}
-              <Card variant="glass" hover={false}>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
-                    <FileSearch className="h-5 w-5 text-accent" />
-                  </div>
-                  <h3 className="text-lg font-bold text-white">
-                    What is a Gap Analysis?
-                  </h3>
+              <Card>
+                <div className="flex items-center gap-3">
+                  <FileSearch className="h-5 w-5 shrink-0 text-brand" strokeWidth={1.6} />
+                  <h3 className="h4">What is a Gap Analysis?</h3>
                 </div>
-                <p className="text-gray-400 text-sm leading-relaxed">
+                <p className="small mt-4">
                   A gap analysis is a structured assessment of your current policies, processes, and controls against the requirements of your target certification standard, ISO 27001, ISO 42001, ISO 9001, ISO 22301, Cyber Essentials, GDPR, or any other standard you are pursuing. The output is a clear report showing where you meet requirements, where you have gaps, and a prioritised roadmap to close them. It is the fastest way to understand your path to certification, regardless of your industry, your size, or your location. And it is completely free.
                 </p>
               </Card>
 
               {/* Trust signals */}
-              <Card variant="glass" hover={false}>
-                <h3 className="text-lg font-bold text-white mb-4">
-                  Why work with us
-                </h3>
-                <ul className="space-y-3">
+              <Card>
+                <h3 className="h4">Why work with us</h3>
+                <ul className="mt-4 list-none space-y-3">
                   {[
                     {
                       icon: Shield,
@@ -486,49 +423,37 @@ export default function ContactContent() {
                       text: "Response within 1 working day, guaranteed",
                     },
                   ].map((item) => (
-                    <li
-                      key={item.text}
-                      className="flex items-start gap-3 text-sm"
-                    >
-                      <item.icon className="h-4 w-4 text-accent mt-0.5 shrink-0" />
-                      <span className="text-gray-300">{item.text}</span>
+                    <li key={item.text} className="flex items-start gap-3">
+                      <item.icon className="mt-0.5 h-4 w-4 shrink-0 text-brand" strokeWidth={1.6} />
+                      <span className="small">{item.text}</span>
                     </li>
                   ))}
                 </ul>
               </Card>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* What happens after you contact us */}
-      <section className="py-12 lg:py-20">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <Card variant="glass" hover={false}>
-              <h2 className="text-2xl font-bold text-white mb-4">
-                What happens after you contact us
-              </h2>
-              <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                Within 1 working day, a senior compliance consultant will review your enquiry and respond directly. We will ask a few focused questions about your organisation, your target certification, ISO 27001, ISO 42001, ISO 9001, Cyber Essentials, GDPR, or another standard, and your timeline and budget. From there we will schedule your free 30-minute gap analysis call and give you a clear, honest assessment of your path to certification. Timeline, cost, and scope, confirmed upfront. No surprises.
-              </p>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Not sure which certification you need? View our{" "}
-                <Link href="/services" className="text-accent hover:text-accent-light transition-colors">
-                  full services
-                </Link>{" "}
-                or explore{" "}
-                <Link href="/industries" className="text-accent hover:text-accent-light transition-colors">
-                  by industry
-                </Link>.
-              </p>
-            </Card>
-          </motion.div>
+      <section className="sec band-alt">
+        <div className="wrap max-w-[900px]">
+          <Card>
+            <h2 className="h3">What happens after you contact us</h2>
+            <p className="small mt-4">
+              Within 1 working day, a senior compliance consultant will review your enquiry and respond directly. We will ask a few focused questions about your organisation, your target certification, ISO 27001, ISO 42001, ISO 9001, Cyber Essentials, GDPR, or another standard, and your timeline and budget. From there we will schedule your free 30-minute gap analysis call and give you a clear, honest assessment of your path to certification. Timeline, cost, and scope, confirmed upfront. No surprises.
+            </p>
+            <p className="small mt-4">
+              Not sure which certification you need? View our{" "}
+              <Link href="/services" className="link">
+                full services
+              </Link>{" "}
+              or explore{" "}
+              <Link href="/industries" className="link">
+                by industry
+              </Link>.
+            </p>
+          </Card>
         </div>
       </section>
     </>

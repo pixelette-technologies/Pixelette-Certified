@@ -13,45 +13,45 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <article className="py-24 lg:py-32">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6">
+    <article className="py-16 lg:py-24">
+      <div className="wrap max-w-[820px]">
         <div className="mb-8">
-          <Breadcrumbs dark items={[{ name: "Privacy Policy" }]} />
+          <Breadcrumbs items={[{ name: "Privacy Policy" }]} />
         </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold gradient-text-white tracking-tight mb-4">
+        <h1 className="h1p mb-4">
           Privacy Policy
         </h1>
-        <p className="text-gray-400 mb-12">Last updated: 1 April 2026</p>
+        <p className="small mb-12">Last updated: 1 April 2026</p>
 
-        <div className="prose-custom space-y-8 text-gray-300 leading-relaxed">
+        <div className="space-y-10 leading-relaxed text-body">
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">1. Who We Are</h2>
+            <h2 className="h3 mb-3">1. Who We Are</h2>
             <p>
               Pixelette Certified is a trading name of Pixelette Group Ltd, registered in England and Wales
               under company number 07251823. We are a UK-based ISO certification and compliance consultancy.
               For the purposes of UK GDPR, Pixelette Group Ltd is the data controller.
             </p>
             <p className="mt-2">
-              <strong className="text-white">Email:</strong>{" "}
-              <a href="mailto:privacy@pixelettecertified.com" className="text-accent hover:text-accent-light transition-colors">
+              <strong className="font-semibold text-ink">Email:</strong>{" "}
+              <a href="mailto:privacy@pixelettecertified.com" className="link">
                 privacy@pixelettecertified.com
               </a>
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">2. What Data We Collect</h2>
+            <h2 className="h3 mb-3">2. What Data We Collect</h2>
             <p>We collect the following personal data when you interact with our website:</p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
-              <li><strong className="text-white">Contact form submissions:</strong> name, email address, company name, phone number, service interest, and message content.</li>
-              <li><strong className="text-white">Live chat interactions:</strong> messages exchanged with our website chat assistant. Chat messages are processed in your browser session only and are not stored on our servers.</li>
-              <li><strong className="text-white">Website analytics:</strong> anonymised usage data including pages visited, time on site, referral source, and device type (via Vercel Analytics or Google Analytics 4).</li>
-              <li><strong className="text-white">Cookies:</strong> essential cookies for site functionality and optional analytics cookies. See our <Link href="/cookie-policy" className="text-accent hover:text-accent-light transition-colors">Cookie Policy</Link> for details.</li>
+              <li><strong className="font-semibold text-ink">Contact form submissions:</strong> name, email address, company name, phone number, service interest, and message content.</li>
+              <li><strong className="font-semibold text-ink">Live chat interactions:</strong> messages exchanged with our website chat assistant. Chat messages are processed in your browser session only and are not stored on our servers.</li>
+              <li><strong className="font-semibold text-ink">Website analytics:</strong> anonymised usage data including pages visited, time on site, referral source, and device type (via Vercel Analytics or Google Analytics 4).</li>
+              <li><strong className="font-semibold text-ink">Cookies:</strong> essential cookies for site functionality and optional analytics cookies. See our <Link href="/cookie-policy" className="link">Cookie Policy</Link> for details.</li>
             </ul>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">3. How We Use Your Data</h2>
+            <h2 className="h3 mb-3">3. How We Use Your Data</h2>
             <p>We use your personal data for the following purposes:</p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
               <li>To respond to your contact form enquiry and provide information about our services.</li>
@@ -62,17 +62,17 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">4. Legal Basis for Processing</h2>
+            <h2 className="h3 mb-3">4. Legal Basis for Processing</h2>
             <p>We process your personal data under the following legal bases (UK GDPR Article 6):</p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
-              <li><strong className="text-white">Consent (Article 6(1)(a)):</strong> when you submit a contact form with the consent checkbox selected.</li>
-              <li><strong className="text-white">Legitimate interests (Article 6(1)(f)):</strong> to respond to enquiries, improve our services, and maintain website security.</li>
-              <li><strong className="text-white">Contract performance (Article 6(1)(b)):</strong> when processing is necessary to provide services you have engaged us for.</li>
+              <li><strong className="font-semibold text-ink">Consent (Article 6(1)(a)):</strong> when you submit a contact form with the consent checkbox selected.</li>
+              <li><strong className="font-semibold text-ink">Legitimate interests (Article 6(1)(f)):</strong> to respond to enquiries, improve our services, and maintain website security.</li>
+              <li><strong className="font-semibold text-ink">Contract performance (Article 6(1)(b)):</strong> when processing is necessary to provide services you have engaged us for.</li>
             </ul>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">5. Data Sharing</h2>
+            <h2 className="h3 mb-3">5. Data Sharing</h2>
             <p>
               We do not sell your personal data. We may share your data with the following categories of
               third parties, only as necessary to deliver our services:
@@ -86,7 +86,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">6. Data Retention</h2>
+            <h2 className="h3 mb-3">6. Data Retention</h2>
             <p>
               Contact form submissions are retained for 24 months from the date of submission, after which
               they are securely deleted. If you become a client, your data is retained for the duration of the
@@ -95,20 +95,20 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">7. Your Rights</h2>
+            <h2 className="h3 mb-3">7. Your Rights</h2>
             <p>Under UK GDPR, you have the following rights:</p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
-              <li><strong className="text-white">Right of access</strong>, request a copy of your personal data.</li>
-              <li><strong className="text-white">Right to rectification</strong>, request correction of inaccurate data.</li>
-              <li><strong className="text-white">Right to erasure</strong>, request deletion of your data.</li>
-              <li><strong className="text-white">Right to restrict processing</strong>, request limitation of how we use your data.</li>
-              <li><strong className="text-white">Right to data portability</strong>, receive your data in a structured format.</li>
-              <li><strong className="text-white">Right to object</strong>, object to processing based on legitimate interests.</li>
-              <li><strong className="text-white">Right to withdraw consent</strong>, withdraw consent at any time without affecting prior processing.</li>
+              <li><strong className="font-semibold text-ink">Right of access</strong>, request a copy of your personal data.</li>
+              <li><strong className="font-semibold text-ink">Right to rectification</strong>, request correction of inaccurate data.</li>
+              <li><strong className="font-semibold text-ink">Right to erasure</strong>, request deletion of your data.</li>
+              <li><strong className="font-semibold text-ink">Right to restrict processing</strong>, request limitation of how we use your data.</li>
+              <li><strong className="font-semibold text-ink">Right to data portability</strong>, receive your data in a structured format.</li>
+              <li><strong className="font-semibold text-ink">Right to object</strong>, object to processing based on legitimate interests.</li>
+              <li><strong className="font-semibold text-ink">Right to withdraw consent</strong>, withdraw consent at any time without affecting prior processing.</li>
             </ul>
             <p className="mt-2">
               To exercise any of these rights, email{" "}
-              <a href="mailto:privacy@pixelettecertified.com" className="text-accent hover:text-accent-light transition-colors">
+              <a href="mailto:privacy@pixelettecertified.com" className="link">
                 privacy@pixelettecertified.com
               </a>.
               We will respond within 30 days.
@@ -116,7 +116,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">8. International Transfers</h2>
+            <h2 className="h3 mb-3">8. International Transfers</h2>
             <p>
               Your data is primarily stored and processed within the United Kingdom and European Economic Area.
               Where data is transferred outside the UK/EEA (e.g. to cloud providers with US infrastructure),
@@ -125,7 +125,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">9. Security</h2>
+            <h2 className="h3 mb-3">9. Security</h2>
             <p>
               We implement appropriate technical and organisational measures to protect your personal data,
               including encryption in transit (TLS), access controls, and regular security reviews. As an
@@ -134,7 +134,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">10. Complaints</h2>
+            <h2 className="h3 mb-3">10. Complaints</h2>
             <p>
               If you are not satisfied with how we handle your data, you have the right to lodge a complaint
               with the Information Commissioner&apos;s Office (ICO):
@@ -148,7 +148,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">11. Changes to This Policy</h2>
+            <h2 className="h3 mb-3">11. Changes to This Policy</h2>
             <p>
               We may update this policy from time to time. Material changes will be communicated via our
               website. The &ldquo;Last updated&rdquo; date at the top of this page indicates the most recent revision.
