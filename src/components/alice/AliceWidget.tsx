@@ -42,8 +42,8 @@ export default function AliceWidget() {
           >
             {/* Hover label */}
             <span className="pointer-events-none whitespace-nowrap
-              rounded-[4px] border border-[#1C4744] bg-[#06222B]
-              px-4 py-2 text-xs font-medium text-[#F2F5F4] shadow-lg
+              rounded-[4px] border border-panel-line bg-footer
+              px-4 py-2 text-xs font-medium text-footer-heading shadow-lg
               opacity-0 translate-x-2
               transition-all duration-300 ease-out
               group-hover:translate-x-0 group-hover:opacity-100">
@@ -53,8 +53,8 @@ export default function AliceWidget() {
             <button
               onClick={() => setIsOpen(true)}
               className="relative flex h-14 w-14 shrink-0 items-center justify-center
-                rounded-full bg-[#056F62] p-3 shadow-lg transition-colors duration-200
-                hover:bg-[#045A4F]"
+                rounded-full bg-brand p-3 shadow-lg transition-colors duration-200
+                hover:bg-brand-hover"
               aria-label="Open chat with Alice"
               title="Chat with Alice about certifications"
             >
@@ -87,24 +87,24 @@ export default function AliceWidget() {
               md:w-[400px] md:h-[600px]
               rounded-none md:rounded-[12px] shadow-2xl overflow-hidden
               flex flex-col
-              border-0 md:border border-[#1C4744]"
-            style={{ background: "#06222B" }}
+              border-0 md:border border-panel-line"
+            style={{ background: "var(--color-footer)" }}
           >
             {/* Header — pinned, never scrolls */}
-            <div className="z-10 flex shrink-0 items-center justify-between border-b border-[#123240] px-5 py-4">
+            <div className="z-10 flex shrink-0 items-center justify-between border-b border-footer-line px-5 py-4">
               <div className="flex items-center gap-3">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#1C4744] p-1.5">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-panel-line p-1.5">
                   <img src="/logos/favicon.svg" alt="Alice" width={36} height={36} loading="lazy" decoding="async" className="h-full w-full" />
                 </div>
                 <div>
-                  <div className="text-sm font-semibold text-[#F2F5F4]">Alice</div>
-                  <div className="mono text-[11px] tracking-[0.06em] text-[#9DB2BC]">AI Accreditation Advisor</div>
+                  <div className="text-sm font-semibold text-footer-heading">Alice</div>
+                  <div className="mono text-[11px] tracking-[0.06em] text-footer-link">AI Accreditation Advisor</div>
                 </div>
               </div>
               <button
                 onClick={handleCloseClick}
                 className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-[4px]
-                  p-3 text-[#9DB2BC] transition-colors hover:bg-[#123240] hover:text-[#F2F5F4]"
+                  p-3 text-footer-link transition-colors hover:bg-footer-line hover:text-footer-heading"
                 aria-label="Close chat"
               >
                 <Close size={18} />

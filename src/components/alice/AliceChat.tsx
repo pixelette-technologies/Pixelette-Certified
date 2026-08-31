@@ -231,7 +231,7 @@ export default function AliceChat({ onClose, onCloseRefReady }: AliceChatProps) 
   if (!historyLoaded) {
     return (
       <div className="flex flex-col flex-1 min-h-0 items-center justify-center">
-        <span className="text-xs text-[#9DB2BC] italic">Loading conversation...</span>
+        <span className="text-xs text-footer-link italic">Loading conversation...</span>
       </div>
     );
   }
@@ -243,15 +243,15 @@ export default function AliceChat({ onClose, onCloseRefReady }: AliceChatProps) 
         <div className="flex-1 flex items-center justify-center px-6">
           <div className="w-full max-w-sm">
             <div className="text-center mb-6">
-              <h3 className="text-[#F2F5F4] text-lg font-bold mb-2">Welcome to Pixelette Certified</h3>
-              <p className="text-[#9DB2BC] text-sm leading-relaxed">
+              <h3 className="text-footer-heading text-lg font-bold mb-2">Welcome to Pixelette Certified</h3>
+              <p className="text-footer-link text-sm leading-relaxed">
                 I&apos;m Alice, your AI accreditation advisor. Enter your details below and I&apos;ll help you find the right certification for your business.
               </p>
             </div>
 
             <form onSubmit={handleFormSubmit} className="space-y-4">
               <div>
-                <label htmlFor="alice-name" className="mono mb-1.5 block text-[11px] uppercase tracking-[0.09em] text-[#9DB2BC]">
+                <label htmlFor="alice-name" className="mono mb-1.5 block text-[11px] uppercase tracking-[0.09em] text-footer-link">
                   Your name
                 </label>
                 <input
@@ -262,16 +262,16 @@ export default function AliceChat({ onClose, onCloseRefReady }: AliceChatProps) 
                   onChange={(e) => setFormName(e.target.value)}
                   placeholder="e.g. Sarah"
                   required
-                  className="w-full bg-[#0B2A34] border border-[#123240] rounded-[4px] px-4 py-2.5
-                    text-sm text-[#F2F5F4] placeholder:text-[#7C93A0]
-                    focus:outline-none focus:border-[#6FE3CB]/50 focus:ring-1 focus:ring-[#6FE3CB]/30
+                  className="w-full bg-footer-hover border border-footer-line rounded-[4px] px-4 py-2.5
+                    text-sm text-footer-heading placeholder:text-footer-legal
+                    focus:outline-none focus:border-footer-accent/50 focus:ring-1 focus:ring-footer-accent/30
                     transition-colors"
                   disabled={formSubmitting}
                 />
               </div>
 
               <div>
-                <label htmlFor="alice-email" className="mono mb-1.5 block text-[11px] uppercase tracking-[0.09em] text-[#9DB2BC]">
+                <label htmlFor="alice-email" className="mono mb-1.5 block text-[11px] uppercase tracking-[0.09em] text-footer-link">
                   Work email
                 </label>
                 <input
@@ -281,9 +281,9 @@ export default function AliceChat({ onClose, onCloseRefReady }: AliceChatProps) 
                   onChange={(e) => setFormEmail(e.target.value)}
                   placeholder="e.g. sarah@company.com"
                   required
-                  className="w-full bg-[#0B2A34] border border-[#123240] rounded-[4px] px-4 py-2.5
-                    text-sm text-[#F2F5F4] placeholder:text-[#7C93A0]
-                    focus:outline-none focus:border-[#6FE3CB]/50 focus:ring-1 focus:ring-[#6FE3CB]/30
+                  className="w-full bg-footer-hover border border-footer-line rounded-[4px] px-4 py-2.5
+                    text-sm text-footer-heading placeholder:text-footer-legal
+                    focus:outline-none focus:border-footer-accent/50 focus:ring-1 focus:ring-footer-accent/30
                     transition-colors"
                   disabled={formSubmitting}
                 />
@@ -292,8 +292,8 @@ export default function AliceChat({ onClose, onCloseRefReady }: AliceChatProps) 
               <button
                 type="submit"
                 disabled={formSubmitting || !formName.trim() || !formEmail.trim()}
-                className="w-full bg-[#056F62] hover:bg-[#045A4F] text-[#F2F5F4] font-semibold
-                  py-2.5 px-4 rounded-[4px] transition-colors disabled:opacity-50 disabled:hover:bg-[#056F62]
+                className="w-full bg-brand hover:bg-brand-hover text-footer-heading font-semibold
+                  py-2.5 px-4 rounded-[4px] transition-colors disabled:opacity-50 disabled:hover:bg-brand
                   flex items-center justify-center gap-2"
               >
                 {formSubmitting ? (
@@ -334,11 +334,11 @@ export default function AliceChat({ onClose, onCloseRefReady }: AliceChatProps) 
             <div className={cn(
               "max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed",
               msg.role === "user"
-                ? "bg-[#056F62] text-[#F2F5F4] rounded-br-sm font-medium"
-                : "bg-[#123240] text-[#F2F5F4] rounded-bl-sm"
+                ? "bg-brand text-footer-heading rounded-br-sm font-medium"
+                : "bg-footer-line text-footer-heading rounded-bl-sm"
             )}>
               {msg.role === "assistant" && (
-                <span className="mono mb-1 block text-[10px] uppercase tracking-[0.14em] text-[#6FE3CB]">Alice</span>
+                <span className="mono mb-1 block text-[10px] uppercase tracking-[0.14em] text-footer-accent">Alice</span>
               )}
               {msg.content}
             </div>
@@ -346,14 +346,14 @@ export default function AliceChat({ onClose, onCloseRefReady }: AliceChatProps) 
         ))}
         {isLoading && (
           <div className="flex justify-start">
-            <div className="bg-[#123240] rounded-2xl rounded-bl-sm px-4 py-3">
+            <div className="bg-footer-line rounded-2xl rounded-bl-sm px-4 py-3">
               <div className="flex items-center gap-2">
                 <div className="flex gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#6FE3CB]/70 animate-bounce" style={{ animationDelay: "0ms" }} />
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#6FE3CB]/70 animate-bounce" style={{ animationDelay: "150ms" }} />
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#6FE3CB]/70 animate-bounce" style={{ animationDelay: "300ms" }} />
+                  <span className="w-1.5 h-1.5 rounded-full bg-footer-accent/70 animate-bounce" style={{ animationDelay: "0ms" }} />
+                  <span className="w-1.5 h-1.5 rounded-full bg-footer-accent/70 animate-bounce" style={{ animationDelay: "150ms" }} />
+                  <span className="w-1.5 h-1.5 rounded-full bg-footer-accent/70 animate-bounce" style={{ animationDelay: "300ms" }} />
                 </div>
-                <span className="text-xs italic text-[#9DB2BC]">Alice is thinking...</span>
+                <span className="text-xs italic text-footer-link">Alice is thinking...</span>
               </div>
             </div>
           </div>
@@ -362,7 +362,7 @@ export default function AliceChat({ onClose, onCloseRefReady }: AliceChatProps) 
       </div>
 
       {/* Input */}
-      <div className="px-4 pb-4 pt-2 border-t border-[#123240] shrink-0">
+      <div className="px-4 pb-4 pt-2 border-t border-footer-line shrink-0">
         <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} className="flex gap-2">
           <input
             ref={inputRef}
@@ -370,18 +370,18 @@ export default function AliceChat({ onClose, onCloseRefReady }: AliceChatProps) 
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type a message..."
-            className="flex-1 bg-[#0B2A34] border border-[#123240] rounded-[4px] px-4 py-2.5
-              text-sm text-[#F2F5F4] placeholder:text-[#7C93A0]
-              focus:outline-none focus:border-[#6FE3CB]/50 focus:ring-1 focus:ring-[#6FE3CB]/30
+            className="flex-1 bg-footer-hover border border-footer-line rounded-[4px] px-4 py-2.5
+              text-sm text-footer-heading placeholder:text-footer-legal
+              focus:outline-none focus:border-footer-accent/50 focus:ring-1 focus:ring-footer-accent/30
               transition-colors"
             disabled={isLoading}
           />
           <button
             type="submit"
             disabled={isLoading || !input.trim()}
-            className="w-10 h-10 rounded-[4px] bg-[#056F62] hover:bg-[#045A4F]
-              disabled:opacity-50 disabled:hover:bg-[#056F62]
-              flex items-center justify-center text-[#F2F5F4] transition-colors shrink-0"
+            className="w-10 h-10 rounded-[4px] bg-brand hover:bg-brand-hover
+              disabled:opacity-50 disabled:hover:bg-brand
+              flex items-center justify-center text-footer-heading transition-colors shrink-0"
             aria-label="Send message"
           >
             {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
@@ -408,28 +408,28 @@ export default function AliceChat({ onClose, onCloseRefReady }: AliceChatProps) 
           className="absolute inset-0 z-50 flex items-center justify-center"
           style={{ backgroundColor: "rgba(6, 34, 43, 0.88)", backdropFilter: "blur(4px)" }}
         >
-          <div className="bg-[#06222B] border border-[#1C4744] rounded-[4px] p-6 shadow-2xl" style={{ width: "280px" }}>
+          <div className="bg-footer border border-panel-line rounded-[4px] p-6 shadow-2xl" style={{ width: "280px" }}>
             {ratingState === "done" ? (
               <div className="text-center py-4">
-                <div className="text-[#6FE3CB] text-4xl mb-2">{"\u2713"}</div>
-                <div className="text-[#F2F5F4] text-base font-medium">Thanks for your feedback</div>
+                <div className="text-footer-accent text-4xl mb-2">{"\u2713"}</div>
+                <div className="text-footer-heading text-base font-medium">Thanks for your feedback</div>
               </div>
             ) : (
               <>
-                <h3 className="text-[#F2F5F4] text-lg font-semibold mb-1 text-center">Was Alice helpful?</h3>
-                <p className="text-[#9DB2BC] text-xs mb-5 text-center">Your feedback helps us improve</p>
+                <h3 className="text-footer-heading text-lg font-semibold mb-1 text-center">Was Alice helpful?</h3>
+                <p className="text-footer-link text-xs mb-5 text-center">Your feedback helps us improve</p>
                 <div className="flex gap-3 mb-3">
                   <button
                     onClick={() => handleRatingClick("helpful")}
                     disabled={ratingState === "submitting"}
-                    className="flex-1 bg-[#056F62] hover:bg-[#045A4F] text-[#F2F5F4] py-2.5 px-4 rounded-[4px] font-medium disabled:opacity-50 transition-colors"
+                    className="flex-1 bg-brand hover:bg-brand-hover text-footer-heading py-2.5 px-4 rounded-[4px] font-medium disabled:opacity-50 transition-colors"
                   >
                     {"\uD83D\uDC4D"} Yes
                   </button>
                   <button
                     onClick={() => handleRatingClick("not_helpful")}
                     disabled={ratingState === "submitting"}
-                    className="flex-1 bg-[#1C4744] hover:bg-[#2A6460] text-[#F2F5F4] py-2.5 px-4 rounded-[4px] font-medium disabled:opacity-50 transition-colors"
+                    className="flex-1 bg-panel-line hover:bg-panel-cta-line text-footer-heading py-2.5 px-4 rounded-[4px] font-medium disabled:opacity-50 transition-colors"
                   >
                     {"\uD83D\uDC4E"} No
                   </button>
@@ -437,7 +437,7 @@ export default function AliceChat({ onClose, onCloseRefReady }: AliceChatProps) 
                 <button
                   onClick={handleSkipRating}
                   disabled={ratingState === "submitting"}
-                  className="w-full text-[#9DB2BC] hover:text-[#F2F5F4] text-sm py-1 disabled:opacity-50"
+                  className="w-full text-footer-link hover:text-footer-heading text-sm py-1 disabled:opacity-50"
                 >
                   Skip
                 </button>
