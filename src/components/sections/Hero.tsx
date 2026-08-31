@@ -1,4 +1,5 @@
 import Button from "@/components/ui/Button";
+import HeroParticles from "@/components/canvas/HeroParticles";
 import Pill from "@/components/ui/Pill";
 
 const certifications = [
@@ -27,8 +28,9 @@ const certifications = [
  */
 export default function Hero() {
   return (
-    <section className="wash">
-      <div className="wrap py-20 text-center lg:py-28">
+    <section className="wash relative overflow-hidden">
+      <HeroParticles />
+      <div className="wrap relative py-20 text-center lg:py-28">
         <div className="flex flex-wrap justify-center gap-2.5">
           {certifications.map((tag) => (
             <Pill key={tag}>{tag}</Pill>
