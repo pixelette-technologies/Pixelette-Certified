@@ -37,51 +37,84 @@
 
 /* -- 2 - COLOUR, RADIUS, SHADOW, CONTAINER --------------------------------
    static forces every token into :root even when no utility references it,
-   so the component classes below can safely use var(--color-line-card).     */
-@theme static {
-  /* brand */
-  --color-brand:       #056F62;
-  --color-brand-hover: #045A4F;
-  --color-brand-wash:  #C7EBDF;   /* hero radial inner stop */
-  --color-brand-tint:  #E4F4EF;   /* diagram / highlight fill */
+   so the component classes below can safely use var(--color-line-card).
 
-  /* text */
-  --color-ink:   #0A0A0A;
-  --color-body:  #414D5C;
-  --color-muted: #5D6B7D;
-  --color-soft:  #62707F;
+   =========================== BRAND LAYER ================================
+   Everything in this @theme block from here to the radii is Pixelette
+   CERTIFIED specific. It is the ONLY part of this file that differs between
+   group sites: the scale in S3 and every component class in S5 are shared,
+   and that shared skeleton is what makes the group read as one house.
+
+   The guide (docs/Pixelette_Web_Patterns.html) is a ONE-TONE system drawn
+   around Pixelette Technologies: a single mid-green does every job. Certified
+   is TWO-TONE, which is where the visual distinction comes from - hue barely
+   moves (guide 173deg, Certified 180-182deg), value structure does:
+
+     brand         dark petrol anchor. Carries everything that is READ.
+     brand-signal  bright teal. MARKS, never speaks. See the device in S5.
+
+   These are Certified's own historic colours, and the ones its wordmark never
+   left: public/logos/logo-green-text.svg has always been #044143 + #14A4A9.
+   The stylesheet had drifted away from the mark, not the other way round.
+
+   Do not point brand-signal at text or at a thin stroke on a light ground:
+   it is 3.04:1 on white, which clears the 3:1 non-text threshold and nothing
+   more. Ratios below are against --color-page unless stated.
+   ======================================================================== */
+@theme static {
+  /* brand - the reading role */
+  --color-brand:       #065456;   /* 8.71  - eyebrow, link, btn fill, focus */
+  --color-brand-hover: #044143;   /* 11.40 - button and link hover */
+  --color-brand-wash:  #D2EFEC;   /* hero radial inner stop */
+  --color-brand-tint:  #E6F4F3;   /* diagram / highlight fill */
+
+  /* brand - the signal role. Solid 3px accents only, never text or strokes.
+     Free to do more on dark grounds, where it reaches 5.04 on the footer. */
+  --color-brand-signal: #14A4A9;
+
+  /* text - neutrals hold their lightness and rotate hue from the guide's
+     blue-grey (212deg) towards petrol (~180deg). Every ratio holds or gains. */
+  --color-ink:   #0A0A0A;         /* 19.80 - unchanged */
+  --color-body:  #3F4E4E;         /* 8.71  - was 414D5C at 8.60 */
+  --color-muted: #5A6C6C;         /* 5.53  - was 5D6B7D at 5.43 */
+  --color-soft:  #5F7070;         /* 5.20  - was 62707F at 5.07 */
 
   /* surfaces */
   --color-page: #FFFFFF;
-  --color-band: #F4F7FA;
+  --color-band: #F3F7F7;
 
   /* rules and borders, light -> strong */
-  --color-line:        #E2E8EF;  /* section rules, td */
-  --color-line-card:   #DFE6EE;  /* card */
-  --color-line-pill:   #DDE4EC;  /* pill, input, th */
-  --color-line-strong: #C3D1DE;  /* btn2 border, emphasis cards */
+  --color-line:        #E1EAE9;  /* section rules, td */
+  --color-line-card:   #DEE8E7;  /* card */
+  --color-line-pill:   #DCE6E5;  /* pill, input, th */
+  --color-line-strong: #C2D3D1;  /* btn2 border, emphasis cards */
 
-  /* dark - site footer */
-  --color-footer:         #06222B;
-  --color-footer-line:    #123240;
-  --color-footer-hover:   #0B2C36;
+  /* dark - site footer. Slate becomes petrol; the text ramp is unchanged. */
+  --color-footer:         #052A2B;
+  --color-footer-line:    #123A38;
+  --color-footer-hover:   #0A3433;
   --color-footer-heading: #F2F5F4;
   --color-footer-link:    #9DB2BC;
   --color-footer-legal:   #7C93A0;
-  --color-footer-accent:  #6FE3CB;
+  --color-footer-accent:  #6FE3CB;  /* already inside Certified's range */
 
   /* dark - feature panel (.panel) */
-  --color-panel-from:     #04211F;
-  --color-panel-to:       #080F0F;
-  --color-panel-line:     #1C4744;
+  --color-panel-from:     #031A18;
+  --color-panel-to:       #050C0C;
+  --color-panel-line:     #194542;
   --color-panel-label:    #5F918B;
   --color-panel-body:     #9BAEAB;
   --color-panel-pill:     #7FA9A4;
   --color-panel-cta:      #BFE9E3;
-  --color-panel-cta-line: #2A6460;
+  --color-panel-cta-line: #276360;
 
   /* semantic */
   --color-danger: #B42318;
+
+  /* ========================= END BRAND LAYER ============================
+     Everything below is COMMON to every Pixelette site. Changing it here
+     breaks the family resemblance rather than expressing this brand.
+     ===================================================================== */
 
   /* radii - the system uses exactly two */
   --radius-btn:  4px;
@@ -136,7 +169,7 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Deliberate divergence from the guide: it sets a { color:#056F62 }
+  /* Deliberate divergence from the guide: it sets a global green a { color }
      globally then overrides it inline everywhere. Under Preflight
      (a { color: inherit }) that would turn the navbar, breadcrumbs and
      footer green. Inline text links opt in with .link; .prose a is automatic. */
@@ -173,9 +206,29 @@
     margin-inline: auto;
   }
 
+  /* BRAND LAYER - the signature device, half 1 of 2. See also .card-feature.
+     The guide marks a section only with a hairline. Certified caps that rule
+     with a 40px segment of signal teal, aligned to the container rather than
+     the viewport so it sits directly above the first word of the heading.
+
+     position:relative makes .sec a containing block. Checked: the only
+     absolutely-positioned descendants in src/ are the contact honeypot at
+     left:-9999px and a zero-size hidden Turnstile wrapper, both of which are
+     anchor-independent. The cap is deliberately NOT on a bare .band-alt: it
+     marks a section opening, not every band on the page. */
   .sec {
     padding-block: var(--sec-y);
     border-top: 1px solid var(--color-line);
+    position: relative;
+  }
+  .sec::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: max(20px, calc((100% - var(--container-wrap)) / 2));
+    width: 40px;
+    height: 3px;
+    background: var(--color-brand-signal);
   }
   .sec-sm { padding-block: var(--sec-y-sm); }
 
@@ -323,10 +376,16 @@
     box-shadow: var(--shadow-card);
   }
 
-  /* highlighted / primary card - the guide's door treatment */
+  /* highlighted / primary card - the guide's door treatment.
+
+     BRAND LAYER - the signature device, half 2 of 2. The guide puts its 3px
+     accent across the TOP of a feature card; Certified moves it to the LEFT,
+     in signal teal. Same primitive, different mannerism, and it reads at a
+     glance in a screenshot, which is what a sibling brand needs. */
   .card-feature {
     border-color: var(--color-line-strong);
-    border-top: 3px solid var(--color-brand);
+    border-top: 1px solid var(--color-line-strong);
+    border-left: 3px solid var(--color-brand-signal);
     box-shadow: var(--shadow-feature);
   }
 
@@ -392,7 +451,7 @@
     color: var(--color-footer-link);
   }
   .footer .eyebrow { color: var(--color-footer-accent); }
-  .footer .pill    { border-color: #1B3D4A; color: var(--color-footer-link); }
+  .footer .pill    { border-color: var(--color-footer-line); color: var(--color-footer-link); }
 
   /* section bands */
   .band-alt {
@@ -400,7 +459,7 @@
     border-top: 1px solid var(--color-line);
   }
   .band-closing {
-    background: linear-gradient(180deg, #FFFFFF 0%, #F4F7FA 100%);
+    background: linear-gradient(180deg, var(--color-page) 0%, var(--color-band) 100%);
     border-top: 1px solid var(--color-line);
   }
 
