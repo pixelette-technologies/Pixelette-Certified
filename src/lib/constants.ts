@@ -18,14 +18,21 @@ export const SITE_CONFIG = {
   },
 } as const;
 
-export const BRAND_COLORS = {
-  primary: "#06222B",
-  primaryLight: "#123240",
-  primaryDark: "#04191F",
-  accent: "#056F62",
-  accentLight: "#6FE3CB",
-  accentDark: "#045A4F",
-  black: "#000000",
+/**
+ * Palette for HTML email, which cannot read CSS custom properties and so needs
+ * literal hexes inline. These mirror the dark-family tokens in globals.css —
+ * keep the two in step, and change globals.css first.
+ *
+ * Previously this held stale guide values and had no importers at all, which is
+ * how the transactional emails drifted a full palette behind the site.
+ */
+export const EMAIL_COLORS = {
+  ground: "#052A2B",   /* --color-footer      : card ground */
+  mid: "#0A3433",      /* --color-footer-hover: header gradient midpoint */
+  line: "#123A38",     /* --color-footer-line : header gradient end */
+  deep: "#031A18",     /* --color-panel-from  : footer strip */
+  accent: "#6FE3CB",   /* --color-footer-accent */
+  brand: "#065456",    /* --color-brand       : CTA button fill */
   white: "#FFFFFF",
 } as const;
 
