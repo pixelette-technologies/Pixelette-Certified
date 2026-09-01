@@ -52,7 +52,7 @@ export default function HomePage() {
 
       {/* Buyer-intent pathways */}
       <section className="sec-sm">
-        <div className="wrap">
+        <div className="wrap" data-reveal="">
           <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { label: "I need certification to close a specific deal", href: "/services/iso-27001", icon: FileCheck },
@@ -80,7 +80,7 @@ export default function HomePage() {
 
       {/* Commercial Impact section */}
       <section className="sec band-alt">
-        <div className="wrap">
+        <div className="wrap" data-reveal="">
           <SectionHeading
             label="Commercial Impact"
             title="The Commercial Impact of Getting Certified"
@@ -116,7 +116,7 @@ export default function HomePage() {
 
       {/* Urgency messaging */}
       <section className="border-y border-line bg-band py-12 lg:py-14">
-        <div className="wrap">
+        <div className="wrap" data-reveal="">
           <p className="body mx-auto text-center">
             Our 10-week delivery cycle means engagements started today complete before the end of Q2 2026. Engagements started after May complete in Q3. If you have a procurement deadline, fiscal year-end, or EU AI Act milestone in view, the calendar, not the contract, is your binding constraint.
           </p>
@@ -127,7 +127,7 @@ export default function HomePage() {
 
       {/* ISO 42001 First-Mover section */}
       <section className="sec band-alt">
-        <div className="wrap flex flex-col justify-between gap-10 lg:flex-row lg:items-center lg:gap-16">
+        <div className="wrap flex flex-col justify-between gap-10 lg:flex-row lg:items-center lg:gap-16" data-reveal="">
           <div>
             <Brain className="h-6 w-6 text-brand" strokeWidth={1.6} aria-hidden="true" />
             <h2 className="h2 mt-5 max-w-[20ch]">
@@ -150,7 +150,7 @@ export default function HomePage() {
 
       {/* Pass-First Guarantee */}
       <section className="border-y border-line py-12 lg:py-14">
-        <div className="wrap mx-auto max-w-[72ch] text-center">
+        <div className="wrap mx-auto max-w-[72ch] text-center" data-reveal="">
           <h3 className="h4">The Pixelette Pass-First Guarantee</h3>
           <p className="small mt-3">
             98% First-Attempt Pass Rate. If a failure occurs due to a gap in our documentation, we cover the remediation at no additional cost.

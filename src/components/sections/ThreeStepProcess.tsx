@@ -30,7 +30,7 @@ const steps = [
 export default function ThreeStepProcess() {
   return (
     <section className="sec band-alt">
-      <div className="wrap">
+      <div className="wrap" data-reveal="">
         <SectionHeading
           label="How We Work"
           title="Certified in Three Steps, So You Can Focus on Winning Deals"

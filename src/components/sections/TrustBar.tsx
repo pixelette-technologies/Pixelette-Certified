@@ -9,7 +9,7 @@ import StatTile from "@/components/ui/StatTile";
 export default function TrustBar() {
   return (
     <section className="band-alt py-12 lg:py-14" aria-label="Track record">
-      <div className="wrap">
+      <div className="wrap" data-reveal="">
         <div className="grid grid-cols-2 gap-3.5 md:grid-cols-4">
           {TRUST_STATS.map((stat) => (
             <StatTile

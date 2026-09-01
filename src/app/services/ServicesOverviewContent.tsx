@@ -64,7 +64,7 @@ export default function ServicesOverviewContent({ groupedServices }: ServicesOve
 
       {/* ─── Categories Grid ─── */}
       <section className="sec band-alt">
-        <div className="wrap">
+        <div className="wrap" data-reveal="">
           <div className="grid gap-3.5 md:grid-cols-2">
             {groupedServices.map((category) => (
               <div key={category.key} className="card flex flex-col">

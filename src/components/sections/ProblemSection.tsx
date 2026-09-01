@@ -31,7 +31,7 @@ const painPoints = [
 export default function ProblemSection() {
   return (
     <section className="sec">
-      <div className="wrap">
+      <div className="wrap" data-reveal="">
         <SectionHeading
           label="The Problem"
           title="Your next big deal is waiting on a certificate you don't have yet."

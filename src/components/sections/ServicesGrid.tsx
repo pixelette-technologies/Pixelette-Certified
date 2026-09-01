@@ -25,7 +25,7 @@ const PAGES_WITH_ROUTES = new Set([
 export default function ServicesGrid() {
   return (
     <section className="sec">
-      <div className="wrap">
+      <div className="wrap" data-reveal="">
         <SectionHeading
           label="Our Services"
           title="One Partner for ISO, Cyber Security, AI Governance, and Privacy"

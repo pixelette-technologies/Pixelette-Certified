@@ -65,7 +65,7 @@ export default function IndustriesContent({ industries }: IndustriesContentProps
 
       {/* Industries Grid */}
       <section className="sec band-alt">
-        <div className="wrap">
+        <div className="wrap" data-reveal="">
           <div className="grid gap-3.5 md:grid-cols-2">
             {industries.map((industry) => {
               const IconComp = iconMap[industry.slug] || Building2;
@@ -135,7 +135,7 @@ export default function IndustriesContent({ industries }: IndustriesContentProps
 
       {/* Why Industry Expertise Matters */}
       <section className="sec">
-        <div className="wrap">
+        <div className="wrap" data-reveal="">
           <SectionHeading
             label="Why It Matters"
             title="Industry expertise drives faster certification"

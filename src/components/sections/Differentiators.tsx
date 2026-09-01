@@ -32,7 +32,7 @@ const differentiators = [
 export default function Differentiators() {
   return (
     <section className="sec band-alt">
-      <div className="wrap">
+      <div className="wrap" data-reveal="">
         <SectionHeading
           label="Why Pixelette Certified"
           title="The unfair advantage your compliance deserves"

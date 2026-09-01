@@ -72,7 +72,7 @@ export default async function BlogCategoryPage({
       </section>
 
       <section className="sec band-alt">
-        <div className="wrap">
+        <div className="wrap" data-reveal="">
           <div className="grid gap-3.5 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => (
               <Link

@@ -23,7 +23,7 @@ export default function CTASection({
 }: CTASectionProps) {
   return (
     <section className="sec band-closing">
-      <div className="wrap">
+      <div className="wrap" data-reveal="">
         <div className="flex flex-col justify-between gap-10 lg:flex-row lg:items-center lg:gap-16">
           <div>
             <h2 className="h2 max-w-[20ch]">{headline}</h2>

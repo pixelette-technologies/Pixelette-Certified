@@ -34,7 +34,7 @@ const testimonials = [
 export default function Testimonials() {
   return (
     <section className="sec">
-      <div className="wrap">
+      <div className="wrap" data-reveal="">
         <SectionHeading
           label="Client Success"
           title="Trusted by Technology Companies Winning Enterprise Contracts"

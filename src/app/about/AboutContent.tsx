@@ -133,7 +133,7 @@ export default function AboutContent() {
 
       {/* Our Story */}
       <section className="sec band-alt">
-        <div className="wrap">
+        <div className="wrap" data-reveal="">
           <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
             <div>
               <Eyebrow className="mb-5">Our Story</Eyebrow>
@@ -170,7 +170,7 @@ export default function AboutContent() {
 
       {/* Credentials */}
       <section className="sec">
-        <div className="wrap">
+        <div className="wrap" data-reveal="">
           <SectionHeading
             label="Credentials"
             title="Qualified, certified, and accountable"
@@ -190,7 +190,7 @@ export default function AboutContent() {
 
       {/* Meet the Team */}
       <section className="sec band-alt">
-        <div className="wrap">
+        <div className="wrap" data-reveal="">
           <SectionHeading
             label="Our Team"
             title="The people behind your certification"
@@ -241,7 +241,7 @@ export default function AboutContent() {
 
       {/* Why Choose Us */}
       <section className="sec">
-        <div className="wrap">
+        <div className="wrap" data-reveal="">
           <SectionHeading
             label="Why Pixelette Certified"
             title="The unfair advantage your compliance deserves"

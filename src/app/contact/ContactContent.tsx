@@ -437,7 +437,7 @@ export default function ContactContent() {
 
       {/* What happens after you contact us */}
       <section className="sec band-alt">
-        <div className="wrap max-w-[900px]">
+        <div className="wrap max-w-[900px]" data-reveal="">
           <Card>
             <h2 className="h3">What happens after you contact us</h2>
             <p className="small mt-4">

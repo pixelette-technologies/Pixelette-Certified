@@ -63,7 +63,7 @@ export default function CaseStudyClient({ study }: { study: CaseStudyData }) {
       </section>
 
       <section className="border-y border-line bg-band py-12">
-        <div className="wrap">
+        <div className="wrap" data-reveal="">
           <div
             className={cn(
               "grid grid-cols-2 gap-3.5",
@@ -80,7 +80,7 @@ export default function CaseStudyClient({ study }: { study: CaseStudyData }) {
       </section>
 
       <section className="sec">
-        <div className="wrap max-w-[820px]">
+        <div className="wrap max-w-[820px]" data-reveal="">
           <h2 className="h3">Overview</h2>
           <p className="body mt-5">{study.overview}</p>
 
@@ -128,7 +128,7 @@ export default function CaseStudyClient({ study }: { study: CaseStudyData }) {
       </section>
 
       <section className="sec band-closing">
-        <div className="wrap max-w-[640px] text-center">
+        <div className="wrap max-w-[640px] text-center" data-reveal="">
           <h2 className="h2">Ready to achieve the same results?</h2>
           <p className="body mx-auto mt-5">Book a free gap analysis to discuss your certification needs.</p>
           <div className="mt-9">

@@ -78,7 +78,7 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
 
       {/* ─── Overview ─── */}
       <section className="sec band-alt">
-        <div className="wrap">
+        <div className="wrap" data-reveal="">
           <SectionHeading label="Overview" title="What is this service?" className="mb-6" />
           <p className="body max-w-[66ch]">{service.longDescription}</p>
         </div>
@@ -86,7 +86,7 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
 
       {/* ─── What We Deliver ─── */}
       <section className="sec">
-        <div className="wrap">
+        <div className="wrap" data-reveal="">
           <SectionHeading
             label="Deliverables"
             title="What we deliver"
@@ -108,7 +108,7 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
 
       {/* ─── Our Process ─── */}
       <section className="sec band-alt">
-        <div className="wrap">
+        <div className="wrap" data-reveal="">
           <SectionHeading
             label="Our Process"
             title={service.category === "advisory" ? "How we engage with you" : "How we get you certified"}
@@ -134,7 +134,7 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
 
       {/* ─── Pricing ─── */}
       <section className="sec">
-        <div className="wrap">
+        <div className="wrap" data-reveal="">
           <SectionHeading
             label="Pricing"
             title="Transparent pricing"
@@ -193,7 +193,7 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
       {/* ─── FAQ ─── */}
       {service.faqs.length > 0 && (
         <section className="sec band-alt">
-          <div className="wrap max-w-[840px]">
+          <div className="wrap max-w-[840px]" data-reveal="">
             <SectionHeading label="FAQ" title="Frequently asked questions" />
             <FaqSchema faqs={service.faqs} />
             <Accordion items={service.faqs} />
@@ -204,7 +204,7 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
       {/* ─── Related Services ─── */}
       {relatedServices.length > 0 && (
         <section className="sec">
-          <div className="wrap">
+          <div className="wrap" data-reveal="">
             <SectionHeading
               label="Related Services"
               title="You may also need"

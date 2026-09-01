@@ -148,6 +148,28 @@
   --sec-y:    clamp(3.5rem, 2.5714rem + 3.8095vw, 6rem);         /* 56 -> 96 */
   --sec-y-sm: clamp(2.5rem, 2.0357rem + 1.9048vw, 4rem);         /* 40 -> 64 */
   --header-h: clamp(4rem,   3.6288rem + 1.5238vw, 5rem);         /* 64 -> 80 */
+
+  /* Motion. The first motion tokens on the site, and scoped so they stay the
+     only ones: the --reveal- prefix says they belong to one feature rather
+     than advertising a motion system that does not exist.
+
+     They live in THIS :root and not in @theme static for two reasons. They
+     are not colour, and --ease-* is a live Tailwind v4 theme namespace, so an
+     easing curve in @theme would silently mint an ease-* utility nobody asked
+     for. See S5.9 for what reads them.
+
+     12px is about one line of .small leading, so a band appears to drop into
+     place by one line: typographic settling, not a slide. It is also small
+     enough not to fight the two marks that stay still, the .sec hairline and
+     its 40px teal ::before tick. Opacity finishes 140ms before the transform
+     so copy is never read grey, and it is linear because eased opacity on
+     text has a visibly dull middle. The curve is easeOutCubic - no overshoot;
+     a spring or back curve reads instantly as "an effect". */
+  --reveal-rise:    12px;
+  --reveal-fade:    420ms;
+  --reveal-shift:   560ms;
+  --reveal-ease:    cubic-bezier(0.33, 1, 0.68, 1);              /* easeOutCubic */
+  --reveal-stagger: 70ms;
 }
 
 /* -- 4 - BASE ------------------------------------------------------------- */
@@ -645,6 +667,75 @@
   /* :focus, not :focus-visible - the element is unreachable by pointer and
      :focus-visible has been flaky here across browsers. */
   .skip-to-content:focus { top: 0; }
+
+  /* 5.9 - Scroll reveal ---------------------------------------------------
+     The only motion in this stylesheet. Read the three states as a sequence:
+
+       [data-reveal]                 authored in the markup. Styles NOTHING.
+       [data-reveal-state="hidden"]  written by JS, and only ever to elements
+                                     that were below the fold at the moment JS
+                                     started. See RevealObserver.
+       [data-reveal-state="shown"]   written by JS when the element crosses in.
+                                     The ONLY rule that carries a transition.
+
+     Four consequences, each load-bearing:
+
+     1. No JS / JS failed / JS still downloading -> no data-reveal-state
+        attribute exists -> not one rule below matches -> the page is exactly
+        what the server sent. The hidden state is opt-IN, and the only thing
+        that can opt in is code which has already proved it is running.
+     2. Nothing that was on screen when JS booted is ever hidden, so nothing
+        can flash. The observer measures first and hides second.
+     3. transition is declared on "shown", not on the element. Applying
+        "hidden" is therefore instantaneous and cannot animate backwards.
+     4. These are attribute selectors in @layer components, so any Tailwind
+        utility still out-ranks them. The file's contract is intact.
+
+     Three authoring rules, enforced by nothing but this comment:
+       - The attribute goes on the inner .wrap, NEVER on the section itself.
+         Every band paints its own background - .band-alt, the .band-closing
+         gradient, the .wash radials - plus a 1px top hairline. Translating
+         the section opens a 12px seam of --color-page above every alt band
+         and drags the hairline and the teal tick out of line.
+       - NEVER nest one [data-reveal] inside another. Opacity multiplies and
+         translations stack; the inner one would sit at 0 after the outer has
+         finished.
+       - NEVER mark an element that needs a transform of its own, or one with
+         a sticky or fixed descendant - a transformed ancestor becomes their
+         containing block. Nothing in src/ is sticky or fixed inside a section
+         today; a sticky table-of-contents in a blog post would be the first,
+         which is one of the reasons BlogPostClient is left unmarked. */
+  [data-reveal-state="hidden"]:not([data-reveal="stagger"]) {
+    opacity: 0;
+    transform: translateY(var(--reveal-rise));
+  }
+  [data-reveal-state="shown"]:not([data-reveal="stagger"]) {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity   var(--reveal-fade)  linear,
+      transform var(--reveal-shift) var(--reveal-ease);
+  }
+
+  /* Stagger, opt in per grid with data-reveal="stagger". The container itself
+     does not move - only its direct children do, so the two never compound
+     into a 24px drop. The delay is CAPPED at the fourth child: a 12-card grid
+     must not take 900ms to arrive, and the tail of a long list must never be
+     left visibly behind the head. */
+  [data-reveal="stagger"][data-reveal-state="hidden"] > * {
+    opacity: 0;
+    transform: translateY(var(--reveal-rise));
+  }
+  [data-reveal="stagger"][data-reveal-state="shown"] > * {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity   var(--reveal-fade)  linear,
+      transform var(--reveal-shift) var(--reveal-ease);
+  }
+  [data-reveal="stagger"][data-reveal-state="shown"] > *:nth-child(2)     { transition-delay: var(--reveal-stagger); }
+  [data-reveal="stagger"][data-reveal-state="shown"] > *:nth-child(3)     { transition-delay: calc(var(--reveal-stagger) * 2); }
+  [data-reveal="stagger"][data-reveal-state="shown"] > *:nth-child(n + 4) { transition-delay: calc(var(--reveal-stagger) * 3); }
 }
 
 /* -- 6 - UTILITIES --------------------------------------------------------
@@ -684,6 +775,46 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* The scroll reveal is the one thing in this file that can fail CLOSED, so
+     it gets an outright reset rather than the duration-zeroing above.
+
+     Zeroing transition-duration alone is NOT enough, and it is worth being
+     precise about why: an element below the fold would still be sitting at
+     opacity 0, still waiting for an IntersectionObserver to notice it. It
+     would then snap into existence with no transition - content popping in,
+     which is the exact experience this media query exists to prevent,
+     delivered without any animation at all.
+
+     So: whatever state the script has written, and whatever it writes next,
+     [data-reveal] is visible. This is THE guarantee. The script's own
+     matchMedia bail-out is an optimisation layered on top of it, not the
+     mechanism. If RevealObserver is deleted tomorrow, or ships broken, or
+     races this query on a mid-session flip, the rule below still holds.
+
+     Unlayered !important is deliberate. The file's warning against writing a
+     component class outside @layer components is about component classes
+     competing with Tailwind; S8 has always been an unlayered reset and this
+     belongs with it. */
+  [data-reveal],
+  [data-reveal="stagger"] > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* -- 9 - PRINT ------------------------------------------------------------
+   The reveal hides below-fold content until it is scrolled to. Printing does
+   not scroll, so print gets the same outright reset reduced motion does.
+   Nothing else in this file needs a print rule; do not grow this block into a
+   print stylesheet without a reason.                                        */
+@media print {
+  [data-reveal],
+  [data-reveal="stagger"] > * {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

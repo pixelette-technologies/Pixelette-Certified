@@ -29,7 +29,7 @@ export default function Newsletter() {
 
   return (
     <section className="sec band-alt">
-      <div className="wrap">
+      <div className="wrap" data-reveal="">
         <div className="mx-auto max-w-[640px] text-center">
           <h2 className="h2 mx-auto max-w-[22ch]">
             Compliance Intelligence for Enterprise-Ready Businesses

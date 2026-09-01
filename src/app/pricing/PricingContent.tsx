@@ -129,7 +129,7 @@ export default function PricingContent() {
 
       {/* Our pricing promise */}
       <section className="sec">
-        <div className="wrap">
+        <div className="wrap" data-reveal="">
           <SectionHeading
             label="Our Promise"
             title="How we price every engagement"
@@ -149,7 +149,7 @@ export default function PricingContent() {
 
       {/* What is included */}
       <section className="sec band-alt">
-        <div className="wrap max-w-[900px]">
+        <div className="wrap max-w-[900px]" data-reveal="">
           <SectionHeading
             label="Included"
             title="What every engagement delivers"
@@ -194,7 +194,7 @@ export default function PricingContent() {
 
       {/* Multi-certification savings */}
       <section className="sec">
-        <div className="wrap max-w-[900px]">
+        <div className="wrap max-w-[900px]" data-reveal="">
           <SectionHeading
             label="Multi-Certification"
             title="Combined certifications save time and money"
@@ -218,7 +218,7 @@ export default function PricingContent() {
 
       {/* How to get started */}
       <section className="sec band-alt">
-        <div className="wrap max-w-[900px]">
+        <div className="wrap max-w-[900px]" data-reveal="">
           <Eyebrow className="mb-5">Get Started</Eyebrow>
           <h2 className="h2 max-w-[20ch]">Your free 30-minute gap analysis</h2>
           <p className="body mt-5">
@@ -237,7 +237,7 @@ export default function PricingContent() {
 
       {/* FAQ */}
       <section className="sec">
-        <div className="wrap max-w-[840px]">
+        <div className="wrap max-w-[840px]" data-reveal="">
           <SectionHeading label="Pricing FAQ" title="Common pricing questions" />
           <FaqSchema faqs={pricingFAQs} />
           <Accordion items={pricingFAQs} />

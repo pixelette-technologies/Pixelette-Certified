@@ -25,7 +25,7 @@ export default function CaseStudiesPage() {
       </section>
 
       <section className="sec band-alt">
-        <div className="wrap">
+        <div className="wrap" data-reveal="">
           <div className="grid gap-3.5 lg:grid-cols-3">
             {caseStudies.map((study) => (
               <Link
