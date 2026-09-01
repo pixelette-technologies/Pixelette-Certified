@@ -83,7 +83,7 @@ export default function HomePage() {
         <div className="wrap" data-reveal="">
           <SectionHeading
             label="Commercial Impact"
-            title="The Commercial Impact of Getting Certified"
+            title="The commercial impact of getting certified"
           />
 
           <p className="lead max-w-[46ch] font-medium text-brand">
@@ -131,7 +131,7 @@ export default function HomePage() {
           <div>
             <Brain className="h-6 w-6 text-brand" strokeWidth={1.6} aria-hidden="true" />
             <h2 className="h2 mt-5 max-w-[20ch]">
-              The AI Governance First-Mover Advantage
+              The AI governance first-mover advantage
             </h2>
             <p className="body mt-5">
               ISO 42001 certification before your competitors. Delivered by a PECB-certified Lead Auditor, among the first in the UK market.
@@ -151,7 +151,7 @@ export default function HomePage() {
       {/* Pass-First Guarantee */}
       <section className="border-y border-line py-12 lg:py-14">
         <div className="wrap mx-auto max-w-[72ch] text-center" data-reveal="">
-          <h3 className="h4">The Pixelette Pass-First Guarantee</h3>
+          <h3 className="h4">The Pixelette pass-first guarantee</h3>
           <p className="small mt-3">
             98% First-Attempt Pass Rate. If a failure occurs due to a gap in our documentation, we cover the remediation at no additional cost.
           </p>

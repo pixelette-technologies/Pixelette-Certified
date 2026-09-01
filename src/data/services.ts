@@ -63,11 +63,11 @@ export const services: Service[] = [
       "3 months post-certification support",
     ],
     process: [
-      { week: "Week 1", title: "Kickoff & Gap Analysis", description: "Initial meeting, scope definition, gap analysis conducted, remediation roadmap delivered." },
-      { week: "Weeks 2–5", title: "Documentation Build", description: "All ISMS policies written, risk assessment conducted, SoA drafted, asset inventory built." },
-      { week: "Weeks 6–8", title: "Controls Implementation", description: "Technical and organisational controls implemented and evidenced, staff training delivered." },
-      { week: "Week 9", title: "Internal Audit", description: "Full internal audit conducted, non-conformities identified and closed." },
-      { week: "Weeks 10–12", title: "External Audit", description: "Stage 1 documentation review and Stage 2 compliance audit. Certificate issued." },
+      { week: "Week 1", title: "Kickoff & gap analysis", description: "Initial meeting, scope definition, gap analysis conducted, remediation roadmap delivered." },
+      { week: "Weeks 2–5", title: "Documentation build", description: "All ISMS policies written, risk assessment conducted, SoA drafted, asset inventory built." },
+      { week: "Weeks 6–8", title: "Controls implementation", description: "Technical and organisational controls implemented and evidenced, staff training delivered." },
+      { week: "Week 9", title: "Internal audit", description: "Full internal audit conducted, non-conformities identified and closed." },
+      { week: "Weeks 10–12", title: "External audit", description: "Stage 1 documentation review and Stage 2 compliance audit. Certificate issued." },
     ],
     pricing: [
       { name: "Essentials", audience: "Startups and SMEs up to 50 employees", price: "Scoped to your business", features: ["Gap analysis", "ISMS documentation", "SoA", "Risk register", "1 internal audit", "Stage 1 + Stage 2 support"] },
@@ -109,10 +109,10 @@ export const services: Service[] = [
     ],
     process: [
       { week: "Week 1", title: "Kickoff & BIA", description: "Scope definition, business impact analysis, critical function identification." },
-      { week: "Weeks 2–5", title: "BCMS Documentation", description: "BC policies, plans, and procedures written. Recovery strategies defined." },
-      { week: "Weeks 6–8", title: "Implementation & Testing", description: "Plans tested through exercises. Staff trained. Gaps identified and closed." },
-      { week: "Week 9", title: "Internal Audit", description: "Full internal audit and management review conducted." },
-      { week: "Weeks 10–12", title: "External Audit", description: "Stage 1 and Stage 2 certification audit. Certificate issued." },
+      { week: "Weeks 2–5", title: "BCMS documentation", description: "BC policies, plans, and procedures written. Recovery strategies defined." },
+      { week: "Weeks 6–8", title: "Implementation & testing", description: "Plans tested through exercises. Staff trained. Gaps identified and closed." },
+      { week: "Week 9", title: "Internal audit", description: "Full internal audit and management review conducted." },
+      { week: "Weeks 10–12", title: "External audit", description: "Stage 1 and Stage 2 certification audit. Certificate issued." },
     ],
     pricing: [
       { name: "Essentials", audience: "SMEs up to 50 employees", price: "Scoped to your business", features: ["Gap analysis", "BCMS documentation", "BIA", "BC plans", "Internal audit", "Audit support"] },
@@ -150,11 +150,11 @@ export const services: Service[] = [
       "Continuous improvement framework",
     ],
     process: [
-      { week: "Week 1", title: "Kickoff & Gap Analysis", description: "Current quality practices assessed against ISO 9001 requirements." },
-      { week: "Weeks 2–5", title: "QMS Documentation", description: "Quality manual, procedures, and process maps developed." },
+      { week: "Week 1", title: "Kickoff & gap analysis", description: "Current quality practices assessed against ISO 9001 requirements." },
+      { week: "Weeks 2–5", title: "QMS documentation", description: "Quality manual, procedures, and process maps developed." },
       { week: "Weeks 6–8", title: "Implementation", description: "QMS implemented, staff trained, evidence gathered." },
-      { week: "Week 9", title: "Internal Audit", description: "Full internal audit conducted, findings addressed." },
-      { week: "Weeks 10–12", title: "External Audit", description: "Stage 1 and Stage 2 certification audit." },
+      { week: "Week 9", title: "Internal audit", description: "Full internal audit conducted, findings addressed." },
+      { week: "Weeks 10–12", title: "External audit", description: "Stage 1 and Stage 2 certification audit." },
     ],
     pricing: [
       { name: "Essentials", audience: "SMEs up to 50 employees", price: "Scoped to your business", features: ["Gap analysis", "QMS documentation", "Process mapping", "Internal audit", "Audit support"] },
@@ -191,11 +191,11 @@ export const services: Service[] = [
       "Stage 1 and Stage 2 audit support",
     ],
     process: [
-      { week: "Week 1", title: "Kickoff & Environmental Review", description: "Current environmental practices assessed, aspects and impacts identified." },
-      { week: "Weeks 2–5", title: "EMS Documentation", description: "Environmental policy, procedures, and controls documented." },
+      { week: "Week 1", title: "Kickoff & environmental review", description: "Current environmental practices assessed, aspects and impacts identified." },
+      { week: "Weeks 2–5", title: "EMS documentation", description: "Environmental policy, procedures, and controls documented." },
       { week: "Weeks 6–8", title: "Implementation", description: "Controls implemented, monitoring established, staff trained." },
-      { week: "Week 9", title: "Internal Audit", description: "Full EMS audit conducted, corrective actions taken." },
-      { week: "Weeks 10–12", title: "External Audit", description: "Certification body audit. Certificate issued." },
+      { week: "Week 9", title: "Internal audit", description: "Full EMS audit conducted, corrective actions taken." },
+      { week: "Weeks 10–12", title: "External audit", description: "Certification body audit. Certificate issued." },
     ],
     pricing: [
       { name: "Essentials", audience: "SMEs", price: "Scoped to your business", features: ["Gap analysis", "EMS documentation", "Aspects register", "Internal audit", "Audit support"] },
@@ -232,11 +232,11 @@ export const services: Service[] = [
       "EU AI Act compliance mapping",
     ],
     process: [
-      { week: "Week 1", title: "Kickoff & AI Readiness Review", description: "AI systems inventory, current governance assessment, scope definition." },
-      { week: "Weeks 2–5", title: "AIMS Documentation", description: "AI policies, risk frameworks, transparency procedures, and data governance documented." },
-      { week: "Weeks 6–9", title: "Implementation & Assessment", description: "Controls implemented, bias assessments conducted, staff trained on responsible AI." },
-      { week: "Week 10", title: "Internal Audit", description: "Full AIMS audit, non-conformities addressed." },
-      { week: "Weeks 11–14", title: "External Audit", description: "Certification body audit. Certificate issued." },
+      { week: "Week 1", title: "Kickoff & AI readiness review", description: "AI systems inventory, current governance assessment, scope definition." },
+      { week: "Weeks 2–5", title: "AIMS documentation", description: "AI policies, risk frameworks, transparency procedures, and data governance documented." },
+      { week: "Weeks 6–9", title: "Implementation & assessment", description: "Controls implemented, bias assessments conducted, staff trained on responsible AI." },
+      { week: "Week 10", title: "Internal audit", description: "Full AIMS audit, non-conformities addressed." },
+      { week: "Weeks 11–14", title: "External audit", description: "Certification body audit. Certificate issued." },
     ],
     pricing: [
       { name: "Essentials", audience: "AI startups up to 50 employees", price: "Scoped to your business", features: ["Gap analysis", "AIMS documentation", "AI risk assessment", "Internal audit", "Audit support"] },
@@ -274,7 +274,7 @@ export const services: Service[] = [
       "Progression planning to ISO 27001",
     ],
     process: [
-      { week: "Week 1", title: "Gap Analysis", description: "Review of your current security controls against Cyber Essentials requirements." },
+      { week: "Week 1", title: "Gap analysis", description: "Review of your current security controls against Cyber Essentials requirements." },
       { week: "Week 2", title: "Remediation", description: "Address identified gaps in firewall, patching, access control, malware protection, and configuration." },
       { week: "Week 3", title: "Certification", description: "Complete self-assessment (CE) or technical assessment (CE+). Certificate issued." },
     ],
@@ -390,12 +390,12 @@ export const services: Service[] = [
       "Re-test after remediation",
     ],
     process: [
-      { week: "Week 1", title: "Scoping & Planning", description: "Define scope, agree rules of engagement, set up testing environment." },
+      { week: "Week 1", title: "Scoping & planning", description: "Define scope, agree rules of engagement, set up testing environment." },
       { week: "Weeks 2–3", title: "Testing", description: "Active penetration testing conducted against agreed scope." },
       { week: "Week 4", title: "Reporting", description: "Detailed findings report with CVSS scores, executive summary, remediation guidance." },
     ],
     pricing: [
-      { name: "Web/API Test", audience: "Single application", price: "Per application", features: ["OWASP Top 10 testing", "API endpoint testing", "CVSS-scored report", "Remediation guidance", "Re-test included"] },
+      { name: "Web/API test", audience: "Single application", price: "Per application", features: ["OWASP Top 10 testing", "API endpoint testing", "CVSS-scored report", "Remediation guidance", "Re-test included"] },
     ],
     faqs: [
       { question: "How often should we do pen testing?", answer: "At minimum annually, and after any significant changes to your applications or infrastructure. Many compliance frameworks (ISO 27001, PCI DSS) require at least annual testing." },
@@ -428,8 +428,8 @@ export const services: Service[] = [
       "Staff privacy awareness training",
     ],
     process: [
-      { week: "Week 1", title: "Privacy Assessment", description: "Current privacy practices reviewed against GDPR requirements. Gap report delivered." },
-      { week: "Weeks 2–5", title: "Programme Build", description: "Privacy policies, ROPA, DPIA framework, breach procedures developed." },
+      { week: "Week 1", title: "Privacy assessment", description: "Current privacy practices reviewed against GDPR requirements. Gap report delivered." },
+      { week: "Weeks 2–5", title: "Programme build", description: "Privacy policies, ROPA, DPIA framework, breach procedures developed." },
       { week: "Weeks 6–8", title: "Implementation", description: "Policies implemented, consent mechanisms updated, staff trained." },
     ],
     pricing: [
@@ -459,11 +459,11 @@ export const services: Service[] = [
     category: "iso",
     features: ["Privacy policies and procedures aligned to ISO 27701", "PIMS implementation consultancy", "Integration with existing ISO 27001 ISMS", "Internal audit and Stage 1 and Stage 2 certification audit accompaniment"],
     process: [
-      { week: "Week 1", title: "Kickoff & Gap Analysis", description: "Assess current privacy posture against ISO 27701 requirements." },
-      { week: "Weeks 2–5", title: "PIMS Documentation", description: "Privacy policies, procedures, and PIMS documentation built." },
+      { week: "Week 1", title: "Kickoff & gap analysis", description: "Assess current privacy posture against ISO 27701 requirements." },
+      { week: "Weeks 2–5", title: "PIMS documentation", description: "Privacy policies, procedures, and PIMS documentation built." },
       { week: "Weeks 6–8", title: "Implementation", description: "Integration with existing ISMS, staff training, controls implemented." },
-      { week: "Week 9", title: "Internal Audit", description: "Full pre-audit review conducted." },
-      { week: "Weeks 10–12", title: "External Audit", description: "Stage 1 and Stage 2 certification audit." },
+      { week: "Week 9", title: "Internal audit", description: "Full pre-audit review conducted." },
+      { week: "Weeks 10–12", title: "External audit", description: "Stage 1 and Stage 2 certification audit." },
     ],
     pricing: [
       { name: "Standard", audience: "Organisations with existing ISO 27001", price: "Scoped to your business", features: ["Gap analysis", "PIMS documentation", "ISMS integration", "Internal audit", "Audit support"] },
@@ -484,8 +484,8 @@ export const services: Service[] = [
     category: "grc",
     features: ["Trust Services Criteria gap analysis", "Controls framework design and documentation", "Policy and procedure drafting", "Evidence collection programme", "Audit readiness and examiner liaison", "SOC 2 Compliance Report issued"],
     process: [
-      { week: "Weeks 1–2", title: "Gap Analysis", description: "Trust Services Criteria assessment and controls mapping." },
-      { week: "Weeks 3–6", title: "Controls Design", description: "Documentation, policies, and controls implementation." },
+      { week: "Weeks 1–2", title: "Gap analysis", description: "Trust Services Criteria assessment and controls mapping." },
+      { week: "Weeks 3–6", title: "Controls design", description: "Documentation, policies, and controls implementation." },
       { week: "Weeks 7–10", title: "Implementation", description: "Evidence collection and audit readiness preparation." },
     ],
     pricing: [
@@ -508,7 +508,7 @@ export const services: Service[] = [
     category: "grc",
     features: ["SAMA CSF controls gap analysis across all four domains", "Cybersecurity policies and procedures drafting", "Controls implementation consultancy", "Regulatory examination readiness assessment", "Banking sector compliance programme design"],
     process: [
-      { week: "Month 1", title: "Gap Analysis", description: "Controls gap analysis across all SAMA CSF domains." },
+      { week: "Month 1", title: "Gap analysis", description: "Controls gap analysis across all SAMA CSF domains." },
       { week: "Months 2–3", title: "Implementation", description: "Policies, procedures, and controls implemented." },
       { week: "Month 4", title: "Readiness", description: "Regulatory examination readiness assessment." },
     ],
@@ -594,7 +594,7 @@ export const services: Service[] = [
       { week: "Weeks 3–4", title: "Remediation", description: "Hardening implementation and verification." },
     ],
     pricing: [
-      { name: "Per Domain", audience: "On-premise and cloud hybrid", price: "Scoped to your business", features: ["Full AD review", "Hardening implementation", "Remediation report"] },
+      { name: "Per domain", audience: "On-premise and cloud hybrid", price: "Scoped to your business", features: ["Full AD review", "Hardening implementation", "Remediation report"] },
     ],
     faqs: [],
     relatedSlugs: ["penetration-testing", "vciso", "iso-27001"],
@@ -694,7 +694,7 @@ export const services: Service[] = [
     features: ["Monthly GRC advisory sessions", "Regulatory horizon scanning", "Risk register review and reporting", "Policy maintenance and updates", "Incident guidance and regulatory notification advisory", "On-demand expert access"],
     process: [
       { week: "Month 1", title: "Onboarding", description: "Full security posture assessment and priority roadmap." },
-      { week: "Ongoing", title: "Monthly Advisory", description: "Regular advisory sessions, policy reviews, and regulatory updates." },
+      { week: "Ongoing", title: "Monthly advisory", description: "Regular advisory sessions, policy reviews, and regulatory updates." },
     ],
     pricing: [
       { name: "Subscription", audience: "Post-certification organisations", price: "Monthly retainer", features: ["GRC advisory", "Horizon scanning", "On-demand access", "White-label available"] },

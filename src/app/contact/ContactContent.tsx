@@ -111,7 +111,7 @@ export default function ContactContent() {
             {/* Left: Form */}
             <div className="lg:order-2 lg:col-span-3">
               <Card>
-                <h2 className="h3">Book a Free ISO 27001 Gap Analysis</h2>
+                <h2 className="h3">Book a free ISO 27001 gap analysis</h2>
 
                 <p className="small mt-4">
                   Tell us about your organisation, your target certification, and your timeline. We will review your enquiry and come back to you within 1 working day with a clear, honest assessment of your next steps. No sales pressure. No obligation.
@@ -390,7 +390,7 @@ export default function ContactContent() {
               <Card>
                 <div className="flex items-center gap-3">
                   <FileSearch className="h-5 w-5 shrink-0 text-brand" strokeWidth={1.6} />
-                  <h3 className="h4">What is a Gap Analysis?</h3>
+                  <h3 className="h4">What is a gap analysis?</h3>
                 </div>
                 <p className="small mt-4">
                   A gap analysis is a structured assessment of your current policies, processes, and controls against the requirements of your target certification standard, ISO 27001, ISO 42001, ISO 9001, ISO 22301, Cyber Essentials, GDPR, or any other standard you are pursuing. The output is a clear report showing where you meet requirements, where you have gaps, and a prioritised roadmap to close them. It is the fastest way to understand your path to certification, regardless of your industry, your size, or your location. And it is completely free.

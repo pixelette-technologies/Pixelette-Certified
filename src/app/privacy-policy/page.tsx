@@ -19,13 +19,13 @@ export default function PrivacyPolicyPage() {
           <Breadcrumbs items={[{ name: "Privacy Policy" }]} />
         </div>
         <h1 className="h1p mb-4">
-          Privacy Policy
+          Privacy policy
         </h1>
         <p className="small mb-12">Last updated: 1 April 2026</p>
 
         <div className="space-y-10 leading-relaxed text-body">
           <section>
-            <h2 className="h3 mb-3">1. Who We Are</h2>
+            <h2 className="h3 mb-3">1. Who we are</h2>
             <p>
               Pixelette Certified is a trading name of Pixelette Group Ltd, registered in England and Wales
               under company number 07251823. We are a UK-based ISO certification and compliance consultancy.
@@ -40,7 +40,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="h3 mb-3">2. What Data We Collect</h2>
+            <h2 className="h3 mb-3">2. What data we collect</h2>
             <p>We collect the following personal data when you interact with our website:</p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
               <li><strong className="font-semibold text-ink">Contact form submissions:</strong> name, email address, company name, phone number, service interest, and message content.</li>
@@ -51,7 +51,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="h3 mb-3">3. How We Use Your Data</h2>
+            <h2 className="h3 mb-3">3. How we use your data</h2>
             <p>We use your personal data for the following purposes:</p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
               <li>To respond to your contact form enquiry and provide information about our services.</li>
@@ -62,7 +62,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="h3 mb-3">4. Legal Basis for Processing</h2>
+            <h2 className="h3 mb-3">4. Legal basis for processing</h2>
             <p>We process your personal data under the following legal bases (UK GDPR Article 6):</p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
               <li><strong className="font-semibold text-ink">Consent (Article 6(1)(a)):</strong> when you submit a contact form with the consent checkbox selected.</li>
@@ -72,7 +72,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="h3 mb-3">5. Data Sharing</h2>
+            <h2 className="h3 mb-3">5. Data sharing</h2>
             <p>
               We do not sell your personal data. We may share your data with the following categories of
               third parties, only as necessary to deliver our services:
@@ -86,7 +86,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="h3 mb-3">6. Data Retention</h2>
+            <h2 className="h3 mb-3">6. Data retention</h2>
             <p>
               Contact form submissions are retained for 24 months from the date of submission, after which
               they are securely deleted. If you become a client, your data is retained for the duration of the
@@ -95,7 +95,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="h3 mb-3">7. Your Rights</h2>
+            <h2 className="h3 mb-3">7. Your rights</h2>
             <p>Under UK GDPR, you have the following rights:</p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
               <li><strong className="font-semibold text-ink">Right of access</strong>, request a copy of your personal data.</li>
@@ -116,7 +116,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="h3 mb-3">8. International Transfers</h2>
+            <h2 className="h3 mb-3">8. International transfers</h2>
             <p>
               Your data is primarily stored and processed within the United Kingdom and European Economic Area.
               Where data is transferred outside the UK/EEA (e.g. to cloud providers with US infrastructure),
@@ -148,7 +148,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="h3 mb-3">11. Changes to This Policy</h2>
+            <h2 className="h3 mb-3">11. Changes to this policy</h2>
             <p>
               We may update this policy from time to time. Material changes will be communicated via our
               website. The &ldquo;Last updated&rdquo; date at the top of this page indicates the most recent revision.

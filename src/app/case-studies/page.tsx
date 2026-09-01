@@ -17,7 +17,7 @@ export default function CaseStudiesPage() {
             as="h1"
             variant="h1p"
             label="Case Studies"
-            title="Real Results for Real Companies"
+            title="Real results for real companies"
             description="How UK technology companies achieved certification faster, won enterprise deals, and built lasting compliance programmes."
             className="mt-8 mb-0"
           />

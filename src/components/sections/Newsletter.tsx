@@ -32,7 +32,7 @@ export default function Newsletter() {
       <div className="wrap" data-reveal="">
         <div className="mx-auto max-w-[640px] text-center">
           <h2 className="h2 mx-auto max-w-[22ch]">
-            Compliance Intelligence for Enterprise-Ready Businesses
+            Compliance intelligence for enterprise-ready businesses
           </h2>
           <p className="body mx-auto mt-5">
             Get monthly insights on ISO certification, cybersecurity regulations, AI governance,

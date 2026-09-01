@@ -19,13 +19,13 @@ export default function CookiePolicyPage() {
           <Breadcrumbs items={[{ name: "Cookie Policy" }]} />
         </div>
         <h1 className="h1p mb-4">
-          Cookie Policy
+          Cookie policy
         </h1>
         <p className="small mb-12">Last updated: 1 April 2026</p>
 
         <div className="space-y-10 leading-relaxed text-body">
           <section>
-            <h2 className="h3 mb-3">1. What Are Cookies</h2>
+            <h2 className="h3 mb-3">1. What are cookies</h2>
             <p>
               Cookies are small text files stored on your device when you visit a website. They help the
               website remember your preferences and understand how you interact with the site. We use cookies
@@ -34,9 +34,9 @@ export default function CookiePolicyPage() {
           </section>
 
           <section>
-            <h2 className="h3 mb-3">2. Cookies We Use</h2>
+            <h2 className="h3 mb-3">2. Cookies we use</h2>
 
-            <h3 className="h4 mt-4 mb-2 text-brand">Essential Cookies</h3>
+            <h3 className="h4 mt-4 mb-2 text-brand">Essential cookies</h3>
             <p>
               These cookies are necessary for the website to function and cannot be switched off. They are
               usually set in response to actions you take, such as setting your privacy preferences or
@@ -67,7 +67,7 @@ export default function CookiePolicyPage() {
               </table>
             </div>
 
-            <h3 className="h4 mt-6 mb-2 text-brand">Analytics Cookies</h3>
+            <h3 className="h4 mt-6 mb-2 text-brand">Analytics cookies</h3>
             <p>
               These cookies help us understand how visitors interact with our website by collecting and
               reporting information anonymously. We use this data to improve our site.
@@ -98,7 +98,7 @@ export default function CookiePolicyPage() {
           </section>
 
           <section>
-            <h2 className="h3 mb-3">3. Managing Cookies</h2>
+            <h2 className="h3 mb-3">3. Managing cookies</h2>
             <p>
               You can control and delete cookies through your browser settings. Most browsers allow you to:
             </p>
@@ -115,7 +115,7 @@ export default function CookiePolicyPage() {
           </section>
 
           <section>
-            <h2 className="h3 mb-3">4. Third-Party Cookies</h2>
+            <h2 className="h3 mb-3">4. Third-party cookies</h2>
             <p>
               We do not use third-party advertising cookies. The only third-party cookies on our site are
               from analytics providers (Google Analytics and Vercel Analytics), which collect anonymised
@@ -124,7 +124,7 @@ export default function CookiePolicyPage() {
           </section>
 
           <section>
-            <h2 className="h3 mb-3">5. Changes to This Policy</h2>
+            <h2 className="h3 mb-3">5. Changes to this policy</h2>
             <p>
               We may update this cookie policy from time to time. Any changes will be posted on this page
               with an updated revision date.
@@ -132,7 +132,7 @@ export default function CookiePolicyPage() {
           </section>
 
           <section>
-            <h2 className="h3 mb-3">6. Contact Us</h2>
+            <h2 className="h3 mb-3">6. Contact us</h2>
             <p>
               If you have questions about our use of cookies, please contact us at{" "}
               <a href="mailto:privacy@pixelettecertified.com" className="link">

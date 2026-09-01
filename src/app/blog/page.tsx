@@ -25,7 +25,7 @@ export default function BlogPage() {
             as="h1"
             variant="h1p"
             label="Blog"
-            title="Insights & Guides"
+            title="Insights and guides"
             description="Compliance Intelligence, Strategic thinking on certification, procurement, AI governance, and enterprise readiness. Written by UK-credentialled practitioners, for businesses operating in any market."
             className="mt-8 mb-0"
           />

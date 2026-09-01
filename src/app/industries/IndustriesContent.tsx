@@ -53,7 +53,7 @@ export default function IndustriesContent({ industries }: IndustriesContentProps
 
           <div className="mt-8 max-w-[52ch]">
             <Eyebrow className="mb-5">Who We Help</Eyebrow>
-            <h1 className="h1p">Delivering Cyber Confidence Across Industries</h1>
+            <h1 className="h1p">Delivering cyber confidence across industries</h1>
             <p className="lead mt-6">
               Every industry faces unique compliance challenges. We bring specialist
               expertise to each sector, delivering certifications that unlock growth

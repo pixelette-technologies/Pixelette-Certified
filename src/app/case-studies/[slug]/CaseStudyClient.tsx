@@ -84,14 +84,14 @@ export default function CaseStudyClient({ study }: { study: CaseStudyData }) {
           <h2 className="h3">Overview</h2>
           <p className="body mt-5">{study.overview}</p>
 
-          <h2 className="h3 mt-14">The Challenge</h2>
+          <h2 className="h3 mt-14">The challenge</h2>
           <div className="mt-5 space-y-4">
             {study.challenge.map((p, i) => (
               <p key={i} className="body">{p}</p>
             ))}
           </div>
 
-          <h2 className="h3 mt-14">Our Solution</h2>
+          <h2 className="h3 mt-14">Our solution</h2>
           <div className="mt-5 space-y-4">
             {study.solution.map((p, i) => (
               <p key={i} className="body">{p}</p>
@@ -109,7 +109,7 @@ export default function CaseStudyClient({ study }: { study: CaseStudyData }) {
             </figcaption>
           </figure>
 
-          <h2 className="h3 mt-14">Services Used</h2>
+          <h2 className="h3 mt-14">Services used</h2>
           <div className="mt-8 grid gap-3.5 md:grid-cols-3">
             {study.relatedServices.map((svc) => (
               <Link

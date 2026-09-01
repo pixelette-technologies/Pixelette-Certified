@@ -33,7 +33,7 @@ export default function ThreeStepProcess() {
       <div className="wrap" data-reveal="">
         <SectionHeading
           label="How We Work"
-          title="Certified in Three Steps, So You Can Focus on Winning Deals"
+          title="Certified in three steps, so you can focus on winning deals"
           description="Simple, transparent, and designed to keep your business moving, no matter where you are in the world or what industry you operate in."
         />
 

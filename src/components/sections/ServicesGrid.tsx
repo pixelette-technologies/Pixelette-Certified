@@ -28,7 +28,7 @@ export default function ServicesGrid() {
       <div className="wrap" data-reveal="">
         <SectionHeading
           label="Our Services"
-          title="One Partner for ISO, Cyber Security, AI Governance, and Privacy"
+          title="One partner for ISO, cyber security, AI governance, and privacy"
           description="From ISO certification to ongoing security leadership, we cover the full compliance landscape for businesses across every industry, in every market."
         />
 

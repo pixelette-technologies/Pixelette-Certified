@@ -21,7 +21,7 @@ const blogPostsData: Record<string, BlogPostData> = {
   "iso-27001-security-questionnaire": {
     slug: "iso-27001-security-questionnaire",
     seoTitle: "ISO 27001 Security Questionnaire Help | Pixelette Certified",
-    title: "We Just Got Asked for ISO 27001 in a Security Questionnaire. What Now?",
+    title: "We just got asked for ISO 27001 in a security questionnaire. What now?",
     description:
       "Your buyer just sent a security questionnaire asking for ISO 27001. You don't have it. This guide shows exactly what to do next and how to stay in the deal.",
     date: "2026-04-07",
@@ -46,7 +46,7 @@ const blogPostsData: Record<string, BlogPostData> = {
   "iso-27001-10-weeks-vs-6-months": {
     slug: "iso-27001-10-weeks-vs-6-months",
     seoTitle: "ISO 27001 in 10 Weeks vs 6 Months | Pixelette Certified",
-    title: "ISO 27001 in 10 Weeks vs 6 Months: What Actually Changes?",
+    title: "ISO 27001 in 10 weeks vs 6 months: what actually changes?",
     description:
       "The 10-week ISO 27001 timeline is not a marketing gimmick. This guide explains what a structured fast-track compresses and how to spot corner-cutting.",
     date: "2026-04-06",
@@ -72,7 +72,7 @@ const blogPostsData: Record<string, BlogPostData> = {
   "real-cost-not-being-iso-27001-certified": {
     slug: "real-cost-not-being-iso-27001-certified",
     seoTitle: "Cost of Not Being ISO 27001 Certified | Pixelette Certified",
-    title: "The Real Cost of NOT Being ISO 27001 Certified",
+    title: "The real cost of NOT being ISO 27001 certified",
     description:
       "Every founder asks how much ISO 27001 costs. The right question is how much it costs not to have it. This guide puts a number on the second question.",
     date: "2026-04-05",
@@ -98,7 +98,7 @@ const blogPostsData: Record<string, BlogPostData> = {
   "customer-asked-ai-governance": {
     slug: "customer-asked-ai-governance",
     seoTitle: "AI Governance for Enterprise Buyers | Pixelette Certified",
-    title: "Our Customer Just Asked About Our AI Governance. We Don't Have Any.",
+    title: "Our customer just asked about our AI governance. We don't have any.",
     description:
       "Enterprise buyers and investors now ask about AI governance. If you build or deploy AI, ISO 42001 is the answer. Here is what to do this week.",
     date: "2026-04-04",
@@ -124,7 +124,7 @@ const blogPostsData: Record<string, BlogPostData> = {
   "iso-27001-or-soc-2-uk-saas": {
     slug: "iso-27001-or-soc-2-uk-saas",
     seoTitle: "ISO 27001 or SOC 2 for UK SaaS | Pixelette Certified",
-    title: "ISO 27001 or SOC 2? A Straight Answer for UK SaaS Selling into US Enterprise",
+    title: "ISO 27001 or SOC 2? A straight answer for UK SaaS selling into US enterprise",
     description:
       "A UK SaaS company closes its first US deal and discovers SOC 2 is the default. This guide explains whether to hold one or both, and in what order.",
     date: "2026-04-03",
@@ -151,7 +151,7 @@ const blogPostsData: Record<string, BlogPostData> = {
   "enterprise-security-questionnaire-without-iso-27001": {
     slug: "enterprise-security-questionnaire-without-iso-27001",
     seoTitle: "Questionnaires Without ISO 27001 | Pixelette Certified",
-    title: "How to Answer an Enterprise Security Questionnaire Without ISO 27001",
+    title: "How to answer an enterprise security questionnaire without ISO 27001",
     description:
       "A tactical guide for handling enterprise security questionnaires when you do not yet hold ISO 27001, with a free response framework template.",
     date: "2026-04-02",
@@ -177,7 +177,7 @@ const blogPostsData: Record<string, BlogPostData> = {
   "iso-27001-uk-fintech-fca-dora": {
     slug: "iso-27001-uk-fintech-fca-dora",
     seoTitle: "ISO 27001 for UK FinTech: FCA & DORA | Pixelette Certified",
-    title: "ISO 27001 for UK Fintech: What the FCA and DORA Actually Require",
+    title: "ISO 27001 for UK fintech: what the FCA and DORA actually require",
     description:
       "FCA operational resilience, DORA compliance, and ISO 27001 for fintech. This guide maps the real regulatory requirements to the certification framework.",
     date: "2026-04-01",
@@ -203,7 +203,7 @@ const blogPostsData: Record<string, BlogPostData> = {
   "iso-27001-uk-healthtech-nhs": {
     slug: "iso-27001-uk-healthtech-nhs",
     seoTitle: "ISO 27001 for UK HealthTech & NHS | Pixelette Certified",
-    title: "ISO 27001 for UK Healthtech: NHS DSPT, DTAC, and the Procurement Gates You Will Actually Face",
+    title: "ISO 27001 for UK healthtech: NHS DSPT, DTAC, and the procurement gates you will actually face",
     description:
       "A practical guide to the four NHS assurance frameworks UK healthtech will face, where ISO 27001 fits in the stack, and how to navigate tender deadlines.",
     date: "2026-03-31",
@@ -229,7 +229,7 @@ const blogPostsData: Record<string, BlogPostData> = {
   "iso-27001-ai-companies-iso-42001": {
     slug: "iso-27001-ai-companies-iso-42001",
     seoTitle: "ISO 27001 and 42001 for AI Firms | Pixelette Certified",
-    title: "ISO 27001 for AI Companies: Why ISO 42001 Alone Is Not Enough",
+    title: "ISO 27001 for AI companies: why ISO 42001 alone is not enough",
     description:
       "AI companies need both ISO 27001 and ISO 42001 because the two standards cover different risk domains, and enterprise buyers check the ISO 27001 box first.",
     date: "2026-03-30",
@@ -255,7 +255,7 @@ const blogPostsData: Record<string, BlogPostData> = {
   "iso-27001-legal-firms-sra": {
     slug: "iso-27001-legal-firms-sra",
     seoTitle: "ISO 27001 for Legal Firms & the SRA | Pixelette Certified",
-    title: "ISO 27001 for Legal Firms: SRA Expectations, Client Audits, and the Cost of One Breach",
+    title: "ISO 27001 for legal firms: SRA expectations, client audits, and the cost of one breach",
     description:
       "The average UK legal firm data breach costs 4.2 million pounds. This guide explains what the SRA expects and why client audits are now the procurement gate.",
     date: "2026-03-29",
@@ -281,7 +281,7 @@ const blogPostsData: Record<string, BlogPostData> = {
   "investor-asked-security-posture": {
     slug: "investor-asked-security-posture",
     seoTitle: "Security Posture in Due Diligence | Pixelette Certified",
-    title: "Your Investor Just Asked About Your Security Posture in Due Diligence. What Now?",
+    title: "Your investor just asked about your security posture in due diligence. What now?",
     description:
       "Investor security diligence is tougher than procurement questionnaires. What Series B and later funds actually look for, and what to do when it arrives.",
     date: "2026-03-28",
@@ -306,7 +306,7 @@ const blogPostsData: Record<string, BlogPostData> = {
   "cyber-insurance-premium-increased": {
     slug: "cyber-insurance-premium-increased",
     seoTitle: "Cyber Insurance & ISO 27001 Pricing | Pixelette Certified",
-    title: "Your Cyber Insurance Premium Just Increased by 40%. Here Is Why, and What to Do About It.",
+    title: "Your cyber insurance premium just increased by 40%. Here is why, and what to do about it.",
     description:
       "UK cyber insurance premiums have repriced sharply. This guide explains exactly how underwriters use ISO 27001 in their pricing models, and what to do.",
     date: "2026-03-27",
@@ -331,7 +331,7 @@ const blogPostsData: Record<string, BlogPostData> = {
   "iso-27001-vs-cyber-essentials-plus": {
     slug: "iso-27001-vs-cyber-essentials-plus",
     seoTitle: "ISO 27001 vs Cyber Essentials Plus | Pixelette Certified",
-    title: "ISO 27001 vs Cyber Essentials Plus: When You Need One, When You Need Both, and When the Question Itself Is Wrong",
+    title: "ISO 27001 vs Cyber Essentials Plus: when you need one, when you need both, and when the question itself is wrong",
     description:
       "ISO 27001 and Cyber Essentials Plus are not alternatives. They satisfy different procurement gates. This guide explains which buyers need which credential.",
     date: "2026-03-26",
@@ -356,7 +356,7 @@ const blogPostsData: Record<string, BlogPostData> = {
   "vanta-drata-vs-real-consultancy": {
     slug: "vanta-drata-vs-real-consultancy",
     seoTitle: "Vanta vs Drata vs a Consultancy | Pixelette Certified",
-    title: "Vanta vs Drata vs a Real Consultancy: What Compliance Automation Tools Actually Do (And What They Don't)",
+    title: "Vanta vs Drata vs a real consultancy: what compliance automation tools actually do (and what they don't)",
     description:
       "An honest comparison of compliance automation platforms and consultancy-led implementation, with the five scenarios where platform-only reliably fails.",
     date: "2026-03-25",
@@ -382,7 +382,7 @@ const blogPostsData: Record<string, BlogPostData> = {
   "iso-27001-projects-over-budget": {
     slug: "iso-27001-projects-over-budget",
     seoTitle: "ISO 27001 Project Budget Red Flags | Pixelette Certified",
-    title: "Why Most ISO 27001 Projects Run Over Budget (And the Four Red Flags to Watch For in a Proposal)",
+    title: "Why most ISO 27001 projects run over budget (and the four red flags to watch for in a proposal)",
     description:
       "Roughly 60 percent of UK ISO 27001 projects run over budget. The four proposal-stage red flags and the contract mechanics that prevent cost overrun.",
     date: "2026-03-24",
@@ -407,7 +407,7 @@ const blogPostsData: Record<string, BlogPostData> = {
   "20-person-company-iso-27001": {
     slug: "20-person-company-iso-27001",
     seoTitle: "ISO 27001 for 20-Person Companies | Pixelette Certified",
-    title: "Can a 20-Person Company Really Get ISO 27001 Certified? A Direct Answer.",
+    title: "Can a 20-person company really get ISO 27001 certified? A direct answer.",
     description:
       "ISO 27001 was designed to scale to organisations of any size. How the standard scales, what gets easier at smaller scale, and the one thing that is harder.",
     date: "2026-03-23",
@@ -433,7 +433,7 @@ const blogPostsData: Record<string, BlogPostData> = {
   "eu-ai-act-uk-companies": {
     slug: "eu-ai-act-uk-companies",
     seoTitle: "EU AI Act Prep for UK Companies | Pixelette Certified",
-    title: "EU AI Act Preparation for UK Companies: What You Actually Need to Do Before August 2026",
+    title: "EU AI Act preparation for UK companies: what you actually need to do before August 2026",
     description:
       "The EU AI Act applies to UK companies whose AI output is used in the EU, regardless of headquarters. This guide maps the obligations with a 90-day plan.",
     date: "2026-03-22",
@@ -459,7 +459,7 @@ const blogPostsData: Record<string, BlogPostData> = {
   "iso-42001-vs-eu-ai-act": {
     slug: "iso-42001-vs-eu-ai-act",
     seoTitle: "ISO 42001 vs the EU AI Act Explained | Pixelette Certified",
-    title: "ISO 42001 vs the EU AI Act: What Enterprise Buyers Actually Expect You to Hold",
+    title: "ISO 42001 vs the EU AI Act: what enterprise buyers actually expect you to hold",
     description:
       "ISO 42001 and the EU AI Act are not interchangeable. How the two relate structurally and how to position your AI governance posture credibly to buyers.",
     date: "2026-03-21",

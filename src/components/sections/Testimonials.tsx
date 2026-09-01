@@ -37,7 +37,7 @@ export default function Testimonials() {
       <div className="wrap" data-reveal="">
         <SectionHeading
           label="Client Success"
-          title="Trusted by Technology Companies Winning Enterprise Contracts"
+          title="Trusted by technology companies winning enterprise contracts"
           description="Our clients pass their audits first time. Here is what they say."
         />
 

@@ -37,9 +37,9 @@ export default function Hero() {
 
         <h1 className="h1 mx-auto mt-8 max-w-[22ch]">
           <span className="block">
-            Your Next Enterprise Deal Is Waiting on a Certificate You Don&apos;t Have Yet.
+            Your next enterprise deal is waiting on a certificate you don&apos;t have yet.
           </span>
-          <span className="mt-2 block text-brand">We Fix That in 10 Weeks.</span>
+          <span className="mt-2 block text-brand">We fix that in 10 weeks.</span>
         </h1>
 
         <p className="lead mx-auto mt-7">

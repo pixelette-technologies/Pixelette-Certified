@@ -118,7 +118,7 @@ export default function BlogPostClient({
         {/* Related posts */}
         {relatedPosts.length > 0 && (
           <section>
-            <h2 className="h3 mb-8">Related Articles</h2>
+            <h2 className="h3 mb-8">Related articles</h2>
             <div className="grid gap-3.5 md:grid-cols-3">
               {relatedPosts.map((related) => (
                 <Link
