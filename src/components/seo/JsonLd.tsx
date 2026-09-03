@@ -31,7 +31,7 @@ export function OrganizationSchema() {
         telephone: "+442079460958",
         email: "info@pixelettecertified.com",
         description:
-          "UK-headquartered ISO certification and compliance consultancy. ISO 27001, ISO 42001, Cyber Essentials, GDPR, vCISO, vDPO, and penetration testing. Fixed fee. 98% first-attempt pass rate. Globally delivered.",
+          "UK headquartered ISO certification and compliance consultancy. ISO 27001, ISO 42001, Cyber Essentials, GDPR, vCISO, vDPO, and penetration testing. Fixed fee. 98% first-attempt pass rate. Globally delivered.",
         address: {
           "@type": "PostalAddress",
           streetAddress: "66 Paul Street",

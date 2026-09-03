@@ -132,7 +132,7 @@ export default function CaseStudyClient({ study }: { study: CaseStudyData }) {
           <h2 className="h2">Ready to achieve the same results?</h2>
           <p className="body mx-auto mt-5">Book a free gap analysis to discuss your certification needs.</p>
           <div className="mt-9">
-            <Button href="/contact" size="lg">See Your 10-Week Certification Roadmap</Button>
+            <Button href="/contact" size="lg">See Your 10 Week Certification Roadmap</Button>
           </div>
         </div>
       </section>

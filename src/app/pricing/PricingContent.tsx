@@ -117,7 +117,7 @@ export default function PricingContent() {
             </p>
             <div className="mt-9 flex flex-wrap gap-3.5">
               <Button href="/contact" size="lg">
-                See Your 10-Week Certification Roadmap
+                See Your 10 Week Certification Roadmap
               </Button>
               <Button href="/contact" variant="secondary" size="lg">
                 Talk to a Consultant
@@ -229,7 +229,7 @@ export default function PricingContent() {
           </p>
           <div className="mt-9 flex flex-wrap gap-3.5">
             <Button href="/contact" size="lg" iconRight={<ArrowRight size={16} />}>
-              See Your 10-Week Certification Roadmap
+              See Your 10 Week Certification Roadmap
             </Button>
           </div>
         </div>

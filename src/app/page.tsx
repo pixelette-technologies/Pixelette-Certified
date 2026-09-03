@@ -32,7 +32,7 @@ export default function HomePage() {
           name: "Pixelette Certified",
           url: "https://pixelettecertified.com",
           description:
-            "UK-headquartered ISO certification and compliance consultancy. ISO 27001, ISO 42001, Cyber Essentials, GDPR, vCISO, vDPO, SOC 2, penetration testing, and AI governance. Globally delivered across UK, UAE, Saudi Arabia, Qatar, EU, Americas, and APAC.",
+            "UK headquartered ISO certification and compliance consultancy. ISO 27001, ISO 42001, Cyber Essentials, GDPR, vCISO, vDPO, SOC 2, penetration testing, and AI governance. Globally delivered across UK, UAE, Saudi Arabia, Qatar, EU, Americas, and APAC.",
           publisher: { "@id": "https://pixelettecertified.com/#organization" },
         }}
       />
@@ -107,7 +107,7 @@ export default function HomePage() {
           </ul>
 
           <p className="small mt-9 max-w-[72ch]">
-            Fixed-fee. Senior-led. Backed by the Pixelette Pass-First Guarantee: if a failure occurs due to a gap in our documentation, we cover the remediation at no additional cost.
+            Fixed-fee. Senior-led. Backed by the Pixelette Pass First Guarantee: if a failure occurs due to a gap in our documentation, we cover the remediation at no additional cost.
           </p>
         </div>
       </section>
@@ -118,7 +118,7 @@ export default function HomePage() {
       <section className="border-y border-line bg-band py-12 lg:py-14">
         <div className="wrap" data-reveal="">
           <p className="body mx-auto text-center">
-            Our 10-week delivery cycle means engagements started today complete before the end of Q2 2026. Engagements started after May complete in Q3. If you have a procurement deadline, fiscal year-end, or EU AI Act milestone in view, the calendar, not the contract, is your binding constraint.
+            Our 10 week delivery cycle means engagements started today complete before the end of Q2 2026. Engagements started after May complete in Q3. If you have a procurement deadline, fiscal year-end, or EU AI Act milestone in view, the calendar, not the contract, is your binding constraint.
           </p>
         </div>
       </section>
@@ -131,10 +131,10 @@ export default function HomePage() {
           <div>
             <Brain className="h-6 w-6 text-brand" strokeWidth={1.6} aria-hidden="true" />
             <h2 className="h2 mt-5 max-w-[20ch]">
-              The AI governance first-mover advantage
+              The AI governance first mover advantage
             </h2>
             <p className="body mt-5">
-              ISO 42001 certification before your competitors. Delivered by a PECB-certified Lead Auditor, among the first in the UK market.
+              ISO 42001 certification before your competitors. Delivered by a PECB certified Lead Auditor, among the first in the UK market.
             </p>
           </div>
 
@@ -151,7 +151,7 @@ export default function HomePage() {
       {/* Pass-First Guarantee */}
       <section className="border-y border-line py-12 lg:py-14">
         <div className="wrap mx-auto max-w-[72ch] text-center" data-reveal="">
-          <h3 className="h4">The Pixelette pass-first guarantee</h3>
+          <h3 className="h4">The Pixelette pass first guarantee</h3>
           <p className="small mt-3">
             98% First-Attempt Pass Rate. If a failure occurs due to a gap in our documentation, we cover the remediation at no additional cost.
           </p>

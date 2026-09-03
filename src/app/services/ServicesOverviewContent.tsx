@@ -51,11 +51,11 @@ export default function ServicesOverviewContent({ groupedServices }: ServicesOve
           <div className="mt-8 max-w-[52ch]">
             <h1 className="h1p">Our services</h1>
             <p className="lead mt-6">
-              Everything You Need to Be Enterprise-Ready. ISO certification, cybersecurity, AI governance, and privacy compliance. UK-headquartered, globally delivered, across every sector.
+              Everything You Need to Be Enterprise-Ready. ISO certification, cybersecurity, AI governance, and privacy compliance. UK headquartered, globally delivered, across every sector.
             </p>
             <div className="mt-9">
               <Button href="/contact" size="lg">
-                See Your 10-Week Certification Roadmap
+                See Your 10 Week Certification Roadmap
               </Button>
             </div>
           </div>

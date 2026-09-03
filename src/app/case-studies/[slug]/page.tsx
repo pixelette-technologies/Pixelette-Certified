@@ -56,7 +56,7 @@ const caseStudiesData: Record<string, CaseStudyData> = {
     challenge: [
       "Enterprise clients were increasingly requiring evidence of AI governance alongside traditional information security certifications. The company was receiving procurement questionnaires with specific sections on AI risk management, bias assessment, and data governance that they could not adequately address.",
       "The EU AI Act compliance deadline was approaching, and the company's AI systems fell within the high-risk category requiring formal governance frameworks. Without a structured approach, compliance would be reactive and expensive.",
-      "The competitive landscape was intensifying. Several competitors had already achieved ISO 27001, and first-mover advantage on ISO 42001 was a significant differentiator given that very few UK AI companies held the certification.",
+      "The competitive landscape was intensifying. Several competitors had already achieved ISO 27001, and first mover advantage on ISO 42001 was a significant differentiator given that very few UK AI companies held the certification.",
     ],
     solution: [
       "We designed a dual certification programme that leveraged the significant overlap between ISO 27001 and ISO 42001. Approximately sixty percent of the documentation and controls addressed requirements for both standards, reducing total effort and cost.",

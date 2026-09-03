@@ -35,7 +35,7 @@ const credentials = [
     icon: Brain,
     title: "ISO 42001 Lead Auditor (PECB)",
     description:
-      "PECB-certified ISO 42001 Lead Auditor. AI governance certification authority. Among the first in the UK market.",
+      "PECB certified ISO 42001 Lead Auditor. AI governance certification authority. Among the first in the UK market.",
   },
   {
     icon: Scale,
@@ -80,7 +80,7 @@ const differentiators = [
     icon: Brain,
     title: "AI governance pioneers",
     description:
-      "Among the first UK consultancies offering ISO 42001 AI governance certification, with a PECB-certified ISO 42001 Lead Auditor on the team.",
+      "Among the first UK consultancies offering ISO 42001 AI governance certification, with a PECB certified ISO 42001 Lead Auditor on the team.",
   },
   {
     icon: Globe,

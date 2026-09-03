@@ -16,7 +16,7 @@ interface CTASectionProps {
 export default function CTASection({
   headline = "See your path to certification in 30 minutes",
   description = "No obligation. No sales pressure. In 30 minutes, you will know exactly where your compliance gaps are, which standards apply to your business and jurisdiction, and what a realistic timeline and cost looks like, wherever in the world you operate.",
-  primaryCta = "See Your 10-Week Certification Roadmap",
+  primaryCta = "See Your 10 Week Certification Roadmap",
   primaryHref = "/contact",
   secondaryCta = "Talk to a Consultant",
   secondaryHref = "/contact",

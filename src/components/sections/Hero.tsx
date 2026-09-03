@@ -45,11 +45,11 @@ export default function Hero() {
         <p className="lead mx-auto mt-7">
           Enterprise contracts. Government frameworks. Investor due diligence. The deals
           you&apos;re losing because you&apos;re not yet certified, we close that gap in 10 weeks.
-          Fixed fee. 98% first-attempt pass rate. UK-headquartered. Globally delivered.
+          Fixed fee. 98% first-attempt pass rate. UK headquartered. Globally delivered.
         </p>
 
         <div className="mt-9 flex flex-wrap justify-center gap-3.5">
-          <Button href="/contact">See Your 10-Week Certification Roadmap</Button>
+          <Button href="/contact">See Your 10 Week Certification Roadmap</Button>
           <Button href="/services" variant="secondary">
             Talk to a Consultant
           </Button>

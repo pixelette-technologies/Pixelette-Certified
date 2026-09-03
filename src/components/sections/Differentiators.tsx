@@ -25,7 +25,7 @@ const differentiators = [
     icon: Brain,
     title: "AI governance pioneers",
     description:
-      "Among the first UK consultancies offering ISO 42001 AI governance certification, with a PECB-certified ISO 42001 Lead Auditor on the team.",
+      "Among the first UK consultancies offering ISO 42001 AI governance certification, with a PECB certified ISO 42001 Lead Auditor on the team.",
   },
 ];
 

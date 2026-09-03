@@ -181,7 +181,7 @@ export default function IndustriesContent({ industries }: IndustriesContentProps
       <CTASection
         headline="Not sure which certification your industry needs?"
         description="Book a free 30-minute gap analysis. We will assess your industry requirements, map the certifications that matter, and give you a realistic timeline and cost."
-        primaryCta="See Your 10-Week Certification Roadmap"
+        primaryCta="See Your 10 Week Certification Roadmap"
         primaryHref="/contact"
         secondaryCta="View All Services"
         secondaryHref="/services"

@@ -69,7 +69,7 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
                 Get Started
               </Button>
               <Button href="/contact" variant="secondary" size="lg">
-                See Your 10-Week Certification Roadmap
+                See Your 10 Week Certification Roadmap
               </Button>
             </div>
           </div>
@@ -238,7 +238,7 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
       <CTASection
         headline={`Ready to start your ${service.shortTitle} journey?`}
         description="Book a free gap analysis call. In 30 minutes you will know exactly where you stand, what it takes, and what it costs."
-        primaryCta="See Your 10-Week Certification Roadmap"
+        primaryCta="See Your 10 Week Certification Roadmap"
         primaryHref="/contact"
         secondaryCta="Talk to a Consultant"
         secondaryHref="/contact"
