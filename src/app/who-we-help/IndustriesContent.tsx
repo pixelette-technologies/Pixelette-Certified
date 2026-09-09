@@ -35,8 +35,8 @@ interface IndustryData {
   longDescription: string;
   challenges: string[];
   certifications: string[];
-  caseStudySnippet: string;
-  stats: { value: string; label: string }[];
+  procurementReality: string;
+  signals: { value: string; label: string }[];
 }
 
 interface IndustriesContentProps {
@@ -49,7 +49,7 @@ export default function IndustriesContent({ industries }: IndustriesContentProps
       {/* Hero */}
       <section className="wash-left">
         <div className="wrap py-16 lg:py-24">
-          <Breadcrumbs items={[{ name: "Industries" }]} />
+          <Breadcrumbs items={[{ name: "Who We Help" }]} />
 
           <div className="mt-8 max-w-[52ch]">
             <Eyebrow className="mb-5">Who We Help</Eyebrow>
@@ -80,12 +80,13 @@ export default function IndustriesContent({ industries }: IndustriesContentProps
                     </div>
                   </div>
 
-                  {/* Stats */}
+                  {/* Requirement signals. Previously three stat tiles carrying
+                      week counts and pass rates, none of which were evidenced. */}
                   <div className="mt-6 grid grid-cols-3 gap-3.5">
-                    {industry.stats.map((stat) => (
-                      <div key={stat.label} className="tile">
-                        <b className="!text-[20px]">{stat.value}</b>
-                        <span>{stat.label}</span>
+                    {industry.signals.map((signal) => (
+                      <div key={signal.label} className="tile">
+                        <b className="!text-[20px]">{signal.value}</b>
+                        <span>{signal.label}</span>
                       </div>
                     ))}
                   </div>
@@ -115,10 +116,15 @@ export default function IndustriesContent({ industries }: IndustriesContentProps
                     </div>
                   </div>
 
-                  {/* Case study snippet */}
-                  <blockquote className="mt-6 border-l-2 border-brand pl-5 text-[15px] leading-relaxed text-body">
-                    &ldquo;{industry.caseStudySnippet}&rdquo;
-                  </blockquote>
+                  {/* What procurement in this sector actually asks for.
+                      Rendered as a paragraph, not a blockquote: the previous
+                      markup wrapped an anonymous client outcome in curly quotes,
+                      which reads as a client quotation no matter what the text says.
+                      Changing the words without changing the element would have
+                      left the same impression. */}
+                  <p className="mt-6 border-l-2 border-line-strong pl-5 text-[15px] leading-relaxed text-body">
+                    {industry.procurementReality}
+                  </p>
 
                   {/* CTA */}
                   <div className="mt-auto pt-6">
@@ -181,7 +187,7 @@ export default function IndustriesContent({ industries }: IndustriesContentProps
       <CTASection
         headline="Not sure which certification your industry needs?"
         description="Book a free 30-minute gap analysis. We will assess your industry requirements, map the certifications that matter, and give you a realistic timeline and cost."
-        primaryCta="See Your 10 Week Certification Roadmap"
+        primaryCta="Book a Compliance Diagnostic"
         primaryHref="/contact"
         secondaryCta="View All Services"
         secondaryHref="/services"

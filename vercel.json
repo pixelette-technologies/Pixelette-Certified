@@ -3,6 +3,10 @@
     {
       "path": "/api/alice/weekly-report",
       "schedule": "0 8 * * 1"
+    },
+    {
+      "path": "/api/cron/purge-contact-attachments",
+      "schedule": "0 3 1 * *"
     }
   ]
 }

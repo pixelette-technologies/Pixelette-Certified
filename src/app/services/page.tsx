@@ -70,10 +70,14 @@ const categories = [
   },
 ];
 
+// Withdrawn services are excluded everywhere they could be rendered or indexed.
+// Marking them "retired" in the data only helps if every consumer filters.
+const publishedServices = services.filter((s) => s.status !== "retired");
+
 const groupedServices = categories
   .map((cat) => ({
     ...cat,
-    services: services
+    services: publishedServices
       .filter((s) => s.category === cat.key)
       .map(({ icon, ...rest }) => rest),
   }))
@@ -89,7 +93,7 @@ export default function ServicesPage() {
           name: "Pixelette Certified Services",
           description: "ISO certification, cybersecurity, and compliance services.",
           url: "https://pixelettecertified.com/services",
-          itemListElement: services.map((service, i) => ({
+          itemListElement: publishedServices.map((service, i) => ({
             "@type": "ListItem",
             position: i + 1,
             item: {

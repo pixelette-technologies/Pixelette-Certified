@@ -1,16 +1,15 @@
 import type { MetadataRoute } from "next";
-import { services } from "@/data/services";
-import { caseStudies } from "@/data/caseStudies";
+import { getRoutedServices } from "@/data/services";
 import { SITE_CONFIG } from "@/lib/constants";
 import { allCategories, categorySlug } from "@/lib/categories";
 
 // Update when site structure/content materially changes; keeps sitemap lastmod
 // honest rather than stamping the request time on every fetch.
-const SITE_LAST_MODIFIED = new Date("2026-06-09");
+const SITE_LAST_MODIFIED = new Date("2026-09-08");
 
 const blogPostSlugs: { slug: string; date: string }[] = [
   { slug: "iso-27001-security-questionnaire", date: "2026-04-07" },
-  { slug: "iso-27001-10-weeks-vs-6-months", date: "2026-04-06" },
+  { slug: "iso-27001-fast-track-what-changes", date: "2026-04-06" },
   { slug: "real-cost-not-being-iso-27001-certified", date: "2026-04-05" },
   { slug: "customer-asked-ai-governance", date: "2026-04-04" },
   { slug: "iso-27001-or-soc-2-uk-saas", date: "2026-04-03" },
@@ -64,10 +63,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/case-studies`,
+      // Listed here rather than picked up by getRoutedServices(): it is a hub
+      // over the "supporting" services, not a service entry of its own.
+      url: `${baseUrl}/services/additional-frameworks`,
       lastModified: SITE_LAST_MODIFIED,
       changeFrequency: "monthly",
-      priority: 0.7,
+      priority: 0.5,
     },
     {
       url: `${baseUrl}/blog`,
@@ -76,7 +77,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/industries`,
+      url: `${baseUrl}/resources`,
+      lastModified: SITE_LAST_MODIFIED,
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/who-we-help`,
       lastModified: SITE_LAST_MODIFIED,
       changeFrequency: "monthly",
       priority: 0.7,
@@ -95,25 +102,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const SERVICE_PAGES_WITH_ROUTES = new Set([
-    "iso-27001", "iso-22301", "iso-9001", "iso-14001", "iso-42001",
-    "cyber-essentials", "vciso", "vdpo", "penetration-testing", "gdpr-privacy",
-  ]);
-
-  const servicePages: MetadataRoute.Sitemap = services
-    .filter((service) => SERVICE_PAGES_WITH_ROUTES.has(service.slug))
-    .map((service) => ({
-      url: `${baseUrl}/services/${service.slug}`,
-      lastModified: SITE_LAST_MODIFIED,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    }));
-
-  const caseStudyPages: MetadataRoute.Sitemap = caseStudies.map((study) => ({
-    url: `${baseUrl}/case-studies/${study.slug}`,
+  // Sourced from services.ts rather than a local list. The previous hardcoded
+  // Set still contained penetration-testing, so a withdrawn service would have
+  // stayed in the sitemap and kept being submitted for indexing after its route
+  // was deleted.
+  const servicePages: MetadataRoute.Sitemap = getRoutedServices().map((service) => ({
+    url: `${baseUrl}/services/${service.slug}`,
     lastModified: SITE_LAST_MODIFIED,
     changeFrequency: "monthly",
-    priority: 0.7,
+    priority: 0.8,
   }));
 
   const blogPages: MetadataRoute.Sitemap = blogPostSlugs.map(({ slug, date }) => ({
@@ -133,7 +130,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticPages,
     ...servicePages,
-    ...caseStudyPages,
     ...blogPages,
     ...blogCategoryPages,
   ];

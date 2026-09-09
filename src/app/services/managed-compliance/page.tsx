@@ -4,7 +4,7 @@ import ServicePageTemplate from "@/components/sections/ServicePageTemplate";
 import JsonLd from "@/components/seo/JsonLd";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 
-const service = getServiceBySlug("penetration-testing")!;
+const service = getServiceBySlug("managed-compliance")!;
 
 export const metadata: Metadata = {
   title: service.seo.title,
@@ -20,10 +20,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PenetrationTestingPage() {
+export default function ManagedCompliancePage() {
   return (
     <>
-      <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Services", href: "/services" }, { name: "Penetration Testing" }]} />
+      <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Services", href: "/services" }, { name: "Managed Compliance" }]} />
       <JsonLd
         data={{
           "@context": "https://schema.org",

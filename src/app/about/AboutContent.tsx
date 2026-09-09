@@ -9,60 +9,87 @@ import {
   Brain,
   Globe,
   Clock,
+  Lock,
 } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Eyebrow from "@/components/ui/Eyebrow";
-import Pill from "@/components/ui/Pill";
 import StatTile from "@/components/ui/StatTile";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import Card from "@/components/ui/Card";
 import CTASection from "@/components/sections/CTASection";
 
+/**
+ * Credentials are stated as INDIVIDUAL or NETWORK practitioner credentials.
+ *
+ * The previous version presented all six as company credentials, complete with
+ * superlatives about the credential set. Four things had to change:
+ *
+ *   - The corporate ISO 27001 claim is gone. No valid certificate for the
+ *     contracting entity was supplied.
+ *   - The lead-auditor registration title is gone. The supplied certificate
+ *     proves course completion, not current registration, so the capability can
+ *     be described but the title cannot be used.
+ *   - Two credentials are gone: one is on HOLD pending a current-status check,
+ *     the other does not appear in the verification register at all.
+ *   - The quality-institute corporate membership is gone. It is a paid
+ *     membership, not a practitioner credential, and it padded a credential count.
+ *
+ * The last card is deliberately a negative disclosure. Saying plainly what we
+ * are not is a stronger trust signal than another badge, and it is the sentence
+ * the claims gate asserts must remain on this page.
+ */
 const credentials = [
   {
     icon: Shield,
-    title: "ISO 27001 Certified Practice",
+    title: "ISO/IEC 27001 lead auditor capability",
     description:
-      "We hold our own ISO 27001 certification. We practise what we preach and understand the standard from the inside.",
-  },
-  {
-    icon: Award,
-    title: "ISO 27001:2022 Lead Auditor (IRCA)",
-    description:
-      "CQI and IRCA via IQMS Learning / DAS Certification. IRCA-registered, the gold standard for ISO 27001 lead auditors.",
+      "Our delivery network includes practitioners trained to ISO/IEC 27001 lead auditor level. They plan and run your internal audit before Stage 2. We do not conduct your certification audit; an independent certification body does that.",
   },
   {
     icon: Brain,
-    title: "ISO 42001 Lead Auditor (PECB)",
+    title: "ISO/IEC 42001 Lead Auditor (PECB)",
     description:
-      "PECB certified ISO 42001 Lead Auditor. AI governance certification authority. Among the first in the UK market.",
+      "Our approved delivery network includes a PECB Certified ISO/IEC 42001 Lead Auditor. AI management system engagements are led by a practitioner who holds that credential.",
   },
   {
     icon: Scale,
-    title: "IAPP Privacy Certifications",
+    title: "Privacy and AI governance credentials",
     description:
-      "AIGP (AI Governance Professional), FIP (Fellow of Information Privacy), CIPP/US, and CIPM. The most comprehensive IAPP credential set available.",
+      "Network practitioners hold AIGP, CIPM and CIPP/US from the IAPP, covering AI governance, privacy programme management and US privacy law.",
   },
   {
     icon: Award,
-    title: "CISA and CEH",
+    title: "Information systems audit",
     description:
-      "ISACA CISA (Certified Information Systems Auditor) and EC-Council CEH (Certified Ethical Hacker), underpinning audit and penetration testing delivery.",
+      "A network practitioner holds CISA, the ISACA Certified Information Systems Auditor credential. It underpins our internal audit and evidence work.",
+  },
+  {
+    icon: Lock,
+    title: "Cloud security credentials",
+    description:
+      "Network practitioners hold CCSK and CCZT from the Cloud Security Alliance, covering cloud controls and zero trust architecture.",
   },
   {
     icon: Users,
-    title: "CQI Corporate Member",
+    title: "What we are not",
     description:
-      "Chartered Quality Institute corporate membership demonstrating quality management commitment across all engagements.",
+      "We are not UKAS accredited, not an IASME Certification Body, not a PCI QSA and not a SOC 2 auditor. Where an engagement requires an accredited body or a licensed assessor, we coordinate with one and tell you who they are.",
   },
 ];
+
+/**
+ * The governing sentence for every credential surface. Kept as a const so the
+ * About page, and anything that later reuses this data, cannot drift apart.
+ */
+const CREDENTIAL_DISCLAIMER =
+  "Accreditation belongs to the entity that holds it. Pixelette Certified is not an accredited certification body and does not issue certificates. The credentials below are held by individual practitioners in our approved delivery network and are stated as individual credentials.";
 
 const differentiators = [
   {
     icon: Zap,
-    title: "10 weeks to certification",
+    title: "Scoped before it is priced",
     description:
-      "Most consultancies take 5 to 8 months. We have engineered a structured process that gets businesses certified in 10 weeks without cutting corners.",
+      "A written scope and a fixed fee before any work begins. No hourly billing, no scope creep, and no completion date promised before we know what we are actually looking at.",
   },
   {
     icon: Puzzle,
@@ -74,41 +101,46 @@ const differentiators = [
     icon: PoundSterling,
     title: "No pricing surprises",
     description:
-      "Fixed-fee proposals before any work begins. No hourly billing. No scope creep. Every engagement scoped to your business, your sector, and your audit body, with 90 days post-certification support included as standard.",
+      "Fixed-fee proposals before any work begins. Every engagement scoped to your business, your sector, and your audit body, with 90 days post-certification support included as standard.",
   },
   {
     icon: Brain,
-    title: "AI governance pioneers",
+    title: "AI governance depth",
     description:
-      "Among the first UK consultancies offering ISO 42001 AI governance certification, with a PECB certified ISO 42001 Lead Auditor on the team.",
+      "Our approved delivery network includes a PECB Certified ISO/IEC 42001 Lead Auditor, so AI management system work is led by someone who audits the standard rather than someone reading it for the first time.",
   },
   {
     icon: Globe,
-    title: "Global delivery, UK credentialled",
+    title: "One accountable relationship",
     description:
-      "UK, UAE, Saudi Arabia, Qatar, EU, Americas, and Asia Pacific. Our UK-based certifications and credentials are recognised worldwide.",
+      "We stay accountable for scope, proposal, project governance and quality across the whole programme, and match credentialed specialists to the requirement rather than pretending one person covers everything.",
   },
   {
     icon: Clock,
-    title: "Post-certification support",
+    title: "Support after the audit",
     description:
-      "Certification is the beginning, not the end. 90 days post-certification support included. vCISO, vDPO, managed advisory, and surveillance audit support available ongoing.",
+      "Certification is a control cycle, not a one-off project. 90 days post-certification support included, with vCISO, vDPO, managed compliance and surveillance support available ongoing.",
   },
 ];
 
-const team = [
-  {
-    name: "Asif Rana Ashiq",
-    role: "CEO & Founder",
-    credentials: [] as string[],
-    bio: "Founder of the Pixelette Group with over a decade of experience building technology solutions across the UK, Middle East, and Europe. Established Pixelette Certified to give businesses of every size access to world-class compliance expertise at a fair price, delivered without the delays and overheads of traditional consultancy.",
-  },
-  {
-    name: "Muhammad Waleed",
-    role: "Lead Consultant",
-    credentials: ["ISO 27001 Lead Auditor (IRCA)", "ISO 42001 Lead Auditor (PECB)", "AIGP", "FIP", "CIPP/US", "CIPM", "CISA", "CEH"],
-    bio: "Leads all certification engagements and audit preparation. Holds ISO 27001 Lead Auditor (IRCA), ISO 42001 Lead Auditor (PECB), AIGP, FIP, CIPP/US, CIPM (all IAPP), CISA (ISACA), and CEH (EC-Council) credentials. One of the most comprehensively certified compliance practitioners in the UK market.",
-  },
+/**
+ * Named individuals and their credentials are not published here.
+ *
+ * The verification register treats the practitioner certificates supplied for
+ * this site as approved-delivery-network credentials, not as those of an
+ * employee, and the brief forbids converting either into a corporate
+ * accreditation. Presenting a named "Lead Consultant" with an eight-credential
+ * badge row did exactly that conversion, so the roster is replaced by a
+ * description of how engagements are actually staffed.
+ *
+ * The founder is named because founding the company is a fact about the company,
+ * not a credential claim.
+ */
+const staffingModel = [
+  "Pixelette Certified is the accountable commercial and delivery-management front door. Discovery, scope, commercial proposal, project governance and quality control sit with us for the life of the engagement.",
+  "Where specialist capability is required, we assign credentialed practitioners from our approved delivery network according to the framework, sector and jurisdiction. Practitioner assignment depends on scope and availability, and the practitioner leading your engagement is named in the proposal.",
+  "Where independent certification, scheme assessment or attestation is required, we coordinate the appropriate independent route rather than blurring consultancy with assurance. Professional credentials belong to the people who hold them and are never presented as Pixelette accreditations.",
+  "Pixelette Certified was founded by Asif Rana Ashiq, and is backed by Pixelette Group's technology delivery team across the UK, Middle East, Europe, North America and Asia Pacific.",
 ];
 
 export default function AboutContent() {
@@ -156,10 +188,17 @@ export default function AboutContent() {
 
             <div className="grid grid-cols-2 gap-3.5">
               {[
-                { value: "10+", label: "Years in technology" },
-                { value: "50+", label: "Certifications delivered" },
-                { value: "98%", label: "First-attempt pass rate" },
-                { value: "Global", label: "Worldwide delivery" },
+                /*
+                 * These four tiles previously carried a certification count and
+                 * an audit pass rate, neither of which is evidenced. The grid is refilled rather than emptied: it
+                 * renders a fixed four-up layout, so an empty array would leave
+                 * a padded blank band. Every value here is a fact about how we
+                 * are structured, not a claimed outcome.
+                 */
+                { value: "10+", label: "Years in technology delivery" },
+                { value: "Fixed", label: "Fee agreed before work begins" },
+                { value: "90 days", label: "Post-certification support included" },
+                { value: "Global", label: "UK, UAE, Saudi Arabia, Qatar, EU, Americas, APAC" },
               ].map((stat) => (
                 <StatTile key={stat.label} value={stat.value} label={stat.label} />
               ))}
@@ -172,11 +211,13 @@ export default function AboutContent() {
       <section className="sec">
         <div className="wrap" data-reveal="">
           <SectionHeading
-            label="Credentials"
-            title="Qualified, certified, and accountable"
-            description="Our consultants hold the industry's most respected qualifications. We do not just advise on compliance, we live it."
+            label="Delivery credentials"
+            title="The credentials behind your engagement"
+            description={CREDENTIAL_DISCLAIMER}
           />
-          <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Six cards, so three columns divide evenly and the closing
+              disclosure card lands at the end of a row rather than orphaned. */}
+          <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
             {credentials.map((item) => (
               <Card key={item.title} className="flex h-full flex-col">
                 <item.icon className="h-5 w-5 text-brand" strokeWidth={1.6} aria-hidden="true" />
@@ -193,47 +234,26 @@ export default function AboutContent() {
         <div className="wrap" data-reveal="">
           <SectionHeading
             label="Our Team"
-            title="The people behind your certification"
-            description="Senior consultants with real-world experience across information security, privacy, AI governance, and ethical hacking."
+            title="How engagements are staffed"
+            description="One accountable client relationship, with the right credentialed specialist matched to the requirement."
           />
 
-          <div className="grid max-w-3xl gap-3.5 sm:grid-cols-2">
-            {team.map((member) => (
-              <div key={member.name + member.role} className="card flex h-full flex-col">
-                {/* Initials */}
-                <div className="flex h-14 w-14 items-center justify-center rounded-full border border-line-strong">
-                  <span className="mono text-base font-medium text-brand">
-                    {member.name === "To Be Announced" ? "?" : member.name.split(" ").map((n) => n[0]).join("")}
-                  </span>
-                </div>
-
-                <h3 className="h4 mt-5">{member.name}</h3>
-                <p className="mt-1 text-sm font-medium text-brand">{member.role}</p>
-
-                {/* Credentials */}
-                {member.credentials.length > 0 && (
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {member.credentials.slice(0, 4).map((cred) => (
-                      <Pill key={cred}>{cred}</Pill>
-                    ))}
-                    {member.credentials.length > 4 && (
-                      <Pill>+{member.credentials.length - 4} more</Pill>
-                    )}
-                  </div>
-                )}
-
-                <p className="small mt-4 flex-1">{member.bio}</p>
+          <div className="grid overflow-hidden rounded-card border border-line-card md:grid-cols-2">
+            {staffingModel.map((para, i) => (
+              <div
+                key={para.slice(0, 24)}
+                className="border-b border-line-card bg-page p-7 last:border-b-0 md:p-[30px] md:[&:nth-child(odd)]:border-r md:[&:nth-last-child(-n+2)]:border-b-0"
+              >
+                <Eyebrow>{String(i + 1).padStart(2, "0")}</Eyebrow>
+                <p className="small mt-3">{para}</p>
               </div>
             ))}
           </div>
 
-          {/* Capacity statements */}
-          <div className="mt-12 max-w-[72ch] space-y-4">
+          {/* Capacity statement */}
+          <div className="mt-12 max-w-[72ch]">
             <p className="small">
-              Backed by Pixelette Group&apos;s decade-long technology delivery team across the UK, Middle East, Europe, North America, and Asia Pacific, giving every engagement access to specialist input across SaaS, cloud infrastructure, AI systems, and software architecture.
-            </p>
-            <p className="small">
-              We deliberately operate a low-volume, senior-led model. Every engagement is led by a credentialled practitioner, never handed to a junior. This is the engine behind our 98% first-attempt pass rate.
+              We deliberately operate a low-volume, senior-led model. Every engagement is led by a credentialed practitioner, never handed to a junior, and your internal audit is run by us before the certification body&apos;s Stage 2 so that issues surface internally first.
             </p>
           </div>
         </div>

@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/check-claims.mjs && next build",
     "start": "next start",
     "lint": "eslint",
     "lint:legacy-tokens": "node scripts/check-legacy-tokens.mjs",
+    "lint:claims": "node scripts/check-claims.mjs",
+    "verify": "npm run lint && npm run lint:legacy-tokens && npm run lint:claims && tsc --noEmit",
     "compare:palette": "node scripts/build-palette-compare.mjs"
   },
   "dependencies": {

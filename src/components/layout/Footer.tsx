@@ -6,26 +6,29 @@ import { ArrowRight } from "@/components/ui/icons";
 
 const quickLinks = [
   { label: "Home", href: "/" },
+  { label: "Who We Help", href: "/who-we-help" },
+  { label: "AI Governance", href: "/services/iso-42001" },
+  { label: "Resources", href: "/resources" },
   { label: "About Us", href: "/about" },
-  { label: "Case Studies", href: "/case-studies" },
-  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
 
-const isoServices = [
-  { label: "ISO 27001", href: "/services/iso-27001" },
-  { label: "ISO 42001 (AI)", href: "/services/iso-42001" },
-  { label: "ISO 9001", href: "/services/iso-9001" },
-  { label: "ISO 22301", href: "/services/iso-22301" },
-  { label: "GDPR & Privacy", href: "/services/gdpr-privacy" },
-];
-
-const advisoryServices = [
-  { label: "vCISO", href: "/services/vciso" },
-  { label: "vDPO", href: "/services/vdpo" },
-  { label: "Cyber Essentials", href: "/services/cyber-essentials" },
-  { label: "Pen Testing", href: "/services/penetration-testing" },
-  { label: "SOC 2", href: "/contact" },
+/*
+ * One services column mirroring the seven top-level menu items, replacing the
+ * previous ISO / Advisory split.
+ *
+ * That split carried two live defects: a "Pen Testing" link to a route that is
+ * now withdrawn, and a "SOC 2" entry that pointed at /contact - a service link
+ * with no service page behind it. Both now resolve properly.
+ */
+const serviceLinks = [
+  { label: "ISO 27001 Readiness", href: "/services/iso-27001" },
+  { label: "ISO 42001 & AI Governance", href: "/services/iso-42001" },
+  { label: "SOC 2 Readiness", href: "/services/soc-2" },
+  { label: "vCISO & GRC Advisory", href: "/services/vciso" },
+  { label: "Privacy & vDPO", href: "/services/vdpo" },
+  { label: "Managed Compliance", href: "/services/managed-compliance" },
+  { label: "Additional Frameworks", href: "/services/additional-frameworks" },
 ];
 
 function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
@@ -40,7 +43,7 @@ export default function Footer() {
   return (
     <footer className="footer" role="contentinfo">
       <div className="wrap py-16">
-        <div className="grid grid-cols-1 gap-x-12 gap-y-10 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr]">
+        <div className="grid grid-cols-1 gap-x-12 gap-y-10 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1.2fr_1.3fr]">
           {/* Brand */}
           <div>
             <Link href="/" aria-label="Pixelette Certified Home">
@@ -55,7 +58,7 @@ export default function Footer() {
             <p className="max-w-[34ch] text-sm leading-relaxed text-footer-link">
               {SITE_CONFIG.tagline}
               <br />
-              Global ISO certification and compliance consultancy, trusted across every industry.
+              Compliance, cyber assurance and AI governance. Implementation and readiness, with independent assessment coordinated where required.
             </p>
             <div className="mt-6 flex gap-2.5">
               <a
@@ -89,20 +92,10 @@ export default function Footer() {
             ))}
           </div>
 
-          {/* Services, ISO */}
+          {/* Services */}
           <div className="flex flex-col gap-1">
             <Eyebrow tone="dark" className="mb-2">Our Services</Eyebrow>
-            {isoServices.map((link) => (
-              <FooterLink key={link.href} href={link.href}>
-                {link.label}
-              </FooterLink>
-            ))}
-          </div>
-
-          {/* Services, advisory */}
-          <div className="flex flex-col gap-1">
-            <Eyebrow tone="dark" className="mb-2">Advisory & Testing</Eyebrow>
-            {advisoryServices.map((link) => (
+            {serviceLinks.map((link) => (
               <FooterLink key={link.href} href={link.href}>
                 {link.label}
               </FooterLink>
@@ -130,9 +123,9 @@ export default function Footer() {
             <p className="py-2 text-sm leading-relaxed text-footer-link">{SITE_CONFIG.address}</p>
 
             <div className="mt-3 rounded-lg border border-footer-line p-4">
-              <p className="text-sm font-semibold text-footer-heading">Free 30-Minute Consultation</p>
+              <p className="text-sm font-semibold text-footer-heading">Free 30-Minute Compliance Diagnostic</p>
               <p className="mt-2 text-[13px] leading-relaxed text-footer-link">
-                Find out which certification is right for your business, wherever you are in the world.
+                Tell us what you have been asked to prove, and we will help you work out the route forward.
               </p>
               <Link
                 href="/contact"

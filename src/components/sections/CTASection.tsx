@@ -7,19 +7,32 @@ interface CTASectionProps {
   primaryHref?: string;
   secondaryCta?: string;
   secondaryHref?: string;
+  /**
+   * Optional small print under the buttons.
+   *
+   * This used to be a hardcoded line stating how quickly clients typically
+   * convert after their first call - an unevidenced conversion statistic that no
+   * caller could turn off, rendered on roughly ten routes. It is a prop now, and it defaults to undefined: the footnote has to
+   * be opted into, so nothing can reintroduce a claim here by inheritance.
+   */
+  footnote?: string;
 }
 
 /**
  * The guide's closing CTA band: white-to-band gradient, heading and body left,
  * the buttons right. Replaces the old glass card floating on a mesh gradient.
+ *
+ * The defaults matter more than they look. Most call sites rely on them, so the
+ * defaults are the copy on most pages of the site.
  */
 export default function CTASection({
-  headline = "See your path to certification in 30 minutes",
-  description = "No obligation. No sales pressure. In 30 minutes, you will know exactly where your compliance gaps are, which standards apply to your business and jurisdiction, and what a realistic timeline and cost looks like, wherever in the world you operate.",
-  primaryCta = "See Your 10 Week Certification Roadmap",
+  headline = "Tell us what you have been asked to prove",
+  description = "A customer, tender, investor or regulator has already given you the starting point. Send us the requirement or book a 30-minute compliance diagnostic, and we will help you identify the right route, the likely work involved and the specialist capability required.",
+  primaryCta = "Book a 30-Minute Compliance Diagnostic",
   primaryHref = "/contact",
-  secondaryCta = "Talk to a Consultant",
+  secondaryCta = "Send Us the Requirement",
   secondaryHref = "/contact",
+  footnote,
 }: CTASectionProps) {
   return (
     <section className="sec band-closing">
@@ -38,7 +51,8 @@ export default function CTASection({
               </Button>
             </div>
             <p className="small mt-5 max-w-[38ch]">
-              Most clients book their first paid engagement within 2 weeks of their gap analysis call.
+              {footnote ??
+                "No certification outcome or completion date is promised before scope, current readiness and the independent assessment route have been confirmed."}
             </p>
           </div>
         </div>

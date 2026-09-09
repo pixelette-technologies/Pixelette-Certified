@@ -52,16 +52,20 @@ export const metadata: Metadata = {
     default: "ISO Certification & Compliance | Pixelette Certified",
     template: "%s | Pixelette Certified",
   },
-  description: "Get ISO 27001, ISO 42001, Cyber Essentials, GDPR and more in as little as 10 weeks. Fixed-fee compliance consultancy. 98% first-attempt pass rate, worldwide.",
+  // This is the DEFAULT description, inherited by every page that does not set
+  // its own. It is therefore the single highest-leverage string on the property,
+  // and the reason a source grep is not sufficient verification: a page with no
+  // description of its own silently republishes whatever is written here.
+  description: "Pixelette Certified helps organisations meet the security, privacy, AI-governance and assurance requirements standing between them and enterprise customers, tenders, investors and regulated markets.",
   keywords: [
-    "ISO 27001 certification UK",
-    "Cyber Essentials certification",
-    "ISO compliance consultancy",
+    "ISO 27001 readiness UK",
+    "Cyber Essentials readiness",
+    "compliance consultancy UK",
     "vCISO UK",
     "GDPR compliance",
     "ISO 42001 AI governance",
-    "penetration testing UK",
-    "information security certification",
+    "SOC 2 readiness",
+    "managed compliance",
   ],
   authors: [{ name: "Pixelette Certified" }],
   creator: "Pixelette Group",
@@ -70,8 +74,8 @@ export const metadata: Metadata = {
     locale: "en_GB",
     url: SITE_CONFIG.url,
     siteName: SITE_CONFIG.name,
-    title: "Pixelette Certified | ISO Certification & Global Compliance Consultancy",
-    description: "Get certified in as little as 10 weeks. Pixelette Certified delivers ISO 27001, ISO 42001, Cyber Essentials, GDPR, ISO 9001, ISO 22301 and more to businesses across every industry, worldwide. Fixed fee. 98% first-attempt pass rate.",
+    title: "Pixelette Certified | Compliance, Cyber Assurance & AI Governance",
+    description: "Turn compliance from a deal blocker into proof you are ready. ISO 27001 and ISO 42001 readiness, SOC 2 readiness, vCISO, privacy and vDPO, and managed compliance, with independent assessment coordinated where required.",
     images: [
       {
         url: "/images/og/default.png",
@@ -85,7 +89,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@pixelettecert",
     creator: "@pixelettecert",
-    title: "Pixelette Certified | ISO Certification & Compliance UK",
+    title: "Pixelette Certified | Compliance, Cyber Assurance & AI Governance",
     description: SITE_CONFIG.description,
     images: ["/images/og/default.png"],
   },

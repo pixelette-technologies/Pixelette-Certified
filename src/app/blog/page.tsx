@@ -73,7 +73,7 @@ export default function BlogPage() {
               </p>
               <div className="mt-8">
                 <Button href="/contact" variant="primary" size="lg">
-                  See Your 10 Week Certification Roadmap
+                  Book a Compliance Diagnostic
                 </Button>
               </div>
             </div>

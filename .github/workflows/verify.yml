@@ -1,0 +1,25 @@
+# Surfaces lint, claims and type failures at review time rather than at deploy
+# time. The claims gate is also wired into `npm run build`, which is what Vercel
+# runs, so it is the enforcement; this workflow is the ergonomics.
+name: verify
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run lint:legacy-tokens
+      - name: Claims register gate
+        run: npm run lint:claims
+      - run: npx tsc --noEmit

@@ -4,7 +4,7 @@ import IndustriesContent from "./IndustriesContent";
 import JsonLd from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Industries We Serve | ISO Compliance",
+  title: "Who We Help",
   description:
     "ISO certification and compliance consultancy for every industry: FinTech, healthcare, manufacturing, logistics, legal, energy and retail. Globally delivered.",
   keywords: [
@@ -16,13 +16,13 @@ export const metadata: Metadata = {
     "government supplier certification",
   ],
   openGraph: {
-    title: "Industries We Serve | Global Compliance Expertise | Pixelette Certified",
+    title: "Who We Help | Pixelette Certified",
     description:
       "ISO certification and compliance consultancy for every industry: FinTech, healthcare, manufacturing, logistics, legal, energy and retail. Globally delivered.",
-    url: "https://pixelettecertified.com/industries",
+    url: "https://pixelettecertified.com/who-we-help",
   },
   alternates: {
-    canonical: "https://pixelettecertified.com/industries",
+    canonical: "https://pixelettecertified.com/who-we-help",
   },
 };
 
@@ -44,7 +44,7 @@ export default function IndustriesPage() {
             position: i + 1,
             name: ind.title,
             description: ind.description,
-            url: `https://pixelettecertified.com/industries#${ind.slug}`,
+            url: `https://pixelettecertified.com/who-we-help#${ind.slug}`,
           })),
         }}
       />

@@ -22,10 +22,10 @@ export const blogPosts: BlogPost[] = [
     readingTime: "7 min read",
   },
   {
-    slug: "iso-27001-10-weeks-vs-6-months",
-    title: "ISO 27001 in 10 weeks vs 6 months: what actually changes?",
+    slug: "iso-27001-fast-track-what-changes",
+    title: "ISO 27001 fast-track: what a compressed engagement changes, and what it cannot",
     description:
-      "The 10-week timeline is not a marketing gimmick. This guide explains what a structured fast-track compresses, what it does not, and how to tell a real fast-track from corner-cutting.",
+      "A structured fast-track compresses documentation cycle time, workshop scheduling and audit lead time. It does not compress the audit or the operating evidence. Here is how to tell the difference.",
     date: "2026-04-06",
     category: "ISO 27001",
     readingTime: "7 min read",

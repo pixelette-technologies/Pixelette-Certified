@@ -3,19 +3,40 @@ import AboutContent from "./AboutContent";
 import JsonLd from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "About | ISO Certification Experts",
+  title: "About | Compliance, Cyber Assurance & AI Governance",
   description:
-    "Global ISO certification and compliance consultancy serving every industry. 50+ certifications delivered, 98% first-attempt pass rate. Expert-led, fixed fee.",
+    "Pixelette Certified is the accountable front door for compliance programmes, with credentialed specialists matched to the requirement and independent assessment coordinated where required.",
   openGraph: {
-    title: "About Pixelette Certified | Global ISO Certification & Compliance Experts",
+    title: "About Pixelette Certified",
     description:
-      "Global ISO certification and compliance consultancy serving every industry. 50+ certifications delivered, 98% first-attempt pass rate. Expert-led, fixed fee.",
+      "One accountable client relationship. The right credentialed specialist for the requirement. Clear separation between implementation and independent assurance.",
   },
   alternates: {
     canonical: "https://pixelettecertified.com/about",
   },
 };
 
+/*
+ * This page previously emitted three JSON-LD blocks. Two of them have been
+ * removed outright rather than rewritten, because the problem was structural
+ * rather than a matter of wording:
+ *
+ *   - Organization.hasCredential asserted a corporate ISO 27001 certification,
+ *     a lead-auditor registration, a privacy qualification and an institute
+ *     membership as credentials of the LEGAL ENTITY. schema.org has no property
+ *     meaning "practitioners in our delivery network hold these", so there is no
+ *     compliant rewrite available - only deletion. (CIPP/E was also asserted
+ *     nowhere else on the site and matched no supplied certificate.)
+ *
+ *   - The two Person blocks paired `worksFor` with `hasCredential`, which is
+ *     precisely the mechanism that turns an individual's certificates into an
+ *     organisational capability in a knowledge graph. That is the exact claim
+ *     the brief's publication rule exists to prevent, so both are gone. Two of
+ *     the credentials listed there are not publishable at all.
+ *
+ * Structured data has no obligation to enumerate staff, so removing them costs
+ * nothing and is correct regardless of how the staffing question resolves.
+ */
 export default function AboutPage() {
   return (
     <>
@@ -27,7 +48,7 @@ export default function AboutPage() {
           url: "https://pixelettecertified.com",
           logo: "https://pixelettecertified.com/logos/logo-green-text.svg",
           description:
-            "UK-based ISO certification and compliance consultancy specialising in technology companies.",
+            "UK headquartered compliance consultancy supporting organisations through ISO, Cyber Essentials, GDPR, SOC 2 and PCI DSS readiness. Certification is issued by independent certification bodies, not by Pixelette Certified.",
           foundingDate: "2024",
           parentOrganization: {
             "@type": "Organization",
@@ -38,15 +59,9 @@ export default function AboutPage() {
             { "@type": "Country", name: "Ireland" },
             { "@type": "Country", name: "United Arab Emirates" },
           ],
-          hasCredential: [
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "certification", name: "ISO 27001 Certified Practice" },
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "certification", name: "IRCA Certified ISO 27001 Lead Auditors" },
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "certification", name: "IAPP CIPP/E Qualified" },
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "membership", name: "CQI Corporate Member" },
-          ],
           knowsAbout: [
             "ISO 27001", "ISO 22301", "ISO 9001", "ISO 14001", "ISO 42001",
-            "Cyber Essentials", "GDPR", "Penetration Testing", "AI Governance",
+            "Cyber Essentials", "SOC 2", "PCI DSS", "GDPR", "AI Governance",
           ],
           contactPoint: {
             "@type": "ContactPoint",
@@ -54,50 +69,6 @@ export default function AboutPage() {
             email: "info@pixelettecertified.com",
             availableLanguage: "English",
           },
-          employee: [
-            { "@type": "Person", name: "Asif Rana Ashiq", jobTitle: "CEO & Founder" },
-            { "@type": "Person", name: "Muhammad Waleed", jobTitle: "Lead Consultant" },
-          ],
-        }}
-      />
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "Person",
-          name: "Muhammad Waleed",
-          jobTitle: "Lead Consultant",
-          description:
-            "Lead Consultant at Pixelette Certified. Leads all certification engagements and audit preparation. Holds ISO 27001 Lead Auditor (IRCA), ISO 42001 Lead Auditor (PECB), AIGP, FIP, CIPP/US, CIPM, CISA, and CEH credentials.",
-          worksFor: { "@id": "https://pixelettecertified.com/#organization" },
-          knowsAbout: [
-            "ISO 27001",
-            "ISO 42001",
-            "AI Governance",
-            "Information Security Management",
-            "Data Privacy",
-            "Penetration Testing",
-          ],
-          hasCredential: [
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "certification", name: "ISO 27001 Lead Auditor (IRCA)" },
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "certification", name: "ISO 42001 Lead Auditor (PECB)" },
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "certification", name: "AIGP" },
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "certification", name: "FIP" },
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "certification", name: "CIPP/US" },
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "certification", name: "CIPM" },
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "certification", name: "CISA" },
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "certification", name: "CEH" },
-          ],
-        }}
-      />
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "Person",
-          name: "Asif Rana Ashiq",
-          jobTitle: "CEO & Founder",
-          description:
-            "Founder of the Pixelette Group and CEO of Pixelette Certified, with over a decade of experience building technology solutions across the UK, Middle East, and Europe.",
-          worksFor: { "@id": "https://pixelettecertified.com/#organization" },
         }}
       />
       <AboutContent />

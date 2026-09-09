@@ -47,11 +47,22 @@ export default function BlogPostClient({
             description: post.description,
             datePublished: post.date,
             dateModified: post.date,
+            /*
+             * Organisation byline, not a Person.
+             *
+             * This previously emitted a Person with `jobTitle` and `worksFor`,
+             * which asserted a named individual's employment across all 18
+             * indexed posts. Whether that individual is staff or an approved
+             * delivery-network practitioner is an open question, and an
+             * organisational byline is correct under either answer, so it
+             * unblocks now. The E-E-A-T cost of an organisational author is real
+             * and recoverable later; a machine-readable employment assertion
+             * that turns out to be wrong is not.
+             */
             author: {
-              "@type": "Person",
+              "@type": "Organization",
+              "@id": "https://pixelettecertified.com/#organization",
               name: post.author,
-              jobTitle: post.authorRole,
-              worksFor: { "@id": "https://pixelettecertified.com/#organization" },
             },
             publisher: {
               "@type": "Organization",
@@ -148,7 +159,7 @@ export default function BlogPostClient({
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3.5 sm:flex-row">
               <Button href="/contact" variant="primary" size="lg">
-                See Your 10 Week Certification Roadmap
+                Book a Compliance Diagnostic
               </Button>
               <Button href="/services/iso-27001" variant="secondary" size="lg">
                 View Services

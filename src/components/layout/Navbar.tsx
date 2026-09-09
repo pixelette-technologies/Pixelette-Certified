@@ -10,11 +10,33 @@ import { NAV_ITEMS } from "@/lib/constants";
 import Button from "@/components/ui/Button";
 import { Menu, Close, ChevronDown, ArrowRight } from "@/components/ui/icons";
 
+/**
+ * Which nav item should show as active for a given path.
+ *
+ * Longest match wins. "AI Governance" deep-links to /services/iso-42001,
+ * which is inside Services' own path, so a plain startsWith test would
+ * highlight both items at once. Comparing match length picks the more
+ * specific one.
+ */
+function activeNavLabel(pathname: string): string | null {
+  let best: { label: string; length: number } | null = null;
+
+  for (const item of NAV_ITEMS) {
+    const target = item.match ?? item.href;
+    const isMatch = target === "/" ? pathname === "/" : pathname.startsWith(target);
+    if (!isMatch) continue;
+    if (!best || target.length > best.length) best = { label: item.label, length: target.length };
+  }
+
+  return best?.label ?? null;
+}
+
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const pathname = usePathname();
+  const activeLabel = activeNavLabel(pathname);
   const reduce = useReducedMotion();
 
   // Close both menus on navigation. Reading pathname during render rather than
@@ -65,7 +87,7 @@ export default function Navbar() {
                   <button
                     className={cn(
                       "inline-flex min-h-[44px] items-center gap-1.5 text-[15px] transition-colors",
-                      pathname.startsWith("/services")
+                      activeLabel === item.label
                         ? "font-medium text-ink"
                         : "text-muted hover:text-ink"
                     )}
@@ -90,7 +112,7 @@ export default function Navbar() {
                         className="fixed inset-x-0 top-[var(--header-h)] z-50 border-b border-line bg-page shadow-card"
                       >
                         <div className="wrap py-6">
-                          <div className="grid grid-cols-5 gap-3.5">
+                          <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
                             {item.children.map((child) => (
                               <Link
                                 key={child.href}
@@ -116,7 +138,7 @@ export default function Navbar() {
                           </div>
                           <div className="mt-4 flex justify-end border-t border-line pt-4">
                             <Link
-                              href="/services"
+                              href={item.href}
                               className="flink text-[15px] font-medium text-brand hover:text-brand-hover"
                             >
                               View All Services <ArrowRight size={15} />
@@ -133,7 +155,7 @@ export default function Navbar() {
                   href={item.href}
                   className={cn(
                     "inline-flex min-h-[44px] items-center text-[15px] transition-colors",
-                    pathname === item.href
+                    activeLabel === item.label
                       ? "font-medium text-ink"
                       : "text-muted hover:text-ink"
                   )}
@@ -147,7 +169,7 @@ export default function Navbar() {
           {/* CTA + mobile toggle */}
           <div className="flex shrink-0 items-center gap-3">
             <Button href="/contact" size="sm" className="hidden sm:inline-flex">
-              Book Your Assessment
+              Book a Compliance Diagnostic
             </Button>
 
             <button
@@ -219,7 +241,7 @@ export default function Navbar() {
                       href={item.href}
                       className={cn(
                         "flex min-h-[44px] items-center px-2 text-[15px]",
-                        pathname === item.href ? "font-medium text-ink" : "text-muted hover:text-ink"
+                        activeLabel === item.label ? "font-medium text-ink" : "text-muted hover:text-ink"
                       )}
                     >
                       {item.label}
@@ -228,7 +250,7 @@ export default function Navbar() {
                 )}
                 <div className="px-2 pt-3">
                   <Button href="/contact" fullWidth>
-                    Book Your Assessment
+                    Book a Compliance Diagnostic
                   </Button>
                 </div>
               </div>

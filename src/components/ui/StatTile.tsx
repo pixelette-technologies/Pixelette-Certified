@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 interface StatTileProps {
-  /** the figure, already formatted: "98%", "10 Weeks", "50+" */
+  /** the figure, already formatted, e.g. "90 days", "Fixed", "Global" */
   value: React.ReactNode;
   label: string;
   /** optional source citation, rendered as .src beneath the tile */

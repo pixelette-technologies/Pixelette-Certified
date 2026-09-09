@@ -443,13 +443,37 @@
     padding: 34px 38px;
     color: var(--color-panel-body);
   }
-  .panel .eyebrow { color: var(--color-panel-label); }
+  /* Full-bleed dark band, for a whole section rather than an inset panel.
+     Same ground and same descendant colours as .panel, minus the card border
+     and radius, because it spans the viewport.
+
+     Do NOT reach for .footer to get a dark mid-page section. It only recolours
+     .eyebrow and .pill, so an .h2 inside it inherits --color-ink (near-black)
+     on a near-black ground and disappears. That trap is why this class exists. */
+  .band-dark {
+    background: linear-gradient(135deg, var(--color-panel-from) 0%, var(--color-panel-to) 64%);
+    border-block: 1px solid var(--color-panel-line);
+    color: var(--color-panel-body);
+  }
+
+  .panel .eyebrow,
+  .band-dark .eyebrow { color: var(--color-panel-label); }
+  .panel .h1,
   .panel .h2,
   .panel .h3,
-  .panel .h4      { color: #FFFFFF; }
+  .panel .h4,
+  .band-dark .h1,
+  .band-dark .h2,
+  .band-dark .h3,
+  .band-dark .h4      { color: #FFFFFF; }
   .panel .small,
-  .panel .body    { color: var(--color-panel-body); }
-  .panel .pill    { border-color: var(--color-panel-line); color: var(--color-panel-pill); }
+  .panel .body,
+  .panel .lead,
+  .band-dark .small,
+  .band-dark .body,
+  .band-dark .lead    { color: var(--color-panel-body); }
+  .panel .pill,
+  .band-dark .pill    { border-color: var(--color-panel-line); color: var(--color-panel-pill); }
 
   /* dark outline CTA, used inside .panel */
   .btn-panel {

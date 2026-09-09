@@ -38,7 +38,7 @@ const RESPONSE_WINDOWS: Record<string, string> = {
 const SUGGESTED_ACTIONS: Record<string, string> = {
   urgent: "Contact within 1 hour. Call directly. Reference any specific deadlines mentioned.",
   hot: "Contact within 24 hours via phone or email. Personalised outreach.",
-  warm: "Contact within 48 hours via email. Include relevant case study.",
+  warm: "Contact within 48 hours via email. Lead with the delivery model, not client examples.",
   cold: "Add to nurture list. No immediate action required.",
 };
 
@@ -89,7 +89,7 @@ export async function sendLeadNotification(
 
   const body = `
 ===============================================
-CLARA LEAD ALERT — ${classUpper}
+ALICE LEAD ALERT — ${classUpper}
 ===============================================
 
 Lead Score:        ${input.score}/100
@@ -134,7 +134,7 @@ METADATA
   Received at:       ${timestamp}
 
 -----------------------------------------------
-Sent by Alice — AI Accreditation Advisor
+Sent by Alice — AI Compliance Advisor
 Pixelette Certified
 pixelettecertified.com
 `.trim();
@@ -282,7 +282,7 @@ export async function sendSlackNotification(
             {
               type: "context",
               elements: [
-                { type: "mrkdwn", text: "Sent by Alice \u2014 AI Accreditation Advisor at Pixelette Certified" },
+                { type: "mrkdwn", text: "Sent by Alice \u2014 AI Compliance Advisor at Pixelette Certified" },
               ],
             },
           ],
@@ -308,6 +308,113 @@ export async function sendSlackNotification(
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
     console.error(`[Alice Notifications] Slack notification failed (exception): ${message}`);
+    return { sent: false, error: message };
+  }
+}
+
+interface ComplianceAlertInput {
+  conversationId: string;
+  breaches: Array<{ id: string; match: string; why: string }>;
+  /** The reply that was withheld, when the deterministic guard blocked one. */
+  blockedReply?: string;
+}
+
+/**
+ * Alert the team that Alice produced, or nearly produced, a banned claim.
+ *
+ * Fires from two places, which mean different things:
+ *   - the deterministic guard in the chat route, where the reply was BLOCKED
+ *     before it reached the visitor
+ *   - the post-conversation quality judge, where the claim was already SENT and
+ *     the guard's patterns did not catch it
+ *
+ * The second case is the more important one to act on: it means the register
+ * has a gap. The alert says which case it is so nobody has to guess.
+ *
+ * Deliberately never throws. A failure to alert must not fail a chat response,
+ * and must not mask the console.error the caller has already written.
+ */
+export async function sendComplianceAlert(
+  input: ComplianceAlertInput
+): Promise<{ sent: boolean; error?: string }> {
+  const wasBlocked = Boolean(input.blockedReply);
+  const heading = wasBlocked
+    ? "Alice claim BLOCKED before delivery"
+    : "Alice claim DETECTED after delivery";
+
+  try {
+    const webhookUrl = process.env.ALICE_SLACK_WEBHOOK_URL;
+    if (!webhookUrl) {
+      console.warn(`[Alice Compliance] ${heading}, but no Slack webhook is configured`);
+      return { sent: false, error: "webhook_url_missing" };
+    }
+
+    const detail = input.breaches
+      .map((b) => `• *${b.id}* matched \`${b.match}\`\n   ${b.why}`)
+      .join("\n");
+
+    const payload = {
+      attachments: [
+        {
+          // Red for a claim that actually reached a visitor, amber for one the
+          // guard caught. Both need review; only one needs a response.
+          color: wasBlocked ? "#F4A261" : "#E63946",
+          blocks: [
+            {
+              type: "header",
+              text: { type: "plain_text", text: `⚠ ${heading}`, emoji: true },
+            },
+            { type: "section", text: { type: "mrkdwn", text: detail } },
+            ...(input.blockedReply
+              ? [
+                  {
+                    type: "section",
+                    text: {
+                      type: "mrkdwn",
+                      text: `*Withheld reply:*\n>${input.blockedReply.slice(0, 800)}`,
+                    },
+                  },
+                ]
+              : []),
+            {
+              type: "section",
+              text: {
+                type: "mrkdwn",
+                text: wasBlocked
+                  ? `*Conversation:* \`${input.conversationId}\`\nThe visitor received the safe fallback instead.`
+                  : `*Conversation:* \`${input.conversationId}\`\nThis reached the visitor. The claims register has a gap worth closing.`,
+              },
+            },
+            {
+              type: "context",
+              elements: [
+                {
+                  type: "mrkdwn",
+                  text: "Sent by the claims guard — src/lib/claims/register.mjs",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
+
+    const res = await fetch(webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    const body = await res.text();
+    if (res.status === 200 && body === "ok") {
+      return { sent: true };
+    }
+
+    console.error(`[Alice Compliance] Slack rejected alert: status=${res.status} body=${body}`);
+    return { sent: false, error: body };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Unknown error";
+    console.error(`[Alice Compliance] Alert failed: ${message}`);
     return { sent: false, error: message };
   }
 }

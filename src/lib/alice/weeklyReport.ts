@@ -140,7 +140,7 @@ RED FLAGS
 ${redFlagsSection}
 
 ===========================================
-Sent by Alice, AI Accreditation Advisor
+Sent by Alice, AI Compliance Advisor
 Pixelette Certified | pixelettecertified.com
 Report generated: ${timestamp}
 ===========================================

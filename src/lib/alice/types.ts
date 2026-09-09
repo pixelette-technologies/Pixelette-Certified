@@ -46,10 +46,21 @@ export interface QualityCheckInput {
   aiNotes?: string;
   visitorRating?: "helpful" | "not_helpful";
   visitorRatedAt?: string;
+  /** false when the judge found a claim that must never be published */
+  compliancePassed?: boolean;
+  /** verbatim offending sentences, null when there were none */
+  complianceBreaches?: string | null;
 }
 
 export interface AIQualityCheckResult {
   score: number;
   notes: string;
   rawResponse: string;
+  /**
+   * Separate from `score` deliberately: a conversation can be commercially
+   * excellent and still contain a claim that must never ship. Defaults to false
+   * when the verdict cannot be parsed.
+   */
+  compliancePassed: boolean;
+  complianceBreaches: string | null;
 }

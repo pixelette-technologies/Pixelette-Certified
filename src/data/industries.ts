@@ -13,8 +13,10 @@ export interface Industry {
   icon: LucideIcon;
   challenges: string[];
   certifications: string[];
-  caseStudySnippet: string;
-  stats: { value: string; label: string }[];
+  /** What procurement in this sector actually asks for. Never a client outcome. */
+  procurementReality: string;
+  /** Requirement signals for the sector. Never a performance figure. */
+  signals: { value: string; label: string }[];
 }
 
 export const industries: Industry[] = [
@@ -22,7 +24,7 @@ export const industries: Industry[] = [
     slug: "fintech",
     title: "FinTech & Financial Services",
     shortTitle: "FinTech",
-    description: "Enterprise clients and regulators demand certified security. We get FinTechs audit-ready in weeks, not months.",
+    description: "Enterprise clients and regulators expect evidenced security governance. We build the management system and the evidence behind it.",
     longDescription:
       "Financial technology companies operate under intense scrutiny from regulators, enterprise banking partners, and investors. FCA expectations, PSD2 requirements, and enterprise procurement security questionnaires all demand formal certification. Without ISO 27001, your pipeline stalls at the security review stage.",
     icon: Landmark,
@@ -34,18 +36,18 @@ export const industries: Industry[] = [
       "PCI DSS, SOC 2, and ISO 27001 overlap creates compliance fatigue without expert guidance",
     ],
     certifications: ["ISO 27001", "Cyber Essentials Plus", "ISO 22301", "GDPR", "vCISO"],
-    caseStudySnippet: "A 65-person UK FinTech achieved ISO 27001 in 9 weeks, unlocking enterprise banking contract conversations post-certification.",
-    stats: [
-      { value: "9wk", label: "Avg FinTech certification" },
-      { value: "98%", label: "First-attempt pass rate" },
-      { value: "Fixed-fee", label: "No hourly billing" },
+    procurementReality: "Enterprise banking partners, FCA-regulated counterparties and cyber insurers each ask for formal evidence of information security governance before onboarding. ISO 27001 is the usual reference point, and the security review is where uncertified suppliers stall.",
+    signals: [
+      { value: "ISO 27001", label: "Common procurement condition" },
+      { value: "DORA", label: "Operational resilience in scope" },
+      { value: "Fixed-fee", label: "Scoped before work begins" },
     ],
   },
   {
     slug: "ai-technology",
     title: "AI & Machine Learning Companies",
     shortTitle: "AI & ML",
-    description: "ISO 42001 AI governance is the new competitive edge. Be among the first certified AI companies in the UK.",
+    description: "AI governance is becoming a procurement requirement. ISO/IEC 42001 is the management system standard buyers are starting to ask for.",
     longDescription:
       "AI companies face a unique compliance landscape. The EU AI Act, enterprise AI procurement requirements, and growing public scrutiny around responsible AI all demand formal governance frameworks. ISO 42001 is the standard that proves you build AI responsibly, and the companies that achieve it now gain a structural advantage.",
     icon: Cpu,
@@ -57,11 +59,11 @@ export const industries: Industry[] = [
       "GDPR Article 22 automated decision-making obligations overlap with AI governance",
     ],
     certifications: ["ISO 42001", "ISO 27001", "GDPR", "vCISO"],
-    caseStudySnippet: "A 40-person AI SaaS platform achieved dual ISO 42001 + ISO 27001 certification in 14 weeks, leveraging 60% control overlap.",
-    stats: [
-      { value: "1st", label: "Among first UK AI consultancies" },
-      { value: "60%", label: "Control overlap leveraged" },
-      { value: "14wk", label: "Dual certification timeline" },
+    procurementReality: "AI governance questions are appearing in enterprise security questionnaires alongside the EU AI Act timetable. Buyers increasingly want evidence of accountability, risk ownership, data governance and human oversight rather than a policy document.",
+    signals: [
+      { value: "ISO 42001", label: "AI management system standard" },
+      { value: "EU AI Act", label: "Obligations phasing in" },
+      { value: "Shared controls", label: "Integrates with ISO 27001" },
     ],
   },
   {
@@ -70,7 +72,7 @@ export const industries: Industry[] = [
     shortTitle: "SaaS",
     description: "ISO 27001 is the ticket to enterprise sales. Stop losing deals to certified competitors.",
     longDescription:
-      "SaaS companies scaling into the enterprise market hit the same wall: procurement teams require ISO 27001 as a minimum security standard. Every month without certification is pipeline lost to competitors who already have it. We specialise in getting SaaS platforms from zero to certified in 10 weeks.",
+      "SaaS companies scaling into the enterprise market hit the same wall: procurement teams require ISO 27001 as a minimum security standard. Every month without certification is pipeline lost to competitors who already have it. We build the management system, the controls and the evidence pack that turns a questionnaire from a fire drill into a repeatable response.",
     icon: Wifi,
     challenges: [
       "Enterprise procurement requires ISO 27001 as a first-pass filter",
@@ -80,11 +82,11 @@ export const industries: Industry[] = [
       "Rapid feature development outpaces security documentation",
     ],
     certifications: ["ISO 27001", "Cyber Essentials", "vCISO", "Penetration Testing", "GDPR"],
-    caseStudySnippet: "A UK SaaS platform cut security questionnaire response time by 85% after ISO 27001 certification, closing 5 enterprise deals in Q1.",
-    stats: [
-      { value: "10wk", label: "Standard SaaS timeline" },
-      { value: "5", label: "Enterprise deals in Q1" },
-      { value: "85%", label: "Questionnaire time saved" },
+    procurementReality: "Security questionnaires have become a sales gate rather than a formality. A maintained control environment and a current evidence pack turn a multi-day response exercise into a repeatable one.",
+    signals: [
+      { value: "ISO 27001", label: "Enterprise baseline" },
+      { value: "SOC 2", label: "Common for US buyers" },
+      { value: "Evidence pack", label: "Questionnaire-ready" },
     ],
   },
   {
@@ -103,11 +105,11 @@ export const industries: Industry[] = [
       "Clinical safety standards intersect with information security requirements",
     ],
     certifications: ["Cyber Essentials Plus", "ISO 27001", "ISO 22301", "GDPR", "vDPO"],
-    caseStudySnippet: "A 120-person HealthTech achieved Cyber Essentials in 3 weeks and ISO 27001 in 12 weeks, securing NHS framework eligibility.",
-    stats: [
-      { value: "3wk", label: "Cyber Essentials timeline" },
-      { value: "12wk", label: "ISO 27001 timeline" },
-      { value: "100%", label: "Contract renewals secured" },
+    procurementReality: "NHS supply chain routes, DSPT and DTAC each set their own evidence expectations, and private healthcare clients commonly require information security assurance before a data processing agreement is signed.",
+    signals: [
+      { value: "Cyber Essentials", label: "Common public sector gate" },
+      { value: "ISO 27001", label: "Data processing assurance" },
+      { value: "DSPT / DTAC", label: "NHS evidence routes" },
     ],
   },
   {
@@ -126,11 +128,11 @@ export const industries: Industry[] = [
       "Competitive differentiation requires demonstrable security posture",
     ],
     certifications: ["ISO 27001", "ISO 9001", "Cyber Essentials", "GDPR", "vCISO"],
-    caseStudySnippet: "A multi-office consultancy unified fragmented security practices under ISO 27001 and ISO 9001 in a combined 14-week engagement.",
-    stats: [
-      { value: "14wk", label: "Combined ISO timeline" },
-      { value: "£0", label: "Major audit findings cost" },
-      { value: "25%", label: "Below market pricing" },
+    procurementReality: "Client audit clauses and panel onboarding increasingly ask for a documented management system rather than a policy pack, particularly where client data crosses jurisdictions.",
+    signals: [
+      { value: "ISO 27001", label: "Client audit expectation" },
+      { value: "ISO 9001", label: "Panel onboarding" },
+      { value: "Multi-office", label: "Scope set at diagnostic" },
     ],
   },
   {
@@ -149,11 +151,11 @@ export const industries: Industry[] = [
       "Annual renewal requirements demand ongoing compliance management",
     ],
     certifications: ["Cyber Essentials", "Cyber Essentials Plus", "ISO 27001", "ISO 22301", "vCISO"],
-    caseStudySnippet: "Achieved Cyber Essentials in 2 weeks to meet an NHS framework deadline, then ISO 27001 within 10 weeks.",
-    stats: [
-      { value: "2wk", label: "Fastest CE certification" },
-      { value: "10wk", label: "ISO 27001 follow-on" },
-      { value: "100%", label: "Framework eligibility" },
+    procurementReality: "Cyber Essentials is commonly required across UK public sector supply chains, and framework applications set their own submission deadlines. The assessment itself is delivered by a licensed Certification Body.",
+    signals: [
+      { value: "Cyber Essentials", label: "Readiness and coordination" },
+      { value: "Frameworks", label: "Deadline-driven" },
+      { value: "Licensed CB", label: "Performs the assessment" },
     ],
   },
   {
@@ -172,11 +174,11 @@ export const industries: Industry[] = [
       "Multi-channel operations create complex data flow requirements",
     ],
     certifications: ["ISO 27001", "Cyber Essentials", "GDPR", "Penetration Testing", "vCISO"],
-    caseStudySnippet: "An e-commerce platform reduced data breach insurance premiums by 40% and onboarded 3 enterprise retail partners post-certification.",
-    stats: [
-      { value: "40%", label: "Insurance premium reduction" },
-      { value: "10wk", label: "Certification timeline" },
-      { value: "3", label: "Enterprise partners gained" },
+    procurementReality: "Payment data, enterprise retail partners and cyber insurers each place their own evidence requirements on retailers, and PCI DSS obligations sit alongside rather than inside an ISO management system.",
+    signals: [
+      { value: "PCI DSS", label: "Readiness and support" },
+      { value: "ISO 27001", label: "Partner onboarding" },
+      { value: "Insurers", label: "Ask for control evidence" },
     ],
   },
   {
@@ -195,11 +197,11 @@ export const industries: Industry[] = [
       "International expansion requires compliance across multiple jurisdictions",
     ],
     certifications: ["ISO 27001", "Cyber Essentials", "GDPR", "vDPO", "ISO 9001"],
-    caseStudySnippet: "An EdTech platform serving 200+ schools achieved ISO 27001 and GDPR compliance, unlocking multi-academy trust contracts.",
-    stats: [
-      { value: "200+", label: "Schools protected" },
-      { value: "11wk", label: "Certification timeline" },
-      { value: "100%", label: "GDPR children's compliance" },
+    procurementReality: "Multi-academy trusts and institutional buyers apply heightened scrutiny where children's data is processed, and UK GDPR obligations around consent and safeguarding sit alongside security requirements.",
+    signals: [
+      { value: "ISO 27001", label: "Institutional procurement" },
+      { value: "UK GDPR", label: "Children's data duties" },
+      { value: "DPIA", label: "Commonly required" },
     ],
   },
   {
@@ -215,11 +217,11 @@ export const industries: Industry[] = [
       "Industrial and operational technology environments require formal information security governance as part of supply chain risk management",
     ],
     certifications: ["ISO 9001", "ISO 14001", "ISO 27001", "ISO 22301"],
-    caseStudySnippet: "A manufacturing supplier achieved ISO 9001 and ISO 14001 dual certification in 16 weeks, securing inclusion on three major OEM approved supplier lists.",
-    stats: [
-      { value: "16wk", label: "Dual certification timeline" },
-      { value: "3", label: "OEM supplier lists secured" },
-      { value: "100%", label: "First-attempt pass rate" },
+    procurementReality: "OEM approved-supplier lists commonly require a quality management system, and environmental criteria increasingly appear alongside it in supply chain onboarding.",
+    signals: [
+      { value: "ISO 9001", label: "Approved supplier lists" },
+      { value: "ISO 14001", label: "Environmental criteria" },
+      { value: "Integrated", label: "Shared documentation" },
     ],
   },
   {
@@ -235,11 +237,11 @@ export const industries: Industry[] = [
       "GDPR and international data transfer obligations apply to any logistics operator processing personal data across borders",
     ],
     certifications: ["ISO 27001", "ISO 22301", "ISO 9001", "GDPR"],
-    caseStudySnippet: "A logistics technology provider achieved ISO 27001 and ISO 22301 in parallel in 15 weeks, securing contracts with three multinational distribution clients.",
-    stats: [
-      { value: "15wk", label: "Dual certification timeline" },
-      { value: "3", label: "Multinational contracts won" },
-      { value: "100%", label: "First-attempt pass rate" },
+    procurementReality: "Multinational distribution clients ask for both information security and demonstrable continuity planning, because a supplier outage propagates directly into their own operations.",
+    signals: [
+      { value: "ISO 27001", label: "Client security requirement" },
+      { value: "ISO 22301", label: "Continuity assurance" },
+      { value: "Integrated", label: "Shared documentation" },
     ],
   },
   {
@@ -255,11 +257,11 @@ export const industries: Industry[] = [
       "Global law firm networks require ISO 27001 certification from all affiliated offices and supplier organisations",
     ],
     certifications: ["ISO 27001", "GDPR", "vCISO", "ISO 9001"],
-    caseStudySnippet: "A professional services firm with offices across three countries achieved ISO 27001 and ISO 9001 dual certification, satisfying the security requirements of two global client networks simultaneously.",
-    stats: [
-      { value: "14wk", label: "Combined certification" },
-      { value: "3", label: "Countries covered" },
-      { value: "0", label: "Major audit findings" },
+    procurementReality: "SRA expectations, client audit rights and global client networks each set their own information security requirements, and firms operating across jurisdictions face several at once.",
+    signals: [
+      { value: "ISO 27001", label: "Client network requirement" },
+      { value: "ISO 9001", label: "Quality assurance" },
+      { value: "Multi-jurisdiction", label: "Scope set at diagnostic" },
     ],
   },
   {
@@ -275,11 +277,11 @@ export const industries: Industry[] = [
       "NIS2 in Europe, NESA in the UAE, and equivalent frameworks in other markets create binding compliance obligations for energy sector participants",
     ],
     certifications: ["ISO 27001", "ISO 22301", "ISO 14001", "vCISO"],
-    caseStudySnippet: "An energy technology provider achieved ISO 27001 and ISO 14001 dual certification in 16 weeks, meeting the procurement requirements of a major utilities procurement framework.",
-    stats: [
-      { value: "16wk", label: "Dual certification timeline" },
-      { value: "100%", label: "Framework eligibility" },
-      { value: "35%", label: "Insurance premium reduction" },
+    procurementReality: "Utilities procurement frameworks commonly set both security and environmental criteria, and critical infrastructure obligations raise the evidence bar further.",
+    signals: [
+      { value: "ISO 27001", label: "Framework criterion" },
+      { value: "ISO 14001", label: "Environmental criterion" },
+      { value: "Critical infrastructure", label: "Heightened scrutiny" },
     ],
   },
   {
@@ -295,11 +297,11 @@ export const industries: Industry[] = [
       "Penetration testing and vulnerability assessment requirements are embedded in most national telecoms regulatory frameworks",
     ],
     certifications: ["ISO 27001", "ISO 22301", "Penetration Testing", "vCISO"],
-    caseStudySnippet: "A telecoms software provider achieved ISO 27001 certification in 11 weeks, satisfying the security requirements of a major national telecoms operator procurement process.",
-    stats: [
-      { value: "11wk", label: "Certification timeline" },
-      { value: "100%", label: "Operator requirements met" },
-      { value: "0", label: "Major audit findings" },
+    procurementReality: "National operator procurement processes apply detailed security requirements to software suppliers, and evidence of a maintained control environment is normally requested rather than a point-in-time statement.",
+    signals: [
+      { value: "ISO 27001", label: "Operator requirement" },
+      { value: "ISO 22301", label: "Service continuity" },
+      { value: "Maintained", label: "Evidence kept current" },
     ],
   },
 ];

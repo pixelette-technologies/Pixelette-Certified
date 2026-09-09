@@ -13,8 +13,10 @@ import {
 import {
   sendLeadNotification,
   sendSlackNotification,
+  sendComplianceAlert,
   generateConversationSummary,
 } from "@/lib/alice/notifications";
+import { findClaimMatches } from "@/lib/claims/register.mjs";
 import {
   extractUrlFromMessage,
   scrapeWebsite,
@@ -193,9 +195,42 @@ export async function POST(request: Request) {
 
     const { cleanReply, captured } = extractFields(rawReply);
 
-    // Persist messages to database
+    /**
+     * Deterministic pre-delivery claims guard.
+     *
+     * Everything else protecting Alice is probabilistic: the prompt asks her not
+     * to make banned claims, and the quality judge notices afterwards. This is
+     * the only control that is deterministic and runs BEFORE the reply reaches
+     * the visitor. It costs one regex pass over a string capped at 1024 tokens.
+     *
+     * The register's runtime subset is negation-aware, so the compliant answer
+     * to "what is your pass rate?" - "we do not publish a pass rate" - is not
+     * suppressed by the rule that bans asserting one.
+     */
+    let safeReply = cleanReply;
+    const breaches = findClaimMatches(cleanReply, { runtimeOnly: true });
+    if (breaches.length > 0) {
+      const summary = breaches.map((b) => `${b.id} ("${b.match}")`).join(", ");
+      console.error(`[Alice Claims] BLOCKED reply for conversation ${conversation.conversationId}: ${summary}`);
+
+      safeReply =
+        "Let me get that confirmed for you rather than guess. The 30-minute compliance diagnostic is the right place for it, and you can book at pixelettecertified.com/contact. Is there anything else I can help with in the meantime?";
+
+      // Fire and forget: a blocked reply must never delay or fail the response.
+      sendComplianceAlert({
+        conversationId: conversation.conversationId,
+        breaches: breaches.map((b) => ({ id: b.id, match: b.match, why: b.why })),
+        blockedReply: cleanReply,
+      }).catch((err) => {
+        console.error("[Alice Claims] Compliance alert failed:", err);
+      });
+    }
+
+    // Persist messages to database. The BLOCKED text is what gets stored, not
+    // the original: the transcript should reflect what the visitor actually saw,
+    // and the offending text is preserved in the compliance alert instead.
     const userMsg: ChatMessage = { role: "user", content: trimmedMessage };
-    const assistantMsg: ChatMessage = { role: "assistant", content: cleanReply };
+    const assistantMsg: ChatMessage = { role: "assistant", content: safeReply };
 
     try {
       await appendMessagesToConversation(conversation.conversationId, userMsg, assistantMsg);
@@ -292,10 +327,29 @@ export async function POST(request: Request) {
             generateAIQualityCheck(messages)
               .then((aiResult) => {
                 if (aiResult) {
+                  if (!aiResult.compliancePassed) {
+                    console.error(
+                      `[Alice Claims] Quality judge returned COMPLIANCE: FAIL for conversation ${conversation.conversationId}: ${aiResult.complianceBreaches ?? "no detail"}`
+                    );
+                    sendComplianceAlert({
+                      conversationId: conversation.conversationId,
+                      breaches: [
+                        {
+                          id: "quality-judge",
+                          match: aiResult.complianceBreaches ?? "unspecified",
+                          why: "The post-conversation quality judge flagged a claim the deterministic guard did not catch.",
+                        },
+                      ],
+                    }).catch((err) => {
+                      console.error("[Alice Claims] Compliance alert failed:", err);
+                    });
+                  }
                   return saveQualityCheck({
                     conversationId: conversation.conversationId,
                     aiScore: aiResult.score,
                     aiNotes: aiResult.notes,
+                    compliancePassed: aiResult.compliancePassed,
+                    complianceBreaches: aiResult.complianceBreaches,
                   });
                 }
                 return null;
@@ -311,7 +365,7 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json<ChatResponse>({
-      reply: cleanReply,
+      reply: safeReply,
       captured: hasCaptured ? captured : undefined,
       sessionId: conversation.sessionId,
       conversationId: conversation.conversationId || undefined,

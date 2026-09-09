@@ -98,7 +98,7 @@ export default function AliceWidget() {
                 </div>
                 <div>
                   <div className="text-sm font-semibold text-footer-heading">Alice</div>
-                  <div className="mono text-[11px] tracking-[0.06em] text-footer-link">AI Accreditation Advisor</div>
+                  <div className="mono text-[11px] tracking-[0.06em] text-footer-link">AI Compliance Advisor</div>
                 </div>
               </div>
               <button

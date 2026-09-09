@@ -5,7 +5,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 
 export interface ProcessStep {
-  week: string;
+  phase: string;
   title: string;
   description: string;
 }
@@ -22,6 +22,25 @@ export interface PricingTier {
   features: string[];
 }
 
+/**
+ * Publication status for a service.
+ *
+ * Three states rather than a boolean, because the 8 September 2026 brief has
+ * three buckets and a boolean would force ISO 9001 and ISO 14001 into either
+ * "core" (which the brief forbids) or "withdrawn" (which it does not ask for).
+ *
+ *   core        one of the seven top-level Services menu items
+ *   supporting  genuinely offered, but not headline. Reachable, not promoted.
+ *   retired     withdrawn. Never rendered, never routed, never in the sitemap.
+ *
+ * Entries are marked rather than deleted on purpose: relatedSlugs are plain
+ * strings, and a dangling slug resolves to undefined which getRelatedServices
+ * already filters away. Deleting an entry therefore removes a card from six
+ * other pages silently, with no error and no build failure. Marking it keeps
+ * the failure visible and the decision reversible in one line.
+ */
+export type ServiceStatus = "core" | "supporting" | "retired";
+
 export interface Service {
   slug: string;
   title: string;
@@ -30,6 +49,9 @@ export interface Service {
   longDescription: string;
   icon: LucideIcon;
   category: "iso" | "cyber" | "advisory" | "privacy" | "grc" | "architecture" | "bcdr" | "ai-governance";
+  status: ServiceStatus;
+  /** true iff src/app/services/<slug>/page.tsx exists */
+  hasRoute: boolean;
   features: string[];
   process: ProcessStep[];
   pricing: PricingTier[];
@@ -45,9 +67,11 @@ export interface Service {
 export const services: Service[] = [
   {
     slug: "iso-27001",
-    title: "ISO 27001 Certification",
+    status: "core",
+    hasRoute: true,
+    title: "ISO/IEC 27001 Implementation & Certification Readiness",
     shortTitle: "ISO 27001",
-    description: "The global standard for information security management. Get certified in 10 weeks.",
+    description: "The global standard for information security management. Implementation and certification readiness, scoped to your organisation.",
     longDescription:
       "ISO 27001 is the international standard for information security management. It defines the requirements for an Information Security Management System (ISMS), a structured framework of policies, procedures, and controls that protects your organisation's information assets. For UK technology companies, ISO 27001 has become the de facto requirement for selling to enterprise clients, winning government contracts, passing investor due diligence, and qualifying for cyber insurance at favourable rates. Whether you are a SaaS platform targeting enterprise clients, a healthcare provider seeking NHS supply chain approval, a FinTech navigating FCA or DORA requirements, a manufacturer seeking supply chain inclusion, or any other organisation that handles sensitive data, ISO 27001 is your foundation.",
     icon: Shield,
@@ -63,11 +87,11 @@ export const services: Service[] = [
       "3 months post-certification support",
     ],
     process: [
-      { week: "Week 1", title: "Kickoff & gap analysis", description: "Initial meeting, scope definition, gap analysis conducted, remediation roadmap delivered." },
-      { week: "Weeks 2–5", title: "Documentation build", description: "All ISMS policies written, risk assessment conducted, SoA drafted, asset inventory built." },
-      { week: "Weeks 6–8", title: "Controls implementation", description: "Technical and organisational controls implemented and evidenced, staff training delivered." },
-      { week: "Week 9", title: "Internal audit", description: "Full internal audit conducted, non-conformities identified and closed." },
-      { week: "Weeks 10–12", title: "External audit", description: "Stage 1 documentation review and Stage 2 compliance audit. Certificate issued." },
+      { phase: "Phase 1", title: "Kickoff & gap analysis", description: "Initial meeting, scope definition, gap analysis conducted, remediation roadmap delivered." },
+      { phase: "Phase 2", title: "Documentation build", description: "All ISMS policies written, risk assessment conducted, SoA drafted, asset inventory built." },
+      { phase: "Phase 3", title: "Controls implementation", description: "Technical and organisational controls implemented and evidenced, staff training delivered." },
+      { phase: "Phase 4", title: "Internal audit", description: "Full internal audit conducted, non-conformities identified and closed." },
+      { phase: "Phase 5", title: "External audit", description: "Stage 1 documentation review and Stage 2 compliance audit. Certificate issued." },
     ],
     pricing: [
       { name: "Essentials", audience: "Startups and SMEs up to 50 employees", price: "Scoped to your business", features: ["Gap analysis", "ISMS documentation", "SoA", "Risk register", "1 internal audit", "Stage 1 + Stage 2 support"] },
@@ -75,22 +99,24 @@ export const services: Service[] = [
       { name: "Enterprise", audience: "150+ employees or regulated sectors", price: "Scoped to your business", features: ["Everything in Professional", "vCISO Standard 12 months", "GDPR alignment layer", "Year 1 + 2 surveillance"] },
     ],
     faqs: [
-      { question: "How long does ISO 27001 take?", answer: "Our standard implementation runs 10–12 weeks from kickoff to Stage 2 audit. Complex organisations or those with significant existing gaps may take 14–16 weeks." },
+      { question: "How long does ISO 27001 take?", answer: "It depends on your starting position, the scope of the management system and the certification body's own audit timetable. We set a realistic phase plan at scoping and confirm it in the proposal. No completion date is promised before that." },
       { question: "Do we need ISO 27001 or Cyber Essentials?", answer: "They solve different problems. Cyber Essentials covers 5 basic technical controls and is required for UK government contracts. ISO 27001 is a full management system required by enterprise clients globally. Many companies start with Cyber Essentials and progress to ISO 27001." },
-      { question: "What happens if we fail the Stage 2 audit?", answer: "Clients who go through our full implementation process do not fail Stage 2 on documentation grounds. If a failure occurs due to a gap in our documentation, we cover the remediation at no additional cost." },
+      { question: "What happens if we fail the Stage 2 audit?", answer: "We run a full internal audit before Stage 2 so that non-conformities surface internally first and are closed before the certification body sees them. Where an auditor does raise a finding, we support you through corrective action and closure." },
       { question: "Do we need to be technical to get ISO 27001?", answer: "No. ISO 27001 is a management system standard, not a technical standard. We write the documentation, implement the controls, and manage the process. Your team needs to understand the policies and follow them, which we train them to do." },
       { question: "Can we get ISO 27001 and SOC 2 at the same time?", answer: "Yes, and it is efficient to do so. They share 60–70% of control requirements. We can run a combined implementation reducing total cost and time significantly." },
     ],
     relatedSlugs: ["cyber-essentials", "vciso", "gdpr-privacy"],
     seo: {
-      title: "ISO 27001 Certification UK | Fixed Fee",
-      description: "Get ISO 27001 certified in 10 weeks. UK-based expert-led implementation from gap analysis to Stage 2 audit. Fixed-fee engagement. 98% first-attempt pass rate.",
+      title: "ISO 27001 Certification Readiness UK | Fixed Fee",
+      description: "ISO 27001 implementation and certification readiness. UK-based, senior-led, from gap analysis through to Stage 2 audit support. Fixed-fee engagement scoped before work begins.",
       keywords: ["ISO 27001 certification UK", "ISO 27001 consultant", "ISMS implementation", "information security certification"],
     },
   },
   {
     slug: "iso-22301",
-    title: "ISO 22301 Certification",
+    status: "supporting",
+    hasRoute: true,
+    title: "ISO 22301 Implementation & Certification Readiness",
     shortTitle: "ISO 22301",
     description: "Business continuity certification. Demonstrate resilience and stay operational when it matters most.",
     longDescription:
@@ -108,11 +134,11 @@ export const services: Service[] = [
       "Stage 1 and Stage 2 audit support",
     ],
     process: [
-      { week: "Week 1", title: "Kickoff & BIA", description: "Scope definition, business impact analysis, critical function identification." },
-      { week: "Weeks 2–5", title: "BCMS documentation", description: "BC policies, plans, and procedures written. Recovery strategies defined." },
-      { week: "Weeks 6–8", title: "Implementation & testing", description: "Plans tested through exercises. Staff trained. Gaps identified and closed." },
-      { week: "Week 9", title: "Internal audit", description: "Full internal audit and management review conducted." },
-      { week: "Weeks 10–12", title: "External audit", description: "Stage 1 and Stage 2 certification audit. Certificate issued." },
+      { phase: "Phase 1", title: "Kickoff & BIA", description: "Scope definition, business impact analysis, critical function identification." },
+      { phase: "Phase 2", title: "BCMS documentation", description: "BC policies, plans, and procedures written. Recovery strategies defined." },
+      { phase: "Phase 3", title: "Implementation & testing", description: "Plans tested through exercises. Staff trained. Gaps identified and closed." },
+      { phase: "Phase 4", title: "Internal audit", description: "Full internal audit and management review conducted." },
+      { phase: "Phase 5", title: "External audit", description: "Stage 1 and Stage 2 certification audit. Certificate issued." },
     ],
     pricing: [
       { name: "Essentials", audience: "SMEs up to 50 employees", price: "Scoped to your business", features: ["Gap analysis", "BCMS documentation", "BIA", "BC plans", "Internal audit", "Audit support"] },
@@ -132,7 +158,9 @@ export const services: Service[] = [
   },
   {
     slug: "iso-9001",
-    title: "ISO 9001 Certification",
+    status: "supporting",
+    hasRoute: true,
+    title: "ISO 9001 Implementation & Certification Readiness",
     shortTitle: "ISO 9001",
     description: "Quality management certification. Prove consistent delivery excellence to clients worldwide.",
     longDescription:
@@ -150,11 +178,11 @@ export const services: Service[] = [
       "Continuous improvement framework",
     ],
     process: [
-      { week: "Week 1", title: "Kickoff & gap analysis", description: "Current quality practices assessed against ISO 9001 requirements." },
-      { week: "Weeks 2–5", title: "QMS documentation", description: "Quality manual, procedures, and process maps developed." },
-      { week: "Weeks 6–8", title: "Implementation", description: "QMS implemented, staff trained, evidence gathered." },
-      { week: "Week 9", title: "Internal audit", description: "Full internal audit conducted, findings addressed." },
-      { week: "Weeks 10–12", title: "External audit", description: "Stage 1 and Stage 2 certification audit." },
+      { phase: "Phase 1", title: "Kickoff & gap analysis", description: "Current quality practices assessed against ISO 9001 requirements." },
+      { phase: "Phase 2", title: "QMS documentation", description: "Quality manual, procedures, and process maps developed." },
+      { phase: "Phase 3", title: "Implementation", description: "QMS implemented, staff trained, evidence gathered." },
+      { phase: "Phase 4", title: "Internal audit", description: "Full internal audit conducted, findings addressed." },
+      { phase: "Phase 5", title: "External audit", description: "Stage 1 and Stage 2 certification audit." },
     ],
     pricing: [
       { name: "Essentials", audience: "SMEs up to 50 employees", price: "Scoped to your business", features: ["Gap analysis", "QMS documentation", "Process mapping", "Internal audit", "Audit support"] },
@@ -173,7 +201,9 @@ export const services: Service[] = [
   },
   {
     slug: "iso-14001",
-    title: "ISO 14001 Certification",
+    status: "supporting",
+    hasRoute: true,
+    title: "ISO 14001 Implementation & Certification Readiness",
     shortTitle: "ISO 14001",
     description: "Environmental management certification. Lead on sustainability and meet ESG obligations.",
     longDescription:
@@ -191,11 +221,11 @@ export const services: Service[] = [
       "Stage 1 and Stage 2 audit support",
     ],
     process: [
-      { week: "Week 1", title: "Kickoff & environmental review", description: "Current environmental practices assessed, aspects and impacts identified." },
-      { week: "Weeks 2–5", title: "EMS documentation", description: "Environmental policy, procedures, and controls documented." },
-      { week: "Weeks 6–8", title: "Implementation", description: "Controls implemented, monitoring established, staff trained." },
-      { week: "Week 9", title: "Internal audit", description: "Full EMS audit conducted, corrective actions taken." },
-      { week: "Weeks 10–12", title: "External audit", description: "Certification body audit. Certificate issued." },
+      { phase: "Phase 1", title: "Kickoff & environmental review", description: "Current environmental practices assessed, aspects and impacts identified." },
+      { phase: "Phase 2", title: "EMS documentation", description: "Environmental policy, procedures, and controls documented." },
+      { phase: "Phase 3", title: "Implementation", description: "Controls implemented, monitoring established, staff trained." },
+      { phase: "Phase 4", title: "Internal audit", description: "Full EMS audit conducted, corrective actions taken." },
+      { phase: "Phase 5", title: "External audit", description: "Certification body audit. Certificate issued." },
     ],
     pricing: [
       { name: "Essentials", audience: "SMEs", price: "Scoped to your business", features: ["Gap analysis", "EMS documentation", "Aspects register", "Internal audit", "Audit support"] },
@@ -207,14 +237,16 @@ export const services: Service[] = [
     ],
     relatedSlugs: ["iso-9001", "iso-27001", "iso-22301"],
     seo: {
-      title: "ISO 14001 Environmental Cert UK",
+      title: "ISO 14001 Environmental Readiness UK",
       description: "ISO 14001 certification for UK businesses. Environmental management system implementation, gap analysis and audit support. Expert-led, fixed-fee engagement.",
       keywords: ["ISO 14001 certification UK", "environmental management", "EMS", "sustainability certification"],
     },
   },
   {
     slug: "iso-42001",
-    title: "ISO 42001 AI Governance Certification",
+    status: "core",
+    hasRoute: true,
+    title: "AI Governance & ISO/IEC 42001 Certification Readiness",
     shortTitle: "ISO 42001",
     description: "AI governance certification. Lead responsibly in the era of artificial intelligence.",
     longDescription:
@@ -232,11 +264,11 @@ export const services: Service[] = [
       "EU AI Act compliance mapping",
     ],
     process: [
-      { week: "Week 1", title: "Kickoff & AI readiness review", description: "AI systems inventory, current governance assessment, scope definition." },
-      { week: "Weeks 2–5", title: "AIMS documentation", description: "AI policies, risk frameworks, transparency procedures, and data governance documented." },
-      { week: "Weeks 6–9", title: "Implementation & assessment", description: "Controls implemented, bias assessments conducted, staff trained on responsible AI." },
-      { week: "Week 10", title: "Internal audit", description: "Full AIMS audit, non-conformities addressed." },
-      { week: "Weeks 11–14", title: "External audit", description: "Certification body audit. Certificate issued." },
+      { phase: "Phase 1", title: "Kickoff & AI readiness review", description: "AI systems inventory, current governance assessment, scope definition." },
+      { phase: "Phase 2", title: "AIMS documentation", description: "AI policies, risk frameworks, transparency procedures, and data governance documented." },
+      { phase: "Phase 3", title: "Implementation & assessment", description: "Controls implemented, bias assessments conducted, staff trained on responsible AI." },
+      { phase: "Phase 4", title: "Internal audit", description: "Full AIMS audit, non-conformities addressed." },
+      { phase: "Phase 5", title: "External audit", description: "Certification body audit. Certificate issued." },
     ],
     pricing: [
       { name: "Essentials", audience: "AI startups up to 50 employees", price: "Scoped to your business", features: ["Gap analysis", "AIMS documentation", "AI risk assessment", "Internal audit", "Audit support"] },
@@ -249,14 +281,16 @@ export const services: Service[] = [
     ],
     relatedSlugs: ["iso-27001", "gdpr-privacy", "vciso"],
     seo: {
-      title: "ISO 42001 AI Governance Cert UK",
-      description: "Achieve ISO 42001 AI governance certification in 14 weeks. One of the only UK consultancies formally offering ISO 42001. EU AI Act ready. Fixed-fee engagement.",
+      title: "ISO 42001 AI Governance Readiness UK",
+      description: "ISO/IEC 42001 AI management system implementation and certification readiness. Our approved delivery network includes a PECB Certified ISO/IEC 42001 Lead Auditor. EU AI Act aligned. Fixed-fee engagement.",
       keywords: ["ISO 42001 certification", "AI governance", "AIMS", "EU AI Act compliance", "responsible AI"],
     },
   },
   {
     slug: "cyber-essentials",
-    title: "Cyber Essentials Certification",
+    status: "supporting",
+    hasRoute: true,
+    title: "Cyber Essentials Readiness & Coordination",
     shortTitle: "Cyber Essentials",
     description: "The UK government-backed cybersecurity certification. Essential for public sector supply chains.",
     longDescription:
@@ -274,9 +308,9 @@ export const services: Service[] = [
       "Progression planning to ISO 27001",
     ],
     process: [
-      { week: "Week 1", title: "Gap analysis", description: "Review of your current security controls against Cyber Essentials requirements." },
-      { week: "Week 2", title: "Remediation", description: "Address identified gaps in firewall, patching, access control, malware protection, and configuration." },
-      { week: "Week 3", title: "Certification", description: "Complete self-assessment (CE) or technical assessment (CE+). Certificate issued." },
+      { phase: "Phase 1", title: "Gap analysis", description: "Review of your current security controls against Cyber Essentials requirements." },
+      { phase: "Phase 2", title: "Remediation", description: "Address identified gaps in firewall, patching, access control, malware protection, and configuration." },
+      { phase: "Phase 3", title: "Certification", description: "Complete self-assessment (CE) or technical assessment (CE+). Certificate issued." },
     ],
     pricing: [
       { name: "Cyber Essentials", audience: "All businesses", price: "Scoped to your business", features: ["Gap analysis", "Remediation guidance", "Self-assessment preparation", "Submission management"] },
@@ -284,18 +318,20 @@ export const services: Service[] = [
     ],
     faqs: [
       { question: "What is the difference between CE and CE Plus?", answer: "Cyber Essentials is a self-assessment verified by a certifying body. Cyber Essentials Plus includes external hands-on technical testing, vulnerability scanning and configuration testing by an assessor." },
-      { question: "How quickly can we get certified?", answer: "Cyber Essentials typically takes 2–3 weeks. Cyber Essentials Plus takes 4–6 weeks due to the external testing component." },
+      { question: "How quickly can we get certified?", answer: "It depends on your starting position and on the authorised assessor's availability. Cyber Essentials Plus takes longer than Cyber Essentials because of the external technical assessment. We set a realistic plan at scoping rather than promising a date before we have looked." },
     ],
     relatedSlugs: ["iso-27001", "penetration-testing", "vciso"],
     seo: {
-      title: "Cyber Essentials Certification UK",
-      description: "UK government-backed Cyber Essentials and Cyber Essentials Plus certification. Fixed-fee. Fast-track 2–3 week delivery for government suppliers and NHS.",
+      title: "Cyber Essentials Readiness & Coordination UK",
+      description: "Cyber Essentials and Cyber Essentials Plus readiness and coordination for government suppliers and NHS supply chains. Fixed-fee. The formal assessment is delivered through the appropriate authorised route.",
       keywords: ["Cyber Essentials certification", "Cyber Essentials Plus", "UK government certification", "cybersecurity certification"],
     },
   },
   {
     slug: "vciso",
-    title: "Virtual CISO (vCISO)",
+    status: "core",
+    hasRoute: true,
+    title: "vCISO & GRC Advisory",
     shortTitle: "vCISO",
     description: "Senior security leadership, without the senior hire. A fractional CISO for your business.",
     longDescription:
@@ -313,9 +349,9 @@ export const services: Service[] = [
       "Monthly security reporting",
     ],
     process: [
-      { week: "Week 1", title: "Onboarding", description: "Security posture review, stakeholder meetings, priority identification." },
-      { week: "Weeks 2–4", title: "Foundation", description: "Security roadmap, governance framework, quick wins delivered." },
-      { week: "Ongoing", title: "Retainer", description: "Monthly advisory, board reports, risk management, questionnaire support." },
+      { phase: "Phase 1", title: "Onboarding", description: "Security posture review, stakeholder meetings, priority identification." },
+      { phase: "Phase 2", title: "Foundation", description: "Security roadmap, governance framework, quick wins delivered." },
+      { phase: "Phase 3", title: "Retainer", description: "Monthly advisory, board reports, risk management, questionnaire support." },
     ],
     pricing: [
       { name: "vCISO Basic", audience: "Post-certification governance", price: "Monthly retainer", features: ["10–12 hrs/month", "Monthly security review", "Board report", "Policy maintenance", "Email support"] },
@@ -328,14 +364,16 @@ export const services: Service[] = [
     ],
     relatedSlugs: ["iso-27001", "vdpo", "penetration-testing"],
     seo: {
-      title: "Virtual CISO (vCISO) Service UK",
+      title: "vCISO & GRC Advisory UK",
       description: "Senior security leadership without the full-time hire. Flexible monthly vCISO retainers covering board-level strategy, risk and compliance governance.",
       keywords: ["vCISO UK", "virtual CISO", "fractional CISO", "security leadership"],
     },
   },
   {
     slug: "vdpo",
-    title: "Virtual DPO (vDPO)",
+    status: "core",
+    hasRoute: true,
+    title: "Privacy & vDPO",
     shortTitle: "vDPO",
     description: "Your dedicated Data Protection Officer, on demand. Expert privacy leadership at a fraction of the cost.",
     longDescription:
@@ -353,9 +391,9 @@ export const services: Service[] = [
       "Staff privacy awareness training",
     ],
     process: [
-      { week: "Week 1", title: "Onboarding", description: "Privacy posture review, ROPA audit, priority gap identification." },
-      { week: "Weeks 2–4", title: "Foundation", description: "ROPA updated, DPIA framework established, policies reviewed." },
-      { week: "Ongoing", title: "Retainer", description: "Ongoing DPO duties, DSR management, compliance monitoring." },
+      { phase: "Phase 1", title: "Onboarding", description: "Privacy posture review, ROPA audit, priority gap identification." },
+      { phase: "Phase 2", title: "Foundation", description: "ROPA updated, DPIA framework established, policies reviewed." },
+      { phase: "Phase 3", title: "Retainer", description: "Ongoing DPO duties, DSR management, compliance monitoring." },
     ],
     pricing: [
       { name: "vDPO", audience: "All organisations", price: "Monthly retainer", features: ["8–10 hrs/month", "ROPA maintenance", "DSR handling", "DPIA advisory", "Privacy policy reviews", "Email support"] },
@@ -365,18 +403,20 @@ export const services: Service[] = [
     ],
     relatedSlugs: ["gdpr-privacy", "vciso", "iso-27001"],
     seo: {
-      title: "Virtual DPO (vDPO) Service UK",
+      title: "Privacy & vDPO Service UK",
       description: "Virtual Data Protection Officer service for UK businesses. GDPR compliance, DSR management, DPIAs and ongoing DPO duties on a flexible monthly retainer.",
       keywords: ["vDPO UK", "virtual DPO", "data protection officer", "GDPR DPO"],
     },
   },
   {
     slug: "penetration-testing",
-    title: "Penetration Testing (VAPT)",
+    status: "retired",
+    hasRoute: false,
+    title: "Penetration Testing (VAPT) — withdrawn",
     shortTitle: "Penetration Testing",
     description: "Find your vulnerabilities before attackers do. Expert-led security testing for any environment.",
     longDescription:
-      "Our Vulnerability Assessment and Penetration Testing (VAPT) service identifies security weaknesses in your applications, networks, and infrastructure before attackers exploit them. Conducted by CREST-certified testers using industry-standard methodologies.",
+      "Withdrawn from the first release pending verification of a named tester or provider and their QA route. Retained as data, with status 'retired', so related-service references resolve cleanly rather than vanishing silently.",
     icon: Bug,
     category: "cyber",
     features: [
@@ -390,9 +430,9 @@ export const services: Service[] = [
       "Re-test after remediation",
     ],
     process: [
-      { week: "Week 1", title: "Scoping & planning", description: "Define scope, agree rules of engagement, set up testing environment." },
-      { week: "Weeks 2–3", title: "Testing", description: "Active penetration testing conducted against agreed scope." },
-      { week: "Week 4", title: "Reporting", description: "Detailed findings report with CVSS scores, executive summary, remediation guidance." },
+      { phase: "Phase 1", title: "Scoping & planning", description: "Define scope, agree rules of engagement, set up testing environment." },
+      { phase: "Phase 2", title: "Testing", description: "Active penetration testing conducted against agreed scope." },
+      { phase: "Phase 3", title: "Reporting", description: "Detailed findings report with CVSS scores, executive summary, remediation guidance." },
     ],
     pricing: [
       { name: "Web/API test", audience: "Single application", price: "Per application", features: ["OWASP Top 10 testing", "API endpoint testing", "CVSS-scored report", "Remediation guidance", "Re-test included"] },
@@ -410,6 +450,8 @@ export const services: Service[] = [
   },
   {
     slug: "gdpr-privacy",
+    status: "supporting",
+    hasRoute: true,
     title: "GDPR & Data Privacy",
     shortTitle: "GDPR & Privacy",
     description: "Turn your data protection obligations into a competitive advantage across any jurisdiction.",
@@ -428,9 +470,9 @@ export const services: Service[] = [
       "Staff privacy awareness training",
     ],
     process: [
-      { week: "Week 1", title: "Privacy assessment", description: "Current privacy practices reviewed against GDPR requirements. Gap report delivered." },
-      { week: "Weeks 2–5", title: "Programme build", description: "Privacy policies, ROPA, DPIA framework, breach procedures developed." },
-      { week: "Weeks 6–8", title: "Implementation", description: "Policies implemented, consent mechanisms updated, staff trained." },
+      { phase: "Phase 1", title: "Privacy assessment", description: "Current privacy practices reviewed against GDPR requirements. Gap report delivered." },
+      { phase: "Phase 2", title: "Programme build", description: "Privacy policies, ROPA, DPIA framework, breach procedures developed." },
+      { phase: "Phase 3", title: "Implementation", description: "Policies implemented, consent mechanisms updated, staff trained." },
     ],
     pricing: [
       { name: "Essentials", audience: "SMEs", price: "Scoped to your business", features: ["GDPR assessment", "Privacy policies", "ROPA", "Breach procedures", "Staff training"] },
@@ -451,6 +493,8 @@ export const services: Service[] = [
 
   {
     slug: "iso-27701",
+    status: "supporting",
+    hasRoute: false,
     title: "ISO 27701 Privacy Information Management",
     shortTitle: "ISO 27701",
     description: "The privacy extension to ISO 27001. Establishes a Privacy Information Management System aligned with GDPR and global privacy regulations.",
@@ -459,11 +503,11 @@ export const services: Service[] = [
     category: "iso",
     features: ["Privacy policies and procedures aligned to ISO 27701", "PIMS implementation consultancy", "Integration with existing ISO 27001 ISMS", "Internal audit and Stage 1 and Stage 2 certification audit accompaniment"],
     process: [
-      { week: "Week 1", title: "Kickoff & gap analysis", description: "Assess current privacy posture against ISO 27701 requirements." },
-      { week: "Weeks 2–5", title: "PIMS documentation", description: "Privacy policies, procedures, and PIMS documentation built." },
-      { week: "Weeks 6–8", title: "Implementation", description: "Integration with existing ISMS, staff training, controls implemented." },
-      { week: "Week 9", title: "Internal audit", description: "Full pre-audit review conducted." },
-      { week: "Weeks 10–12", title: "External audit", description: "Stage 1 and Stage 2 certification audit." },
+      { phase: "Phase 1", title: "Kickoff & gap analysis", description: "Assess current privacy posture against ISO 27701 requirements." },
+      { phase: "Phase 2", title: "PIMS documentation", description: "Privacy policies, procedures, and PIMS documentation built." },
+      { phase: "Phase 3", title: "Implementation", description: "Integration with existing ISMS, staff training, controls implemented." },
+      { phase: "Phase 4", title: "Internal audit", description: "Full pre-audit review conducted." },
+      { phase: "Phase 5", title: "External audit", description: "Stage 1 and Stage 2 certification audit." },
     ],
     pricing: [
       { name: "Standard", audience: "Organisations with existing ISO 27001", price: "Scoped to your business", features: ["Gap analysis", "PIMS documentation", "ISMS integration", "Internal audit", "Audit support"] },
@@ -476,31 +520,35 @@ export const services: Service[] = [
   },
   {
     slug: "soc-2",
-    title: "SOC 2 Compliance",
+    status: "core",
+    hasRoute: true,
+    title: "SOC 2 Readiness",
     shortTitle: "SOC 2",
     description: "Trust Services Criteria compliance for technology companies serving US enterprise clients and investors.",
-    longDescription: "SOC 2 Type I assesses whether controls are suitably designed. SOC 2 Type II verifies controls operate effectively over an audit period. The gold standard for technology companies demonstrating security assurance to US enterprise clients.",
+    longDescription: "SOC 2 Type I assesses whether controls are suitably designed. SOC 2 Type II verifies that controls operated effectively over a period. We prepare the controls, evidence and operating model needed for the examination. The examination itself, and the resulting report, are performed through the appropriate independent CPA or audit route, never by Pixelette Certified.",
     icon: ShieldCheck,
     category: "grc",
-    features: ["Trust Services Criteria gap analysis", "Controls framework design and documentation", "Policy and procedure drafting", "Evidence collection programme", "Audit readiness and examiner liaison", "SOC 2 Compliance Report issued"],
+    features: ["Trust Services Criteria gap analysis", "Controls framework design and documentation", "Policy and procedure drafting", "Evidence collection programme", "Audit readiness and examiner liaison", "Coordination of the independent CPA examination"],
     process: [
-      { week: "Weeks 1–2", title: "Gap analysis", description: "Trust Services Criteria assessment and controls mapping." },
-      { week: "Weeks 3–6", title: "Controls design", description: "Documentation, policies, and controls implementation." },
-      { week: "Weeks 7–10", title: "Implementation", description: "Evidence collection and audit readiness preparation." },
+      { phase: "Phase 1", title: "Gap analysis", description: "Trust Services Criteria assessment and controls mapping." },
+      { phase: "Phase 2", title: "Controls design", description: "Documentation, policies, and controls implementation." },
+      { phase: "Phase 3", title: "Implementation", description: "Evidence collection and audit readiness preparation." },
     ],
     pricing: [
       { name: "Type I", audience: "Point-in-time controls assessment", price: "Scoped to your business", features: ["Controls design review", "Policy documentation", "Readiness assessment"] },
-      { name: "Type II", audience: "Operational effectiveness over audit period", price: "Scoped to your business", features: ["Full implementation", "Evidence programme", "Compliance Report issued"] },
+      { name: "Type II", audience: "Operational effectiveness over audit period", price: "Scoped to your business", features: ["Full implementation", "Evidence programme", "Independent examination coordinated"] },
     ],
     faqs: [
       { question: "What is the difference between SOC 2 Type I and Type II?", answer: "Type I is a point-in-time assessment of controls design. Type II verifies controls operated effectively over a period (typically 6-12 months). Most US enterprise clients require Type II." },
     ],
     relatedSlugs: ["iso-27001", "vciso", "penetration-testing"],
-    seo: { title: "SOC 2 Compliance UK", description: "SOC 2 Type I and Type II compliance for technology companies. Trust Services Criteria implementation and audit support.", keywords: ["SOC 2", "SOC 2 Type II", "Trust Services Criteria"] },
+    seo: { title: "SOC 2 Readiness UK", description: "SOC 2 Type I and Type II readiness for technology companies. Trust Services Criteria implementation, evidence preparation and coordination of the independent examination.", keywords: ["SOC 2", "SOC 2 Type II", "Trust Services Criteria"] },
   },
   {
     slug: "sama-csf",
-    title: "SAMA CSF Compliance",
+    status: "supporting",
+    hasRoute: false,
+    title: "SAMA CSF Readiness & Compliance Support",
     shortTitle: "SAMA CSF",
     description: "Mandatory cybersecurity framework for Saudi Arabian financial institutions regulated by the Saudi Arabian Monetary Authority.",
     longDescription: "The SAMA Cybersecurity Framework is mandatory for all financial institutions regulated by the Saudi Arabian Monetary Authority, including banks, insurance companies, and financial market infrastructure. Pixelette Certified delivers full SAMA CSF compliance implementation.",
@@ -508,9 +556,9 @@ export const services: Service[] = [
     category: "grc",
     features: ["SAMA CSF controls gap analysis across all four domains", "Cybersecurity policies and procedures drafting", "Controls implementation consultancy", "Regulatory examination readiness assessment", "Banking sector compliance programme design"],
     process: [
-      { week: "Month 1", title: "Gap analysis", description: "Controls gap analysis across all SAMA CSF domains." },
-      { week: "Months 2–3", title: "Implementation", description: "Policies, procedures, and controls implemented." },
-      { week: "Month 4", title: "Readiness", description: "Regulatory examination readiness assessment." },
+      { phase: "Phase 1", title: "Gap analysis", description: "Controls gap analysis across all SAMA CSF domains." },
+      { phase: "Phase 2", title: "Implementation", description: "Policies, procedures, and controls implemented." },
+      { phase: "Phase 3", title: "Readiness", description: "Regulatory examination readiness assessment." },
     ],
     pricing: [
       { name: "Enterprise", audience: "Saudi financial institutions", price: "Scoped to your business", features: ["Full SAMA CSF implementation", "Regulatory readiness", "Banking sector expertise"] },
@@ -521,7 +569,9 @@ export const services: Service[] = [
   },
   {
     slug: "nca-ecc",
-    title: "NCA ECC / CCC Compliance",
+    status: "supporting",
+    hasRoute: false,
+    title: "NCA ECC / CCC Readiness & Compliance Support",
     shortTitle: "NCA ECC/CCC",
     description: "Essential Cybersecurity Controls and Cloud Cybersecurity Controls for Saudi government entities and critical infrastructure.",
     longDescription: "The NCA Essential Cybersecurity Controls apply to all Saudi government entities and critical national infrastructure. The NCA Cloud Cybersecurity Controls apply to cloud service providers in the Kingdom. Both are mandatory regulatory requirements.",
@@ -529,8 +579,8 @@ export const services: Service[] = [
     category: "grc",
     features: ["NCA ECC/CCC gap analysis across all control domains", "Controls implementation and documentation", "Critical infrastructure and cloud security compliance", "Regulatory reporting and audit readiness support"],
     process: [
-      { week: "Month 1", title: "Assessment", description: "Gap analysis across all NCA control domains." },
-      { week: "Months 2–3", title: "Implementation", description: "Controls implementation and documentation." },
+      { phase: "Phase 1", title: "Assessment", description: "Gap analysis across all NCA control domains." },
+      { phase: "Phase 2", title: "Implementation", description: "Controls implementation and documentation." },
     ],
     pricing: [
       { name: "Enterprise", audience: "Saudi government and critical infrastructure", price: "Scoped to your business", features: ["Full NCA ECC/CCC implementation", "Regulatory reporting support"] },
@@ -541,7 +591,9 @@ export const services: Service[] = [
   },
   {
     slug: "qcb-nia",
-    title: "QCB / NIA Compliance",
+    status: "supporting",
+    hasRoute: false,
+    title: "QCB / NIA Readiness & Compliance Support",
     shortTitle: "QCB/NIA",
     description: "Qatar Central Bank cybersecurity requirements and National Information Assurance framework for Qatari financial institutions.",
     longDescription: "The Qatar Central Bank Cybersecurity Requirements and the National Information Assurance framework are the primary regulatory cybersecurity obligations for financial institutions and government entities in Qatar.",
@@ -549,8 +601,8 @@ export const services: Service[] = [
     category: "grc",
     features: ["QCB Cybersecurity Requirements gap analysis", "NIA framework alignment and documentation", "Financial sector regulatory compliance programme", "Regulatory reporting and audit preparation"],
     process: [
-      { week: "Month 1", title: "Assessment", description: "Gap analysis against QCB and NIA requirements." },
-      { week: "Months 2–3", title: "Implementation", description: "Controls implementation and regulatory documentation." },
+      { phase: "Phase 1", title: "Assessment", description: "Gap analysis against QCB and NIA requirements." },
+      { phase: "Phase 2", title: "Implementation", description: "Controls implementation and regulatory documentation." },
     ],
     pricing: [
       { name: "Enterprise", audience: "Qatar financial institutions", price: "Scoped to your business", features: ["Full QCB/NIA compliance implementation"] },
@@ -561,6 +613,8 @@ export const services: Service[] = [
   },
   {
     slug: "zero-trust",
+    status: "supporting",
+    hasRoute: false,
     title: "Zero Trust Architecture Design",
     shortTitle: "Zero Trust",
     description: "Vendor-neutral Zero Trust architecture design based on NIST SP 800-207 and CISA principles.",
@@ -569,9 +623,9 @@ export const services: Service[] = [
     category: "architecture",
     features: ["Zero Trust maturity assessment", "Identity and access management architecture", "Micro-segmentation and network design", "Endpoint security framework", "Data protection architecture", "Implementation roadmap"],
     process: [
-      { week: "Weeks 1–2", title: "Assessment", description: "Current-state analysis and maturity assessment." },
-      { week: "Weeks 3–4", title: "Design", description: "Architecture design across identity, network, and data layers." },
-      { week: "Weeks 5–6", title: "Roadmap", description: "Implementation roadmap and documentation delivered." },
+      { phase: "Phase 1", title: "Assessment", description: "Current-state analysis and maturity assessment." },
+      { phase: "Phase 2", title: "Design", description: "Architecture design across identity, network, and data layers." },
+      { phase: "Phase 3", title: "Roadmap", description: "Implementation roadmap and documentation delivered." },
     ],
     pricing: [
       { name: "Standard", audience: "All organisations", price: "Scoped to your business", features: ["Maturity assessment", "Architecture design", "Implementation roadmap"] },
@@ -582,6 +636,8 @@ export const services: Service[] = [
   },
   {
     slug: "ad-hardening",
+    status: "supporting",
+    hasRoute: false,
     title: "Active Directory Hardening",
     shortTitle: "AD Hardening",
     description: "Systematic hardening of Active Directory and Azure AD / Entra ID environments to reduce domain compromise risk.",
@@ -590,8 +646,8 @@ export const services: Service[] = [
     category: "architecture",
     features: ["AD configuration review and gap analysis", "Privileged access management design", "Group Policy hardening", "Service account security review", "Domain controller hardening", "Prioritised remediation report"],
     process: [
-      { week: "Weeks 1–2", title: "Review", description: "Configuration review and vulnerability assessment." },
-      { week: "Weeks 3–4", title: "Remediation", description: "Hardening implementation and verification." },
+      { phase: "Phase 1", title: "Review", description: "Configuration review and vulnerability assessment." },
+      { phase: "Phase 2", title: "Remediation", description: "Hardening implementation and verification." },
     ],
     pricing: [
       { name: "Per domain", audience: "On-premise and cloud hybrid", price: "Scoped to your business", features: ["Full AD review", "Hardening implementation", "Remediation report"] },
@@ -602,6 +658,8 @@ export const services: Service[] = [
   },
   {
     slug: "cloud-security-architecture",
+    status: "supporting",
+    hasRoute: false,
     title: "Cloud Security Architecture",
     shortTitle: "Cloud Security",
     description: "Security architecture design for AWS, Azure, GCP, and hybrid cloud environments.",
@@ -610,9 +668,9 @@ export const services: Service[] = [
     category: "architecture",
     features: ["Current-state cloud security assessment", "Target-state architecture design", "Landing zone and account structure design", "CSA Cloud Controls Matrix alignment", "Architecture document and implementation roadmap"],
     process: [
-      { week: "Weeks 1–2", title: "Assessment", description: "Current cloud security posture review." },
-      { week: "Weeks 3–4", title: "Design", description: "Target architecture design across all cloud layers." },
-      { week: "Weeks 5–6", title: "Documentation", description: "Architecture document and roadmap delivered." },
+      { phase: "Phase 1", title: "Assessment", description: "Current cloud security posture review." },
+      { phase: "Phase 2", title: "Design", description: "Target architecture design across all cloud layers." },
+      { phase: "Phase 3", title: "Documentation", description: "Architecture document and roadmap delivered." },
     ],
     pricing: [
       { name: "Standard", audience: "AWS, Azure, GCP, hybrid", price: "Scoped to your business", features: ["Assessment", "Architecture design", "Implementation roadmap"] },
@@ -623,6 +681,8 @@ export const services: Service[] = [
   },
   {
     slug: "bia-bra",
+    status: "supporting",
+    hasRoute: false,
     title: "Business Impact Analysis & Risk Assessment",
     shortTitle: "BIA / BRA",
     description: "Identify critical functions, recovery priorities, and the threats most likely to cause disruption to your operations.",
@@ -631,8 +691,8 @@ export const services: Service[] = [
     category: "bcdr",
     features: ["Critical business function mapping", "MAO, RTO, and RPO determination", "Business risk and threat assessment", "Interdependency mapping", "Formal BIA and BRA documentation"],
     process: [
-      { week: "Week 1", title: "Scoping", description: "Critical functions and services identified." },
-      { week: "Weeks 2–3", title: "Analysis", description: "Impact analysis and risk assessment conducted." },
+      { phase: "Phase 1", title: "Scoping", description: "Critical functions and services identified." },
+      { phase: "Phase 2", title: "Analysis", description: "Impact analysis and risk assessment conducted." },
     ],
     pricing: [
       { name: "Standard", audience: "Up to 5 business functions", price: "Scoped to your business", features: ["BIA", "BRA", "Formal documentation"] },
@@ -643,6 +703,8 @@ export const services: Service[] = [
   },
   {
     slug: "dr-planning",
+    status: "supporting",
+    hasRoute: false,
     title: "Disaster Recovery Planning",
     shortTitle: "DR Planning",
     description: "Actionable DR runbooks and recovery procedures ensuring IT systems can be restored within defined objectives.",
@@ -651,9 +713,9 @@ export const services: Service[] = [
     category: "bcdr",
     features: ["DR strategy aligned to RTO, RPO, and MAO targets", "DR runbook development", "Backup and replication strategy review", "DR testing plan and exercise design", "ISO 22301 integration"],
     process: [
-      { week: "Weeks 1–2", title: "Strategy", description: "DR strategy design aligned to recovery objectives." },
-      { week: "Weeks 3–4", title: "Runbooks", description: "Step-by-step recovery procedures developed." },
-      { week: "Weeks 5–6", title: "Testing", description: "DR testing plan designed and initial exercise conducted." },
+      { phase: "Phase 1", title: "Strategy", description: "DR strategy design aligned to recovery objectives." },
+      { phase: "Phase 2", title: "Runbooks", description: "Step-by-step recovery procedures developed." },
+      { phase: "Phase 3", title: "Testing", description: "DR testing plan designed and initial exercise conducted." },
     ],
     pricing: [
       { name: "Standard", audience: "Up to 5 IT systems", price: "Scoped to your business", features: ["DR strategy", "Runbooks", "Testing plan"] },
@@ -664,6 +726,8 @@ export const services: Service[] = [
   },
   {
     slug: "ai-risk-assessment",
+    status: "supporting",
+    hasRoute: false,
     title: "AI Risk Assessment",
     shortTitle: "AI Risk Assessment",
     description: "Structured evaluation of AI system risks against the NIST AI Risk Management Framework, with EU AI Act alignment.",
@@ -672,9 +736,9 @@ export const services: Service[] = [
     category: "ai-governance",
     features: ["AI system inventory and classification by EU AI Act risk tier", "NIST AI RMF GOVERN, MAP, MEASURE, MANAGE assessment", "Bias, fairness, and transparency review", "Data governance and privacy risk assessment", "AI security and adversarial robustness review", "Prioritised recommendations report"],
     process: [
-      { week: "Week 1", title: "Inventory", description: "AI systems inventoried and classified by risk tier." },
-      { week: "Week 2", title: "Assessment", description: "NIST AI RMF assessment across all functions." },
-      { week: "Week 3", title: "Report", description: "Risk assessment report with prioritised recommendations." },
+      { phase: "Phase 1", title: "Inventory", description: "AI systems inventoried and classified by risk tier." },
+      { phase: "Phase 2", title: "Assessment", description: "NIST AI RMF assessment across all functions." },
+      { phase: "Phase 3", title: "Report", description: "Risk assessment report with prioritised recommendations." },
     ],
     pricing: [
       { name: "Standard", audience: "Up to 5 AI systems", price: "Scoped to your business", features: ["System inventory", "NIST AI RMF assessment", "Recommendations report"] },
@@ -684,24 +748,31 @@ export const services: Service[] = [
     seo: { title: "AI Risk Assessment", description: "AI risk assessment against NIST AI RMF with EU AI Act alignment.", keywords: ["AI risk assessment", "NIST AI RMF", "EU AI Act"] },
   },
   {
-    slug: "managed-advisory",
-    title: "Managed Cybersecurity Advisory",
-    shortTitle: "Managed Advisory",
-    description: "Continuous GRC advisory subscription delivered by certified practitioners. White-label available for partners and MSPs.",
-    longDescription: "A white-label-compatible monthly subscription providing continuous governance, risk, and compliance advisory across your security and privacy programme. Designed for post-certification organisations and businesses with ongoing regulatory obligations.",
+    slug: "managed-compliance",
+    status: "core",
+    hasRoute: true,
+    title: "Managed Compliance",
+    shortTitle: "Managed Compliance",
+    description: "Certification is a control cycle, not a one-off project. Keep the system working after the audit.",
+    longDescription: "A certificate is a snapshot; the management system behind it is what an auditor actually tests at surveillance. Managed Compliance keeps controls, evidence, reviews and improvement activity moving between audits, so the next assessment is a continuation of business as usual rather than a scramble. It suits organisations that have achieved certification and need to hold it, and those carrying ongoing regulatory obligations without a full-time governance function.",
     icon: UserCheck,
-    category: "ai-governance",
-    features: ["Monthly GRC advisory sessions", "Regulatory horizon scanning", "Risk register review and reporting", "Policy maintenance and updates", "Incident guidance and regulatory notification advisory", "On-demand expert access"],
+    category: "grc",
+    features: ["Managed compliance and GRC advisory", "Internal review and audit-readiness support", "Evidence and policy maintenance", "Management-review and continual-improvement support", "Surveillance and recertification preparation", "Regulatory horizon scanning", "Risk register review and reporting", "On-demand practitioner access"],
     process: [
-      { week: "Month 1", title: "Onboarding", description: "Full security posture assessment and priority roadmap." },
-      { week: "Ongoing", title: "Monthly advisory", description: "Regular advisory sessions, policy reviews, and regulatory updates." },
+      { phase: "Phase 1", title: "Onboarding", description: "Review of the existing management system, current evidence position and outstanding findings, and a priority roadmap." },
+      { phase: "Phase 2", title: "Ongoing governance", description: "Scheduled reviews, policy and evidence maintenance, risk register upkeep, and regulatory horizon scanning." },
+      { phase: "Phase 3", title: "Audit preparation", description: "Internal review ahead of each surveillance or recertification assessment, with findings closed before the assessor arrives." },
     ],
     pricing: [
-      { name: "Subscription", audience: "Post-certification organisations", price: "Monthly retainer", features: ["GRC advisory", "Horizon scanning", "On-demand access", "White-label available"] },
+      { name: "Managed Governance & Compliance", audience: "Organisations holding certification, or carrying ongoing regulatory obligations", price: "Monthly retainer, scoped to your business", features: ["Ongoing governance and GRC advisory", "Evidence and policy maintenance", "Internal review before each assessment", "Surveillance and recertification preparation", "On-demand practitioner access"] },
     ],
-    faqs: [],
+    faqs: [
+      { question: "We are already certified. What does this actually cover?", answer: "The work that keeps a management system credible between assessments: risk register reviews, evidence collection, policy updates as the business changes, management review, internal audit, and closing findings. Surveillance assessments test whether the system is operating, not whether the documents exist." },
+      { question: "How is this different from vCISO?", answer: "vCISO is security leadership: strategy, risk ownership and board reporting. Managed Compliance is the governance and evidence engine underneath it. Organisations often take both, and they are scoped together where that is the case." },
+      { question: "Do you handle the surveillance assessment itself?", answer: "We prepare you for it and support findings through to closure. The assessment is carried out by your certification body, which is independent of us by design." },
+    ],
     relatedSlugs: ["vciso", "vdpo", "iso-27001"],
-    seo: { title: "Managed Cybersecurity Advisory", description: "Continuous GRC advisory subscription. White-label available for MSPs and partners.", keywords: ["managed GRC", "cybersecurity advisory", "compliance subscription"] },
+    seo: { title: "Managed Compliance UK", description: "Ongoing governance, evidence maintenance and audit readiness between assessments. Surveillance and recertification preparation, scoped to your business.", keywords: ["managed compliance", "managed GRC", "surveillance audit support", "audit readiness"] },
   },
 ];
 
@@ -709,6 +780,20 @@ export function getServiceBySlug(slug: string): Service | undefined {
   return services.find((s) => s.slug === slug);
 }
 
+/**
+ * Services that have their own page and are still offered.
+ *
+ * This replaces three separately-maintained copies of the same slug list that
+ * had grown up in ServicesGrid.tsx, ServicesOverviewContent.tsx and sitemap.ts.
+ * Three hand-kept copies of "which services have pages" is how a withdrawn
+ * service stays in the sitemap after its route is deleted.
+ */
+export function getRoutedServices(): Service[] {
+  return services.filter((s) => s.hasRoute && s.status !== "retired");
+}
+
 export function getRelatedServices(slugs: string[]): Service[] {
-  return slugs.map((slug) => services.find((s) => s.slug === slug)).filter(Boolean) as Service[];
+  return slugs
+    .map((slug) => services.find((s) => s.slug === slug))
+    .filter((s): s is Service => Boolean(s) && s!.status !== "retired" && s!.hasRoute);
 }

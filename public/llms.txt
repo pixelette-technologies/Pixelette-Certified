@@ -1,56 +1,58 @@
 # Pixelette Certified
 
-> UK-headquartered ISO certification and compliance consultancy. Fixed-fee. Senior-led. 98% first-attempt pass rate. Globally delivered across UK, UAE, Saudi Arabia, Qatar, EU, Americas, and APAC.
+> UK-headquartered compliance consultancy. Certification readiness, cyber assurance, privacy and AI governance. Fixed-fee, scoped before work begins. Delivered across UK, UAE, Saudi Arabia, Qatar, EU, Americas, and APAC.
 
-Pixelette Certified is operated by Pixelette Group Ltd (Companies House 07251823), registered in England and Wales. Office: 66 Paul Street, London, EC2A 4NA. Contact: info@pixelettecertified.com.
+Pixelette Certified is a consultancy. It is not a certification body, it does not issue certificates, reports or attestations, and it holds no accreditation of its own. Where a framework requires independent certification, scheme assessment or attestation, that assessment is performed by the appropriate independent body.
+
+Office: 66 Paul Street, London, EC2A 4NA. Contact: info@pixelettecertified.com.
 
 ## What We Do
 
-We help technology companies, FinTechs, healthcare providers, manufacturers, and government suppliers achieve ISO certification and regulatory compliance — faster, at fixed cost, with a 98% first-attempt pass rate.
+We help organisations meet the security, privacy, AI-governance and assurance requirements standing between them and enterprise customers, tenders, investors and regulated markets. We manage the engagement from initial gap assessment through implementation, audit readiness and ongoing compliance, matching each requirement to the right credentialed specialists and coordinating independent assessment where required.
 
-Core services: ISO 27001 (information security), ISO 42001 (AI governance), ISO 22301 (business continuity), ISO 9001 (quality management), ISO 14001 (environmental), Cyber Essentials and Cyber Essentials Plus, GDPR / UK GDPR compliance, Virtual CISO (vCISO), Virtual DPO (vDPO), Penetration Testing (VAPT), and regional GRC frameworks (SAMA CSF, NCA ECC/CCC, QCB/NIA).
+Core services: ISO/IEC 27001 implementation and certification readiness, ISO/IEC 42001 AI governance and certification readiness, SOC 2 Readiness, vCISO and GRC advisory, Privacy and vDPO, managed compliance, Cyber Essentials Readiness and Coordination, PCI DSS Readiness and Compliance Support, GDPR / UK GDPR programmes, and selected regional GRC frameworks (SAMA CSF, NCA ECC/CCC, QCB/NIA).
 
 ## Key Facts
 
-- 50+ ISO certifications delivered
-- 98% first-attempt audit pass rate
-- 10-week standard delivery from kickoff to certificate
-- Fixed-fee engagements (no hourly billing, no scope creep)
-- ISO 27001 Certified Practice — we hold the same certification we help you achieve
-- PECB-certified Lead Auditor on staff — among the first in the UK to offer ISO 42001
-- Pixelette Pass-First Guarantee: if a failure occurs due to a gap in our documentation, we cover the remediation at no extra cost
+- One accountable client relationship, with credentialed specialists matched to the requirement
+- A written scope and a fixed fee agreed before any work begins. No hourly billing, no scope creep
+- Internal audit run before the certification body's Stage 2, so findings surface internally first
+- 90 days post-certification support included as standard
+- Clear separation between implementation and independent assurance
+- Our approved delivery network includes a PECB Certified ISO/IEC 42001 Lead Auditor
+- No completion date is promised before scope, current readiness and the independent assessment route have been confirmed
+
+## What We Are Not
+
+Pixelette Certified is not UKAS accredited, not an IASME Certification Body, not a PCI QSA, not a SOC 2 auditor, and not an ISO certification body. Professional credentials referenced on this site are held by the individual practitioners to whom they were issued and are stated as individual or network credentials, never as corporate accreditations.
 
 ## Services
 
-- [ISO 27001 Certification](https://pixelettecertified.com/services/iso-27001): Information Security Management System. 10-week implementation. UK government and enterprise supply chain standard.
-- [ISO 42001 AI Governance](https://pixelettecertified.com/services/iso-42001): AI Management System. EU AI Act aligned. PECB-certified auditor. Delivered in 14 weeks.
+- [ISO/IEC 27001 Implementation & Certification Readiness](https://pixelettecertified.com/services/iso-27001): Information Security Management System. Gap assessment, ISMS implementation, policies, controls, risk treatment, internal readiness, and coordination of the independent certification route.
+- [ISO/IEC 42001 AI Governance & Certification Readiness](https://pixelettecertified.com/services/iso-42001): AI Management System design and implementation, AI risk and governance controls, EU AI Act aligned, readiness for an independent certification route.
 - [ISO 22301 Business Continuity](https://pixelettecertified.com/services/iso-22301): Business Continuity Management. Disaster recovery, crisis management, resilience.
 - [ISO 9001 Quality Management](https://pixelettecertified.com/services/iso-9001): Quality Management System. Widely required in enterprise procurement.
 - [ISO 14001 Environmental Management](https://pixelettecertified.com/services/iso-14001): Environmental Management System. ESG and sustainability obligations.
-- [Cyber Essentials / CE Plus](https://pixelettecertified.com/services/cyber-essentials): UK government-backed. Required for public sector contracts. 2–3 week delivery.
-- [vCISO](https://pixelettecertified.com/services/vciso): Virtual Chief Information Security Officer. Fractional senior security leadership on a monthly retainer.
-- [vDPO](https://pixelettecertified.com/services/vdpo): Virtual Data Protection Officer. GDPR compliance, DSR management, DPIAs, ICO liaison.
-- [Penetration Testing](https://pixelettecertified.com/services/penetration-testing): VAPT — web application, API, network, and cloud. CVSS-scored reports.
+- [Cyber Essentials Readiness & Coordination](https://pixelettecertified.com/services/cyber-essentials): Readiness, remediation support, and portal or assessment coordination. The formal assessment is delivered through the appropriate authorised route.
+- [vCISO & GRC Advisory](https://pixelettecertified.com/services/vciso): Fractional security leadership, governance, risk oversight and board reporting within an agreed scope.
+- [Privacy & vDPO](https://pixelettecertified.com/services/vdpo): Privacy governance, DPIA support, RoPA oversight, and an externally delivered DPO service where appropriate.
 - [GDPR & Privacy](https://pixelettecertified.com/services/gdpr-privacy): UK GDPR and EU GDPR compliance programmes.
 
 ## Pages
 
-- [Home](https://pixelettecertified.com): Overview, services, commercial impact, testimonials.
+- [Home](https://pixelettecertified.com): Proposition, buyer triggers, delivery model, services.
 - [Services](https://pixelettecertified.com/services): Full service catalogue.
-- [About](https://pixelettecertified.com/about): Company background, team credentials, ISO 27001 Certified Practice status.
-- [Industries](https://pixelettecertified.com/industries): Sector-specific compliance: FinTech, healthcare, SaaS, manufacturing, legal, logistics, government.
-- [Case Studies](https://pixelettecertified.com/case-studies): Client outcomes and certification journeys.
-- [Blog](https://pixelettecertified.com/blog): ISO and compliance guides for technology companies, organised into category archives (ISO 27001, AI Governance, SOC 2, Advisory, FinTech, Healthcare, Legal, Compliance).
+- [About](https://pixelettecertified.com/about): Company background, delivery model, and how engagements are staffed.
+- [Industries](https://pixelettecertified.com/industries): Sector-specific compliance requirements: FinTech, healthcare, SaaS, manufacturing, legal, logistics, government.
+- [Blog](https://pixelettecertified.com/blog): ISO and compliance guides, organised into category archives (ISO 27001, AI Governance, SOC 2, Advisory, FinTech, Healthcare, Legal, Compliance).
 - [Pricing](https://pixelettecertified.com/pricing): Fixed-fee model explained.
-- [Contact](https://pixelettecertified.com/contact): Book a free 30-minute gap analysis.
+- [Contact](https://pixelettecertified.com/contact): Book a free 30-minute compliance diagnostic, or send us the requirement you have been asked to meet.
 
-## Case Studies
+## Evidence Policy
 
-- [UK FinTech ISO 27001](https://pixelettecertified.com/case-studies/uk-fintech-iso-27001): Series A payments company certified in 9 weeks, zero major audit findings.
-- [AI SaaS ISO 42001 + ISO 27001](https://pixelettecertified.com/case-studies/ai-saas-iso-42001-iso-27001): Dual certification in 14 weeks, among the first UK AI companies certified to ISO 42001.
-- [Healthcare Tech Cyber Essentials + ISO 27001](https://pixelettecertified.com/case-studies/healthcare-tech-cyber-essentials-iso-27001): Cyber Essentials in 3 weeks for NHS supply chain, ISO 27001 in 12 weeks across three offices.
+We do not publish client case studies, testimonials, certification counts, pass rates or average delivery times. Client work is confidential, and proof is published only where it can be substantiated and correctly attributed.
 
 ## Optional
 
-- [Full page directory](https://pixelettecertified.com/llms-full.txt): Complete list of every page including all 18 blog guides and category archives.
+- [Full page directory](https://pixelettecertified.com/llms-full.txt): Complete list of every page including all blog guides and category archives.
 - [Sitemap](https://pixelettecertified.com/sitemap.xml)

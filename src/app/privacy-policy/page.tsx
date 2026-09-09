@@ -43,7 +43,8 @@ export default function PrivacyPolicyPage() {
             <h2 className="h3 mb-3">2. What data we collect</h2>
             <p>We collect the following personal data when you interact with our website:</p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
-              <li><strong className="font-semibold text-ink">Contact form submissions:</strong> name, email address, company name, phone number, service interest, and message content.</li>
+              <li><strong className="font-semibold text-ink">Contact form submissions:</strong> first and last name, work email address, company name, phone number, organisation size, jurisdiction, what prompted your enquiry, any deadline, and the description of what you have been asked to prove.</li>
+              <li><strong className="font-semibold text-ink">Documents you choose to attach:</strong> if you attach a questionnaire, tender clause, customer email or requirement document, we store that file in access-controlled storage. Only our team can retrieve it. Attaching a document is entirely optional and your enquiry is treated the same way without one.</li>
               <li><strong className="font-semibold text-ink">Live chat interactions:</strong> messages exchanged with our website chat assistant. Chat messages are processed in your browser session only and are not stored on our servers.</li>
               <li><strong className="font-semibold text-ink">Website analytics:</strong> anonymised usage data including pages visited, time on site, referral source, and device type (via Vercel Analytics or Google Analytics 4).</li>
               <li><strong className="font-semibold text-ink">Cookies:</strong> essential cookies for site functionality and optional analytics cookies. See our <Link href="/cookie-policy" className="link">Cookie Policy</Link> for details.</li>
@@ -57,6 +58,7 @@ export default function PrivacyPolicyPage() {
               <li>To respond to your contact form enquiry and provide information about our services.</li>
               <li>To schedule and conduct gap analysis consultations.</li>
               <li>To send follow-up communications related to your enquiry (not unsolicited marketing).</li>
+              <li>To send occasional compliance insights and service updates, but only where you have separately opted in. That opt-in is a distinct choice from consenting to us responding to your enquiry, and you can withdraw it at any time without affecting the enquiry itself.</li>
               <li>To improve our website and services based on anonymised analytics.</li>
             </ul>
           </section>
@@ -89,8 +91,9 @@ export default function PrivacyPolicyPage() {
             <h2 className="h3 mb-3">6. Data retention</h2>
             <p>
               Contact form submissions are retained for 24 months from the date of submission, after which
-              they are securely deleted. If you become a client, your data is retained for the duration of the
-              engagement plus 6 years for legal and regulatory compliance.
+              they are securely deleted. Any document you attach is held under the same 24-month limit and is
+              deleted on the same schedule. If you become a client, your data is retained for the duration of
+              the engagement plus 6 years for legal and regulatory compliance.
             </p>
           </section>
 
@@ -128,8 +131,9 @@ export default function PrivacyPolicyPage() {
             <h2 className="h3 mb-3">9. Security</h2>
             <p>
               We implement appropriate technical and organisational measures to protect your personal data,
-              including encryption in transit (TLS), access controls, and regular security reviews. As an
-              ISO 27001 certified practice, information security is fundamental to how we operate.
+              including encryption in transit (TLS), access controls, and regular security reviews. Information
+              security is the work we do for clients, and we hold ourselves to the same controls we implement
+              for them.
             </p>
           </section>
 

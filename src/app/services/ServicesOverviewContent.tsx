@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Shield, ShieldCheck, Globe, Leaf, Brain, Lock, UserCheck, FileSearch, Bug, Scale } from "lucide-react";
-import type { Service } from "@/data/services";
+import { getRoutedServices, type Service } from "@/data/services";
 import Button from "@/components/ui/Button";
 import Eyebrow from "@/components/ui/Eyebrow";
 import CTASection from "@/components/sections/CTASection";
@@ -31,13 +31,15 @@ interface ServicesOverviewContentProps {
   groupedServices: CategoryGroup[];
 }
 
-const PAGES_WITH_ROUTES = new Set([
-  "iso-27001", "iso-22301", "iso-9001", "iso-14001", "iso-42001",
-  "cyber-essentials", "vciso", "vdpo", "penetration-testing", "gdpr-privacy",
-]);
+/**
+ * Derived from services.ts rather than hand-maintained. The previous local Set
+ * listed penetration-testing, so after that route was withdrawn this helper
+ * would still have linked to it.
+ */
+const ROUTED_SLUGS = new Set(getRoutedServices().map((s) => s.slug));
 
 function serviceHref(slug: string): string {
-  return PAGES_WITH_ROUTES.has(slug) ? `/services/${slug}` : "/contact";
+  return ROUTED_SLUGS.has(slug) ? `/services/${slug}` : "/contact";
 }
 
 export default function ServicesOverviewContent({ groupedServices }: ServicesOverviewContentProps) {
@@ -55,7 +57,7 @@ export default function ServicesOverviewContent({ groupedServices }: ServicesOve
             </p>
             <div className="mt-9">
               <Button href="/contact" size="lg">
-                See Your 10 Week Certification Roadmap
+                Book a Compliance Diagnostic
               </Button>
             </div>
           </div>

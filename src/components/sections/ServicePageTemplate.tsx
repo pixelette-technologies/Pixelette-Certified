@@ -69,7 +69,7 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
                 Get Started
               </Button>
               <Button href="/contact" variant="secondary" size="lg">
-                See Your 10 Week Certification Roadmap
+                Book a Compliance Diagnostic
               </Button>
             </div>
           </div>
@@ -121,7 +121,7 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
                 key={i}
                 className="grid gap-x-8 gap-y-3 border-b border-line-card bg-page p-7 last:border-b-0 md:grid-cols-[150px_1fr] md:p-[30px]"
               >
-                <Eyebrow>{step.week}</Eyebrow>
+                <Eyebrow>{step.phase}</Eyebrow>
                 <div>
                   <h3 className="h4">{step.title}</h3>
                   <p className="small mt-2.5">{step.description}</p>
@@ -238,7 +238,7 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
       <CTASection
         headline={`Ready to start your ${service.shortTitle} journey?`}
         description="Book a free gap analysis call. In 30 minutes you will know exactly where you stand, what it takes, and what it costs."
-        primaryCta="See Your 10 Week Certification Roadmap"
+        primaryCta="Book a Compliance Diagnostic"
         primaryHref="/contact"
         secondaryCta="Talk to a Consultant"
         secondaryHref="/contact"

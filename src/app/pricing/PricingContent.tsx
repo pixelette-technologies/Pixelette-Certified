@@ -66,7 +66,7 @@ const pricingFAQs = [
   {
     question: "Are certification body fees included?",
     answer:
-      "For SME engagements, the certification body audit fee is included in our project price. For larger organisations, CB fees are separate, typically £4,500 to £8,000 depending on the standard, your organisation size, and the chosen certification body. We recommend UKAS-accredited certification bodies and help you obtain competitive quotes.",
+      "For SME engagements, the certification body audit fee is included in our project price. For larger organisations, CB fees are separate, typically £4,500 to £8,000 depending on the standard, your organisation size, and the chosen certification body. This is the independent body's own fee, not ours, and it is confirmed at scoping. We can help you obtain competitive quotes from suitably accredited certification bodies.",
   },
   {
     question: "Do you offer payment plans?",
@@ -112,12 +112,12 @@ export default function PricingContent() {
             <h1 className="h1p">Transparent pricing, scoped to your business</h1>
             <p className="lead mt-6">
               We do not publish price lists because no two engagements are identical.
-              What we guarantee: a fixed-fee proposal before work starts, full
+              What we commit to: a fixed-fee proposal before work starts, full
               transparency, no hourly billing, no scope creep, and 90 days post-certification support included as standard.
             </p>
             <div className="mt-9 flex flex-wrap gap-3.5">
               <Button href="/contact" size="lg">
-                See Your 10 Week Certification Roadmap
+                Book a Compliance Diagnostic
               </Button>
               <Button href="/contact" variant="secondary" size="lg">
                 Talk to a Consultant
@@ -179,8 +179,9 @@ export default function PricingContent() {
                 typically{" "}
                 <strong className="font-semibold text-ink">£4,500 to £8,000</strong>{" "}
                 depending on the standard, your organisation size, and the chosen
-                certification body. We recommend UKAS-accredited certification bodies
-                and can help you obtain competitive quotes.
+                certification body. This is the independent body&rsquo;s own fee, not ours, and it
+                is confirmed at scoping. We can help you obtain competitive quotes
+                from suitably accredited certification bodies.
               </p>
               <p className="small mt-2.5">
                 <strong className="font-semibold text-ink">Payment plans:</strong>{" "}
@@ -225,11 +226,11 @@ export default function PricingContent() {
             Every engagement begins with a free, no-obligation gap analysis. In 30
             minutes, our consultants will assess your current posture, identify which
             standards apply, and provide a realistic timeline and fixed-fee proposal.
-            Most clients book their first paid engagement within two weeks.
+            No certification outcome or completion date is promised before scope, current readiness and the independent assessment route have been confirmed.
           </p>
           <div className="mt-9 flex flex-wrap gap-3.5">
             <Button href="/contact" size="lg" iconRight={<ArrowRight size={16} />}>
-              See Your 10 Week Certification Roadmap
+              Book a Compliance Diagnostic
             </Button>
           </div>
         </div>
