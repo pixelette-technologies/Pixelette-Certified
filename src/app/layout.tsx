@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ClientShell from "@/components/layout/ClientShell";
+import Analytics from "@/components/privacy/Analytics";
 import { OrganizationSchema } from "@/components/seo/JsonLd";
 import { SITE_CONFIG } from "@/lib/constants";
 
@@ -116,18 +117,8 @@ export default function RootLayout({
     >
       <head>
         <meta name="google-site-verification" content="C7bI6NnGsWlyxSL7Ax2Ii72eg_y9UtjRDR2KbJCu4gg" />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-VX5PH3RWRB" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-VX5PH3RWRB');
-            `,
-          }}
-        />
-        <script src="https://analytics.ahrefs.com/analytics.js" data-key="NrhMy8upP8sv8uHS6EOSmg" async />
+        {/* Google Analytics and Ahrefs load from <Analytics /> below, and only
+            while the visitor's Privacy choices setting allows it. */}
       </head>
       <body className="min-h-full flex flex-col font-sans">
         <a href="#main-content" className="skip-to-content">
@@ -140,6 +131,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <ClientShell />
+        <Analytics />
       </body>
     </html>
   );

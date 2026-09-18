@@ -21,7 +21,7 @@ export default function CookiePolicyPage() {
         <h1 className="h1p mb-4">
           Cookie policy
         </h1>
-        <p className="small mb-12">Last updated: 1 April 2026</p>
+        <p className="small mb-12">Last updated: 18 September 2026</p>
 
         <div className="space-y-10 leading-relaxed text-body">
           <section>
@@ -34,63 +34,66 @@ export default function CookiePolicyPage() {
           </section>
 
           <section>
-            <h2 className="h3 mb-3">2. Cookies we use</h2>
+            <h2 className="h3 mb-3">2. Cookies and storage we use</h2>
 
-            <h3 className="h4 mt-4 mb-2 text-brand">Essential cookies</h3>
+            <h3 className="h4 mt-4 mb-2 text-brand">Essential storage</h3>
             <p>
-              These cookies are necessary for the website to function and cannot be switched off. They are
-              usually set in response to actions you take, such as setting your privacy preferences or
-              filling in forms. You can set your browser to block these cookies, but some parts of the site
-              may not function as a result.
+              We do not set any essential cookies. The site keeps two small items in your browser&rsquo;s local
+              storage so that features you use keep working. They are not sent to us with each page request, and
+              you can clear them at any time through your browser settings.
             </p>
             <div className="mt-3 overflow-x-auto">
               <table className="w-full overflow-hidden rounded-lg border border-line-card text-sm">
                 <thead>
                   <tr className="bg-band">
-                    <th className="px-4 py-2 text-left font-semibold text-ink">Cookie</th>
+                    <th className="px-4 py-2 text-left font-semibold text-ink">Name</th>
                     <th className="px-4 py-2 text-left font-semibold text-ink">Purpose</th>
                     <th className="px-4 py-2 text-left font-semibold text-ink">Duration</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-line">
                   <tr>
-                    <td className="px-4 py-2 text-brand">__next_*</td>
-                    <td className="px-4 py-2">Next.js framework session and routing</td>
-                    <td className="px-4 py-2">Session</td>
+                    <td className="px-4 py-2 text-brand">pc-analytics</td>
+                    <td className="px-4 py-2">Remembers your website analytics choice from Privacy choices</td>
+                    <td className="px-4 py-2">Until you clear it</td>
                   </tr>
                   <tr>
-                    <td className="px-4 py-2 text-brand">cookie_consent</td>
-                    <td className="px-4 py-2">Stores your cookie consent preference</td>
-                    <td className="px-4 py-2">12 months</td>
+                    <td className="px-4 py-2 text-brand">alice_session_id</td>
+                    <td className="px-4 py-2">Links this browser to your conversation with Alice, our website assistant, so it can be resumed</td>
+                    <td className="px-4 py-2">Until you clear it</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <h3 className="h4 mt-6 mb-2 text-brand">Analytics cookies</h3>
+            <h3 className="h4 mt-6 mb-2 text-brand">Website analytics</h3>
             <p>
-              These cookies help us understand how visitors interact with our website by collecting and
-              reporting information anonymously. We use this data to improve our site.
+              We use analytics to understand how our website is used and to improve its performance and
+              content. Analytics are on unless you switch them off using <strong className="font-semibold text-ink">Privacy
+              choices</strong> in the footer of any page. When they are off, neither service below is loaded.
             </p>
             <div className="mt-3 overflow-x-auto">
               <table className="w-full overflow-hidden rounded-lg border border-line-card text-sm">
                 <thead>
                   <tr className="bg-band">
-                    <th className="px-4 py-2 text-left font-semibold text-ink">Cookie</th>
-                    <th className="px-4 py-2 text-left font-semibold text-ink">Purpose</th>
+                    <th className="px-4 py-2 text-left font-semibold text-ink">Service</th>
+                    <th className="px-4 py-2 text-left font-semibold text-ink">Cookies</th>
                     <th className="px-4 py-2 text-left font-semibold text-ink">Duration</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-line">
                   <tr>
-                    <td className="px-4 py-2 text-brand">_ga, _ga_*</td>
-                    <td className="px-4 py-2">Google Analytics 4, anonymised usage tracking</td>
-                    <td className="px-4 py-2">2 years</td>
+                    <td className="px-4 py-2 text-brand">Google Analytics 4</td>
+                    <td className="px-4 py-2">
+                      <code>_ga</code> distinguishes visitors; <code>_ga_*</code> keeps session state. Both are
+                      first-party cookies set on our domain.
+                    </td>
+                    <td className="px-4 py-2">Up to 2 years</td>
                   </tr>
                   <tr>
-                    <td className="px-4 py-2 text-brand">va_*</td>
-                    <td className="px-4 py-2">Vercel Analytics, page performance monitoring</td>
-                    <td className="px-4 py-2">Session</td>
+                    <td className="px-4 py-2 text-brand">Ahrefs Web Analytics</td>
+                    <td className="px-4 py-2">None. Ahrefs counts visits without cookies or stored identifiers.</td>
+                    <td className="px-4 py-2">Not applicable</td>
                   </tr>
                 </tbody>
               </table>
@@ -98,9 +101,15 @@ export default function CookiePolicyPage() {
           </section>
 
           <section>
-            <h2 className="h3 mb-3">3. Managing cookies</h2>
+            <h2 className="h3 mb-3">3. Managing your choices</h2>
             <p>
-              You can control and delete cookies through your browser settings. Most browsers allow you to:
+              Use <strong className="font-semibold text-ink">Privacy choices</strong> in the footer to switch
+              website analytics on or off. Your choice is saved in this browser and applies straight away:
+              switching off stops both services and deletes the Google Analytics cookies.
+            </p>
+            <p className="mt-2">
+              You can also control and delete cookies and local storage through your browser settings. Most
+              browsers allow you to:
             </p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
               <li>View what cookies are stored and delete them individually.</li>
@@ -109,17 +118,13 @@ export default function CookiePolicyPage() {
               <li>Block all cookies from being set.</li>
               <li>Delete all cookies when you close your browser.</li>
             </ul>
-            <p className="mt-2">
-              Note that blocking all cookies will affect the functionality of this and many other websites.
-            </p>
           </section>
 
           <section>
-            <h2 className="h3 mb-3">4. Third-party cookies</h2>
+            <h2 className="h3 mb-3">4. Advertising</h2>
             <p>
-              We do not use third-party advertising cookies. The only third-party cookies on our site are
-              from analytics providers (Google Analytics and Vercel Analytics), which collect anonymised
-              usage data only.
+              We do not use advertising or remarketing cookies. Google&rsquo;s advertising features, including
+              Google signals and ad personalisation, are switched off for our analytics.
             </p>
           </section>
 

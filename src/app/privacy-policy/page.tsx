@@ -21,7 +21,7 @@ export default function PrivacyPolicyPage() {
         <h1 className="h1p mb-4">
           Privacy policy
         </h1>
-        <p className="small mb-12">Last updated: 1 April 2026</p>
+        <p className="small mb-12">Last updated: 18 September 2026</p>
 
         <div className="space-y-10 leading-relaxed text-body">
           <section>
@@ -46,8 +46,8 @@ export default function PrivacyPolicyPage() {
               <li><strong className="font-semibold text-ink">Contact form submissions:</strong> first and last name, work email address, company name, phone number, organisation size, jurisdiction, what prompted your enquiry, any deadline, and the description of what you have been asked to prove.</li>
               <li><strong className="font-semibold text-ink">Documents you choose to attach:</strong> if you attach a questionnaire, tender clause, customer email or requirement document, we store that file in access-controlled storage. Only our team can retrieve it. Attaching a document is entirely optional and your enquiry is treated the same way without one.</li>
               <li><strong className="font-semibold text-ink">Live chat interactions:</strong> messages exchanged with our website chat assistant. Chat messages are processed in your browser session only and are not stored on our servers.</li>
-              <li><strong className="font-semibold text-ink">Website analytics:</strong> anonymised usage data including pages visited, time on site, referral source, and device type (via Vercel Analytics or Google Analytics 4).</li>
-              <li><strong className="font-semibold text-ink">Cookies:</strong> essential cookies for site functionality and optional analytics cookies. See our <Link href="/cookie-policy" className="link">Cookie Policy</Link> for details.</li>
+              <li><strong className="font-semibold text-ink">Website analytics:</strong> usage data including pages visited, time on site, referral source, and device type (via Google Analytics 4 and Ahrefs Web Analytics). You can switch analytics off at any time using Privacy choices in the website footer.</li>
+              <li><strong className="font-semibold text-ink">Cookies:</strong> optional analytics cookies set by Google Analytics 4, and browser storage that remembers your privacy choice and your conversation with our chat assistant. See our <Link href="/cookie-policy" className="link">Cookie Policy</Link> for details.</li>
             </ul>
           </section>
 
@@ -59,7 +59,7 @@ export default function PrivacyPolicyPage() {
               <li>To schedule and conduct gap analysis consultations.</li>
               <li>To send follow-up communications related to your enquiry (not unsolicited marketing).</li>
               <li>To send occasional compliance insights and service updates, but only where you have separately opted in. That opt-in is a distinct choice from consenting to us responding to your enquiry, and you can withdraw it at any time without affecting the enquiry itself.</li>
-              <li>To improve our website and services based on anonymised analytics.</li>
+              <li>To improve our website and services based on website analytics.</li>
             </ul>
           </section>
 
@@ -82,7 +82,7 @@ export default function PrivacyPolicyPage() {
             <ul className="list-disc pl-6 mt-2 space-y-1">
               <li>Cloud hosting providers (Vercel) for website delivery.</li>
               <li>Email service providers for responding to enquiries.</li>
-              <li>Analytics providers (anonymised data only).</li>
+              <li>Analytics providers (Google Analytics and Ahrefs Web Analytics).</li>
               <li>Professional advisors (legal, accounting) where required by law.</li>
             </ul>
           </section>
