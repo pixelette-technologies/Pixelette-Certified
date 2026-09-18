@@ -2,6 +2,9 @@
 
 Verification of the 18 issues raised in `Full-Crawl-Report-2026-05-19.md` against the live `pixelette-certified` codebase. Status reflects whether the issue **actually exists in the current code**, not whether it was a valid observation at crawl time.
 
+> [!info] Status as of 18 September 2026
+> This table is a snapshot from before `a249d39`. Since then the [[Website-Replacement-Implementation-2026-09-09|Verified Website Replacement]] has closed #7, #8, #14, #15 and #19 (the last partly — `/services` added, case-study URLs dropped with the route). **#6 and #13 remain open**, pending written confirmation of the contracting legal entity. Treat the file:line references below as historical.
+
 | # | Issue | Status | Reason |
 |---|-------|--------|--------|
 | 1 | Address discrepancy (66 Paul Street vs 77 Fulham Palace Road) | **Resolved (site side)** | Manager Companies House lookup against Co. No. 07251823 confirms registered office = `66 Paul Street, London, EC2A 4NA`. [src/lib/constants.ts:10](src/lib/constants.ts#L10) is correct as-is. The proposal-template value `77 Fulham Palace Road` lives outside this repo and needs an external update; no code change. |

@@ -2,6 +2,20 @@
 
 Companion to [Crawl-Report-Issues-Verification.md](Crawl-Report-Issues-Verification.md). For every issue marked **True** or **Partially true** in that document, this file maps the *complete surface area in the codebase* that needs to change — not just one example. Every claim is backed by a verified file:line reference. No assumptions.
 
+> [!warning] Superseded by the Verified Website Replacement (9 September 2026)
+> The implementation plan below was never carried out as written. The 8 September brief imposed a strict evidence rule, and the work in [[Website-Replacement-Implementation-2026-09-09]] overtook every decision here. File:line references below reflect the code **before** `a249d39` and are now stale.
+>
+> | Ref | Decision here | What actually happened |
+> |---|---|---|
+> | Q1 | Filter `ServicesGrid` to routed services | **Done differently.** Homepage rebuilt; three duplicate slug lists consolidated into `getRoutedServices()` |
+> | M1 | Strip case-study figures, keep narrative | **Moot.** Case-studies route withdrawn with 301s; `Testimonials.tsx` deleted. Any future case study must satisfy the evidence type in `caseStudies.ts` |
+> | M2 / M3 | Publish `Pixelette Group Ltd` / `07251823` in footer and privacy policy | **On hold.** Values are in `SITE_CONFIG`, but the brief says the current number must not be reused. Now go-live blocker 2 pending written confirmation of the contracting entity |
+> | M4 | Standardise on "9 active certifications" | **Reversed.** The aggregate was one person's eight credentials plus a paid corporate membership; removed as an unsupported claim. Credentials now publish individually from `credentials.ts`, with FIP, CEH, IRCA and CQI withheld |
+> | Q9 | Add `/services` + 3 case-study URLs to sitemap | **Partly done.** `/services` is in the sitemap; case-study URLs are not, because the route no longer exists |
+> | Q5, Q6, Q8 | Dropped / leave as-is | Unchanged |
+>
+> Do not implement M1 or M4 from this note: the replacement copy they propose is contrary to the brief. M1's suggested "98% pass rate" for `industries.ts` and M4's "including our own ISO 27001 Certified Practice" are both now banned claims that the build gate would reject.
+
 ---
 
 ## Issue 8 — Homepage 404s: 12 service slugs without page routes
@@ -251,4 +265,6 @@ All decisions are logged. No code changes have been made yet — this list is th
 
 ## What's open
 
-Nothing. All issues raised in `Full-Crawl-Report-2026-05-19.md` have been addressed — either with a logged decision pending implementation, or marked as dropped / not actionable codebase-side. Ready for the development plan.
+*Updated 18 September 2026:* only the legal-entity question (M2/M3) survives, tracked as blocker 2 in [[Website-Replacement-Implementation-2026-09-09#Before this can go live]]. Everything else is closed or superseded — see the banner at the top.
+
+*Original text, 3 September 2026:* Nothing. All issues raised in `Full-Crawl-Report-2026-05-19.md` have been addressed — either with a logged decision pending implementation, or marked as dropped / not actionable codebase-side. Ready for the development plan.

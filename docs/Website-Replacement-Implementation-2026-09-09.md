@@ -4,7 +4,7 @@ Implementation of *Pixelette Certified | Verified Website Replacement Copy* (bri
 
 - **Commit:** `a249d39` on `main`, 86 files, +5038 / −2039
 - **Branch:** `compliance/verified-website-replacement` (merged, retained locally)
-- **Status:** implemented and verified. **Not yet deployed.** Two prerequisites outstanding, see [[#Before this can go live]].
+- **Status:** implemented and verified. **Not yet deployed.** Four prerequisites outstanding, see [[#Before this can go live]]. Last reviewed 18 September 2026 — see [[#Status log]].
 
 The brief did two things at once: it repositioned the commercial proposition, and it imposed a strict evidence rule. The second is the reason this was urgent — the site was publishing accreditation and performance claims that no supplied evidence supported, and it was publishing them in places a casual review would not look.
 
@@ -183,7 +183,7 @@ The contact-pipeline checks cover the cases where a mistake is a security bug ra
 ## Before this can go live
 
 **1. Apply migrations `0005` and `0006` to Supabase — before the code deploys.**
-The contact insert is best-effort and only logs on failure. Deploying first produces a *silent* data-loss window: emails sending, nothing recorded, and nobody noticing until someone queries the table.
+The contact insert is best-effort and only logs on failure. Deploying first produces a *silent* data-loss window: emails sending, nothing recorded, and nobody noticing until someone queries the table. See [[#The two migrations]] for what they contain.
 
 **2. Confirm the contracting legal entity and company number.**
 Footer, privacy policy and Organization JSON-LD all read from `SITE_CONFIG` in [constants.ts](src/lib/constants.ts), so this is a single edit once confirmed.
@@ -191,6 +191,25 @@ Footer, privacy policy and Organization JSON-LD all read from `SITE_CONFIG` in [
 **3. Set three environment variables** (documented in `.env.example`). Point preview at a **separate bucket** so preview traffic never lands customer documents in production.
 
 **4. Run the Alice adversarial script against the live endpoint.** Twelve questions designed to elicit each banned claim, two repeated in Arabic since the constraints must survive translation. Archive the transcripts — they are a §16 artefact.
+
+### The two migrations
+
+The contact form was rebuilt to the brief's field set, and the table created in [0003](supabase/migrations/0003_contact_submissions.sql) only had `name, email, company, phone, country, service, message` plus privacy-consent columns. Without these migrations the new answers still reach the team by email but are never recorded.
+
+**[0005_contact_enquiry_fields.sql](supabase/migrations/0005_contact_enquiry_fields.sql)** — columns on `contact_submissions`:
+
+| Group | Columns | Notes |
+|---|---|---|
+| Identity | `first_name`, `last_name` | Legacy `name` still written as `first_name \|\| ' ' \|\| last_name`, so its `not null` holds and existing reporting keeps working |
+| Qualification | `enquiry_reason`, `organisation_size`, `jurisdiction`, `deadline`, `no_fixed_deadline` | CHECK-constrained to the slugs in `src/lib/contact/constants.ts`; a deadline and "no fixed deadline" are mutually exclusive |
+| Marketing consent | `marketing_opt_in`, `marketing_consent_text`, `marketing_consent_timestamp` | Stored **separately** from privacy consent, which is what makes the brief's "kept separate" requirement auditable. Consent text is null when opt-in is false |
+| Attachment | `attachment_bucket`, `_path`, `_filename`, `_mime`, `_size_bytes`, `_sha256` | Metadata only; the file lives in the private bucket |
+
+Plus three partial indexes — the one on `created_at where attachment_path is not null` lets the 24-month attachment purge find rows still owning a file without a full scan. `country` is deprecated in favour of `jurisdiction`, left null on new rows rather than dropped.
+
+**[0006_contact_attachments_bucket.sql](supabase/migrations/0006_contact_attachments_bucket.sql)** — the private `contact-attachments` Storage bucket: `public = false` set explicitly, 4 MiB limit (under Vercel's ~4.5 MB body ceiling), MIME allowlist. **No `storage.objects` policies**, deliberately: RLS is on by default, so zero policies means only the service-role key can read or write. The browser never talks to Storage. Split from 0005 because it writes to the `storage` schema, which needs different privileges — a storage permission failure cannot block the column migration.
+
+**Why migrate first.** Every 0005 column is nullable or defaulted and nothing is renamed or dropped, so the *currently deployed* route still inserts successfully against the migrated schema. The reverse order is not safe: new code against the old schema fails every insert while the emails keep sending.
 
 ---
 
@@ -210,3 +229,13 @@ Footer, privacy policy and Organization JSON-LD all read from `SITE_CONFIG` in [
 
 - [[Crawl-Report-Issues-Verification]] — several issues it raised as *True* are closed by this work: anonymous testimonials (#7), unverified case-study figures (#15), the "9 active certifications" aggregate (#14), and homepage service 404s (#8, via `getRoutedServices()`).
 - Company registration display (#6, #13) remains open, deliberately — see blocker 2 above.
+- [[Crawl-Report-Deep-Research]] — its decisions M1, M4, Q1 and Q9 were overtaken by this work; M2/M3 are on hold behind blocker 2. The note carries a banner recording which.
+
+---
+
+## Status log
+
+| Date | State |
+|---|---|
+| 9 September 2026 | Implemented and verified (`a249d39`), vault record added (`da4f8cc`) |
+| 18 September 2026 | **No change.** No commits since `da4f8cc`. All four go-live prerequisites and all seven management questions remain open. Migrations 0005/0006 present in the repo; not confirmed applied to Supabase. |
