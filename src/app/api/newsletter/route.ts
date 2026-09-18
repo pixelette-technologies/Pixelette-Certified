@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import { getResend } from "@/lib/resend";
 import { EMAIL_COLORS } from "@/lib/constants";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+
 
 export async function POST(request: Request) {
   try {
@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     }
 
     // Notify team of new subscriber
-    await resend.emails.send({
+    await getResend().emails.send({
       from: "Pixelette Certified <noreply@pixelettecertified.com>",
       to: ["partnerships@pixelette.tech"],
       subject: `New newsletter subscriber: ${email}`,
@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     });
 
     // Send welcome email to subscriber
-    await resend.emails.send({
+    await getResend().emails.send({
       from: "Pixelette Certified <noreply@pixelettecertified.com>",
       to: [email],
       subject: "Welcome to Pixelette Certified Insights",

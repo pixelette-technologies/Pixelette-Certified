@@ -1,9 +1,9 @@
 // Notification handlers - admin email alerts for qualified leads
 
-import { Resend } from "resend";
+import { getResend } from "@/lib/resend";
 import Anthropic from "@anthropic-ai/sdk";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+
 
 const FROM_ADDRESS = "Alice <alice@pixelettecertified.com>";
 
@@ -146,7 +146,7 @@ pixelettecertified.com
       subject,
     });
 
-    const response = await resend.emails.send({
+    const response = await getResend().emails.send({
       from: FROM_ADDRESS,
       to: [adminEmail],
       subject,

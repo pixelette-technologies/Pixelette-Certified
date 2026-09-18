@@ -13,13 +13,12 @@ function requireEnv(name: string): string {
   return value;
 }
 
-// Browser client — safe for React components, respects RLS
-export const supabaseBrowser: SupabaseClient = createClient(
-  requireEnv("NEXT_PUBLIC_SUPABASE_URL"),
-  requireEnv("NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY")
-);
-
-// Server client factory — bypasses RLS, API routes only
+// Server client factory — bypasses RLS, API routes only.
+//
+// Clients are created on call, never at module load. An eagerly created
+// client (the unused `supabaseBrowser` that used to live here) throws on
+// import whenever the env vars are absent, which fails `next build` while it
+// collects page data for every API route that imports this file.
 export function getSupabaseServer(): SupabaseClient {
   return createClient(
     requireEnv("NEXT_PUBLIC_SUPABASE_URL"),

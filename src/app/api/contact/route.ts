@@ -1,6 +1,6 @@
 import { createHash, randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import { getResend } from "@/lib/resend";
 import { validateContact, escapeHtml, asBoolean } from "@/lib/contact/validation";
 import {
   CONSENT_STATEMENT,
@@ -35,7 +35,7 @@ import { EMAIL_COLORS } from "@/lib/constants";
 export const runtime = "nodejs";
 export const maxDuration = 30;
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+
 
 const RATE_LIMIT_ENABLED = process.env.CONTACT_RATE_LIMIT_ENABLED !== "false";
 const TURNSTILE_ENABLED = process.env.CONTACT_TURNSTILE_ENABLED === "true";
@@ -436,7 +436,7 @@ export async function POST(request: Request) {
         </div>`
         : "";
 
-    const adminEmail = resend.emails.send({
+    const adminEmail = getResend().emails.send({
       from: "Pixelette Certified <noreply@pixelettecertified.com>",
       to: ["partnerships@pixelette.tech"],
       replyTo: data.email,
@@ -485,7 +485,7 @@ export async function POST(request: Request) {
       `,
     });
 
-    const userEmail = resend.emails.send({
+    const userEmail = getResend().emails.send({
       from: "Pixelette Certified <noreply@pixelettecertified.com>",
       to: [data.email],
       subject: "We've received your enquiry, Pixelette Certified",

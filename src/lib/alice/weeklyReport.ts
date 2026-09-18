@@ -1,9 +1,9 @@
 // Alice weekly report — generates and emails a lead summary every Monday
 
-import { Resend } from "resend";
+import { getResend } from "@/lib/resend";
 import { getSupabaseServer } from "@/lib/alice/supabase";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+
 const FROM_ADDRESS = "Alice <alice@pixelettecertified.com>";
 
 interface WeeklyReportResult {
@@ -158,7 +158,7 @@ Report generated: ${timestamp}
       return { success: false, leadsThisWeek: totalLeads, error: "No recipients configured" };
     }
 
-    const response = await resend.emails.send({
+    const response = await getResend().emails.send({
       from: FROM_ADDRESS,
       to: recipients,
       subject,

@@ -27,9 +27,13 @@ import { verifyTurnstileToken } from "@/lib/alice/turnstile";
 import { getSupabaseServer } from "@/lib/alice/supabase";
 import { generateAIQualityCheck, saveQualityCheck } from "@/lib/alice/qualityCheck";
 
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
+// Created on first request, not at module load: the constructor throws when
+// ANTHROPIC_API_KEY is absent, which would fail `next build` page-data collection.
+let anthropic: Anthropic | null = null;
+function getAnthropic(): Anthropic {
+  anthropic ??= new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+  return anthropic;
+}
 
 const MAX_HISTORY_LENGTH = 20;
 
@@ -183,7 +187,7 @@ export async function POST(request: Request) {
 
     messages.push({ role: "user", content: trimmedMessage });
 
-    const response = await anthropic.messages.create({
+    const response = await getAnthropic().messages.create({
       model: "claude-sonnet-4-6",
       max_tokens: 1024,
       system: ALICE_SYSTEM_PROMPT,
