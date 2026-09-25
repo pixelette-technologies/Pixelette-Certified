@@ -241,4 +241,4 @@ Plus three partial indexes — the one on `created_at where attachment_path is n
 | 9 September 2026 | Implemented and verified (`a249d39`), vault record added (`da4f8cc`) |
 | 18 September 2026 | **No change.** No commits since `da4f8cc`. All four go-live prerequisites and all seven management questions remain open. Migrations 0005/0006 present in the repo; not confirmed applied to Supabase. |
 | 18 September 2026, later | Footer and analytics consent work landed on `main` (`f9274d5`, `d41347d`) — see [[Group-Footer-and-Privacy-Choices-2026-09-18]]. **Prerequisites unchanged:** the legal line still reads the unconfirmed entity, and migrations 0005/0006 are still unconfirmed against Supabase. `npm run build` was broken before that work and is now fixed. |
-| 25 September 2026 | Positioning superseded by the strategic rebuild. See [[Strategic-Rebuild-Implementation-2026-09-25]]. The evidence rules and claims gate carry forward and are extended. |
+| 25 September 2026 | Positioning superseded by the strategic rebuild (`968937c`). See [[Strategic-Rebuild-Implementation-2026-09-25]]. The evidence rules and claims gate carry forward and are extended. |

@@ -2,7 +2,8 @@
 
 Implementation of the *Pixelette Certified website: full strategic rebuild specification* (received 25 September 2026) against the `pixelette-certified` codebase.
 
-- **Status:** implemented, built and verified locally. **Not committed, not deployed.** Go-live prerequisites below, including those carried over from [[Website-Replacement-Implementation-2026-09-09#Before this can go live]].
+- **Commit:** `968937c` on `main`, pushed 25 September 2026
+- **Status:** implemented, verified and pushed. **Deployment not confirmed.** If Vercel auto-deploys `main`, the go-live prerequisites below apply immediately, including those carried over from [[Website-Replacement-Implementation-2026-09-09#Before this can go live]].
 - **Supersedes** the positioning in [[Website-Replacement-Implementation-2026-09-09]] (four pillars, buyer triggers, compliance diagnostic). Its evidence rules and claims gate are kept and extended.
 
 The specification repositions the site as a UK-headquartered cyber security, compliance, assurance and AI governance consultancy focused on the **UK, United States and GCC**, delivered through a specialist practitioner network, with **no public pricing** and strict independence wording.
@@ -84,7 +85,8 @@ Build gotcha: `.next/dev/types` from an old dev session referenced deleted pages
 
 | Date | State |
 |---|---|
-| 25 September 2026 | Implemented and verified locally. Uncommitted, pending review. |
+| 25 September 2026 | Implemented and verified locally. |
+| 25 September 2026, later | Committed and pushed to `main` (`968937c`). The hero H1 terminal full stop was removed on review, per the no-full-stops-in-headings rule. Go-live prerequisites unchanged. |
 
 ## Related
 
