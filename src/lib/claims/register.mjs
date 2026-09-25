@@ -80,6 +80,9 @@ export const APPROVED_CREDENTIALS = [
   "CIPP/US",
   "CCSK",
   "CCZT",
+  // Moved from HOLD to approved by the 25 September 2026 rebuild specification
+  // (§12), which lists FIP among the currently evidenced credentials.
+  "FIP",
 ];
 
 /** @type {ClaimRule[]} */
@@ -194,9 +197,15 @@ export const CLAIM_RULES = [
     id: "crest",
     negationAware: true,
     category: "accreditation claim",
-    // Case-sensitive so it cannot fire on "crestfallen" or "crescent".
-    pattern: /\bCREST\b/,
-    why: "No qualifying corporate or tester evidence was supplied. Penetration testing is HOLD for the first release.",
+    /*
+     * Targets the self-claim, not the token. The 25 September 2026
+     * specification (§18) allows saying that, where a customer requires CREST,
+     * delivery is arranged through an appropriately accredited provider. What
+     * must never appear is "CREST-certified testers" or any first-person claim
+     * to CREST status, because no CREST evidence for Pixelette exists.
+     */
+    pattern: /\bCREST[-\s](?:certified|accredited|approved|registered|member)|\b(?:we|we're|our|Pixelette)\b[^.\n]{0,40}\bCREST\b/,
+    why: "No CREST evidence exists for Pixelette Certified or its testers. CREST may be named only as a requirement a customer might set.",
     runtime: true,
     exempt: [],
   },
@@ -227,16 +236,6 @@ export const CLAIM_RULES = [
     category: "unregistered credential",
     pattern: /\bCEH\b|Certified Ethical Hacker/i,
     why: "CEH does not appear in the brief's verification register at all.",
-    runtime: true,
-    exempt: [],
-  },
-  {
-    id: "fip",
-    negationAware: true,
-    category: "unregistered credential",
-    // \b after FIP correctly fails inside "FIPS", so no false positive there.
-    pattern: /\bFIP\b|Fellow of Information Privacy/i,
-    why: "FIP is marked HOLD. Current IAPP status was not verified. Recheck before publishing.",
     runtime: true,
     exempt: [],
   },
@@ -458,6 +457,87 @@ export const CLAIM_RULES = [
     why: "No universal guarantee of certification or regulatory compliance may be offered. The named 'Pass First Guarantee' is withdrawn.",
     skipComments: true,
     fileFilter: /\.(tsx?|jsx?|mdx?)$/,
+    runtime: true,
+    exempt: [],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // 25 September 2026 rebuild specification (§3, §6, §41).
+  // The site must read as a professional consultancy, with no public pricing
+  // and none of the sales language the specification lists. skipComments is
+  // true for this class: provenance comments legitimately quote the banned
+  // phrases when explaining why something was removed.
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: "price-figure",
+    category: "pricing",
+    pattern: /[£€]\s?\d|\$\s?\d{1,3}(?:,\d{3})+|\$\d+(?:\.\d+)?\s?(?:k|m|bn|million|billion)\b/i,
+    why: "No public pricing or monetary value may appear anywhere on the site (§6).",
+    skipComments: true,
+    runtime: true,
+    exempt: [],
+  },
+  {
+    id: "pricing-language",
+    category: "pricing",
+    pattern: /transparent pricing|fixed[-\s]fee|no hidden fees|hourly rate|monthly retainer|payment plans?|most popular|pricing tiers?/i,
+    why: "Pricing sections, packages and fixed-fee labels are removed (§6). Use ENGAGEMENT_TERMS instead.",
+    skipComments: true,
+    runtime: true,
+    exempt: [],
+  },
+  {
+    id: "pricing-tier-data",
+    category: "pricing",
+    pattern: /name:\s*["'](?:Essentials|Professional|Enterprise|Basic|Standard)["']/,
+    why: "Essentials, Professional and Enterprise style packages are removed (§6, §41).",
+    fileFilter: /\.(tsx?|jsx?|mjs)$/,
+    exempt: [],
+  },
+  {
+    id: "free-offer",
+    category: "sales language",
+    pattern: /\bfree\s+(?:30[-\s]minute\s+)?(?:gap analysis|consultation|diagnostic|assessment|compliance diagnostic|review)/i,
+    why: "No 'free gap analysis' or similar offer (§33). The CTA family is 'Discuss your requirements'.",
+    skipComments: true,
+    runtime: true,
+    exempt: [],
+  },
+  {
+    id: "sales-cliche",
+    negationAware: true,
+    category: "sales language",
+    pattern: /deal[-\s]blocker|unfair advantage|\bwe fix\b|hassle[-\s]free|game[-\s]changer|unlock(?:s|ing)? growth|crush(?:ing)? compliance|\bpainless\b|stop losing deals|certification made easy|pass[-\s]first|we do everything/i,
+    why: "Promotional language the specification removes (§3, §41).",
+    skipComments: true,
+    runtime: true,
+    exempt: [],
+  },
+  {
+    id: "get-certified",
+    negationAware: true,
+    category: "sales language",
+    pattern: /\b(?:get|getting|gets)\s+(?:you\s+)?certified\b|\bwe get you certified\b/i,
+    why: "Pixelette does not certify anyone. Use 'prepare for independent certification' (§13 editorial rule, §36).",
+    skipComments: true,
+    runtime: true,
+    exempt: [],
+  },
+  {
+    id: "global-reach",
+    category: "sales language",
+    pattern: /globally delivered|global delivery|every (?:sector|industry|market)|any market|anywhere in the world/i,
+    why: "The headline markets are the UK, United States and GCC. Do not imply unlimited jurisdictional capability (§2, §11, §41).",
+    skipComments: true,
+    runtime: true,
+    exempt: [],
+  },
+  {
+    id: "ten-weeks",
+    category: "universal timeline",
+    pattern: /\b(?:10|ten)[-\s]weeks?\b/i,
+    why: "The 10-week language is removed throughout (§5, §41).",
+    skipComments: true,
     runtime: true,
     exempt: [],
   },

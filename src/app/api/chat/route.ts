@@ -218,7 +218,7 @@ export async function POST(request: Request) {
       console.error(`[Alice Claims] BLOCKED reply for conversation ${conversation.conversationId}: ${summary}`);
 
       safeReply =
-        "Let me get that confirmed for you rather than guess. The 30-minute compliance diagnostic is the right place for it, and you can book at pixelettecertified.com/contact. Is there anything else I can help with in the meantime?";
+        "Let me get that confirmed for you rather than guess. Our team can answer it properly, and you can reach them at pixelettecertified.com/contact. Is there anything else I can help with in the meantime?";
 
       // Fire and forget: a blocked reply must never delay or fail the response.
       sendComplianceAlert({

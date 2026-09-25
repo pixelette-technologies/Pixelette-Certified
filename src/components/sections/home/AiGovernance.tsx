@@ -1,61 +1,63 @@
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
-import Pill from "@/components/ui/Pill";
-import { ArrowRight } from "@/components/ui/icons";
+import { ArrowRight, Check } from "@/components/ui/icons";
 
 /**
- * AI governance, as the flagship proposition.
+ * AI governance feature (§13).
  *
- * The credential sentence is quoted verbatim from the brief's approved wording
- * and must not be paraphrased. "Our approved delivery network includes a PECB
- * Certified ISO/IEC 42001 Lead Auditor" is precise about three things at once:
- * the credential is individual, it sits in the network rather than in the
- * company, and it is the scheme's own title. Loosening any of those turns a
- * verified fact into a corporate accreditation claim.
- *
- * Note what is absent: no primacy claim, no market-position claim, no
- * superlative of any kind. The credential is the differentiator; it does not need
- * a superlative attached to it.
+ * Presented as governance first and ISO 42001 second. The standard is one
+ * route among several, and the copy says so, because a buyer governed by the
+ * NIST AI RMF or the EU AI Act should not come away thinking certification is
+ * the only answer.
  */
+const capabilities = [
+  "AI governance frameworks",
+  "ISO 42001 readiness",
+  "AI risk and impact assessment",
+  "AI inventories",
+  "Roles and accountability",
+  "Policies and control frameworks",
+  "NIST AI RMF alignment where relevant",
+  "EU AI Act alignment where applicable",
+  "Integration with ISO 27001 and privacy governance",
+];
+
 export default function AiGovernance() {
   return (
     <section className="sec band-dark">
       <div className="wrap" data-reveal="">
-        <div className="flex flex-col justify-between gap-10 lg:flex-row lg:items-end lg:gap-16">
-          <div className="max-w-[62ch]">
-            <Pill tone="dark">ISO/IEC 42001</Pill>
-
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+          <div>
             <SectionHeading
               dark
-              label="Flagship capability"
-              title="Innovate with AI. Prove how you govern it."
-              className="mb-0 mt-6"
+              label="AI governance"
+              title="Govern AI with the same discipline as security and privacy"
+              className="mb-0"
               titleWidth="22ch"
             />
-
-            <div className="mt-6 space-y-4">
-              <p className="body">
-                AI adoption is moving faster than many organisations&rsquo; governance. Customers,
-                boards and procurement teams increasingly want evidence of accountability, risk
-                ownership, data governance, human oversight and responsible use.
-              </p>
-              <p className="body">
-                We help organisations design and implement AI governance controls, assess AI risk
-                and prepare for ISO/IEC 42001 certification through an independent certification
-                route.
-              </p>
-              <p className="body">
-                Our approved delivery network includes a PECB Certified ISO/IEC 42001 Lead Auditor
-                and professionals holding recognised AI-governance and privacy credentials.
-              </p>
+            <p className="body mt-6">
+              Customers, boards and regulators increasingly want to understand how AI is used, who
+              is accountable for it and how its risks are managed. We help organisations put that
+              governance in place, using ISO/IEC 42001 where certification is sought and other
+              recognised frameworks where they fit the requirement better.
+            </p>
+            <div className="mt-8">
+              <Button href="/services/iso-42001" variant="panel" iconRight={<ArrowRight size={16} />}>
+                Explore AI governance
+              </Button>
             </div>
           </div>
 
-          <div className="shrink-0">
-            <Button href="/services/iso-42001" variant="panel" size="lg" iconRight={<ArrowRight size={16} />}>
-              Book an AI Governance Readiness Review
-            </Button>
-          </div>
+          <ul className="list-none grid content-start gap-3.5 sm:grid-cols-2">
+            {capabilities.map((item) => (
+              <li key={item} className="flex gap-3">
+                <span className="mt-1 shrink-0 text-footer-accent">
+                  <Check size={16} />
+                </span>
+                <span className="small">{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

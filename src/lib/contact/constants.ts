@@ -1,93 +1,68 @@
 // Shared, client-safe constants for the contact form.
 //
-// This file is the single source of truth for the service list, the consent
-// wording, and the privacy-policy version consent is captured against. It is
-// imported by BOTH the form (to render) and the API route (to validate and to
-// store the consent record), so the wording a visitor sees and the wording we
-// record can never drift apart.
+// This file is the single source of truth for the form's option lists, the
+// consent wording, and the privacy-policy version consent is captured against.
+// It is imported by BOTH the form (to render) and the API route (to validate
+// and store), so what a visitor sees and what we record cannot drift apart.
+//
+// Every option carries a slug and a label, and they do different jobs:
+//
+//   value  the stable identifier. Stored in a CHECK-constrained column and used
+//          in `/contact?reason=<value>` deep links. Changing a value needs a
+//          migration and breaks live links, so treat it as an API.
+//   label  what the visitor reads, and what is emailed to the team.
+//
+// The three lists follow §33 of the 25 September 2026 rebuild specification.
 
-/**
- * "What brought you here?" - the enquiry vocabulary.
- *
- * This replaces the old "Service interest" list, which asked visitors to
- * self-diagnose against an acronym before they had spoken to anyone. The brief
- * is explicit that people arrive with a trigger, not a roadmap: a customer
- * request, a tender condition, a questionnaire, an investor question or a
- * regulatory deadline. These are those triggers.
- *
- * Each option carries BOTH a slug and a label, and they do different jobs:
- *
- *   value  the stable identifier. Used in `/contact?reason=<value>` deep links
- *          from the homepage trigger cards, and later as the stored enquiry
- *          reason. Changing a value breaks live links, so treat it as an API.
- *   label  what the visitor reads, and what is stored and emailed today so the
- *          record stays human-readable without a lookup.
- *
- * Penetration Testing is deliberately absent: it is withdrawn from the first
- * release, and an option nobody can be sold is a dead end in a form.
- */
+/** "What are you working towards?" Stored in contact_submissions.enquiry_reason. */
 export const ENQUIRY_REASONS = [
-  { value: "tender-requirement", label: "A customer or tender has asked for certification" },
-  { value: "security-questionnaire", label: "We have been sent a security questionnaire" },
-  { value: "iso-certification", label: "We need ISO 27001 or ISO 42001" },
-  { value: "soc-2", label: "A US customer is asking for SOC 2" },
-  { value: "ai-governance", label: "Customers are questioning how we govern AI" },
-  { value: "vciso", label: "We need a CISO, but not a full-time hire" },
-  { value: "privacy-vdpo", label: "We need privacy leadership or an external DPO" },
-  { value: "maintain-certification", label: "We are already certified and need to stay ready" },
-  { value: "other", label: "Something else" },
+  { value: "iso-27001", label: "ISO 27001" },
+  { value: "ai-governance", label: "AI governance / ISO 42001" },
+  { value: "soc-2", label: "SOC 2" },
+  { value: "cyber-assurance", label: "Cyber assurance or testing" },
+  { value: "privacy", label: "Privacy or data governance" },
+  { value: "vciso-grc", label: "vCISO / GRC" },
+  { value: "cyber-essentials", label: "Cyber Essentials" },
+  { value: "business-continuity", label: "Business continuity / ISO 22301" },
+  { value: "gcc-regulatory", label: "GCC regulatory compliance" },
+  { value: "other", label: "Other" },
+  { value: "not-sure", label: "Not sure" },
 ] as const;
 
 export type EnquiryReasonValue = (typeof ENQUIRY_REASONS)[number]["value"];
 
-/**
- * The labels, which are what the server validates membership against and what
- * is stored. Derived rather than duplicated: a label edited in one place cannot
- * fall out of step with the other.
- */
-export const SERVICE_OPTIONS = ENQUIRY_REASONS.map((r) => r.label);
-
-/**
- * Build a link into the contact form with a reason preselected.
- *
- * Every caller uses this rather than hand-writing a query string, so a value
- * that does not exist is a TypeScript error at the call site instead of a
- * silent no-op for the visitor. The anchor matters: without it a deep-linked
- * visitor lands on the hero and has to scroll to find the field we just filled
- * in for them.
- */
-export function contactHref(reason?: EnquiryReasonValue): string {
-  return reason ? `/contact?reason=${reason}#enquiry-form` : "/contact";
-}
-
-/**
- * Organisation size bands, per the brief's enquiry form.
- *
- * Values are stable slugs (matched by a CHECK constraint in migration 0005);
- * labels are what the visitor reads. Changing a value needs a migration,
- * changing a label does not.
- */
-export const ORGANISATION_SIZES = [
-  { value: "1-25", label: "1 to 25" },
-  { value: "26-100", label: "26 to 100" },
-  { value: "101-500", label: "101 to 500" },
-  { value: "501-2000", label: "501 to 2,000" },
-  { value: "2000-plus", label: "More than 2,000" },
-] as const;
-
-export type OrganisationSizeValue = (typeof ORGANISATION_SIZES)[number]["value"];
-
-/** Jurisdiction or market. Same slug/label contract as above. */
+/** "Where does the requirement apply?" Stored in contact_submissions.jurisdiction. */
 export const JURISDICTIONS = [
-  { value: "uk", label: "UK" },
-  { value: "eu", label: "EU" },
-  { value: "us", label: "US" },
-  { value: "gcc", label: "GCC" },
-  { value: "multi-region", label: "Multi-region" },
+  { value: "uk", label: "United Kingdom" },
+  { value: "us", label: "United States" },
+  { value: "saudi-arabia", label: "Saudi Arabia" },
+  { value: "uae", label: "UAE" },
+  { value: "qatar", label: "Qatar" },
   { value: "other", label: "Other" },
 ] as const;
 
 export type JurisdictionValue = (typeof JURISDICTIONS)[number]["value"];
+
+/** "What has prompted the requirement?" Stored in contact_submissions.requirement_trigger. */
+export const REQUIREMENT_TRIGGERS = [
+  { value: "customer-procurement", label: "Customer or procurement requirement" },
+  { value: "regulatory-obligation", label: "Regulatory obligation" },
+  { value: "certification-audit", label: "Certification or audit" },
+  { value: "investor-due-diligence", label: "Investor or due-diligence requirement" },
+  { value: "internal-governance", label: "Internal governance improvement" },
+  { value: "other", label: "Other" },
+] as const;
+
+export type RequirementTriggerValue = (typeof REQUIREMENT_TRIGGERS)[number]["value"];
+
+/**
+ * Build a link into the contact form with "What are you working towards?"
+ * preselected. Typed, so a value that does not exist is a build error at the
+ * call site rather than a silent no-op for the visitor.
+ */
+export function contactHref(reason?: EnquiryReasonValue): string {
+  return reason ? `/contact?reason=${reason}#enquiry-form` : "/contact";
+}
 
 // Per-field length constraints, enforced on both client (maxLength) and server.
 export const CONTACT_LIMITS = {
@@ -102,6 +77,7 @@ export const CONTACT_LIMITS = {
   message: { min: 10, max: 5000 },
   company: { max: 200 },
   phone: { max: 50 },
+  role: { max: 120 },
   country: { max: 100 },
 } as const;
 
@@ -128,9 +104,9 @@ export const UPLOAD_LIMITS = {
   allowedExtensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".csv", ".txt", ".png", ".jpg", ".jpeg"],
 } as const;
 
-// Effective date of /privacy-policy ("Last updated: 1 April 2026"). Stored with
+// Effective date of /privacy-policy ("Last updated: 25 September 2026"). Stored with
 // every submission so we can prove which policy version the person consented to.
-export const PRIVACY_POLICY_VERSION = "2026-04-01";
+export const PRIVACY_POLICY_VERSION = "2026-09-25";
 
 // The exact statement the visitor agrees to by ticking the consent box. Stored
 // verbatim with each submission (UK GDPR Art. 7(1) — ability to demonstrate

@@ -67,4 +67,4 @@ export const caseStudies: CaseStudy[] = [];
  * exactly how we treat their confidentiality too.
  */
 export const EVIDENCE_STATEMENT =
-  "We do not publish client case studies or testimonials unless the client is named, has given written permission, and every figure in the study can be substantiated. Client work is confidential, and we would rather show you how the work runs than show you proof we cannot stand behind. Ask during the diagnostic and we can look at arranging a reference under NDA, subject to the client agreeing.";
+  "We publish client case studies only where the client is named, has given written permission and every statement can be substantiated. Client work is confidential. Where a reference is needed, we can discuss arranging one under a confidentiality agreement, subject to the client agreeing.";

@@ -32,11 +32,11 @@ export default function Newsletter() {
       <div className="wrap" data-reveal="">
         <div className="mx-auto max-w-[640px] text-center">
           <h2 className="h2 mx-auto max-w-[22ch]">
-            Compliance intelligence for enterprise-ready businesses
+            Insights by email
           </h2>
           <p className="body mx-auto mt-5">
-            Get monthly insights on ISO certification, cybersecurity regulations, AI governance,
-            and global compliance trends, written by our consultants, not a marketing team.
+            Occasional analysis of cyber security, compliance and AI governance requirements across
+            the UK, United States and GCC.
           </p>
 
           {status === "success" ? (
@@ -44,7 +44,7 @@ export default function Newsletter() {
               <span className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-full border border-brand text-brand">
                 <Check size={16} />
               </span>
-              <p className="h4">You&apos;re subscribed!</p>
+              <p className="h4">You are subscribed</p>
               <p className="small mt-1">Check your inbox for a confirmation email.</p>
             </div>
           ) : (
@@ -87,7 +87,7 @@ export default function Newsletter() {
           )}
 
           <p className="src mt-5">
-            No spam. Unsubscribe anytime. Read our{" "}
+            You can unsubscribe at any time. Read our{" "}
             <a href="/privacy-policy" className="link underline">Privacy Policy</a>.
           </p>
         </div>

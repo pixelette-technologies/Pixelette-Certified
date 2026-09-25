@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 
 type CardVariant =
   | "default" // .card
-  | "feature" // .card + 3px brand top border — highlighted pricing tier
+  | "feature" // .card + 3px brand top border — highlighted card
   | "flat" // .tile geometry: 4px radius, tighter padding, single hairline shadow
   | "band" // card sitting on the alternate band
   | "dark"; // .panel

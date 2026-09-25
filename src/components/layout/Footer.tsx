@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { SITE_CONFIG } from "@/lib/constants";
+import { SITE_CONFIG, NAV_ITEMS } from "@/lib/constants";
 import PrivacyChoices from "@/components/privacy/PrivacyChoices";
 
 /*
@@ -26,31 +26,32 @@ import PrivacyChoices from "@/components/privacy/PrivacyChoices";
  * Technologies footer, so every sister site describes every company alike.
  */
 
+/*
+ * Footer navigation mirrors the primary navigation (§7, §39): the Services
+ * column is the eight core services plus the hub, and the Company column
+ * carries the remaining top-level sections and the legal pages.
+ */
 const serviceLinks = [
-  { label: "ISO 27001 Readiness", href: "/services/iso-27001" },
-  { label: "ISO 42001 & AI Governance", href: "/services/iso-42001" },
-  { label: "SOC 2 Readiness", href: "/services/soc-2" },
-  { label: "vCISO & GRC Advisory", href: "/services/vciso" },
-  { label: "Privacy & vDPO", href: "/services/vdpo" },
-  { label: "Managed Compliance", href: "/services/managed-compliance" },
-  { label: "Additional Frameworks", href: "/services/additional-frameworks" },
-  { label: "All services", href: "/services" },
+  ...NAV_ITEMS.find((item) => item.label === "Services")!.children!,
+  { label: "View all services", href: "/services" },
 ];
 
 const companyLinks = [
+  { label: "Markets", href: "/markets" },
+  { label: "Who we help", href: "/who-we-help" },
+  { label: "Experience", href: "/experience" },
+  { label: "Insights", href: "/blog" },
   { label: "About", href: "/about" },
-  { label: "Who We Help", href: "/who-we-help" },
-  { label: "Resources", href: "/resources" },
   { label: "Contact", href: "/contact" },
-  { label: "Privacy Policy", href: "/privacy-policy" },
-  { label: "Cookies & analytics", href: "/cookie-policy" },
+  { label: "Privacy policy", href: "/privacy-policy" },
+  { label: "Cookies and analytics", href: "/cookie-policy" },
 ];
 
 const group = [
   {
     name: "Pixelette Certified",
     current: true,
-    what: "Compliance readiness, cyber assurance, privacy, AI governance and ongoing compliance support.",
+    what: "Cyber security, compliance, assurance and AI governance for organisations in the UK, United States and GCC.",
   },
   {
     name: "Pixelette Technologies",
@@ -86,18 +87,18 @@ export default function Footer() {
       <div className="wrap">
         <div className="site-footer__grid">
           <div className="site-footer__brand">
-            <Link href="/" aria-label="Pixelette Certified Home" className="site-footer__logo">
+            <Link href="/" aria-label="Pixelette Certified home" className="site-footer__logo">
               <Image
                 src="/logos/logo-white-text.svg"
-                alt="Pixelette Certified, ISO 27001 and Compliance Consultancy UK"
+                alt="Pixelette Certified"
                 width={200}
                 height={40}
                 className="h-9 w-auto"
               />
             </Link>
             <p>
-              Compliance, cyber assurance and AI governance. Implementation and readiness, with independent
-              assessment coordinated where required.
+              UK-headquartered cyber security, compliance, assurance and AI governance consultancy, focused on
+              the UK, United States and GCC.
             </p>
             <div className="site-footer__social">
               <a href={SITE_CONFIG.social.linkedin} target="_blank" rel="noopener noreferrer" className={socialClass} aria-label="LinkedIn">

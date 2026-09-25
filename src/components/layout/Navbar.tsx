@@ -6,24 +6,20 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { NAV_ITEMS } from "@/lib/constants";
+import { NAV_ITEMS, PRIMARY_CTA } from "@/lib/constants";
 import Button from "@/components/ui/Button";
 import { Menu, Close, ChevronDown, ArrowRight } from "@/components/ui/icons";
 
 /**
- * Which nav item should show as active for a given path.
- *
- * Longest match wins. "AI Governance" deep-links to /services/iso-42001,
- * which is inside Services' own path, so a plain startsWith test would
- * highlight both items at once. Comparing match length picks the more
- * specific one.
+ * Which nav item should show as active for a given path. Longest match wins,
+ * so a more specific prefix is never overridden by a shorter one.
  */
 function activeNavLabel(pathname: string): string | null {
   let best: { label: string; length: number } | null = null;
 
   for (const item of NAV_ITEMS) {
     const target = item.match ?? item.href;
-    const isMatch = target === "/" ? pathname === "/" : pathname.startsWith(target);
+    const isMatch = pathname === target || pathname.startsWith(`${target}/`);
     if (!isMatch) continue;
     if (!best || target.length > best.length) best = { label: item.label, length: target.length };
   }
@@ -31,22 +27,28 @@ function activeNavLabel(pathname: string): string | null {
   return best?.label ?? null;
 }
 
+/**
+ * Seven items and a button do not fit comfortably at 1024px, so the full
+ * desktop bar starts at the xl breakpoint and the drawer covers everything
+ * below it. Dropdowns are compact panels anchored to their trigger rather than
+ * a full-width mega-menu (§7).
+ */
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const [mobileSection, setMobileSection] = useState<string | null>(null);
   const pathname = usePathname();
   const activeLabel = activeNavLabel(pathname);
   const reduce = useReducedMotion();
 
-  // Close both menus on navigation. Reading pathname during render rather than
+  // Close every menu on navigation. Reading pathname during render rather than
   // calling setState inside an effect avoids a cascading re-render.
   const [lastPath, setLastPath] = useState(pathname);
   if (pathname !== lastPath) {
     setLastPath(pathname);
     setMobileOpen(false);
-    setServicesOpen(false);
-    setMobileServicesOpen(false);
+    setOpenMenu(null);
+    setMobileSection(null);
   }
 
   // Lock body scroll while the mobile drawer is open.
@@ -59,15 +61,24 @@ export default function Navbar() {
     };
   }, [mobileOpen]);
 
+  // Escape closes an open dropdown.
+  useEffect(() => {
+    if (!openMenu) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpenMenu(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [openMenu]);
+
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-page">
       <nav className="wrap" aria-label="Main navigation">
         <div className="flex h-[var(--header-h)] items-center justify-between gap-6">
-          {/* Logo */}
-          <Link href="/" className="flex shrink-0 items-center" aria-label="Pixelette Certified Home">
+          <Link href="/" className="flex shrink-0 items-center" aria-label="Pixelette Certified home">
             <Image
               src="/logos/logo-green-text.svg"
-              alt="Pixelette Certified, ISO 27001 and Compliance Consultancy UK"
+              alt="Pixelette Certified"
               width={200}
               height={40}
               priority
@@ -76,72 +87,74 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden items-center gap-7 lg:flex">
+          <div className="hidden items-center gap-6 xl:flex">
             {NAV_ITEMS.map((item) =>
               item.children ? (
                 <div
                   key={item.label}
-                  onMouseEnter={() => setServicesOpen(true)}
-                  onMouseLeave={() => setServicesOpen(false)}
+                  className="relative"
+                  onMouseEnter={() => setOpenMenu(item.label)}
+                  onMouseLeave={() => setOpenMenu(null)}
                 >
                   <button
                     className={cn(
                       "inline-flex min-h-[44px] items-center gap-1.5 text-[15px] transition-colors",
-                      activeLabel === item.label
-                        ? "font-medium text-ink"
-                        : "text-muted hover:text-ink"
+                      activeLabel === item.label ? "font-medium text-ink" : "text-muted hover:text-ink"
                     )}
-                    aria-expanded={servicesOpen}
+                    aria-expanded={openMenu === item.label}
                     aria-haspopup="true"
-                    onClick={() => setServicesOpen((v) => !v)}
+                    onClick={() => setOpenMenu((v) => (v === item.label ? null : item.label))}
                   >
                     {item.label}
                     <ChevronDown
                       size={14}
-                      className={cn("transition-transform duration-200", servicesOpen && "rotate-180")}
+                      className={cn("transition-transform duration-200", openMenu === item.label && "rotate-180")}
                     />
                   </button>
 
                   <AnimatePresence>
-                    {servicesOpen && (
+                    {openMenu === item.label && (
                       <motion.div
                         initial={{ opacity: 0, y: -4 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -4 }}
-                        transition={reduce ? { duration: 0 } : { duration: 0.18 }}
-                        className="fixed inset-x-0 top-[var(--header-h)] z-50 border-b border-line bg-page shadow-card"
+                        transition={reduce ? { duration: 0 } : { duration: 0.16 }}
+                        className="absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2"
                       >
-                        <div className="wrap py-6">
-                          <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
+                        <div
+                          className={cn(
+                            "rounded-card border border-line bg-page p-3 shadow-card",
+                            item.children.length > 4 ? "w-[540px]" : "w-[260px]"
+                          )}
+                        >
+                          <ul
+                            className={cn(
+                              "grid list-none gap-0.5",
+                              item.children.length > 4 && "grid-cols-2"
+                            )}
+                          >
                             {item.children.map((child) => (
-                              <Link
-                                key={child.href}
-                                href={child.href}
-                                className={cn(
-                                  "rounded-[4px] px-3 py-2.5 transition-colors",
-                                  pathname === child.href
-                                    ? "bg-band"
-                                    : "hover:bg-band"
-                                )}
-                              >
-                                <div
+                              <li key={child.href}>
+                                <Link
+                                  href={child.href}
                                   className={cn(
-                                    "text-[15px] font-medium leading-tight",
-                                    pathname === child.href ? "text-brand" : "text-ink"
+                                    "block rounded-[4px] px-3 py-2.5 text-[14.5px] leading-snug transition-colors",
+                                    pathname === child.href
+                                      ? "bg-band font-medium text-brand"
+                                      : "text-ink hover:bg-band"
                                   )}
                                 >
                                   {child.label}
-                                </div>
-                                <div className="small mt-1 text-[13px]">{child.description}</div>
-                              </Link>
+                                </Link>
+                              </li>
                             ))}
-                          </div>
-                          <div className="mt-4 flex justify-end border-t border-line pt-4">
+                          </ul>
+                          <div className="mt-2 border-t border-line px-3 pt-3">
                             <Link
                               href={item.href}
-                              className="flink text-[15px] font-medium text-brand hover:text-brand-hover"
+                              className="flink text-[14.5px] font-medium text-brand hover:text-brand-hover"
                             >
-                              View All Services <ArrowRight size={15} />
+                              {item.allLabel} <ArrowRight size={14} />
                             </Link>
                           </div>
                         </div>
@@ -155,10 +168,9 @@ export default function Navbar() {
                   href={item.href}
                   className={cn(
                     "inline-flex min-h-[44px] items-center text-[15px] transition-colors",
-                    activeLabel === item.label
-                      ? "font-medium text-ink"
-                      : "text-muted hover:text-ink"
+                    activeLabel === item.label ? "font-medium text-ink" : "text-muted hover:text-ink"
                   )}
+                  aria-current={activeLabel === item.label ? "page" : undefined}
                 >
                   {item.label}
                 </Link>
@@ -166,15 +178,14 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* CTA + mobile toggle */}
           <div className="flex shrink-0 items-center gap-3">
-            <Button href="/contact" size="sm" className="hidden sm:inline-flex">
-              Book a Compliance Diagnostic
+            <Button href={PRIMARY_CTA.href} size="sm" className="hidden sm:inline-flex">
+              {PRIMARY_CTA.label}
             </Button>
 
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-[4px] text-ink transition-colors hover:bg-band lg:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-[4px] text-ink transition-colors hover:bg-band xl:hidden"
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
             >
@@ -191,28 +202,28 @@ export default function Navbar() {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={reduce ? { duration: 0 } : { duration: 0.24 }}
-              className="overflow-hidden border-t border-line lg:hidden"
+              className="max-h-[calc(100vh-var(--header-h))] overflow-y-auto border-t border-line xl:hidden"
             >
               <div className="space-y-1 py-4">
                 {NAV_ITEMS.map((item) =>
                   item.children ? (
                     <div key={item.label}>
                       <button
-                        onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                        onClick={() => setMobileSection((v) => (v === item.label ? null : item.label))}
                         className="flex min-h-[44px] w-full items-center justify-between px-2 text-[15px] font-medium text-ink"
-                        aria-expanded={mobileServicesOpen}
+                        aria-expanded={mobileSection === item.label}
                       >
                         {item.label}
                         <ChevronDown
                           size={15}
                           className={cn(
                             "text-muted transition-transform duration-200",
-                            mobileServicesOpen && "rotate-180"
+                            mobileSection === item.label && "rotate-180"
                           )}
                         />
                       </button>
                       <AnimatePresence>
-                        {mobileServicesOpen && (
+                        {mobileSection === item.label && (
                           <motion.div
                             initial={{ height: 0 }}
                             animate={{ height: "auto" }}
@@ -230,6 +241,12 @@ export default function Navbar() {
                                   {child.label}
                                 </Link>
                               ))}
+                              <Link
+                                href={item.href}
+                                className="flex min-h-[44px] items-center px-2 text-[15px] font-medium text-brand"
+                              >
+                                {item.allLabel}
+                              </Link>
                             </div>
                           </motion.div>
                         )}
@@ -249,8 +266,8 @@ export default function Navbar() {
                   )
                 )}
                 <div className="px-2 pt-3">
-                  <Button href="/contact" fullWidth>
-                    Book a Compliance Diagnostic
+                  <Button href={PRIMARY_CTA.href} fullWidth>
+                    {PRIMARY_CTA.label}
                   </Button>
                 </div>
               </div>

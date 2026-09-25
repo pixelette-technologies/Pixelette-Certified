@@ -7,8 +7,8 @@ import {
   MARKETING_STATEMENT,
   PRIVACY_POLICY_VERSION,
   UPLOAD_LIMITS,
-  ORGANISATION_SIZES,
   JURISDICTIONS,
+  REQUIREMENT_TRIGGERS,
 } from "@/lib/contact/constants";
 import {
   sanitiseFilename,
@@ -56,7 +56,7 @@ const UPLOADS_ENABLED = process.env.NEXT_PUBLIC_CONTACT_UPLOADS_ENABLED !== "fal
 /** Leaves headroom over UPLOAD_LIMITS.maxBytes for the text fields and boundaries. */
 const MAX_REQUEST_BYTES = UPLOAD_LIMITS.maxBytes + 512 * 1024;
 
-const SIZE_LABELS = new Map(ORGANISATION_SIZES.map((o) => [o.value as string, o.label as string]));
+const TRIGGER_LABELS = new Map(REQUIREMENT_TRIGGERS.map((o) => [o.value as string, o.label as string]));
 const JURISDICTION_LABELS = new Map(JURISDICTIONS.map((o) => [o.value as string, o.label as string]));
 
 function maskIp(ip: string): string {
@@ -167,8 +167,12 @@ export async function POST(request: Request) {
           firstName: body.firstName ?? (spaceAt > 0 ? legacyName.slice(0, spaceAt) : legacyName),
           lastName: body.lastName ?? (spaceAt > 0 ? legacyName.slice(spaceAt + 1) : "-"),
           privacyConsent: body.privacyConsent ?? body.gdprConsent,
-          organisationSize: body.organisationSize ?? "1-25",
-          jurisdiction: body.jurisdiction ?? "other",
+          // Older form versions sent a free-text service label and no
+          // jurisdiction or trigger. Map them to the neutral options rather than
+          // rejecting an enquiry the visitor could not have filled in differently.
+          service: "not-sure",
+          jurisdiction: "other",
+          trigger: "other",
         };
       } catch {
         return NextResponse.json({ error: "Invalid request." }, { status: 400 });
@@ -328,19 +332,17 @@ export async function POST(request: Request) {
         // Legacy columns, still populated so the not-null constraints hold and
         // existing reporting keeps working. See migration 0005.
         name: fullName,
-        message: data.requirement,
+        message: data.message,
         service: data.reasonLabel,
 
         first_name: data.firstName,
         last_name: data.lastName,
         email: data.email,
         company: data.company,
-        phone: data.phone || null,
+        job_role: data.role || null,
         enquiry_reason: data.reasonValue,
-        organisation_size: data.organisationSize,
         jurisdiction: data.jurisdiction,
-        deadline: data.deadline || null,
-        no_fixed_deadline: data.noFixedDeadline,
+        requirement_trigger: data.trigger,
 
         consent_given: true,
         consent_text: CONSENT_STATEMENT,
@@ -381,23 +383,11 @@ export async function POST(request: Request) {
       fullName: escapeHtml(fullName),
       email: escapeHtml(data.email),
       company: escapeHtml(data.company),
-      phone: escapeHtml(data.phone || "Not provided"),
+      role: escapeHtml(data.role || "Not provided"),
       reason: escapeHtml(data.reasonLabel),
-      requirement: escapeHtml(data.requirement),
-      size: escapeHtml(SIZE_LABELS.get(data.organisationSize) || data.organisationSize),
+      message: escapeHtml(data.message),
       jurisdiction: escapeHtml(JURISDICTION_LABELS.get(data.jurisdiction) || data.jurisdiction),
-      deadline: escapeHtml(
-        data.deadline
-          ? new Date(`${data.deadline}T00:00:00Z`).toLocaleDateString("en-GB", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-              timeZone: "UTC",
-            })
-          : data.noFixedDeadline
-            ? "No fixed deadline"
-            : "Not provided"
-      ),
+      trigger: escapeHtml(TRIGGER_LABELS.get(data.trigger) || data.trigger),
       attachmentName: attachment ? escapeHtml(attachment.filename) : "",
       attachmentUrl: attachment?.signedUrl ? escapeHtml(attachment.signedUrl) : "",
       attachmentMeta: attachment ? escapeHtml(`${formatBytes(attachment.size)} · ${attachment.mime}`) : "",
@@ -445,7 +435,7 @@ export async function POST(request: Request) {
         <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: ${EMAIL_COLORS.ground}; border-radius: 12px; overflow: hidden;">
           <div style="background: linear-gradient(135deg, ${EMAIL_COLORS.ground} 0%, ${EMAIL_COLORS.mid} 50%, ${EMAIL_COLORS.line} 100%); padding: 32px 32px 24px; text-align: center; border-bottom: 2px solid ${EMAIL_COLORS.accent};">
             <img src="https://pixelettecertified.com/logos/logo-white-text.svg" alt="Pixelette Certified" style="height: 40px; margin-bottom: 16px;" />
-            <h1 style="color: ${EMAIL_COLORS.accent}; margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.5px;">New Contact Form Submission</h1>
+            <h1 style="color: ${EMAIL_COLORS.accent}; margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.5px;">New enquiry</h1>
             <p style="color: rgba(255,255,255,0.5); margin: 8px 0 0; font-size: 13px;">Received on ${new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })} at ${new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })}</p>
           </div>
 
@@ -454,16 +444,15 @@ export async function POST(request: Request) {
               <tr>${label("Name")}${value(`<strong>${safe.fullName}</strong>`)}</tr>
               <tr style="background: rgba(255,255,255,0.03);">${label("Work email")}<td style="padding: 12px 16px;"><a href="mailto:${safe.email}" style="color: ${EMAIL_COLORS.accent}; text-decoration: none; font-size: 15px;">${safe.email}</a></td></tr>
               <tr>${label("Company")}${value(safe.company)}</tr>
-              <tr style="background: rgba(255,255,255,0.03);">${label("Organisation size")}${value(safe.size)}</tr>
-              <tr>${label("Jurisdiction")}${value(safe.jurisdiction)}</tr>
-              <tr style="background: rgba(255,255,255,0.03);">${label("What brought them here")}<td style="padding: 12px 16px; color: ${EMAIL_COLORS.accent}; font-size: 15px; font-weight: 700;">${safe.reason}</td></tr>
-              <tr>${label("Deadline")}${value(safe.deadline)}</tr>
-              <tr style="background: rgba(255,255,255,0.03);">${label("Phone")}${value(safe.phone)}</tr>
+              <tr style="background: rgba(255,255,255,0.03);">${label("Role")}${value(safe.role)}</tr>
+              <tr>${label("Working towards")}<td style="padding: 12px 16px; color: ${EMAIL_COLORS.accent}; font-size: 15px; font-weight: 700;">${safe.reason}</td></tr>
+              <tr style="background: rgba(255,255,255,0.03);">${label("Where it applies")}${value(safe.jurisdiction)}</tr>
+              <tr>${label("Prompted by")}${value(safe.trigger)}</tr>
             </table>
 
             <div style="margin-top: 24px; padding: 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(111,227,203,0.2); border-radius: 8px;">
-              <p style="color: rgba(255,255,255,0.5); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 8px;">What they have been asked to prove</p>
-              <p style="color: ${EMAIL_COLORS.white}; line-height: 1.7; white-space: pre-wrap; margin: 0; font-size: 14px;">${safe.requirement}</p>
+              <p style="color: rgba(255,255,255,0.5); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 8px;">Message</p>
+              <p style="color: ${EMAIL_COLORS.white}; line-height: 1.7; white-space: pre-wrap; margin: 0; font-size: 14px;">${safe.message}</p>
             </div>
 
             ${attachmentBlock}
@@ -478,7 +467,7 @@ export async function POST(request: Request) {
           </div>
 
           <div style="background: ${EMAIL_COLORS.deep}; padding: 20px 32px; text-align: center; border-top: 1px solid rgba(111,227,203,0.15);">
-            <p style="color: rgba(255,255,255,0.3); font-size: 12px; margin: 0;">Pixelette Certified, Compliance. Governance. Cyber Trust.</p>
+            <p style="color: rgba(255,255,255,0.3); font-size: 12px; margin: 0;">Pixelette Certified. Cyber security, compliance, assurance and AI governance.</p>
             <p style="color: rgba(255,255,255,0.2); font-size: 11px; margin: 6px 0 0;">pixelettecertified.com</p>
           </div>
         </div>
@@ -488,7 +477,7 @@ export async function POST(request: Request) {
     const userEmail = getResend().emails.send({
       from: "Pixelette Certified <noreply@pixelettecertified.com>",
       to: [data.email],
-      subject: "We've received your enquiry, Pixelette Certified",
+      subject: "Your enquiry to Pixelette Certified",
       html: `
         <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: ${EMAIL_COLORS.ground}; border-radius: 12px; overflow: hidden;">
           <div style="background: linear-gradient(135deg, ${EMAIL_COLORS.ground} 0%, ${EMAIL_COLORS.mid} 50%, ${EMAIL_COLORS.line} 100%); padding: 32px; text-align: center; border-bottom: 2px solid ${EMAIL_COLORS.accent};">
@@ -498,29 +487,22 @@ export async function POST(request: Request) {
           </div>
 
           <div style="padding: 32px;">
-            <p style="color: rgba(255,255,255,0.85); line-height: 1.7; font-size: 15px; margin: 0 0 16px;">We have received your enquiry about <strong style="color: ${EMAIL_COLORS.accent};">${safe.reason}</strong> and a member of our team will respond within one working day.</p>
+            <p style="color: rgba(255,255,255,0.85); line-height: 1.7; font-size: 15px; margin: 0 0 16px;">We have received your enquiry about <strong style="color: ${EMAIL_COLORS.accent};">${safe.reason}</strong>. A member of our team will review it and aim to respond within one working day.</p>
             ${attachment ? `<p style="color: rgba(255,255,255,0.85); line-height: 1.7; font-size: 15px; margin: 0 0 16px;">We have received your document, ${safe.attachmentName}.</p>` : ""}
             <p style="color: rgba(255,255,255,0.85); line-height: 1.7; font-size: 15px; margin: 0 0 20px;">In the meantime, you may find these resources helpful:</p>
 
             <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
               <tr>
                 <td style="padding: 12px 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
-                  <a href="https://pixelettecertified.com/services" style="color: ${EMAIL_COLORS.accent}; text-decoration: none; font-weight: 600; font-size: 14px;">Our Services →</a>
-                  <p style="color: rgba(255,255,255,0.4); font-size: 12px; margin: 4px 0 0;">ISO 27001 and ISO 42001 readiness, SOC 2 readiness, vCISO, privacy and vDPO</p>
+                  <a href="https://pixelettecertified.com/services" style="color: ${EMAIL_COLORS.accent}; text-decoration: none; font-weight: 600; font-size: 14px;">Our services →</a>
+                  <p style="color: rgba(255,255,255,0.4); font-size: 12px; margin: 4px 0 0;">Cyber security, compliance, assurance and AI governance</p>
                 </td>
               </tr>
               <tr><td style="height: 8px;"></td></tr>
               <tr>
                 <td style="padding: 12px 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
-                  <a href="https://pixelettecertified.com/pricing" style="color: ${EMAIL_COLORS.accent}; text-decoration: none; font-weight: 600; font-size: 14px;">Pricing →</a>
-                  <p style="color: rgba(255,255,255,0.4); font-size: 12px; margin: 4px 0 0;">How engagements are scoped and priced</p>
-                </td>
-              </tr>
-              <tr><td style="height: 8px;"></td></tr>
-              <tr>
-                <td style="padding: 12px 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
-                  <a href="https://pixelettecertified.com/resources" style="color: ${EMAIL_COLORS.accent}; text-decoration: none; font-weight: 600; font-size: 14px;">Resources →</a>
-                  <p style="color: rgba(255,255,255,0.4); font-size: 12px; margin: 4px 0 0;">Practitioner guides on certification, assurance and AI governance</p>
+                  <a href="https://pixelettecertified.com/blog" style="color: ${EMAIL_COLORS.accent}; text-decoration: none; font-weight: 600; font-size: 14px;">Insights →</a>
+                  <p style="color: rgba(255,255,255,0.4); font-size: 12px; margin: 4px 0 0;">Analysis of requirements in the UK, United States and GCC</p>
                 </td>
               </tr>
             </table>
@@ -528,7 +510,7 @@ export async function POST(request: Request) {
           </div>
 
           <div style="background: ${EMAIL_COLORS.deep}; padding: 20px 32px; text-align: center; border-top: 1px solid rgba(111,227,203,0.15);">
-            <p style="color: rgba(255,255,255,0.3); font-size: 12px; margin: 0;">Pixelette Certified, Compliance. Governance. Cyber Trust.</p>
+            <p style="color: rgba(255,255,255,0.3); font-size: 12px; margin: 0;">Pixelette Certified. Cyber security, compliance, assurance and AI governance.</p>
             <p style="color: rgba(255,255,255,0.2); font-size: 11px; margin: 6px 0 0;">pixelettecertified.com</p>
           </div>
         </div>

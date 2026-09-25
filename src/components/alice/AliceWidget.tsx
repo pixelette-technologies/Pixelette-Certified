@@ -56,7 +56,7 @@ export default function AliceWidget() {
                 rounded-full bg-brand p-3 shadow-lg transition-colors duration-200
                 hover:bg-brand-hover"
               aria-label="Open chat with Alice"
-              title="Chat with Alice about certifications"
+              title="Chat with Alice about your requirements"
             >
               <img
                 src="/logos/favicon.svg"
@@ -98,7 +98,7 @@ export default function AliceWidget() {
                 </div>
                 <div>
                   <div className="text-sm font-semibold text-footer-heading">Alice</div>
-                  <div className="mono text-[11px] tracking-[0.06em] text-footer-link">AI Compliance Advisor</div>
+                  <div className="mono text-[11px] tracking-[0.06em] text-footer-link">AI advisor</div>
                 </div>
               </div>
               <button

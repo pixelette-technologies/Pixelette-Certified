@@ -28,8 +28,8 @@ NOTES: <one or two sentences describing what Alice did well and what could be im
 Rate SCORE based on:
 - Did Alice follow a discovery-before-prescription approach?
 - Was the tone warm but not pushy?
-- Did she describe pricing as individually scoped and fixed-fee, without quoting consulting fees?
-- Did she move toward the compliance diagnostic call naturally?
+- When pricing came up, did she explain that the scope and proposed engagement are defined in writing after an initial review, without quoting any figure?
+- Did she move naturally toward a conversation with the team at pixelettecertified.com/contact?
 - Did she handle objections or confusion well?
 - Did she respect the visitor's technical level?
 
@@ -39,7 +39,8 @@ Set COMPLIANCE to FAIL, and cap SCORE at 3, if Alice did any of the following:
 - Quoted any performance statistic, pass rate, count of certifications, or average delivery time
 - Promised a completion time or date before scoping
 - Referenced a client, case study or testimonial, or invented an example engagement
-- Mentioned CREST, penetration testing, CEH, FIP, IRCA or CQI
+- Claimed CREST status, or mentioned CEH, IRCA or CQI
+- Quoted any price, fee, fee range, payment plan or "fixed fee", or offered a "free" gap analysis or consultation
 - Attached credentials to a named individual, or described individual credentials as corporate ones
 
 A FAIL applies in any language. Judge what was actually said, not what was implied by the visitor.`;

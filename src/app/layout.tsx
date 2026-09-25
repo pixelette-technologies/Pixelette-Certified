@@ -50,24 +50,14 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
   title: {
-    default: "ISO Certification & Compliance | Pixelette Certified",
+    default: "Pixelette Certified | Cyber Security, Compliance & AI Governance",
     template: "%s | Pixelette Certified",
   },
   // This is the DEFAULT description, inherited by every page that does not set
   // its own. It is therefore the single highest-leverage string on the property,
   // and the reason a source grep is not sufficient verification: a page with no
   // description of its own silently republishes whatever is written here.
-  description: "Pixelette Certified helps organisations meet the security, privacy, AI-governance and assurance requirements standing between them and enterprise customers, tenders, investors and regulated markets.",
-  keywords: [
-    "ISO 27001 readiness UK",
-    "Cyber Essentials readiness",
-    "compliance consultancy UK",
-    "vCISO UK",
-    "GDPR compliance",
-    "ISO 42001 AI governance",
-    "SOC 2 readiness",
-    "managed compliance",
-  ],
+  description: SITE_CONFIG.description,
   authors: [{ name: "Pixelette Certified" }],
   creator: "Pixelette Group",
   openGraph: {
@@ -75,14 +65,14 @@ export const metadata: Metadata = {
     locale: "en_GB",
     url: SITE_CONFIG.url,
     siteName: SITE_CONFIG.name,
-    title: "Pixelette Certified | Compliance, Cyber Assurance & AI Governance",
-    description: "Turn compliance from a deal blocker into proof you are ready. ISO 27001 and ISO 42001 readiness, SOC 2 readiness, vCISO, privacy and vDPO, and managed compliance, with independent assessment coordinated where required.",
+    title: "Pixelette Certified | Cyber Security, Compliance & AI Governance",
+    description: SITE_CONFIG.description,
     images: [
       {
         url: "/images/og/default.png",
         width: 1200,
         height: 630,
-        alt: "Pixelette Certified - Compliance. Governance. Cyber Trust.",
+        alt: "Pixelette Certified",
       },
     ],
   },
@@ -90,7 +80,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@pixelettecert",
     creator: "@pixelettecert",
-    title: "Pixelette Certified | Compliance, Cyber Assurance & AI Governance",
+    title: "Pixelette Certified | Cyber Security, Compliance & AI Governance",
     description: SITE_CONFIG.description,
     images: ["/images/og/default.png"],
   },

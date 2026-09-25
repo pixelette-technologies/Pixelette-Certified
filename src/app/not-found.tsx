@@ -13,13 +13,13 @@ export default function NotFound() {
 
           <p className="body mt-6">
             The page you are looking for does not exist or has been moved.
-            Let us get you back on track.
+            The pages below are a good place to start.
           </p>
 
           <div className="mt-9 flex flex-wrap gap-3.5">
             <Button href="/">Back to home</Button>
             <Button href="/services" variant="secondary">
-              View services
+              Explore our services
             </Button>
           </div>
 

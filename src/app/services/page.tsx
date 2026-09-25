@@ -1,111 +1,123 @@
 import type { Metadata } from "next";
-import { services } from "@/data/services";
+import Link from "next/link";
+import { getCoreServices, specialistCapabilities, ENGAGEMENT_TERMS } from "@/data/services";
 import JsonLd from "@/components/seo/JsonLd";
-import ServicesOverviewContent from "./ServicesOverviewContent";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import SectionHeading from "@/components/ui/SectionHeading";
+import Button from "@/components/ui/Button";
+import CTASection from "@/components/sections/CTASection";
+import { ArrowRight } from "@/components/ui/icons";
+import { SITE_CONFIG } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Our Services | ISO & Compliance",
+  title: "Services",
   description:
-    "ISO 27001, ISO 42001, ISO 9001, ISO 22301, ISO 14001, Cyber Essentials, GDPR, vCISO, vDPO and penetration testing. Global compliance for every industry.",
-  keywords: [
-    "ISO certification services UK",
-    "cybersecurity services",
-    "compliance consultancy",
-    "ISO 27001",
-    "Cyber Essentials",
-    "vCISO",
-    "GDPR compliance",
-  ],
+    "ISO 27001, AI governance and ISO 42001, SOC 2 readiness, cyber assurance and testing, privacy, vCISO, business continuity and GCC regulatory compliance.",
   openGraph: {
-    title: "Our Services | Pixelette Certified",
+    title: "Services | Pixelette Certified",
     description:
-      "ISO certification, cybersecurity, and compliance services for UK technology companies.",
-    url: "https://pixelettecertified.com/services",
+      "Cyber security, compliance, assurance and AI governance services for organisations in the UK, United States and GCC.",
+    url: `${SITE_CONFIG.url}/services`,
   },
-  alternates: {
-    canonical: "https://pixelettecertified.com/services",
-  },
+  alternates: { canonical: `${SITE_CONFIG.url}/services` },
 };
 
-const categories = [
-  {
-    key: "iso" as const,
-    label: "ISO Certification",
-    description: "International standards that open doors to enterprise clients and government contracts.",
-  },
-  {
-    key: "cyber" as const,
-    label: "Cybersecurity & Testing",
-    description: "UK government-backed certifications, vulnerability assessments, and penetration testing.",
-  },
-  {
-    key: "advisory" as const,
-    label: "Advisory Services",
-    description: "Senior security and privacy leadership on a flexible retainer.",
-  },
-  {
-    key: "privacy" as const,
-    label: "Privacy & Data Protection",
-    description: "Turn your data obligations into a competitive advantage.",
-  },
-  {
-    key: "grc" as const,
-    label: "GRC & Regulatory Frameworks",
-    description: "SOC 2, SAMA CSF, NCA ECC/CCC, QCB/NIA, sector-specific and regional regulatory compliance.",
-  },
-  {
-    key: "architecture" as const,
-    label: "Security Architecture",
-    description: "Zero Trust, Active Directory hardening, and cloud security architecture design.",
-  },
-  {
-    key: "bcdr" as const,
-    label: "Business Continuity & Disaster Recovery",
-    description: "BIA, BRA, and DR planning to ensure your organisation can withstand disruption.",
-  },
-  {
-    key: "ai-governance" as const,
-    label: "AI Governance & Managed Advisory",
-    description: "AI risk assessment aligned to NIST AI RMF and the EU AI Act, plus continuous GRC advisory subscriptions with white-label options.",
-  },
-];
-
-// Withdrawn services are excluded everywhere they could be rendered or indexed.
-// Marking them "retired" in the data only helps if every consumer filters.
-const publishedServices = services.filter((s) => s.status !== "retired");
-
-const groupedServices = categories
-  .map((cat) => ({
-    ...cat,
-    services: publishedServices
-      .filter((s) => s.category === cat.key)
-      .map(({ icon, ...rest }) => rest),
-  }))
-  .filter((cat) => cat.services.length > 0);
-
+/*
+ * The services hub (§14). Eight core services first, then the specialist
+ * capabilities that sit behind them. Nothing here is presented as a product with
+ * a price or a duration, and ISO 9001 and ISO 14001 are no longer promoted.
+ */
 export default function ServicesPage() {
+  const core = getCoreServices();
+
   return (
     <>
       <JsonLd
         data={{
           "@context": "https://schema.org",
           "@type": "ItemList",
-          name: "Pixelette Certified Services",
-          description: "ISO certification, cybersecurity, and compliance services.",
-          url: "https://pixelettecertified.com/services",
-          itemListElement: publishedServices.map((service, i) => ({
+          name: "Pixelette Certified services",
+          url: `${SITE_CONFIG.url}/services`,
+          itemListElement: core.map((service, i) => ({
             "@type": "ListItem",
             position: i + 1,
-            item: {
-              "@type": "Service",
-              name: service.title,
-              description: service.description,
-              url: `https://pixelettecertified.com/services/${service.slug}`,
-            },
+            url: `${SITE_CONFIG.url}/services/${service.slug}`,
+            name: service.title,
           })),
         }}
       />
-      <ServicesOverviewContent groupedServices={groupedServices} />
+
+      <section className="wash-left">
+        <div className="wrap py-16 lg:py-24">
+          <Breadcrumbs items={[{ name: "Services" }]} />
+          <div className="mt-8 max-w-[56ch]">
+            <h1 className="h1p">Services</h1>
+            <p className="lead mt-6">
+              We help organisations meet cyber security, compliance and AI governance requirements
+              across the UK, United States and GCC, from the first assessment through to independent
+              certification, attestation or assessment.
+            </p>
+            <div className="mt-9">
+              <Button href="/contact" size="lg">
+                Discuss your requirements
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="sec band-alt">
+        <div className="wrap" data-reveal="">
+          <SectionHeading label="Core services" title="Compliance and assurance built around the requirement" />
+          <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
+            {core.map((service) => {
+              const Icon = service.icon;
+              return (
+                <Link
+                  key={service.slug}
+                  href={`/services/${service.slug}`}
+                  className="card flex h-full flex-col p-6 transition-colors duration-150 hover:border-line-strong"
+                >
+                  <Icon className="h-5 w-5 text-brand" strokeWidth={1.6} aria-hidden="true" />
+                  <h2 className="h4 mt-4">{service.navLabel}</h2>
+                  <p className="small mt-2 flex-1">{service.summary}</p>
+                  <span className="flink mt-4 text-sm font-medium text-brand">
+                    Explore the service <ArrowRight size={14} />
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="sec" id="additional-capabilities">
+        <div className="wrap" data-reveal="">
+          <SectionHeading
+            label="Specialist capabilities"
+            title="Additional specialist capabilities"
+            description="Offered where appropriately qualified practitioners are available for the scope, sector and jurisdiction. Each sits within one of the core services above."
+          />
+          <div className="border-t border-line">
+            {specialistCapabilities.map((cap) => (
+              <Link
+                key={cap.title}
+                href={cap.href}
+                className="grid gap-2 border-b border-line py-5 transition-colors duration-150 hover:bg-band md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)_auto] md:items-baseline md:gap-8 md:px-2"
+              >
+                <span className="text-[16px] font-semibold leading-snug text-ink">{cap.title}</span>
+                <span className="small">{cap.text}</span>
+                <span className="shrink-0 text-brand" aria-hidden="true">
+                  <ArrowRight size={15} />
+                </span>
+              </Link>
+            ))}
+          </div>
+          <p className="small mt-8 max-w-[72ch]">{ENGAGEMENT_TERMS}</p>
+        </div>
+      </section>
+
+      <CTASection />
     </>
   );
 }
