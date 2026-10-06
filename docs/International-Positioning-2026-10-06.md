@@ -24,7 +24,7 @@ The approved headline is unchanged: "Build the assurance your customers, regulat
 | Insights | Existing categories kept. No International category was added |
 | Alice | The same geographic position, including the instruction not to describe delivery as subcontracting |
 
-The markets index map keeps the three coastlines already drawn. They are labelled as routes, not offices. On the homepage, International shows the wider drawing at an even tone.
+The markets index no longer uses a coastline map. See [[Markets-Header-2026-10-06]]. On the homepage, International shows the wider drawing at an even tone.
 
 The contact change reuses the existing `eu` jurisdiction slug and the existing `country` column for the free-text place. No new migration.
 
@@ -38,3 +38,5 @@ The go-live list in the 25 September note. The hidden group footer band. The com
 - [[Compression-Pass-2026-10-06]]
 - [[Insights-Page-2026-10-06]]
 - [[Website-Replacement-Implementation-2026-09-09]]
+- [[Markets-Header-2026-10-06]]
+- [[Hero-Marks-2026-10-06]]

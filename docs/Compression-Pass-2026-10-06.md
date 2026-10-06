@@ -56,3 +56,5 @@ Recorded so a later pass does not treat these as done:
 - [[Website-Replacement-Implementation-2026-09-09]]
 - [[Insights-Page-2026-10-06]]
 - [[International-Positioning-2026-10-06]]
+- [[Markets-Header-2026-10-06]]
+- [[Hero-Marks-2026-10-06]]

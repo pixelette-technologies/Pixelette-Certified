@@ -40,3 +40,5 @@ Reviewed and left. The visible footer is already one description, link columns, 
 - [[Compression-Pass-2026-10-06]]
 - [[Website-Replacement-Implementation-2026-09-09]]
 - [[International-Positioning-2026-10-06]]
+- [[Markets-Header-2026-10-06]]
+- [[Hero-Marks-2026-10-06]]
