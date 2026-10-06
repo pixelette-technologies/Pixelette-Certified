@@ -1,42 +1,41 @@
 import Button from "@/components/ui/Button";
+import AssuranceSystem from "@/components/visuals/AssuranceSystem";
 import { PRIMARY_CTA } from "@/lib/constants";
 
 /**
- * Homepage hero (§4).
- *
- * The H1 is the brand promise and must be retained exactly as written. The
- * trust line underneath is deliberately restrained: headquarters and markets,
- * stated once, with no statistic and no "global" claim.
+ * Homepage hero. The H1 is the approved brand promise and is not rewritten.
+ * The diagram is the memorable element; the copy stays to two sentences.
  */
 export default function HomeHero() {
   return (
     <section className="wash">
-      <div className="wrap py-20 text-center lg:py-28">
-        <p className="mono text-xs uppercase tracking-[0.08em] text-brand">
-          Cyber security, compliance &amp; AI governance
-        </p>
+      <div className="wrap grid items-center gap-12 py-16 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-10 lg:py-24">
+        <div>
+          <p className="mono text-xs uppercase tracking-[0.08em] text-brand">
+            Cyber security, compliance and AI governance
+          </p>
 
-        <h1 className="h1 mx-auto mt-6 max-w-[22ch]">
-          Build the assurance your customers, regulators and partners expect
-        </h1>
+          <h1 className="h1 mt-6 max-w-[16ch]">
+            Build the assurance your customers, regulators and partners expect
+          </h1>
 
-        <p className="lead mx-auto mt-7 max-w-[62ch]">
-          Pixelette Certified helps organisations meet cyber security, compliance and AI governance
-          requirements across the UK, United States and GCC. We assess what is required, address the
-          gaps, implement appropriate controls and prepare you for independent certification,
-          attestation or assessment.
-        </p>
+          <p className="lead mt-7 max-w-[48ch]">
+            Pixelette Certified helps organisations meet cyber security, compliance and AI governance
+            requirements across the UK, United States and GCC. We assess the requirement, address the
+            gaps and prepare you for independent assurance.
+          </p>
 
-        <div className="mt-9 flex flex-wrap justify-center gap-3.5">
-          <Button href={PRIMARY_CTA.href}>{PRIMARY_CTA.label}</Button>
-          <Button href="/services" variant="secondary">
-            Explore our services
-          </Button>
+          <div className="mt-9 flex flex-wrap gap-3.5">
+            <Button href={PRIMARY_CTA.href}>{PRIMARY_CTA.label}</Button>
+            <Button href="#services" variant="secondary">
+              Explore our services
+            </Button>
+          </div>
+
+          <p className="small mt-10">UK headquartered. Focused on the UK, United States and GCC.</p>
         </div>
 
-        <p className="small mx-auto mt-10 border-t border-line pt-8">
-          UK headquartered. Focused on the UK, United States and GCC.
-        </p>
+        <AssuranceSystem />
       </div>
     </section>
   );

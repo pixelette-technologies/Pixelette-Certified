@@ -45,16 +45,16 @@ export default function MarketsPage() {
 
       <section className="sec band-alt">
         <div className="wrap" data-reveal="">
-          <div className="grid gap-3.5 md:grid-cols-3">
+          <div className="border-t border-line">
             {markets.map((market) => (
               <Link
                 key={market.slug}
                 href={marketHref(market)}
-                className="card flex h-full flex-col transition-colors duration-150 hover:border-line-strong"
+                className="grid gap-2 border-b border-line py-6 transition-colors duration-150 hover:bg-page md:grid-cols-[14rem_minmax(0,1fr)_auto] md:items-baseline md:gap-8"
               >
                 <h2 className="h3">{market.name}</h2>
-                <p className="small mt-3 flex-1">{market.cardLine}</p>
-                <span className="flink mt-5 text-sm font-medium text-brand">
+                <p className="small">{market.cardLine}</p>
+                <span className="flink text-sm font-medium text-brand">
                   Explore the market <ArrowRight size={14} />
                 </span>
               </Link>

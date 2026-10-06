@@ -32,7 +32,7 @@ Office: 66 Paul Street, London, EC2A 4NA. Contact: info@pixelettecertified.com.
 
 - [Services](https://pixelettecertified.com/services)
 - [Who we help](https://pixelettecertified.com/who-we-help)
-- [Experience](https://pixelettecertified.com/experience): Practitioner experience, clearly labelled as such.
+- [Expertise](https://pixelettecertified.com/expertise): Practitioner credentials and practitioner experience, clearly labelled as such.
 - [Insights](https://pixelettecertified.com/blog): Analysis with references to primary sources.
 - [About](https://pixelettecertified.com/about)
 - [Contact](https://pixelettecertified.com/contact)

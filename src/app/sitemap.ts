@@ -6,7 +6,7 @@ import { SITE_CONFIG } from "@/lib/constants";
 
 // Update when site structure or content materially changes, so lastmod stays
 // honest rather than stamping the request time on every fetch.
-const SITE_LAST_MODIFIED = new Date("2026-09-25");
+const SITE_LAST_MODIFIED = new Date("2026-10-06");
 
 /*
  * Every list below is derived from the data that drives the routes, so a page
@@ -35,7 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/markets", 0.7),
     ...markets.map((m) => page(`/markets/${m.path}`, 0.8)),
     page("/who-we-help", 0.6),
-    page("/experience", 0.6),
+    page("/expertise", 0.6),
     page("/about", 0.6),
     page("/contact", 0.7),
     page("/blog", 0.7, "weekly"),

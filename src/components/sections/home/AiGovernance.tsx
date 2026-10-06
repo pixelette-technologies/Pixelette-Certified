@@ -1,63 +1,47 @@
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
-import { ArrowRight, Check } from "@/components/ui/icons";
+import GovernedAi from "@/components/visuals/GovernedAi";
+import { ArrowRight } from "@/components/ui/icons";
 
 /**
- * AI governance feature (§13).
- *
- * Presented as governance first and ISO 42001 second. The standard is one
- * route among several, and the copy says so, because a buyer governed by the
- * NIST AI RMF or the EU AI Act should not come away thinking certification is
- * the only answer.
+ * The one homepage feature. Four concepts, not a capability checklist.
+ * The visual is decorative; the words are in the list.
  */
-const capabilities = [
-  "AI governance frameworks",
-  "ISO 42001 readiness",
-  "AI risk and impact assessment",
-  "AI inventories",
-  "Roles and accountability",
-  "Policies and control frameworks",
-  "NIST AI RMF alignment where relevant",
-  "EU AI Act alignment where applicable",
-  "Integration with ISO 27001 and privacy governance",
-];
+
+const CONCEPTS = ["Governance", "Risk and impact", "Accountability", "Assurance"];
 
 export default function AiGovernance() {
   return (
     <section className="sec band-dark">
       <div className="wrap" data-reveal="">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-16">
           <div>
             <SectionHeading
               dark
               label="AI governance"
               title="Govern AI with the same discipline as security and privacy"
               className="mb-0"
-              titleWidth="22ch"
+              titleWidth="18ch"
             />
-            <p className="body mt-6">
-              Customers, boards and regulators increasingly want to understand how AI is used, who
-              is accountable for it and how its risks are managed. We help organisations put that
-              governance in place, using ISO/IEC 42001 where certification is sought and other
-              recognised frameworks where they fit the requirement better.
+            <p className="body mt-6 max-w-[52ch]">
+              Build clear accountability, risk controls and evidence around the AI your organisation
+              develops or uses, applying ISO 42001, NIST AI RMF and relevant regulation where
+              appropriate.
             </p>
+            <ul className="mt-8 grid list-none grid-cols-2 gap-x-8 gap-y-4">
+              {CONCEPTS.map((concept) => (
+                <li key={concept} className="border-t border-panel-line pt-3 text-[15px] font-medium text-footer-heading">
+                  {concept}
+                </li>
+              ))}
+            </ul>
             <div className="mt-8">
               <Button href="/services/iso-42001" variant="panel" iconRight={<ArrowRight size={16} />}>
                 Explore AI governance
               </Button>
             </div>
           </div>
-
-          <ul className="list-none grid content-start gap-3.5 sm:grid-cols-2">
-            {capabilities.map((item) => (
-              <li key={item} className="flex gap-3">
-                <span className="mt-1 shrink-0 text-footer-accent">
-                  <Check size={16} />
-                </span>
-                <span className="small">{item}</span>
-              </li>
-            ))}
-          </ul>
+          <GovernedAi />
         </div>
       </div>
     </section>

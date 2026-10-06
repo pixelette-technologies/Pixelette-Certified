@@ -69,24 +69,20 @@ export default function ServicesPage() {
       <section className="sec band-alt">
         <div className="wrap" data-reveal="">
           <SectionHeading label="Core services" title="Compliance and assurance built around the requirement" />
-          <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
-            {core.map((service) => {
-              const Icon = service.icon;
-              return (
-                <Link
-                  key={service.slug}
-                  href={`/services/${service.slug}`}
-                  className="card flex h-full flex-col p-6 transition-colors duration-150 hover:border-line-strong"
-                >
-                  <Icon className="h-5 w-5 text-brand" strokeWidth={1.6} aria-hidden="true" />
-                  <h2 className="h4 mt-4">{service.navLabel}</h2>
-                  <p className="small mt-2 flex-1">{service.summary}</p>
-                  <span className="flink mt-4 text-sm font-medium text-brand">
-                    Explore the service <ArrowRight size={14} />
-                  </span>
-                </Link>
-              );
-            })}
+          <div className="border-t border-line">
+            {core.map((service) => (
+              <Link
+                key={service.slug}
+                href={`/services/${service.slug}`}
+                className="grid gap-2 border-b border-line py-5 transition-colors duration-150 hover:bg-band md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.4fr)_auto] md:items-baseline md:gap-8 md:px-2"
+              >
+                <h2 className="text-[16px] font-semibold leading-snug text-ink">{service.navLabel}</h2>
+                <p className="small">{service.summary}</p>
+                <span className="shrink-0 text-brand" aria-hidden="true">
+                  <ArrowRight size={15} />
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

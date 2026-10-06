@@ -18,11 +18,11 @@ interface CTASectionProps {
  */
 export default function CTASection({
   headline = "Discuss your requirements",
-  description = "Tell us what you need to achieve and where the requirement applies. Following an initial review, we define the scope, delivery approach and proposed engagement in writing before work begins.",
+  description = "Tell us what you need to achieve and where the requirement applies. We will establish the appropriate route and expertise for the engagement.",
   primaryCta = PRIMARY_CTA.label,
   primaryHref = PRIMARY_CTA.href,
-  secondaryCta = "Explore our services",
-  secondaryHref = "/services",
+  secondaryCta,
+  secondaryHref,
 }: CTASectionProps) {
   return (
     <section className="sec band-closing">
@@ -35,9 +35,11 @@ export default function CTASection({
 
           <div className="flex shrink-0 flex-wrap gap-3.5">
             <Button href={primaryHref}>{primaryCta}</Button>
-            <Button href={secondaryHref} variant="secondary">
-              {secondaryCta}
-            </Button>
+            {secondaryCta && secondaryHref && (
+              <Button href={secondaryHref} variant="secondary">
+                {secondaryCta}
+              </Button>
+            )}
           </div>
         </div>
       </div>

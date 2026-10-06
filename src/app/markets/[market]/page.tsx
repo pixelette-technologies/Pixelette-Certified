@@ -8,7 +8,7 @@ import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
 import CTASection from "@/components/sections/CTASection";
-import { ArrowRight, Check } from "@/components/ui/icons";
+import { ArrowRight } from "@/components/ui/icons";
 import { SITE_CONFIG, PRIMARY_CTA } from "@/lib/constants";
 
 export const dynamicParams = false;
@@ -88,15 +88,12 @@ export default async function MarketPage({
               ))}
             </div>
             {market.audience && (
-              <div className="card self-start">
+              <div className="self-start border-t border-line pt-5">
                 <h2 className="h4">{market.audience.heading}</h2>
-                <ul className="mt-4 list-none space-y-2.5">
+                <ul className="mt-4 list-disc space-y-1.5 pl-5">
                   {market.audience.items.map((item) => (
-                    <li key={item} className="flex gap-3">
-                      <span className="mt-1 shrink-0 text-brand">
-                        <Check size={15} />
-                      </span>
-                      <span className="small">{item}</span>
+                    <li key={item} className="small">
+                      {item}
                     </li>
                   ))}
                 </ul>
@@ -109,17 +106,17 @@ export default async function MarketPage({
       <section className="sec">
         <div className="wrap" data-reveal="">
           <SectionHeading label="Services" title={`Core services in ${placeName}`} />
-          <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="border-t border-line">
             {serviceEntries.map(({ note, service }) => (
               <Link
                 key={service.slug}
                 href={`/services/${service.slug}`}
-                className="card flex h-full flex-col p-6 transition-colors duration-150 hover:border-line-strong"
+                className="grid gap-2 border-b border-line py-5 transition-colors duration-150 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)_auto] md:items-baseline md:gap-8"
               >
-                <h3 className="h4">{service.navLabel}</h3>
-                <p className="small mt-2 flex-1">{note}</p>
-                <span className="flink mt-4 text-sm font-medium text-brand">
-                  Explore the service <ArrowRight size={14} />
+                <h3 className="text-[16px] font-semibold text-ink">{service.navLabel}</h3>
+                <p className="small">{note}</p>
+                <span className="text-brand" aria-hidden="true">
+                  <ArrowRight size={15} />
                 </span>
               </Link>
             ))}

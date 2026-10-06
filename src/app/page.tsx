@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import HomeHero from "@/components/sections/home/HomeHero";
-import WorkingTowards from "@/components/sections/home/WorkingTowards";
-import CoreServices from "@/components/sections/home/CoreServices";
-import HowItWorks from "@/components/sections/home/HowItWorks";
-import DeliveryModel from "@/components/sections/home/DeliveryModel";
-import Markets from "@/components/sections/home/Markets";
+import HomeServices from "@/components/sections/home/HomeServices";
+import FromRequirement from "@/components/sections/home/FromRequirement";
+import HomeMarkets from "@/components/sections/home/HomeMarkets";
 import AiGovernance from "@/components/sections/home/AiGovernance";
-import Credentials from "@/components/sections/home/Credentials";
+import ExpertiseStrip from "@/components/sections/home/ExpertiseStrip";
 import CTASection from "@/components/sections/CTASection";
 import JsonLd from "@/components/seo/JsonLd";
 import { SITE_CONFIG } from "@/lib/constants";
@@ -24,11 +22,9 @@ export const metadata: Metadata = {
 };
 
 /**
- * The homepage, per §9 to §13 of the 25 September 2026 rebuild specification.
- *
- * It contains no copy of its own: every string lives in its section component
- * or under src/data, so there is one place to look for any sentence. Eight
- * sections and a closing call to action, kept deliberately short (§42).
+ * Six sections, then the footer: hero, services, pathway, markets, AI
+ * governance, expertise and the closing invitation. Detail lives on the
+ * service, market and expertise pages.
  */
 export default function HomePage() {
   return (
@@ -46,13 +42,11 @@ export default function HomePage() {
       />
 
       <HomeHero />
-      <WorkingTowards />
-      <CoreServices />
-      <HowItWorks />
-      <DeliveryModel />
-      <Markets />
+      <HomeServices />
+      <FromRequirement />
+      <HomeMarkets />
       <AiGovernance />
-      <Credentials />
+      <ExpertiseStrip />
       <CTASection />
     </>
   );

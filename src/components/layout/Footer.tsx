@@ -39,7 +39,7 @@ const serviceLinks = [
 const companyLinks = [
   { label: "Markets", href: "/markets" },
   { label: "Who we help", href: "/who-we-help" },
-  { label: "Experience", href: "/experience" },
+  { label: "Expertise", href: "/expertise" },
   { label: "Insights", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },

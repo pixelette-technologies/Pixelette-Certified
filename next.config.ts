@@ -51,9 +51,10 @@ const nextConfig: NextConfig = {
     // Resources merged into Insights, which keeps the /blog address (§32).
     { source: "/resources", destination: "/blog", permanent: true },
 
-    // Case studies renamed Experience (§30).
-    { source: "/case-studies", destination: "/experience", permanent: true },
-    { source: "/case-studies/:slug", destination: "/experience", permanent: true },
+    // Case studies became Experience, then Expertise. Old addresses still resolve.
+    { source: "/case-studies", destination: "/expertise", permanent: true },
+    { source: "/case-studies/:slug", destination: "/expertise", permanent: true },
+    { source: "/experience", destination: "/expertise", permanent: true },
 
     /*
      * Renamed, not withdrawn. The page's own eyebrow already read "Who We Help",

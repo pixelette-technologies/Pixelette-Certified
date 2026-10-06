@@ -83,8 +83,8 @@ interface NavItem {
 }
 
 /**
- * Primary navigation, per the 25 September 2026 rebuild specification (§7, §8,
- * §25). Deliberately small: two short dropdowns and five links, no mega-menu.
+ * Primary navigation. Services and Markets keep short dropdowns. Who we help
+ * stays as a page but is not in this bar. Contact is the header button only.
  *
  * Cyber Essentials is absent from the Services menu on purpose. It sits inside
  * the UK and cyber assurance architecture (§8) and is reached from there.
@@ -120,11 +120,9 @@ export const NAV_ITEMS: NavItem[] = [
       { label: "GCC", href: "/markets/gcc" },
     ],
   },
-  { label: "Who we help", href: "/who-we-help" },
-  { label: "Experience", href: "/experience" },
+  { label: "Expertise", href: "/expertise" },
   { label: "Insights", href: "/blog", match: "/blog" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
 ];
 
 /** The principal call to action, used in the header and closing sections (§4, §34). */
