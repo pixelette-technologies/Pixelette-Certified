@@ -88,9 +88,11 @@ Build gotcha: `.next/dev/types` from an old dev session referenced deleted pages
 | 25 September 2026 | Implemented and verified locally. |
 | 25 September 2026, later | Committed and pushed to `main` (`968937c`). The hero H1 terminal full stop was removed on review, per the no-full-stops-in-headings rule. Go-live prerequisites unchanged. |
 | 6 October 2026 | Homepage and templates compressed. See [[Compression-Pass-2026-10-06]]. Go-live prerequisites unchanged. |
+| 6 October 2026, later | Insights index redesigned. See [[Insights-Page-2026-10-06]]. Go-live prerequisites unchanged. |
 
 ## Related
 
 - [[Website-Replacement-Implementation-2026-09-09]]
 - [[Group-Footer-and-Privacy-Choices-2026-09-18]]
 - [[Compression-Pass-2026-10-06]]
+- [[Insights-Page-2026-10-06]]

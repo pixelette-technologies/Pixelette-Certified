@@ -54,3 +54,4 @@ Recorded so a later pass does not treat these as done:
 - [[Strategic-Rebuild-Implementation-2026-09-25]]
 - [[Group-Footer-and-Privacy-Choices-2026-09-18]]
 - [[Website-Replacement-Implementation-2026-09-09]]
+- [[Insights-Page-2026-10-06]]
