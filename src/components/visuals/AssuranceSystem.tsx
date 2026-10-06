@@ -100,12 +100,6 @@ export default function AssuranceSystem() {
 
         <svg viewBox="0 0 420 300" className="h-auto w-full text-brand" role="img" aria-hidden="true">
           <g ref={layer} style={{ transition: reduce ? "none" : "transform 180ms linear" }}>
-            <g fill="none" stroke="currentColor" strokeWidth="1" opacity="0.18">
-              <path d={diamond(200, 56)} />
-              <path d={diamond(214, 150)} transform="translate(6 -4)" />
-              <path d={diamond(200, 244)} transform="translate(10 -7)" />
-            </g>
-
             <g fill="var(--color-brand-tint)" stroke="currentColor" strokeWidth="1" opacity="0.95">
               <path d={diamond(200, 56)} />
               <path d={diamond(214, 150)} />

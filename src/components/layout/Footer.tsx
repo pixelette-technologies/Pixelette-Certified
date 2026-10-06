@@ -136,7 +136,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <section className="groupband" aria-labelledby="group-heading">
+        {/* Hidden for now. The group band stays in the markup so it can be restored. */}
+        <section className="groupband hidden" hidden aria-labelledby="group-heading">
           <div className="groupband__intro">
             <h2 id="group-heading">Part of Pixelette Group</h2>
             <p>
