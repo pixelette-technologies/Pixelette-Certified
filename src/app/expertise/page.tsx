@@ -13,7 +13,7 @@ import { ArrowRight } from "@/components/ui/icons";
 export const metadata: Metadata = {
   title: "Expertise",
   description:
-    "Practitioner credentials, selected practitioner experience, and how expertise is assigned across the UK, United States and GCC.",
+    "Practitioner credentials, selected practitioner experience, and how specialist capability is assigned to the requirement.",
   alternates: { canonical: `${SITE_CONFIG.url}/expertise` },
   openGraph: {
     title: "Expertise | Pixelette Certified",
@@ -27,6 +27,7 @@ const FRAMEWORKS: Record<string, string> = {
   uk: "ISO 27001, Cyber Essentials, UK GDPR, AI governance",
   us: "SOC 2, ISO 27001, NIST-aligned governance, US privacy",
   gcc: "NCA, SAMA, NIA, QCB, ISO 27001, privacy",
+  international: "ISO 27001, ISO 42001, ISO 22301, ISO 27701, vCISO, SOC 2 readiness",
 };
 
 /**

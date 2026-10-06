@@ -37,7 +37,10 @@ const serviceLinks = [
 ];
 
 const companyLinks = [
-  { label: "Markets", href: "/markets" },
+  { label: "United Kingdom", href: "/markets/united-kingdom" },
+  { label: "United States", href: "/markets/united-states" },
+  { label: "GCC", href: "/markets/gcc" },
+  { label: "International", href: "/markets/international" },
   { label: "Who we help", href: "/who-we-help" },
   { label: "Expertise", href: "/expertise" },
   { label: "Insights", href: "/blog" },
@@ -51,7 +54,7 @@ const group = [
   {
     name: "Pixelette Certified",
     current: true,
-    what: "Cyber security, compliance, assurance and AI governance for organisations in the UK, United States and GCC.",
+    what: "UK-headquartered cyber security, compliance, assurance and AI governance consultancy supporting organisations internationally.",
   },
   {
     name: "Pixelette Technologies",
@@ -97,8 +100,8 @@ export default function Footer() {
               />
             </Link>
             <p>
-              UK-headquartered cyber security, compliance, assurance and AI governance consultancy, focused on
-              the UK, United States and GCC.
+              UK-headquartered cyber security, compliance, assurance and AI governance consultancy supporting
+              organisations internationally.
             </p>
             <div className="site-footer__social">
               <a href={SITE_CONFIG.social.linkedin} target="_blank" rel="noopener noreferrer" className={socialClass} aria-label="LinkedIn">

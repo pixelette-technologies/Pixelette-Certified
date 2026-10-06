@@ -6,8 +6,9 @@ import { cn } from "@/lib/utils";
 import { ArrowRight } from "@/components/ui/icons";
 
 /**
- * One market at a time. The drawing marks only the United Kingdom, the United
- * States and the Gulf, and lets the unselected regions recede.
+ * One route at a time. Selecting a region highlights it. International shows
+ * the wider drawing at an even tone, without pins and without implying that
+ * unmarked places are out of scope.
  */
 
 const MARKETS = [
@@ -15,14 +16,15 @@ const MARKETS = [
     id: "uk",
     label: "United Kingdom",
     href: "/markets/united-kingdom",
+    cta: "Explore UK requirements",
     paragraph:
-      "Support for UK organisations meeting security, privacy, AI governance and assurance requirements set by customers, public sector buyers and regulators.",
+      "Support for organisations meeting security, privacy, AI governance and assurance requirements that apply in the United Kingdom.",
     items: [
       "ISO 27001",
-      "AI governance",
+      "AI governance and ISO 42001",
       "Cyber Essentials readiness",
-      "Privacy",
-      "vCISO & GRC",
+      "Privacy and data governance",
+      "vCISO and GRC",
       "Customer and procurement assurance",
     ],
   },
@@ -30,24 +32,42 @@ const MARKETS = [
     id: "us",
     label: "United States",
     href: "/markets/united-states",
+    cta: "Explore US requirements",
     paragraph:
-      "Support for US organisations preparing for SOC 2, meeting enterprise security expectations and governing AI and personal data.",
+      "Support for organisations preparing for SOC 2, meeting enterprise security expectations and governing AI and personal data under US requirements.",
     items: [
       "SOC 2 readiness",
       "ISO 27001",
-      "NIST-aligned governance",
+      "NIST-aligned cyber governance",
       "AI governance",
       "US privacy",
-      "vCISO & GRC",
+      "vCISO and GRC",
     ],
   },
   {
     id: "gcc",
     label: "GCC",
     href: "/markets/gcc",
+    cta: "Explore GCC requirements",
     paragraph:
-      "Support for organisations meeting cyber security, privacy and governance requirements set by regulators in Saudi Arabia, Qatar and the UAE.",
-    items: ["Saudi NCA / SAMA", "Qatar NIA / QCB", "UAE regulatory alignment", "ISO 27001", "Privacy", "GRC"],
+      "Support for cyber, compliance and regulatory requirements in Saudi Arabia, Qatar and the UAE. The requirements differ by country.",
+    items: ["Saudi Arabia: NCA, SAMA, privacy", "Qatar: NIA, QCB, privacy", "UAE: applicable requirements", "ISO", "AI governance", "Cyber and GRC"],
+  },
+  {
+    id: "international",
+    label: "International",
+    href: "/markets/international",
+    cta: "Explore international requirements",
+    paragraph:
+      "Support for organisations internationally. Many standards are international in scope. Jurisdiction-specific requirements are confirmed before an engagement is defined.",
+    items: [
+      "ISO 27001",
+      "ISO 42001 and AI governance",
+      "ISO 22301",
+      "ISO 27701",
+      "vCISO and GRC",
+      "SOC 2 readiness",
+    ],
   },
 ] as const;
 
@@ -78,7 +98,7 @@ export default function MarketSwitcher() {
   return (
     <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(220px,280px)] lg:gap-16">
       <div>
-        <div role="tablist" aria-label="Where we work" className="flex flex-wrap gap-x-1 border-b border-line" onKeyDown={onTabKey}>
+        <div role="tablist" aria-label="Markets" className="flex flex-wrap gap-x-1 border-b border-line" onKeyDown={onTabKey}>
           {MARKETS.map((item) => {
             const selected = item.id === current;
             return (
@@ -112,7 +132,7 @@ export default function MarketSwitcher() {
           </ul>
           <p className="body mt-6 max-w-[58ch]">{market.paragraph}</p>
           <Link href={market.href} className="flink mt-6 text-sm font-medium text-brand hover:text-brand-hover">
-            Explore the market <ArrowRight size={14} />
+            {market.cta} <ArrowRight size={14} />
           </Link>
         </div>
       </div>
@@ -123,35 +143,52 @@ export default function MarketSwitcher() {
 }
 
 function RegionField({ active }: { active: MarketId }) {
-  function tone(id: MarketId) {
-    return active === id ? 1 : 0.16;
+  const open = active === "international";
+
+  function tone(id: Exclude<MarketId, "international">) {
+    if (open) return 0.38;
+    return active === id ? 1 : 0.2;
+  }
+
+  function fill(id: Exclude<MarketId, "international">) {
+    if (open || active !== id) return "none";
+    return "var(--color-brand-tint)";
   }
 
   return (
     <svg viewBox="0 0 320 220" className="mx-auto h-auto w-full max-w-[280px] text-brand" aria-hidden="true">
+      <g fill="none" stroke="currentColor" strokeWidth="0.7" opacity={open ? 0.45 : 0.22}>
+        <path d="M8 36 C 80 28, 160 44, 312 32" />
+        <path d="M8 78 C 90 66, 180 90, 312 72" />
+        <path d="M8 120 C 100 108, 200 132, 312 114" />
+        <path d="M8 162 C 90 176, 190 150, 312 168" />
+        <path d="M64 12 C 52 70, 76 150, 48 208" />
+        <path d="M160 10 C 172 80, 148 150, 168 210" />
+        <path d="M248 12 C 236 78, 260 148, 236 208" />
+      </g>
       <g fill="none" stroke="currentColor" strokeWidth="1.15">
-        <path
-          d="M28 48 L118 36 L146 78 L132 128 L78 146 L34 118 Z"
-          opacity={tone("us")}
-          fill={active === "us" ? "var(--color-brand-tint)" : "none"}
-        />
-        <path
-          d="M168 34 L196 28 L204 62 L176 74 Z"
-          opacity={tone("uk")}
-          fill={active === "uk" ? "var(--color-brand-tint)" : "none"}
-        />
-        <path
-          d="M214 108 L286 96 L304 132 L268 168 L220 150 Z"
-          opacity={tone("gcc")}
-          fill={active === "gcc" ? "var(--color-brand-tint)" : "none"}
-        />
-        <path d="M146 90 C160 96 164 40 176 52" opacity="0.35" />
-        <path d="M196 70 C210 96 200 110 230 124" opacity="0.35" />
+        <path d="M28 48 L118 36 L146 78 L132 128 L78 146 L34 118 Z" opacity={tone("us")} fill={fill("us")} />
+        <path d="M168 34 L196 28 L204 62 L176 74 Z" opacity={tone("uk")} fill={fill("uk")} />
+        <path d="M214 108 L286 96 L304 132 L268 168 L220 150 Z" opacity={tone("gcc")} fill={fill("gcc")} />
       </g>
       <g fill="currentColor" fontFamily="var(--font-ui)" fontSize="11">
-        <text x="48" y="168" opacity={tone("us")}>United States</text>
-        <text x="158" y="92" opacity={tone("uk")}>UK</text>
-        <text x="228" y="188" opacity={tone("gcc")}>GCC</text>
+        {open ? (
+          <text x="160" y="112" textAnchor="middle">
+            International
+          </text>
+        ) : (
+          <>
+            <text x="48" y="168" opacity={tone("us")}>
+              United States
+            </text>
+            <text x="158" y="92" opacity={tone("uk")}>
+              UK
+            </text>
+            <text x="228" y="188" opacity={tone("gcc")}>
+              GCC
+            </text>
+          </>
+        )}
       </g>
     </svg>
   );

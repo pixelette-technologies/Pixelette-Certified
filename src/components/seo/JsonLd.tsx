@@ -40,7 +40,7 @@ export function OrganizationSchema() {
          * the claims gate asserts it is still here.
          */
         description:
-          "UK-headquartered cyber security, compliance, assurance and AI governance consultancy focused on the UK, United States and GCC. ISO 27001 readiness and implementation, AI governance and ISO 42001, SOC 2 readiness, cyber assurance and testing, privacy and data governance, vCISO and GRC advisory, business continuity and GCC regulatory compliance. Certification is issued by independent certification bodies and SOC 2 reports by licensed CPA firms, not by Pixelette Certified.",
+          "UK-headquartered cyber security, compliance, assurance and AI governance consultancy supporting organisations internationally. ISO 27001 readiness and implementation, AI governance and ISO 42001, SOC 2 readiness, cyber assurance and testing, privacy and data governance, vCISO and GRC advisory, business continuity and GCC regulatory compliance. Certification is issued by independent certification bodies and SOC 2 reports by licensed CPA firms, not by Pixelette Certified.",
         address: {
           "@type": "PostalAddress",
           streetAddress: "66 Paul Street",
@@ -49,13 +49,11 @@ export function OrganizationSchema() {
           addressRegion: "England",
           addressCountry: "GB",
         },
-        areaServed: [
-          { "@type": "Country", name: "United Kingdom" },
-          { "@type": "Country", name: "United States" },
-          { "@type": "Country", name: "Saudi Arabia" },
-          { "@type": "Country", name: "Qatar" },
-          { "@type": "Country", name: "United Arab Emirates" },
-        ],
+        /*
+         * No closed country list. A short areaServed of five countries would
+         * describe the business as limited to those places.
+         */
+        areaServed: "International",
         /*
          * Services without offers or prices (§6). Names are the public service
          * names and none implies that Pixelette Certified issues a certificate.

@@ -12,32 +12,32 @@ import { getServiceBySlug } from "@/data/services";
 const FEATURED: { slug: Parameters<typeof getServiceBySlug>[0]; tags: string; frameworks: string }[] = [
   {
     slug: "iso-27001",
-    tags: "United Kingdom · United States · GCC",
+    tags: "International",
     frameworks: "ISO 27001",
   },
   {
     slug: "iso-42001",
-    tags: "United Kingdom · United States · GCC",
+    tags: "International",
     frameworks: "ISO 42001 · NIST AI RMF",
   },
   {
     slug: "soc-2",
-    tags: "United States · SaaS · Technology",
+    tags: "International / US-facing assurance",
     frameworks: "SOC 2 · ISO 27001",
   },
   {
     slug: "privacy",
-    tags: "United Kingdom · United States · GCC",
-    frameworks: "UK GDPR · US privacy · GCC privacy",
+    tags: "International",
+    frameworks: "ISO 27701 · Applicable privacy law",
   },
   {
     slug: "vciso",
-    tags: "United Kingdom · United States · GCC",
+    tags: "International",
     frameworks: "GRC · ISO 27001",
   },
   {
     slug: "gcc-regulatory-compliance",
-    tags: "Saudi Arabia · Qatar · UAE",
+    tags: "GCC",
     frameworks: "NCA · SAMA · NIA · QCB",
   },
 ];

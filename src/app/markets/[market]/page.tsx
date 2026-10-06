@@ -35,10 +35,8 @@ export async function generateMetadata({
 }
 
 /*
- * One template for the three market pages (§26 to §28). The content differs by
- * market in data, not in layout. Service order is the order in
- * src/data/markets.ts, which is how the US page leads with SOC 2 and never with
- * Cyber Essentials or UK GDPR (§27).
+ * One template for every market route. The content differs by market in data,
+ * not in layout. Service order is the order in src/data/markets.ts.
  */
 export default async function MarketPage({
   params,
@@ -53,8 +51,6 @@ export default async function MarketPage({
     const service = getServiceBySlug(entry.slug);
     return service ? [{ note: entry.note, service }] : [];
   }) satisfies { note: string; service: Service }[];
-
-  const placeName = market.name === "GCC" ? "the GCC" : `the ${market.name}`;
 
   return (
     <>
@@ -105,7 +101,7 @@ export default async function MarketPage({
 
       <section className="sec">
         <div className="wrap" data-reveal="">
-          <SectionHeading label="Services" title={`Core services in ${placeName}`} />
+          <SectionHeading label="Services" title={market.servicesHeading} />
           <div className="border-t border-line">
             {serviceEntries.map(({ note, service }) => (
               <Link

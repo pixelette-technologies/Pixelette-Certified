@@ -33,8 +33,7 @@ export default function Newsletter() {
         <div className="mx-auto max-w-[640px] text-center">
           <h2 className="h2 mx-auto max-w-[18ch]">Keep up with what changes</h2>
           <p className="body mx-auto mt-4">
-            Occasional analysis of cyber security, compliance and AI governance requirements across
-            the UK, United States and GCC.
+            Occasional analysis of cyber security, compliance and AI governance requirements.
           </p>
 
           {status === "success" ? (

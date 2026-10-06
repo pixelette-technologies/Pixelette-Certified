@@ -41,7 +41,7 @@ const SITUATIONS: Record<ServiceSlug, string[]> = {
     "Findings need to be remediated and retested.",
   ],
   privacy: [
-    "The organisation processes personal data in the UK, United States or GCC.",
+    "The organisation processes personal data and needs governance aligned to the applicable law.",
     "A customer or regulator has asked for evidence of privacy governance.",
     "Security or AI work needs to stay aligned with data protection duties.",
   ],
@@ -114,6 +114,7 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
           <div className="mt-8 max-w-[42ch]">
             <h1 className="h1p">{service.title}</h1>
             <p className="lead mt-6">{service.summary}</p>
+            <p className="small mt-5">{service.availability}</p>
             <div className="mt-9">
               <Button href="/contact" size="lg">
                 Discuss your requirements

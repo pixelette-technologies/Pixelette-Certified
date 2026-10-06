@@ -21,8 +21,12 @@ export default function HomeHero() {
 
           <p className="lead mt-7 max-w-[48ch]">
             Pixelette Certified helps organisations meet cyber security, compliance and AI governance
-            requirements across the UK, United States and GCC. We assess the requirement, address the
-            gaps and prepare you for independent assurance.
+            requirements. We support organisations internationally, adapting each engagement to the
+            relevant standard, customer requirement and jurisdiction.
+          </p>
+          <p className="body mt-4 max-w-[48ch]">
+            We assess the requirement, address the gaps and prepare organisations for independent
+            assurance.
           </p>
 
           <div className="mt-9 flex flex-wrap gap-3.5">
@@ -31,8 +35,6 @@ export default function HomeHero() {
               Explore our services
             </Button>
           </div>
-
-          <p className="small mt-10">UK headquartered. Focused on the UK, United States and GCC.</p>
         </div>
 
         <AssuranceSystem />

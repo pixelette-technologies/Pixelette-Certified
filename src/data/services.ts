@@ -79,6 +79,13 @@ export interface Service {
   faqs: FAQ[];
   relatedSlugs: ServiceSlug[];
   markets: MarketSlug[];
+  /** Discreet availability line on the service page. */
+  availability: string;
+  /**
+   * ISO country codes when the service is limited to those places.
+   * Omit when the service is not restricted to a closed set of countries.
+   */
+  areaServed?: string[];
   seo: { title: string; description: string };
 }
 
@@ -141,7 +148,8 @@ export const services: Service[] = [
       { question: "Do we need a technical team to achieve ISO 27001?", answer: "ISO 27001 is a management system standard, so leadership involvement and clear ownership matter as much as technical skill. Technical controls still need to be implemented, and we work with your team or suppliers to do that." },
     ],
     relatedSlugs: ["soc-2", "iso-42001", "vciso"],
-    markets: ["uk", "us", "gcc"],
+    markets: ["uk", "us", "gcc", "international"],
+    availability: "Available internationally",
     seo: {
       title: "ISO 27001 Readiness & Implementation",
       description:
@@ -184,7 +192,7 @@ export const services: Service[] = [
       items: [
         { label: "ISO/IEC 42001:2023", points: ["International management system standard for AI", "Certifiable by an accredited certification body", "Integrates with ISO 27001 and privacy governance"] },
         { label: "NIST AI RMF 1.0", points: ["Voluntary framework published by NIST in January 2023", "Organised around the Govern, Map, Measure and Manage functions", "Widely referenced by US customers and public bodies"] },
-        { label: "Regulatory alignment", points: ["EU AI Act (Regulation (EU) 2024/1689) where it applies to your systems or market", "Sector and jurisdiction requirements in the UK, United States and GCC", "Legal interpretation is provided by appropriately qualified counsel where required"] },
+        { label: "Regulatory alignment", points: ["EU AI Act (Regulation (EU) 2024/1689) where it applies to your systems or market", "Sector and jurisdiction requirements that apply to the organisation", "Legal interpretation is provided by appropriately qualified counsel where required"] },
       ],
     },
     approach: [
@@ -201,7 +209,8 @@ export const services: Service[] = [
       { question: "We only use AI tools from suppliers. Does this apply to us?", answer: "Often, yes. Organisations that deploy third-party AI still need to understand how it is used, what data it processes and who is accountable. The work is usually lighter than for organisations that develop AI systems." },
     ],
     relatedSlugs: ["iso-27001", "privacy", "vciso"],
-    markets: ["uk", "us", "gcc"],
+    markets: ["uk", "us", "gcc", "international"],
+    availability: "Available internationally",
     seo: {
       title: "AI Governance & ISO 42001",
       description:
@@ -259,7 +268,8 @@ export const services: Service[] = [
       { question: "Can one programme support SOC 2 and ISO 27001?", answer: "Yes. The frameworks differ in structure and outcome, but many controls overlap. Designing controls and evidence once, then mapping them to both, avoids duplicated work." },
     ],
     relatedSlugs: ["iso-27001", "cyber-assurance", "vciso"],
-    markets: ["us"],
+    markets: ["us", "international"],
+    availability: "Available internationally for organisations requiring US-facing assurance",
     seo: {
       title: "SOC 2 Readiness",
       description:
@@ -308,7 +318,8 @@ export const services: Service[] = [
       { question: "Can you provide testing by an accredited provider?", answer: "Where a customer or regulator specifies a particular accreditation for testers or testing companies, we arrange delivery through a provider that holds it and confirm this in writing before testing begins." },
     ],
     relatedSlugs: ["soc-2", "iso-27001", "cyber-essentials"],
-    markets: ["uk", "us", "gcc"],
+    markets: ["uk", "us", "gcc", "international"],
+    availability: "Available internationally, subject to scope and any required accreditation",
     seo: {
       title: "Cyber Assurance & Testing",
       description:
@@ -327,7 +338,7 @@ export const services: Service[] = [
     opening:
       "Build a privacy programme that meets the requirements applying to your organisation and can be demonstrated in practice.",
     overview: [
-      "Privacy obligations depend on where you operate, whose data you process and what you do with it. An organisation serving customers in the UK, the United States and the Gulf may face several regimes with different rules on lawful processing, individual rights, breach notification and international transfers.",
+      "Privacy obligations depend on where you operate, whose data you process and what you do with it. An organisation serving customers in more than one country may face several regimes with different rules on lawful processing, individual rights, breach notification and international transfers.",
       "We help organisations understand which requirements apply, put proportionate governance in place and keep the records that show it operating. Where the work calls for legal advice on the interpretation of a law, we will say so, and appropriately qualified legal counsel may be required.",
     ],
     coverage: {
@@ -367,7 +378,8 @@ export const services: Service[] = [
       { question: "Can you help with privacy in more than one country?", answer: "Yes. We organise the work around the regimes that apply, and assign practitioners with the relevant jurisdictional knowledge." },
     ],
     relatedSlugs: ["iso-27001", "iso-42001", "vciso"],
-    markets: ["uk", "us", "gcc"],
+    markets: ["uk", "us", "gcc", "international"],
+    availability: "Available internationally. National privacy laws are scoped to the applicable jurisdiction",
     seo: {
       title: "Privacy & Data Governance",
       description:
@@ -419,7 +431,8 @@ export const services: Service[] = [
       { question: "We are already certified. How does ongoing GRC support help?", answer: "Surveillance audits test whether the management system is operating. Ongoing support keeps risk reviews, evidence, internal audit and management review current between assessments." },
     ],
     relatedSlugs: ["iso-27001", "soc-2", "privacy"],
-    markets: ["uk", "us", "gcc"],
+    markets: ["uk", "us", "gcc", "international"],
+    availability: "Available internationally, subject to the requirements of the engagement",
     seo: {
       title: "vCISO & GRC Advisory",
       description:
@@ -467,7 +480,8 @@ export const services: Service[] = [
       { question: "Do we need certification?", answer: "Not always. Many organisations need tested continuity arrangements to satisfy customers or regulators without pursuing certification. We help you decide which is appropriate." },
     ],
     relatedSlugs: ["iso-27001", "vciso", "gcc-regulatory-compliance"],
-    markets: ["uk", "gcc"],
+    markets: ["uk", "gcc", "international"],
+    availability: "Available internationally",
     seo: {
       title: "Business Continuity & ISO 22301",
       description:
@@ -484,10 +498,10 @@ export const services: Service[] = [
     summary:
       "Support with cyber security, governance, privacy and assurance requirements across Saudi Arabia, Qatar and the UAE.",
     opening:
-      "Support for organisations navigating cyber security, governance, privacy and assurance requirements across key GCC markets.",
+      "Support for organisations navigating cyber security, governance, privacy and assurance requirements in Saudi Arabia, Qatar and the UAE.",
     overview: [
       "Regulators in the Gulf have established detailed cyber security and data protection requirements, and applicability often depends on the sector, the type of entity and whether it supports government or critical national infrastructure. Organisations entering these markets, and suppliers to regulated entities, frequently need to demonstrate alignment before they can proceed.",
-      "We match each engagement with practitioners who have experience of the relevant regulator and sector, and combine regulatory work with international standards where that reduces duplicated effort.",
+      "Where an engagement involves jurisdiction-specific requirements, we confirm the applicable scope and ensure the appropriate specialist capability is available before defining the engagement. Regulatory work can sit alongside international standards where that reduces duplicated effort.",
     ],
     coverage: {
       heading: "What the work covers",
@@ -502,11 +516,11 @@ export const services: Service[] = [
     },
     groups: {
       heading: "Jurisdictions",
-      intro: "Our GCC work is concentrated in Saudi Arabia and Qatar, with more selective support in the UAE.",
+      intro: "The requirements differ by country. UAE support is confirmed against the applicable regulator and sector before an engagement is defined.",
       items: [
         { label: "Saudi Arabia", points: ["National Cybersecurity Authority (NCA) requirements, including the Essential Cybersecurity Controls", "Saudi Central Bank (SAMA) cyber security requirements for regulated financial institutions", "Personal Data Protection Law and privacy governance", "ISO 27001", "Business continuity", "GRC and vCISO support"] },
         { label: "Qatar", points: ["National Information Assurance (NIA) standard and the National Information Security Compliance Framework (NISCF)", "Qatar Central Bank (QCB) requirements for regulated financial institutions", "Personal Data Privacy Protection Law", "ISO 27001", "Business continuity", "Governance"] },
-        { label: "United Arab Emirates", points: ["Cyber security governance", "ISO 27001 and related standards", "AI governance", "Privacy", "Regulatory alignment support where appropriate specialist expertise is available"], note: "Our UAE support is more selective, and is confirmed against the specific regulator and sector before an engagement begins." },
+        { label: "United Arab Emirates", points: ["Applicable cyber, compliance, privacy and governance requirements", "ISO standards", "AI governance"], note: "The applicable regulator and sector are confirmed before an engagement is defined." },
       ],
     },
     approach: [
@@ -523,6 +537,8 @@ export const services: Service[] = [
     ],
     relatedSlugs: ["iso-27001", "iso-22301", "privacy"],
     markets: ["gcc"],
+    availability: "Saudi Arabia, Qatar and the UAE, according to the applicable requirement",
+    areaServed: ["SA", "QA", "AE"],
     seo: {
       title: "GCC Cyber & Regulatory Compliance",
       description:
@@ -576,6 +592,8 @@ export const services: Service[] = [
     ],
     relatedSlugs: ["iso-27001", "cyber-assurance", "vciso"],
     markets: ["uk"],
+    availability: "United Kingdom",
+    areaServed: ["GB"],
     seo: {
       title: "Cyber Essentials Readiness",
       description:

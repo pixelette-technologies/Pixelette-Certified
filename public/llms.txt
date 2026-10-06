@@ -1,6 +1,6 @@
 # Pixelette Certified
 
-> UK-headquartered cyber security, compliance, assurance and AI governance consultancy, focused principally on the United Kingdom, the United States and the GCC.
+> UK-headquartered cyber security, compliance, assurance and AI governance consultancy supporting organisations internationally.
 
 Pixelette Certified helps organisations meet cyber security, compliance and AI governance requirements. It assesses what is required, addresses gaps, implements appropriate controls and prepares organisations for independent certification, attestation or assessment.
 
@@ -16,7 +16,7 @@ Office: 66 Paul Street, London, EC2A 4NA. Contact: info@pixelettecertified.com.
 - [AI governance & ISO 42001](https://pixelettecertified.com/services/iso-42001): AI governance frameworks, risk and impact assessment, NIST AI RMF alignment and ISO 42001 readiness.
 - [SOC 2 readiness](https://pixelettecertified.com/services/soc-2): Controls, evidence and operating discipline to prepare for a SOC 2 examination by a licensed CPA firm.
 - [Cyber assurance & testing](https://pixelettecertified.com/services/cyber-assurance): Vulnerability assessment, application, API, network and cloud testing, penetration testing and remediation validation.
-- [Privacy & data governance](https://pixelettecertified.com/services/privacy): Privacy programmes for UK, US and GCC requirements, including DPO support.
+- [Privacy & data governance](https://pixelettecertified.com/services/privacy): Privacy information management, including ISO 27701, with national privacy laws scoped to the applicable jurisdiction.
 - [vCISO & GRC advisory](https://pixelettecertified.com/services/vciso): Flexible senior security leadership and ongoing governance, risk and compliance support.
 - [Business continuity & operational resilience](https://pixelettecertified.com/services/iso-22301): Business impact analysis, continuity and recovery planning, and ISO 22301 readiness.
 - [GCC cyber & regulatory compliance](https://pixelettecertified.com/services/gcc-regulatory-compliance): Support with NCA, SAMA, NIA, NISCF, QCB and GCC privacy requirements.
@@ -27,6 +27,7 @@ Office: 66 Paul Street, London, EC2A 4NA. Contact: info@pixelettecertified.com.
 - [United Kingdom](https://pixelettecertified.com/markets/united-kingdom)
 - [United States](https://pixelettecertified.com/markets/united-states)
 - [GCC](https://pixelettecertified.com/markets/gcc)
+- [International](https://pixelettecertified.com/markets/international)
 
 ## Pages
 

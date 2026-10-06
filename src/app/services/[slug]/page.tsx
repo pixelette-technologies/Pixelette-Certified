@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { services, getServiceBySlug } from "@/data/services";
-import { markets } from "@/data/markets";
 import ServicePageTemplate from "@/components/sections/ServicePageTemplate";
 import JsonLd from "@/components/seo/JsonLd";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
@@ -19,12 +18,6 @@ export const dynamicParams = false;
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
 }
-
-const COUNTRY_CODES: Record<string, string[]> = {
-  uk: ["GB"],
-  us: ["US"],
-  gcc: ["SA", "QA", "AE"],
-};
 
 export async function generateMetadata({
   params,
@@ -57,10 +50,6 @@ export default async function ServicePage({
   const service = getServiceBySlug(slug);
   if (!service) notFound();
 
-  const areaServed = markets
-    .filter((m) => service.markets.includes(m.slug))
-    .flatMap((m) => COUNTRY_CODES[m.slug]);
-
   return (
     <>
       <BreadcrumbSchema
@@ -77,7 +66,7 @@ export default async function ServicePage({
           serviceType: service.navLabel,
           provider: { "@id": `${SITE_CONFIG.url}/#organization` },
           url: `${SITE_CONFIG.url}/services/${service.slug}`,
-          areaServed,
+          ...(service.areaServed ? { areaServed: service.areaServed } : {}),
         }}
       />
       <ServicePageTemplate service={service} />

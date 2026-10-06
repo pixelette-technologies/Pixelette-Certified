@@ -342,6 +342,7 @@ export async function POST(request: Request) {
         job_role: data.role || null,
         enquiry_reason: data.reasonValue,
         jurisdiction: data.jurisdiction,
+        country: data.jurisdictionDetail || null,
         requirement_trigger: data.trigger,
 
         consent_given: true,
@@ -386,7 +387,11 @@ export async function POST(request: Request) {
       role: escapeHtml(data.role || "Not provided"),
       reason: escapeHtml(data.reasonLabel),
       message: escapeHtml(data.message),
-      jurisdiction: escapeHtml(JURISDICTION_LABELS.get(data.jurisdiction) || data.jurisdiction),
+      jurisdiction: escapeHtml(
+        data.jurisdictionDetail
+          ? `${JURISDICTION_LABELS.get(data.jurisdiction) || data.jurisdiction}: ${data.jurisdictionDetail}`
+          : JURISDICTION_LABELS.get(data.jurisdiction) || data.jurisdiction
+      ),
       trigger: escapeHtml(TRIGGER_LABELS.get(data.trigger) || data.trigger),
       attachmentName: attachment ? escapeHtml(attachment.filename) : "",
       attachmentUrl: attachment?.signedUrl ? escapeHtml(attachment.signedUrl) : "",
@@ -502,7 +507,7 @@ export async function POST(request: Request) {
               <tr>
                 <td style="padding: 12px 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
                   <a href="https://pixelettecertified.com/blog" style="color: ${EMAIL_COLORS.accent}; text-decoration: none; font-weight: 600; font-size: 14px;">Insights →</a>
-                  <p style="color: rgba(255,255,255,0.4); font-size: 12px; margin: 4px 0 0;">Analysis of requirements in the UK, United States and GCC</p>
+                  <p style="color: rgba(255,255,255,0.4); font-size: 12px; margin: 4px 0 0;">Analysis of cyber security, compliance and AI governance requirements</p>
                 </td>
               </tr>
             </table>

@@ -38,7 +38,8 @@ export const JURISDICTIONS = [
   { value: "saudi-arabia", label: "Saudi Arabia" },
   { value: "uae", label: "UAE" },
   { value: "qatar", label: "Qatar" },
-  { value: "other", label: "Other" },
+  { value: "eu", label: "European Union / EEA" },
+  { value: "other", label: "Other international market" },
 ] as const;
 
 export type JurisdictionValue = (typeof JURISDICTIONS)[number]["value"];

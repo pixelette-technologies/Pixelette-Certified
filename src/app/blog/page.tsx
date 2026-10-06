@@ -19,7 +19,7 @@ import {
 import { SITE_CONFIG } from "@/lib/constants";
 
 const INTRO =
-  "Analysis of cyber security, compliance and AI governance requirements across the UK, United States and GCC.";
+  "Analysis of cyber security, compliance and AI governance requirements, including standards that apply internationally and rules that depend on the jurisdiction.";
 
 type Search = { category?: string | string[]; q?: string | string[]; more?: string | string[] };
 

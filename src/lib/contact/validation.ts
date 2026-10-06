@@ -21,6 +21,8 @@ export interface ContactCleanData {
   reasonLabel: string;
   /** "Where does the requirement apply?" slug. */
   jurisdiction: string;
+  /** Free text when jurisdiction is "other". "" otherwise. */
+  jurisdictionDetail: string;
   /** "What has prompted the requirement?" slug. */
   trigger: string;
   /** Free text. Stored in the legacy `message` column. */
@@ -87,6 +89,7 @@ export function validateContact(body: unknown): ContactValidationResult {
 
   const reasonValue = asString(b.service);
   const jurisdiction = asString(b.jurisdiction);
+  const jurisdictionDetail = asString(b.jurisdictionDetail);
   const trigger = asString(b.trigger);
   const firstName = asString(b.firstName);
   const lastName = asString(b.lastName);
@@ -101,6 +104,14 @@ export function validateContact(body: unknown): ContactValidationResult {
   }
   if (!JURISDICTION_SET.has(jurisdiction)) {
     return { ok: false, error: "Please tell us where the requirement applies." };
+  }
+  if (jurisdiction === "other") {
+    if (!jurisdictionDetail) {
+      return { ok: false, error: "Please tell us the country or jurisdiction." };
+    }
+    if (jurisdictionDetail.length > CONTACT_LIMITS.country.max) {
+      return { ok: false, error: "Country or jurisdiction is too long." };
+    }
   }
   if (!TRIGGER_SET.has(trigger)) {
     return { ok: false, error: "Please tell us what has prompted the requirement." };
@@ -147,6 +158,18 @@ export function validateContact(body: unknown): ContactValidationResult {
 
   return {
     ok: true,
-    data: { firstName, lastName, email, company, role, reasonValue, reasonLabel, jurisdiction, trigger, message },
+    data: {
+      firstName,
+      lastName,
+      email,
+      company,
+      role,
+      reasonValue,
+      reasonLabel,
+      jurisdiction,
+      jurisdictionDetail: jurisdiction === "other" ? jurisdictionDetail : "",
+      trigger,
+      message,
+    },
   };
 }

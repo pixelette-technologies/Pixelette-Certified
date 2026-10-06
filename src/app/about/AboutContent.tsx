@@ -37,10 +37,14 @@ export default function AboutContent() {
           <h2 className="h2 max-w-[14ch]">Who we are</h2>
           <div className="mt-6 max-w-[62ch] space-y-4">
             <p className="body">
-              Pixelette Certified is a UK-headquartered consultancy for cyber security, compliance,
-              assurance and AI governance, focused on the United Kingdom, the United States and the GCC.
-              Organisations come to us when a customer, regulator, investor or board expects them to
-              demonstrate how they manage security, privacy, resilience or AI.
+              Pixelette Certified is a UK-headquartered cyber security, compliance, assurance and AI
+              governance consultancy supporting organisations internationally.
+            </p>
+            <p className="body">
+              We shape each engagement around the standards, customer requirements, regulatory context
+              and specialist capability required. Organisations come to us when a customer, regulator,
+              investor or board expects them to demonstrate how they manage security, privacy, resilience
+              or AI.
             </p>
             <p className="body">
               We are part of Pixelette Group. Each group company is engaged separately.

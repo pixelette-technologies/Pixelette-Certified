@@ -6,7 +6,7 @@ import { SITE_CONFIG } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Tell us what you need to achieve. Discuss cyber security, compliance, assurance or AI governance requirements in the UK, United States or GCC.",
+    "Tell us what you need to achieve and where the requirement applies. We support organisations internationally.",
   openGraph: {
     title: "Contact | Pixelette Certified",
     description: "Tell us what you need to achieve and where the requirement applies.",

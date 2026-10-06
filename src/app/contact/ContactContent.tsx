@@ -26,6 +26,8 @@ const uploadsEnabled = process.env.NEXT_PUBLIC_CONTACT_UPLOADS_ENABLED !== "fals
 interface FormState {
   service: string;
   jurisdiction: string;
+  /** Shown when jurisdiction is "other". */
+  jurisdictionDetail: string;
   trigger: string;
   firstName: string;
   lastName: string;
@@ -45,6 +47,7 @@ interface FormState {
 const EMPTY_FORM: FormState = {
   service: "",
   jurisdiction: "",
+  jurisdictionDetail: "",
   trigger: "",
   firstName: "",
   lastName: "",
@@ -88,7 +91,12 @@ export default function ContactContent() {
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+      ...(name === "jurisdiction" && value !== "other" ? { jurisdictionDetail: "" } : {}),
+    }));
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -132,9 +140,8 @@ export default function ContactContent() {
           <div className="mt-8 max-w-[56ch]">
             <h1 className="h1p">Tell us what you need to achieve</h1>
             <p className="lead mt-6">
-              Whether you are responding to a customer requirement, preparing for certification,
-              strengthening governance or meeting a regulatory obligation, tell us where you need to
-              get to.
+              Tell us what you need to achieve and where the requirement applies. We will establish the
+              appropriate scope, route and specialist capability for the engagement.
             </p>
           </div>
         </div>
@@ -213,6 +220,24 @@ export default function ContactContent() {
                             </option>
                           ))}
                         </select>
+                        {form.jurisdiction === "other" && (
+                          <div className="mt-5">
+                            <label htmlFor="jurisdictionDetail" className="label">
+                              Country or jurisdiction *
+                            </label>
+                            <input
+                              id="jurisdictionDetail"
+                              name="jurisdictionDetail"
+                              type="text"
+                              required
+                              autoComplete="country-name"
+                              maxLength={CONTACT_LIMITS.country.max}
+                              value={form.jurisdictionDetail}
+                              onChange={handleChange}
+                              className="input"
+                            />
+                          </div>
+                        )}
                       </div>
                       <div>
                         <label htmlFor="trigger" className="label">

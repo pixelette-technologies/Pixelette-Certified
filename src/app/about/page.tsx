@@ -6,11 +6,11 @@ import { SITE_CONFIG } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Pixelette Certified is a UK-headquartered compliance, cyber assurance and AI governance consultancy focused on the UK, United States and GCC.",
+    "Pixelette Certified is a UK-headquartered cyber security, compliance, assurance and AI governance consultancy supporting organisations internationally.",
   openGraph: {
     title: "About Pixelette Certified",
     description:
-      "A UK-headquartered compliance, cyber assurance and AI governance consultancy working through a specialist delivery network.",
+      "A UK-headquartered cyber security, compliance, assurance and AI governance consultancy supporting organisations internationally.",
   },
   alternates: { canonical: `${SITE_CONFIG.url}/about` },
 };

@@ -527,7 +527,7 @@ export const CLAIM_RULES = [
     id: "global-reach",
     category: "sales language",
     pattern: /globally delivered|global delivery|every (?:sector|industry|market)|any market|anywhere in the world/i,
-    why: "The headline markets are the UK, United States and GCC. Do not imply unlimited jurisdictional capability (§2, §11, §41).",
+    why: "International support must not be described as unlimited geographic delivery or as regulatory expertise in all jurisdictions.",
     skipComments: true,
     runtime: true,
     exempt: [],

@@ -2,7 +2,7 @@ export const SITE_CONFIG = {
   name: "Pixelette Certified",
   tagline: "Cyber security, compliance, assurance and AI governance",
   description:
-    "Pixelette Certified helps organisations meet cyber security, compliance and AI governance requirements across the UK, United States and GCC, and prepares them for independent certification, attestation or assessment.",
+    "Pixelette Certified helps organisations meet cyber security, compliance and AI governance requirements. We support organisations internationally, adapting each engagement to the relevant standard, customer requirement and jurisdiction.",
   url: "https://pixelettecertified.com",
   email: "info@pixelettecertified.com",
   phone: "+44 20 7946 0958",
@@ -27,8 +27,8 @@ export const SITE_CONFIG = {
   legalEntity: "Pixelette Group Ltd",
   companyNumber: "07251823",
   jurisdiction: "England and Wales",
-  /** Headline markets only (§11 of the 25 September 2026 specification). */
-  regions: ["United Kingdom", "United States", "GCC"],
+  /** Navigation routes. Not a limit on where an engagement can be supported. */
+  regions: ["United Kingdom", "United States", "GCC", "International"],
   social: {
     linkedin: "https://www.linkedin.com/company/pixelette-certified/about/?viewAsMember=true",
     twitter: "https://twitter.com/pixelettecert",
@@ -113,11 +113,12 @@ export const NAV_ITEMS: NavItem[] = [
     label: "Markets",
     href: "/markets",
     match: "/markets",
-    allLabel: "Explore our markets",
+    allLabel: "View markets",
     children: [
       { label: "United Kingdom", href: "/markets/united-kingdom" },
       { label: "United States", href: "/markets/united-states" },
       { label: "GCC", href: "/markets/gcc" },
+      { label: "International", href: "/markets/international" },
     ],
   },
   { label: "Expertise", href: "/expertise" },

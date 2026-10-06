@@ -50,7 +50,7 @@ export async function POST(request: Request) {
           </div>
 
           <div style="padding: 32px;">
-            <p style="color: rgba(255,255,255,0.85); line-height: 1.7; font-size: 15px; margin: 0 0 20px;">Thank you for subscribing. You will receive occasional analysis of cyber security, compliance and AI governance requirements across the UK, United States and GCC.</p>
+            <p style="color: rgba(255,255,255,0.85); line-height: 1.7; font-size: 15px; margin: 0 0 20px;">Thank you for subscribing. You will receive occasional analysis of cyber security, compliance and AI governance requirements.</p>
 
             <p style="color: rgba(255,255,255,0.5); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 12px;">What you'll receive</p>
 
@@ -58,7 +58,7 @@ export async function POST(request: Request) {
               <tr>
                 <td style="padding: 10px 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
                   
-                  <span style="color: rgba(255,255,255,0.85); font-size: 14px; margin-left: 8px;">Changes to standards and regulation in the UK, United States and GCC</span>
+                  <span style="color: rgba(255,255,255,0.85); font-size: 14px; margin-left: 8px;">Changes to standards and jurisdiction-specific requirements</span>
                 </td>
               </tr>
               <tr><td style="height: 6px;"></td></tr>

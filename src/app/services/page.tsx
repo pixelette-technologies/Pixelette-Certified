@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Services | Pixelette Certified",
     description:
-      "Cyber security, compliance, assurance and AI governance services for organisations in the UK, United States and GCC.",
+      "Cyber security, compliance, assurance and AI governance services. Many are available internationally, and jurisdiction-specific requirements are scoped to the applicable law.",
     url: `${SITE_CONFIG.url}/services`,
   },
   alternates: { canonical: `${SITE_CONFIG.url}/services` },
@@ -53,9 +53,9 @@ export default function ServicesPage() {
           <div className="mt-8 max-w-[56ch]">
             <h1 className="h1p">Services</h1>
             <p className="lead mt-6">
-              We help organisations meet cyber security, compliance and AI governance requirements
-              across the UK, United States and GCC, from the first assessment through to independent
-              certification, attestation or assessment.
+              We help organisations meet cyber security, compliance and AI governance requirements,
+              and we support organisations internationally. Each engagement is adapted to the relevant
+              standard, customer requirement and jurisdiction.
             </p>
             <div className="mt-9">
               <Button href="/contact" size="lg">
