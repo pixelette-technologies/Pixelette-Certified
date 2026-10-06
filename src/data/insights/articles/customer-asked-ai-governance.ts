@@ -8,6 +8,8 @@ const article: Insight = {
     "AI governance questions now appear in some security questionnaires and due diligence requests. This article explains what those questions are usually trying to establish, which frameworks they refer to, and how to give an accurate first answer.",
   description:
     "What customer questions about AI governance are usually testing, how ISO/IEC 42001, NIST AI RMF and the EU AI Act relate, and how to answer accurately.",
+  summary:
+    "What customer questions about AI governance are usually trying to establish, and how to give an accurate first answer.",
   category: "AI governance",
   jurisdiction: "International",
   published: "2026-04-04",

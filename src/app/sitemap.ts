@@ -39,7 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/about", 0.6),
     page("/contact", 0.7),
     page("/blog", 0.7, "weekly"),
-    ...activeCategories().map((c) => page(`/blog/category/${categorySlug(c)}`, 0.4, "weekly")),
+    ...activeCategories().map((c) => page(`/blog?category=${categorySlug(c)}`, 0.4, "weekly")),
     ...insights.map((i) => ({
       url: `${base}/blog/${i.slug}`,
       lastModified: new Date(i.updated ?? i.published),

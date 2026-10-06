@@ -8,6 +8,8 @@ const article: Insight = {
     "How to give a complete, accurate and well-evidenced response to a supplier security questionnaire when your organisation does not hold ISO/IEC 27001 certification.",
   description:
     "How to answer an enterprise security questionnaire without ISO 27001: what buyers assess, which evidence helps, and phrasing that weakens a response.",
+  summary:
+    "How to give a complete and accurate answer to a supplier security questionnaire when ISO 27001 is not in place.",
   category: "Cyber and GRC",
   jurisdiction: "International",
   published: "2026-04-02",

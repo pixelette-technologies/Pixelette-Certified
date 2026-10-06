@@ -8,6 +8,8 @@ const article: Insight = {
     "What the FCA and PRA operational resilience rules require, when the EU Digital Operational Resilience Act reaches a UK firm, and where an ISO/IEC 27001 management system helps and where it does not.",
   description:
     "How ISO/IEC 27001 relates to FCA and PRA operational resilience rules and to DORA, including when DORA affects a UK fintech and what an ISMS leaves out.",
+  summary:
+    "How ISO 27001 relates to FCA operational resilience rules, and when the EU Digital Operational Resilience Act reaches a UK firm.",
   category: "UK compliance",
   jurisdiction: "United Kingdom",
   published: "2026-04-01",

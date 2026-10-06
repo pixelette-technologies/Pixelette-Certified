@@ -8,6 +8,8 @@ const article: Insight = {
     "ISO/IEC 27001 does not prescribe a timetable. This article explains which parts of a programme depend on your own organisation, which depend on the certification body, and why operating evidence cannot be rushed.",
   description:
     "What affects an ISO 27001 timetable: starting position, scope, operating evidence, certification body scheduling and how ISO/IEC 27006-1 sets audit time.",
+  summary:
+    "Which parts of an ISO 27001 programme depend on the organisation, and which depend on the certification body.",
   category: "Cyber and GRC",
   jurisdiction: "International",
   published: "2026-04-06",

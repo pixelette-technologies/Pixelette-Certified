@@ -8,6 +8,8 @@ const article: Insight = {
     "The assurance frameworks a digital health supplier is likely to meet when selling to NHS organisations in England, what each one is for, and how an ISO/IEC 27001 management system relates to them.",
   description:
     "How the DSPT, DTAC, clinical safety standards and Cyber Essentials apply to digital health suppliers to the NHS in England, and where ISO/IEC 27001 fits.",
+  summary:
+    "Which assurance frameworks a digital health supplier is likely to meet when selling to NHS organisations in England.",
   category: "UK compliance",
   jurisdiction: "United Kingdom (England)",
   published: "2026-03-31",

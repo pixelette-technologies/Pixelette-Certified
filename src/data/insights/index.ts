@@ -20,8 +20,11 @@ import euAiAct from "./articles/eu-ai-act-uk-companies";
 import iso42001VsAct from "./articles/iso-42001-vs-eu-ai-act";
 import gcc from "./articles/gcc-cyber-regulation-saudi-arabia-qatar";
 
-export type { Insight, InsightCategory, InsightBlock, InsightSource } from "./types";
+export type { Insight, InsightCategory, InsightBlock, InsightSource, InsightVisual } from "./types";
 export { INSIGHT_CATEGORIES } from "./types";
+
+/** How many archive items the index shows before "Load more insights". */
+export const BROWSE_PAGE_SIZE = 8;
 
 /** Every published article, newest first. */
 export const insights: Insight[] = [
@@ -86,4 +89,73 @@ export function formatInsightDate(iso: string): string {
     year: "numeric",
     timeZone: "UTC",
   });
+}
+
+/** Approved navigation label. The stored category stays "Cyber and GRC". */
+export function categoryLabel(category: string): string {
+  return category === "Cyber and GRC" ? "Cyber & GRC" : category;
+}
+
+export function categoryFromParam(param: string | undefined): InsightCategory | undefined {
+  if (!param) return undefined;
+  return INSIGHT_CATEGORIES.find((c) => categorySlug(c) === param);
+}
+
+/** Shareable index URL. Article URLs are not built here. */
+export function insightsHref(opts: { category?: string; q?: string; more?: boolean } = {}): string {
+  const params = new URLSearchParams();
+  if (opts.category) params.set("category", opts.category);
+  const q = opts.q?.trim();
+  if (q) params.set("q", q);
+  if (opts.more) params.set("more", "1");
+  const query = params.toString();
+  return query ? `/blog?${query}` : "/blog";
+}
+
+export function filterInsights(opts: { category?: string; q?: string }): Insight[] {
+  const category = categoryFromParam(opts.category);
+  const q = opts.q?.trim().toLowerCase() ?? "";
+  return insights.filter((insight) => {
+    if (category && insight.category !== category) return false;
+    if (!q) return true;
+    const haystack = [
+      insight.title,
+      insight.summary,
+      insight.standfirst,
+      insight.description,
+      insight.category,
+      categoryLabel(insight.category),
+      insight.jurisdiction,
+    ]
+      .join(" ")
+      .toLowerCase();
+    return haystack.includes(q);
+  });
+}
+
+export interface InsightIndexView {
+  /** Lead article. The configured feature when it is in the set, otherwise the newest match. */
+  lead: Insight | null;
+  latest: Insight[];
+  browse: Insight[];
+  hiddenCount: number;
+}
+
+/**
+ * Featured, then the two newest remaining, then the archive.
+ * One list, one sort. Sections are slices, not copies of the articles.
+ */
+export function composeInsightIndex(items: Insight[], showAllBrowse: boolean): InsightIndexView {
+  const configured = items.find((insight) => insight.featured);
+  const lead = configured ?? items[0] ?? null;
+  const rest = lead ? items.filter((insight) => insight.slug !== lead.slug) : [];
+  const latest = rest.slice(0, 2);
+  const archive = rest.slice(2);
+  const browse = showAllBrowse ? archive : archive.slice(0, BROWSE_PAGE_SIZE);
+  return {
+    lead,
+    latest,
+    browse,
+    hiddenCount: archive.length - browse.length,
+  };
 }

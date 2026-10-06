@@ -8,6 +8,8 @@ const article: Insight = {
     "How ISO/IEC 27001 certification and a SOC 2 examination differ, what US and UK buyers tend to ask for, and the factors that decide which to pursue first.",
   description:
     "ISO/IEC 27001 certification and SOC 2 reports compared for UK SaaS firms selling to the US: who issues each, type 1 and type 2, overlap and sequencing.",
+  summary:
+    "How ISO 27001 certification and a SOC 2 examination differ, and what US and UK buyers tend to ask for.",
   category: "US assurance",
   jurisdiction: "United Kingdom and United States",
   published: "2026-04-03",

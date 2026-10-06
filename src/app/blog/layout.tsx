@@ -4,12 +4,12 @@ import { SITE_CONFIG } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Insights",
   description:
-    "Analysis of cyber security, compliance, assurance and AI governance requirements in the UK, United States and GCC, with references to primary sources.",
+    "Analysis of cyber security, compliance and AI governance requirements across the UK, United States and GCC.",
   alternates: { canonical: `${SITE_CONFIG.url}/blog` },
   openGraph: {
     title: "Insights | Pixelette Certified",
     description:
-      "Analysis of cyber security, compliance, assurance and AI governance requirements in the UK, United States and GCC.",
+      "Analysis of cyber security, compliance and AI governance requirements across the UK, United States and GCC.",
     type: "website",
   },
 };

@@ -8,6 +8,8 @@ const article: Insight = {
     "The EU Artificial Intelligence Act can apply to organisations established outside the EU, including in the UK. This article explains when it may apply, how its obligations are staged following the 2026 amendments, and how UK organisations can assess their position.",
   description:
     "When the EU AI Act can apply to UK organisations, its staged application dates as amended in 2026, and practical steps for assessing your position.",
+  summary:
+    "When the EU AI Act can apply to a UK company, and how its obligations are staged after the 2026 amendments.",
   category: "AI governance",
   jurisdiction: "United Kingdom and European Union",
   published: "2026-03-22",

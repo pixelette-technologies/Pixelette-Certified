@@ -8,6 +8,8 @@ const article: Insight = {
     "The security questions UK cyber insurers commonly ask at application and renewal, why accurate answers matter, and how Cyber Essentials and ISO/IEC 27001 relate to the underwriting process.",
   description:
     "What UK cyber insurers commonly ask about security controls, the duty of fair presentation, and how Cyber Essentials and ISO/IEC 27001 relate to cover.",
+  summary:
+    "The security questions UK cyber insurers commonly ask at renewal, and how Cyber Essentials and ISO 27001 relate.",
   category: "Cyber and GRC",
   jurisdiction: "United Kingdom",
   published: "2026-03-27",

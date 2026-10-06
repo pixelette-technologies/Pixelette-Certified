@@ -8,6 +8,8 @@ const article: Insight = {
     "What a buyer is usually asking when a questionnaire mentions ISO/IEC 27001, how to describe your position accurately, and what evidence you can offer if you do not hold a certificate.",
   description:
     "How to respond when a supplier security questionnaire asks for ISO/IEC 27001: answering accurately, offering evidence, and deciding whether to certify.",
+  summary:
+    "What a questionnaire is usually asking when it mentions ISO 27001, and how to describe your position accurately.",
   category: "Cyber and GRC",
   jurisdiction: "International",
   published: "2026-04-07",

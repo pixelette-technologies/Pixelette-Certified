@@ -8,6 +8,8 @@ const article: Insight = {
     "What the Solicitors Regulation Authority requires of firms on confidentiality, systems and reporting, what it has said about cyber security, and how an ISO/IEC 27001 management system relates to those obligations.",
   description:
     "What the SRA Codes require on confidentiality, controls and reporting, what the SRA has found on law firm cyber security, and where ISO 27001 fits.",
+  summary:
+    "What the SRA requires of law firms on confidentiality and systems, and how an ISO 27001 management system relates.",
   category: "UK compliance",
   jurisdiction: "England and Wales",
   published: "2026-03-29",

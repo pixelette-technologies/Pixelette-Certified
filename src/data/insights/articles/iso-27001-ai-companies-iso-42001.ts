@@ -8,6 +8,8 @@ const article: Insight = {
     "ISO/IEC 27001 and ISO/IEC 42001 share a management system structure but address different risks. This article sets out what each covers, where they overlap, and what to consider when deciding whether to pursue one or both.",
   description:
     "How ISO/IEC 27001 and ISO/IEC 42001 relate for companies that build or use AI: shared structure, different risk domains, and how to decide on scope.",
+  summary:
+    "What ISO 27001 and ISO 42001 each cover, where the two management systems overlap, and how to decide on scope.",
   category: "AI governance",
   jurisdiction: "International",
   published: "2026-03-30",

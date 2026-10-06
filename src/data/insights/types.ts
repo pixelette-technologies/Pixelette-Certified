@@ -22,6 +22,11 @@ export const INSIGHT_CATEGORIES = [
 
 export type InsightCategory = (typeof INSIGHT_CATEGORIES)[number];
 
+/** Purpose-built diagrams. Add a key here only when a visual explains the article. */
+export const INSIGHT_VISUALS = ["gcc-landscape"] as const;
+
+export type InsightVisual = (typeof INSIGHT_VISUALS)[number];
+
 export type InsightBlock =
   /** A body paragraph. May contain bracketed source markers such as [1]. */
   | { type: "p"; text: string }
@@ -51,6 +56,21 @@ export interface Insight {
   standfirst: string;
   /** Meta description, around 150 characters. */
   description: string;
+  /**
+   * Archive scan line, about 18 to 22 words. The standfirst stays on the
+   * article page. This is the only sentence shown in Latest and Browse.
+   */
+  summary: string;
+  /**
+   * When set, this article is the configured featured insight on the index.
+   * Do not infer the feature from list order. At most one article should set it.
+   */
+  featured?: boolean;
+  /**
+   * Key for a purpose-built diagram on the index. Absent means the article
+   * stays typographic, including in the archive.
+   */
+  visual?: InsightVisual;
   category: InsightCategory;
   /** The jurisdiction the article addresses, e.g. "United Kingdom". */
   jurisdiction: string;

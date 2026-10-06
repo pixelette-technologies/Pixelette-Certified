@@ -58,11 +58,11 @@ Pixelette Certified is a consultancy. It is not a certification body and does no
 
 ## Insight categories
 
-- [UK compliance](https://pixelettecertified.com/blog/category/uk-compliance)
-- [US assurance](https://pixelettecertified.com/blog/category/us-assurance)
-- [GCC regulation](https://pixelettecertified.com/blog/category/gcc-regulation)
-- [AI governance](https://pixelettecertified.com/blog/category/ai-governance)
-- [Cyber and GRC](https://pixelettecertified.com/blog/category/cyber-and-grc)
+- [UK compliance](https://pixelettecertified.com/blog?category=uk-compliance)
+- [US assurance](https://pixelettecertified.com/blog?category=us-assurance)
+- [GCC regulation](https://pixelettecertified.com/blog?category=gcc-regulation)
+- [AI governance](https://pixelettecertified.com/blog?category=ai-governance)
+- [Cyber & GRC](https://pixelettecertified.com/blog?category=cyber-and-grc)
 
 ## Evidence policy
 

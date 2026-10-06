@@ -8,6 +8,10 @@ const article: Insight = {
     "Saudi Arabia and Qatar each have national cyber security frameworks, sector rules for financial institutions and a personal data protection law. This overview sets out the main instruments, who issues them and how their applicability depends on the type of organisation.",
   description:
     "An overview of the main cyber security and data protection frameworks in Saudi Arabia and Qatar, who issues them, and which organisations they apply to.",
+  summary:
+    "The main cyber security, financial sector and data protection instruments in Saudi Arabia and Qatar, and who they apply to.",
+  featured: true,
+  visual: "gcc-landscape",
   category: "GCC regulation",
   jurisdiction: "Saudi Arabia and Qatar",
   published: "2026-09-25",

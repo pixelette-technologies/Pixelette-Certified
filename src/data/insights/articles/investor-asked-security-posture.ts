@@ -8,6 +8,8 @@ const article: Insight = {
     "Investors increasingly include information security in due diligence. This article explains how that review differs from a customer questionnaire, the themes it commonly covers, and how to present your position accurately.",
   description:
     "What investors commonly ask about information security in due diligence, the evidence that carries weight, and how to present gaps and plans honestly.",
+  summary:
+    "How investor due diligence on information security differs from a customer questionnaire, and how to present your position.",
   category: "Cyber and GRC",
   jurisdiction: "International",
   published: "2026-03-28",

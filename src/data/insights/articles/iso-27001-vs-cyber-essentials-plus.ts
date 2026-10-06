@@ -8,6 +8,8 @@ const article: Insight = {
     "Cyber Essentials Plus and ISO/IEC 27001 are often compared as if they were alternatives. They assess different things, are issued under different arrangements, and tend to be requested by different buyers.",
   description:
     "How Cyber Essentials Plus and ISO/IEC 27001 differ in scope, assessment and recognition, which buyers tend to ask for each, and how they can work together.",
+  summary:
+    "How Cyber Essentials Plus and ISO 27001 differ in what they assess, and which buyers tend to ask for each.",
   category: "UK compliance",
   jurisdiction: "United Kingdom",
   published: "2026-03-26",

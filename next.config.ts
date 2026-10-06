@@ -96,13 +96,13 @@ const nextConfig: NextConfig = {
     },
 
     // Old Insight category archives, mapped to the five new categories.
-    { source: "/blog/category/iso-27001", destination: "/blog/category/cyber-and-grc", permanent: true },
-    { source: "/blog/category/advisory", destination: "/blog/category/cyber-and-grc", permanent: true },
-    { source: "/blog/category/soc-2", destination: "/blog/category/us-assurance", permanent: true },
-    { source: "/blog/category/fintech", destination: "/blog/category/uk-compliance", permanent: true },
-    { source: "/blog/category/healthcare", destination: "/blog/category/uk-compliance", permanent: true },
-    { source: "/blog/category/legal", destination: "/blog/category/uk-compliance", permanent: true },
-    { source: "/blog/category/compliance", destination: "/blog/category/uk-compliance", permanent: true },
+    { source: "/blog/category/iso-27001", destination: "/blog?category=cyber-and-grc", permanent: true },
+    { source: "/blog/category/advisory", destination: "/blog?category=cyber-and-grc", permanent: true },
+    { source: "/blog/category/soc-2", destination: "/blog?category=us-assurance", permanent: true },
+    { source: "/blog/category/fintech", destination: "/blog?category=uk-compliance", permanent: true },
+    { source: "/blog/category/healthcare", destination: "/blog?category=uk-compliance", permanent: true },
+    { source: "/blog/category/legal", destination: "/blog?category=uk-compliance", permanent: true },
+    { source: "/blog/category/compliance", destination: "/blog?category=uk-compliance", permanent: true },
   ],
   headers: async () => [
     {

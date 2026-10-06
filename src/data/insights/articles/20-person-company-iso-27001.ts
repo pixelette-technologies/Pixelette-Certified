@@ -8,6 +8,8 @@ const article: Insight = {
     "ISO/IEC 27001 is written to apply to organisations of any size. This article explains how it scales to a small company, what tends to be simpler, where the real constraints lie and how to judge whether the timing is right.",
   description:
     "How ISO/IEC 27001 applies to a company of around 20 people: scope, what is simpler at small scale, internal capacity and how audit time is set.",
+  summary:
+    "How ISO 27001 scales to a company of about 20 people, what is simpler, and where the real constraints lie.",
   category: "Cyber and GRC",
   jurisdiction: "International",
   published: "2026-03-23",

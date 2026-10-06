@@ -8,6 +8,8 @@ const article: Insight = {
     "Compliance automation platforms have become a common part of ISO/IEC 27001 and SOC 2 programmes. This article sets out what they typically do well, which parts of the work still depend on judgement, and how to decide what combination suits your organisation.",
   description:
     "What compliance automation platforms typically do for ISO/IEC 27001 and SOC 2 programmes, what still needs judgement, and how to decide on the right mix.",
+  summary:
+    "What compliance automation platforms typically contribute to an ISO 27001 or SOC 2 programme, and what still needs judgement.",
   category: "Cyber and GRC",
   jurisdiction: "International",
   published: "2026-03-25",

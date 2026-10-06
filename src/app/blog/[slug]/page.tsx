@@ -12,6 +12,8 @@ import {
   getInsight,
   getRelatedInsights,
   categorySlug,
+  categoryLabel,
+  insightsHref,
   formatInsightDate,
   type InsightBlock,
 } from "@/data/insights";
@@ -118,8 +120,8 @@ export default async function InsightPage({
           <Breadcrumbs schema={false} items={[{ name: "Insights", href: "/blog" }, { name: insight.title }]} />
 
           <header className="mb-12 mt-8">
-            <Link href={`/blog/category/${categorySlug(insight.category)}`} className="inline-block">
-              <Eyebrow>{insight.category}</Eyebrow>
+            <Link href={insightsHref({ category: categorySlug(insight.category) })} className="inline-block">
+              <Eyebrow>{categoryLabel(insight.category)}</Eyebrow>
             </Link>
             <h1 className="h1p mt-5">{insight.title}</h1>
             <p className="lead mt-6">{insight.standfirst}</p>

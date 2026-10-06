@@ -8,6 +8,8 @@ const article: Insight = {
     "Many ISO/IEC 27001 programmes grow beyond their original plan because important questions were left open at the start. This article sets out how to define scope, establish a starting position and agree the details in writing.",
   description:
     "How to scope an ISO/IEC 27001 programme: defining the ISMS scope, establishing your starting position and what to settle in writing before work begins.",
+  summary:
+    "How to define the scope of an ISO 27001 programme and settle the starting position before work begins.",
   category: "Cyber and GRC",
   jurisdiction: "International",
   published: "2026-03-24",

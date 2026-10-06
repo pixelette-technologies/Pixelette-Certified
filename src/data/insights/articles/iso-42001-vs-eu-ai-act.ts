@@ -8,6 +8,8 @@ const article: Insight = {
     "ISO/IEC 42001 and the EU Artificial Intelligence Act are often mentioned together but serve different purposes. This article explains how they relate, where a management system supports the Act's requirements, and how to describe your position accurately.",
   description:
     "How ISO/IEC 42001 relates to the EU AI Act: a voluntary management system standard alongside binding law, where they align, and what each does not cover.",
+  summary:
+    "How ISO 42001, a voluntary management system, relates to the EU AI Act as binding law, and what each does not cover.",
   category: "AI governance",
   jurisdiction: "European Union",
   published: "2026-03-21",
