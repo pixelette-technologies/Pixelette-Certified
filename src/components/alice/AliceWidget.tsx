@@ -59,7 +59,7 @@ export default function AliceWidget() {
               title="Chat with Alice about your requirements"
             >
               <img
-                src="/logos/favicon.svg"
+                src="/logos/favicon.png"
                 alt="Alice"
                 width={28}
                 height={28}
@@ -94,7 +94,7 @@ export default function AliceWidget() {
             <div className="z-10 flex shrink-0 items-center justify-between border-b border-footer-line px-5 py-4">
               <div className="flex items-center gap-3">
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-panel-line p-1.5">
-                  <img src="/logos/favicon.svg" alt="Alice" width={36} height={36} loading="lazy" decoding="async" className="h-full w-full" />
+                  <img src="/logos/favicon.png" alt="Alice" width={36} height={36} loading="lazy" decoding="async" className="h-full w-full" />
                 </div>
                 <div>
                   <div className="text-sm font-semibold text-footer-heading">Alice</div>

@@ -1016,7 +1016,7 @@ table.cmp-tokens tr:last-child td { border-bottom: 0; }
         <tr><td>app/api/newsletter/route.ts</td><td><b>16</b> hard-coded hexes in the email template</td></tr>
         <tr><td>components/alice/AliceWidget.tsx</td><td><b>14</b> hard-coded hexes</td></tr>
         <tr><td>src/lib/constants.ts</td><td><b>5</b> hexes in <code>BRAND_COLORS</code>, which still has no importers</td></tr>
-        <tr><td>public/logos/favicon.svg</td><td>Re-cut to <code>#044143</code> and <code>#14A4A9</code> to match the wordmark</td></tr>
+        <tr><td>public/logos/favicon.png</td><td>Re-cut to <code>#044143</code> and <code>#14A4A9</code> to match the wordmark</td></tr>
         <tr><td>scripts/check-legacy-tokens.mjs</td><td>Extend the pattern to catch the retired guide hexes, so the next drift fails the build</td></tr>
         <tr><td>Shared layer &mdash; not ours</td><td><b>Outline button border.</b> <code>.btn2</code> is identified only by its border and clears just 1.56:1 where WCAG 1.4.11 asks 3:1. Inherited from the guide, present in both systems. Raise separately; a dedicated token near <code>#879099</code> fixes it group-wide.</td></tr>
       </tbody>

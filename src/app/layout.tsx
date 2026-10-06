@@ -90,8 +90,8 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true },
   },
   icons: {
-    icon: "/logos/favicon.svg",
-    apple: "/logos/favicon.svg",
+    icon: "/logos/favicon.png",
+    apple: "/logos/favicon.png",
   },
 };
 
