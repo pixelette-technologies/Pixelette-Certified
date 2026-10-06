@@ -4,7 +4,7 @@ import { markets, marketHref } from "@/data/markets";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import CTASection from "@/components/sections/CTASection";
-import MarketsMap from "@/components/visuals/MarketsMap";
+import MarketsScope from "@/components/visuals/MarketsScope";
 import { ArrowRight } from "@/components/ui/icons";
 import { SITE_CONFIG } from "@/lib/constants";
 
@@ -34,7 +34,7 @@ export default function MarketsPage() {
       <section className="wash-left">
         <div className="wrap py-16 lg:py-24">
           <Breadcrumbs items={[{ name: "Markets" }]} />
-          <div className="mt-8 grid items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(260px,0.95fr)] lg:gap-12">
+          <div className="mt-8 grid items-start gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(280px,0.95fr)] lg:gap-14">
             <div className="max-w-[56ch]">
               <h1 className="h1p">Markets</h1>
               <p className="lead mt-6">
@@ -43,7 +43,7 @@ export default function MarketsPage() {
                 requirements that often vary by market.
               </p>
             </div>
-            <MarketsMap />
+            <MarketsScope />
           </div>
         </div>
       </section>
