@@ -4,7 +4,7 @@ Rebuild of the site footer to the Pixelette Technologies structure, and the addi
 
 - **Commits:** `f9274d5` (footer, dialog, policy corrections), `d41347d` (build fix) on `main`
 - **Branch:** `feat/group-footer-privacy-choices` (fast-forwarded into `main`, pushed)
-- **Status:** implemented, built and verified. Deployment still gated by the prerequisites in [[Website-Replacement-Implementation-2026-09-09#Before this can go live]].
+- **Status:** implemented, built and verified. Deployment still gated by the prerequisites in [[Website-Replacement-Implementation-2026-09-09#Before this can go live]]. On 6 October 2026 the group band was hidden, not removed. See [[Compression-Pass-2026-10-06]].
 
 The request was to copy the Technologies footer. The consent half turned out to be the larger piece of work, because copying their dialog copy onto this site would have published a false statement: theirs says no analytics run on their website, and two were running on every page of this one with no way to refuse them.
 
