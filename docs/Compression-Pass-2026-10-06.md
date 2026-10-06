@@ -5,7 +5,7 @@ Site-wide compression and visual differentiation, 6 October 2026. The strategic 
 - **Commits:** `000e45b` (the pass) and `cd1b905` (group band hidden, diamond offsets removed) on `main`
 - **Status:** implemented and pushed. Deployment still gated by the prerequisites in [[Strategic-Rebuild-Implementation-2026-09-25#Before this can go live]].
 
-The approved headline remains: "Build the assurance your customers, regulators and partners expect". Geographic focus remains the United Kingdom, the United States and the GCC. No public pricing was introduced.
+The approved headline remains: "Build the assurance your customers, regulators and partners expect". No public pricing was introduced. The geographic wording in this pass was later restated. See [[International-Positioning-2026-10-06]].
 
 ---
 
@@ -55,3 +55,4 @@ Recorded so a later pass does not treat these as done:
 - [[Group-Footer-and-Privacy-Choices-2026-09-18]]
 - [[Website-Replacement-Implementation-2026-09-09]]
 - [[Insights-Page-2026-10-06]]
+- [[International-Positioning-2026-10-06]]
