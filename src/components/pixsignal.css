@@ -63,11 +63,17 @@
 .sig__body {
   border-radius: 50%;
   overflow: hidden;
-  /* #065456, the founder's value, over most of the ball: a lighter lift at
-     the upper left (#14A4A9, the same hue toward white) and only a little
-     darker at the rim (#044143), so the ground stays a Certified petrol that
-     both the white and the dark pixels stand out against. */
-  background: radial-gradient(circle at 30% 22%, #14A4A9 0%, #065456 42%, #065456 78%, #044143 100%);
+  /* Brand petrol over most of the ball: a lighter lift at the upper left
+     (brand-signal) and only a little darker at the rim (brand-hover), so the
+     ground stays a Certified petrol that both the white and the dark pixels
+     stand out against. */
+  background: radial-gradient(
+    circle at 30% 22%,
+    var(--color-brand-signal) 0%,
+    var(--color-brand) 42%,
+    var(--color-brand) 78%,
+    var(--color-brand-hover) 100%
+  );
   box-shadow:
     inset 0 0 0 1px rgba(210, 239, 236, 0.75),
     inset 0 -3px 6px rgba(3, 26, 24, 0.22);

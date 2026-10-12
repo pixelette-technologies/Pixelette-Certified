@@ -15,18 +15,16 @@ import type { CSSProperties } from 'react';
  *   responding  a soft pulse through the centre                   .sig__core
  *   finished    one tiny flash, then it settles                   .sig__flash
  *
- * REVISED THE SAME DAY on the founder's review of the first build: "Remove tree
- * inside. Background make it more lighter #661A8E so the pixels are more clear
- * and distinct. Color of the pixels white and Dark purple." So:
+ * REVISED THE SAME DAY on the founder's review of the first build: remove the
+ * tree inside; lighten the sphere so the pixels read clearly; pixels white and
+ * dark only. On Certified the sphere is brand petrol (not Technologies purple):
  *   - there is no symbol in the ball. The pixels ARE the mark. Hover and the
  *     responding pulse, which the table attaches to "the Pix T symbol", act on
  *     a soft light at the centre of the current instead (`.sig__core`).
- *   - the sphere is #661A8E, his value, lit a little lighter at the top left
- *     and only a little darker at the rim, so it stays a light purple rather
- *     than fading to the dark band.
- *   - the pixels are white and the site's dark purple (--dark, #27033b) and
- *     nothing else: one reads light on the sphere, the other dark, so every
- *     square is distinct from the ground it moves over.
+ *   - the sphere is brand petrol, lit a little lighter at the top left and only
+ *     a little darker at the rim.
+ *   - the pixels are white and the site dark token (--dark) and nothing else:
+ *     one reads light on the sphere, the other dark, so every square is distinct.
  *
  * PURELY DECORATIVE. It is aria-hidden; the button that holds it carries the
  * accessible name, and thinking is also exposed as aria-busy on the chat log.

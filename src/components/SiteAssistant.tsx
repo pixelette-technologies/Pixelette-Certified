@@ -274,11 +274,12 @@ export function SiteAssistant({ context }: { context: PixContext }) {
      trackpad - a finger has no approach. The launcher is position: fixed, so
      its centre is measured once and again on resize, not on every move; each
      move is a subtraction, and React re-renders only when the answer flips. */
+  /* When the panel is open, `near && !open` already suppresses the approach
+     state for PixSignal. Clearing `near` here would be a synchronous setState
+     in an effect (react-hooks/set-state-in-effect); leave it and let the next
+     pointermove after close recompute. */
   useEffect(() => {
-    if (open) {
-      setNear(false);
-      return;
-    }
+    if (open) return;
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     let cx = 0;
     let cy = 0;
