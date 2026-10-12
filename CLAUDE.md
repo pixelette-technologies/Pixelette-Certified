@@ -1,38 +1,35 @@
 @AGENTS.md
 
-## Alice: AI Accreditation Advisor
+## Pix C: site assistant
 
-Alice is an AI-powered chatbot embedded on pixelettecertified.com. She acts as an expert accreditation consultant, elite salesperson, and lead qualification engine in a single conversation. She is powered by the Anthropic Claude API.
+Pix C is the isolated in-codebase site assistant for pixelettecertified.com. It answers from published page copy only (no LLM on the question path). Spec: `docs/PIX-AGENT-BUILD.md`. Persistent agent rule: `.cursor/rules/pix-c-assistant.mdc`.
 
 ### Architecture
 
-Alice lives inside this Next.js project to keep deployment simple and avoid CORS issues.
+- Brain: `src/lib/pix/` (`respond`, `retrieve`, `rules`, `enquiry`)
+- UI: `SiteAssistant`, `AssistantBoundary`, `PixSignal` + `assistant.css` / `pixsignal.css` (Certified petrol/teal)
+- KB: `scripts/build-pix-kb.mjs` → `src/content/pix-kb.json` (this site only)
+- Leads: `src/app/contact/actions.ts` → `src/lib/enquiries.ts` (server-side `scoreLead` only)
+- Mount: root `layout.tsx` with `pixContext()`
 
-- Backend: API routes under src/app/api/chat and related endpoints
-- Frontend: React components under src/components/alice
-- Logic: helpers, prompts, and integrations under src/lib/alice
-- Database: Supabase (added in a later phase)
-- Notifications: Resend for admin emails, Slack webhooks, Google Sheets
-
-### Coding Standards for Alice
+### Coding standards
 
 - TypeScript with strict typing
 - No emoji, no exclamation marks in any user-facing text
 - UK English spelling throughout
-- Use the existing Pixelette brand colours (navy, gold, teal)
-- Font: Plus Jakarta Sans where applicable
-- Short, punchy response discipline (default 2-4 sentences)
+- Certified brand colours (petrol / teal), not Technologies purple
 - Never expose API keys to the frontend
 - Never log secrets or API keys
+- Conversation is React state only (no cookie / localStorage / sessionStorage for chat)
 
-### Alice Personality
+### Scope
 
-Calm, expert, measured and warm. Never robotic, scripted, pushy or promotional. Adapts technical depth to match the visitor. Explains in plain English by default. Where it genuinely helps, moves the conversation toward discussing requirements with the team at pixelettecertified.com/contact. Never quotes prices or offers anything as free (rebuild specification, 25 September 2026).
+Governance, assurance, privacy and compliance readiness. Fail closed on claims. Never reuse Technologies’ `pix-kb.json`.
 
-### Key Data Sources
+### Scripts
 
-Alice's knowledge base comes from pixelettecertified.com. Published pricing, case studies, and team credentials are embedded in her system prompt. See src/lib/alice/systemPrompt.ts (to be implemented) for the full prompt.
+`npm run pix:build` → `pix:check` → `check:pix-sources` → `pix:test`
 
-### Current Development Phase
+### Supabase
 
-Setup phase. Installing dependencies, creating folder structure, adding environment variables. No functional code yet.
+Org **PIXELETTE**, project **Pixelette Certified** (`ykhctxgdtujepqimkeus`, `eu-west-2`). Contact + Pix C migrations applied. Point Vercel at this project’s URL and service role key. Alice’s old schema is retired with the Alice code. Vault: `docs/Pix-C-and-Supabase-Cutover-2026-10-12.md`.

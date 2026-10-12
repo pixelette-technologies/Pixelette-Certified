@@ -1,12 +1,17 @@
 import type { Metadata, Viewport } from "next";
 import { Newsreader, Outfit, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import "@/components/assistant.css";
+import "@/components/pixsignal.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ClientShell from "@/components/layout/ClientShell";
 import Analytics from "@/components/privacy/Analytics";
 import { OrganizationSchema } from "@/components/seo/JsonLd";
 import { SITE_CONFIG } from "@/lib/constants";
+import { AssistantBoundary } from "@/components/AssistantBoundary";
+import { SiteAssistant } from "@/components/SiteAssistant";
+import { pixContext } from "@/lib/pix/server-context";
 
 /* Display serif. Variable, so one file covers 300/400/500, and the opsz axis
    (6..72) lets the browser adjust contrast with size — which is what the
@@ -121,6 +126,9 @@ export default function RootLayout({
         </main>
         <Footer />
         <ClientShell />
+        <AssistantBoundary>
+          <SiteAssistant context={pixContext()} />
+        </AssistantBoundary>
         <Analytics />
       </body>
     </html>

@@ -8,7 +8,7 @@
 // a good look, so the promise and the mechanism ship together.
 
 import { NextRequest, NextResponse } from "next/server";
-import { getSupabaseServer } from "@/lib/alice/supabase";
+import { getSupabaseServer } from "@/lib/supabase/server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

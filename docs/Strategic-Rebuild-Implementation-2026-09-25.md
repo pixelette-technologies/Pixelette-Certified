@@ -74,8 +74,8 @@ Build gotcha: `.next/dev/types` from an old dev session referenced deleted pages
 ## Before this can go live
 
 1. **Legal review of the privacy policy** (§35 requires it). Changes: the delivery network and processors disclosed, the international transfers section rewritten (it no longer claims UK/EEA-first processing), and the false "chat messages are not stored" sentence corrected. **Chat retention period is still unstated**, which is a decision, not a fact in the repo.
-2. **Apply migrations 0005, 0006, 0007 in order** before deploying.
-3. Carried over: **confirm legal entity and company number** (`SITE_CONFIG`), environment variables, and the Alice adversarial script. The script now needs extra questions on pricing and "free" offers.
+2. **Supabase migrations** for contact + Pix C are applied on the new Pixelette Certified project (`ykhctxgdtujepqimkeus`). See [[Pix-C-and-Supabase-Cutover-2026-10-12]]. Point Vercel env at that project before relying on production inserts.
+3. Carried over: **confirm legal entity and company number** (`SITE_CONFIG`) and environment variables (Resend, Turnstile, cron secret, Supabase service role).
 4. **Phone number no longer rendered** on the contact page or in schema. `+44 20 7946 0958` is in Ofcom's drama range (see [[Group-Footer-and-Privacy-Choices-2026-09-18#Open questions]]). Restore only with a real number.
 5. **Practitioner experience** (`src/data/experience.ts`) uses only the specification's categories, with no specifics. It needs sign-off that each area is genuinely evidenced.
 6. Human read of the article sources flagged above.
@@ -91,6 +91,7 @@ Build gotcha: `.next/dev/types` from an old dev session referenced deleted pages
 | 6 October 2026, later | Insights index redesigned. See [[Insights-Page-2026-10-06]]. Go-live prerequisites unchanged. |
 | 6 October 2026, later still | Public geography restated as international support, with the UK, United States and GCC kept as routes. See [[International-Positioning-2026-10-06]]. Go-live prerequisites unchanged. |
 | 6 October 2026, evening | Markets index map replaced by a scope instrument. See [[Markets-Header-2026-10-06]]. Homepage hero redrawn as orbiting marks. See [[Hero-Marks-2026-10-06]]. Go-live prerequisites unchanged. |
+| 12 October 2026 | Alice replaced by Pix C. New Supabase org/project wired; assistant and contact migrations applied. See [[Pix-C-and-Supabase-Cutover-2026-10-12]]. |
 
 ## Related
 
@@ -101,3 +102,5 @@ Build gotcha: `.next/dev/types` from an old dev session referenced deleted pages
 - [[International-Positioning-2026-10-06]]
 - [[Markets-Header-2026-10-06]]
 - [[Hero-Marks-2026-10-06]]
+- [[Pix-C-and-Supabase-Cutover-2026-10-12]]
+

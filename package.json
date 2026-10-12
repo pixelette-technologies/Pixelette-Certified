@@ -4,20 +4,21 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/check-claims.mjs && next build",
+    "build": "node scripts/check-claims.mjs && npm run pix:check && npm run check:pix-sources && next build",
     "start": "next start",
     "lint": "eslint",
     "lint:legacy-tokens": "node scripts/check-legacy-tokens.mjs",
     "lint:claims": "node scripts/check-claims.mjs",
-    "verify": "npm run lint && npm run lint:legacy-tokens && npm run lint:claims && tsc --noEmit",
-    "compare:palette": "node scripts/build-palette-compare.mjs"
+    "verify": "npm run lint && npm run lint:legacy-tokens && npm run lint:claims && npm run pix:check && npm run check:pix-sources && npm run pix:test && tsc --noEmit",
+    "compare:palette": "node scripts/build-palette-compare.mjs",
+    "pix:build": "node scripts/build-pix-kb.mjs",
+    "pix:check": "node scripts/check-pix-kb.mjs",
+    "pix:test": "node scripts/test-pix.cjs",
+    "check:pix-sources": "node scripts/check-pix-kb-sources.mjs"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.82.0",
     "@marsidev/react-turnstile": "^1.5.0",
     "@supabase/supabase-js": "^2.101.1",
-    "axios": "^1.14.0",
-    "cheerio": "^1.2.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",
     "lucide-react": "^1.7.0",
@@ -25,11 +26,11 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "resend": "^6.10.0",
+    "server-only": "^0.0.1",
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/cheerio": "^0.22.35",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

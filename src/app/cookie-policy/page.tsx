@@ -30,8 +30,7 @@ export default function CookiePolicyPage() {
             <p>
               Cookies are small text files stored on your device when you visit a website. They help sites
               work and give site owners information about how the site is used. This page also covers similar
-              technologies such as local storage, which this site uses for privacy preferences and for the
-              Alice assistant.
+              technologies such as local storage, which this site uses for privacy preferences.
             </p>
           </section>
 
@@ -60,9 +59,9 @@ export default function CookiePolicyPage() {
 
             <h3 className="h4 mt-6 mb-2 text-brand">Browser storage</h3>
             <p>
-              We do not set any essential cookies. The site keeps two small items in your browser&apos;s
-              local storage so that features you use keep working. They are not sent to us with each page
-              request, and you can clear them at any time through your browser settings.
+              We do not set any essential cookies. The site keeps one small item in your browser&apos;s
+              local storage so that features you use keep working. It is not sent to us with each page
+              request, and you can clear it at any time through your browser settings.
             </p>
             <ul className="mt-2 list-disc space-y-2 pl-6">
               <li>
@@ -70,12 +69,11 @@ export default function CookiePolicyPage() {
                 analytics choice from Privacy choices (on or off). Held until you clear it or change the
                 choice.
               </li>
-              <li>
-                <strong className="font-semibold text-ink">alice_session_id</strong>: links this browser to
-                your conversation with Alice, our website assistant, so it can be resumed. Held until you
-                clear it.
-              </li>
             </ul>
+            <p className="mt-3">
+              The site assistant (Pix C) does not use cookies or local storage for the conversation. Chat
+              state lives only in the page until you reload.
+            </p>
           </section>
 
           <section>

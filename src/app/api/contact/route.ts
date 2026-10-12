@@ -18,9 +18,9 @@ import {
   formatBytes,
 } from "@/lib/contact/fileType";
 import { checkContactRateLimit } from "@/lib/contact/rateLimit";
-import { extractClientIp } from "@/lib/alice/rateLimit";
-import { verifyTurnstileToken } from "@/lib/alice/turnstile";
-import { getSupabaseServer } from "@/lib/alice/supabase";
+import { extractClientIp } from "@/lib/contact/clientIp";
+import { verifyTurnstileToken } from "@/lib/contact/turnstile";
+import { getSupabaseServer } from "@/lib/supabase/server";
 import { EMAIL_COLORS } from "@/lib/constants";
 
 /*

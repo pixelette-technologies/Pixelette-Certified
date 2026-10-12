@@ -1,0 +1,31 @@
+---
+description: Pix C site assistant — architecture, brand, Supabase project
+alwaysApply: true
+---
+
+# Pix C (site assistant)
+
+**Name:** Pix C (not Alice / Ada / Pix T). Spec: `docs/PIX-AGENT-BUILD.md`.
+
+## Hard rules
+
+- No LLM on the question path — `respond()` + this site’s `src/content/pix-kb.json` only.
+- `MIN_COVERAGE = 0.7`; price / timeline / abuse / injection / off-topic beat retrieval.
+- Fail closed on claims; never reuse Technologies’ KB or claims.
+- Chat is React state only (no cookie / localStorage / sessionStorage).
+- Secrets stay server-only (`pixContext()`, `lead-score`, enquiries).
+
+## Layout
+
+- Brain: `src/lib/pix/` · UI: `SiteAssistant` / `AssistantBoundary` / `PixSignal`
+- Mount: root `layout.tsx` · Leads: `contact/actions.ts` → `enquiries.ts` (score server-side)
+- Brand: petrol `#065456` / signal `#14A4A9` — not Technologies purple (`assistant.css`, `pixsignal.css`)
+- Keep `.visually-hidden-heading` and `.honeypot` CSS or the dock leaks “Website” / ask labels
+
+## Scripts
+
+`pix:build` · `pix:check` · `check:pix-sources` · `pix:test` (also in `build` / `verify`)
+
+## Supabase
+
+Org **PIXELETTE**, project **Pixelette Certified** (`ykhctxgdtujepqimkeus`). Migrations for `contact_submissions`, `contact_enquiries`, and `assistant_contacts` are applied. Contact form → `contact_submissions`; Pix C → `assistant_contacts` / `contact_enquiries`. Never commit `.env` (service role). Vault: `docs/Pix-C-and-Supabase-Cutover-2026-10-12.md`.

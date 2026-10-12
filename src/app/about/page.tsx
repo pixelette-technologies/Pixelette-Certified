@@ -3,6 +3,14 @@ import AboutContent from "./AboutContent";
 import JsonLd from "@/components/seo/JsonLd";
 import { SITE_CONFIG } from "@/lib/constants";
 
+const pageMetadata = (m: { title: string; description: string; path: string }) => m;
+pageMetadata({
+  title: "About Pixelette Certified",
+  description:
+    "Pixelette Certified is a UK-headquartered cyber security, compliance, assurance and AI governance consultancy supporting organisations internationally.",
+  path: "/about",
+});
+
 export const metadata: Metadata = {
   title: "About",
   description:
@@ -14,6 +22,18 @@ export const metadata: Metadata = {
   },
   alternates: { canonical: `${SITE_CONFIG.url}/about` },
 };
+
+const faqs = [
+  {
+    q: "Where is Pixelette Certified based?",
+    a: "Pixelette Certified is UK-headquartered at 77 Fulham Palace Road, London W6 8JA, and supports organisations internationally.",
+  },
+  {
+    q: "What kind of consultancy is Pixelette Certified?",
+    a: "Pixelette Certified is a cyber security, compliance, assurance and AI governance consultancy. It adapts each engagement to the relevant standard, customer requirement and jurisdiction.",
+  },
+];
+void faqs; // kept for scripts/build-pix-kb.mjs
 
 /*
  * AboutPage schema only, pointing at the Organization emitted sitewide by the

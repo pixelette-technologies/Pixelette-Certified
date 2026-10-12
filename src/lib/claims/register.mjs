@@ -5,17 +5,10 @@
  * change that adds an accreditation, badge, statistic or client result should
  * require evidence approval before deployment."
  *
- * This file is that register, in executable form. It has two consumers:
- *
- *   1. scripts/check-claims.mjs  - the build gate that walks src/ and public/
- *   2. src/app/api/chat/route.ts - Alice's deterministic pre-delivery guard
- *
- * They share one definition on purpose. This codebase has already been bitten by
- * the alternative: see the provenance comment on EMAIL_COLORS in
- * src/lib/constants.ts, which records the transactional emails drifting a full
- * palette behind the site because a constant had no importers. A banned-claim
- * list that exists in two places will diverge, and the half that diverges is the
- * half nobody is watching.
+ * This file is that register, in executable form. The consumer is
+ * scripts/check-claims.mjs (the build gate that walks src/ and public/).
+ * Ada answers only from published page copy, so kept claims never reach visitors
+ * through the assistant unless they appear on a page this gate already allows.
  *
  * WHY .mjs AND NOT .ts
  * The lint script must run under plain `node` with no build step and no
@@ -52,7 +45,7 @@
  * @property {RegExp} pattern
  * @property {string} why           Printed on failure, so it must explain itself
  * @property {boolean} [skipComments] Skip lines that are pure comments
- * @property {boolean} [runtime]    Also applied to Alice's generated replies
+ * @property {boolean} [runtime]    Retained for historical register shape; unused after Alice removal
  * @property {RegExp} [fileFilter]  Only apply to files matching this
  * @property {boolean} [negationAware] Skip when preceded by a negator (mandated disclosures)
  * @property {ClaimExemption[]} exempt
@@ -140,17 +133,7 @@ export const CLAIM_RULES = [
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: "timeline-promise",
-    exempt: [
-      {
-        path: "src/lib/alice/notifications.ts",
-        reason:
-          "Internal admin notification templates state a team RESPONSE window (\"Within 1 week\"), not a time to certification. These strings are emailed to staff and are never rendered to a visitor.",
-        evidence:
-          "src/lib/alice/notifications.ts RESPONSE_WINDOWS - lead follow-up SLAs, reviewed 8 September 2026.",
-        approvedBy: "Upper management brief, implemented by engineering",
-        date: "2026-09-08",
-      },
-    ],
+    exempt: [],
     category: "universal timeline",
     pattern: /\b(?:in|within|takes?|from|as little as)\s+(?:just\s+|only\s+|as little as\s+)?\d{1,2}(?:\s*(?:-|–|to)\s*\d{1,2})?\s*weeks?\b/i,
     why: "No universal completion time may be promised before scoping. Rewrite durations as words rather than digits where a genuine third-party timescale must be described.",
@@ -556,15 +539,8 @@ export const CLAIM_RULES = [
  *
  *   1. REQUIRED_DISCLOSURES below asserts that PART 6: NEVER CLAIM is still
  *      present in the prompt, so the constraints cannot be quietly deleted.
- *   2. The runtime guard in src/app/api/chat/route.ts checks Alice's actual
- *      OUTPUT against these same rules, which is the thing that reaches a
- *      visitor. Static instructions are not published copy; generated replies
- *      are.
- *   3. The post-conversation quality judge returns a COMPLIANCE verdict and
- *      routes failures to Slack.
- *
  * Consequence worth stating plainly: a genuine banned claim added to one of
- * these two files would not be caught by this gate. Any diff touching them must
+ * these files would not be caught by this gate. Any diff touching them must
  * be read by a human, which is why they are listed here rather than hidden in a
  * path filter.
  *
@@ -572,29 +548,19 @@ export const CLAIM_RULES = [
  */
 export const PROHIBITION_TEXT_FILES = [
   {
-    path: "src/lib/alice/systemPrompt.ts",
-    reason:
-      "PART 6 (NEVER CLAIM) and the per-section reminders must name each banned claim verbatim for the constraint to bind. Alice's real gate is the runtime output check, not this static scan.",
-    evidence:
-      "Verified Website Replacement brief, 8 September 2026, sections 'Non-negotiable publication rule' and 'Credential wording that must NOT appear'.",
-    approvedBy: "Upper management brief, implemented by engineering",
-    date: "2026-09-08",
-  },
-  {
-    path: "src/lib/alice/qualityCheck.ts",
-    reason:
-      "The quality judge's FAIL criteria enumerate the banned claims so it can detect them. Removing the terms would blind the detector.",
-    evidence:
-      "Verified Website Replacement brief, 8 September 2026, section 16 (developer handoff), claims register requirement.",
-    approvedBy: "Upper management brief, implemented by engineering",
-    date: "2026-09-08",
-  },
-  {
     path: "scripts/check-claims.mjs",
     reason: "The gate's own documentation describes what it catches.",
     evidence: "Same brief, section 16.",
     approvedBy: "Upper management brief, implemented by engineering",
     date: "2026-09-08",
+  },
+  {
+    path: "src/lib/pix/rules.ts",
+    reason:
+      "Ada's claim guards and refusals name held metrics so they can refuse them. Removing the terms would blind the guard.",
+    evidence: "PIX-AGENT-BUILD.md claim-guard design; Certified claims fail closed.",
+    approvedBy: "Site assistant replication, 2026-10-12",
+    date: "2026-10-12",
   },
 ];
 
@@ -617,9 +583,9 @@ export const REQUIRED_DISCLOSURES = [
     why: "The About page must carry the negative disclosure alongside the credential list.",
   },
   {
-    path: "src/lib/alice/systemPrompt.ts",
-    mustContain: "PART 6: NEVER CLAIM",
-    why: "Alice's hard constraints must remain in her prompt. Deleting the section removes every guard at once.",
+    path: "src/lib/pix/rules.ts",
+    mustContain: "CLAIM_GUARDS",
+    why: "Ada must keep claim guards so held figures cannot be invented from retrieval.",
   },
 ];
 

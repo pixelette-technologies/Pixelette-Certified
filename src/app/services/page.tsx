@@ -9,6 +9,14 @@ import CTASection from "@/components/sections/CTASection";
 import { ArrowRight } from "@/components/ui/icons";
 import { SITE_CONFIG } from "@/lib/constants";
 
+const pageMetadata = (m: { title: string; description: string; path: string }) => m;
+pageMetadata({
+  title: "Services",
+  description:
+    "ISO 27001, AI governance and ISO 42001, SOC 2 readiness, cyber assurance and testing, privacy, vCISO, business continuity and GCC regulatory compliance.",
+  path: "/services",
+});
+
 export const metadata: Metadata = {
   title: "Services",
   description:
@@ -21,6 +29,14 @@ export const metadata: Metadata = {
   },
   alternates: { canonical: `${SITE_CONFIG.url}/services` },
 };
+
+const faqs = [
+  {
+    q: "What services does Pixelette Certified offer?",
+    a: "Core services include ISO 27001 and information security, AI governance and ISO 42001, SOC 2 readiness, cyber assurance and testing, privacy and data governance, vCISO and GRC advisory, business continuity and ISO 22301, and GCC regulatory compliance.",
+  },
+];
+void faqs; // kept for scripts/build-pix-kb.mjs
 
 /*
  * The services hub (§14). Eight core services first, then the specialist

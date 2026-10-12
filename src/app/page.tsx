@@ -9,17 +9,50 @@ import CTASection from "@/components/sections/CTASection";
 import JsonLd from "@/components/seo/JsonLd";
 import { SITE_CONFIG } from "@/lib/constants";
 
+/** Extractable for the site assistant KB builder (exact literals only). */
+const pageMetadata = (m: { title: string; description: string; path: string }) => m;
+const homeMeta = pageMetadata({
+  title: "Pixelette Certified | Cyber Security, Compliance & AI Governance",
+  description:
+    "Pixelette Certified helps organisations meet cyber security, compliance and AI governance requirements. We support organisations internationally, adapting each engagement to the relevant standard, customer requirement and jurisdiction.",
+  path: "/",
+});
+
 export const metadata: Metadata = {
   /*
    * `absolute` because the root layout applies a "%s | Pixelette Certified"
    * template, which would otherwise repeat the name.
    */
   title: {
-    absolute: "Pixelette Certified | Cyber Security, Compliance & AI Governance",
+    absolute: homeMeta.title,
   },
-  description: SITE_CONFIG.description,
+  description: homeMeta.description,
   alternates: { canonical: SITE_CONFIG.url },
 };
+
+const faqs = [
+  {
+    q: "What does Pixelette Certified do?",
+    a: "Pixelette Certified helps organisations meet cyber security, compliance and AI governance requirements. We support organisations internationally, adapting each engagement to the relevant standard, customer requirement and jurisdiction.",
+  },
+  {
+    q: "Do you help with ISO 27001?",
+    a: "Yes. We provide ISO 27001 readiness and implementation: scope, risk assessment, ISMS, Statement of Applicability, internal audit and support through independent certification.",
+  },
+  {
+    q: "What is AI governance and ISO 42001?",
+    a: "AI governance is accountable structure for the AI your organisation builds, buys and uses. ISO 42001 readiness is one recognised route where certification is sought; other frameworks may apply depending on your market.",
+  },
+  {
+    q: "How do you approach privacy and data governance?",
+    a: "We help organisations establish privacy and data governance that matches the jurisdictions and customer requirements that apply to them, including programmes that sit alongside information security management.",
+  },
+  {
+    q: "How is an engagement agreed?",
+    a: "Following an initial review, we define the scope, delivery approach and proposed engagement in writing before work begins.",
+  },
+];
+void faqs; // kept for scripts/build-pix-kb.mjs
 
 /**
  * Six sections, then the footer: hero, services, pathway, markets, AI

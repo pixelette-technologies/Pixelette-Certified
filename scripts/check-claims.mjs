@@ -4,7 +4,7 @@
  * Brief §16: "A website copy change that adds an accreditation, badge, statistic
  * or client result should require evidence approval before deployment." This is
  * that gate. The rules themselves live in src/lib/claims/register.mjs, which is
- * shared with Alice's runtime guard so the two can never drift.
+ * for published site copy.
  *
  * Modelled on check-legacy-tokens.mjs, with three deliberate differences:
  *
