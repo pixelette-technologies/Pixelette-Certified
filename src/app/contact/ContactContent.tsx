@@ -286,9 +286,9 @@ export default function ContactContent() {
 
                     <div>
                       <label htmlFor="email" className="label">
-                        Work email *
+                        Email *
                       </label>
-                      <input id="email" name="email" type="email" required autoComplete="email" maxLength={CONTACT_LIMITS.email.max} placeholder="you@company.com" value={form.email} onChange={handleChange} className="input" />
+                      <input id="email" name="email" type="email" required autoComplete="email" maxLength={CONTACT_LIMITS.email.max} placeholder="you@example.com" value={form.email} onChange={handleChange} className="input" />
                     </div>
 
                     <div>

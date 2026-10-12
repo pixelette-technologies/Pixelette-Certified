@@ -105,9 +105,9 @@ export const UPLOAD_LIMITS = {
   allowedExtensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".csv", ".txt", ".png", ".jpg", ".jpeg"],
 } as const;
 
-// Effective date of /privacy-policy ("Last updated: 25 September 2026"). Stored with
-// every submission so we can prove which policy version the person consented to.
-export const PRIVACY_POLICY_VERSION = "2026-09-25";
+// Effective date of /privacy-policy ("Effective 12 October 2026 · Version 1.0").
+// Stored with every submission so we can prove which policy version the person consented to.
+export const PRIVACY_POLICY_VERSION = "2026-10-12";
 
 // The exact statement the visitor agrees to by ticking the consent box. Stored
 // verbatim with each submission (UK GDPR Art. 7(1) — ability to demonstrate
@@ -123,7 +123,7 @@ export const CONSENT_STATEMENT =
 // apply to the file as well as the row. That promise is what the purge cron
 // exists to keep.
 export const CONSENT_NOTICE =
-  "We use these details only to respond to your enquiry. Lawful basis: consent (UK GDPR Art. 6(1)(a)). Any document you attach is held in access-controlled storage under the same terms. We retain enquiries and attachments for 24 months, and you can withdraw consent at any time by emailing privacy@pixelettecertified.com.";
+  "We use these details only to respond to your enquiry. Lawful basis: consent (UK GDPR Art. 6(1)(a)). Any document you attach is held in access-controlled storage under the same terms. We retain enquiries and attachments for 24 months, and you can withdraw consent at any time by emailing info@pixelettecertified.com.";
 
 /**
  * Marketing opt-in, kept entirely separate from the privacy consent above.

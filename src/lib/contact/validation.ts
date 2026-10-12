@@ -138,7 +138,7 @@ export function validateContact(body: unknown): ContactValidationResult {
   }
 
   /*
-   * No free-provider blocking. "Work email" is a nudge, not a rule: sole traders
+   * No free-provider blocking. "Email" is a nudge, not a rule: sole traders
    * and fractional consultants legitimately use personal addresses.
    */
   if (!EMAIL_RE.test(email) || email.length > CONTACT_LIMITS.email.max) {

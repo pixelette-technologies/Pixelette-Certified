@@ -511,7 +511,7 @@ export async function POST(request: Request) {
                 </td>
               </tr>
             </table>
-            ${marketingOptIn ? `<p style="color: rgba(255,255,255,0.5); font-size: 12px; line-height: 1.6; margin: 0;">You also asked to receive occasional compliance insights from us. You can unsubscribe at any time by replying to this email or writing to privacy@pixelettecertified.com.</p>` : ""}
+            ${marketingOptIn ? `<p style="color: rgba(255,255,255,0.5); font-size: 12px; line-height: 1.6; margin: 0;">You also asked to receive occasional compliance insights from us. You can unsubscribe at any time by replying to this email or writing to info@pixelettecertified.com.</p>` : ""}
           </div>
 
           <div style="background: ${EMAIL_COLORS.deep}; padding: 20px 32px; text-align: center; border-top: 1px solid rgba(111,227,203,0.15);">

@@ -9,7 +9,7 @@ Companion to [Crawl-Report-Issues-Verification.md](Crawl-Report-Issues-Verificat
 > |---|---|---|
 > | Q1 | Filter `ServicesGrid` to routed services | **Done differently.** Homepage rebuilt; three duplicate slug lists consolidated into `getRoutedServices()` |
 > | M1 | Strip case-study figures, keep narrative | **Moot.** Case-studies route withdrawn with 301s; `Testimonials.tsx` deleted. Any future case study must satisfy the evidence type in `caseStudies.ts` |
-> | M2 / M3 | Publish `Pixelette Group Ltd` / `07251823` in footer and privacy policy | **On hold.** Values are in `SITE_CONFIG`, but the brief says the current number must not be reused. Now go-live blocker 2 pending written confirmation of the contracting entity |
+> | M2 / M3 | Publish `Pixelette Group Ltd` / `17506745` in footer and privacy policy | **On hold.** Values are in `SITE_CONFIG`, but the brief says the current number must not be reused. Now go-live blocker 2 pending written confirmation of the contracting entity |
 > | M4 | Standardise on "9 active certifications" | **Reversed.** The aggregate was one person's eight credentials plus a paid corporate membership; removed as an unsupported claim. Credentials now publish individually from `credentials.ts`, with FIP, CEH, IRCA and CQI withheld |
 > | Q9 | Add `/services` + 3 case-study URLs to sitemap | **Partly done.** `/services` is in the sitemap; case-study URLs are not, because the route no longer exists |
 > | Q5, Q6, Q8 | Dropped / leave as-is | Unchanged |
@@ -129,27 +129,27 @@ Required edits across 6 files (synchronised — leaving Alice stale while editin
 
 ### Verified problem
 The privacy policy correctly states *"Pixelette Certified is a trading name of Pixelette Group Ltd, registered in England and Wales"* ([src/app/privacy-policy/page.tsx:26](src/app/privacy-policy/page.tsx#L26)). But:
-- No Companies House number (`07251823`) anywhere in `src/` (`grep` returns zero matches).
+- No Companies House number (`17506745`) anywhere in `src/` (`grep` returns zero matches).
 - The footer copyright line names both entities but omits registration number, registered office, and the trading-name relationship.
 
 ### Locations where company identity / legal info appears
 
 | File:line | Current content | Gap |
 |---|---|---|
-| [src/lib/constants.ts:10](src/lib/constants.ts#L10) | `address: "66 Paul Street, London, EC2A 4NA, United Kingdom"` | No registered office distinction, no Co. No. |
+| [src/lib/constants.ts:10](src/lib/constants.ts#L10) | `address: "77 Fulham Palace Road, London W6 8JA"` | No registered office distinction, no Co. No. |
 | [src/components/layout/Footer.tsx:165](src/components/layout/Footer.tsx#L165) | `© 2026 Pixelette Group, Pixelette Certified. All rights reserved.` | No Co. No., no "Registered in England and Wales" |
 | [src/app/privacy-policy/page.tsx:26-28](src/app/privacy-policy/page.tsx#L26-L28) | Trading-name disclosure correct | No Co. No. |
 | [src/app/about/AboutContent.tsx](src/app/about/AboutContent.tsx) | "Our Story" mentions Pixelette Group decade-long | No legal-entity identification |
 | [src/app/contact/ContactContent.tsx](src/app/contact/ContactContent.tsx) | Contact details | No legal entity info |
 
 ### Decisions logged (M2 + M3)
-- **M2 (legal entity data):** Confirmed values — `legalEntity: "Pixelette Group Ltd"`, `companyNumber: "07251823"`, `jurisdiction: "England and Wales"`. Add as new fields on `SITE_CONFIG` in [constants.ts](src/lib/constants.ts).
-- **M3 (registered office):** Companies House lookup against Co. No. 07251823 confirms `66 Paul Street, London, EC2A 4NA` is correct. No address change needed in code.
+- **M2 (legal entity data):** Confirmed values — `legalEntity: "Pixelette Group Ltd"`, `companyNumber: "17506745"`, `jurisdiction: "England and Wales"`. Add as new fields on `SITE_CONFIG` in [constants.ts](src/lib/constants.ts).
+- **M3 (registered office):** Companies House lookup against Co. No. 17506745 confirms `66 Paul Street, London, EC2A 4NA` is correct. No address change needed in code.
 
 Required edits across 3 files:
 - [src/lib/constants.ts](src/lib/constants.ts) — add `legalEntity`, `companyNumber`, `jurisdiction` fields to `SITE_CONFIG`
-- [src/components/layout/Footer.tsx:162-176](src/components/layout/Footer.tsx#L162-L176) — bottom bar to display *"Pixelette Group Ltd · Company No. 07251823 · Registered in England and Wales"*, referencing SITE_CONFIG
-- [src/app/privacy-policy/page.tsx:25-29](src/app/privacy-policy/page.tsx#L25-L29) — section 1 to add "under company number 07251823" after the existing trading-name disclosure
+- [src/components/layout/Footer.tsx:162-176](src/components/layout/Footer.tsx#L162-L176) — bottom bar to display *"Pixelette Group Ltd · Company No. 17506745 · Registered in England and Wales"*, referencing SITE_CONFIG
+- [src/app/privacy-policy/page.tsx:25-29](src/app/privacy-policy/page.tsx#L25-L29) — section 1 to add "under company number 17506745" after the existing trading-name disclosure
 
 External follow-up (outside this repo): proposal template still carries `77 Fulham Palace Road` — needs aligning to the registered office 66 Paul Street.
 
@@ -240,10 +240,10 @@ All decisions are logged. No code changes have been made yet — this list is th
 | [src/app/case-studies/page.tsx](src/app/case-studies/page.tsx) | 15 | Strip 340% / 60-day / 35% / six-figure from result lines at 31, 43, 55 |
 | [src/app/case-studies/[slug]/page.tsx](src/app/case-studies/[slug]/page.tsx) | 15 | Strip unverified figures from UK FinTech, AI SaaS, Healthcare metric arrays; rewrite FinTech testimonial "sixty days" line |
 | [src/lib/alice/systemPrompt.ts](src/lib/alice/systemPrompt.ts) | 7, 14, 15 | Strip case-study figures (lines 139-153, 286-288). Restructure credentials block (157-167) to "9 active certifications…" + separate corporate membership line |
-| [src/components/layout/Footer.tsx](src/components/layout/Footer.tsx) | 6, 13 | Bottom bar to display *"Pixelette Group Ltd · Company No. 07251823 · Registered in England and Wales"* via SITE_CONFIG refs |
+| [src/components/layout/Footer.tsx](src/components/layout/Footer.tsx) | 6, 13 | Bottom bar to display *"Pixelette Group Ltd · Company No. 17506745 · Registered in England and Wales"* via SITE_CONFIG refs |
 | [src/lib/constants.ts](src/lib/constants.ts) | 6, 13 | Add `legalEntity`, `companyNumber`, `jurisdiction` fields to SITE_CONFIG |
 | [src/app/contact/ContactContent.tsx](src/app/contact/ContactContent.tsx) | 14 | Trust-signal text at line 446 → "9 active certifications across IRCA, PECB, IAPP, ISACA, and EC-Council, including our own ISO 27001 Certified Practice" |
-| [src/app/privacy-policy/page.tsx](src/app/privacy-policy/page.tsx) | 6, 13 | Section 1 to add "under company number 07251823" after the existing trading-name disclosure |
+| [src/app/privacy-policy/page.tsx](src/app/privacy-policy/page.tsx) | 6, 13 | Section 1 to add "under company number 17506745" after the existing trading-name disclosure |
 | [src/app/sitemap.ts](src/app/sitemap.ts) | 19 | Add `/services` (hard-coded) + iterate `caseStudies` from `case-studies/page.tsx` to emit the 3 detail URLs |
 | [src/app/about/AboutContent.tsx](src/app/about/AboutContent.tsx) | 14 | **No change** — cards make no count claim |
 
@@ -255,7 +255,7 @@ All decisions are logged. No code changes have been made yet — this list is th
 |---|---|---|---|
 | Q1 (Issue 8) | How to fix 12 homepage 404s? | **C** — filter `ServicesGrid` to the 10 routed services + add "View all services" link to `/services` | See Issue 8 above |
 | M1 (Issues 7+15) | Case study unverified figures? | **Option 2** — strip figures, keep timeline/narrative | See Issue 7+15 above |
-| M2 (Issues 6+13) | Legal entity data for SITE_CONFIG? | **Confirmed** — `legalEntity: "Pixelette Group Ltd"`, `companyNumber: "07251823"`, `jurisdiction: "England and Wales"` | See Issues 6+13 above |
+| M2 (Issues 6+13) | Legal entity data for SITE_CONFIG? | **Confirmed** — `legalEntity: "Pixelette Group Ltd"`, `companyNumber: "17506745"`, `jurisdiction: "England and Wales"` | See Issues 6+13 above |
 | M3 (Issues 6+13) | Registered office per Companies House? | **66 Paul Street, London, EC2A 4NA** — site is correct, no code change to the `address` field | See Issues 6+13 above |
 | Q5 (Issue 4) | "Beat any quote by 10%"? | **Dropped** — commitment doesn't exist in current artefacts | See Issue 4 above |
 | Q6 (Issue 10) | Pricing figures on site? | **Dropped** — price opacity is by design | See Issue 10 above |

@@ -7,7 +7,7 @@ export const SITE_CONFIG = {
   email: "info@pixelettecertified.com",
   phone: "+44 20 7946 0958",
   phoneTel: "+442079460958",
-  address: "66 Paul Street, London, EC2A 4NA, United Kingdom",
+  address: "77 Fulham Palace Road, London W6 8JA",
 
   /*
    * GO-LIVE BLOCKER, and the last thing outstanding before this release ships.
@@ -24,8 +24,8 @@ export const SITE_CONFIG = {
    * and the Organization JSON-LD, so confirming the entity is a one-place edit.
    * Do not deploy to production until it has been confirmed in writing.
    */
-  legalEntity: "Pixelette Group Ltd",
-  companyNumber: "07251823",
+  legalEntity: "Pixelette Certified",
+  companyNumber: "17506745",
   jurisdiction: "England and Wales",
   /** Navigation routes. Not a limit on where an engagement can be supported. */
   regions: ["United Kingdom", "United States", "GCC", "International"],

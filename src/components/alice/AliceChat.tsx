@@ -272,7 +272,7 @@ export default function AliceChat({ onClose, onCloseRefReady }: AliceChatProps) 
 
               <div>
                 <label htmlFor="alice-email" className="mono mb-1.5 block text-[11px] uppercase tracking-[0.09em] text-footer-link">
-                  Work email
+                  Email
                 </label>
                 <input
                   id="alice-email"
