@@ -620,7 +620,8 @@ async function sendNotification(enquiry: Enquiry, stored: LegStatus): Promise<Le
     // below is how you find out that it was needed.
     if (response.status === 422) {
       logFailure('resend send', enquiry.id, 'status=422 retrying without reply_to');
-      const { reply_to: _dropped, ...withoutReplyTo } = payload;
+      const withoutReplyTo = { ...payload };
+      delete withoutReplyTo.reply_to;
       response = await send(withoutReplyTo);
     }
 

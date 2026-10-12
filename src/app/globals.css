@@ -110,6 +110,9 @@
 
   /* semantic */
   --color-danger: #B42318;
+  --color-warning: #8F4208;         /* form field error text */
+  --color-warning-border: #B4540F;  /* invalid input border */
+  --color-ok: #7EE7A8;              /* live / success chip on dark mock */
 
   /* ========================= END BRAND LAYER ============================
      Everything below is COMMON to every Pixelette site. Changing it here

@@ -1,22 +1,25 @@
-/* Map assistant tokens onto Certified brand (petrol / teal), with hex
-   fallbacks so the widget never inherits Technologies purple. */
+/* Map assistant tokens onto Certified brand (petrol / teal). Hex lives in
+   globals.css only; these aliases never inherit Technologies purple. */
 :root {
-  --brand: var(--color-brand, #065456);
-  --brand-hover: var(--color-brand-hover, #044143);
-  --brand-tint: var(--color-brand-tint, #e6f4f3);
-  --ink: var(--color-ink, #0a0a0a);
-  --body: var(--color-body, #3f4e4e);
-  --muted: var(--color-muted, #5a6c6c);
-  --muted-2: var(--color-soft, #5f7070);
-  --paper: var(--color-page, #ffffff);
-  --line: var(--color-line, #e1eae9);
-  --line-2: var(--color-line-card, #dee8e7);
-  --line-3: var(--color-line-pill, #dce6e5);
-  --line-4: var(--color-line-strong, #c2d3d1);
+  --brand: var(--color-brand);
+  --brand-hover: var(--color-brand-hover);
+  --brand-tint: var(--color-brand-tint);
+  --ink: var(--color-ink);
+  --body: var(--color-body);
+  --muted: var(--color-muted);
+  --muted-2: var(--color-soft);
+  --paper: var(--color-page);
+  --line: var(--color-line);
+  --line-2: var(--color-line-card);
+  --line-3: var(--color-line-pill);
+  --line-4: var(--color-line-strong);
   --serif: var(--font-display, Georgia, serif);
   --mono: var(--font-data, ui-monospace, monospace);
-  --dark: var(--color-footer, #052a2b);
+  --dark: var(--color-footer);
   --gutter: 20px;
+  --warn: var(--color-warning);
+  --warn-border: var(--color-warning-border);
+  --ok: var(--color-ok);
 }
 
 /* ------------------------------------------------------- site assistant --
@@ -127,7 +130,7 @@
 .asst-launch--signal.is-labelled:not(.asst-launch--open) {
   padding-left: 20px;
   /* Light, on the founder's review (2026-10-02): the brand tint, so the
-     #065456 ball stands out against the pill instead of sinking into it. */
+     brand ball stands out against the pill instead of sinking into it. */
   background: var(--brand-tint);
   box-shadow:
     inset 0 0 0 1px rgba(6, 84, 86, 0.18),
@@ -336,7 +339,7 @@
   line-height: 1.55;
   padding: 10px 13px;
   border-radius: 12px;
-  background: #f5f7fa;
+  background: var(--color-band);
   color: var(--body);
 }
 
@@ -517,13 +520,13 @@
 }
 
 .asst-review [aria-invalid='true'] {
-  border-color: #b4540f;
+  border-color: var(--warn-border);
 }
 
 .asst-review-error {
   font-size: 12px;
   font-weight: 400;
-  color: #8f4208;
+  color: var(--warn);
 }
 
 .asst-review-actions {
@@ -865,7 +868,7 @@
 .art-bridge {
   margin-top: 54px;
   padding: 30px 32px;
-  background: #F7FAFA;
+  background: var(--color-band);
   border-radius: 12px;
   max-width: 68ch;
 }
@@ -1016,7 +1019,7 @@
 
 .sph__plane--ground {
   transform: translateZ(-90px);
-  background: #f4f7fa;
+  background: var(--color-band);
   border-color: var(--line-2);
 }
 
@@ -1024,7 +1027,7 @@
    than as a sci-fi floor because it is thin, grey and square. */
 .sph__plane--grid {
   transform: translateZ(-46px);
-  background-color: #fbfcfd;
+  background-color: var(--color-page);
   background-image:
     linear-gradient(var(--line-2) 1px, transparent 1px),
     linear-gradient(90deg, var(--line-2) 1px, transparent 1px);
@@ -1218,7 +1221,7 @@
   position: relative;
   border: 1px solid var(--line-2);
   border-radius: 12px;
-  background: linear-gradient(180deg, #fbfcfd 0%, #f4f7fa 100%);
+  background: linear-gradient(180deg, var(--color-page) 0%, var(--color-band) 100%);
   overflow: hidden;
   display: grid;
   place-items: center;
@@ -1337,7 +1340,7 @@
   height: 270px;
   transform: rotateX(90deg) translateZ(-100px);
   transform-style: preserve-3d;
-  background-color: #dde5ed;
+  background-color: var(--color-line-strong);
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.55) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.55) 1px, transparent 1px);
@@ -1349,21 +1352,21 @@
   width: 340px;
   height: 200px;
   transform: translateZ(-135px);
-  background: #f7fafc;
+  background: var(--color-band);
 }
 
 .room__left {
   width: 270px;
   height: 200px;
   transform: rotateY(90deg) translateZ(-170px);
-  background: #eef3f7;
+  background: var(--color-band);
 }
 
 .room__right {
   width: 270px;
   height: 200px;
   transform: rotateY(-90deg) translateZ(170px);
-  background: #f4f8fa;
+  background: var(--color-band);
 }
 
 /* The layout, painted into the floor as one coplanar SVG. No Z offset, so
@@ -1378,7 +1381,7 @@
 
 .room__desk {
   fill: #ffffff;
-  stroke: #8fa7bd;
+  stroke: var(--color-footer-link);
   stroke-width: 1.6;
 }
 
@@ -1389,8 +1392,8 @@
 }
 
 .room__counter {
-  fill: #9DBFB9;
-  stroke: #5F918B;
+  fill: var(--color-panel-pill);
+  stroke: var(--color-panel-label);
   stroke-width: 1.4;
 }
 
@@ -1439,7 +1442,7 @@
 .ar__wall {
   position: absolute;
   inset: 0 0 38% 0;
-  background: linear-gradient(180deg, #fdfdfe, #f4f7fa);
+  background: linear-gradient(180deg, var(--color-page), var(--color-band));
   border: 1px solid var(--line-2);
   border-radius: 6px 6px 0 0;
 }
@@ -1447,7 +1450,7 @@
 .ar__floor {
   position: absolute;
   inset: 62% 0 0 0;
-  background: #eef2f6;
+  background: var(--color-band);
   border: 1px solid var(--line-3);
   border-top: none;
   transform: perspective(500px) rotateX(52deg);
@@ -1527,7 +1530,7 @@
   width: 140px;
   height: 98px;
   border-radius: 8px;
-  background: #eef2f6;
+  background: var(--color-band);
   border: 1px solid var(--line-4);
 }
 
@@ -1670,7 +1673,7 @@
 }
 
 .prod__layer--a {
-  background: #fdfdfe;
+  background: var(--color-page);
 }
 .prod__layer--b {
   background: var(--brand-tint);
@@ -1680,7 +1683,7 @@
   border-color: var(--brand);
 }
 .prod__layer--d {
-  background: #e9eef3;
+  background: var(--color-band);
 }
 
 .prod__label {
@@ -2037,7 +2040,7 @@
 /* The game half sits on the tinted surface, so the two settings read as
    different worlds without either needing a different palette. */
 .tw__half--game {
-  background: #f7fafa;
+  background: var(--color-band);
 }
 
 .tw__kicker {
@@ -2097,7 +2100,7 @@
 }
 
 .tw__frag {
-  fill: #eef2f6;
+  fill: var(--color-band);
   stroke: var(--line-4);
   stroke-width: 1.2;
 }
@@ -2138,15 +2141,15 @@
 }
 
 .tw__ridge--far {
-  fill: #eef2f6;
+  fill: var(--color-band);
 }
 
 .tw__ridge--mid {
-  fill: #e4ebf1;
+  fill: var(--color-line);
 }
 
 .tw__ridge--near {
-  fill: #d9e2ea;
+  fill: var(--color-line-strong);
 }
 
 .tw__player {
@@ -2171,7 +2174,7 @@
 
 .tw__bubble--mate {
   fill: var(--brand-tint);
-  stroke: #9DBFB9;
+  stroke: var(--color-panel-pill);
 }
 
 .tw__bubbleTail {
@@ -2183,7 +2186,7 @@
 
 .tw__bubbleTail--mate {
   fill: var(--brand-tint);
-  stroke: #9DBFB9;
+  stroke: var(--color-panel-pill);
 }
 
 .tw__dot {
@@ -2275,7 +2278,7 @@
   border: 1px dashed var(--line-4);
   border-radius: 10px;
   padding: 14px 16px 16px;
-  background: #f7fafa;
+  background: var(--color-band);
 }
 
 .df__branchLead {
@@ -2443,7 +2446,7 @@
   font-size: 13px;
   line-height: 1.4;
   color: var(--muted);
-  background: #f7fafa;
+  background: var(--color-band);
   border-radius: 7px;
   padding: 9px 11px;
 }
@@ -2473,7 +2476,7 @@
   border: 1px dashed var(--line-4);
   border-radius: 12px;
   padding: 18px 20px 20px;
-  background: #f7fafa;
+  background: var(--color-band);
 }
 
 .ev__outcomeLead {
@@ -3190,7 +3193,7 @@
 
 .hx__pulse {
   fill: none;
-  stroke: #f2e6fb;
+  stroke: var(--color-brand-wash);
   stroke-width: 2.6;
   stroke-linecap: round;
   stroke-dasharray: 22 200;
@@ -4470,7 +4473,7 @@
   border: 1px solid var(--line);
   border-radius: 16px;
   overflow: hidden;
-  background: #16111c;
+  background: var(--color-panel-to);
   box-shadow: 0 18px 44px rgba(10, 10, 10, 0.16);
 }
 
@@ -4493,7 +4496,7 @@
   padding: 3px 9px;
   border-radius: 999px;
   background: rgba(126, 231, 168, 0.16);
-  color: #7ee7a8;
+  color: var(--ok);
   font-size: 11px;
 }
 
@@ -4933,7 +4936,7 @@
   padding: 6px;
   border: 0;
   border-radius: 14px;
-  background: linear-gradient(90deg, #065456, #14a4a9);
+  background: linear-gradient(90deg, var(--brand), var(--color-brand-signal));
   box-shadow: 0 12px 30px rgba(3, 26, 24, 0.22);
   position: relative;
 }
@@ -5019,7 +5022,7 @@
 
 .asst-details__error {
   font-size: 12.5px;
-  color: #8f4208;
+  color: var(--warn);
 }
 
 .asst-details__notice {
