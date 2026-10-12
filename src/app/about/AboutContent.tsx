@@ -26,7 +26,7 @@ export default function AboutContent() {
       <section className="wash-left">
         <div className="wrap py-16 lg:py-24">
           <Breadcrumbs items={[{ name: "About" }]} />
-          <div className="mt-8 max-w-[20ch]">
+          <div className="mt-8 max-w-[30rem]">
             <h1 className="h1p">About Pixelette Certified</h1>
           </div>
         </div>
