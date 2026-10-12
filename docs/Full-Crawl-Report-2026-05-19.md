@@ -26,12 +26,12 @@ Original crawl: https://pixelettecertified.com/ fetched 2026-05-19 (homepage Web
 ## Company identity (as displayed publicly)
 
 - **Trading name:** Pixelette Certified (compliance / certification arm of Pixelette Group)
-- **Headquarters address (per site):** 66 Paul Street, London, EC2A 4NA, United Kingdom
+- **Headquarters address (per site):** 77 Fulham Palace Road, London W6 8JA
 - **Phone:** +44 20 7946 0958
 - **Email:** info@pixelettecertified.com
 - **Geographic reach (as claimed publicly):** UK, UAE, Saudi Arabia, Qatar, EU, Americas, APAC
 
-âš ï¸ **Address discrepancy flagged:** The proposal template v5 footer and the PMEX ISO 22301 proposal both state "Registered in England and Wales. Company No. 07251823. Registered Office: 77 Fulham Palace Road, London W6 8JA." The website shows 66 Paul Street EC2A 4NA. These need reconciling â€” verify Companies House registration before any further proposal goes out.
+âš ï¸ **Address discrepancy flagged:** The proposal template v5 footer and the PMEX ISO 22301 proposal both state "Registered in England and Wales. Company No. 17506745. Registered Office: 77 Fulham Palace Road, London W6 8JA." The website shows 66 Paul Street EC2A 4NA. These need reconciling â€” verify Companies House registration before any further proposal goes out.
 
 ## Core commercial proposition (verbatim positioning)
 
@@ -115,7 +115,7 @@ Original crawl: https://pixelettecertified.com/ fetched 2026-05-19 (homepage Web
 
 ## Company registration number
 
-**Not displayed publicly on the site.** Proposal template footer states Company No. 07251823. This is a verification gap â€” a prospect cross-checking the site against Companies House cannot complete the loop from the website alone.
+**Not displayed publicly on the site.** Proposal template footer states Company No. 17506745. This is a verification gap â€” a prospect cross-checking the site against Companies House cannot complete the loop from the website alone.
 
 ## Testimonial / case study claims
 
@@ -259,12 +259,12 @@ From the privacy policy verbatim:
 
 > "Pixelette Certified is a trading name of Pixelette Group Ltd, registered in England and Wales."
 
-This is important for proposal accuracy. The proposal v5 footer says "Registered in England and Wales. Company No. 07251823. 77 Fulham Palace Road, London W6 8JA." The website's privacy policy confirms the registered entity is **Pixelette Group Ltd** (NOT "Pixelette Certified Ltd"). Verify against Companies House:
+This is important for proposal accuracy. The proposal v5 footer says "Registered in England and Wales. Company No. 17506745. 77 Fulham Palace Road, London W6 8JA." The website's privacy policy confirms the registered entity is **Pixelette Group Ltd** (NOT "Pixelette Certified Ltd"). Verify against Companies House:
 
-- Company No. 07251823 should resolve to "PIXELETTE GROUP LTD" or similar (not Pixelette Certified Ltd)
+- Company No. 17506745 should resolve to "PIXELETTE GROUP LTD" or similar (not Pixelette Certified Ltd)
 - Registered office on Companies House is the authoritative address (resolves the 66 Paul Street vs 77 Fulham Palace Road discrepancy)
 
-**Action:** Companies House check at https://find-and-update.company-information.service.gov.uk/ for Company No. 07251823.
+**Action:** Companies House check at https://find-and-update.company-information.service.gov.uk/ for Company No. 17506745.
 
 #### âš ï¸ Finding 8 â€” Useful new fact: 8 active certifications across 4 bodies
 
@@ -301,7 +301,7 @@ Three case studies, all sector-anonymised:
 3. **Add indicative pricing** to the website or accept the friction of "book a call to learn the price"
 4. **Populate the Industries page** with sector-specific landing content matching the 12 strategy streams
 5. **Resolve EU AI Act blog post / strategy doc messaging consistency** â€” verify GPAI Aug 2026 status as of trilogue progress
-6. **Verify Companies House registration** for Co. 07251823 (Pixelette Group Ltd) â€” settles address discrepancy
+6. **Verify Companies House registration** for Co. 17506745 (Pixelette Group Ltd) â€” settles address discrepancy
 7. **Reconcile "8 active certifications" vs proposal-listed 9 credentials** count
 8. **Verify case study figures** (340%, 35%, six-figure NHS, etc.) before citing in outbound
 9. **Add "Beat any quote by 10%" commitment to the website** OR remove from proposals â€” currently inconsistent
@@ -677,7 +677,7 @@ Tell us about your organisation, your target certification, and your timeline. W
 - Phone
 	[+44 20 7946 0958](tel:+442079460958)
 - Office
-	66 Paul Street, London, EC2A 4NA, United Kingdom
+	77 Fulham Palace Road, London W6 8JA
 
 ### What is a Gap Analysis?
 

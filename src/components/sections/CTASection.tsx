@@ -1,8 +1,5 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Button from "@/components/ui/Button";
-import { fadeInUp } from "@/lib/animations";
+import { PRIMARY_CTA } from "@/lib/constants";
 
 interface CTASectionProps {
   headline?: string;
@@ -13,63 +10,39 @@ interface CTASectionProps {
   secondaryHref?: string;
 }
 
+/**
+ * The closing call to action. Most pages use the defaults, so the defaults are
+ * the most widely published copy on the site and follow the restrained CTA
+ * family in §18 and §34: an invitation to a professional discussion, with no
+ * offer, price, deadline or promise attached.
+ */
 export default function CTASection({
-  headline = "See Your Path to Certification in 30 Minutes",
-  description = "No obligation. No sales pressure. In 30 minutes, you will know exactly where your compliance gaps are, which standards apply to your business and jurisdiction, and what a realistic timeline and cost looks like, wherever in the world you operate.",
-  primaryCta = "See Your 10-Week Certification Roadmap",
-  primaryHref = "/contact",
-  secondaryCta = "Talk to a Consultant",
-  secondaryHref = "/contact",
+  headline = "Discuss your requirements",
+  description = "Tell us what you need to achieve and where the requirement applies. We will establish the appropriate route and expertise for the engagement.",
+  primaryCta = PRIMARY_CTA.label,
+  primaryHref = PRIMARY_CTA.href,
+  secondaryCta,
+  secondaryHref,
 }: CTASectionProps) {
   return (
-    <section className="relative py-20 lg:py-28 overflow-hidden">
-      {/* Layered gradient background */}
-      <div className="absolute inset-0 bg-gradient-mesh" />
-
-      {/* Decorative elements */}
-      <div className="absolute top-0 inset-x-0 divider-glow" />
-      <div className="absolute top-[20%] left-[10%] w-[400px] h-[400px] rounded-full bg-accent/[0.05] blur-[100px] animate-float-slow" />
-      <div className="absolute bottom-[20%] right-[10%] w-[300px] h-[300px] rounded-full bg-accent-light/[0.03] blur-[80px] animate-float-slower" />
-
-      {/* Dot pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.02]"
-        style={{
-          backgroundImage: "radial-gradient(circle at 1px 1px, #14AAA9 1px, transparent 0)",
-          backgroundSize: "40px 40px",
-        }}
-      />
-
-      <motion.div
-        variants={fadeInUp}
-        initial="visible"
-        animate="visible"
-        viewport={{ once: true }}
-        className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 text-center"
-      >
-        {/* Glass container */}
-        <div className="glass-card rounded-3xl p-10 md:p-14">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight mb-6 gradient-text-white">
-            {headline}
-          </h2>
-          <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-            {description}
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button href={primaryHref} size="lg">
-              {primaryCta}
-            </Button>
-            <Button href={secondaryHref} variant="secondary" size="lg">
-              {secondaryCta}
-            </Button>
+    <section className="sec band-closing">
+      <div className="wrap" data-reveal="">
+        <div className="flex flex-col justify-between gap-10 lg:flex-row lg:items-center lg:gap-16">
+          <div>
+            <h2 className="h2 max-w-[20ch]">{headline}</h2>
+            <p className="body mt-5 max-w-[60ch]">{description}</p>
           </div>
-          <p className="mt-6 text-sm text-gray-600">
-            Most clients book their first paid engagement within 2 weeks of their gap analysis call.
-          </p>
-        </div>
-      </motion.div>
 
-      <div className="absolute bottom-0 inset-x-0 divider-glow" />
+          <div className="flex shrink-0 flex-wrap gap-3.5">
+            <Button href={primaryHref}>{primaryCta}</Button>
+            {secondaryCta && secondaryHref && (
+              <Button href={secondaryHref} variant="secondary">
+                {secondaryCta}
+              </Button>
+            )}
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

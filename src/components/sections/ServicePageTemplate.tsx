@@ -1,9 +1,5 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Link from "next/link";
-import { Check, ArrowRight, Clock, Shield, ShieldCheck, Globe, Leaf, Brain, Lock, UserCheck, FileSearch, Bug, Scale } from "lucide-react";
-import type { Service } from "@/data/services";
+import type { Service, ServiceItem, ServiceSlug } from "@/data/services";
 import { getRelatedServices } from "@/data/services";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
@@ -11,345 +7,206 @@ import Accordion from "@/components/ui/Accordion";
 import CTASection from "@/components/sections/CTASection";
 import FaqSchema from "@/components/seo/FaqSchema";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
-import { cn } from "@/lib/utils";
+import { ArrowRight } from "@/components/ui/icons";
 
-type SerializableService = Omit<Service, 'icon'>;
+/**
+ * Shorter service architecture: one sentence, three situations, a short
+ * capability accordion, three route stages, the service-specific independence
+ * note, three questions, three related services.
+ *
+ * The long overview and the repeated engagement-terms sentence are not
+ * rendered. The underlying catalogue in services.ts is unchanged, so nothing
+ * factual is deleted from the source, only from this template's surface.
+ */
 
-interface ServicePageTemplateProps {
-  service: SerializableService;
-}
-
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  "iso-27001": Shield,
-  "iso-22301": ShieldCheck,
-  "iso-9001": Globe,
-  "iso-14001": Leaf,
-  "iso-42001": Brain,
-  "cyber-essentials": Lock,
-  "vciso": UserCheck,
-  "vdpo": FileSearch,
-  "penetration-testing": Bug,
-  "gdpr-privacy": Scale,
+const SITUATIONS: Record<ServiceSlug, string[]> = {
+  "iso-27001": [
+    "A customer or contract has asked for ISO 27001 certification.",
+    "The organisation needs an information security management system it can evidence.",
+    "Other assurance work should sit on the same control foundation.",
+  ],
+  "iso-42001": [
+    "Customers, a board or a regulator has asked how AI is governed.",
+    "Certification to ISO 42001 is being considered.",
+    "The NIST AI RMF or another framework fits the requirement more closely.",
+  ],
+  "soc-2": [
+    "A US customer has asked for a SOC 2 report.",
+    "The organisation is preparing for a Type 1 or Type 2 examination.",
+    "Existing ISO 27001 controls need to be mapped to the Trust Services Criteria.",
+  ],
+  "cyber-assurance": [
+    "A customer has asked for testing evidence.",
+    "A material change needs a clear view of exposure.",
+    "Findings need to be remediated and retested.",
+  ],
+  privacy: [
+    "The organisation processes personal data and needs governance aligned to the applicable law.",
+    "A customer or regulator has asked for evidence of privacy governance.",
+    "Security or AI work needs to stay aligned with data protection duties.",
+  ],
+  vciso: [
+    "There is no senior security lead, or that lead needs specialist support.",
+    "Governance and evidence need to stay current between audits.",
+    "Customer assurance or board reporting needs a named owner.",
+  ],
+  "iso-22301": [
+    "Customers or regulators expect continuity arrangements.",
+    "Critical activities need recovery objectives and plans.",
+    "ISO 22301 readiness is part of the requirement.",
+  ],
+  "gcc-regulatory-compliance": [
+    "A Saudi, Qatari or UAE requirement applies to the organisation or its customers.",
+    "NCA, SAMA, NIA, NISCF or QCB obligations need to be understood and addressed.",
+    "International standards need to be mapped to regional requirements.",
+  ],
+  "cyber-essentials": [
+    "A UK customer or public sector buyer has asked for Cyber Essentials.",
+    "The organisation is preparing for Cyber Essentials Plus.",
+    "Technical controls need to be in place before an authorised Certification Body assesses them.",
+  ],
 };
 
+const ROUTE_LABELS = ["Assess", "Implement", "Prepare"] as const;
+
+function routeSteps(approach: ServiceItem[]) {
+  const picked =
+    approach.length <= 3
+      ? approach
+      : [approach[1] ?? approach[0], approach[approach.length - 2], approach[approach.length - 1]];
+  return picked.map((step, index) => ({
+    title: ROUTE_LABELS[index] ?? step.title,
+    text: step.text,
+  }));
+}
+
+function capabilityItems(items: ServiceItem[]) {
+  if (items.length <= 6) {
+    return items.map((item) => ({ question: item.title, answer: item.text }));
+  }
+  const head = items.slice(0, 5).map((item) => ({ question: item.title, answer: item.text }));
+  const rest = items
+    .slice(5)
+    .map((item) => `${item.title}. ${item.text}`)
+    .join(" ");
+  return [...head, { question: "Further scope", answer: rest }];
+}
+
+interface ServicePageTemplateProps {
+  service: Service;
+}
+
 export default function ServicePageTemplate({ service }: ServicePageTemplateProps) {
-  const relatedServices = getRelatedServices(service.relatedSlugs);
-  const IconComponent = iconMap[service.slug] || Shield;
+  const related = getRelatedServices(service.relatedSlugs).slice(0, 3);
+  const faqs = service.faqs.slice(0, 3);
+  const stages = routeSteps(service.approach);
+  const situations = SITUATIONS[service.slug];
 
   return (
     <>
-      {/* ─── Hero ─── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary via-primary-dark to-primary pt-32 pb-20 lg:pt-40 lg:pb-28">
-        {/* Decorative grid */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: "radial-gradient(circle at 1px 1px, #14AAA9 1px, transparent 0)",
-            backgroundSize: "40px 40px",
-          }}
-        />
-        {/* Gradient orb */}
-        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-accent/5 blur-3xl pointer-events-none" />
-
-        {/* Breadcrumb */}
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 mb-8">
-          <Breadcrumbs dark schema={false} items={[{ name: "Services", href: "/services" }, { name: service.shortTitle }]} />
-        </div>
-
-        <motion.div
-          variants={fadeInUp}
-          initial="visible"
-          animate="visible"
-          className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center"
-        >
-          {/* Icon */}
-          <div className="mx-auto mb-8 w-20 h-20 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center">
-            <IconComponent className="h-10 w-10 text-accent" />
-          </div>
-
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-6">
-            {service.title}
-          </h1>
-
-          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-            {service.description}
-          </p>
-
-          {/* Stats row */}
-          <div className="flex flex-wrap justify-center gap-8 mb-10">
-            <div className="flex items-center gap-2 text-gray-300">
-              <Shield className="h-5 w-5 text-accent" />
-              <span className="font-semibold text-white">Fixed-fee engagement</span>
-            </div>
-            <div className="flex items-center gap-2 text-gray-300">
-              <Clock className="h-5 w-5 text-accent" />
-              <span className="font-semibold text-white">{service.process.length} phases</span>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button href="/contact" size="lg">
-              Get Started
-            </Button>
-            <Button href="/contact" variant="secondary" size="lg">
-              See Your 10-Week Certification Roadmap
-            </Button>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* ─── Overview ─── */}
-      <section className="py-20 lg:py-28 bg-surface">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <motion.div
-            variants={fadeInUp}
-            initial="visible"
-            animate="visible"
-            viewport={{ once: true }}
-            className="max-w-3xl mx-auto"
-          >
-            <SectionHeading
-              label="Overview"
-              title="What is this service?"
-              dark={false}
-              centered
-              className="mb-6"
-            />
-            <p className="text-gray-600 text-lg leading-relaxed text-center">
-              {service.longDescription}
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ─── What We Deliver ─── */}
-      <section className="py-20 lg:py-28 bg-primary">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <SectionHeading
-            label="Deliverables"
-            title="What we deliver"
-            description="Every engagement includes these core deliverables, tailored to your organisation."
+      <section className="wash-left">
+        <div className="wrap py-16 lg:py-24">
+          <Breadcrumbs
+            schema={false}
+            items={[{ name: "Services", href: "/services" }, { name: service.shortTitle }]}
           />
 
-          <motion.div
-            variants={staggerContainer}
-            initial="visible"
-            animate="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid sm:grid-cols-2 gap-4"
-          >
-            {service.features.map((feature, i) => (
-              <motion.div
-                key={i}
-                variants={staggerItem}
-                className="flex items-start gap-4 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 p-5"
-              >
-                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center mt-0.5">
-                  <Check className="h-4 w-4 text-accent" />
-                </div>
-                <span className="text-gray-200 font-medium">{feature}</span>
-              </motion.div>
+          <div className="mt-8 max-w-[42ch]">
+            <h1 className="h1p">{service.title}</h1>
+            <p className="lead mt-6">{service.summary}</p>
+            <p className="small mt-5">{service.availability}</p>
+            <div className="mt-9">
+              <Button href="/contact" size="lg">
+                Discuss your requirements
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="sec">
+        <div className="wrap" data-reveal="">
+          <h2 className="h2 max-w-[20ch]">When this service is relevant</h2>
+          <ul className="mt-8 max-w-[68ch] list-none">
+            {situations.map((situation) => (
+              <li key={situation} className="border-t border-line py-4 text-[16px] leading-snug text-ink last:border-b">
+                {situation}
+              </li>
             ))}
-          </motion.div>
+          </ul>
         </div>
       </section>
 
-      {/* ─── Our Process ─── */}
-      <section className="py-20 lg:py-28 bg-surface">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <SectionHeading
-            label="Our Process"
-            title={service.category === "advisory" ? "How we engage with you" : "How we get you certified"}
-            description={service.category === "advisory" ? "A structured onboarding and ongoing retainer model designed for your business." : "A proven, structured approach from kickoff to certification."}
-            dark={false}
-          />
-
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-6 top-0 bottom-0 w-px bg-accent/20 hidden md:block" />
-
-            <div className="space-y-8">
-              {service.process.map((step, i) => (
-                <motion.div
-                  key={i}
-                  variants={fadeInUp}
-                  initial="visible"
-                  animate="visible"
-                  viewport={{ once: true }}
-                  className="relative flex gap-6 md:gap-8"
-                >
-                  {/* Number circle */}
-                  <div className="flex-shrink-0 relative z-10">
-                    <div className="w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center font-bold text-lg shadow-lg shadow-accent/20">
-                      {i + 1}
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex-1 pb-8">
-                    <span className="text-sm font-bold uppercase tracking-widest text-accent-dark mb-1 block">
-                      {step.week}
-                    </span>
-                    <h3 className="text-xl font-bold text-primary mb-2">
-                      {step.title}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      {step.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
+      <section className="sec band-alt">
+        <div className="wrap max-w-[840px]" data-reveal="">
+          <SectionHeading title="What we do" titleWidth="16ch" />
+          <Accordion items={capabilityItems(service.coverage.items)} defaultOpenIndex={0} />
+          {service.groups && (
+            <div className="mt-12">
+              <h3 className="h3">{service.groups.heading}</h3>
+              {service.groups.intro && <p className="small mt-3 max-w-[62ch]">{service.groups.intro}</p>}
+              <div className="mt-6">
+                <Accordion
+                  items={service.groups.items.map((group) => ({
+                    question: group.label,
+                    answer: `${group.points.join(" ")}${group.note ? ` ${group.note}` : ""}`,
+                  }))}
+                />
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
 
-      {/* ─── Pricing ─── */}
-      <section className="py-20 lg:py-28 bg-primary">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <SectionHeading
-            label="Pricing"
-            title="Transparent pricing"
-            description="No hidden fees. No surprise invoices. Choose the tier that fits your organisation."
-          />
-
-          <motion.div
-            variants={staggerContainer}
-            initial="visible"
-            animate="visible"
-            viewport={{ once: true }}
-            className={cn(
-              "grid gap-6",
-              service.pricing.length === 1 && "max-w-md mx-auto",
-              service.pricing.length === 2 && "sm:grid-cols-2 max-w-3xl mx-auto",
-              service.pricing.length >= 3 && "sm:grid-cols-2 lg:grid-cols-3"
-            )}
-          >
-            {service.pricing.map((tier, i) => {
-              const isHighlighted = service.pricing.length === 3 && i === 1;
-              return (
-                <motion.div key={tier.name} variants={staggerItem}>
-                  <div
-                    className={cn(
-                      "relative rounded-2xl p-8 h-full flex flex-col transition-all duration-300",
-                      isHighlighted
-                        ? "bg-accent text-white border-2 border-accent shadow-xl shadow-accent/20 scale-[1.02]"
-                        : "bg-white/5 backdrop-blur-md border border-white/10 text-white"
-                    )}
-                  >
-                    {isHighlighted && (
-                      <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-white text-accent text-xs font-bold uppercase tracking-widest px-4 py-1 rounded-full">
-                        Most Popular
-                      </span>
-                    )}
-
-                    <h3 className="text-xl font-bold mb-1">{tier.name}</h3>
-                    <p className={cn("text-sm mb-4", isHighlighted ? "text-white/80" : "text-gray-400")}>
-                      {tier.audience}
-                    </p>
-
-                    <div className="text-lg font-semibold mb-6">{tier.price}</div>
-
-                    <ul className="space-y-3 flex-1 mb-8">
-                      {tier.features.map((feat, fi) => (
-                        <li key={fi} className="flex items-start gap-3">
-                          <Check className={cn("h-5 w-5 flex-shrink-0 mt-0.5", isHighlighted ? "text-white" : "text-accent")} />
-                          <span className={cn("text-sm", isHighlighted ? "text-white/90" : "text-gray-300")}>
-                            {feat}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <Button
-                      href="/contact"
-                      variant={isHighlighted ? "secondary" : "primary"}
-                      className={cn(
-                        "w-full",
-                        isHighlighted && "border-white text-white hover:bg-white hover:text-accent"
-                      )}
-                    >
-                      Get Started
-                    </Button>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
+      <section className="sec">
+        <div className="wrap" data-reveal="">
+          <h2 className="h2 max-w-[18ch]">Route to assurance</h2>
+          <ol className="mt-10 grid list-none gap-8 md:grid-cols-3 md:gap-10">
+            {stages.map((stage, index) => (
+              <li key={stage.title} className="border-t border-line pt-5">
+                <p className="mono text-xs uppercase tracking-[0.08em] text-brand">
+                  {String(index + 1).padStart(2, "0")}
+                </p>
+                <h3 className="h4 mt-3">{stage.title}</h3>
+                <p className="small mt-2">{stage.text}</p>
+              </li>
+            ))}
+          </ol>
+          <p className="small mt-10 max-w-[68ch] border-l-2 border-brand pl-5">{service.independence}</p>
         </div>
       </section>
 
-      {/* ─── FAQ ─── */}
-      {service.faqs.length > 0 && (
-        <section className="py-20 lg:py-28 bg-surface">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6">
-            <SectionHeading
-              label="FAQ"
-              title="Frequently asked questions"
-              dark={false}
-            />
-            <FaqSchema faqs={service.faqs} />
-            <Accordion items={service.faqs} dark={false} />
+      {faqs.length > 0 && (
+        <section className="sec band-alt">
+          <div className="wrap max-w-[840px]" data-reveal="">
+            <SectionHeading title="Common questions" titleWidth="16ch" />
+            <FaqSchema faqs={faqs} />
+            <Accordion items={faqs} />
           </div>
         </section>
       )}
 
-      {/* ─── Related Services ─── */}
-      {relatedServices.length > 0 && (
-        <section className="py-20 lg:py-28 bg-primary">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <SectionHeading
-              label="Related Services"
-              title="You may also need"
-              description="Complementary services that strengthen your compliance posture."
-            />
+      <section className="sec">
+        <div className="wrap" data-reveal="">
+          <h2 className="h2 max-w-[16ch]">Related services</h2>
+          <ul className="mt-8 list-none border-t border-line">
+            {related.map((rel) => (
+              <li key={rel.slug} className="border-b border-line">
+                <Link
+                  href={`/services/${rel.slug}`}
+                  className="group grid gap-2 py-5 transition-colors md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)_auto] md:items-baseline md:gap-8"
+                >
+                  <span className="text-[16px] font-semibold text-ink group-hover:text-brand">{rel.navLabel}</span>
+                  <span className="small">{rel.summary}</span>
+                  <ArrowRight size={15} className="text-brand" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
-            <motion.div
-              variants={staggerContainer}
-              initial="visible"
-              animate="visible"
-              viewport={{ once: true }}
-              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
-            >
-              {relatedServices.slice(0, 3).map((related) => (
-                <motion.div key={related.slug} variants={staggerItem}>
-                  <Link
-                    href={`/services/${related.slug}`}
-                    className="group flex flex-col h-full rounded-2xl p-6
-                      bg-white/5 backdrop-blur-md border border-white/10
-                      hover:bg-white/10 hover:-translate-y-1
-                      transition-all duration-300"
-                  >
-                    <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
-                      {(() => { const RelIcon = iconMap[related.slug] || Shield; return <RelIcon className="h-6 w-6 text-accent" />; })()}
-                    </div>
-                    <h3 className="font-bold text-white mb-2 group-hover:text-accent transition-colors">
-                      {related.shortTitle}
-                    </h3>
-                    <p className="text-sm text-gray-400 mb-4 flex-1">
-                      {related.description}
-                    </p>
-                    <span className="text-sm font-semibold text-accent inline-flex items-center gap-1 group-hover:gap-2 transition-all">
-                      Learn more <ArrowRight className="h-4 w-4" />
-                    </span>
-                  </Link>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
-      )}
-
-      {/* ─── CTA ─── */}
-      <CTASection
-        headline={`Ready to start your ${service.shortTitle} journey?`}
-        description="Book a free gap analysis call. In 30 minutes you will know exactly where you stand, what it takes, and what it costs."
-        primaryCta="See Your 10-Week Certification Roadmap"
-        primaryHref="/contact"
-        secondaryCta="Talk to a Consultant"
-        secondaryHref="/contact"
-      />
+      <CTASection />
     </>
   );
 }

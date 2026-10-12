@@ -1,119 +1,227 @@
-"use client";
-
-import { motion } from "framer-motion";
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Link from "next/link";
-import Card from "@/components/ui/Card";
-import SectionHeading from "@/components/ui/SectionHeading";
-import Button from "@/components/ui/Button";
-
-import { blogPosts } from "@/data/blogPosts";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
+import Newsletter from "@/components/sections/Newsletter";
+import FeaturedInsight from "@/components/insights/FeaturedInsight";
+import InsightEntry from "@/components/insights/InsightEntry";
+import InsightSearch from "@/components/insights/InsightSearch";
+import {
+  activeCategories,
+  categoryFromParam,
+  categoryLabel,
+  categorySlug,
+  composeInsightIndex,
+  filterInsights,
+  insightsHref,
+} from "@/data/insights";
+import { SITE_CONFIG } from "@/lib/constants";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
-};
+const INTRO =
+  "Analysis of cyber security, compliance and AI governance requirements, including standards that apply internationally and rules that depend on the jurisdiction.";
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" as const },
-  },
-};
+type Search = { category?: string | string[]; q?: string | string[]; more?: string | string[] };
 
-function formatDate(dateString: string): string {
-  return new Date(dateString).toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+function first(value: string | string[] | undefined): string | undefined {
+  return Array.isArray(value) ? value[0] : value;
 }
 
-export default function BlogPage() {
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<Search>;
+}): Promise<Metadata> {
+  const params = await searchParams;
+  const q = first(params.q)?.trim();
+  const more = first(params.more) === "1";
+  const category = categoryFromParam(first(params.category));
+
+  if (q) {
+    return {
+      title: "Insights",
+      description: INTRO,
+      robots: { index: false, follow: true },
+    };
+  }
+
+  if (category) {
+    const url = `${SITE_CONFIG.url}${insightsHref({ category: categorySlug(category) })}`;
+    return {
+      title: `${categoryLabel(category)} insights`,
+      description: INTRO,
+      alternates: { canonical: url },
+      robots: more ? { index: false, follow: true } : undefined,
+      openGraph: {
+        title: `${categoryLabel(category)} | Insights | Pixelette Certified`,
+        description: INTRO,
+        url,
+      },
+    };
+  }
+
+  return {
+    title: "Insights",
+    description: INTRO,
+    alternates: { canonical: `${SITE_CONFIG.url}/blog` },
+    robots: more ? { index: false, follow: true } : undefined,
+    openGraph: {
+      title: "Insights | Pixelette Certified",
+      description: INTRO,
+      url: `${SITE_CONFIG.url}/blog`,
+    },
+  };
+}
+
+export default async function InsightsPage({ searchParams }: { searchParams: Promise<Search> }) {
+  const params = await searchParams;
+  const category = categoryFromParam(first(params.category));
+  const q = first(params.q)?.trim() ?? "";
+  const more = first(params.more) === "1";
+  const categoryParam = category ? categorySlug(category) : undefined;
+  const items = filterInsights({ category: categoryParam, q });
+  const view = composeInsightIndex(items, more);
+
+  const crumbs = category
+    ? [
+        { name: "Home", href: "/" },
+        { name: "Insights", href: "/blog" },
+        { name: categoryLabel(category) },
+      ]
+    : [
+        { name: "Home", href: "/" },
+        { name: "Insights" },
+      ];
+
   return (
-    <section className="relative py-24 lg:py-32">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary-dark via-primary to-primary-dark pointer-events-none" />
+    <>
+      <BreadcrumbSchema items={crumbs} />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <Breadcrumbs dark items={[{ name: "Blog" }]} />
-        </div>
-        <SectionHeading
-          as="h1"
-          label="Blog"
-          title="Insights & Guides"
-          description="Compliance Intelligence, Strategic thinking on certification, procurement, AI governance, and enterprise readiness. Written by UK-credentialled practitioners, for businesses operating in any market."
-        />
-
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
-        >
-          {blogPosts.map((post) => (
-            <motion.div key={post.slug} variants={cardVariants}>
-              <Link href={`/blog/${post.slug}`} className="block h-full">
-                <Card variant="glass" className="h-full flex flex-col">
-                  {/* Category tag */}
-                  <span className="inline-block self-start px-3 py-1 text-xs font-bold uppercase tracking-wider text-accent bg-accent/10 border border-accent/20 rounded-full mb-4">
-                    {post.category}
-                  </span>
-
-                  {/* Title */}
-                  <h2 className="text-xl font-bold text-white mb-3 leading-tight group-hover:text-accent transition-colors">
-                    {post.title}
-                  </h2>
-
-                  {/* Description */}
-                  <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-1">
-                    {post.description}
-                  </p>
-
-                  {/* Footer */}
-                  <div className="flex items-center justify-between pt-4 border-t border-white/10">
-                    <div className="flex items-center gap-3 text-xs text-gray-500">
-                      <time dateTime={post.date}>{formatDate(post.date)}</time>
-                      <span aria-hidden="true">,</span>
-                      <span>{post.readingTime}</span>
-                    </div>
-                    <span className="text-accent text-sm font-semibold">
-                      Read more &rarr;
-                    </span>
-                  </div>
-                </Card>
-              </Link>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="mt-20 text-center"
-        >
-          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-10 max-w-2xl mx-auto">
-            <h2 className="text-2xl font-bold text-white mb-3">
-              Need expert guidance?
-            </h2>
-            <p className="text-gray-400 mb-6">
-              Book a free consultation with our compliance team to discuss your
-              certification needs.
-            </p>
-            <Button href="/contact" variant="primary" size="lg">
-              See Your 10-Week Certification Roadmap
-            </Button>
+      <section>
+        <div className="wrap pb-2 pt-10 lg:pt-14">
+          <Breadcrumbs
+            schema={false}
+            items={
+              category
+                ? [{ name: "Insights", href: "/blog" }, { name: categoryLabel(category) }]
+                : [{ name: "Insights" }]
+            }
+          />
+          <div className="mt-5 max-w-[58ch]">
+            <h1 className="h1p">Insights</h1>
+            <p className="lead mt-4">{INTRO}</p>
           </div>
-        </motion.div>
-      </div>
-    </section>
+
+          <div className="mt-8 flex flex-col gap-5 lg:mt-10 lg:flex-row lg:items-center lg:justify-between">
+            <nav aria-label="Insight categories" className="-mx-1 overflow-x-auto px-1">
+              <ul className="flex w-max items-center md:w-auto md:flex-wrap md:gap-y-2">
+                <CategoryLink href={insightsHref({ q })} current={!category} dot={false}>
+                  All
+                </CategoryLink>
+                {activeCategories().map((item) => (
+                  <CategoryLink
+                    key={item}
+                    href={insightsHref({ category: categorySlug(item), q })}
+                    current={item === category}
+                  >
+                    {categoryLabel(item)}
+                  </CategoryLink>
+                ))}
+              </ul>
+            </nav>
+            <InsightSearch query={q} category={categoryParam} />
+          </div>
+        </div>
+      </section>
+
+      {view.lead ? (
+        <section className="sec" aria-label={view.lead.featured ? "Featured insight" : "Lead insight"}>
+          <div className="wrap">
+            <FeaturedInsight insight={view.lead} />
+          </div>
+        </section>
+      ) : (
+        <section className="sec">
+          <div className="wrap">
+            <p className="body">No insights match this search.</p>
+            <Link href={insightsHref({ category: categoryParam })} className="flink mt-3 font-medium text-brand">
+              Clear search
+            </Link>
+          </div>
+        </section>
+      )}
+
+      {view.latest.length > 0 && (
+        <section className="sec" aria-labelledby="latest-heading">
+          <div className="wrap">
+            <h2 id="latest-heading" className="h2">
+              Latest
+            </h2>
+            <div className="mt-2 grid md:grid-cols-2 md:gap-x-14">
+              {view.latest.map((insight) => (
+                <InsightEntry key={insight.slug} insight={insight} prominence="latest" />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {view.browse.length > 0 && (
+        <section className="sec" aria-labelledby="browse-heading">
+          <div className="wrap">
+            <h2 id="browse-heading" className="h2">
+              Browse insights
+            </h2>
+            <div className="mt-2 grid md:grid-cols-2 md:gap-x-16">
+              {view.browse.map((insight) => (
+                <InsightEntry key={insight.slug} insight={insight} />
+              ))}
+            </div>
+            {view.hiddenCount > 0 && (
+              <div className="mt-8">
+                <Link href={insightsHref({ category: categoryParam, q, more: true })} className="btn2">
+                  Load more insights
+                </Link>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      <Newsletter />
+    </>
+  );
+}
+
+function CategoryLink({
+  href,
+  current,
+  dot = true,
+  children,
+}: {
+  href: string;
+  current: boolean;
+  dot?: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <li className="flex shrink-0 items-center">
+      {dot ? (
+        <span aria-hidden="true" className="px-2.5 text-soft">
+          ·
+        </span>
+      ) : null}
+      <Link
+        href={href}
+        aria-current={current ? "page" : undefined}
+        className={
+          current
+            ? "inline-flex min-h-11 items-center text-[15px] font-semibold text-ink underline decoration-brand decoration-2 underline-offset-[7px]"
+            : "inline-flex min-h-11 items-center text-[15px] text-muted hover:text-ink"
+        }
+      >
+        {children}
+      </Link>
+    </li>
   );
 }

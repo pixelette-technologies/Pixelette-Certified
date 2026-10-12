@@ -8,13 +8,13 @@ export default function manifest(): MetadataRoute.Manifest {
       "UK-based ISO certification and compliance consultancy. ISO 27001, Cyber Essentials, GDPR, vCISO, AI Governance.",
     start_url: "/",
     display: "standalone",
-    background_color: "#044143",
-    theme_color: "#044143",
+    background_color: "#FFFFFF",
+    theme_color: "#FFFFFF",
     icons: [
       {
-        src: "/logos/favicon.svg",
+        src: "/logos/favicon.png",
         sizes: "any",
-        type: "image/svg+xml",
+        type: "image/png",
       },
     ],
   };

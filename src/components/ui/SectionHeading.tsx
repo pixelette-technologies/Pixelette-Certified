@@ -1,53 +1,65 @@
 import { cn } from "@/lib/utils";
-import SectionLabel from "./SectionLabel";
+import Eyebrow from "./Eyebrow";
 
 interface SectionHeadingProps {
   label?: string;
   title: string;
   description?: string;
-  dark?: boolean;
+  /** Semantic level. */
+  as?: "h1" | "h2" | "h3";
+  /** Visual size, independent of level. Defaults to match `as`. */
+  variant?: "h1" | "h1p" | "h2" | "h3";
+  /**
+   * Was true. NOW DEFAULTS TO FALSE — the guide's heading blocks are
+   * left-aligned throughout; centred is the exception (hero, closing CTA).
+   */
   centered?: boolean;
+  /** Set only inside a dark surface (.footer / .panel). */
+  dark?: boolean;
+  /** ch-constraint on the heading. The guide runs 16ch–24ch. */
+  titleWidth?: string;
   className?: string;
-  as?: "h1" | "h2";
+  id?: string;
 }
 
+/**
+ * Eyebrow + serif heading + lead. The old version emitted gradient text and a
+ * glowing divider bar beneath every heading; the guide has neither.
+ */
 export default function SectionHeading({
   label,
   title,
   description,
-  dark = true,
-  centered = true,
+  as: Tag = "h2",
+  variant,
+  centered = false,
+  dark = false,
+  titleWidth,
   className,
-  as: HeadingTag = "h2",
+  id,
 }: SectionHeadingProps) {
+  const visual = variant ?? (Tag === "h1" ? "h1" : Tag === "h3" ? "h3" : "h2");
+  const width = titleWidth ?? (visual === "h1" || visual === "h1p" ? "20ch" : "22ch");
+
   return (
-    <div className={cn(centered && "text-center", "mb-12 lg:mb-16", className)}>
+    <div className={cn("mb-10 lg:mb-14", centered && "text-center", className)}>
       {label && (
-        <SectionLabel dark={dark} className="mb-4 block">
+        <Eyebrow tone={dark ? "dark" : "brand"} className="mb-5">
           {label}
-        </SectionLabel>
+        </Eyebrow>
       )}
-      <HeadingTag
-        className={cn(
-          "text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight",
-          dark ? "gradient-text-white" : "gradient-text"
-        )}
+      <Tag
+        id={id}
+        className={cn(visual, dark && "text-footer-heading", centered && "mx-auto")}
+        style={{ maxWidth: width }}
       >
         {title}
-      </HeadingTag>
+      </Tag>
       {description && (
-        <p
-          className={cn(
-            "mt-5 text-lg max-w-2xl leading-relaxed",
-            centered && "mx-auto",
-            dark ? "text-gray-400" : "text-gray-600"
-          )}
-        >
+        <p className={cn("lead mt-5", centered && "mx-auto", dark && "text-panel-body")}>
           {description}
         </p>
       )}
-      {/* Decorative line under heading */}
-      <div className={cn("mt-6 mx-auto divider-glow", centered ? "max-w-[120px]" : "max-w-[120px]")} />
     </div>
   );
 }

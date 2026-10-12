@@ -1,20 +1,14 @@
 "use client";
 
-import dynamic from "next/dynamic";
-
-const AliceWidget = dynamic(() => import("@/components/alice/AliceWidget"), {
-  ssr: false,
-});
-
-const CustomCursor = dynamic(() => import("@/components/ui/CustomCursor"), {
-  ssr: false,
-});
+import RevealObserver from "@/components/motion/RevealObserver";
 
 export default function ClientShell() {
   return (
     <>
-      <AliceWidget />
-      <CustomCursor />
+      {/* Statically imported, not dynamic: it is under 1KB, and the sooner it
+          runs the smaller the window in which a band the user is about to
+          scroll to has already gone past the fold un-hidden. */}
+      <RevealObserver />
     </>
   );
 }

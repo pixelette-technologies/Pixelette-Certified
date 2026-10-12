@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 import ContactContent from "./ContactContent";
 import JsonLd from "@/components/seo/JsonLd";
+import { SITE_CONFIG } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Contact | Book Your Free Gap Analysis",
+  title: "Contact",
   description:
-    "Book a free 30-minute gap analysis. Global ISO 27001, ISO 42001, Cyber Essentials and GDPR consultancy serving every industry. Response within 1 working day.",
+    "Tell us what you need to achieve and where the requirement applies. We support organisations internationally.",
   openGraph: {
-    title: "Contact Pixelette Certified | Book Your Assessment | Global Compliance Consultancy",
-    description:
-      "Book a free 30-minute gap analysis with Pixelette Certified. Global ISO 27001, ISO 42001, Cyber Essentials and GDPR consultancy serving businesses across every industry worldwide.",
-    url: "https://pixelettecertified.com/contact",
+    title: "Contact | Pixelette Certified",
+    description: "Tell us what you need to achieve and where the requirement applies.",
+    url: `${SITE_CONFIG.url}/contact`,
   },
-  alternates: { canonical: "https://pixelettecertified.com/contact" },
+  alternates: { canonical: `${SITE_CONFIG.url}/contact` },
 };
 
 export default function ContactPage() {
@@ -23,15 +23,8 @@ export default function ContactPage() {
           "@context": "https://schema.org",
           "@type": "ContactPage",
           name: "Contact Pixelette Certified",
-          description:
-            "Book a free gap analysis with Pixelette Certified, UK ISO 27001 and compliance consultancy.",
-          url: "https://pixelettecertified.com/contact",
-          mainEntity: {
-            "@type": "Organization",
-            name: "Pixelette Certified",
-            telephone: "+442079460958",
-            email: "info@pixelettecertified.com",
-          },
+          url: `${SITE_CONFIG.url}/contact`,
+          about: { "@id": `${SITE_CONFIG.url}/#organization` },
         }}
       />
       <ContactContent />

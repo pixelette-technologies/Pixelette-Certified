@@ -1,296 +1,1092 @@
 @import "tailwindcss";
 
-@theme inline {
-  --color-primary: #044143;
-  --color-primary-light: #065456;
-  --color-primary-dark: #032e2f;
-  --color-accent: #14AAA9;
-  --color-accent-light: #1cc4c3;
-  --color-accent-dark: #0e8786;
-  --color-surface: #f0f7f7;
-  --color-surface-dark: #03383a;
-  --color-glass: rgba(4, 65, 67, 0.6);
-  --color-glass-border: rgba(20, 170, 169, 0.2);
-  --font-sans: var(--font-manrope);
-}
+/* ============================================================================
+   PIXELETTE CERTIFIED — DESIGN FOUNDATION
+   Light, editorial, flat, static. Ported from docs/Pixelette_Web_Patterns.html.
 
+   Layering contract:
+     @layer components  ->  the guide's classes (.h1 .card .btn ...). Faithful
+                            ports, so markup can be pasted from the pattern
+                            guide unchanged.
+     @layer utilities   ->  Tailwind. ALWAYS wins over the above, so
+                            className="card p-0" behaves as expected.
+   Never write a component class outside @layer components: unlayered CSS beats
+   every Tailwind utility and you will spend an afternoon finding out why.
+   ========================================================================== */
+
+/* -- 1 - FONT STACKS -------------------------------------------------------
+   --font-newsreader / --font-outfit / --font-ibm-plex-mono are injected onto
+   <html> by next/font in src/app/layout.tsx. next/font bakes a metric-matched
+   fallback into each value; the extra families cover the window before the
+   custom property is defined.                                              */
 :root {
-  --background: #044143;
-  --foreground: #ffffff;
+  --font-display: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --font-ui: var(--font-outfit), "Helvetica Neue", Arial, sans-serif;
+  --font-data: var(--font-ibm-plex-mono), "SFMono-Regular", Consolas, monospace;
 }
 
-::selection {
-  background: rgba(20, 170, 169, 0.4);
-  color: #ffffff;
+/* inline is required: the values reference other custom properties, so they
+   must resolve at definition time. Note that inline theme vars are NOT emitted
+   to :root, which is why every component class below uses var(--font-display)
+   and never var(--font-serif). */
+@theme inline {
+  --font-sans: var(--font-ui);
+  --font-serif: var(--font-display);
+  --font-mono: var(--font-data);
 }
 
-html {
-  scroll-behavior: smooth;
+/* -- 2 - COLOUR, RADIUS, SHADOW, CONTAINER --------------------------------
+   static forces every token into :root even when no utility references it,
+   so the component classes below can safely use var(--color-line-card).
+
+   =========================== BRAND LAYER ================================
+   Everything in this @theme block from here to the radii is Pixelette
+   CERTIFIED specific. It is the ONLY part of this file that differs between
+   group sites: the scale in S3 and every component class in S5 are shared,
+   and that shared skeleton is what makes the group read as one house.
+
+   The guide (docs/Pixelette_Web_Patterns.html) is a ONE-TONE system drawn
+   around Pixelette Technologies: a single mid-green does every job. Certified
+   is TWO-TONE, which is where the visual distinction comes from - hue barely
+   moves (guide 173deg, Certified 180-182deg), value structure does:
+
+     brand         dark petrol anchor. Carries everything that is READ.
+     brand-signal  bright teal. MARKS, never speaks. See the device in S5.
+
+   These are Certified's own historic colours, and the ones its wordmark never
+   left: public/logos/logo-green-text.svg has always been #044143 + #14A4A9.
+   The stylesheet had drifted away from the mark, not the other way round.
+
+   Do not point brand-signal at text or at a thin stroke on a light ground:
+   it is 3.04:1 on white, which clears the 3:1 non-text threshold and nothing
+   more. Ratios below are against --color-page unless stated.
+   ======================================================================== */
+@theme static {
+  /* brand - the reading role */
+  --color-brand:       #065456;   /* 8.71  - eyebrow, link, btn fill, focus */
+  --color-brand-hover: #044143;   /* 11.40 - button and link hover */
+  --color-brand-wash:  #D2EFEC;   /* hero radial inner stop */
+  --color-brand-tint:  #E6F4F3;   /* diagram / highlight fill */
+
+  /* brand - the signal role. Solid 3px accents only, never text or strokes.
+     Free to do more on dark grounds, where it reaches 5.04 on the footer. */
+  --color-brand-signal: #14A4A9;
+
+  /* text - neutrals hold their lightness and rotate hue from the guide's
+     blue-grey (212deg) towards petrol (~180deg). Every ratio holds or gains. */
+  --color-ink:   #0A0A0A;         /* 19.80 - unchanged */
+  --color-body:  #3F4E4E;         /* 8.71  - was 414D5C at 8.60 */
+  --color-muted: #5A6C6C;         /* 5.53  - was 5D6B7D at 5.43 */
+  --color-soft:  #5F7070;         /* 5.20  - was 62707F at 5.07 */
+
+  /* surfaces */
+  --color-page: #FFFFFF;
+  --color-band: #F3F7F7;
+
+  /* rules and borders, light -> strong */
+  --color-line:        #E1EAE9;  /* section rules, td */
+  --color-line-card:   #DEE8E7;  /* card */
+  --color-line-pill:   #DCE6E5;  /* pill, input, th */
+  --color-line-strong: #C2D3D1;  /* btn2 border, emphasis cards */
+
+  /* dark - site footer. Slate becomes petrol; the text ramp is unchanged. */
+  --color-footer:         #052A2B;
+  --color-footer-line:    #123A38;
+  --color-footer-hover:   #0A3433;
+  --color-footer-heading: #F2F5F4;
+  --color-footer-link:    #9DB2BC;
+  --color-footer-legal:   #7C93A0;
+  --color-footer-accent:  #6FE3CB;  /* already inside Certified's range */
+
+  /* dark - feature panel (.panel) */
+  --color-panel-from:     #031A18;
+  --color-panel-to:       #050C0C;
+  --color-panel-line:     #194542;
+  --color-panel-label:    #5F918B;
+  --color-panel-body:     #9BAEAB;
+  --color-panel-pill:     #7FA9A4;
+  --color-panel-cta:      #BFE9E3;
+  --color-panel-cta-line: #276360;
+
+  /* semantic */
+  --color-danger: #B42318;
+
+  /* ========================= END BRAND LAYER ============================
+     Everything below is COMMON to every Pixelette site. Changing it here
+     breaks the family resemblance rather than expressing this brand.
+     ===================================================================== */
+
+  /* radii - the system uses exactly two */
+  --radius-btn:  4px;
+  --radius-tile: 4px;
+  --radius-card: 12px;
+
+  /* shadows - the system uses exactly three */
+  --shadow-tile:    0 1px 2px rgba(10, 20, 19, .04);
+  --shadow-card:    0 1px 2px rgba(10, 20, 19, .04), 0 10px 28px -16px rgba(10, 20, 19, .16);
+  --shadow-feature: 0 2px 4px rgba(10, 20, 19, .04), 0 16px 40px -22px rgba(10, 20, 19, .22);
+
+  /* container -> max-w-wrap */
+  --container-wrap: 1160px;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-manrope), system-ui, sans-serif;
+/* -- 3 - FLUID SCALE -------------------------------------------------------
+   Interpolated 390px -> 1440px. Each clamp hits the guide's mobile value at
+   exactly 390px and its desktop value at exactly 1440px; the guide specifies
+   nothing between, so nothing between is invented. Anything the guide changes
+   discontinuously (font-weight, the hero wash) is in the media query in S7.  */
+:root {
+  --fs-h1:    clamp(2.25rem,   1.6rem    + 2.6667vw, 4rem);      /* 36 -> 64 */
+  --fs-h1p:   clamp(1.9375rem, 1.45rem   + 2vw,      3.25rem);   /* 31 -> 52 */
+  --fs-h2:    clamp(1.75rem,   1.425rem  + 1.3333vw, 2.625rem);  /* 28 -> 42 */
+  --fs-h3:    clamp(1.375rem,  1.3054rem + 0.2857vw, 1.5625rem); /* 22 -> 25 */
+  --fs-h4:    1.125rem;                                          /* 18, flat */
+  --fs-lead:  clamp(1.0625rem, 0.9929rem + 0.2857vw, 1.25rem);   /* 17 -> 20 */
+  --fs-body:  1rem;                                              /* 16, flat */
+  --fs-small: 0.875rem;                                          /* 14, flat */
+
+  --sec-y:    clamp(3.5rem, 2.5714rem + 3.8095vw, 6rem);         /* 56 -> 96 */
+  --sec-y-sm: clamp(2.5rem, 2.0357rem + 1.9048vw, 4rem);         /* 40 -> 64 */
+  --header-h: clamp(4rem,   3.6288rem + 1.5238vw, 5rem);         /* 64 -> 80 */
+
+  /* Motion. The first motion tokens on the site, and scoped so they stay the
+     only ones: the --reveal- prefix says they belong to one feature rather
+     than advertising a motion system that does not exist.
+
+     They live in THIS :root and not in @theme static for two reasons. They
+     are not colour, and --ease-* is a live Tailwind v4 theme namespace, so an
+     easing curve in @theme would silently mint an ease-* utility nobody asked
+     for. See S5.9 for what reads them.
+
+     12px is about one line of .small leading, so a band appears to drop into
+     place by one line: typographic settling, not a slide. It is also small
+     enough not to fight the two marks that stay still, the .sec hairline and
+     its 40px teal ::before tick. Opacity finishes 140ms before the transform
+     so copy is never read grey, and it is linear because eased opacity on
+     text has a visibly dull middle. The curve is easeOutCubic - no overshoot;
+     a spring or back curve reads instantly as "an effect". */
+  --reveal-rise:    12px;
+  --reveal-fade:    420ms;
+  --reveal-shift:   560ms;
+  --reveal-ease:    cubic-bezier(0.33, 1, 0.68, 1);              /* easeOutCubic */
+  --reveal-stagger: 70ms;
 }
 
-/* ============================================
-   GRADIENT & GLASS UTILITIES
-   ============================================ */
-
-/* Animated gradient border */
-@keyframes border-rotate {
-  0% { --border-angle: 0deg; }
-  100% { --border-angle: 360deg; }
-}
-
-@property --border-angle {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-
-.glass-card {
-  background: linear-gradient(
-    135deg,
-    rgba(20, 170, 169, 0.08) 0%,
-    rgba(4, 65, 67, 0.4) 50%,
-    rgba(20, 170, 169, 0.05) 100%
-  );
-  backdrop-filter: blur(20px) saturate(1.5);
-  -webkit-backdrop-filter: blur(20px) saturate(1.5);
-  border: 1px solid rgba(20, 170, 169, 0.15);
-  box-shadow:
-    0 0 0 1px rgba(20, 170, 169, 0.05),
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
-}
-
-.glass-card:hover {
-  background: linear-gradient(
-    135deg,
-    rgba(20, 170, 169, 0.12) 0%,
-    rgba(4, 65, 67, 0.5) 50%,
-    rgba(20, 170, 169, 0.08) 100%
-  );
-  border-color: rgba(20, 170, 169, 0.3);
-  box-shadow:
-    0 0 0 1px rgba(20, 170, 169, 0.1),
-    0 0 30px rgba(20, 170, 169, 0.1),
-    0 16px 48px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-}
-
-/* Animated border glow card */
-.glow-border {
-  position: relative;
-  background: linear-gradient(
-    160deg,
-    rgba(20, 170, 169, 0.06) 0%,
-    rgba(4, 65, 67, 0.3) 100%
-  );
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid transparent;
-  background-clip: padding-box;
-}
-
-.glow-border::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1px;
-  background: conic-gradient(
-    from var(--border-angle, 0deg),
-    transparent 40%,
-    rgba(20, 170, 169, 0.4) 50%,
-    transparent 60%
-  );
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  -webkit-mask-composite: xor;
-  animation: border-rotate 4s linear infinite;
-  pointer-events: none;
-}
-
-.glow-border:hover::before {
-  background: conic-gradient(
-    from var(--border-angle, 0deg),
-    transparent 20%,
-    rgba(20, 170, 169, 0.7) 50%,
-    transparent 80%
-  );
-}
-
-/* White glass card for light sections */
-.white-glass {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(240, 247, 247, 0.95) 100%
-  );
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(20, 170, 169, 0.12);
-  box-shadow:
-    0 4px 24px rgba(4, 65, 67, 0.08),
-    0 1px 3px rgba(4, 65, 67, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
-}
-
-.white-glass:hover {
-  border-color: rgba(20, 170, 169, 0.3);
-  box-shadow:
-    0 0 20px rgba(20, 170, 169, 0.08),
-    0 8px 40px rgba(4, 65, 67, 0.12),
-    0 2px 6px rgba(4, 65, 67, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
-}
-
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, #14AAA9 0%, #1cc4c3 40%, #14AAA9 80%, #0e8786 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  padding-bottom: 0.1em;
-  display: inline-block;
-}
-
-.gradient-text-white {
-  background: linear-gradient(135deg, #ffffff 0%, #e0f2f2 50%, #ffffff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  padding-bottom: 0.1em;
-  display: inline-block;
-}
-
-/* Glow shadow utilities */
-.shadow-glow {
-  box-shadow: 0 0 20px rgba(20, 170, 169, 0.15), 0 8px 32px rgba(0, 0, 0, 0.3);
-}
-
-.shadow-glow-lg {
-  box-shadow: 0 0 40px rgba(20, 170, 169, 0.2), 0 16px 48px rgba(0, 0, 0, 0.4);
-}
-
-.shadow-glow-accent {
-  box-shadow: 0 0 30px rgba(20, 170, 169, 0.3), 0 0 60px rgba(20, 170, 169, 0.1);
-}
-
-/* Section gradient backgrounds */
-.bg-gradient-dark {
-  background: linear-gradient(180deg, #032e2f 0%, #044143 50%, #032e2f 100%);
-}
-
-.bg-gradient-dark-reverse {
-  background: linear-gradient(180deg, #032e2f 0%, #044143 50%, #032e2f 100%);
-}
-
-.bg-gradient-radial {
-  background: radial-gradient(ellipse at 50% 0%, rgba(20, 170, 169, 0.08) 0%, transparent 60%),
-    linear-gradient(180deg, #032e2f 0%, #044143 50%, #032e2f 100%);
-}
-
-.bg-gradient-mesh {
-  background:
-    radial-gradient(ellipse at 20% 20%, rgba(20, 170, 169, 0.06) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 80%, rgba(20, 170, 169, 0.04) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(4, 65, 67, 0.5) 0%, transparent 70%),
-    linear-gradient(180deg, #032e2f 0%, #044143 100%);
-}
-
-/* Animated divider line */
-.divider-glow {
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(20, 170, 169, 0.4) 50%,
-    transparent 100%
-  );
-}
-
-/* Floating orbs for backgrounds */
-@keyframes float-slow {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  33% { transform: translateY(-20px) translateX(10px); }
-  66% { transform: translateY(10px) translateX(-10px); }
-}
-
-@keyframes float-slower {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(-30px) translateX(-15px); }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 0.6; transform: scale(1.05); }
-}
-
-.animate-float-slow {
-  animation: float-slow 8s ease-in-out infinite;
-}
-
-.animate-float-slower {
-  animation: float-slower 12s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 4s ease-in-out infinite;
-}
-
-/* ============================================
-   SCROLLBAR
-   ============================================ */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #032e2f;
-}
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #14AAA9, #0e8786);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #1cc4c3, #14AAA9);
-}
-
-/* ============================================
-   REDUCED MOTION
-   ============================================ */
-@media (prefers-reduced-motion: reduce) {
+/* -- 4 - BASE ------------------------------------------------------------- */
+@layer base {
   html {
-    scroll-behavior: auto;
+    scroll-behavior: smooth;
+    /* the header is sticky; without this, anchors land underneath it */
+    scroll-padding-top: calc(var(--header-h) + 16px);
+    scrollbar-color: var(--color-line-strong) var(--color-page);
   }
+
+  body {
+    background: var(--color-page);
+    color: var(--color-ink);
+    font-family: var(--font-ui);
+    font-size: 1rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Deliberate divergence from the guide: it sets a global green a { color }
+     globally then overrides it inline everywhere. Under Preflight
+     (a { color: inherit }) that would turn the navbar, breadcrumbs and
+     footer green. Inline text links opt in with .link; .prose a is automatic. */
+
+  ::selection {
+    background: var(--color-brand-wash);
+    color: var(--color-ink);
+  }
+
+  /* The guide defines no focus styling at all - it is a static mockup. This is
+     the site's single focus ring; components must not remove it. */
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  .on-dark :focus-visible,
+  .panel :focus-visible,
+  .footer :focus-visible {
+    outline-color: var(--color-footer-accent);
+  }
+}
+
+/* -- 5 - COMPONENT CLASSES ------------------------------------------------
+   Faithful ports of docs/Pixelette_Web_Patterns.html. Class NAMES match the
+   guide byte-for-byte so guide markup pastes in and works.                  */
+@layer components {
+
+  /* 5.1 - Layout ------------------------------------------------------- */
+
+  /* 1160px capped, 20px gutters below, no media query */
+  .wrap {
+    width: min(var(--container-wrap), 100% - 40px);
+    margin-inline: auto;
+  }
+
+  /* BRAND LAYER - the signature device, half 1 of 2. See also .card-feature.
+     The guide marks a section only with a hairline. Certified caps that rule
+     with a 40px segment of signal teal, aligned to the container rather than
+     the viewport so it sits directly above the first word of the heading.
+
+     position:relative makes .sec a containing block. Checked: the only
+     absolutely-positioned descendants in src/ are the contact honeypot at
+     left:-9999px and a zero-size hidden Turnstile wrapper, both of which are
+     anchor-independent. The cap is deliberately NOT on a bare .band-alt: it
+     marks a section opening, not every band on the page. */
+  .sec {
+    padding-block: var(--sec-y);
+    border-top: 1px solid var(--color-line);
+    position: relative;
+  }
+  .sec::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: max(20px, calc((100% - var(--container-wrap)) / 2));
+    width: 40px;
+    height: 3px;
+    background: var(--color-brand-signal);
+  }
+  .sec-sm { padding-block: var(--sec-y-sm); }
+
+  .rule { height: 1px; background: var(--color-line); }
+
+  /* 5.2 - Type --------------------------------------------------------- */
+
+  .h1 {
+    font-family: var(--font-display);
+    font-size: var(--fs-h1);
+    line-height: 1.05;
+    letter-spacing: -0.016em;
+    font-weight: 400;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  /* interior-page hero variant */
+  .h1p {
+    font-family: var(--font-display);
+    font-size: var(--fs-h1p);
+    line-height: 1.07;
+    letter-spacing: -0.015em;
+    font-weight: 400;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .h2 {
+    font-family: var(--font-display);
+    font-size: var(--fs-h2);
+    line-height: 1.14;
+    letter-spacing: -0.014em;
+    font-weight: 400;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .h3 {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    line-height: 1.26;
+    letter-spacing: -0.008em;
+    font-weight: 400;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  /* h4 is SANS. This is not a typo in the guide. */
+  .h4 {
+    font-family: var(--font-ui);
+    font-size: var(--fs-h4);
+    line-height: 1.3;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .lead {
+    font-size: var(--fs-lead);
+    line-height: 1.55;
+    color: var(--color-body);
+    max-width: 62ch;
+  }
+
+  .body {
+    font-size: var(--fs-body);
+    line-height: 1.65;
+    color: var(--color-body);
+    max-width: 66ch;
+  }
+
+  .small {
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    color: var(--color-muted);
+  }
+
+  .eyebrow {
+    font-family: var(--font-data);
+    font-size: 11px;
+    line-height: 1.2;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-brand);
+  }
+
+  /* source citation, sits under stat tiles */
+  .src {
+    font-family: var(--font-data);
+    font-size: 11.5px;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    color: var(--color-soft);
+  }
+
+  .mono { font-family: var(--font-data); }
+
+  /* Inline text link - opt-in, see the note in @layer base */
+  .link { color: var(--color-brand); text-decoration: none; }
+  .link:hover { color: var(--color-brand-hover); }
+
+  /* Preflight strips list markers; restore them where prose needs them. */
+  .list {
+    list-style: disc;
+    padding-left: 18px;
+    font-size: var(--fs-body);
+    line-height: 1.65;
+    color: var(--color-body);
+    max-width: 66ch;
+  }
+  .list > li + li { margin-top: 6px; }
+  .list-num { list-style: decimal; }
+
+  /* 5.3 - Long-form prose ----------------------------------------------
+     Replaces the dead prose/prose-invert/prose-lg in BlogPostClient.tsx:
+     @tailwindcss/typography is NOT installed, so those classes do nothing. */
+  .prose {
+    font-size: var(--fs-body);
+    line-height: 1.7;
+    color: var(--color-body);
+    max-width: 68ch;
+  }
+  .prose > * + *    { margin-top: 1.15em; }
+  .prose h2         { font-family: var(--font-display); font-size: var(--fs-h2); line-height: 1.14; letter-spacing: -0.014em; font-weight: 400; color: var(--color-ink); margin-top: 1.8em; }
+  .prose h3         { font-family: var(--font-display); font-size: var(--fs-h3); line-height: 1.26; letter-spacing: -0.008em; font-weight: 400; color: var(--color-ink); margin-top: 1.6em; }
+  .prose h4         { font-family: var(--font-ui); font-size: var(--fs-h4); font-weight: 600; color: var(--color-ink); margin-top: 1.5em; }
+  .prose strong     { color: var(--color-ink); font-weight: 600; }
+  .prose a          { color: var(--color-brand); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  .prose a:hover    { color: var(--color-brand-hover); }
+  .prose ul         { list-style: disc; padding-left: 18px; }
+  .prose ol         { list-style: decimal; padding-left: 20px; }
+  .prose li + li    { margin-top: 6px; }
+  .prose blockquote { border-left: 2px solid var(--color-brand); padding-left: 18px; color: var(--color-muted); }
+  .prose code       { font-family: var(--font-data); font-size: 0.9em; background: var(--color-band); border: 1px solid var(--color-line-pill); border-radius: 3px; padding: 1px 5px; }
+  .prose img        { border-radius: var(--radius-card); border: 1px solid var(--color-line-card); }
+  .prose hr         { border: 0; height: 1px; background: var(--color-line); margin-block: 2em; }
+
+  /* 5.4 - Surfaces ------------------------------------------------------ */
+
+  .card {
+    background: var(--color-page);
+    border: 1px solid var(--color-line-card);
+    border-radius: var(--radius-card);
+    padding: 28px;
+    box-shadow: var(--shadow-card);
+  }
+
+  /* highlighted / primary card - the guide's door treatment.
+
+     BRAND LAYER - the signature device, half 2 of 2. The guide puts its 3px
+     accent across the TOP of a feature card; Certified moves it to the LEFT,
+     in signal teal. Same primitive, different mannerism, and it reads at a
+     glance in a screenshot, which is what a sibling brand needs. */
+  .card-feature {
+    border-color: var(--color-line-strong);
+    border-top: 1px solid var(--color-line-strong);
+    border-left: 3px solid var(--color-brand-signal);
+    box-shadow: var(--shadow-feature);
+  }
+
+  .tile {
+    background: var(--color-page);
+    border: 1px solid var(--color-line-card);
+    border-radius: var(--radius-tile);
+    padding: 20px 22px;
+    box-shadow: var(--shadow-tile);
+  }
+  .tile b {
+    display: block;
+    font-family: var(--font-data);
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--color-brand);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .tile span {
+    display: block;
+    font-size: 13px;
+    color: var(--color-muted);
+    margin-top: 9px;
+    line-height: 1.4;
+  }
+
+  /* dark feature panel */
+  .panel {
+    background: linear-gradient(135deg, var(--color-panel-from) 0%, var(--color-panel-to) 64%);
+    border: 1px solid var(--color-panel-line);
+    border-radius: var(--radius-card);
+    padding: 34px 38px;
+    color: var(--color-panel-body);
+  }
+  /* Full-bleed dark band, for a whole section rather than an inset panel.
+     Same ground and same descendant colours as .panel, minus the card border
+     and radius, because it spans the viewport.
+
+     Do NOT reach for .footer to get a dark mid-page section. It only recolours
+     .eyebrow and .pill, so an .h2 inside it inherits --color-ink (near-black)
+     on a near-black ground and disappears. That trap is why this class exists. */
+  .band-dark {
+    background: linear-gradient(135deg, var(--color-panel-from) 0%, var(--color-panel-to) 64%);
+    border-block: 1px solid var(--color-panel-line);
+    color: var(--color-panel-body);
+  }
+
+  .panel .eyebrow,
+  .band-dark .eyebrow { color: var(--color-panel-label); }
+  .panel .h1,
+  .panel .h2,
+  .panel .h3,
+  .panel .h4,
+  .band-dark .h1,
+  .band-dark .h2,
+  .band-dark .h3,
+  .band-dark .h4      { color: #FFFFFF; }
+  .panel .small,
+  .panel .body,
+  .panel .lead,
+  .band-dark .small,
+  .band-dark .body,
+  .band-dark .lead    { color: var(--color-panel-body); }
+  .panel .pill,
+  .band-dark .pill    { border-color: var(--color-panel-line); color: var(--color-panel-pill); }
+
+  /* dark outline CTA, used inside .panel */
+  .btn-panel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    border: 1px solid var(--color-panel-cta-line);
+    color: var(--color-panel-cta);
+    font-weight: 500;
+    font-size: 15px;
+    padding: 13px 20px;
+    border-radius: var(--radius-btn);
+    min-height: 48px;
+  }
+
+  /* site footer */
+  .footer {
+    background: var(--color-footer);
+    border-top: 1px solid var(--color-footer-line);
+    color: var(--color-footer-link);
+  }
+  .footer .eyebrow { color: var(--color-footer-accent); }
+  .footer .pill    { border-color: var(--color-footer-line); color: var(--color-footer-link); }
+
+  /* The group footer. Measurements follow the Pixelette Technologies footer so
+     the sister sites share one shape; every colour is this site's footer token.
+     Link colours are scoped to the columns and the group band, not to every
+     `a` in the footer, because the Privacy choices dialog renders inside the
+     footer on a white panel. */
+  .site-footer { padding: 72px 0 40px; }
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: 1.6fr repeat(2, minmax(0, 1fr));
+    gap: 40px 28px;
+  }
+  .site-footer__grid h2,
+  .groupband__intro h2 { margin: 0; }
+  .site-footer__grid > div > h2 {
+    font-family: var(--font-data);
+    font-size: 10.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--color-footer-accent);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .site-footer__logo { display: inline-block; margin-bottom: 20px; }
+  .site-footer__brand p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-footer-heading);
+    max-width: 34ch;
+  }
+  .site-footer__social { display: flex; gap: 10px; margin-top: 20px; }
+  .site-footer__list { list-style: none; padding: 0; margin: 0; }
+  .site-footer__list > li > a,
+  .site-footer .privacy-trigger {
+    color: var(--color-footer-heading);
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    transition: color .15s;
+  }
+  .site-footer__list > li > a:hover,
+  .site-footer .privacy-trigger:hover { color: var(--color-footer-accent); }
+
+  .groupband {
+    margin-top: 56px;
+    padding-top: 40px;
+    border-top: 1px solid var(--color-footer-line);
+    display: grid;
+    grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+    gap: 48px;
+    align-items: start;
+  }
+  .groupband__intro h2 {
+    font-family: var(--font-ui);
+    font-size: 19px;
+    letter-spacing: -.01em;
+    color: var(--color-footer-heading);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .groupband__intro p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--color-footer-heading);
+    max-width: 46ch;
+  }
+  .groupband__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px 32px;
+  }
+  .groupband__name {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-footer-heading);
+    transition: color .15s;
+  }
+  a.groupband__name:hover { color: var(--color-footer-accent); }
+  .groupband__here {
+    font-family: var(--font-data);
+    font-size: 9.5px;
+    font-weight: 400;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--color-footer-legal);
+    border: 1px solid var(--color-footer-line);
+    border-radius: 3px;
+    padding: 3px 7px;
+  }
+  .groupband__what {
+    display: block;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--color-footer-legal);
+    margin-top: 7px;
+    max-width: 42ch;
+  }
+
+  .site-footer__legal {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-footer-line);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    align-items: baseline;
+    justify-content: space-between;
+    font-size: 12.5px;
+  }
+  .site-footer__id {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 26px;
+    color: var(--color-footer-legal);
+    max-width: 76ch;
+  }
+  .site-footer__id--end { margin-left: auto; text-align: right; justify-content: flex-end; }
+
+  @media (max-width: 1000px) {
+    .site-footer__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 900px) {
+    .groupband,
+    .groupband__list { grid-template-columns: minmax(0, 1fr); }
+    .groupband { gap: 34px; }
+    .groupband__list { gap: 22px; }
+  }
+  @media (max-width: 560px) {
+    .site-footer__grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+    .site-footer__id,
+    .site-footer__id > span { display: block; }
+    .site-footer__id--end { margin-left: 0; text-align: left; }
+  }
+
+  /* Privacy choices: the footer trigger and its native <dialog>. */
+  .privacy-trigger {
+    background: none;
+    border: 0;
+    padding: 0;
+    font-family: inherit;
+    line-height: inherit;
+    color: inherit;
+    cursor: pointer;
+    text-align: left;
+  }
+  .privacy-trigger:hover,
+  .privacy-trigger:focus-visible { text-decoration: underline; }
+
+  .privacy-panel {
+    border: 0;
+    padding: 0;
+    max-width: 420px;
+    width: calc(100% - 32px);
+    border-radius: 14px;
+    background: var(--color-page);
+    color: var(--color-ink);
+    box-shadow: 0 24px 64px rgba(3, 26, 24, .28);
+    margin: auto auto 24px;
+  }
+  .privacy-panel::backdrop { background: rgba(3, 26, 24, .24); }
+  .footer .privacy-panel :focus-visible { outline-color: var(--color-brand); }
+  .privacy-panel__inner { padding: 24px 24px 22px; }
+  .privacy-panel__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .privacy-panel__head h2 {
+    font-family: var(--font-ui);
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--color-ink);
+  }
+  .privacy-panel__close {
+    background: none;
+    border: 0;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--color-muted);
+    padding: 0 2px;
+  }
+  .privacy-panel__close:hover { color: var(--color-ink); }
+  .privacy-panel__sub {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 600;
+    margin: 18px 0 0;
+    color: var(--color-ink);
+  }
+  .privacy-panel__body,
+  .privacy-panel__state,
+  .privacy-panel__note {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--color-muted);
+    margin: 8px 0 0;
+  }
+  .privacy-panel__state { color: var(--color-ink); }
+  .privacy-panel__control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-line);
+    font-size: 13px;
+  }
+  .privacy-toggle {
+    display: inline-flex;
+    border: 1px solid var(--color-line-pill);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .privacy-toggle button {
+    font: inherit;
+    font-size: 12.5px;
+    padding: 6px 16px;
+    border: 0;
+    background: none;
+    color: var(--color-muted);
+    cursor: pointer;
+  }
+  .privacy-toggle button[aria-pressed="true"] { background: var(--color-brand); color: #fff; }
+  .privacy-toggle button:disabled { cursor: default; opacity: .6; }
+  .privacy-panel__link {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--color-brand);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .privacy-panel__link:hover { color: var(--color-brand-hover); }
+  @media (max-width: 560px) {
+    .privacy-panel { margin-bottom: 12px; }
+    .privacy-toggle button { padding: 12px 22px; }
+  }
+
+  /* section bands */
+  .band-alt {
+    background: var(--color-band);
+    border-top: 1px solid var(--color-line);
+  }
+  .band-closing {
+    background: linear-gradient(180deg, var(--color-page) 0%, var(--color-band) 100%);
+    border-top: 1px solid var(--color-line);
+  }
+
+  /* hero washes */
+  .wash      { background: radial-gradient(1200px 560px at 50% -20%, var(--color-brand-wash) 0%, var(--color-page) 65%); }
+  .wash-left { background: radial-gradient(900px 420px at 14% -20%, var(--color-brand-wash) 0%, var(--color-page) 60%); }
+
+  /* 5.5 - Controls ------------------------------------------------------ */
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--color-brand);
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.2;
+    padding: 16px 26px;
+    border-radius: var(--radius-btn);
+    min-height: 52px;
+    text-align: center;
+  }
+  .btn:hover { background: var(--color-brand-hover); }
+
+  .btn2 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--color-ink);
+    border: 1px solid var(--color-line-strong);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.2;
+    padding: 16px 26px;
+    border-radius: var(--radius-btn);
+    min-height: 52px;
+    text-align: center;
+  }
+  .btn2:hover { border-color: var(--color-brand); color: var(--color-brand); }
+
+  /* Not in the guide. Replaces the old ghost variant so call sites keep
+     working. Text-only, still a 44px tap target. */
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--color-brand);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.2;
+    padding: 0 4px;
+    border-radius: var(--radius-btn);
+    min-height: 44px;
+  }
+  .btn-ghost:hover { color: var(--color-brand-hover); }
+
+  /* light-button disabled state: opacity alone is near-invisible on white */
+  .btn:disabled,
+  .btn[aria-disabled="true"] {
+    background: var(--color-line-strong);
+    color: #FFFFFF;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-data);
+    font-size: 11px;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid var(--color-line-pill);
+    border-radius: 999px;
+    padding: 6px 12px;
+    color: var(--color-muted);
+    white-space: nowrap;
+  }
+  .pill-brand { border-color: var(--color-brand); color: var(--color-brand); }
+
+  /* 44px minimum tap target on any standalone inline link */
+  .flink {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 44px;
+  }
+
+  /* 5.6 - Tables -------------------------------------------------------- */
+
+  .table-wrap { overflow-x: auto; }
+
+  .table { width: 100%; border-collapse: collapse; }
+  .table th {
+    font-family: var(--font-data);
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    font-weight: 500;
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-line-pill);
+    white-space: nowrap;
+  }
+  .table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--color-line);
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--color-body);
+    vertical-align: top;
+  }
+  .table caption {
+    caption-side: top;
+    text-align: left;
+    font-family: var(--font-data);
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    padding-bottom: 12px;
+  }
+
+  /* 5.7 - Form controls -------------------------------------------------- */
+
+  .label {
+    display: block;
+    font-family: var(--font-data);
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: 8px;
+  }
+  .input,
+  .textarea,
+  .select {
+    display: block;
+    width: 100%;
+    background: var(--color-page);
+    border: 1px solid var(--color-line-pill);
+    border-radius: var(--radius-btn);
+    padding: 13px 14px;
+    min-height: 48px;
+    font-family: var(--font-ui);
+    font-size: 16px;           /* 16px minimum - anything smaller zooms on iOS */
+    line-height: 1.4;
+    color: var(--color-ink);
+  }
+  .input::placeholder,
+  .textarea::placeholder { color: var(--color-muted); }
+  .input:focus,
+  .textarea:focus,
+  .select:focus { border-color: var(--color-brand); }
+  .textarea { min-height: 132px; resize: vertical; }
+  .field-error { color: var(--color-danger); font-size: 13px; margin-top: 6px; }
+
+  /* 5.8 - Skip link ------------------------------------------------------ */
+  .skip-to-content {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 20px;
+    background: var(--color-brand);
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 0 0 var(--radius-btn) var(--radius-btn);
+    transition: top 0.2s;
+  }
+  /* :focus, not :focus-visible - the element is unreachable by pointer and
+     :focus-visible has been flaky here across browsers. */
+  .skip-to-content:focus { top: 0; }
+
+  /* 5.9 - Scroll reveal ---------------------------------------------------
+     The only motion in this stylesheet. Read the three states as a sequence:
+
+       [data-reveal]                 authored in the markup. Styles NOTHING.
+       [data-reveal-state="hidden"]  written by JS, and only ever to elements
+                                     that were below the fold at the moment JS
+                                     started. See RevealObserver.
+       [data-reveal-state="shown"]   written by JS when the element crosses in.
+                                     The ONLY rule that carries a transition.
+
+     Four consequences, each load-bearing:
+
+     1. No JS / JS failed / JS still downloading -> no data-reveal-state
+        attribute exists -> not one rule below matches -> the page is exactly
+        what the server sent. The hidden state is opt-IN, and the only thing
+        that can opt in is code which has already proved it is running.
+     2. Nothing that was on screen when JS booted is ever hidden, so nothing
+        can flash. The observer measures first and hides second.
+     3. transition is declared on "shown", not on the element. Applying
+        "hidden" is therefore instantaneous and cannot animate backwards.
+     4. These are attribute selectors in @layer components, so any Tailwind
+        utility still out-ranks them. The file's contract is intact.
+
+     Three authoring rules, enforced by nothing but this comment:
+       - The attribute goes on the inner .wrap, NEVER on the section itself.
+         Every band paints its own background - .band-alt, the .band-closing
+         gradient, the .wash radials - plus a 1px top hairline. Translating
+         the section opens a 12px seam of --color-page above every alt band
+         and drags the hairline and the teal tick out of line.
+       - NEVER nest one [data-reveal] inside another. Opacity multiplies and
+         translations stack; the inner one would sit at 0 after the outer has
+         finished.
+       - NEVER mark an element that needs a transform of its own, or one with
+         a sticky or fixed descendant - a transformed ancestor becomes their
+         containing block. Nothing in src/ is sticky or fixed inside a section
+         today; a sticky table-of-contents in a blog post would be the first,
+         which is one of the reasons BlogPostClient is left unmarked. */
+  [data-reveal-state="hidden"]:not([data-reveal="stagger"]) {
+    opacity: 0;
+    transform: translateY(var(--reveal-rise));
+  }
+  [data-reveal-state="shown"]:not([data-reveal="stagger"]) {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity   var(--reveal-fade)  linear,
+      transform var(--reveal-shift) var(--reveal-ease);
+  }
+
+  /* Stagger, opt in per grid with data-reveal="stagger". The container itself
+     does not move - only its direct children do, so the two never compound
+     into a 24px drop. The delay is CAPPED at the fourth child: a 12-card grid
+     must not take 900ms to arrive, and the tail of a long list must never be
+     left visibly behind the head. */
+  [data-reveal="stagger"][data-reveal-state="hidden"] > * {
+    opacity: 0;
+    transform: translateY(var(--reveal-rise));
+  }
+  [data-reveal="stagger"][data-reveal-state="shown"] > * {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity   var(--reveal-fade)  linear,
+      transform var(--reveal-shift) var(--reveal-ease);
+  }
+  [data-reveal="stagger"][data-reveal-state="shown"] > *:nth-child(2)     { transition-delay: var(--reveal-stagger); }
+  [data-reveal="stagger"][data-reveal-state="shown"] > *:nth-child(3)     { transition-delay: calc(var(--reveal-stagger) * 2); }
+  [data-reveal="stagger"][data-reveal-state="shown"] > *:nth-child(n + 4) { transition-delay: calc(var(--reveal-stagger) * 3); }
+}
+
+/* -- 6 - UTILITIES --------------------------------------------------------
+   Only what Tailwind cannot already express.                               */
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .text-pretty  { text-wrap: pretty; }
+}
+
+/* -- 7 - THE ONE MEDIA QUERY ----------------------------------------------
+   Everything scalar is handled by clamp() in S3. This exists only for what
+   changes discontinuously at mobile: display headings tighten their tracking
+   and leading, and the hero wash re-aims.
+
+   Weight used to change here too, 300 -> 400, because Newsreader Light is
+   too fragile below ~30px. Since 3373dc3 every display heading is 400 at
+   every width, so those declarations were dead and have gone. The .h2 rule
+   went with them: its line-height was 1.14, identical to the base rule.   */
+@media (max-width: 767px) {
+  .h1, .h1p  { letter-spacing: -0.02em; line-height: 1.08; }
+  .card      { padding: 24px; }
+  .panel     { padding: 26px 24px; }
+  .wash,
+  .wash-left { background: radial-gradient(600px 320px at 30% -10%, var(--color-brand-wash) 0%, var(--color-page) 65%); }
+}
+
+/* -- 8 - REDUCED MOTION ---------------------------------------------------
+   NOTE: this neutralises CSS animation/transition only. framer-motion writes
+   inline transforms and is unaffected - the surviving motion components must
+   each call useReducedMotion().                                             */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* The scroll reveal is the one thing in this file that can fail CLOSED, so
+     it gets an outright reset rather than the duration-zeroing above.
+
+     Zeroing transition-duration alone is NOT enough, and it is worth being
+     precise about why: an element below the fold would still be sitting at
+     opacity 0, still waiting for an IntersectionObserver to notice it. It
+     would then snap into existence with no transition - content popping in,
+     which is the exact experience this media query exists to prevent,
+     delivered without any animation at all.
+
+     So: whatever state the script has written, and whatever it writes next,
+     [data-reveal] is visible. This is THE guarantee. The script's own
+     matchMedia bail-out is an optimisation layered on top of it, not the
+     mechanism. If RevealObserver is deleted tomorrow, or ships broken, or
+     races this query on a mid-session flip, the rule below still holds.
+
+     Unlayered !important is deliberate. The file's warning against writing a
+     component class outside @layer components is about component classes
+     competing with Tailwind; S8 has always been an unlayered reset and this
+     belongs with it. */
+  [data-reveal],
+  [data-reveal="stagger"] > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }
 
-/* ============================================
-   SKIP TO CONTENT
-   ============================================ */
-.skip-to-content {
-  position: absolute;
-  top: -100%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 9999;
-  padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, #14AAA9, #0e8786);
-  color: #ffffff;
-  border-radius: 0 0 0.5rem 0.5rem;
-  font-weight: 600;
-  transition: top 0.2s;
+/* -- 9 - PRINT ------------------------------------------------------------
+   The reveal hides below-fold content until it is scrolled to. Printing does
+   not scroll, so print gets the same outright reset reduced motion does.
+   Nothing else in this file needs a print rule; do not grow this block into a
+   print stylesheet without a reason.                                        */
+@media print {
+  [data-reveal],
+  [data-reveal="stagger"] > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
-.skip-to-content:focus {
-  top: 0;
-}
+

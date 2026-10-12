@@ -1,0 +1,2062 @@
+<meta charset="utf-8">
+<title>Certified Brand Layer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,300;6..72,400&family=Outfit:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400&family=Spectral:wght@300;400&display=swap">
+
+<style>
+/* ===========================================================================
+   1. TOKENS LIFTED FROM src/app/globals.css  (do not edit here — edit source)
+   ======================================================================== */
+:root {
+  --font-display: "Newsreader", Georgia, "Times New Roman", serif;
+  --font-ui: "Outfit", "Helvetica Neue", Arial, sans-serif;
+  --font-data: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+}
+:root {
+/* brand - the reading role */
+  --color-brand:       #065456;   /* 8.71  - eyebrow, link, btn fill, focus */
+  --color-brand-hover: #044143;   /* 11.40 - button and link hover */
+  --color-brand-wash:  #D2EFEC;   /* hero radial inner stop */
+  --color-brand-tint:  #E6F4F3;   /* diagram / highlight fill */
+
+  /* brand - the signal role. Solid 3px accents only, never text or strokes.
+     Free to do more on dark grounds, where it reaches 5.04 on the footer. */
+  --color-brand-signal: #14A4A9;
+
+  /* text - neutrals hold their lightness and rotate hue from the guide's
+     blue-grey (212deg) towards petrol (~180deg). Every ratio holds or gains. */
+  --color-ink:   #0A0A0A;         /* 19.80 - unchanged */
+  --color-body:  #3F4E4E;         /* 8.71  - was 414D5C at 8.60 */
+  --color-muted: #5A6C6C;         /* 5.53  - was 5D6B7D at 5.43 */
+  --color-soft:  #5F7070;         /* 5.20  - was 62707F at 5.07 */
+
+  /* surfaces */
+  --color-page: #FFFFFF;
+  --color-band: #F3F7F7;
+
+  /* rules and borders, light -> strong */
+  --color-line:        #E1EAE9;  /* section rules, td */
+  --color-line-card:   #DEE8E7;  /* card */
+  --color-line-pill:   #DCE6E5;  /* pill, input, th */
+  --color-line-strong: #C2D3D1;  /* btn2 border, emphasis cards */
+
+  /* dark - site footer. Slate becomes petrol; the text ramp is unchanged. */
+  --color-footer:         #052A2B;
+  --color-footer-line:    #123A38;
+  --color-footer-hover:   #0A3433;
+  --color-footer-heading: #F2F5F4;
+  --color-footer-link:    #9DB2BC;
+  --color-footer-legal:   #7C93A0;
+  --color-footer-accent:  #6FE3CB;  /* already inside Certified's range */
+
+  /* dark - feature panel (.panel) */
+  --color-panel-from:     #031A18;
+  --color-panel-to:       #050C0C;
+  --color-panel-line:     #194542;
+  --color-panel-label:    #5F918B;
+  --color-panel-body:     #9BAEAB;
+  --color-panel-pill:     #7FA9A4;
+  --color-panel-cta:      #BFE9E3;
+  --color-panel-cta-line: #276360;
+
+  /* semantic */
+  --color-danger: #B42318;
+
+  /* ========================= END BRAND LAYER ============================
+     Everything below is COMMON to every Pixelette site. Changing it here
+     breaks the family resemblance rather than expressing this brand.
+     ===================================================================== */
+
+  /* radii - the system uses exactly two */
+  --radius-btn:  4px;
+  --radius-tile: 4px;
+  --radius-card: 12px;
+
+  /* shadows - the system uses exactly three */
+  --shadow-tile:    0 1px 2px rgba(10, 20, 19, .04);
+  --shadow-card:    0 1px 2px rgba(10, 20, 19, .04), 0 10px 28px -16px rgba(10, 20, 19, .16);
+  --shadow-feature: 0 2px 4px rgba(10, 20, 19, .04), 0 16px 40px -22px rgba(10, 20, 19, .22);
+
+  /* container -> max-w-wrap */
+  --container-wrap: 1160px;
+}
+:root {
+--fs-h1:    clamp(2.25rem,   1.6rem    + 2.6667vw, 4rem);      /* 36 -> 64 */
+  --fs-h1p:   clamp(1.9375rem, 1.45rem   + 2vw,      3.25rem);   /* 31 -> 52 */
+  --fs-h2:    clamp(1.75rem,   1.425rem  + 1.3333vw, 2.625rem);  /* 28 -> 42 */
+  --fs-h3:    clamp(1.375rem,  1.3054rem + 0.2857vw, 1.5625rem); /* 22 -> 25 */
+  --fs-h4:    1.125rem;                                          /* 18, flat */
+  --fs-lead:  clamp(1.0625rem, 0.9929rem + 0.2857vw, 1.25rem);   /* 17 -> 20 */
+  --fs-body:  1rem;                                              /* 16, flat */
+  --fs-small: 0.875rem;                                          /* 14, flat */
+
+  --sec-y:    clamp(3.5rem, 2.5714rem + 3.8095vw, 6rem);         /* 56 -> 96 */
+  --sec-y-sm: clamp(2.5rem, 2.0357rem + 1.9048vw, 4rem);         /* 40 -> 64 */
+  --header-h: clamp(4rem,   3.6288rem + 1.5238vw, 5rem);         /* 64 -> 80 */
+
+  /* Motion. The first motion tokens on the site, and scoped so they stay the
+     only ones: the --reveal- prefix says they belong to one feature rather
+     than advertising a motion system that does not exist.
+
+     They live in THIS :root and not in @theme static for two reasons. They
+     are not colour, and --ease-* is a live Tailwind v4 theme namespace, so an
+     easing curve in @theme would silently mint an ease-* utility nobody asked
+     for. See S5.9 for what reads them.
+
+     12px is about one line of .small leading, so a band appears to drop into
+     place by one line: typographic settling, not a slide. It is also small
+     enough not to fight the two marks that stay still, the .sec hairline and
+     its 40px teal ::before tick. Opacity finishes 140ms before the transform
+     so copy is never read grey, and it is linear because eased opacity on
+     text has a visibly dull middle. The curve is easeOutCubic - no overshoot;
+     a spring or back curve reads instantly as "an effect". */
+  --reveal-rise:    12px;
+  --reveal-fade:    420ms;
+  --reveal-shift:   560ms;
+  --reveal-ease:    cubic-bezier(0.33, 1, 0.68, 1);              /* easeOutCubic */
+  --reveal-stagger: 70ms;
+}
+
+/* ---- The Certified column needs no overrides: :root above IS the live
+   Certified layer, lifted from globals.css. It is the guide that is now the
+   historical reference, frozen here so the comparison survives. ------------ */
+[data-theme="pt"] {
+  --color-brand: #056F62;
+  --color-brand-hover: #045A4F;
+  --color-brand-wash: #C7EBDF;
+  --color-brand-tint: #E4F4EF;
+  --color-band: #F4F7FA;
+  --color-line: #E2E8EF;
+  --color-line-card: #DFE6EE;
+  --color-line-pill: #DDE4EC;
+  --color-line-strong: #C3D1DE;
+  --color-body: #414D5C;
+  --color-muted: #5D6B7D;
+  --color-soft: #62707F;
+  --color-footer: #06222B;
+  --color-footer-line: #123240;
+  --color-footer-hover: #0B2C36;
+  --color-footer-accent: #6FE3CB;
+  --color-panel-from: #04211F;
+  --color-panel-to: #080F0F;
+  --color-panel-line: #1C4744;
+  --color-panel-cta-line: #2A6460;
+  /* the guide has no signal role - its one green does every job */
+  --color-brand-signal: #056F62;
+}
+
+/* ===========================================================================
+   2. COMPONENT CLASSES LIFTED FROM globals.css @layer components
+   ======================================================================== */
+/* 5.1 - Layout ------------------------------------------------------- */
+
+  /* 1160px capped, 20px gutters below, no media query */
+  .wrap {
+    width: min(var(--container-wrap), 100% - 40px);
+    margin-inline: auto;
+  }
+
+  /* BRAND LAYER - the signature device, half 1 of 2. See also .card-feature.
+     The guide marks a section only with a hairline. Certified caps that rule
+     with a 40px segment of signal teal, aligned to the container rather than
+     the viewport so it sits directly above the first word of the heading.
+
+     position:relative makes .sec a containing block. Checked: the only
+     absolutely-positioned descendants in src/ are the contact honeypot at
+     left:-9999px and a zero-size hidden Turnstile wrapper, both of which are
+     anchor-independent. The cap is deliberately NOT on a bare .band-alt: it
+     marks a section opening, not every band on the page. */
+  .sec {
+    padding-block: var(--sec-y);
+    border-top: 1px solid var(--color-line);
+    position: relative;
+  }
+  .sec::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: max(20px, calc((100% - var(--container-wrap)) / 2));
+    width: 40px;
+    height: 3px;
+    background: var(--color-brand-signal);
+  }
+  .sec-sm { padding-block: var(--sec-y-sm); }
+
+  .rule { height: 1px; background: var(--color-line); }
+
+  /* 5.2 - Type --------------------------------------------------------- */
+
+  .h1 {
+    font-family: var(--font-display);
+    font-size: var(--fs-h1);
+    line-height: 1.05;
+    letter-spacing: -0.016em;
+    font-weight: 400;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  /* interior-page hero variant */
+  .h1p {
+    font-family: var(--font-display);
+    font-size: var(--fs-h1p);
+    line-height: 1.07;
+    letter-spacing: -0.015em;
+    font-weight: 400;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .h2 {
+    font-family: var(--font-display);
+    font-size: var(--fs-h2);
+    line-height: 1.14;
+    letter-spacing: -0.014em;
+    font-weight: 400;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .h3 {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    line-height: 1.26;
+    letter-spacing: -0.008em;
+    font-weight: 400;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  /* h4 is SANS. This is not a typo in the guide. */
+  .h4 {
+    font-family: var(--font-ui);
+    font-size: var(--fs-h4);
+    line-height: 1.3;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .lead {
+    font-size: var(--fs-lead);
+    line-height: 1.55;
+    color: var(--color-body);
+    max-width: 62ch;
+  }
+
+  .body {
+    font-size: var(--fs-body);
+    line-height: 1.65;
+    color: var(--color-body);
+    max-width: 66ch;
+  }
+
+  .small {
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    color: var(--color-muted);
+  }
+
+  .eyebrow {
+    font-family: var(--font-data);
+    font-size: 11px;
+    line-height: 1.2;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-brand);
+  }
+
+  /* source citation, sits under stat tiles */
+  .src {
+    font-family: var(--font-data);
+    font-size: 11.5px;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    color: var(--color-soft);
+  }
+
+  .mono { font-family: var(--font-data); }
+
+  /* Inline text link - opt-in, see the note in @layer base */
+  .link { color: var(--color-brand); text-decoration: none; }
+  .link:hover { color: var(--color-brand-hover); }
+
+  /* Preflight strips list markers; restore them where prose needs them. */
+  .list {
+    list-style: disc;
+    padding-left: 18px;
+    font-size: var(--fs-body);
+    line-height: 1.65;
+    color: var(--color-body);
+    max-width: 66ch;
+  }
+  .list > li + li { margin-top: 6px; }
+  .list-num { list-style: decimal; }
+
+  /* 5.3 - Long-form prose ----------------------------------------------
+     Replaces the dead prose/prose-invert/prose-lg in BlogPostClient.tsx:
+     @tailwindcss/typography is NOT installed, so those classes do nothing. */
+  .prose {
+    font-size: var(--fs-body);
+    line-height: 1.7;
+    color: var(--color-body);
+    max-width: 68ch;
+  }
+  .prose > * + *    { margin-top: 1.15em; }
+  .prose h2         { font-family: var(--font-display); font-size: var(--fs-h2); line-height: 1.14; letter-spacing: -0.014em; font-weight: 400; color: var(--color-ink); margin-top: 1.8em; }
+  .prose h3         { font-family: var(--font-display); font-size: var(--fs-h3); line-height: 1.26; letter-spacing: -0.008em; font-weight: 400; color: var(--color-ink); margin-top: 1.6em; }
+  .prose h4         { font-family: var(--font-ui); font-size: var(--fs-h4); font-weight: 600; color: var(--color-ink); margin-top: 1.5em; }
+  .prose strong     { color: var(--color-ink); font-weight: 600; }
+  .prose a          { color: var(--color-brand); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  .prose a:hover    { color: var(--color-brand-hover); }
+  .prose ul         { list-style: disc; padding-left: 18px; }
+  .prose ol         { list-style: decimal; padding-left: 20px; }
+  .prose li + li    { margin-top: 6px; }
+  .prose blockquote { border-left: 2px solid var(--color-brand); padding-left: 18px; color: var(--color-muted); }
+  .prose code       { font-family: var(--font-data); font-size: 0.9em; background: var(--color-band); border: 1px solid var(--color-line-pill); border-radius: 3px; padding: 1px 5px; }
+  .prose img        { border-radius: var(--radius-card); border: 1px solid var(--color-line-card); }
+  .prose hr         { border: 0; height: 1px; background: var(--color-line); margin-block: 2em; }
+
+  /* 5.4 - Surfaces ------------------------------------------------------ */
+
+  .card {
+    background: var(--color-page);
+    border: 1px solid var(--color-line-card);
+    border-radius: var(--radius-card);
+    padding: 28px;
+    box-shadow: var(--shadow-card);
+  }
+
+  /* highlighted / primary card - the guide's door treatment.
+
+     BRAND LAYER - the signature device, half 2 of 2. The guide puts its 3px
+     accent across the TOP of a feature card; Certified moves it to the LEFT,
+     in signal teal. Same primitive, different mannerism, and it reads at a
+     glance in a screenshot, which is what a sibling brand needs. */
+  .card-feature {
+    border-color: var(--color-line-strong);
+    border-top: 1px solid var(--color-line-strong);
+    border-left: 3px solid var(--color-brand-signal);
+    box-shadow: var(--shadow-feature);
+  }
+
+  .tile {
+    background: var(--color-page);
+    border: 1px solid var(--color-line-card);
+    border-radius: var(--radius-tile);
+    padding: 20px 22px;
+    box-shadow: var(--shadow-tile);
+  }
+  .tile b {
+    display: block;
+    font-family: var(--font-data);
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--color-brand);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .tile span {
+    display: block;
+    font-size: 13px;
+    color: var(--color-muted);
+    margin-top: 9px;
+    line-height: 1.4;
+  }
+
+  /* dark feature panel */
+  .panel {
+    background: linear-gradient(135deg, var(--color-panel-from) 0%, var(--color-panel-to) 64%);
+    border: 1px solid var(--color-panel-line);
+    border-radius: var(--radius-card);
+    padding: 34px 38px;
+    color: var(--color-panel-body);
+  }
+  .panel .eyebrow { color: var(--color-panel-label); }
+  .panel .h2,
+  .panel .h3,
+  .panel .h4      { color: #FFFFFF; }
+  .panel .small,
+  .panel .body    { color: var(--color-panel-body); }
+  .panel .pill    { border-color: var(--color-panel-line); color: var(--color-panel-pill); }
+
+  /* dark outline CTA, used inside .panel */
+  .btn-panel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    border: 1px solid var(--color-panel-cta-line);
+    color: var(--color-panel-cta);
+    font-weight: 500;
+    font-size: 15px;
+    padding: 13px 20px;
+    border-radius: var(--radius-btn);
+    min-height: 48px;
+  }
+
+  /* site footer */
+  .footer {
+    background: var(--color-footer);
+    border-top: 1px solid var(--color-footer-line);
+    color: var(--color-footer-link);
+  }
+  .footer .eyebrow { color: var(--color-footer-accent); }
+  .footer .pill    { border-color: var(--color-footer-line); color: var(--color-footer-link); }
+
+  /* section bands */
+  .band-alt {
+    background: var(--color-band);
+    border-top: 1px solid var(--color-line);
+  }
+  .band-closing {
+    background: linear-gradient(180deg, var(--color-page) 0%, var(--color-band) 100%);
+    border-top: 1px solid var(--color-line);
+  }
+
+  /* hero washes */
+  .wash      { background: radial-gradient(1200px 560px at 50% -20%, var(--color-brand-wash) 0%, var(--color-page) 65%); }
+  .wash-left { background: radial-gradient(900px 420px at 14% -20%, var(--color-brand-wash) 0%, var(--color-page) 60%); }
+
+  /* 5.5 - Controls ------------------------------------------------------ */
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--color-brand);
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.2;
+    padding: 16px 26px;
+    border-radius: var(--radius-btn);
+    min-height: 52px;
+    text-align: center;
+  }
+  .btn:hover { background: var(--color-brand-hover); }
+
+  .btn2 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--color-ink);
+    border: 1px solid var(--color-line-strong);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.2;
+    padding: 16px 26px;
+    border-radius: var(--radius-btn);
+    min-height: 52px;
+    text-align: center;
+  }
+  .btn2:hover { border-color: var(--color-brand); color: var(--color-brand); }
+
+  /* Not in the guide. Replaces the old ghost variant so call sites keep
+     working. Text-only, still a 44px tap target. */
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--color-brand);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.2;
+    padding: 0 4px;
+    border-radius: var(--radius-btn);
+    min-height: 44px;
+  }
+  .btn-ghost:hover { color: var(--color-brand-hover); }
+
+  /* light-button disabled state: opacity alone is near-invisible on white */
+  .btn:disabled,
+  .btn[aria-disabled="true"] {
+    background: var(--color-line-strong);
+    color: #FFFFFF;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-data);
+    font-size: 11px;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid var(--color-line-pill);
+    border-radius: 999px;
+    padding: 6px 12px;
+    color: var(--color-muted);
+    white-space: nowrap;
+  }
+  .pill-brand { border-color: var(--color-brand); color: var(--color-brand); }
+
+  /* 44px minimum tap target on any standalone inline link */
+  .flink {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 44px;
+  }
+
+  /* 5.6 - Tables -------------------------------------------------------- */
+
+  .table-wrap { overflow-x: auto; }
+
+  .table { width: 100%; border-collapse: collapse; }
+  .table th {
+    font-family: var(--font-data);
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    font-weight: 500;
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-line-pill);
+    white-space: nowrap;
+  }
+  .table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--color-line);
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--color-body);
+    vertical-align: top;
+  }
+  .table caption {
+    caption-side: top;
+    text-align: left;
+    font-family: var(--font-data);
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    padding-bottom: 12px;
+  }
+
+  /* 5.7 - Form controls -------------------------------------------------- */
+
+  .label {
+    display: block;
+    font-family: var(--font-data);
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: 8px;
+  }
+  .input,
+  .textarea,
+  .select {
+    display: block;
+    width: 100%;
+    background: var(--color-page);
+    border: 1px solid var(--color-line-pill);
+    border-radius: var(--radius-btn);
+    padding: 13px 14px;
+    min-height: 48px;
+    font-family: var(--font-ui);
+    font-size: 16px;           /* 16px minimum - anything smaller zooms on iOS */
+    line-height: 1.4;
+    color: var(--color-ink);
+  }
+  .input::placeholder,
+  .textarea::placeholder { color: var(--color-muted); }
+  .input:focus,
+  .textarea:focus,
+  .select:focus { border-color: var(--color-brand); }
+  .textarea { min-height: 132px; resize: vertical; }
+  .field-error { color: var(--color-danger); font-size: 13px; margin-top: 6px; }
+
+  /* 5.8 - Skip link ------------------------------------------------------ */
+  .skip-to-content {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 20px;
+    background: var(--color-brand);
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 0 0 var(--radius-btn) var(--radius-btn);
+    transition: top 0.2s;
+  }
+  /* :focus, not :focus-visible - the element is unreachable by pointer and
+     :focus-visible has been flaky here across browsers. */
+  .skip-to-content:focus { top: 0; }
+
+  /* 5.9 - Scroll reveal ---------------------------------------------------
+     The only motion in this stylesheet. Read the three states as a sequence:
+
+       [data-reveal]                 authored in the markup. Styles NOTHING.
+       [data-reveal-state="hidden"]  written by JS, and only ever to elements
+                                     that were below the fold at the moment JS
+                                     started. See RevealObserver.
+       [data-reveal-state="shown"]   written by JS when the element crosses in.
+                                     The ONLY rule that carries a transition.
+
+     Four consequences, each load-bearing:
+
+     1. No JS / JS failed / JS still downloading -> no data-reveal-state
+        attribute exists -> not one rule below matches -> the page is exactly
+        what the server sent. The hidden state is opt-IN, and the only thing
+        that can opt in is code which has already proved it is running.
+     2. Nothing that was on screen when JS booted is ever hidden, so nothing
+        can flash. The observer measures first and hides second.
+     3. transition is declared on "shown", not on the element. Applying
+        "hidden" is therefore instantaneous and cannot animate backwards.
+     4. These are attribute selectors in @layer components, so any Tailwind
+        utility still out-ranks them. The file's contract is intact.
+
+     Three authoring rules, enforced by nothing but this comment:
+       - The attribute goes on the inner .wrap, NEVER on the section itself.
+         Every band paints its own background - .band-alt, the .band-closing
+         gradient, the .wash radials - plus a 1px top hairline. Translating
+         the section opens a 12px seam of --color-page above every alt band
+         and drags the hairline and the teal tick out of line.
+       - NEVER nest one [data-reveal] inside another. Opacity multiplies and
+         translations stack; the inner one would sit at 0 after the outer has
+         finished.
+       - NEVER mark an element that needs a transform of its own, or one with
+         a sticky or fixed descendant - a transformed ancestor becomes their
+         containing block. Nothing in src/ is sticky or fixed inside a section
+         today; a sticky table-of-contents in a blog post would be the first,
+         which is one of the reasons BlogPostClient is left unmarked. */
+  [data-reveal-state="hidden"]:not([data-reveal="stagger"]) {
+    opacity: 0;
+    transform: translateY(var(--reveal-rise));
+  }
+  [data-reveal-state="shown"]:not([data-reveal="stagger"]) {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity   var(--reveal-fade)  linear,
+      transform var(--reveal-shift) var(--reveal-ease);
+  }
+
+  /* Stagger, opt in per grid with data-reveal="stagger". The container itself
+     does not move - only its direct children do, so the two never compound
+     into a 24px drop. The delay is CAPPED at the fourth child: a 12-card grid
+     must not take 900ms to arrive, and the tail of a long list must never be
+     left visibly behind the head. */
+  [data-reveal="stagger"][data-reveal-state="hidden"] > * {
+    opacity: 0;
+    transform: translateY(var(--reveal-rise));
+  }
+  [data-reveal="stagger"][data-reveal-state="shown"] > * {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity   var(--reveal-fade)  linear,
+      transform var(--reveal-shift) var(--reveal-ease);
+  }
+  [data-reveal="stagger"][data-reveal-state="shown"] > *:nth-child(2)     { transition-delay: var(--reveal-stagger); }
+  [data-reveal="stagger"][data-reveal-state="shown"] > *:nth-child(3)     { transition-delay: calc(var(--reveal-stagger) * 2); }
+  [data-reveal="stagger"][data-reveal-state="shown"] > *:nth-child(n + 4) { transition-delay: calc(var(--reveal-stagger) * 3); }
+
+@media (max-width: 767px) {
+.h1, .h1p  { letter-spacing: -0.02em; line-height: 1.08; }
+  .card      { padding: 24px; }
+  .panel     { padding: 26px 24px; }
+  .wash,
+  .wash-left { background: radial-gradient(600px 320px at 30% -10%, var(--color-brand-wash) 0%, var(--color-page) 65%); }
+}
+
+/* ===========================================================================
+   3. SOURCE PATCHES
+   Two rules in globals.css hard-code hexes instead of reading their token, so
+   they would silently escape the neutral rotation. Patched here so the
+   comparison is honest; flagged on the page as a source fix.
+   ======================================================================== */
+.band-closing { background: linear-gradient(180deg, var(--color-page) 0%, var(--color-band) 100%); }
+.footer .pill { border-color: var(--color-footer-line); }
+
+/* ===========================================================================
+   4. SIGNATURE DEVICE — applied to the Certified side only
+   ======================================================================== */
+/* Inverted along with the tokens. The extracted component CSS now carries
+   Certified's left accent as its default, so it is the GUIDE column that needs
+   resetting back to its own top-border treatment. */
+[data-theme="pt"] .card-feature {
+  border-top: 3px solid var(--color-brand);
+  border-left: 1px solid var(--color-line-strong);
+}
+[data-theme="pt"] .sec::before { display: none; }
+
+/* The toggle still reskins the Certified column. "left" is now the default and
+   needs no rule; the other two revert it and apply their own. */
+[data-device="eyebrow"] [data-theme="pc"] .card-feature,
+[data-device="top"]     [data-theme="pc"] .card-feature {
+  border-top: 3px solid var(--color-brand);
+  border-left: 1px solid var(--color-line-strong);
+}
+[data-device="eyebrow"] [data-theme="pc"] .sec::before,
+[data-device="top"]     [data-theme="pc"] .sec::before { display: none; }
+
+[data-device="eyebrow"] [data-theme="pc"] .eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 1px;
+  margin-right: 10px;
+  vertical-align: middle;
+  background: currentColor;
+}
+
+/* ===========================================================================
+   5. DISPLAY FACE — Certified side only
+   ======================================================================== */
+[data-face="spectral"] [data-theme="pc"] { --font-display: "Spectral", Georgia, serif; }
+[data-face="source"]   [data-theme="pc"] { --font-display: "Source Serif 4", Georgia, serif; }
+
+/* ===========================================================================
+   6. PAGE CHROME  (.cmp-* namespace — cannot collide with the extracted CSS)
+
+   The bench is deliberately achromatic. Any tinted surround biases a colour
+   judgement, and the whole page exists to support one. The single chrome
+   accent is amber, which sits outside both brands' 168–198deg range, so a
+   chrome mark can never be mistaken for specimen content.
+   ======================================================================== */
+:root {
+  --c-bench:    #1E2022;
+  --c-well:     #141618;
+  --c-raise:    #26292B;
+  --c-rule:     #34383B;
+  --c-ink:      #E9EBEC;
+  --c-dim:      #979DA0;
+  --c-mark:     #E8B23F;
+  --c-good:     #79C08A;
+  --c-bad:      #E4715F;
+}
+
+body {
+  margin: 0;
+  background: var(--c-bench);
+  color: var(--c-ink);
+  font-family: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.cmp-shell { max-width: 1400px; margin-inline: auto; padding: 0 28px 120px; }
+.cmp-mono { font-family: "IBM Plex Mono", Consolas, monospace; }
+
+/* -- masthead ----------------------------------------------------------- */
+.cmp-mast { padding: 72px 0 40px; border-bottom: 1px solid var(--c-rule); }
+.cmp-kicker {
+  font-family: "IBM Plex Mono", Consolas, monospace;
+  font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--c-mark);
+}
+.cmp-mast h1 {
+  font-size: clamp(30px, 1.4rem + 2.4vw, 52px);
+  line-height: 1.08; font-weight: 500; letter-spacing: -.02em;
+  margin: 18px 0 0; max-width: 20ch; text-wrap: balance;
+}
+.cmp-mast p { color: var(--c-dim); max-width: 68ch; margin: 18px 0 0; }
+.cmp-meta { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 26px; font-size: 12px; color: var(--c-dim); }
+.cmp-meta b { color: var(--c-ink); font-weight: 500; }
+
+/* -- instrument bar ----------------------------------------------------- */
+.cmp-bar {
+  position: sticky; top: 0; z-index: 40;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 26px;
+  padding: 12px 0; margin-bottom: 8px;
+  background: color-mix(in srgb, var(--c-bench) 94%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--c-rule);
+}
+.cmp-ctl { display: flex; align-items: center; gap: 10px; }
+.cmp-ctl > span {
+  font-family: "IBM Plex Mono", Consolas, monospace;
+  font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--c-dim);
+}
+.cmp-seg { display: flex; border: 1px solid var(--c-rule); border-radius: 3px; overflow: hidden; }
+.cmp-seg button {
+  appearance: none; border: 0; background: transparent; cursor: pointer;
+  font: inherit; font-size: 12.5px; color: var(--c-dim);
+  padding: 7px 13px; min-height: 34px;
+  border-right: 1px solid var(--c-rule);
+}
+.cmp-seg button:last-child { border-right: 0; }
+.cmp-seg button:hover { color: var(--c-ink); background: var(--c-raise); }
+.cmp-seg button[aria-pressed="true"] { background: var(--c-mark); color: #201703; font-weight: 500; }
+.cmp-seg button:focus-visible { outline: 2px solid var(--c-mark); outline-offset: -2px; }
+
+/* -- sections ----------------------------------------------------------- */
+.cmp-sec { padding: 64px 0 0; }
+.cmp-sec > h2 {
+  font-size: 26px; font-weight: 500; letter-spacing: -.014em; margin: 0;
+  display: flex; align-items: baseline; gap: 14px;
+}
+.cmp-sec > h2 em {
+  font-family: "IBM Plex Mono", Consolas, monospace;
+  font-style: normal; font-size: 12px; color: var(--c-mark); letter-spacing: .1em;
+}
+.cmp-sec > p { color: var(--c-dim); max-width: 74ch; margin: 14px 0 0; }
+.cmp-sec > p + p { margin-top: 10px; }
+.cmp-lede b { color: var(--c-ink); font-weight: 500; }
+
+/* -- callout ------------------------------------------------------------ */
+.cmp-callout {
+  border: 1px solid var(--c-rule); border-left: 3px solid var(--c-mark);
+  border-radius: 3px; padding: 18px 22px; margin-top: 26px;
+  background: var(--c-well); color: var(--c-dim); font-size: 14px;
+}
+.cmp-callout b { color: var(--c-ink); font-weight: 500; }
+.cmp-callout code { font-family: "IBM Plex Mono", Consolas, monospace; font-size: 12.5px; color: var(--c-mark); }
+
+/* -- invariants list ---------------------------------------------------- */
+.cmp-lock { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; margin-top: 28px; background: var(--c-rule); border: 1px solid var(--c-rule); border-radius: 3px; overflow: hidden; }
+.cmp-lock div { background: var(--c-well); padding: 16px 18px; }
+.cmp-lock dt { font-family: "IBM Plex Mono", Consolas, monospace; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--c-dim); margin: 0; }
+.cmp-lock dd { margin: 6px 0 0; font-size: 14px; color: var(--c-ink); }
+
+/* -- token table -------------------------------------------------------- */
+.cmp-table-wrap { overflow-x: auto; margin-top: 28px; border: 1px solid var(--c-rule); border-radius: 3px; }
+table.cmp-tokens { width: 100%; border-collapse: collapse; font-size: 13.5px; background: var(--c-well); }
+table.cmp-tokens th {
+  font-family: "IBM Plex Mono", Consolas, monospace;
+  font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; text-align: left;
+  color: var(--c-dim); font-weight: 400; padding: 12px 16px; border-bottom: 1px solid var(--c-rule);
+  white-space: nowrap;
+}
+table.cmp-tokens td { padding: 9px 16px; border-bottom: 1px solid var(--c-rule); vertical-align: middle; }
+table.cmp-tokens tr:last-child td { border-bottom: 0; }
+.cmp-tok { font-family: "IBM Plex Mono", Consolas, monospace; font-size: 12px; color: var(--c-ink); white-space: nowrap; }
+.cmp-sw { white-space: nowrap; }
+.cmp-sw i { display: inline-block; width: 26px; height: 16px; border-radius: 2px; vertical-align: -3px; margin-right: 9px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); }
+.cmp-sw code { font-family: "IBM Plex Mono", Consolas, monospace; font-size: 12px; color: var(--c-dim); font-variant-numeric: tabular-nums; }
+.cmp-note { color: var(--c-dim); font-size: 13px; }
+.cmp-none { color: var(--c-dim); font-size: 12px; font-style: italic; }
+.cmp-unchanged .cmp-tok, .cmp-unchanged .cmp-note { opacity: .55; }
+
+/* -- contrast audit ----------------------------------------------------- */
+.cmp-audit { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 22px; margin-top: 28px; }
+.cmp-audit section { border: 1px solid var(--c-rule); border-radius: 3px; background: var(--c-well); overflow: hidden; }
+.cmp-audit h3 { margin: 0; padding: 13px 16px; font-size: 13px; font-weight: 500; border-bottom: 1px solid var(--c-rule); display: flex; justify-content: space-between; align-items: center; }
+.cmp-audit h3 span { font-family: "IBM Plex Mono", Consolas, monospace; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--c-dim); }
+.cmp-audit ul { list-style: none; margin: 0; padding: 0; }
+.cmp-audit li { display: flex; align-items: center; gap: 12px; padding: 8px 16px; border-bottom: 1px solid var(--c-rule); font-size: 13px; }
+.cmp-audit li:last-child { border-bottom: 0; }
+.cmp-audit li span:first-child { flex: 1; color: var(--c-dim); }
+.cmp-ratio { font-family: "IBM Plex Mono", Consolas, monospace; font-variant-numeric: tabular-nums; color: var(--c-ink); }
+.cmp-badge { font-family: "IBM Plex Mono", Consolas, monospace; font-size: 10px; letter-spacing: .1em; padding: 3px 7px; border-radius: 2px; min-width: 44px; text-align: center; }
+.cmp-badge[data-r="aaa"]  { background: rgba(121,192,138,.16); color: var(--c-good); }
+.cmp-badge[data-r="aa"]   { background: rgba(121,192,138,.10); color: var(--c-good); }
+.cmp-badge[data-r="ui"]   { background: rgba(232,178,63,.14); color: var(--c-mark); }
+.cmp-badge[data-r="deco"] { background: var(--c-raise); color: var(--c-dim); }
+.cmp-badge[data-r="inherit"] { background: rgba(232,178,63,.14); color: var(--c-mark); }
+.cmp-badge[data-r="fail"] { background: rgba(228,113,95,.16); color: var(--c-bad); }
+
+/* -- specimen plates ---------------------------------------------------- */
+.cmp-boards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 28px; align-items: start; }
+.cmp-col { min-width: 0; }
+.cmp-col-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  padding-bottom: 10px; margin-bottom: 14px; border-bottom: 1px solid var(--c-rule);
+  position: sticky; top: 59px; z-index: 20; background: var(--c-bench);
+}
+.cmp-col-head b { font-size: 15px; font-weight: 500; }
+.cmp-col-head span { font-family: "IBM Plex Mono", Consolas, monospace; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--c-dim); }
+
+.cmp-plate { margin: 0 0 18px; border: 1px solid var(--c-rule); border-radius: 4px; overflow: hidden; background: var(--c-well); }
+.cmp-plate-cap {
+  font-family: "IBM Plex Mono", Consolas, monospace;
+  font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--c-dim);
+  padding: 9px 14px; border-bottom: 1px solid var(--c-rule);
+}
+.cmp-plate-body {
+  padding: 24px;
+  background: var(--color-page);
+  color: var(--color-ink);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.55;
+}
+.cmp-plate-dark .cmp-plate-body { background: var(--c-well); padding: 20px; }
+
+/* specimen-internal layout helpers */
+.cmp-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+.cmp-row + .cmp-row { margin-top: 14px; }
+.cmp-center { justify-content: center; text-align: center; }
+.cmp-grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 18px; }
+.cmp-grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 18px; }
+.cmp-grid4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+.cmp-sec-demo { padding-block: 28px; }
+.cmp-figure { font-size: 30px; font-weight: 500; letter-spacing: -.02em; color: var(--color-brand); margin: 14px 0 0; }
+.cmp-ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+.cmp-ticks li { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; color: var(--color-body); }
+.cmp-tick { color: var(--color-brand-signal); flex: none; margin-top: 3px; }
+.cmp-block { display: flex; width: 100%; }
+.cmp-faq-row { padding: 20px 0; border-bottom: 1px solid var(--color-line); }
+.cmp-faq-row:first-child { padding-top: 0; }
+.cmp-faq-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.cmp-form { display: grid; gap: 18px; }
+.cmp-footer-demo { padding: 24px; border-radius: 4px; }
+.cmp-footer-links { display: flex; flex-wrap: wrap; gap: 4px 20px; margin: 10px 0 0; }
+.cmp-footer-links a { color: var(--color-footer-link); text-decoration: none; font-size: 14.5px; }
+.cmp-footer-links a:hover { color: var(--color-footer-heading); }
+
+/* forced states — the page has to show hover/focus without a pointer */
+.cmp-force-hover.btn { background: var(--color-brand-hover); }
+.cmp-force-hover.btn2 { border-color: var(--color-brand); color: var(--color-brand); }
+.cmp-force-focus { outline: 2px solid var(--color-brand); outline-offset: 2px; border-radius: 2px; }
+.cmp-force-focus.input { border-color: var(--color-brand); }
+
+/* -- composition -------------------------------------------------------- */
+.cmp-stage { margin-top: 28px; border: 1px solid var(--c-rule); border-radius: 4px; overflow: hidden; }
+.cmp-stage-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  padding: 10px 16px; border-bottom: 1px solid var(--c-rule); background: var(--c-well);
+  font-family: "IBM Plex Mono", Consolas, monospace; font-size: 10.5px;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--c-dim);
+}
+.cmp-stage-head b { color: var(--c-mark); font-weight: 400; }
+
+.cmp-canvas { position: relative; background: var(--color-page); }
+.cmp-layer {
+  background: var(--color-page);
+  color: var(--color-ink);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.55;
+}
+/* wipe + flip: both layers stacked, PC clipped from the handle rightwards */
+[data-mode="wipe"] .cmp-layer,
+[data-mode="flip"] .cmp-layer { position: absolute; inset: 0 0 auto 0; }
+[data-mode="wipe"] .cmp-layer-pc,
+[data-mode="flip"] .cmp-layer-pc { clip-path: inset(0 0 0 var(--wipe, 50%)); }
+[data-mode="flip"] .cmp-layer-pc { transition: clip-path .18s ease; }
+[data-mode="stack"] .cmp-layer { position: static; }
+[data-mode="stack"] .cmp-layer-pc { border-top: 2px solid var(--c-mark); }
+
+.cmp-handle {
+  position: absolute; top: 0; bottom: 0; left: var(--wipe, 50%);
+  width: 2px; background: var(--c-mark); cursor: ew-resize; z-index: 5;
+  transform: translateX(-1px);
+}
+.cmp-handle::after {
+  content: ""; position: absolute; top: 50%; left: 50%; width: 34px; height: 34px;
+  transform: translate(-50%, -50%); border-radius: 50%;
+  background: var(--c-mark); box-shadow: 0 2px 12px rgba(0,0,0,.4);
+}
+.cmp-handle::before {
+  content: ""; position: absolute; top: 50%; left: 50%; width: 13px; height: 8px;
+  transform: translate(-50%, -50%); z-index: 1;
+  background: #201703;
+  clip-path: polygon(0 50%, 34% 0, 34% 35%, 66% 35%, 66% 0, 100% 50%, 66% 100%, 66% 65%, 34% 65%, 34% 100%);
+}
+[data-mode="flip"] .cmp-handle, [data-mode="stack"] .cmp-handle { display: none; }
+.cmp-stage-tag {
+  position: absolute; top: 12px; z-index: 6;
+  font-family: "IBM Plex Mono", Consolas, monospace; font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; padding: 4px 9px; border-radius: 2px;
+  background: rgba(20,22,24,.86); color: #E9EBEC;
+}
+.cmp-tag-pt { left: 12px; }
+.cmp-tag-pc { right: 12px; }
+[data-mode="stack"] .cmp-stage-tag { display: none; }
+.cmp-stack-tag { display: none; }
+[data-mode="stack"] .cmp-stack-tag {
+  display: block; padding: 8px 16px; background: var(--c-well);
+  font-family: "IBM Plex Mono", Consolas, monospace; font-size: 10.5px;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--c-dim);
+}
+
+/* composition-internal helpers */
+.cmp-hero { padding-block: 80px; text-align: center; }
+.cmp-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.cmp-hero-h1 { margin: 32px auto 0; max-width: 22ch; }
+.cmp-hero-accent { display: block; margin-top: 8px; color: var(--color-brand); }
+.cmp-hero-lead { margin: 28px auto 0; }
+.cmp-band-pad { padding-block: 50px; }
+.cmp-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; margin-top: 36px; border-top: 1px solid var(--color-line); }
+.cmp-step { padding: 24px 24px 24px 0; border-right: 1px solid var(--color-line); }
+.cmp-step:last-child { border-right: 0; }
+.cmp-step + .cmp-step { padding-left: 24px; }
+.cmp-step-n { display: block; font-size: 12px; letter-spacing: .14em; color: var(--color-brand-signal); margin-bottom: 10px; }
+.cmp-step .small { margin: 8px 0 0; }
+.cmp-footer-full { padding-block: 56px 28px; }
+.cmp-footer-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 32px; }
+.cmp-footer-body { color: var(--color-footer-link); font-size: 14.5px; margin: 12px 0 0; }
+.cmp-footer-base {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;
+  margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--color-footer-line);
+  color: var(--color-footer-legal); font-size: 13px;
+}
+
+/* -- face specimen ------------------------------------------------------ */
+.cmp-faces { display: grid; gap: 18px; margin-top: 28px; }
+.cmp-face { border: 1px solid var(--c-rule); border-radius: 4px; overflow: hidden; background: var(--c-well); }
+.cmp-face-head { display: flex; justify-content: space-between; gap: 14px; padding: 10px 16px; border-bottom: 1px solid var(--c-rule); font-family: "IBM Plex Mono", Consolas, monospace; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--c-dim); }
+.cmp-face-head b { color: var(--c-mark); font-weight: 400; }
+.cmp-face-body { padding: 30px 26px; background: var(--color-page); }
+.cmp-face-body .h1 { max-width: 20ch; }
+.cmp-face-body .lead { margin-top: 16px; }
+.cmp-face-body .cmp-row { margin-top: 20px; }
+
+/* -- impact list -------------------------------------------------------- */
+.cmp-impact { width: 100%; border-collapse: collapse; margin-top: 28px; font-size: 13.5px; border: 1px solid var(--c-rule); border-radius: 3px; background: var(--c-well); }
+.cmp-impact th { font-family: "IBM Plex Mono", Consolas, monospace; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; text-align: left; color: var(--c-dim); font-weight: 400; padding: 12px 16px; border-bottom: 1px solid var(--c-rule); }
+.cmp-impact td { padding: 10px 16px; border-bottom: 1px solid var(--c-rule); vertical-align: top; color: var(--c-dim); }
+.cmp-impact tr:last-child td { border-bottom: 0; }
+.cmp-impact td:first-child { font-family: "IBM Plex Mono", Consolas, monospace; font-size: 12px; color: var(--c-ink); white-space: nowrap; }
+.cmp-impact td b { color: var(--c-ink); font-weight: 500; font-variant-numeric: tabular-nums; }
+
+.cmp-foot { margin-top: 72px; padding-top: 22px; border-top: 1px solid var(--c-rule); color: var(--c-dim); font-size: 12.5px; display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.cmp-foot code { font-family: "IBM Plex Mono", Consolas, monospace; color: var(--c-mark); }
+
+/* -- narrow ------------------------------------------------------------- */
+@media (max-width: 1000px) {
+  .cmp-boards { grid-template-columns: 1fr; }
+  .cmp-col-head { position: static; }
+}
+@media (max-width: 640px) {
+  .cmp-shell { padding: 0 16px 80px; }
+  .cmp-mast { padding-top: 44px; }
+  .cmp-bar { gap: 10px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+</style>
+
+<div class="cmp-shell" data-theme-root data-device="left" data-face="newsreader" data-mode="wipe">
+
+  <header class="cmp-mast">
+    <div class="cmp-kicker">Pixelette Group &middot; Brand layer discovery</div>
+    <h1>Same bones, different house</h1>
+    <p>The revamp made Pixelette Certified render as a faithful copy of the group pattern guide, which was drawn around Pixelette Technologies. This page proposes the layer that keeps the shared skeleton intact while giving Certified its own identity, and is the method we will reuse for the rest of the group.</p>
+    <div class="cmp-meta">
+      <span><b>Left</b> Pattern guide, frozen reference</span>
+      <span><b>Right</b> Certified brand layer, as built</span>
+      <span><b>Source</b> src/app/globals.css, extracted at build time</span>
+      <span><b>Status</b> Applied and building</span>
+    </div>
+  </header>
+
+  <div class="cmp-bar">
+    <div class="cmp-ctl"><span>Device</span>
+      <div class="cmp-seg" data-ctl="device">
+        <button type="button" data-v="left" aria-pressed="true">Left accent</button>
+        <button type="button" data-v="eyebrow" aria-pressed="false">Eyebrow rule</button>
+        <button type="button" data-v="top" aria-pressed="false">Top border</button>
+      </div>
+    </div>
+    <div class="cmp-ctl"><span>Display face</span>
+      <div class="cmp-seg" data-ctl="face">
+        <button type="button" data-v="newsreader" aria-pressed="true">Newsreader</button>
+        <button type="button" data-v="spectral" aria-pressed="false">Spectral</button>
+        <button type="button" data-v="source" aria-pressed="false">Source Serif</button>
+      </div>
+    </div>
+    <div class="cmp-ctl"><span>Composition</span>
+      <div class="cmp-seg" data-ctl="mode">
+        <button type="button" data-v="wipe" aria-pressed="true">Wipe</button>
+        <button type="button" data-v="flip" aria-pressed="false">Flip</button>
+        <button type="button" data-v="stack" aria-pressed="false">Stacked</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 01 ------------------------------------------------------------------ -->
+  <section class="cmp-sec">
+    <h2><em>01</em> The two systems</h2>
+    <p class="cmp-lede">Hue is not where the difference lives. The guide green sits at <b>173&deg;</b>, Certified&rsquo;s teal at <b>180&deg;</b> and its petrol at <b>182&deg;</b> &mdash; barely nine degrees across the whole set. Swapping one green for another would read as the same site with a fault in it.</p>
+    <p>What separates the two companies is <b>value structure</b>. Technologies is a one-tone system: a single mid-green at 23% lightness does every job, from eyebrow to button fill to card border. Certified becomes a two-tone system: a dark petrol anchor carrying everything that has to be read, and a bright teal signal that marks and never speaks.</p>
+    <p>That is also why the bright teal cannot simply take over. At <b>2.86:1</b> on white it fails every text threshold, across 61 <code style="font-family:'IBM Plex Mono',monospace;color:var(--c-mark)">text-brand</code> call sites plus every filled button. Demoting it to a signal role is what makes it usable at all.</p>
+
+    <div class="cmp-callout">
+      <b>The mark was already right.</b> <code>logo-green-text.svg</code> and <code>logo-white-text.svg</code> have always been <code>#044143</code> and <code>#14A4A9</code>. Only the stylesheet and the favicon drifted to the guide green. This proposal brings the site back into agreement with its own wordmark rather than inventing a palette.
+    </div>
+
+    <p style="margin-top:34px">Everything below stays identical across every Pixelette site. This is what &ldquo;similar&rdquo; concretely means:</p>
+    <dl class="cmp-lock">
+      <div><dt>Container</dt><dd>1160px cap, 20px gutters, no media query</dd></div>
+      <div><dt>Fluid scale</dt><dd>h1 36&rarr;64, section rhythm 56&rarr;96, header 64&rarr;80</dd></div>
+      <div><dt>Type roles</dt><dd>Serif display, sans body, mono eyebrow, sans h4</dd></div>
+      <div><dt>Geometry</dt><dd>12px card, 4px button, 4px tile, three shadows</dd></div>
+      <div><dt>Structure</dt><dd>Eyebrow &rarr; h2 &rarr; lead &rarr; content, hairline rules, alternating bands</dd></div>
+      <div><dt>Behaviour</dt><dd>Flat and static, 44px tap targets, one focus system</dd></div>
+    </dl>
+  </section>
+
+  <!-- 02 ------------------------------------------------------------------ -->
+  <section class="cmp-sec">
+    <h2><em>02</em> Tokens</h2>
+    <p>Every value that moves. Neutrals hold their lightness exactly and rotate hue from the guide&rsquo;s blue-grey towards Certified&rsquo;s petrol, so the page feels like a different house without a single contrast ratio dropping.</p>
+
+    <div class="cmp-table-wrap">
+      <table class="cmp-tokens">
+        <thead><tr><th>Token</th><th>Technologies</th><th>Certified</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr class="cmp-group"><td colspan="4" style="background:var(--c-raise);font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--c-mark)">Brand &mdash; one tone becomes two</td></tr>
+          <tr data-group="brand">
+    <td class="cmp-tok">--color-brand</td>
+    <td class="cmp-sw"><i style="background:#056F62"></i><code>#056F62</code></td>
+    <td class="cmp-sw"><i style="background:#065456"></i><code>#065456</code></td>
+    <td class="cmp-note">Eyebrows, links, .pill-brand, .btn fill, focus ring, .tile figures</td>
+  </tr>
+<tr data-group="brand">
+    <td class="cmp-tok">--color-brand-hover</td>
+    <td class="cmp-sw"><i style="background:#045A4F"></i><code>#045A4F</code></td>
+    <td class="cmp-sw"><i style="background:#044143"></i><code>#044143</code></td>
+    <td class="cmp-note">Button and link hover</td>
+  </tr>
+<tr data-group="brand" class="cmp-unchanged">
+    <td class="cmp-tok">--color-brand-signal</td>
+    <td class="cmp-sw"><span class="cmp-none">not in PT</span></td>
+    <td class="cmp-sw"><i style="background:#14A4A9"></i><code>#14A4A9</code></td>
+    <td class="cmp-note">New role. Feature accent, ticks, on-dark. Never text on light.</td>
+  </tr>
+<tr data-group="brand">
+    <td class="cmp-tok">--color-brand-wash</td>
+    <td class="cmp-sw"><i style="background:#C7EBDF"></i><code>#C7EBDF</code></td>
+    <td class="cmp-sw"><i style="background:#D2EFEC"></i><code>#D2EFEC</code></td>
+    <td class="cmp-note">Hero radial inner stop</td>
+  </tr>
+<tr data-group="brand">
+    <td class="cmp-tok">--color-brand-tint</td>
+    <td class="cmp-sw"><i style="background:#E4F4EF"></i><code>#E4F4EF</code></td>
+    <td class="cmp-sw"><i style="background:#E6F4F3"></i><code>#E6F4F3</code></td>
+    <td class="cmp-note">Diagram and highlight fill</td>
+  </tr>
+          <tr class="cmp-group"><td colspan="4" style="background:var(--c-raise);font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--c-mark)">Neutrals &mdash; lightness held, hue rotated 212&deg; to ~180&deg;</td></tr>
+          <tr data-group="neutral">
+    <td class="cmp-tok">--color-band</td>
+    <td class="cmp-sw"><i style="background:#F4F7FA"></i><code>#F4F7FA</code></td>
+    <td class="cmp-sw"><i style="background:#F3F7F7"></i><code>#F3F7F7</code></td>
+    <td class="cmp-note">Alternate section band</td>
+  </tr>
+<tr data-group="neutral">
+    <td class="cmp-tok">--color-line</td>
+    <td class="cmp-sw"><i style="background:#E2E8EF"></i><code>#E2E8EF</code></td>
+    <td class="cmp-sw"><i style="background:#E1EAE9"></i><code>#E1EAE9</code></td>
+    <td class="cmp-note">Section rules, table cells</td>
+  </tr>
+<tr data-group="neutral">
+    <td class="cmp-tok">--color-line-card</td>
+    <td class="cmp-sw"><i style="background:#DFE6EE"></i><code>#DFE6EE</code></td>
+    <td class="cmp-sw"><i style="background:#DEE8E7"></i><code>#DEE8E7</code></td>
+    <td class="cmp-note">Card border</td>
+  </tr>
+<tr data-group="neutral">
+    <td class="cmp-tok">--color-line-pill</td>
+    <td class="cmp-sw"><i style="background:#DDE4EC"></i><code>#DDE4EC</code></td>
+    <td class="cmp-sw"><i style="background:#DCE6E5"></i><code>#DCE6E5</code></td>
+    <td class="cmp-note">Pill, input, table header</td>
+  </tr>
+<tr data-group="neutral">
+    <td class="cmp-tok">--color-line-strong</td>
+    <td class="cmp-sw"><i style="background:#C3D1DE"></i><code>#C3D1DE</code></td>
+    <td class="cmp-sw"><i style="background:#C2D3D1"></i><code>#C2D3D1</code></td>
+    <td class="cmp-note">Outline button, emphasis card</td>
+  </tr>
+<tr data-group="neutral">
+    <td class="cmp-tok">--color-body</td>
+    <td class="cmp-sw"><i style="background:#414D5C"></i><code>#414D5C</code></td>
+    <td class="cmp-sw"><i style="background:#3F4E4E"></i><code>#3F4E4E</code></td>
+    <td class="cmp-note">Body copy</td>
+  </tr>
+<tr data-group="neutral">
+    <td class="cmp-tok">--color-muted</td>
+    <td class="cmp-sw"><i style="background:#5D6B7D"></i><code>#5D6B7D</code></td>
+    <td class="cmp-sw"><i style="background:#5A6C6C"></i><code>#5A6C6C</code></td>
+    <td class="cmp-note">Secondary copy, labels</td>
+  </tr>
+<tr data-group="neutral">
+    <td class="cmp-tok">--color-soft</td>
+    <td class="cmp-sw"><i style="background:#62707F"></i><code>#62707F</code></td>
+    <td class="cmp-sw"><i style="background:#5F7070"></i><code>#5F7070</code></td>
+    <td class="cmp-note">Citations, tertiary</td>
+  </tr>
+          <tr class="cmp-group"><td colspan="4" style="background:var(--c-raise);font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--c-mark)">Dark family &mdash; slate becomes petrol</td></tr>
+          <tr data-group="dark">
+    <td class="cmp-tok">--color-footer</td>
+    <td class="cmp-sw"><i style="background:#06222B"></i><code>#06222B</code></td>
+    <td class="cmp-sw"><i style="background:#052A2B"></i><code>#052A2B</code></td>
+    <td class="cmp-note">Footer ground</td>
+  </tr>
+<tr data-group="dark">
+    <td class="cmp-tok">--color-footer-line</td>
+    <td class="cmp-sw"><i style="background:#123240"></i><code>#123240</code></td>
+    <td class="cmp-sw"><i style="background:#123A38"></i><code>#123A38</code></td>
+    <td class="cmp-note">Footer rules</td>
+  </tr>
+<tr data-group="dark">
+    <td class="cmp-tok">--color-footer-hover</td>
+    <td class="cmp-sw"><i style="background:#0B2C36"></i><code>#0B2C36</code></td>
+    <td class="cmp-sw"><i style="background:#0A3433"></i><code>#0A3433</code></td>
+    <td class="cmp-note">Footer row hover</td>
+  </tr>
+<tr data-group="dark" class="cmp-unchanged">
+    <td class="cmp-tok">--color-footer-accent</td>
+    <td class="cmp-sw"><i style="background:#6FE3CB"></i><code>#6FE3CB</code></td>
+    <td class="cmp-sw"><i style="background:#6FE3CB"></i><code>#6FE3CB</code></td>
+    <td class="cmp-note">Unchanged — already in Certified's range</td>
+  </tr>
+<tr data-group="dark">
+    <td class="cmp-tok">--color-panel-from</td>
+    <td class="cmp-sw"><i style="background:#04211F"></i><code>#04211F</code></td>
+    <td class="cmp-sw"><i style="background:#031A18"></i><code>#031A18</code></td>
+    <td class="cmp-note">Panel gradient start</td>
+  </tr>
+<tr data-group="dark">
+    <td class="cmp-tok">--color-panel-to</td>
+    <td class="cmp-sw"><i style="background:#080F0F"></i><code>#080F0F</code></td>
+    <td class="cmp-sw"><i style="background:#050C0C"></i><code>#050C0C</code></td>
+    <td class="cmp-note">Panel gradient end</td>
+  </tr>
+<tr data-group="dark">
+    <td class="cmp-tok">--color-panel-line</td>
+    <td class="cmp-sw"><i style="background:#1C4744"></i><code>#1C4744</code></td>
+    <td class="cmp-sw"><i style="background:#194542"></i><code>#194542</code></td>
+    <td class="cmp-note">Panel border</td>
+  </tr>
+<tr data-group="dark">
+    <td class="cmp-tok">--color-panel-cta-line</td>
+    <td class="cmp-sw"><i style="background:#2A6460"></i><code>#2A6460</code></td>
+    <td class="cmp-sw"><i style="background:#276360"></i><code>#276360</code></td>
+    <td class="cmp-note">Panel CTA border</td>
+  </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13px;margin-top:14px">Unchanged: <code style="font-family:'IBM Plex Mono',monospace;font-size:12px">ink</code>, <code style="font-family:'IBM Plex Mono',monospace;font-size:12px">page</code>, <code style="font-family:'IBM Plex Mono',monospace;font-size:12px">danger</code>, <code style="font-family:'IBM Plex Mono',monospace;font-size:12px">footer-heading</code>, <code style="font-family:'IBM Plex Mono',monospace;font-size:12px">footer-link</code>, <code style="font-family:'IBM Plex Mono',monospace;font-size:12px">footer-legal</code>, <code style="font-family:'IBM Plex Mono',monospace;font-size:12px">panel-label</code>, <code style="font-family:'IBM Plex Mono',monospace;font-size:12px">panel-body</code>, <code style="font-family:'IBM Plex Mono',monospace;font-size:12px">panel-pill</code>, <code style="font-family:'IBM Plex Mono',monospace;font-size:12px">panel-cta</code>.</p>
+
+    <h3 style="font-size:17px;font-weight:500;margin:44px 0 0">Contrast audit</h3>
+    <p>Computed in the browser from the live token values, so a number here can never disagree with a swatch above. Text roles are held to 4.5:1, interface roles to 3:1.</p>
+    <div class="cmp-audit">
+      <section data-theme="pt"><h3>Pixelette Technologies <span data-summary></span></h3><ul data-checks></ul></section>
+      <section data-theme="pc"><h3>Pixelette Certified <span data-summary></span></h3><ul data-checks></ul></section>
+    </div>
+    <div class="cmp-callout">
+      <b>One check comes back marked <code>GUIDE</code>, in both columns.</b> The outline button is identified purely by its border, so WCAG 1.4.11 asks for 3:1 &mdash; and <code>--color-line-strong</code> gives 1.56 against white. That is inherited from the pattern guide, it is identical in both systems, and this proposal neither causes nor worsens it. The fix is a dedicated border token for <code>.btn2</code> at roughly <code>#879099</code>, which belongs to the shared Pixelette layer and needs raising with Mr Rana rather than changing here.
+    </div>
+  </section>
+
+  <!-- 03 ------------------------------------------------------------------ -->
+  <section class="cmp-sec">
+    <h2><em>03</em> Specimen board</h2>
+    <p>Identical markup, rendered from one template, differing only in the token block above it. The signature device selected in the bar applies to the Certified column only &mdash; the Technologies column always shows the guide&rsquo;s own treatment, as the control.</p>
+    <div class="cmp-boards">
+      <div class="cmp-col" data-theme="pt">
+        <div class="cmp-col-head"><b>Pixelette Technologies</b><span>Frozen reference</span></div>
+        
+<figure class="cmp-plate ">
+  <figcaption class="cmp-plate-cap">Buttons — default, hover, disabled, focused</figcaption>
+  <div class="cmp-plate-body">
+  <div class="cmp-row">
+    <a class="btn" href="#0">Book a gap analysis</a>
+    <a class="btn cmp-force-hover" href="#0">Hover</a>
+    <button class="btn" type="button" disabled>Disabled</button>
+  </div>
+  <div class="cmp-row">
+    <a class="btn2" href="#0">Talk to a consultant</a>
+    <a class="btn2 cmp-force-hover" href="#0">Hover</a>
+    <a class="btn-ghost" href="#0">Read the case study <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2.5 8h11M9 3.5L13.5 8 9 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+  <div class="cmp-row">
+    <a class="btn cmp-force-focus" href="#0">Focus ring</a>
+    <a class="btn2 cmp-force-focus" href="#0">Focus ring</a>
+  </div></div>
+</figure>
+
+<figure class="cmp-plate ">
+  <figcaption class="cmp-plate-cap">Section opening — rule, eyebrow, h2, lead</figcaption>
+  <div class="cmp-plate-body">
+  <div class="sec cmp-sec-demo">
+    <div class="eyebrow">Why it matters</div>
+    <h2 class="h2" style="margin-top:14px">Certification is a commercial gate, not a compliance chore.</h2>
+    <p class="lead" style="margin-top:16px">Enterprise contracts, government frameworks and investor due diligence all ask the same question before the commercial one.</p>
+  </div></div>
+</figure>
+
+<figure class="cmp-plate ">
+  <figcaption class="cmp-plate-cap">Cards — standard and feature. The signature device shows here.</figcaption>
+  <div class="cmp-plate-body">
+  <div class="cmp-grid3">
+    <div class="card">
+      <div class="eyebrow">Assess</div>
+      <h3 class="h3" style="margin-top:10px">Gap analysis</h3>
+      <p class="body" style="margin-top:10px">We map your current controls against the standard and price the shortfall.</p>
+    </div>
+    <div class="card card-feature">
+      <div class="eyebrow">Implement</div>
+      <h3 class="h3" style="margin-top:10px">Build the system</h3>
+      <p class="body" style="margin-top:10px">Policies, evidence and training, written for your business rather than lifted from a template.</p>
+    </div>
+    <div class="card">
+      <div class="eyebrow">Certify</div>
+      <h3 class="h3" style="margin-top:10px">Audit support</h3>
+      <p class="body" style="margin-top:10px">We sit with you through Stage 1 and Stage 2 and handle the auditor directly.</p>
+    </div>
+  </div></div>
+</figure>
+
+<figure class="cmp-plate ">
+  <figcaption class="cmp-plate-cap">Stat tiles and citation</figcaption>
+  <div class="cmp-plate-body">
+  <div class="cmp-grid4">
+    <div class="tile"><b>50+</b><span>ISO Certifications Delivered</span></div>
+    <div class="tile"><b>98%</b><span>First-Attempt Audit Pass Rate</span></div>
+    <div class="tile"><b>10 Weeks</b><span>Average to Certification</span></div>
+    <div class="tile"><b>Global</b><span>UK, UAE, Saudi Arabia, Qatar, EU, Americas, APAC</span></div>
+  </div>
+  <p class="src" style="margin-top:12px">Source: Pixelette Certified delivery record, 2023–2026.</p></div>
+</figure>
+
+<figure class="cmp-plate ">
+  <figcaption class="cmp-plate-cap">Pricing card — highlighted tier with tick list</figcaption>
+  <div class="cmp-plate-body">
+  <div class="cmp-grid2">
+    <div class="card">
+      <div class="eyebrow">Essentials</div>
+      <p class="mono cmp-figure">£4,950</p>
+      <div class="rule" style="margin:18px 0"></div>
+      <ul class="cmp-ticks">
+        <li><svg class="cmp-tick" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Gap analysis and scope</span></li>
+        <li><svg class="cmp-tick" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Policy set and evidence pack</span></li>
+        <li><svg class="cmp-tick" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>One remote audit day</span></li>
+      </ul>
+      <a class="btn2 cmp-block" href="#0" style="margin-top:20px">Choose Essentials</a>
+    </div>
+    <div class="card card-feature">
+      <div class="eyebrow">Complete</div>
+      <p class="mono cmp-figure">£9,850</p>
+      <div class="rule" style="margin:18px 0"></div>
+      <ul class="cmp-ticks">
+        <li><svg class="cmp-tick" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Everything in Essentials</span></li>
+        <li><svg class="cmp-tick" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Stage 1 and Stage 2 attendance</span></li>
+        <li><svg class="cmp-tick" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Twelve months of surveillance support</span></li>
+      </ul>
+      <a class="btn cmp-block" href="#0" style="margin-top:20px">Choose Complete</a>
+    </div>
+  </div></div>
+</figure>
+
+<figure class="cmp-plate ">
+  <figcaption class="cmp-plate-cap">FAQ rows — divider-separated, expanded in place</figcaption>
+  <div class="cmp-plate-body">
+  <div class="cmp-faq">
+    <div class="cmp-faq-row">
+      <h4 class="h4">How long does ISO 27001 actually take?</h4>
+      <p class="body" style="margin-top:10px">Ten weeks from kickoff to Stage 2 for most organisations under 250 staff. Larger scopes run to fourteen.</p>
+    </div>
+    <div class="cmp-faq-row">
+      <h4 class="h4">Is the fee really fixed?</h4>
+      <p class="body" style="margin-top:10px">Yes. The only variable is the certification body's own audit fee, which is paid to them directly.</p>
+    </div>
+  </div></div>
+</figure>
+
+<figure class="cmp-plate ">
+  <figcaption class="cmp-plate-cap">Table</figcaption>
+  <div class="cmp-plate-body">
+  <div class="table-wrap">
+    <table class="table">
+      <caption>Standards and typical duration</caption>
+      <thead><tr><th>Standard</th><th>Scope</th><th>Typical duration</th></tr></thead>
+      <tbody>
+        <tr><td>ISO 27001</td><td>Information security management</td><td>10 weeks</td></tr>
+        <tr><td>ISO 42001</td><td>AI management systems</td><td>12 weeks</td></tr>
+        <tr><td>Cyber Essentials Plus</td><td>Technical controls verification</td><td>3 weeks</td></tr>
+      </tbody>
+    </table>
+  </div></div>
+</figure>
+
+<figure class="cmp-plate ">
+  <figcaption class="cmp-plate-cap">Form controls, including the error state</figcaption>
+  <div class="cmp-plate-body">
+  <div class="cmp-form">
+    <div>
+      <label class="label" for="f-name-pt">Full name</label>
+      <input class="input" id="f-name-pt" type="text" value="Alex Whitfield">
+    </div>
+    <div>
+      <label class="label" for="f-std-pt">Standard of interest</label>
+      <select class="select" id="f-std-pt"><option>ISO 27001</option><option>ISO 42001</option></select>
+    </div>
+    <div>
+      <label class="label" for="f-email-pt">Work email</label>
+      <input class="input cmp-force-focus" id="f-email-pt" type="text" placeholder="you@company.com">
+      <p class="field-error">Enter a work email address so we can reach the right team.</p>
+    </div>
+    <div>
+      <label class="label" for="f-msg-pt">What are you trying to win?</label>
+      <textarea class="textarea" id="f-msg-pt" placeholder="Tell us about the contract or framework"></textarea>
+    </div>
+  </div></div>
+</figure>
+
+<figure class="cmp-plate ">
+  <figcaption class="cmp-plate-cap">Pills, inline links and long-form prose</figcaption>
+  <div class="cmp-plate-body">
+  <div class="cmp-row">
+    <span class="pill">ISO 27001</span>
+    <span class="pill">Cyber Essentials</span>
+    <span class="pill pill-brand">UKAS accredited</span>
+  </div>
+  <div class="prose" style="margin-top:20px">
+    <p>Most organisations arrive here because a customer asked for a certificate. The <a href="#0">gap analysis</a> exists to tell you how far off you are before anyone signs anything.</p>
+    <blockquote>The auditor does not care how good your intentions are. They care whether the evidence exists on the day.</blockquote>
+    <p>Scope is the single biggest lever on cost. Narrow it honestly and <strong>the whole programme gets cheaper</strong>.</p>
+  </div></div>
+</figure>
+
+<figure class="cmp-plate cmp-plate-dark">
+  <figcaption class="cmp-plate-cap">Dark panel</figcaption>
+  <div class="cmp-plate-body">
+  <div class="panel">
+    <div class="eyebrow">Gap analysis</div>
+    <h3 class="h3" style="margin-top:12px">Thirty minutes, no fee, no obligation.</h3>
+    <p class="body" style="margin-top:12px">We will tell you which standard your buyer actually wants, what it will cost, and how long it takes.</p>
+    <div class="cmp-row" style="margin-top:20px">
+      <span class="pill">No sales script</span>
+      <a class="btn-panel" href="#0">Book the call <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2.5 8h11M9 3.5L13.5 8 9 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div></div>
+</figure>
+
+<figure class="cmp-plate cmp-plate-dark">
+  <figcaption class="cmp-plate-cap">Footer strip</figcaption>
+  <div class="cmp-plate-body">
+  <div class="footer cmp-footer-demo">
+    <div class="eyebrow">Pixelette Certified</div>
+    <p class="cmp-footer-links"><a href="#0" class="flink">ISO 27001</a><a href="#0" class="flink">ISO 42001</a><a href="#0" class="flink">Cyber Essentials</a><a href="#0" class="flink">Case studies</a></p>
+    <div class="cmp-row" style="margin-top:12px"><span class="pill">UK headquartered</span><span class="pill">Globally delivered</span></div>
+  </div></div>
+</figure>
+
+      </div>
+      <div class="cmp-col" data-theme="pc">
+        <div class="cmp-col-head"><b>Pixelette Certified</b><span>Live, from globals.css</span></div>
+        
+<figure class="cmp-plate ">
+  <figcaption class="cmp-plate-cap">Buttons — default, hover, disabled, focused</figcaption>
+  <div class="cmp-plate-body">
+  <div class="cmp-row">
+    <a class="btn" href="#0">Book a gap analysis</a>
+    <a class="btn cmp-force-hover" href="#0">Hover</a>
+    <button class="btn" type="button" disabled>Disabled</button>
+  </div>
+  <div class="cmp-row">
+    <a class="btn2" href="#0">Talk to a consultant</a>
+    <a class="btn2 cmp-force-hover" href="#0">Hover</a>
+    <a class="btn-ghost" href="#0">Read the case study <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2.5 8h11M9 3.5L13.5 8 9 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+  <div class="cmp-row">
+    <a class="btn cmp-force-focus" href="#0">Focus ring</a>
+    <a class="btn2 cmp-force-focus" href="#0">Focus ring</a>
+  </div></div>
+</figure>
+
+<figure class="cmp-plate ">
+  <figcaption class="cmp-plate-cap">Section opening — rule, eyebrow, h2, lead</figcaption>
+  <div class="cmp-plate-body">
+  <div class="sec cmp-sec-demo">
+    <div class="eyebrow">Why it matters</div>
+    <h2 class="h2" style="margin-top:14px">Certification is a commercial gate, not a compliance chore.</h2>
+    <p class="lead" style="margin-top:16px">Enterprise contracts, government frameworks and investor due diligence all ask the same question before the commercial one.</p>
+  </div></div>
+</figure>
+
+<figure class="cmp-plate ">
+  <figcaption class="cmp-plate-cap">Cards — standard and feature. The signature device shows here.</figcaption>
+  <div class="cmp-plate-body">
+  <div class="cmp-grid3">
+    <div class="card">
+      <div class="eyebrow">Assess</div>
+      <h3 class="h3" style="margin-top:10px">Gap analysis</h3>
+      <p class="body" style="margin-top:10px">We map your current controls against the standard and price the shortfall.</p>
+    </div>
+    <div class="card card-feature">
+      <div class="eyebrow">Implement</div>
+      <h3 class="h3" style="margin-top:10px">Build the system</h3>
+      <p class="body" style="margin-top:10px">Policies, evidence and training, written for your business rather than lifted from a template.</p>
+    </div>
+    <div class="card">
+      <div class="eyebrow">Certify</div>
+      <h3 class="h3" style="margin-top:10px">Audit support</h3>
+      <p class="body" style="margin-top:10px">We sit with you through Stage 1 and Stage 2 and handle the auditor directly.</p>
+    </div>
+  </div></div>
+</figure>
+
+<figure class="cmp-plate ">
+  <figcaption class="cmp-plate-cap">Stat tiles and citation</figcaption>
+  <div class="cmp-plate-body">
+  <div class="cmp-grid4">
+    <div class="tile"><b>50+</b><span>ISO Certifications Delivered</span></div>
+    <div class="tile"><b>98%</b><span>First-Attempt Audit Pass Rate</span></div>
+    <div class="tile"><b>10 Weeks</b><span>Average to Certification</span></div>
+    <div class="tile"><b>Global</b><span>UK, UAE, Saudi Arabia, Qatar, EU, Americas, APAC</span></div>
+  </div>
+  <p class="src" style="margin-top:12px">Source: Pixelette Certified delivery record, 2023–2026.</p></div>
+</figure>
+
+<figure class="cmp-plate ">
+  <figcaption class="cmp-plate-cap">Pricing card — highlighted tier with tick list</figcaption>
+  <div class="cmp-plate-body">
+  <div class="cmp-grid2">
+    <div class="card">
+      <div class="eyebrow">Essentials</div>
+      <p class="mono cmp-figure">£4,950</p>
+      <div class="rule" style="margin:18px 0"></div>
+      <ul class="cmp-ticks">
+        <li><svg class="cmp-tick" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Gap analysis and scope</span></li>
+        <li><svg class="cmp-tick" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Policy set and evidence pack</span></li>
+        <li><svg class="cmp-tick" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>One remote audit day</span></li>
+      </ul>
+      <a class="btn2 cmp-block" href="#0" style="margin-top:20px">Choose Essentials</a>
+    </div>
+    <div class="card card-feature">
+      <div class="eyebrow">Complete</div>
+      <p class="mono cmp-figure">£9,850</p>
+      <div class="rule" style="margin:18px 0"></div>
+      <ul class="cmp-ticks">
+        <li><svg class="cmp-tick" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Everything in Essentials</span></li>
+        <li><svg class="cmp-tick" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Stage 1 and Stage 2 attendance</span></li>
+        <li><svg class="cmp-tick" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Twelve months of surveillance support</span></li>
+      </ul>
+      <a class="btn cmp-block" href="#0" style="margin-top:20px">Choose Complete</a>
+    </div>
+  </div></div>
+</figure>
+
+<figure class="cmp-plate ">
+  <figcaption class="cmp-plate-cap">FAQ rows — divider-separated, expanded in place</figcaption>
+  <div class="cmp-plate-body">
+  <div class="cmp-faq">
+    <div class="cmp-faq-row">
+      <h4 class="h4">How long does ISO 27001 actually take?</h4>
+      <p class="body" style="margin-top:10px">Ten weeks from kickoff to Stage 2 for most organisations under 250 staff. Larger scopes run to fourteen.</p>
+    </div>
+    <div class="cmp-faq-row">
+      <h4 class="h4">Is the fee really fixed?</h4>
+      <p class="body" style="margin-top:10px">Yes. The only variable is the certification body's own audit fee, which is paid to them directly.</p>
+    </div>
+  </div></div>
+</figure>
+
+<figure class="cmp-plate ">
+  <figcaption class="cmp-plate-cap">Table</figcaption>
+  <div class="cmp-plate-body">
+  <div class="table-wrap">
+    <table class="table">
+      <caption>Standards and typical duration</caption>
+      <thead><tr><th>Standard</th><th>Scope</th><th>Typical duration</th></tr></thead>
+      <tbody>
+        <tr><td>ISO 27001</td><td>Information security management</td><td>10 weeks</td></tr>
+        <tr><td>ISO 42001</td><td>AI management systems</td><td>12 weeks</td></tr>
+        <tr><td>Cyber Essentials Plus</td><td>Technical controls verification</td><td>3 weeks</td></tr>
+      </tbody>
+    </table>
+  </div></div>
+</figure>
+
+<figure class="cmp-plate ">
+  <figcaption class="cmp-plate-cap">Form controls, including the error state</figcaption>
+  <div class="cmp-plate-body">
+  <div class="cmp-form">
+    <div>
+      <label class="label" for="f-name-pc">Full name</label>
+      <input class="input" id="f-name-pc" type="text" value="Alex Whitfield">
+    </div>
+    <div>
+      <label class="label" for="f-std-pc">Standard of interest</label>
+      <select class="select" id="f-std-pc"><option>ISO 27001</option><option>ISO 42001</option></select>
+    </div>
+    <div>
+      <label class="label" for="f-email-pc">Work email</label>
+      <input class="input cmp-force-focus" id="f-email-pc" type="text" placeholder="you@company.com">
+      <p class="field-error">Enter a work email address so we can reach the right team.</p>
+    </div>
+    <div>
+      <label class="label" for="f-msg-pc">What are you trying to win?</label>
+      <textarea class="textarea" id="f-msg-pc" placeholder="Tell us about the contract or framework"></textarea>
+    </div>
+  </div></div>
+</figure>
+
+<figure class="cmp-plate ">
+  <figcaption class="cmp-plate-cap">Pills, inline links and long-form prose</figcaption>
+  <div class="cmp-plate-body">
+  <div class="cmp-row">
+    <span class="pill">ISO 27001</span>
+    <span class="pill">Cyber Essentials</span>
+    <span class="pill pill-brand">UKAS accredited</span>
+  </div>
+  <div class="prose" style="margin-top:20px">
+    <p>Most organisations arrive here because a customer asked for a certificate. The <a href="#0">gap analysis</a> exists to tell you how far off you are before anyone signs anything.</p>
+    <blockquote>The auditor does not care how good your intentions are. They care whether the evidence exists on the day.</blockquote>
+    <p>Scope is the single biggest lever on cost. Narrow it honestly and <strong>the whole programme gets cheaper</strong>.</p>
+  </div></div>
+</figure>
+
+<figure class="cmp-plate cmp-plate-dark">
+  <figcaption class="cmp-plate-cap">Dark panel</figcaption>
+  <div class="cmp-plate-body">
+  <div class="panel">
+    <div class="eyebrow">Gap analysis</div>
+    <h3 class="h3" style="margin-top:12px">Thirty minutes, no fee, no obligation.</h3>
+    <p class="body" style="margin-top:12px">We will tell you which standard your buyer actually wants, what it will cost, and how long it takes.</p>
+    <div class="cmp-row" style="margin-top:20px">
+      <span class="pill">No sales script</span>
+      <a class="btn-panel" href="#0">Book the call <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2.5 8h11M9 3.5L13.5 8 9 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div></div>
+</figure>
+
+<figure class="cmp-plate cmp-plate-dark">
+  <figcaption class="cmp-plate-cap">Footer strip</figcaption>
+  <div class="cmp-plate-body">
+  <div class="footer cmp-footer-demo">
+    <div class="eyebrow">Pixelette Certified</div>
+    <p class="cmp-footer-links"><a href="#0" class="flink">ISO 27001</a><a href="#0" class="flink">ISO 42001</a><a href="#0" class="flink">Cyber Essentials</a><a href="#0" class="flink">Case studies</a></p>
+    <div class="cmp-row" style="margin-top:12px"><span class="pill">UK headquartered</span><span class="pill">Globally delivered</span></div>
+  </div></div>
+</figure>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 ------------------------------------------------------------------ -->
+  <section class="cmp-sec">
+    <h2><em>04</em> Full composition</h2>
+    <p>Real homepage copy, hero through footer. <b>Wipe</b> is the default because two half-width columns actually hide a neutral rotation &mdash; each side gets judged in the other&rsquo;s context. Drag the handle, or use <b>Flip</b> to alternate the whole page in place, which is the only reliable way to perceive a hue shift this small.</p>
+    <div class="cmp-stage">
+      <div class="cmp-stage-head"><span>Homepage composition</span><span>Drag the handle &middot; <b>F</b> flips &middot; <b>&larr; &rarr;</b> nudge</span></div>
+      <div class="cmp-canvas" id="stage" style="--wipe:50%">
+        <span class="cmp-stage-tag cmp-tag-pt">Technologies</span>
+        <span class="cmp-stage-tag cmp-tag-pc">Certified</span>
+        <div class="cmp-stack-tag">Pixelette Technologies &mdash; guide, as built</div>
+        <div class="cmp-layer cmp-layer-pt" data-theme="pt">
+<section class="wash">
+  <div class="wrap cmp-hero">
+    <div class="cmp-pills">
+      <span class="pill">ISO 27001</span><span class="pill">ISO 42001</span><span class="pill">Cyber Essentials</span>
+      <span class="pill">GDPR</span><span class="pill">ISO 9001</span><span class="pill">ISO 22301</span><span class="pill">vCISO</span>
+    </div>
+    <h1 class="h1 cmp-hero-h1">
+      <span style="display:block">Your Next Enterprise Deal Is Waiting on a Certificate You Don&rsquo;t Have Yet.</span>
+      <span class="cmp-hero-accent">We Fix That in 10 Weeks.</span>
+    </h1>
+    <p class="lead cmp-hero-lead">Enterprise contracts. Government frameworks. Investor due diligence. The deals you&rsquo;re losing because you&rsquo;re not yet certified, we close that gap in 10 weeks. Fixed fee. 98% first-attempt pass rate. UK-headquartered. Globally delivered.</p>
+    <div class="cmp-row cmp-center" style="margin-top:36px">
+      <a class="btn" href="#0">See Your 10-Week Certification Roadmap</a>
+      <a class="btn2" href="#0">Talk to a Consultant</a>
+    </div>
+  </div>
+</section>
+
+<section class="band-alt cmp-band-pad" aria-label="Track record">
+  <div class="wrap cmp-grid4">
+    <div class="tile"><b>50+</b><span>ISO Certifications Delivered</span></div>
+    <div class="tile"><b>98%</b><span>First-Attempt Audit Pass Rate</span></div>
+    <div class="tile"><b>10 Weeks</b><span>Average to Certification</span></div>
+    <div class="tile"><b>Global</b><span>UK, UAE, Saudi Arabia, Qatar, EU, Americas, APAC</span></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="eyebrow">What we do</div>
+    <h2 class="h2" style="margin-top:14px;max-width:20ch">Every standard your buyer is likely to ask for.</h2>
+    <p class="lead" style="margin-top:16px">One team, one fixed fee, one roadmap. We run the implementation and sit with you through the audit.</p>
+    <div class="cmp-grid3" style="margin-top:36px">
+      <div class="card">
+        <div class="eyebrow">Information security</div>
+        <h3 class="h3" style="margin-top:10px">ISO 27001</h3>
+        <p class="body" style="margin-top:10px">The certificate enterprise procurement asks for by name. Ten weeks, fixed fee.</p>
+        <p style="margin-top:16px"><a class="link flink" href="#0">Explore ISO 27001 <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2.5 8h11M9 3.5L13.5 8 9 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+      </div>
+      <div class="card card-feature">
+        <div class="eyebrow">AI governance</div>
+        <h3 class="h3" style="margin-top:10px">ISO 42001</h3>
+        <p class="body" style="margin-top:10px">The first AI management standard. Increasingly the condition of selling AI into regulated buyers.</p>
+        <p style="margin-top:16px"><a class="link flink" href="#0">Explore ISO 42001 <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2.5 8h11M9 3.5L13.5 8 9 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+      </div>
+      <div class="card">
+        <div class="eyebrow">Technical controls</div>
+        <h3 class="h3" style="margin-top:10px">Cyber Essentials</h3>
+        <p class="body" style="margin-top:10px">Mandatory for most UK government contracts. Three weeks from kickoff.</p>
+        <p style="margin-top:16px"><a class="link flink" href="#0">Explore Cyber Essentials <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2.5 8h11M9 3.5L13.5 8 9 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec band-alt">
+  <div class="wrap">
+    <div class="eyebrow">How it works</div>
+    <h2 class="h2" style="margin-top:14px;max-width:18ch">Three stages. No surprises.</h2>
+    <div class="cmp-steps">
+      <div class="cmp-step"><span class="mono cmp-step-n">01</span><h4 class="h4">Gap analysis</h4><p class="small">Thirty minutes to establish scope, standard and cost.</p></div>
+      <div class="cmp-step"><span class="mono cmp-step-n">02</span><h4 class="h4">Implementation</h4><p class="small">Policies, controls and evidence, built around how you actually work.</p></div>
+      <div class="cmp-step"><span class="mono cmp-step-n">03</span><h4 class="h4">Certification</h4><p class="small">We attend Stage 1 and Stage 2 and manage the auditor.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec band-closing">
+  <div class="wrap cmp-center">
+    <div class="eyebrow">Free gap analysis</div>
+    <h2 class="h2" style="margin-top:14px;max-width:22ch;margin-inline:auto">Find out what certification would actually cost you.</h2>
+    <p class="lead" style="margin-top:16px;margin-inline:auto">Thirty minutes with a consultant who has taken more than fifty organisations through audit.</p>
+    <div class="cmp-row cmp-center" style="margin-top:32px"><a class="btn" href="#0">Book the call</a></div>
+  </div>
+</section>
+
+<footer class="footer cmp-footer-full">
+  <div class="wrap">
+    <div class="cmp-footer-cols">
+      <div>
+        <div class="eyebrow">Pixelette Certified</div>
+        <p class="cmp-footer-body">Compliance. Governance. Cyber Trust.<br>66 Paul Street, London, EC2A 4NA</p>
+      </div>
+      <div><div class="eyebrow">Standards</div><p class="cmp-footer-links"><a href="#0" class="flink">ISO 27001</a><a href="#0" class="flink">ISO 42001</a><a href="#0" class="flink">ISO 9001</a></p></div>
+      <div><div class="eyebrow">Services</div><p class="cmp-footer-links"><a href="#0" class="flink">vCISO</a><a href="#0" class="flink">vDPO</a><a href="#0" class="flink">Penetration testing</a></p></div>
+      <div><div class="eyebrow">Company</div><p class="cmp-footer-links"><a href="#0" class="flink">About</a><a href="#0" class="flink">Case studies</a><a href="#0" class="flink">Contact</a></p></div>
+      <div><div class="eyebrow">Legal</div><p class="cmp-footer-links"><a href="#0" class="flink">Privacy policy</a><a href="#0" class="flink">Cookie policy</a></p></div>
+    </div>
+    <div class="cmp-footer-base"><span>Pixelette Group Ltd &middot; 17506745 &middot; England and Wales</span><span class="cmp-row"><span class="pill">UK</span><span class="pill">UAE</span><span class="pill">EU</span></span></div>
+  </div>
+</footer>
+</div>
+        <div class="cmp-stack-tag">Pixelette Certified &mdash; proposed</div>
+        <div class="cmp-layer cmp-layer-pc" data-theme="pc">
+<section class="wash">
+  <div class="wrap cmp-hero">
+    <div class="cmp-pills">
+      <span class="pill">ISO 27001</span><span class="pill">ISO 42001</span><span class="pill">Cyber Essentials</span>
+      <span class="pill">GDPR</span><span class="pill">ISO 9001</span><span class="pill">ISO 22301</span><span class="pill">vCISO</span>
+    </div>
+    <h1 class="h1 cmp-hero-h1">
+      <span style="display:block">Your Next Enterprise Deal Is Waiting on a Certificate You Don&rsquo;t Have Yet.</span>
+      <span class="cmp-hero-accent">We Fix That in 10 Weeks.</span>
+    </h1>
+    <p class="lead cmp-hero-lead">Enterprise contracts. Government frameworks. Investor due diligence. The deals you&rsquo;re losing because you&rsquo;re not yet certified, we close that gap in 10 weeks. Fixed fee. 98% first-attempt pass rate. UK-headquartered. Globally delivered.</p>
+    <div class="cmp-row cmp-center" style="margin-top:36px">
+      <a class="btn" href="#0">See Your 10-Week Certification Roadmap</a>
+      <a class="btn2" href="#0">Talk to a Consultant</a>
+    </div>
+  </div>
+</section>
+
+<section class="band-alt cmp-band-pad" aria-label="Track record">
+  <div class="wrap cmp-grid4">
+    <div class="tile"><b>50+</b><span>ISO Certifications Delivered</span></div>
+    <div class="tile"><b>98%</b><span>First-Attempt Audit Pass Rate</span></div>
+    <div class="tile"><b>10 Weeks</b><span>Average to Certification</span></div>
+    <div class="tile"><b>Global</b><span>UK, UAE, Saudi Arabia, Qatar, EU, Americas, APAC</span></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="eyebrow">What we do</div>
+    <h2 class="h2" style="margin-top:14px;max-width:20ch">Every standard your buyer is likely to ask for.</h2>
+    <p class="lead" style="margin-top:16px">One team, one fixed fee, one roadmap. We run the implementation and sit with you through the audit.</p>
+    <div class="cmp-grid3" style="margin-top:36px">
+      <div class="card">
+        <div class="eyebrow">Information security</div>
+        <h3 class="h3" style="margin-top:10px">ISO 27001</h3>
+        <p class="body" style="margin-top:10px">The certificate enterprise procurement asks for by name. Ten weeks, fixed fee.</p>
+        <p style="margin-top:16px"><a class="link flink" href="#0">Explore ISO 27001 <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2.5 8h11M9 3.5L13.5 8 9 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+      </div>
+      <div class="card card-feature">
+        <div class="eyebrow">AI governance</div>
+        <h3 class="h3" style="margin-top:10px">ISO 42001</h3>
+        <p class="body" style="margin-top:10px">The first AI management standard. Increasingly the condition of selling AI into regulated buyers.</p>
+        <p style="margin-top:16px"><a class="link flink" href="#0">Explore ISO 42001 <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2.5 8h11M9 3.5L13.5 8 9 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+      </div>
+      <div class="card">
+        <div class="eyebrow">Technical controls</div>
+        <h3 class="h3" style="margin-top:10px">Cyber Essentials</h3>
+        <p class="body" style="margin-top:10px">Mandatory for most UK government contracts. Three weeks from kickoff.</p>
+        <p style="margin-top:16px"><a class="link flink" href="#0">Explore Cyber Essentials <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2.5 8h11M9 3.5L13.5 8 9 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec band-alt">
+  <div class="wrap">
+    <div class="eyebrow">How it works</div>
+    <h2 class="h2" style="margin-top:14px;max-width:18ch">Three stages. No surprises.</h2>
+    <div class="cmp-steps">
+      <div class="cmp-step"><span class="mono cmp-step-n">01</span><h4 class="h4">Gap analysis</h4><p class="small">Thirty minutes to establish scope, standard and cost.</p></div>
+      <div class="cmp-step"><span class="mono cmp-step-n">02</span><h4 class="h4">Implementation</h4><p class="small">Policies, controls and evidence, built around how you actually work.</p></div>
+      <div class="cmp-step"><span class="mono cmp-step-n">03</span><h4 class="h4">Certification</h4><p class="small">We attend Stage 1 and Stage 2 and manage the auditor.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec band-closing">
+  <div class="wrap cmp-center">
+    <div class="eyebrow">Free gap analysis</div>
+    <h2 class="h2" style="margin-top:14px;max-width:22ch;margin-inline:auto">Find out what certification would actually cost you.</h2>
+    <p class="lead" style="margin-top:16px;margin-inline:auto">Thirty minutes with a consultant who has taken more than fifty organisations through audit.</p>
+    <div class="cmp-row cmp-center" style="margin-top:32px"><a class="btn" href="#0">Book the call</a></div>
+  </div>
+</section>
+
+<footer class="footer cmp-footer-full">
+  <div class="wrap">
+    <div class="cmp-footer-cols">
+      <div>
+        <div class="eyebrow">Pixelette Certified</div>
+        <p class="cmp-footer-body">Compliance. Governance. Cyber Trust.<br>66 Paul Street, London, EC2A 4NA</p>
+      </div>
+      <div><div class="eyebrow">Standards</div><p class="cmp-footer-links"><a href="#0" class="flink">ISO 27001</a><a href="#0" class="flink">ISO 42001</a><a href="#0" class="flink">ISO 9001</a></p></div>
+      <div><div class="eyebrow">Services</div><p class="cmp-footer-links"><a href="#0" class="flink">vCISO</a><a href="#0" class="flink">vDPO</a><a href="#0" class="flink">Penetration testing</a></p></div>
+      <div><div class="eyebrow">Company</div><p class="cmp-footer-links"><a href="#0" class="flink">About</a><a href="#0" class="flink">Case studies</a><a href="#0" class="flink">Contact</a></p></div>
+      <div><div class="eyebrow">Legal</div><p class="cmp-footer-links"><a href="#0" class="flink">Privacy policy</a><a href="#0" class="flink">Cookie policy</a></p></div>
+    </div>
+    <div class="cmp-footer-base"><span>Pixelette Group Ltd &middot; 17506745 &middot; England and Wales</span><span class="cmp-row"><span class="pill">UK</span><span class="pill">UAE</span><span class="pill">EU</span></span></div>
+  </div>
+</footer>
+</div>
+        <div class="cmp-handle" id="handle" role="separator" aria-label="Comparison position" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 ------------------------------------------------------------------ -->
+  <section class="cmp-sec">
+    <h2><em>05</em> Signature device</h2>
+    <p>Sibling brands usually differ by one memorable mannerism. The guide already has one: a 3px brand border across the top of a feature card. Certified needs its own, built from primitives the guide already contains rather than new vocabulary. Switch between all three in the bar and watch the cards in sections 03 and 04.</p>
+    <dl class="cmp-lock">
+      <div><dt>Left accent &mdash; recommended</dt><dd>3px signal-teal left border on feature cards; section rules gain a 40px cap aligned to the container. Reads from across the room.</dd></div>
+      <div><dt>Eyebrow rule</dt><dd>A 16px hairline before every eyebrow. Quieter, and reads as a clause marker, which suits an accreditation body.</dd></div>
+      <div><dt>Top border</dt><dd>The guide&rsquo;s own treatment, unchanged. The control &mdash; pick this and Certified has no device of its own.</dd></div>
+    </dl>
+  </section>
+
+  <!-- 06 ------------------------------------------------------------------ -->
+  <section class="cmp-sec">
+    <h2><em>06</em> Display face</h2>
+    <p>Newsreader Light is the guide&rsquo;s loudest personality signal. Changing the family while keeping the role &mdash; light editorial serif, 300 and 400, identical clamp sizes &mdash; would make Certified unmistakable without moving a single measurement. Selecting a face in the bar also reskins the Certified side of sections 03 and 04.</p>
+    <div class="cmp-faces" id="faces"></div>
+    <div class="cmp-callout">
+      <b>If a face other than Newsreader wins:</b> the sub-768px rule in <code>globals.css</code> raises display weight from 300 to 400 because Newsreader Light shreds below 30px. Spectral and Source Serif hold their light weight better, so that bump needs re-tuning rather than copying. Narrow this window past 767px to see it fire.
+    </div>
+  </section>
+
+  <!-- 07 ------------------------------------------------------------------ -->
+  <section class="cmp-sec">
+    <h2><em>07</em> What implementation touches</h2>
+    <p>So the decision is made with the cost visible. None of it is applied yet.</p>
+    <table class="cmp-impact">
+      <thead><tr><th>Location</th><th>Work</th></tr></thead>
+      <tbody>
+        <tr><td>src/app/globals.css</td><td>The token block above. <b>21</b> values, one new role.</td></tr>
+        <tr><td>src/app/globals.css</td><td><b>Two source bugs.</b> <code>.band-closing</code> hard-codes <code>#FFFFFF</code> and <code>#F4F7FA</code> instead of reading <code>--color-page</code> and <code>--color-band</code>; <code>.footer .pill</code> hard-codes <code>#1B3D4A</code>. Both would silently escape the neutral rotation. This page patches them so the comparison is honest.</td></tr>
+        <tr><td>components/alice/AliceChat.tsx</td><td><b>49</b> hard-coded hexes</td></tr>
+        <tr><td>app/api/contact/route.ts</td><td><b>17</b> hard-coded hexes in the email template</td></tr>
+        <tr><td>app/api/newsletter/route.ts</td><td><b>16</b> hard-coded hexes in the email template</td></tr>
+        <tr><td>components/alice/AliceWidget.tsx</td><td><b>14</b> hard-coded hexes</td></tr>
+        <tr><td>src/lib/constants.ts</td><td><b>5</b> hexes in <code>BRAND_COLORS</code>, which still has no importers</td></tr>
+        <tr><td>public/logos/favicon.png</td><td>Re-cut to <code>#044143</code> and <code>#14A4A9</code> to match the wordmark</td></tr>
+        <tr><td>scripts/check-legacy-tokens.mjs</td><td>Extend the pattern to catch the retired guide hexes, so the next drift fails the build</td></tr>
+        <tr><td>Shared layer &mdash; not ours</td><td><b>Outline button border.</b> <code>.btn2</code> is identified only by its border and clears just 1.56:1 where WCAG 1.4.11 asks 3:1. Inherited from the guide, present in both systems. Raise separately; a dedicated token near <code>#879099</code> fixes it group-wide.</td></tr>
+      </tbody>
+    </table>
+    <div class="cmp-callout">
+      <b>The real deliverable is the split.</b> Once this lands, <code>globals.css</code> separates into a Pixelette common layer &mdash; scale, geometry, spacing, every component class, byte-identical across the group &mdash; and a brand layer of roughly thirty lines. The next four sites are then a palette and a device choice, not another conversion.
+    </div>
+  </section>
+
+  <footer class="cmp-foot">
+    <span>Generated from <code>src/app/globals.css</code> by <code>scripts/build-palette-compare.mjs</code></span>
+    <span>Re-run with <code>npm run compare:palette</code></span>
+    <span>Chrome is deliberately achromatic: a tinted surround would bias the judgement this page exists to support</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var root = document.querySelector("[data-theme-root]");
+
+  /* -- segmented controls ------------------------------------------------ */
+  Array.prototype.forEach.call(document.querySelectorAll(".cmp-seg"), function (seg) {
+    var attr = "data-" + seg.getAttribute("data-ctl");
+    seg.addEventListener("click", function (e) {
+      var btn = e.target.closest("button[data-v]");
+      if (!btn) return;
+      Array.prototype.forEach.call(seg.querySelectorAll("button"), function (b) {
+        b.setAttribute("aria-pressed", String(b === btn));
+      });
+      root.setAttribute(attr, btn.getAttribute("data-v"));
+      if (attr === "data-mode" || attr === "data-face") syncStage();
+    });
+  });
+
+  /* -- contrast ---------------------------------------------------------- */
+  var CHECKS = [{"kind":"text","label":"Brand on page","fg":"--color-brand","bg":"--color-page"},{"kind":"text","label":"Brand on band","fg":"--color-brand","bg":"--color-band"},{"kind":"text","label":"Button label (white on brand)","fg":"#FFFFFF","bg":"--color-brand"},{"kind":"text","label":"Button hover (white on brand-hover)","fg":"#FFFFFF","bg":"--color-brand-hover"},{"kind":"text","label":"Ink on page","fg":"--color-ink","bg":"--color-page"},{"kind":"text","label":"Body on page","fg":"--color-body","bg":"--color-page"},{"kind":"text","label":"Body on band","fg":"--color-body","bg":"--color-band"},{"kind":"text","label":"Muted on page","fg":"--color-muted","bg":"--color-page"},{"kind":"text","label":"Muted on band","fg":"--color-muted","bg":"--color-band"},{"kind":"text","label":"Soft on page","fg":"--color-soft","bg":"--color-page"},{"kind":"text","label":"Danger on page","fg":"--color-danger","bg":"--color-page"},{"kind":"text","label":"Footer link on footer","fg":"--color-footer-link","bg":"--color-footer"},{"kind":"text","label":"Footer heading on footer","fg":"--color-footer-heading","bg":"--color-footer"},{"kind":"text","label":"Footer accent on footer","fg":"--color-footer-accent","bg":"--color-footer"},{"kind":"text","label":"Footer legal on footer","fg":"--color-footer-legal","bg":"--color-footer"},{"kind":"text","label":"Panel body on panel","fg":"--color-panel-body","bg":"--color-panel-from"},{"kind":"text","label":"Panel CTA on panel","fg":"--color-panel-cta","bg":"--color-panel-from"},{"kind":"text","label":"Panel label on panel","fg":"--color-panel-label","bg":"--color-panel-from"},{"kind":"ui","label":"Signal on footer (PC only)","fg":"--color-brand-signal","bg":"--color-footer","pcOnly":true},{"kind":"ui","label":"Outline button border","fg":"--color-line-strong","bg":"--color-page","inherited":true},{"kind":"deco","label":"Card border on page","fg":"--color-line-card","bg":"--color-page"},{"kind":"deco","label":"Band on page","fg":"--color-band","bg":"--color-page"}];
+
+  function parse(v) {
+    v = String(v).trim();
+    if (v.charAt(0) === "#") {
+      if (v.length === 4) v = "#" + v[1] + v[1] + v[2] + v[2] + v[3] + v[3];
+      return [parseInt(v.substr(1, 2), 16), parseInt(v.substr(3, 2), 16), parseInt(v.substr(5, 2), 16)];
+    }
+    var m = v.match(/-?[\d.]+/g);
+    return m ? [+m[0], +m[1], +m[2]] : [0, 0, 0];
+  }
+  function lum(rgb) {
+    var c = rgb.map(function (n) {
+      n = n / 255;
+      return n <= 0.03928 ? n / 12.92 : Math.pow((n + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  }
+  function ratio(a, b) {
+    var x = lum(parse(a)), y = lum(parse(b));
+    if (x < y) { var t = x; x = y; y = t; }
+    return (x + 0.05) / (y + 0.05);
+  }
+  function resolve(el, token) {
+    if (token.charAt(0) === "#") return token;
+    return getComputedStyle(el).getPropertyValue(token) || "#000000";
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll(".cmp-audit section"), function (panel) {
+    var theme = panel.getAttribute("data-theme");
+    var probe = document.querySelector('.cmp-col[data-theme="' + theme + '"]') || panel;
+    var list = panel.querySelector("[data-checks]");
+    var fails = 0, inherited = 0, shown = 0;
+    CHECKS.forEach(function (c) {
+      if (c.pcOnly && theme !== "pc") return;
+      var r = ratio(resolve(probe, c.fg), resolve(probe, c.bg));
+      var min = c.kind === "text" ? 4.5 : c.kind === "ui" ? 3 : 0;
+      var pass = r >= min;
+      var rank = c.inherited && !pass ? "inherit"
+        : c.kind === "deco" ? "deco"
+        : !pass ? "fail"
+        : c.kind === "ui" ? "ui"
+        : r >= 7 ? "aaa" : "aa";
+      var text = rank === "inherit" ? "GUIDE"
+        : rank === "deco" ? "&mdash;"
+        : rank === "fail" ? "FAIL"
+        : rank === "ui" ? "AA UI"
+        : rank.toUpperCase();
+      if (!pass && min > 0) { if (c.inherited) inherited += 1; else fails += 1; }
+      shown += 1;
+      var li = document.createElement("li");
+      li.innerHTML = '<span>' + c.label + '</span>'
+        + '<span class="cmp-ratio">' + r.toFixed(2) + '</span>'
+        + '<span class="cmp-badge" data-r="' + rank + '">' + text + '</span>';
+      list.appendChild(li);
+    });
+    var s = panel.querySelector("[data-summary]");
+    if (fails) {
+      s.textContent = fails + " of " + shown + " FAIL";
+      s.style.color = "var(--c-bad)";
+    } else if (inherited) {
+      s.textContent = shown + " checks, " + inherited + " inherited";
+      s.style.color = "var(--c-mark)";
+    } else {
+      s.textContent = shown + " checks, all pass";
+    }
+  });
+
+  /* -- face specimens ---------------------------------------------------- */
+  var FACES = [
+    ["newsreader", '"Newsreader", Georgia, serif', "Newsreader", "Current. The guide&rsquo;s own face."],
+    ["spectral", '"Spectral", Georgia, serif', "Spectral", "Recommended. Narrower, more formal, holds 300 better at small sizes."],
+    ["source", '"Source Serif 4", Georgia, serif', "Source Serif 4", "Warmer and wider. Reads less institutional."]
+  ];
+  var facesEl = document.getElementById("faces");
+  FACES.forEach(function (f) {
+    var wrap = document.createElement("div");
+    wrap.className = "cmp-face";
+    wrap.innerHTML =
+      '<div class="cmp-face-head"><span>' + f[2] + '</span><span>' + f[3] + '</span></div>'
+      + '<div class="cmp-face-body" data-theme="pc" style="--font-display:' + f[1] + '">'
+      + '<div class="eyebrow">Free gap analysis</div>'
+      + '<h2 class="h1" style="margin-top:16px">Find out what certification would actually cost you.</h2>'
+      + '<p class="lead">Thirty minutes with a consultant who has taken more than fifty organisations through audit. Fixed fee, no obligation.</p>'
+      + '<div class="cmp-row"><a class="btn" href="#0">Book the call</a><a class="btn2" href="#0">See pricing</a></div>'
+      + '</div>';
+    facesEl.appendChild(wrap);
+  });
+
+  /* -- composition stage ------------------------------------------------- */
+  var stage = document.getElementById("stage");
+  var handle = document.getElementById("handle");
+  var pt = stage.querySelector(".cmp-layer-pt");
+  var pc = stage.querySelector(".cmp-layer-pc");
+
+  function setWipe(pct) {
+    pct = Math.max(0, Math.min(100, pct));
+    stage.style.setProperty("--wipe", pct + "%");
+    handle.setAttribute("aria-valuenow", String(Math.round(pct)));
+  }
+  function currentWipe() {
+    return parseFloat(stage.style.getPropertyValue("--wipe")) || 0;
+  }
+
+  /* In wipe and flip the layers are absolutely positioned, so the stage has
+     no height of its own. A changed display face makes the two sides differ
+     slightly, so take the taller. */
+  function syncStage() {
+    var mode = root.getAttribute("data-mode");
+    if (mode === "stack") { stage.style.height = ""; return; }
+    requestAnimationFrame(function () {
+      stage.style.height = Math.max(pt.offsetHeight, pc.offsetHeight) + "px";
+    });
+  }
+
+  function pointTo(clientX) {
+    var r = stage.getBoundingClientRect();
+    setWipe(((clientX - r.left) / r.width) * 100);
+  }
+
+  var dragging = false;
+  handle.addEventListener("pointerdown", function (e) {
+    if (root.getAttribute("data-mode") !== "wipe") return;
+    dragging = true;
+    handle.setPointerCapture(e.pointerId);
+    e.preventDefault();
+  });
+  handle.addEventListener("pointermove", function (e) { if (dragging) pointTo(e.clientX); });
+  handle.addEventListener("pointerup", function () { dragging = false; });
+  stage.addEventListener("click", function (e) {
+    var mode = root.getAttribute("data-mode");
+    if (mode === "flip") { setWipe(currentWipe() > 50 ? 0 : 100); return; }
+    if (mode === "wipe" && !e.target.closest("a, button, input, select, textarea")) pointTo(e.clientX);
+  });
+
+  handle.addEventListener("keydown", function (e) {
+    var step = e.shiftKey ? 10 : 2;
+    if (e.key === "ArrowLeft") { setWipe(currentWipe() - step); e.preventDefault(); }
+    if (e.key === "ArrowRight") { setWipe(currentWipe() + step); e.preventDefault(); }
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.target.closest("input, textarea, select")) return;
+    if (e.key === "f" || e.key === "F") setWipe(currentWipe() > 50 ? 0 : 100);
+  });
+
+  window.addEventListener("resize", syncStage);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncStage);
+  syncStage();
+})();
+</script>

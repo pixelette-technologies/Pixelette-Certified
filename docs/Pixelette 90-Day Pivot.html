@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pixelette 90-Day Pivot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F4F5F2; --panel:#FFFFFF; --sunk:#EAEBE6;
+  --ink:#15181B; --ink-2:#3C444A; --muted:#6B7379;
+  --rule:#D8DAD3; --rule-2:#C3C6BD;
+  --accent:#17505E; --accent-soft:#E2EDF0;
+  --good:#2C6B4F; --warn:#9A6410; --bad:#8E3232;
+  --good-bg:#E4EFE8; --warn-bg:#F5EBD8; --bad-bg:#F5E3E1;
+  --shadow:0 1px 2px rgba(21,24,27,.05),0 8px 24px -16px rgba(21,24,27,.18);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#101315; --panel:#171B1E; --sunk:#1E2326;
+    --ink:#E9EBE7; --ink-2:#BFC5C7; --muted:#8B9397;
+    --rule:#2A3034; --rule-2:#3A4247;
+    --accent:#6EB4C4; --accent-soft:#17303A;
+    --good:#7DBE9C; --warn:#D7A85A; --bad:#DE8C84;
+    --good-bg:#16291F; --warn-bg:#2C2415; --bad-bg:#2C1B1A;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -16px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#101315; --panel:#171B1E; --sunk:#1E2326;
+  --ink:#E9EBE7; --ink-2:#BFC5C7; --muted:#8B9397;
+  --rule:#2A3034; --rule-2:#3A4247;
+  --accent:#6EB4C4; --accent-soft:#17303A;
+  --good:#7DBE9C; --warn:#D7A85A; --bad:#DE8C84;
+  --good-bg:#16291F; --warn-bg:#2C2415; --bad-bg:#2C1B1A;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -16px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:15.5px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.wrap{display:grid;grid-template-columns:250px minmax(0,1fr);gap:56px;max-width:1320px;margin:0 auto;padding:0 32px}
+nav.toc{position:sticky;top:0;align-self:start;max-height:100vh;overflow-y:auto;padding:34px 0 60px;border-right:1px solid var(--rule);font-size:12.5px}
+nav.toc .brandmark{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+nav.toc a{display:flex;gap:9px;text-decoration:none;color:var(--muted);padding:3px 14px 3px 0;line-height:1.35;border-left:2px solid transparent;padding-left:11px;margin-left:-13px}
+nav.toc a:hover{color:var(--ink);border-left-color:var(--rule-2)}
+nav.toc a.on{color:var(--ink);border-left-color:var(--accent);font-weight:500}
+nav.toc a span{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--muted);min-width:16px;font-variant-numeric:tabular-nums}
+nav.toc .grp{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--rule-2);margin:22px 0 8px;padding-left:11px}
+main{padding:34px 0 140px;min-width:0;max-width:900px}
+h1{font-family:"Newsreader",Georgia,serif;font-weight:500;font-size:clamp(34px,4.6vw,52px);line-height:1.06;letter-spacing:-.015em;margin:0 0 18px;text-wrap:balance}
+h2{font-family:"Newsreader",Georgia,serif;font-weight:500;font-size:clamp(25px,3vw,33px);line-height:1.14;letter-spacing:-.012em;margin:0 0 6px;text-wrap:balance}
+h3{font-family:"IBM Plex Sans",sans-serif;font-weight:600;font-size:17px;line-height:1.3;margin:34px 0 10px;letter-spacing:-.005em}
+h4{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:28px 0 8px}
+p{margin:0 0 14px;max-width:70ch}
+ul,ol{margin:0 0 16px;padding-left:20px;max-width:70ch}
+li{margin-bottom:7px}
+a{color:var(--accent)}
+strong{font-weight:600}
+section{scroll-margin-top:20px;padding:52px 0 8px;border-top:1px solid var(--rule)}
+section:first-of-type{border-top:none;padding-top:8px}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--rule)}
+.lede{font-family:"Newsreader",Georgia,serif;font-size:19.5px;line-height:1.5;color:var(--ink-2);max-width:64ch;margin-bottom:24px}
+.masthead{padding:44px 0 34px;border-bottom:2px solid var(--ink)}
+.meta{display:flex;flex-wrap:wrap;gap:8px 26px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);letter-spacing:.04em;margin-top:22px}
+.tbl{overflow-x:auto;margin:18px 0 26px;border:1px solid var(--rule);border-radius:3px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:560px}
+th{text-align:left;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:500;padding:11px 13px;border-bottom:1px solid var(--rule-2);background:var(--sunk);vertical-align:bottom;white-space:nowrap}
+td{padding:10px 13px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.45}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl.compact table{font-size:12.3px}
+.tbl.compact td,.tbl.compact th{padding:8px 11px}
+.pill{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;border-radius:2px;font-weight:500;white-space:nowrap}
+.p-fact{background:var(--good-bg);color:var(--good)}
+.p-inf{background:var(--warn-bg);color:var(--warn)}
+.p-rec{background:var(--accent-soft);color:var(--accent)}
+.p-bad{background:var(--bad-bg);color:var(--bad)}
+.p-hi{background:var(--good-bg);color:var(--good)}
+.p-med{background:var(--warn-bg);color:var(--warn)}
+.p-lo{background:var(--sunk);color:var(--muted)}
+.callout{background:var(--panel);border:1px solid var(--rule);border-left:3px solid var(--accent);padding:16px 20px;margin:22px 0;border-radius:2px;box-shadow:var(--shadow)}
+.callout.warn{border-left-color:var(--warn)}
+.callout.bad{border-left-color:var(--bad)}
+.callout p:last-child{margin-bottom:0}
+.callout h5{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);margin:0 0 8px;font-weight:600}
+.verdict{background:var(--sunk);border:1px solid var(--rule-2);padding:22px 24px;border-radius:3px;margin:24px 0}
+.verdict .q{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.verdict .a{font-family:"Newsreader",Georgia,serif;font-size:22px;line-height:1.32;color:var(--ink);text-wrap:balance}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:20px 0 26px}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:3px;padding:16px 18px;box-shadow:var(--shadow)}
+.card h5{font-family:"IBM Plex Sans",sans-serif;font-size:14px;font-weight:600;margin:0 0 6px}
+.card p{font-size:13.5px;margin-bottom:0;color:var(--ink-2)}
+.stat{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
+.stat b{font-family:"IBM Plex Mono",monospace;font-size:26px;font-weight:500;letter-spacing:-.02em;color:var(--accent);font-variant-numeric:tabular-nums;line-height:1}
+.stat span{font-size:13px;color:var(--muted);line-height:1.35}
+.bar{position:relative;height:7px;background:var(--sunk);border-radius:1px;overflow:hidden;min-width:70px}
+.bar i{position:absolute;inset:0 auto 0 0;background:var(--accent);border-radius:1px;display:block}
+.bar i.lo{background:var(--rule-2)}
+.scorerow{display:grid;grid-template-columns:1fr 46px 90px;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--rule);font-size:13.5px}
+.scorerow:last-child{border-bottom:none}
+.scorerow b{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;text-align:right;font-weight:500}
+.q-src{font-size:12px;color:var(--muted);margin-top:-8px;margin-bottom:18px}
+footer{border-top:2px solid var(--ink);margin-top:60px;padding-top:22px;font-size:12.5px;color:var(--muted)}
+hr{border:none;border-top:1px solid var(--rule);margin:28px 0}
+a:focus-visible,nav.toc a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+html{scroll-behavior:smooth}
+tr.phase td{background:var(--accent-soft);color:var(--accent);font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;font-weight:600}
+td.wk{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.money{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+tfoot td{font-weight:600;background:var(--sunk);border-top:1px solid var(--rule-2)}
+@media (max-width:980px){
+  .wrap{grid-template-columns:1fr;gap:0;padding:0 20px}
+  nav.toc{position:static;max-height:none;border-right:none;border-bottom:1px solid var(--rule);padding-bottom:20px;columns:2;column-gap:24px}
+  nav.toc a{break-inside:avoid}
+  main{padding-top:24px}
+}
+</style>
+
+
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc">
+  <div class="brandmark">90-Day Pivot</div>
+  <div class="grp">Reality</div>
+  <a href="#p1"><span>01</span>The hard truth</a>
+  <a href="#p2"><span>02</span>Client zero is you</a>
+  <div class="grp">The offers</div>
+  <a href="#p3"><span>03</span>Three products, priced</a>
+  <div class="grp">Execution</div>
+  <a href="#p4"><span>04</span>The 90-day plan</a>
+  <a href="#p5"><span>05</span>The budget</a>
+  <a href="#p6"><span>06</span>Upskilling</a>
+  <a href="#p7"><span>07</span>Credibility moves</a>
+  <div class="grp">Money</div>
+  <a href="#p8"><span>08</span>First revenue</a>
+  <a href="#p9"><span>09</span>What not to buy</a>
+  <a href="#p10"><span>10</span>What breaks this</a>
+  <a href="#p11"><span>&#9670;</span>Week one checklist</a>
+</nav>
+<main>
+<div class="masthead">
+  <div class="eyebrow">Pixelette Technologies &middot; Execution plan</div>
+  <h1>Ninety days, one and a half people, under five thousand pounds.</h1>
+  <p class="lede">How to reach the AI delivery and assurance position from where you actually are: no AI credentials, no public proof, no spare cash, and revenue needed inside the quarter.</p>
+  <div class="meta">
+    <span>Prepared 29 August 2026</span>
+    <span>Capacity assumed: 1 FTE engineer, 0.5 FTE commercial</span>
+    <span>Cash ceiling: &pound;5,000 over six months</span>
+    <span>First invoice target: week 9</span>
+  </div>
+</div>
+
+<section id="p1">
+<div class="eyebrow">01 &middot; The hard truth</div>
+<h2>What 1.5 people and £5,000 cannot buy</h2>
+<p>Three things have to be said before the plan, because the plan only works if they are accepted.</p>
+
+<div class="callout bad">
+<h5>1. You cannot build three products. You can build one and document two.</h5>
+<p>Only one of your three offers is software. The other two are <strong>methodology products</strong>: a diagnostic method and a governance artefact pack. They are documents, templates and a repeatable process, not code. That is not a compromise, it is the correct answer at your scale, and it is why they can be sellable in weeks rather than quarters. The mistake would be treating all three as engineering builds.</p>
+</div>
+
+<div class="callout bad">
+<h5>2. ISO 42001 certification is not happening this year.</h5>
+<p>Audit fees alone for an organisation of 126 to 175 employees run <strong>£9,000 to £17,500</strong> for initial certification, before consultancy, remediation or platform costs, on a three to nine month timeline. That is two to three and a half times your entire six-month budget. <span class="pill p-rec">What to do instead</span> Buy the standard, build and publish the artefacts, get a gap-assessment quote from a UKAS-accredited body, and say exactly that. Total cash: about £600. Never imply certification you do not hold; enterprise buyers check accredited registers.</p>
+</div>
+
+<div class="callout bad">
+<h5>3. Grant money will not arrive inside 90 days.</h5>
+<p>Innovate UK BridgeAI ended June 2026. The Flexible AI Upskilling Fund closed May 2024. Every Innovate UK AI competition checked is closed. UK Shared Prosperity Fund closed March 2026, taking many growth hubs with it. TechLocal closed to applications in March 2026. <strong>Do not build a 90-day plan around grant income.</strong> Two exceptions survive and both are in the plan: Skills Bootcamps at 10% SME contribution, and fully funded apprenticeships for 16 to 24 year olds.</p>
+</div>
+
+<h3>What that leaves, and it is more than it sounds</h3>
+<p>You are not starting from nothing. You hold two certified management systems, seven years of delivered work, named clients, quantified case studies and a delivery network. The gap is <strong>AI-specific proof and AI-specific method</strong>, and the research says that is exactly the gap buyers weigh most heavily.</p>
+<div class="callout">
+<h5>The finding that should shape everything you do next</h5>
+<p>A survey of 310 enterprise buyers across 266 companies, published 18 August 2026, asked what evidence they prioritise when evaluating AI suppliers. The answer: <strong>proven integration 47%, measurable business outcomes 32%, transparency 23%</strong>. Buyers demand "specific problem resolution through comparable client case studies paired with quantified financial returns, not merely showcase AI capabilities or roadmaps."</p>
+<p><strong>Not one of the top three is a certification.</strong> One published case study with a real integration and a real number outranks a wall of badges. That is unusually good news for a firm with 1.5 FTE and £5,000, because the binding constraint becomes a client saying yes rather than a budget you do not have.</p>
+</div>
+</section>
+
+<section id="p2">
+<div class="eyebrow">02 &middot; The unlock</div>
+<h2>Client zero is Pixelette Group</h2>
+<p class="lede">One piece of work produces the methodology, the case study, the upskilling and the product templates simultaneously. Run your three offers on your own business first.</p>
+
+<p>You have four operating entities and an internal estate. Run the AI Value Baseline across Pixelette Technologies, Marketing, Certified and Holdings: instrument two or three real internal processes, measure them properly, and take them through build, run and assurance exactly as you would for a paying client.</p>
+
+<div class="tbl compact">
+<table>
+<thead><tr><th>What the internal engagement produces</th><th>Which problem it solves</th><th>Cost</th></tr></thead>
+<tbody>
+<tr><td><strong>A tested diagnostic method</strong> with real artefacts, a scoring model and a worked business case</td><td>Offer 1 becomes sellable, with a template rather than a promise</td><td class="money">£0</td></tr>
+<tr><td><strong>A case study you own outright</strong>, with no client sign-off to wait for and no NDA to negotiate</td><td>The 47% integration and 32% outcome proof points, available in week 6 rather than month 6</td><td class="money">£0</td></tr>
+<tr><td><strong>Hands-on upskilling under real conditions</strong>, on a system that matters, with consequences</td><td>Faster and more credible than any course. Courses become revision, not learning</td><td class="money">£0</td></tr>
+<tr><td><strong>A live system in the monitoring stack</strong> generating real traces, real drift and real incidents</td><td>Offer 3 has something to monitor from day one. A demo with real data beats a demo with fixtures</td><td class="money">£0</td></tr>
+<tr><td><strong>A complete ISO 42001-aligned artefact set</strong> covering your own AI use</td><td>Offer 2's templates, plus you can honestly say you run your own AI under the framework you sell</td><td class="money">£0</td></tr>
+<tr><td><strong>Two production Claude deployments</strong> and one public customer story</td><td>Two of the three requirements for Claude Partner Network Select status</td><td class="money">£0</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout">
+<h5>Why this is defensible rather than a shortcut</h5>
+<p>"We run our own operations this way, here is the measurement, here are the artefacts, here is the monitoring dashboard" is a stronger opening than any certificate, and it is the one proof asset that costs nothing and cannot be disputed. It also forces the honest version of the methodology, because you feel the parts that do not work. Say plainly that the first case study is internal. Buyers respect it; pretending otherwise is what damages credibility.</p>
+</div>
+<p>The constraint to respect: <strong>pick processes that matter and that you would fix anyway</strong>. Proposal production, bid qualification, recruitment screening, case study drafting, client reporting. If the internal work is theatre, the case study will read as theatre.</p>
+</section>
+
+<section id="p3">
+<div class="eyebrow">03 &middot; The three offers</div>
+<h2>What you sell, and for how much</h2>
+<p class="lede">Prices anchored on published comparables, mostly from G-Cloud rate cards, where UK suppliers are legally obliged to disclose what they charge.</p>
+
+<h3>Offer 1 &mdash; AI Value Baseline <span class="pill p-rec">Sellable week 5</span></h3>
+<div class="tbl compact">
+<table>
+<tbody>
+<tr><th style="width:20%">What it is</th><td>A four-week fixed-price diagnostic: instrument two or three candidate processes, establish a measured baseline, produce a costed roadmap and a business case written for a CFO</td></tr>
+<tr><th>Why it sells now</th><td>Only 18% of organisations track AI ROI and 40% do not know whether it is measured. Buyers want outcome-based pricing and cannot measure outcomes. You sell them the measurement first</td></tr>
+<tr><th>Skills needed</th><td><strong>None you do not already have.</strong> Process analysis, measurement, financial modelling and a written recommendation. This is why it goes first</td></tr>
+<tr><th>Price</th><td><strong class="money">£6,000 to £12,000</strong> fixed. Comparables: AI Expert (Worcester) publishes AI Workshop from £2,999, AI Roadmap from £4,999, first engagement typically £8,000 to £15,000. Winder.AI states "most engagements land in the five-figure range", two to four weeks</td></tr>
+<tr><th>Delivery cost</th><td>Roughly 8 to 12 person-days. At £12,000 that is a genuinely healthy margin</td></tr>
+<tr><th>Publish the price</th><td><strong>Yes.</strong> No services firm in the 22-firm benchmark publishes a price for anything. It is an uncontested differentiator that costs nothing to claim</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>Offer 2 &mdash; AI Governance Readiness <span class="pill p-rec">Sellable week 8</span></h3>
+<div class="tbl compact">
+<table>
+<tbody>
+<tr><th style="width:20%">What it is</th><td>ISO/IEC 42001-aligned AI management system built as an extension of the client's existing ISO 27001: AI policy, risk methodology, system inventory, impact assessments, human oversight, incident response, Statement of Applicability, plus support through their customers' security reviews</td></tr>
+<tr><th>Why it sells now</th><td>78% of leaders lack confidence they could pass an independent AI governance audit within 90 days. IT security review is the single biggest cause of enterprise deal delay, at 50%. And the live EU deadline is <strong>Article 50 transparency, 2 August 2026 with watermarking grace to 2 December 2026</strong>, not the high-risk obligations that slipped to December 2027. Most competitors are still selling the wrong date</td></tr>
+<tr><th>Skills needed</th><td><strong>You already run two certified management systems.</strong> Clauses 4, 5, 7, 9 and 10 of ISO 42001 are the same Harmonised Structure as ISO 9001 and 27001. The genuinely new work is clause 6.1.2 risk assessment, 6.1.4 impact assessment, and Annex A groups A.5 (impacts), A.6 (lifecycle) and A.7 (data)</td></tr>
+<tr><th>Built from</th><td>ISO 42001 + 42005 bundle (CHF 365, cheaper than CHF 406 separately) plus free authoritative sources: <strong>DSIT AI Management Essentials</strong> (updated 6 Feb 2026, Open Government Licence, ten sections that map almost one-to-one onto the documents a UK client needs), NIST AI RMF and Playbook, ICO AI and data protection risk toolkit (v11, May 2026), EU AI Act Explorer, OWASP GenAI LLM Top 10 2026</td></tr>
+<tr><th>Price</th><td><strong class="money">£8,000 to £20,000</strong> per engagement, or <strong class="money">£850 to £1,200</strong> per day. Comparables from G-Cloud 14 published rate cards: SecureTeam ISO 27001 gap analysis £850 to £1,000/day; Oyster IMS AI governance readiness £938 to £1,761/day; Adroit Cloud AI ethics and governance £270 to £2,200/day; PwC AI assurance £100 to £2,750/day</td></tr>
+<tr><th>Say this explicitly</th><td>"We prepare you for certification. We cannot issue it." ISO/IEC 42006:2025 reserves certification for accredited bodies. Saying so builds trust rather than costing sales</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>Offer 3 &mdash; Managed AI Operations <span class="pill p-rec">Sellable week 12</span></h3>
+<div class="tbl compact">
+<table>
+<tbody>
+<tr><th style="width:20%">What it is</th><td>The run contract: continuous evaluation against acceptance thresholds, drift and regression detection, incident response with defined severities, model and prompt version control, inference cost management, and a monthly operating report showing the delta</td></tr>
+<tr><th>Why it sells now</th><td>Organisations average <strong>54 AI agent incidents a year</strong> with 17% high severity, 85% lack real-time visibility of AI spend, and only 11% feel prepared for anticipated agent scale by 2027. No named competitor with published pricing was found anywhere in the research. You would be creating the category</td></tr>
+<tr><th>Skills needed</th><td>Real but bounded: OpenTelemetry instrumentation, a Docker-composed observability stack, an evaluation harness, and a judge pipeline. Roughly 20 to 25 engineer-days across the quarter</td></tr>
+<tr><th>Price</th><td><strong class="money">£1,500 to £3,000 per client per month.</strong> Comparable: Telef&oacute;nica Tech UK publishes MLOps as a Service on G-Cloud at a monthly subscription of <strong>£1,750 Essential to £8,250 Enterprise</strong>. Undercut Essential and you are still running a real business</td></tr>
+<tr><th>Delivery cost</th><td>Roughly <strong class="money">£30 to £62 per month</strong> in infrastructure for five client systems combined: a Hetzner box at &euro;29 to &euro;35, Cloudflare R2 storage under $4, and judge-model API calls at $4 to $35 with 5% sampling, batch pricing and prompt caching. <strong>Five clients at £1,750 is £8,750 of monthly revenue against about £62 of compute.</strong> The cost of this business is labour, not inference</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout bad">
+<h5>The licence trap that would have cost you the business</h5>
+<p><strong>Arize Phoenix is Elastic License 2.0, which forbids exactly this model.</strong> Verbatim: "You may not provide the software to third parties as a hosted or managed service, where the service provides users with access to any substantial set of the features or functionality of the software." Phoenix is fine deployed <em>inside the client's own cloud account</em>, where the client is the licensee. It is not fine as your multi-tenant platform.</p>
+<p><strong>Langfuse core is MIT and safe.</strong> Its <code>/ee</code> directories are separately licensed and forbid resale, but those cover only project-level RBAC, audit logs, data masking and similar. Use <strong>one Langfuse organisation per client</strong> rather than project-level roles and you stay entirely inside MIT. Grafana is AGPLv3: ship it unmodified and brand through provisioned dashboards, not forked source, and it costs you nothing.</p>
+</div>
+
+<h3>The stack, in build order</h3>
+<div class="tbl compact">
+<table>
+<thead><tr><th class="num">#</th><th>Component</th><th>Licence</th><th>Why this one</th><th class="num">Days</th></tr></thead>
+<tbody>
+<tr><td class="num">1</td><td><strong>OpenLLMetry</strong> instrumentation + OpenTelemetry GenAI conventions</td><td>Apache 2.0</td><td>Vendor-neutral. This is the insurance policy: if any backend relicenses, you swap it without re-instrumenting. That is why it is first, not second</td><td class="num">3</td></tr>
+<tr><td class="num">2</td><td><strong>Langfuse OSS</strong> on Hetzner (web, worker, Postgres, ClickHouse, Redis, R2)</td><td>MIT</td><td>All core features and APIs available without limits when self-hosted. The backbone</td><td class="num">5</td></tr>
+<tr><td class="num">3</td><td><strong>Promptfoo</strong> eval and red-team harness in CI</td><td>MIT</td><td>Regression testing and OWASP-mapped red teaming in one tool. Note the 10k probes/month community cap</td><td class="num">4</td></tr>
+<tr><td class="num">4</td><td><strong>Ragas + DeepEval</strong> against a 100-example golden set</td><td>Apache 2.0</td><td>Implements the golden-dataset method. DeepEval runs entirely locally</td><td class="num">4</td></tr>
+<tr><td class="num">5</td><td><strong>Judge pipeline</strong>: 5% sampling, binary pass/fail, batch API, prompt caching, human calibration</td><td>&mdash;</td><td>The billable core. Calibrate against human labels before you sell it</td><td class="num">5</td></tr>
+<tr><td class="num">6</td><td><strong>Grafana + Prometheus</strong> client dashboards</td><td>AGPLv3 / Apache 2.0</td><td>Ship Grafana unmodified. Brand via provisioned dashboards</td><td class="num">3</td></tr>
+<tr><td class="num">7</td><td><strong>Evidently</strong> drift and regression reporting, including judge drift</td><td>Apache 2.0</td><td>Judge drift, your evaluator's own behaviour moving, is the differentiator competitors do not mention</td><td class="num">3</td></tr>
+<tr><td class="num">8</td><td><strong>Inspect AI</strong> harness, and contribute one eval to <code>inspect_evals</code></td><td>MIT</td><td>Built by the <strong>UK AI Security Institute</strong>. For a UK firm selling assurance to UK buyers, adopting the government's own evaluation framework is positioning as much as tooling. Submission was simplified on 8 May 2026: open an issue, a bot opens the pull request</td><td class="num">6</td></tr>
+</tbody>
+</table>
+</div>
+<p class="q-src">Roughly 33 engineer-days for the full stack. The first five components, about 21 days, are enough to sell and deliver offer 3.</p>
+</section>
+<section id="p4">
+<div class="eyebrow">04 &middot; The 90-day plan</div>
+<h2>Week by week</h2>
+<p class="lede">Two lanes. E is the full-time engineer or delivery lead. C is the half-time commercial person. Every week has one thing that must be true by Friday.</p>
+<div class="tbl">
+<table>
+<thead><tr><th class="num">Wk</th><th>E &mdash; engineer, full time</th><th>C &mdash; commercial, half time</th><th>True by Friday</th></tr></thead>
+<tbody>
+<tr class="phase"><td colspan="4">Phase 1 &middot; Weeks 1 to 2 &middot; Everything free, started at once</td></tr>
+<tr><td class="wk">1</td><td>Join <strong>Claude Partner Network</strong> at Registered. Start Anthropic Academy (free). Stand up Hetzner box, deploy Langfuse OSS. Instrument one internal Pixelette process with OpenLLMetry</td><td><strong>Apply to AI DPS RM6200</strong>: download the bid pack, self-certify across the four filter levels, sign the Data Ethics Letter of Understanding. Confirm whether the group's Cyber Essentials Plus is current</td><td>DPS application submitted. Langfuse running with real traces from your own business</td></tr>
+<tr><td class="wk">2</td><td>Promptfoo in CI. First golden set of 100 examples from the internal process. Register free: AWS Partner Network, OpenAI Partner Network. Free Microsoft Applied Skills labs AI-3002/3003/3004</td><td>Buy ISO 42001 + 42005 bundle. Draft the AIMS scope and AI policy for Pixelette's own AI use. Book the free techUK event for 28 September. Email DSIT about the AI Assurance Innovation Fund status</td><td>Three directory listings live. Three verified hands-on credentials. The standard is on the desk</td></tr>
+<tr class="phase"><td colspan="4">Phase 2 &middot; Weeks 3 to 6 &middot; Client zero, and offer 1 goes on sale</td></tr>
+<tr><td class="wk">3</td><td>Run the <strong>AI Value Baseline on Pixelette Group</strong>: pick two internal processes, instrument them, measure the real current-state numbers</td><td>Write the Value Baseline as a productised offer: scope, four-week timeline, deliverables, <strong>published price</strong>, and a worked example from the internal run</td><td>You have real before-numbers for two of your own processes</td></tr>
+<tr><td class="wk">4</td><td>Judge pipeline with 5% sampling and binary pass/fail. Calibrate against your own human labels. Ragas and DeepEval metrics wired up</td><td>Build the target list: <strong>existing and lapsed clients first</strong>. Twenty named accounts, each with the process you would baseline. Draft the outreach</td><td>The judge agrees with your human labels often enough to quote its numbers</td></tr>
+<tr><td class="wk">5</td><td>Grafana dashboards and Evidently drift reporting. First internal monthly operating report produced end to end</td><td><strong>Offer 1 goes live.</strong> Page published with the price on it. Outreach starts to the twenty accounts. Target: eight conversations</td><td>The Value Baseline is a page with a price, and the first outreach is out</td></tr>
+<tr><td class="wk">6</td><td>Write up the internal baseline as the <strong>first case study</strong>: named process, measured before and after, architecture diagram, dashboard screenshot</td><td>Publish the <strong>trust page</strong>: ISO 9001 with its IAF verification link, ISO 27001 with a verification link, Cyber Essentials, subprocessors, data handling, model providers, retention. Pre-answer the standard security questionnaire</td><td>You have one real case study and a trust page. Both were free</td></tr>
+<tr class="phase"><td colspan="4">Phase 3 &middot; Weeks 7 to 9 &middot; Governance goes on sale, first money lands</td></tr>
+<tr><td class="wk">7</td><td>Build the <strong>governance artefact pack</strong>: crosswalk ISO 42001 Annex A against your existing ISO 9001 and 27001 controls. Templates for AI policy, risk methodology, system inventory, impact assessment, human oversight, incident response</td><td>Book <strong>AI-300 Machine Learning Operations Engineer Associate</strong> for E. Approach Skills Bootcamp providers about 10% co-funded AI upskilling for directly employed staff</td><td>The crosswalk exists. It is the sales argument: your certifications already cover half of ISO 42001</td></tr>
+<tr><td class="wk">8</td><td>Publish the <strong>methodology</strong>, fully cited to Anthropic, OpenAI, NIST, OWASP and UK AISI. Cite, do not invent. Two weeks of writing, permanent asset</td><td><strong>Offer 2 goes live.</strong> Lead with the Article 50 transparency deadline that is live now, not the high-risk one that slipped to December 2027. Most competitors are quoting the wrong date</td><td>The methodology is public and every claim in it traces to an authority</td></tr>
+<tr><td class="wk">9</td><td>Deliver the first paid Value Baseline. Claude certification exams begin: eight Associate, two Architect Foundations</td><td><strong>First invoice out.</strong> Chase pre-funded demand: regional Made Smarter approved-supplier lists, and TechLocal grant winners whose projects started 1 July 2026 and need delivery subcontractors</td><td>Money has been invoiced</td></tr>
+<tr class="phase"><td colspan="4">Phase 4 &middot; Weeks 10 to 13 &middot; The annuity, and the partner badge</td></tr>
+<tr><td class="wk">10</td><td>Package <strong>offer 3</strong>: SLAs, severity model, monthly report format, onboarding runbook. Prove it on the internal system for a full month first</td><td>Price offer 3 at £1,500 to £3,000 per month. Take it to every Value Baseline client as the natural next step. The build without the run is a project; with the run it is a relationship</td><td>The run contract exists as a signable document with a rate card</td></tr>
+<tr><td class="wk">11</td><td>Contribute one evaluation to <strong>UK AISI's <code>inspect_evals</code></strong>. Permanently attributed, government-affiliated, objective acceptance bar, costs only engineering days</td><td>Complete the <strong>Claude Select</strong> requirements: 10 certified individuals, 2 production deployments in 12 months, 1 public customer story. Submit</td><td>Ten people certified. The Select application is in</td></tr>
+<tr><td class="wk">12</td><td>Deliver the first governance engagement. Sit AI-300</td><td><strong>Offer 3 goes live.</strong> First run contract signed, ideally on a system you did not build, which proves it is a capability rather than a warranty</td><td>Recurring revenue has started</td></tr>
+<tr><td class="wk">13</td><td>Second case study written. Publish the judge-drift technical piece, the thing competitors do not talk about</td><td>Review: pipeline, conversion, what sold and what did not. Set the next 90 days from evidence rather than from this plan</td><td>Two case studies, three sellable offers, one annuity, one partner badge</td></tr>
+</tbody>
+</table>
+</div>
+<div class="callout warn">
+<h5>The one date already in the diary</h5>
+<p><strong>28 September 2026, 1pm to 5pm, techUK, 10 St Bride Street, London EC4A 4AD.</strong> "One year on: the Trusted Third-Party AI Assurance Roadmap." Free to attend without techUK membership. The audience is AI assurance providers, consortium members, BCS, UKAS, BSI, NPL, DSIT, policymakers and investors. The UK AI assurance profession is being defined in that room right now, and the sector is valued at over £1bn GVA with a stated path to £18.8bn by 2035. It falls inside week 5 of this plan. It is the cheapest credibility action available to you and it costs a train fare.</p>
+</div>
+</section>
+
+<section id="p5">
+<div class="eyebrow">05 &middot; The budget</div>
+<h2>Every pound, accounted for</h2>
+<div class="tbl compact">
+<table>
+<thead><tr><th>Line</th><th>What it buys</th><th class="num">Cost</th><th>When</th></tr></thead>
+<tbody>
+<tr><td><strong>Claude certifications</strong></td><td>8 &times; Certified Associate Foundations at $99, plus 2 &times; Architect Foundations at $125. Meets the Select tier headcount requirement</td><td class="num">~£800</td><td>Wk 9-11</td></tr>
+<tr><td><strong>Cyber Essentials</strong></td><td>IASME published band for 50 to 249 employees: £500 + VAT. <span class="pill p-med">Check first</span> The group already claims Cyber Essentials Plus. If it is current, this line is £0 and the real job is publishing it, since it appears nowhere on the website</td><td class="num">£0 or ~£600</td><td>Wk 1-3</td></tr>
+<tr><td><strong>ISO 42001 + 42005 bundle</strong></td><td>CHF 365 for both, against CHF 406 bought separately. 42005 defines the AI impact assessment, the highest-value single deliverable in offer 2</td><td class="num">~£330</td><td>Wk 2</td></tr>
+<tr><td><strong>Infrastructure, 3 months</strong></td><td>Hetzner CX53 or CPX32 at &euro;29 to &euro;35/month, Cloudflare R2 storage, judge-model API with batch pricing and caching</td><td class="num">~£120</td><td>Wk 1-13</td></tr>
+<tr><td><strong>AI-300 exam</strong></td><td>Machine Learning Operations Engineer Associate. Covers GenAI observability and quality assurance, which is precisely the assurance sale. Microsoft does not publish a price; Pearson VUE lists role-based vouchers at $165</td><td class="num">~£125</td><td>Wk 12</td></tr>
+<tr><td><strong>techUK event travel</strong></td><td>Event free. Two people to London, 28 September</td><td class="num">~£150</td><td>Wk 5</td></tr>
+<tr><td><strong>ISO 42001 gap assessment quotes</strong></td><td>From UKAS-accredited bodies. Quotes cost nothing; getting them lets you say publicly that you have started. Also surfaces the auditor-availability constraint early, which is real: UKAS accredited BSI first in November 2025 and the accredited pool is still thin</td><td class="num">£0</td><td>Wk 7</td></tr>
+<tr><td><strong>Contingency</strong></td><td>Domain and page build, professional indemnity review for the assurance offer, unbudgeted exam retakes</td><td class="num">~£500</td><td>&mdash;</td></tr>
+</tbody>
+<tfoot><tr><td colspan="2"><strong>Total committed</strong></td><td class="num"><strong>£2,025 to £2,625</strong></td><td>of £5,000</td></tr>
+<tr><td colspan="2">Headroom held back for what the first 90 days proves</td><td class="num"><strong>£2,375 to £2,975</strong></td><td></td></tr></tfoot>
+</table>
+</div>
+<p class="q-src">Currency conversions indicative. Verify Microsoft exam pricing at booking; Microsoft does not publish a UK GBP list price. Hetzner adjusted prices on 15 June 2026 and the current plan names differ slightly from the published specs, so confirm in the console.</p>
+<div class="callout">
+<h5>What the headroom is for</h5>
+<p>Do not spend it in the first 90 days. It is the option on whichever of the three offers actually sells. If governance leads, spend it on <strong>IAPP AI Governance Professional</strong> (about £700 to £750 via the member route: $295 membership plus $649 member exam rate) for whoever fronts assurance conversations. If operations leads, spend it on a second engineer's Claude and Microsoft certifications. If neither sells, you have kept £2,500 rather than burned it.</p>
+</div>
+</section>
+
+<section id="p6">
+<div class="eyebrow">06 &middot; Upskilling</div>
+<h2>The fastest route to competence, in order</h2>
+<p class="lede">Delivery first, courses second. Courses are revision for something you have already done, not preparation for something you have not.</p>
+
+<div class="tbl compact">
+<table>
+<thead><tr><th class="num">Order</th><th>What</th><th>Cost</th><th>Time</th><th>Why here</th></tr></thead>
+<tbody>
+<tr><td class="num">1</td><td><strong>Build and run one real system on your own estate</strong></td><td class="money">£0</td><td>Wk 1-6</td><td>Nothing else teaches evaluation, drift, cost control and incident handling. Every course below makes sense only after this</td></tr>
+<tr><td class="num">2</td><td><strong>Anthropic Academy</strong>, 22 free courses: Claude 101, Building with the Claude API, Introduction to Model Context Protocol, MCP Advanced Topics, Agent Skills, Subagents</td><td class="money">£0</td><td>Wk 1-8</td><td>Free, current, certificates on completion, and it is the prerequisite for the partner certifications. Best free curriculum available</td></tr>
+<tr><td class="num">3</td><td><strong>Microsoft Applied Skills</strong> labs AI-3002, AI-3003, AI-3004</td><td class="money">£0</td><td>Wk 2</td><td>Genuinely free, no voucher needed, live labs on real Azure surfaces. Verifiable hands-on evidence for zero cash. Weak brand recognition, real proof of doing</td></tr>
+<tr><td class="num">4</td><td><strong>Published evaluation methodology</strong>: Anthropic's "Demystifying evals for AI agents" (9 Jan 2026), OpenAI's evaluation best practices, Husain and Shankar's evals FAQ (free, updated 18 Jul 2026)</td><td class="money">£0</td><td>Wk 4-8</td><td>This is where the sellable expertise actually lives. Binary pass/fail over 1-5 ratings, 100+ trace error analysis, 10 to 20 traces per week in production monitoring, calibrating judges against human labels</td></tr>
+<tr><td class="num">5</td><td><strong>Claude Certified Associate and Architect Foundations</strong></td><td class="money">~£800</td><td>Wk 9-11</td><td>The only tier-one ecosystem badge reachable on this budget, and it unlocks Select status</td></tr>
+<tr><td class="num">6</td><td><strong>AI-300 Machine Learning Operations Engineer Associate</strong></td><td class="money">~£125</td><td>Wk 12</td><td>The best-matched credential to "AI operations" that exists. Note <strong>AI-102 was retired on 30 June 2026</strong>; any provider still selling AI-102 prep is selling a dead credential</td></tr>
+<tr><td class="num">7</td><td><strong>Skills Bootcamps</strong> at 10% SME contribution, and a fully funded 16 to 24 apprentice</td><td class="money">~£0</td><td>Wk 7+</td><td>The only live UK funding that fits. <span class="pill p-bad">Trap</span> Eligibility covers directly employed PAYE staff only. Contractors, workers, self-employed, directors and officeholders do not qualify, which matters for a 200-person delivery network</td></tr>
+<tr><td class="num">8</td><td><strong>NVIDIA NCP-AAI Agentic AI (Professional)</strong>, $200</td><td class="money">~£150</td><td>Later</td><td>Technically credible, carries weight with engineers, and almost no UK services firm holds it. Deferred because it is a differentiator, not a prerequisite</td></tr>
+</tbody>
+</table>
+</div>
+<div class="callout warn">
+<h5>Stale information that would waste your money</h5>
+<p><strong>AI-102 is retired</strong> (30 June 2026). The replacements are AI-103 and AI-300. <strong>Every Microsoft free-voucher scheme has closed</strong>: AI Skills Fest ended 12 June 2026, the Credentials AI Challenge vouchers expired 30 June 2026, and no discount scheme is running as of today. Budget full exam price. <strong>DeepLearning.AI certificates signal almost nothing to a procurement function.</strong> Use the free audit tier for the learning and do not pay for the certificate.</p>
+</div>
+</section>
+
+<section id="p7">
+<div class="eyebrow">07 &middot; Credibility</div>
+<h2>Five moves that cost almost nothing</h2>
+<div class="grid2">
+<div class="card"><h5>1. AI DPS RM6200 &middot; free, week 1</h5><p>Registration is free with no cap on suppliers, continuous entry, and the agreement runs to <strong>23 February 2029</strong>. Entry is a self-declaration across four filter levels plus a <strong>Data Ethics Letter of Understanding</strong> and evidence you already hold: ISO 9001, ISO 27001, insurance. That signed ethics undertaking is also a free credibility artefact you can cite in private-sector bids. Note Crown Commercial Service became the Government Commercial Agency on 1 April 2026.</p></div>
+<div class="card"><h5>2. Claude Partner Network Select &middot; ~£800</h5><p>Requirements formalised 3 June 2026: <strong>10 certified individuals, 2 production deployments within 12 months, 1 public customer story.</strong> No revenue commitment, no annual designation fee. Compare Microsoft's Solutions Partner designation at <strong>$4,875 a year</strong> before you clear any Azure consumption threshold. The catch is real though: certifications belong to individuals and partners must maintain certified people who have used Claude within the past 90 days. Choose people who will actually use it.</p></div>
+<div class="card"><h5>3. A published methodology &middot; free</h5><p>The highest value per pound available. Publish how you scope, evaluate, handle model risk, set acceptance criteria and what you refuse to do, grounded in NIST AI RMF and its Generative AI Profile. Cite Anthropic, OpenAI, NIST, OWASP and UK AISI rather than inventing. <strong>Publishing a methodology that cites rather than invents is itself the credibility signal.</strong></p></div>
+<div class="card"><h5>4. A contribution to UK AISI's inspect_evals &middot; free</h5><p>MIT licensed, maintained by the UK AI Security Institute with Arcadia Impact and the Vector Institute. Permanently and publicly attributed, objective acceptance bar, submission simplified on 8 May 2026. "We maintain an evaluation in the UK AI Security Institute's Inspect Evals repository" is a stronger sentence than any marketing copy, and for a UK firm selling assurance to UK buyers it is worth more than a logo.</p></div>
+<div class="card"><h5>5. The AI Assurance Consortium orbit &middot; free</h5><p>Launched from the September 2025 Trusted Third-Party AI Assurance Roadmap, chaired by BCS with UKAS, BSI, NPL and the Ada Lovelace Institute, industry advisory group led by techUK. It is building a voluntary code of ethics and a skills and competencies framework right now. <strong>Your existing ISO 9001 and 27001 are exactly what makes you a plausible early participant rather than a newcomer.</strong> Start at the free 28 September event.</p></div>
+<div class="card"><h5>The proof asset that beats all five</h5><p><strong>One case study with a real integration and a real number.</strong> 47% of enterprise buyers rank proven integration first and 32% rank measurable outcomes second. Certification does not appear in the top three. Your internal Pixelette baseline delivers this in week 6 with no client sign-off to wait for.</p></div>
+</div>
+
+<h3>The four-person precedent worth studying</h3>
+<p>Parlance Labs is a <strong>four-person</strong> team. Its founder noticed he was repeating the same advice, wrote it down publicly for free, taught a course to over 3,500 students from Fortune 500 companies and major AI labs including OpenAI, Meta and Google, and now qualifies clients out, directing those without baseline knowledge to the free resources first. Note what he says about open source specifically: his contributions have <em>diminished</em> because it is now easier to build your own tools with AI. <strong>The writing, not the repository, was the asset.</strong> That is the entire escalation ladder, executed by four people: free artefact, then course, then book, then inbound consulting.</p>
+</section>
+<section id="p8">
+<div class="eyebrow">08 &middot; First revenue</div>
+<h2>Where the money actually comes from inside 90 days</h2>
+<div class="callout warn">
+<h5>Be honest about this</h5>
+<p>New-logo enterprise pipeline does not convert in 90 days. IT security review alone delays half of enterprise deals. <strong>Your first invoice will almost certainly come from a client you have already worked with</strong>, buying a four-week diagnostic they can approve without a procurement cycle. Price offer 1 at the level a sponsor can sign off without going to committee, and treat that as the design constraint rather than an accident.</p>
+</div>
+<div class="tbl compact">
+<table>
+<thead><tr><th>Route</th><th>Why it converts fast</th><th>Realistic first money</th><th>Effort</th></tr></thead>
+<tbody>
+<tr><td><strong>Existing and lapsed clients</strong>, sold a Value Baseline</td><td>No procurement, no security review, existing trust, and a price a sponsor can approve alone. You have named clients across gowalkies, SIB360, One-Stop CCTV, Butter Smiles, Beowulf, CAST Perimeter, Lytics, WindWorkX and BlockGuard</td><td><strong>Weeks 8 to 10</strong></td><td>Low</td></tr>
+<tr><td><strong>Made Smarter approved-supplier and technical-advisor lists</strong></td><td>Made Smarter funds SME manufacturers, not technology firms, so you are not eligible as a recipient. But the recipients have just been granted money and need suppliers. <strong>Pre-funded buyers with budget already allocated</strong></td><td><strong>Weeks 8 to 12</strong></td><td>Low</td></tr>
+<tr><td><strong>TechLocal grant winners</strong> as a delivery subcontractor</td><td>£27m across four years, projects started from 1 July 2026, and they need AI training and work-experience delivery partners. Applications closed, so no bid effort. Commercial conversation only</td><td><strong>Weeks 8 to 12</strong></td><td>Low</td></tr>
+<tr><td><strong>AI DPS RM6200</strong> opportunities</td><td>Free entry, live to 2029, and SME spend through the route already exceeds 50% of the total. Approval timeline is not published, so plan for weeks</td><td><strong>Weeks 10 to 16</strong></td><td>Medium</td></tr>
+<tr><td><strong>Offer 2 to your own existing ISO clients</strong></td><td>Anyone you know holding ISO 27001 is a warm ISO 42001 readiness conversation. The crosswalk is the pitch: half the work is already done in their existing management system</td><td><strong>Weeks 10 to 14</strong></td><td>Low</td></tr>
+<tr><td><strong>Offer 3 attached to every offer 1 delivery</strong></td><td>The run contract is sold at the same time as the build, never after. This is the difference between a project business and an annuity business</td><td><strong>Weeks 12 to 16</strong></td><td>Low</td></tr>
+</tbody>
+</table>
+</div>
+<h3>A defensible 90-day target</h3>
+<div class="grid2">
+<div class="card"><div class="stat"><b>2-3</b><span>Value Baselines sold at £6k to £12k</span></div><p>From existing relationships. This is the number the whole plan turns on.</p></div>
+<div class="card"><div class="stat"><b>1</b><span>Governance readiness engagement at £8k to £20k</span></div><p>Most likely from a client already holding ISO 27001.</p></div>
+<div class="card"><div class="stat"><b>1</b><span>Run contract at £1.5k to £3k per month</span></div><p>Small money, disproportionate strategic value. It proves the annuity exists.</p></div>
+<div class="card"><div class="stat"><b>£20k-45k</b><span>Realistic booked revenue by day 90</span></div><p>Against roughly £2,000 to £2,600 of cash spend. The constraint is selling time, not capability.</p></div>
+</div>
+<p class="q-src">These are targets built from the published price bands and the conversion realities above, not forecasts. Treat the two to three Value Baselines as the single metric that determines whether the plan is working at week 9.</p>
+</section>
+
+<section id="p9">
+<div class="eyebrow">09 &middot; What not to buy</div>
+<h2>The expensive mistakes, named</h2>
+<div class="tbl compact">
+<table>
+<thead><tr><th>Do not buy</th><th class="num">Cost</th><th>Why not</th></tr></thead>
+<tbody>
+<tr><td><strong>Microsoft Solutions Partner for Data and AI</strong></td><td class="num">$4,875/yr</td><td>The designation fee alone is 97% of your entire budget, and you would still need to clear Azure Consumed Revenue thresholds and hold Azure Administrator Associate plus Azure Solutions Architect Expert before a single AI certification scores a point. Free AI Cloud Partner Program membership is still worth holding. Revisit in FY27</td></tr>
+<tr><td><strong>BSI ISO/IEC 42001 Lead Auditor training</strong></td><td class="num">£2,585 + VAT</td><td>Over half the budget, and it does not let you certify anyone: ISO/IEC 42006:2025 reserves that for accredited bodies. Take it in month seven from revenue, not from the £5,000</td></tr>
+<tr><td><strong>ISO 42001 certification itself</strong></td><td class="num">£9k-17.5k</td><td>Audit fees only for your size band, on a three to nine month timeline, before consultancy or remediation. Two to three and a half times the budget. Build and publish the artefacts instead, for about £600</td></tr>
+<tr><td><strong>Arize Phoenix as your hosted platform</strong></td><td class="num">£0</td><td>Elastic License 2.0 explicitly forbids providing the software to third parties as a hosted or managed service. Free to deploy, illegal to build offer 3 on. Keep it for client-premises work only</td></tr>
+<tr><td><strong>Langfuse Enterprise licence</strong></td><td class="num">not published</td><td>Use one Langfuse organisation per client instead of project-level RBAC and stay entirely inside MIT. Revisit only when a client's compliance team demands audit logs or server-side data masking</td></tr>
+<tr><td><strong>Commercial observability seats</strong></td><td class="num">$39-199/mo</td><td>LangSmith at $39/seat/month and Langfuse Cloud Pro at $199/month are your competitors' cost base, not yours. <strong>Quoting them in your proposals is worth more than buying them</strong></td></tr>
+<tr><td><strong>IAPP AI Governance Professional, for now</strong></td><td class="num">~£750</td><td>The strongest individual AI governance credential and it genuinely opens regulated-sector doors, but at roughly 19% of the budget for one person it competes directly with certifying ten people into Claude Select. Promote it in the next cycle if governance is where the deals land</td></tr>
+<tr><td><strong>Coursera and DeepLearning.AI certificates</strong></td><td class="num">varies</td><td>Good learning, poor credentialling. They signal almost nothing to an enterprise procurement function. Audit free, do not pay for the certificate</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section id="p10">
+<div class="eyebrow">10 &middot; Risk</div>
+<h2>What would break this plan</h2>
+<div class="tbl compact">
+<table>
+<thead><tr><th>Risk</th><th>Likelihood</th><th>What it does</th><th>Mitigation</th></tr></thead>
+<tbody>
+<tr><td><strong>The 1 FTE gets pulled onto billable delivery</strong></td><td><span class="pill p-bad">High</span></td><td>Kills the plan outright. This is the most likely failure mode by a wide margin and it is entirely within your control</td><td>Ring-fence formally. Put the internal baseline on the delivery board as a named project with a client code. If it is not scheduled like client work it will not survive contact with client work</td></tr>
+<tr><td><strong>Nothing sells by week 9</strong></td><td><span class="pill p-med">Medium</span></td><td>No revenue, and the second 90 days has to be funded from existing business</td><td>The week 9 gate is real. If no Value Baseline has been invoiced, stop building offer 3 and put both people on selling offer 1 for three weeks. Capability without a buyer is a hobby</td></tr>
+<tr><td><strong>Langfuse relicenses its core away from MIT</strong></td><td><span class="pill p-lo">Low</span></td><td>Offer 3's economics change overnight</td><td>OpenTelemetry instrumentation is step one of the build for exactly this reason. Swap the backend without re-instrumenting anything</td></tr>
+<tr><td><strong>The ISO 27001 certificate cannot be independently verified</strong></td><td><span class="pill p-med">Unknown, urgent</span></td><td>It undermines offer 2 completely and damages every other claim on the site. Your ISO 9001 links to the IAF registry; ISO 27001 is an image with no link</td><td>Resolve in week 1. Publish a verification link or stop claiming it. There is no third option</td></tr>
+<tr><td><strong>Claude Select's 90-day active-usage rule</strong></td><td><span class="pill p-med">Medium</span></td><td>Certifications lapse quietly and Select status goes with them</td><td>Certify people who genuinely use Claude in delivery, not ten volunteers. Ten certificates held by people who never open it is £800 wasted</td></tr>
+<tr><td><strong>Selling assurance while also building the systems</strong></td><td><span class="pill p-med">Medium</span></td><td>An independence question a sophisticated buyer will raise</td><td>Be explicit: you do readiness and internal audit, not certification. Never audit your own build for the same client without saying so in writing. The honesty is the differentiator</td></tr>
+<tr><td><strong>Skills Bootcamp eligibility</strong></td><td><span class="pill p-med">Medium</span></td><td>The funding evaporates on a technicality</td><td>Only directly employed PAYE staff qualify. Contractors, workers, self-employed, directors and officeholders do not. Check your employment structure before counting on it</td></tr>
+<tr><td><strong>Being caught claiming what you do not hold</strong></td><td><span class="pill p-lo">Low, catastrophic</span></td><td>Ends the assurance proposition permanently</td><td>Say "aligned to ISO 42001, gap assessment complete, targeting certification in [month]". Never imply the certificate. Buyers verify accredited registers and getting caught costs more than the certificate would have</td></tr>
+</tbody>
+</table>
+</div>
+<div class="callout">
+<h5>The single number to watch</h5>
+<p><strong>Value Baselines invoiced by week 9.</strong> Two or three means the positioning is real and the second 90 days builds on evidence. Zero means the offer, the price or the audience is wrong, and no amount of stack-building fixes that. Everything else in this plan is subordinate to that one measurement.</p>
+</div>
+</section>
+
+<section id="p11">
+<div class="eyebrow">Week one</div>
+<h2>What to do on Monday</h2>
+<div class="tbl compact">
+<table>
+<thead><tr><th class="num">&#9633;</th><th>Action</th><th>Who</th><th class="num">Cost</th><th class="num">Hours</th></tr></thead>
+<tbody>
+<tr><td class="num">1</td><td>Ring-fence the FTE. Put the internal baseline on the delivery board with a client code and a named sponsor</td><td>CEO</td><td class="num">£0</td><td class="num">1</td></tr>
+<tr><td class="num">2</td><td>Resolve the ISO 27001 verification link. Publish it or remove the claim</td><td>Legal</td><td class="num">£0</td><td class="num">2</td></tr>
+<tr><td class="num">3</td><td>Confirm whether the group's Cyber Essentials Plus is current. If it is, publish it; it appears nowhere on the website</td><td>C</td><td class="num">£0</td><td class="num">1</td></tr>
+<tr><td class="num">4</td><td>Apply to AI DPS RM6200 via the Cabinet Office Supplier Registration Service</td><td>C</td><td class="num">£0</td><td class="num">8</td></tr>
+<tr><td class="num">5</td><td>Join the Claude Partner Network at Registered level and start Anthropic Academy</td><td>E</td><td class="num">£0</td><td class="num">2</td></tr>
+<tr><td class="num">6</td><td>Register free with AWS Partner Network and OpenAI Partner Network</td><td>E</td><td class="num">£0</td><td class="num">2</td></tr>
+<tr><td class="num">7</td><td>Provision the Hetzner box, deploy Langfuse OSS, instrument one internal process</td><td>E</td><td class="num">~£30</td><td class="num">16</td></tr>
+<tr><td class="num">8</td><td>Choose the two internal processes for the baseline. Write down what you will measure before you measure it</td><td>E + C</td><td class="num">£0</td><td class="num">3</td></tr>
+<tr><td class="num">9</td><td>Book the free techUK AI assurance event on 28 September</td><td>C</td><td class="num">£0</td><td class="num">0.5</td></tr>
+<tr><td class="num">10</td><td>Buy the ISO 42001 and 42005 bundle</td><td>C</td><td class="num">~£330</td><td class="num">0.5</td></tr>
+<tr><td class="num">11</td><td>Email DSIT for the status of the £11m AI Assurance Innovation Fund, round one</td><td>C</td><td class="num">£0</td><td class="num">0.5</td></tr>
+<tr><td class="num">12</td><td>Draft the target list: twenty existing or lapsed clients, each with the specific process you would baseline</td><td>C</td><td class="num">£0</td><td class="num">4</td></tr>
+</tbody>
+<tfoot><tr><td colspan="3"><strong>Week one total</strong></td><td class="num"><strong>~£360</strong></td><td class="num"><strong>~40 hrs</strong></td></tr></tfoot>
+</table>
+</div>
+<div class="verdict">
+  <div class="q">The plan in one sentence</div>
+  <div class="a">Run your own business through the offer you intend to sell, publish what you learn with every claim traceable to an authority, certify ten people for eight hundred pounds, and sell a four-week diagnostic to clients who already trust you.</div>
+</div>
+</section>
+
+<footer>
+<p><strong>Method.</strong> Two research workstreams executed 29 August 2026: upskilling, funding, partner and framework routes; and the minimum viable delivery stack, licensing, published competitor pricing and infrastructure cost. All prices, deadlines and licence terms were taken from primary sources on that date and are cited in full in the underlying research. Pricing comparables come predominantly from G-Cloud rate cards, where UK suppliers are obliged to publish what they charge.</p>
+<p><strong>Verify before committing.</strong> Microsoft does not publish a UK GBP exam price. Hetzner adjusted pricing on 15 June 2026 and current plan names differ from the published specs. AWS partner fee information conflicts between AWS's own statement that joining is free and a third-party report of a $2,500 annual fee; treat the latter as unverified. The status of round one of the £11m AI Assurance Innovation Fund could not be confirmed from a primary DSIT source. Claude Partner Network certification prices are gated behind partner registration. No Pixelette credential, client or capability has been assumed or invented; where this plan refers to Cyber Essentials Plus or ISO 27001 it flags that both need verifying before use.</p>
+</footer>
+</main>
+</div>
+
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('nav.toc a'));
+  var map = {};
+  links.forEach(function(a){ var id=a.getAttribute('href').slice(1); var el=document.getElementById(id); if(el) map[id]=a; });
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(a){ a.classList.remove('on'); });
+        var a = map[e.target.id];
+        if(a) a.classList.add('on');
+      }
+    });
+  }, { rootMargin: '-10% 0px -80% 0px', threshold: 0 });
+  Object.keys(map).forEach(function(id){ obs.observe(document.getElementById(id)); });
+})();
+</script>
+
+</body>
+</html>
