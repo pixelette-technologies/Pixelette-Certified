@@ -1,11 +1,17 @@
 import type { Metadata, Viewport } from "next";
 import { Newsreader, Outfit, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import "@/components/assistant.css";
+import "@/components/pixsignal.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ClientShell from "@/components/layout/ClientShell";
+import Analytics from "@/components/privacy/Analytics";
 import { OrganizationSchema } from "@/components/seo/JsonLd";
 import { SITE_CONFIG } from "@/lib/constants";
+import { AssistantBoundary } from "@/components/AssistantBoundary";
+import { SiteAssistant } from "@/components/SiteAssistant";
+import { pixContext } from "@/lib/pix/server-context";
 
 /* Display serif. Variable, so one file covers 300/400/500, and the opsz axis
    (6..72) lets the browser adjust contrast with size — which is what the
@@ -49,20 +55,14 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
   title: {
-    default: "ISO Certification & Compliance | Pixelette Certified",
+    default: "Pixelette Certified | Cyber Security, Compliance & AI Governance",
     template: "%s | Pixelette Certified",
   },
-  description: "Get ISO 27001, ISO 42001, Cyber Essentials, GDPR and more in as little as 10 weeks. Fixed-fee compliance consultancy. 98% first-attempt pass rate, worldwide.",
-  keywords: [
-    "ISO 27001 certification UK",
-    "Cyber Essentials certification",
-    "ISO compliance consultancy",
-    "vCISO UK",
-    "GDPR compliance",
-    "ISO 42001 AI governance",
-    "penetration testing UK",
-    "information security certification",
-  ],
+  // This is the DEFAULT description, inherited by every page that does not set
+  // its own. It is therefore the single highest-leverage string on the property,
+  // and the reason a source grep is not sufficient verification: a page with no
+  // description of its own silently republishes whatever is written here.
+  description: SITE_CONFIG.description,
   authors: [{ name: "Pixelette Certified" }],
   creator: "Pixelette Group",
   openGraph: {
@@ -70,14 +70,14 @@ export const metadata: Metadata = {
     locale: "en_GB",
     url: SITE_CONFIG.url,
     siteName: SITE_CONFIG.name,
-    title: "Pixelette Certified | ISO Certification & Global Compliance Consultancy",
-    description: "Get certified in as little as 10 weeks. Pixelette Certified delivers ISO 27001, ISO 42001, Cyber Essentials, GDPR, ISO 9001, ISO 22301 and more to businesses across every industry, worldwide. Fixed fee. 98% first-attempt pass rate.",
+    title: "Pixelette Certified | Cyber Security, Compliance & AI Governance",
+    description: SITE_CONFIG.description,
     images: [
       {
         url: "/images/og/default.png",
         width: 1200,
         height: 630,
-        alt: "Pixelette Certified - Compliance. Governance. Cyber Trust.",
+        alt: "Pixelette Certified",
       },
     ],
   },
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@pixelettecert",
     creator: "@pixelettecert",
-    title: "Pixelette Certified | ISO Certification & Compliance UK",
+    title: "Pixelette Certified | Cyber Security, Compliance & AI Governance",
     description: SITE_CONFIG.description,
     images: ["/images/og/default.png"],
   },
@@ -95,8 +95,8 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true },
   },
   icons: {
-    icon: "/logos/favicon.svg",
-    apple: "/logos/favicon.svg",
+    icon: "/logos/favicon.png",
+    apple: "/logos/favicon.png",
   },
 };
 
@@ -112,18 +112,8 @@ export default function RootLayout({
     >
       <head>
         <meta name="google-site-verification" content="C7bI6NnGsWlyxSL7Ax2Ii72eg_y9UtjRDR2KbJCu4gg" />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-VX5PH3RWRB" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-VX5PH3RWRB');
-            `,
-          }}
-        />
-        <script src="https://analytics.ahrefs.com/analytics.js" data-key="NrhMy8upP8sv8uHS6EOSmg" async />
+        {/* Google Analytics and Ahrefs load from <Analytics /> below, and only
+            while the visitor's Privacy choices setting allows it. */}
       </head>
       <body className="min-h-full flex flex-col font-sans">
         <a href="#main-content" className="skip-to-content">
@@ -136,6 +126,10 @@ export default function RootLayout({
         </main>
         <Footer />
         <ClientShell />
+        <AssistantBoundary>
+          <SiteAssistant context={pixContext()} />
+        </AssistantBoundary>
+        <Analytics />
       </body>
     </html>
   );

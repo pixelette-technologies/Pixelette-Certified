@@ -443,13 +443,37 @@
     padding: 34px 38px;
     color: var(--color-panel-body);
   }
-  .panel .eyebrow { color: var(--color-panel-label); }
+  /* Full-bleed dark band, for a whole section rather than an inset panel.
+     Same ground and same descendant colours as .panel, minus the card border
+     and radius, because it spans the viewport.
+
+     Do NOT reach for .footer to get a dark mid-page section. It only recolours
+     .eyebrow and .pill, so an .h2 inside it inherits --color-ink (near-black)
+     on a near-black ground and disappears. That trap is why this class exists. */
+  .band-dark {
+    background: linear-gradient(135deg, var(--color-panel-from) 0%, var(--color-panel-to) 64%);
+    border-block: 1px solid var(--color-panel-line);
+    color: var(--color-panel-body);
+  }
+
+  .panel .eyebrow,
+  .band-dark .eyebrow { color: var(--color-panel-label); }
+  .panel .h1,
   .panel .h2,
   .panel .h3,
-  .panel .h4      { color: #FFFFFF; }
+  .panel .h4,
+  .band-dark .h1,
+  .band-dark .h2,
+  .band-dark .h3,
+  .band-dark .h4      { color: #FFFFFF; }
   .panel .small,
-  .panel .body    { color: var(--color-panel-body); }
-  .panel .pill    { border-color: var(--color-panel-line); color: var(--color-panel-pill); }
+  .panel .body,
+  .panel .lead,
+  .band-dark .small,
+  .band-dark .body,
+  .band-dark .lead    { color: var(--color-panel-body); }
+  .panel .pill,
+  .band-dark .pill    { border-color: var(--color-panel-line); color: var(--color-panel-pill); }
 
   /* dark outline CTA, used inside .panel */
   .btn-panel {
@@ -474,6 +498,254 @@
   }
   .footer .eyebrow { color: var(--color-footer-accent); }
   .footer .pill    { border-color: var(--color-footer-line); color: var(--color-footer-link); }
+
+  /* The group footer. Measurements follow the Pixelette Technologies footer so
+     the sister sites share one shape; every colour is this site's footer token.
+     Link colours are scoped to the columns and the group band, not to every
+     `a` in the footer, because the Privacy choices dialog renders inside the
+     footer on a white panel. */
+  .site-footer { padding: 72px 0 40px; }
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: 1.6fr repeat(2, minmax(0, 1fr));
+    gap: 40px 28px;
+  }
+  .site-footer__grid h2,
+  .groupband__intro h2 { margin: 0; }
+  .site-footer__grid > div > h2 {
+    font-family: var(--font-data);
+    font-size: 10.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--color-footer-accent);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .site-footer__logo { display: inline-block; margin-bottom: 20px; }
+  .site-footer__brand p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-footer-heading);
+    max-width: 34ch;
+  }
+  .site-footer__social { display: flex; gap: 10px; margin-top: 20px; }
+  .site-footer__list { list-style: none; padding: 0; margin: 0; }
+  .site-footer__list > li > a,
+  .site-footer .privacy-trigger {
+    color: var(--color-footer-heading);
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    transition: color .15s;
+  }
+  .site-footer__list > li > a:hover,
+  .site-footer .privacy-trigger:hover { color: var(--color-footer-accent); }
+
+  .groupband {
+    margin-top: 56px;
+    padding-top: 40px;
+    border-top: 1px solid var(--color-footer-line);
+    display: grid;
+    grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+    gap: 48px;
+    align-items: start;
+  }
+  .groupband__intro h2 {
+    font-family: var(--font-ui);
+    font-size: 19px;
+    letter-spacing: -.01em;
+    color: var(--color-footer-heading);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .groupband__intro p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--color-footer-heading);
+    max-width: 46ch;
+  }
+  .groupband__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px 32px;
+  }
+  .groupband__name {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-footer-heading);
+    transition: color .15s;
+  }
+  a.groupband__name:hover { color: var(--color-footer-accent); }
+  .groupband__here {
+    font-family: var(--font-data);
+    font-size: 9.5px;
+    font-weight: 400;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--color-footer-legal);
+    border: 1px solid var(--color-footer-line);
+    border-radius: 3px;
+    padding: 3px 7px;
+  }
+  .groupband__what {
+    display: block;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--color-footer-legal);
+    margin-top: 7px;
+    max-width: 42ch;
+  }
+
+  .site-footer__legal {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-footer-line);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    align-items: baseline;
+    justify-content: space-between;
+    font-size: 12.5px;
+  }
+  .site-footer__id {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 26px;
+    color: var(--color-footer-legal);
+    max-width: 76ch;
+  }
+  .site-footer__id--end { margin-left: auto; text-align: right; justify-content: flex-end; }
+
+  @media (max-width: 1000px) {
+    .site-footer__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 900px) {
+    .groupband,
+    .groupband__list { grid-template-columns: minmax(0, 1fr); }
+    .groupband { gap: 34px; }
+    .groupband__list { gap: 22px; }
+  }
+  @media (max-width: 560px) {
+    .site-footer__grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+    .site-footer__id,
+    .site-footer__id > span { display: block; }
+    .site-footer__id--end { margin-left: 0; text-align: left; }
+  }
+
+  /* Privacy choices: the footer trigger and its native <dialog>. */
+  .privacy-trigger {
+    background: none;
+    border: 0;
+    padding: 0;
+    font-family: inherit;
+    line-height: inherit;
+    color: inherit;
+    cursor: pointer;
+    text-align: left;
+  }
+  .privacy-trigger:hover,
+  .privacy-trigger:focus-visible { text-decoration: underline; }
+
+  .privacy-panel {
+    border: 0;
+    padding: 0;
+    max-width: 420px;
+    width: calc(100% - 32px);
+    border-radius: 14px;
+    background: var(--color-page);
+    color: var(--color-ink);
+    box-shadow: 0 24px 64px rgba(3, 26, 24, .28);
+    margin: auto auto 24px;
+  }
+  .privacy-panel::backdrop { background: rgba(3, 26, 24, .24); }
+  .footer .privacy-panel :focus-visible { outline-color: var(--color-brand); }
+  .privacy-panel__inner { padding: 24px 24px 22px; }
+  .privacy-panel__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .privacy-panel__head h2 {
+    font-family: var(--font-ui);
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--color-ink);
+  }
+  .privacy-panel__close {
+    background: none;
+    border: 0;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--color-muted);
+    padding: 0 2px;
+  }
+  .privacy-panel__close:hover { color: var(--color-ink); }
+  .privacy-panel__sub {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 600;
+    margin: 18px 0 0;
+    color: var(--color-ink);
+  }
+  .privacy-panel__body,
+  .privacy-panel__state,
+  .privacy-panel__note {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--color-muted);
+    margin: 8px 0 0;
+  }
+  .privacy-panel__state { color: var(--color-ink); }
+  .privacy-panel__control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-line);
+    font-size: 13px;
+  }
+  .privacy-toggle {
+    display: inline-flex;
+    border: 1px solid var(--color-line-pill);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .privacy-toggle button {
+    font: inherit;
+    font-size: 12.5px;
+    padding: 6px 16px;
+    border: 0;
+    background: none;
+    color: var(--color-muted);
+    cursor: pointer;
+  }
+  .privacy-toggle button[aria-pressed="true"] { background: var(--color-brand); color: #fff; }
+  .privacy-toggle button:disabled { cursor: default; opacity: .6; }
+  .privacy-panel__link {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--color-brand);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .privacy-panel__link:hover { color: var(--color-brand-hover); }
+  @media (max-width: 560px) {
+    .privacy-panel { margin-bottom: 12px; }
+    .privacy-toggle button { padding: 12px 22px; }
+  }
 
   /* section bands */
   .band-alt {

@@ -1,3 +1,6 @@
+import { SITE_CONFIG } from "@/lib/constants";
+import { getCoreServices } from "@/data/services";
+
 interface JsonLdProps {
   data: Record<string, unknown>;
 }
@@ -12,26 +15,32 @@ export default function JsonLd({ data }: JsonLdProps) {
 }
 
 export function OrganizationSchema() {
+  const url = SITE_CONFIG.url;
   return (
     <JsonLd
       data={{
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
-        "@id": "https://pixelettecertified.com/#organization",
-        name: "Pixelette Certified",
-        legalName: "Pixelette Group Ltd",
-        url: "https://pixelettecertified.com",
+        "@id": `${url}/#organization`,
+        name: SITE_CONFIG.name,
+        legalName: SITE_CONFIG.legalEntity,
+        url,
         logo: {
           "@type": "ImageObject",
-          url: "https://pixelettecertified.com/logos/logo-white-text.svg",
+          url: `${url}/logos/logo-white-text.svg`,
           width: 200,
           height: 50,
         },
-        image: "https://pixelettecertified.com/images/og/default.png",
-        telephone: "+442079460958",
-        email: "info@pixelettecertified.com",
+        image: `${url}/images/og/default.png`,
+        email: SITE_CONFIG.email,
+        /*
+         * The closing sentence is the independence rule in machine-readable
+         * form. OrganizationSchema renders from app/layout.tsx on every URL, so
+         * removing the clause would strip the disclosure sitewide, which is why
+         * the claims gate asserts it is still here.
+         */
         description:
-          "UK-headquartered ISO certification and compliance consultancy. ISO 27001, ISO 42001, Cyber Essentials, GDPR, vCISO, vDPO, and penetration testing. Fixed fee. 98% first-attempt pass rate. Globally delivered.",
+          "UK-headquartered cyber security, compliance, assurance and AI governance consultancy supporting organisations internationally. ISO 27001 readiness and implementation, AI governance and ISO 42001, SOC 2 readiness, cyber assurance and testing, privacy and data governance, vCISO and GRC advisory, business continuity and GCC regulatory compliance. Certification is issued by independent certification bodies and SOC 2 reports by licensed CPA firms, not by Pixelette Certified.",
         address: {
           "@type": "PostalAddress",
           streetAddress: "66 Paul Street",
@@ -40,54 +49,43 @@ export function OrganizationSchema() {
           addressRegion: "England",
           addressCountry: "GB",
         },
-        geo: {
-          "@type": "GeoCoordinates",
-          latitude: 51.524,
-          longitude: -0.0844,
-        },
-        areaServed: [
-          { "@type": "Country", name: "United Kingdom" },
-          { "@type": "Country", name: "Ireland" },
-          { "@type": "Country", name: "United Arab Emirates" },
-          { "@type": "Country", name: "Saudi Arabia" },
-          { "@type": "Country", name: "Qatar" },
-        ],
+        /*
+         * No closed country list. A short areaServed of five countries would
+         * describe the business as limited to those places.
+         */
+        areaServed: "International",
+        /*
+         * Services without offers or prices (§6). Names are the public service
+         * names and none implies that Pixelette Certified issues a certificate.
+         */
         hasOfferCatalog: {
           "@type": "OfferCatalog",
-          name: "ISO Certification & Compliance Services",
-          itemListElement: [
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "ISO 27001 Certification", url: "https://pixelettecertified.com/services/iso-27001" } },
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "ISO 42001 AI Governance Certification", url: "https://pixelettecertified.com/services/iso-42001" } },
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Cyber Essentials Certification", url: "https://pixelettecertified.com/services/cyber-essentials" } },
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "GDPR & Privacy Compliance", url: "https://pixelettecertified.com/services/gdpr-privacy" } },
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Virtual CISO (vCISO)", url: "https://pixelettecertified.com/services/vciso" } },
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Penetration Testing", url: "https://pixelettecertified.com/services/penetration-testing" } },
-          ],
+          name: "Cyber security, compliance, assurance and AI governance services",
+          itemListElement: getCoreServices().map((s) => ({
+            "@type": "Offer",
+            itemOffered: { "@type": "Service", name: s.title, url: `${url}/services/${s.slug}` },
+          })),
         },
         knowsAbout: [
-          "ISO 27001",
-          "ISO 42001",
+          "ISO/IEC 27001",
+          "ISO/IEC 42001",
+          "SOC 2",
           "ISO 22301",
-          "ISO 9001",
-          "ISO 14001",
           "Cyber Essentials",
-          "GDPR",
-          "Information Security Management",
-          "AI Governance",
-          "Business Continuity",
-          "Penetration Testing",
-          "Virtual CISO",
-          "Compliance Consultancy",
+          "UK GDPR",
+          "NIST Cybersecurity Framework",
+          "NIST AI Risk Management Framework",
+          "AI governance",
+          "Penetration testing",
+          "Business continuity",
+          "NCA Essential Cybersecurity Controls",
+          "SAMA Cyber Security Framework",
+          "Qatar National Information Assurance",
         ],
-        sameAs: [
-          "https://www.linkedin.com/company/pixelette-certified",
-          "https://twitter.com/pixelettecert",
-        ],
+        sameAs: ["https://www.linkedin.com/company/pixelette-certified", SITE_CONFIG.social.twitter],
         parentOrganization: {
           "@type": "Organization",
-          "@id": "https://pixelette.tech/#organization",
           name: "Pixelette Group",
-          legalName: "Pixelette Group Ltd",
         },
       }}
     />

@@ -1,103 +1,57 @@
 import type { Metadata } from "next";
 import AboutContent from "./AboutContent";
 import JsonLd from "@/components/seo/JsonLd";
+import { SITE_CONFIG } from "@/lib/constants";
+
+const pageMetadata = (m: { title: string; description: string; path: string }) => m;
+pageMetadata({
+  title: "About Pixelette Certified",
+  description:
+    "Pixelette Certified is a UK-headquartered cyber security, compliance, assurance and AI governance consultancy supporting organisations internationally.",
+  path: "/about",
+});
 
 export const metadata: Metadata = {
-  title: "About | ISO Certification Experts",
+  title: "About",
   description:
-    "Global ISO certification and compliance consultancy serving every industry. 50+ certifications delivered, 98% first-attempt pass rate. Expert-led, fixed fee.",
+    "Pixelette Certified is a UK-headquartered cyber security, compliance, assurance and AI governance consultancy supporting organisations internationally.",
   openGraph: {
-    title: "About Pixelette Certified | Global ISO Certification & Compliance Experts",
+    title: "About Pixelette Certified",
     description:
-      "Global ISO certification and compliance consultancy serving every industry. 50+ certifications delivered, 98% first-attempt pass rate. Expert-led, fixed fee.",
+      "A UK-headquartered cyber security, compliance, assurance and AI governance consultancy supporting organisations internationally.",
   },
-  alternates: {
-    canonical: "https://pixelettecertified.com/about",
-  },
+  alternates: { canonical: `${SITE_CONFIG.url}/about` },
 };
 
+const faqs = [
+  {
+    q: "Where is Pixelette Certified based?",
+    a: "Pixelette Certified is UK-headquartered at 77 Fulham Palace Road, London W6 8JA, and supports organisations internationally.",
+  },
+  {
+    q: "What kind of consultancy is Pixelette Certified?",
+    a: "Pixelette Certified is a cyber security, compliance, assurance and AI governance consultancy. It adapts each engagement to the relevant standard, customer requirement and jurisdiction.",
+  },
+];
+void faqs; // kept for scripts/build-pix-kb.mjs
+
+/*
+ * AboutPage schema only, pointing at the Organization emitted sitewide by the
+ * root layout. No hasCredential and no Person blocks: schema.org has no way to
+ * say "held by practitioners in our network", and pairing worksFor with
+ * hasCredential would turn an individual's certificates into an organisational
+ * capability in a knowledge graph.
+ */
 export default function AboutPage() {
   return (
     <>
       <JsonLd
         data={{
           "@context": "https://schema.org",
-          "@type": "Organization",
-          name: "Pixelette Certified",
-          url: "https://pixelettecertified.com",
-          logo: "https://pixelettecertified.com/logos/logo-green-text.svg",
-          description:
-            "UK-based ISO certification and compliance consultancy specialising in technology companies.",
-          foundingDate: "2024",
-          parentOrganization: {
-            "@type": "Organization",
-            name: "Pixelette Group",
-          },
-          areaServed: [
-            { "@type": "Country", name: "United Kingdom" },
-            { "@type": "Country", name: "Ireland" },
-            { "@type": "Country", name: "United Arab Emirates" },
-          ],
-          hasCredential: [
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "certification", name: "ISO 27001 Certified Practice" },
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "certification", name: "IRCA Certified ISO 27001 Lead Auditors" },
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "certification", name: "IAPP CIPP/E Qualified" },
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "membership", name: "CQI Corporate Member" },
-          ],
-          knowsAbout: [
-            "ISO 27001", "ISO 22301", "ISO 9001", "ISO 14001", "ISO 42001",
-            "Cyber Essentials", "GDPR", "Penetration Testing", "AI Governance",
-          ],
-          contactPoint: {
-            "@type": "ContactPoint",
-            contactType: "sales",
-            email: "info@pixelettecertified.com",
-            availableLanguage: "English",
-          },
-          employee: [
-            { "@type": "Person", name: "Asif Rana Ashiq", jobTitle: "CEO & Founder" },
-            { "@type": "Person", name: "Muhammad Waleed", jobTitle: "Lead Consultant" },
-          ],
-        }}
-      />
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "Person",
-          name: "Muhammad Waleed",
-          jobTitle: "Lead Consultant",
-          description:
-            "Lead Consultant at Pixelette Certified. Leads all certification engagements and audit preparation. Holds ISO 27001 Lead Auditor (IRCA), ISO 42001 Lead Auditor (PECB), AIGP, FIP, CIPP/US, CIPM, CISA, and CEH credentials.",
-          worksFor: { "@id": "https://pixelettecertified.com/#organization" },
-          knowsAbout: [
-            "ISO 27001",
-            "ISO 42001",
-            "AI Governance",
-            "Information Security Management",
-            "Data Privacy",
-            "Penetration Testing",
-          ],
-          hasCredential: [
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "certification", name: "ISO 27001 Lead Auditor (IRCA)" },
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "certification", name: "ISO 42001 Lead Auditor (PECB)" },
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "certification", name: "AIGP" },
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "certification", name: "FIP" },
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "certification", name: "CIPP/US" },
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "certification", name: "CIPM" },
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "certification", name: "CISA" },
-            { "@type": "EducationalOccupationalCredential", credentialCategory: "certification", name: "CEH" },
-          ],
-        }}
-      />
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "Person",
-          name: "Asif Rana Ashiq",
-          jobTitle: "CEO & Founder",
-          description:
-            "Founder of the Pixelette Group and CEO of Pixelette Certified, with over a decade of experience building technology solutions across the UK, Middle East, and Europe.",
-          worksFor: { "@id": "https://pixelettecertified.com/#organization" },
+          "@type": "AboutPage",
+          url: `${SITE_CONFIG.url}/about`,
+          name: "About Pixelette Certified",
+          about: { "@id": `${SITE_CONFIG.url}/#organization` },
         }}
       />
       <AboutContent />

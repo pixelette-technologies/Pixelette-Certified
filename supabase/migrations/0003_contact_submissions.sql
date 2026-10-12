@@ -48,6 +48,6 @@ comment on column public.contact_submissions.consent_timestamp is
 -- ============================================================================
 -- Row Level Security: enabled, no policies. Only the service role key (used by
 -- the /api/contact route) can access this table. The publishable/anon key
--- cannot read or write it. Consistent with the leads/conversations tables.
+-- cannot read or write it.
 -- ============================================================================
 alter table public.contact_submissions enable row level security;

@@ -1,24 +1,19 @@
 import type { Metadata } from "next";
+import { SITE_CONFIG } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Compliance & ISO Certification Blog",
+  title: "Insights",
   description:
-    "Expert insights on ISO 27001, Cyber Essentials, GDPR and AI governance for businesses operating in any market. Written by certified compliance practitioners.",
-  alternates: {
-    canonical: "https://pixelettecertified.com/blog",
-  },
+    "Analysis of cyber security, compliance and AI governance requirements, including standards that apply internationally and rules that depend on the jurisdiction.",
+  alternates: { canonical: `${SITE_CONFIG.url}/blog` },
   openGraph: {
-    title: "Compliance & ISO Certification Blog | Pixelette Certified",
+    title: "Insights | Pixelette Certified",
     description:
-      "Expert insights on ISO 27001, Cyber Essentials, GDPR and AI governance for businesses operating in any market. Written by certified compliance practitioners.",
+      "Analysis of cyber security, compliance and AI governance requirements, including standards that apply internationally and rules that depend on the jurisdiction.",
     type: "website",
   },
 };
 
-export default function BlogLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function BlogLayout({ children }: { children: React.ReactNode }) {
   return children;
 }

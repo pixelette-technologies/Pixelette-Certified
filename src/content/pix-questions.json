@@ -1,0 +1,32 @@
+{
+  "entries": [
+    {
+      "ask": ["what does pixelette do", "what do you do", "who are you", "tell me about pixelette certified"],
+      "answer": { "path": "/", "title": "What does Pixelette Certified do?" }
+    },
+    {
+      "ask": ["iso 27001", "information security management", "isms help", "do you do iso 27001"],
+      "answer": { "path": "/", "title": "Do you help with ISO 27001?" }
+    },
+    {
+      "ask": ["ai governance", "iso 42001", "artificial intelligence governance", "aims"],
+      "answer": { "path": "/", "title": "What is AI governance and ISO 42001?" }
+    },
+    {
+      "ask": ["privacy programme", "data governance", "gdpr help", "privacy and data"],
+      "answer": { "path": "/", "title": "How do you approach privacy and data governance?" }
+    },
+    {
+      "ask": ["how do you price", "how is work scoped", "engagement terms", "how do we start"],
+      "answer": { "path": "/", "title": "How is an engagement agreed?" }
+    },
+    {
+      "ask": ["where are you based", "london office", "uk headquarters"],
+      "answer": { "path": "/about", "title": "Where is Pixelette Certified based?" }
+    },
+    {
+      "ask": ["list of services", "what can you offer", "your services"],
+      "answer": { "path": "/services", "title": "What services does Pixelette Certified offer?" }
+    }
+  ]
+}

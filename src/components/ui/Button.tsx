@@ -1,12 +1,12 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-type ButtonVariant = "primary" | "secondary" | "ghost";
+type ButtonVariant = "primary" | "secondary" | "ghost" | "panel";
 type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonProps {
   children: React.ReactNode;
-  /** primary -> .btn (filled brand) · secondary -> .btn2 (outline) · ghost -> .btn-ghost (text only) */
+  /** primary -> .btn (filled brand) · secondary -> .btn2 (outline) · ghost -> .btn-ghost (text only) · panel -> .btn-panel (outline on a dark band) */
   variant?: ButtonVariant;
   size?: ButtonSize;
   href?: string;
@@ -25,6 +25,10 @@ const variantClass: Record<ButtonVariant, string> = {
   primary: "btn",
   secondary: "btn2",
   ghost: "btn-ghost",
+  // .btn-panel already existed in globals.css but was unreachable from this
+  // component, so a CTA on a dark ground needed a className hack that emitted
+  // both btn2 and btn-panel.
+  panel: "btn-panel",
 };
 
 /**

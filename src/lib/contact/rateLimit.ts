@@ -1,9 +1,7 @@
 // Rate limiting for the public contact form — in-memory sliding window per IP.
 //
-// Modelled on src/lib/alice/rateLimit.ts but with tighter limits: a contact form
-// should see far fewer legitimate submissions than a chat widget. The store is
-// kept separate from Alice's so chat traffic and contact traffic don't share a
-// counter.
+// Tighter limits than a general API: a contact form should see far fewer
+// legitimate submissions than a chat widget.
 //
 // NOTE: in-memory state is per-serverless-instance and resets on cold start, so
 // this mitigates bursts and casual abuse rather than acting as a global counter.

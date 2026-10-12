@@ -28,15 +28,12 @@ export default function Newsletter() {
   }
 
   return (
-    <section className="sec band-alt">
-      <div className="wrap" data-reveal="">
+    <section className="sec sec-sm band-alt">
+      <div className="wrap">
         <div className="mx-auto max-w-[640px] text-center">
-          <h2 className="h2 mx-auto max-w-[22ch]">
-            Compliance intelligence for enterprise-ready businesses
-          </h2>
-          <p className="body mx-auto mt-5">
-            Get monthly insights on ISO certification, cybersecurity regulations, AI governance,
-            and global compliance trends, written by our consultants, not a marketing team.
+          <h2 className="h2 mx-auto max-w-[18ch]">Keep up with what changes</h2>
+          <p className="body mx-auto mt-4">
+            Occasional analysis of cyber security, compliance and AI governance requirements.
           </p>
 
           {status === "success" ? (
@@ -44,11 +41,11 @@ export default function Newsletter() {
               <span className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-full border border-brand text-brand">
                 <Check size={16} />
               </span>
-              <p className="h4">You&apos;re subscribed!</p>
+              <p className="h4">You are subscribed</p>
               <p className="small mt-1">Check your inbox for a confirmation email.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="mx-auto mt-9 max-w-md">
+            <form onSubmit={handleSubmit} className="mx-auto mt-6 max-w-md">
               <div className="flex flex-col gap-3.5 sm:flex-row">
                 <div className="flex-1">
                   <label htmlFor="newsletter-email" className="sr-only">
@@ -58,7 +55,7 @@ export default function Newsletter() {
                     id="newsletter-email"
                     type="email"
                     required
-                    placeholder="your@email.com"
+                    placeholder="Email address"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="input"
@@ -87,7 +84,7 @@ export default function Newsletter() {
           )}
 
           <p className="src mt-5">
-            No spam. Unsubscribe anytime. Read our{" "}
+            You can unsubscribe at any time. Read our{" "}
             <a href="/privacy-policy" className="link underline">Privacy Policy</a>.
           </p>
         </div>

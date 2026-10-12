@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import PrivacyChoices from "@/components/privacy/PrivacyChoices";
+import { SITE_CONFIG } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Cookie Policy",
-  description: "How Pixelette Certified uses cookies and similar technologies on our website.",
+  description:
+    "How Pixelette Certified uses cookies and similar technologies on pixelettecertified.com.",
   robots: { index: true, follow: true },
   alternates: {
     canonical: "https://pixelettecertified.com/cookie-policy",
@@ -18,130 +21,110 @@ export default function CookiePolicyPage() {
         <div className="mb-8">
           <Breadcrumbs items={[{ name: "Cookie Policy" }]} />
         </div>
-        <h1 className="h1p mb-4">
-          Cookie policy
-        </h1>
-        <p className="small mb-12">Last updated: 1 April 2026</p>
+        <h1 className="h1p mb-4">Cookie policy</h1>
+        <p className="small mb-12">Last updated: 12 October 2026</p>
 
         <div className="space-y-10 leading-relaxed text-body">
           <section>
-            <h2 className="h3 mb-3">1. What are cookies</h2>
+            <h2 className="h3 mb-3">What cookies are</h2>
             <p>
-              Cookies are small text files stored on your device when you visit a website. They help the
-              website remember your preferences and understand how you interact with the site. We use cookies
-              and similar technologies to ensure our website functions correctly and to improve your experience.
+              Cookies are small text files stored on your device when you visit a website. They help sites
+              work and give site owners information about how the site is used. This page also covers similar
+              technologies such as local storage, which this site uses for privacy preferences.
             </p>
           </section>
 
           <section>
-            <h2 className="h3 mb-3">2. Cookies we use</h2>
-
-            <h3 className="h4 mt-4 mb-2 text-brand">Essential cookies</h3>
+            <h2 className="h3 mb-3">The cookies and storage we use</h2>
             <p>
-              These cookies are necessary for the website to function and cannot be switched off. They are
-              usually set in response to actions you take, such as setting your privacy preferences or
-              filling in forms. You can set your browser to block these cookies, but some parts of the site
-              may not function as a result.
+              We use Google Analytics 4 and Ahrefs Web Analytics to understand how visitors use our site so
+              we can improve it. Google Analytics sets analytics cookies. Ahrefs Web Analytics does not use
+              cookies. Analytics run unless you switch them off using Privacy choices. When they are off,
+              neither service is loaded, and any Google Analytics cookies left from an earlier visit are
+              removed.
             </p>
-            <div className="mt-3 overflow-x-auto">
-              <table className="w-full overflow-hidden rounded-lg border border-line-card text-sm">
-                <thead>
-                  <tr className="bg-band">
-                    <th className="px-4 py-2 text-left font-semibold text-ink">Cookie</th>
-                    <th className="px-4 py-2 text-left font-semibold text-ink">Purpose</th>
-                    <th className="px-4 py-2 text-left font-semibold text-ink">Duration</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-line">
-                  <tr>
-                    <td className="px-4 py-2 text-brand">__next_*</td>
-                    <td className="px-4 py-2">Next.js framework session and routing</td>
-                    <td className="px-4 py-2">Session</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2 text-brand">cookie_consent</td>
-                    <td className="px-4 py-2">Stores your cookie consent preference</td>
-                    <td className="px-4 py-2">12 months</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            <p className="mt-3">
+              We do not use advertising or profiling cookies. Google&apos;s advertising features, including
+              Google signals and ad personalisation, are switched off for our analytics.
+            </p>
 
             <h3 className="h4 mt-6 mb-2 text-brand">Analytics cookies</h3>
-            <p>
-              These cookies help us understand how visitors interact with our website by collecting and
-              reporting information anonymously. We use this data to improve our site.
-            </p>
-            <div className="mt-3 overflow-x-auto">
-              <table className="w-full overflow-hidden rounded-lg border border-line-card text-sm">
-                <thead>
-                  <tr className="bg-band">
-                    <th className="px-4 py-2 text-left font-semibold text-ink">Cookie</th>
-                    <th className="px-4 py-2 text-left font-semibold text-ink">Purpose</th>
-                    <th className="px-4 py-2 text-left font-semibold text-ink">Duration</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-line">
-                  <tr>
-                    <td className="px-4 py-2 text-brand">_ga, _ga_*</td>
-                    <td className="px-4 py-2">Google Analytics 4, anonymised usage tracking</td>
-                    <td className="px-4 py-2">2 years</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2 text-brand">va_*</td>
-                    <td className="px-4 py-2">Vercel Analytics, page performance monitoring</td>
-                    <td className="px-4 py-2">Session</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="h3 mb-3">3. Managing cookies</h2>
-            <p>
-              You can control and delete cookies through your browser settings. Most browsers allow you to:
-            </p>
-            <ul className="list-disc pl-6 mt-2 space-y-1">
-              <li>View what cookies are stored and delete them individually.</li>
-              <li>Block third-party cookies.</li>
-              <li>Block cookies from specific sites.</li>
-              <li>Block all cookies from being set.</li>
-              <li>Delete all cookies when you close your browser.</li>
+            <ul className="mt-2 list-disc space-y-2 pl-6">
+              <li>
+                <strong className="font-semibold text-ink">_ga and _ga_*</strong> (Google Analytics):
+                distinguish unique visitors and sessions to produce aggregate usage statistics. Set by Google
+                as first-party cookies on our domain and typically retained for up to two years.
+              </li>
             </ul>
-            <p className="mt-2">
-              Note that blocking all cookies will affect the functionality of this and many other websites.
+
+            <h3 className="h4 mt-6 mb-2 text-brand">Browser storage</h3>
+            <p>
+              We do not set any essential cookies. The site keeps one small item in your browser&apos;s
+              local storage so that features you use keep working. It is not sent to us with each page
+              request, and you can clear it at any time through your browser settings.
+            </p>
+            <ul className="mt-2 list-disc space-y-2 pl-6">
+              <li>
+                <strong className="font-semibold text-ink">pc-analytics</strong>: remembers your website
+                analytics choice from Privacy choices (on or off). Held until you clear it or change the
+                choice.
+              </li>
+            </ul>
+            <p className="mt-3">
+              The site assistant (Pix C) does not use cookies or local storage for the conversation. Chat
+              state lives only in the page until you reload.
             </p>
           </section>
 
           <section>
-            <h2 className="h3 mb-3">4. Third-party cookies</h2>
+            <h2 className="h3 mb-3">Your choice and how to change it</h2>
             <p>
-              We do not use third-party advertising cookies. The only third-party cookies on our site are
-              from analytics providers (Google Analytics and Vercel Analytics), which collect anonymised
-              usage data only.
+              Use <strong className="font-semibold text-ink">Privacy choices</strong> in the footer of any
+              page, or the control below, to switch website analytics on or off. Your choice is saved in this
+              browser and applies straight away: switching off stops both services and deletes the Google
+              Analytics cookies.
+            </p>
+            <div className="mt-4">
+              <PrivacyChoices />
+            </div>
+            <p className="mt-4">
+              You can also control and delete cookies and local storage through your browser settings.
             </p>
           </section>
 
           <section>
-            <h2 className="h3 mb-3">5. Changes to this policy</h2>
+            <h2 className="h3 mb-3">More information</h2>
             <p>
-              We may update this cookie policy from time to time. Any changes will be posted on this page
-              with an updated revision date.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="h3 mb-3">6. Contact us</h2>
-            <p>
-              If you have questions about our use of cookies, please contact us at{" "}
-              <a href="mailto:privacy@pixelettecertified.com" className="link">
-                privacy@pixelettecertified.com
-              </a>{" "}
-              or visit our{" "}
+              For more on how Google uses data from sites that use its services, see the{" "}
+              <a
+                href="https://policies.google.com/technologies/cookies"
+                className="link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Google cookie information page
+              </a>
+              . For your rights under UK data protection law, see the{" "}
+              <a
+                href="https://ico.org.uk/for-the-public/online/cookies/"
+                className="link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ICO guidance on cookies
+              </a>
+              . How we handle personal information more widely is in our{" "}
               <Link href="/privacy-policy" className="link">
                 Privacy Policy
-              </Link>.
+              </Link>
+              .
+            </p>
+            <p className="mt-3">
+              Questions about cookies can go to{" "}
+              <a href={`mailto:${SITE_CONFIG.email}`} className="link">
+                {SITE_CONFIG.email}
+              </a>
+              .
             </p>
           </section>
         </div>

@@ -1,4 +1,5 @@
 import Button from "@/components/ui/Button";
+import { PRIMARY_CTA } from "@/lib/constants";
 
 interface CTASectionProps {
   headline?: string;
@@ -10,16 +11,18 @@ interface CTASectionProps {
 }
 
 /**
- * The guide's closing CTA band: white-to-band gradient, heading and body left,
- * the buttons right. Replaces the old glass card floating on a mesh gradient.
+ * The closing call to action. Most pages use the defaults, so the defaults are
+ * the most widely published copy on the site and follow the restrained CTA
+ * family in §18 and §34: an invitation to a professional discussion, with no
+ * offer, price, deadline or promise attached.
  */
 export default function CTASection({
-  headline = "See your path to certification in 30 minutes",
-  description = "No obligation. No sales pressure. In 30 minutes, you will know exactly where your compliance gaps are, which standards apply to your business and jurisdiction, and what a realistic timeline and cost looks like, wherever in the world you operate.",
-  primaryCta = "See Your 10-Week Certification Roadmap",
-  primaryHref = "/contact",
-  secondaryCta = "Talk to a Consultant",
-  secondaryHref = "/contact",
+  headline = "Discuss your requirements",
+  description = "Tell us what you need to achieve and where the requirement applies. We will establish the appropriate route and expertise for the engagement.",
+  primaryCta = PRIMARY_CTA.label,
+  primaryHref = PRIMARY_CTA.href,
+  secondaryCta,
+  secondaryHref,
 }: CTASectionProps) {
   return (
     <section className="sec band-closing">
@@ -27,19 +30,16 @@ export default function CTASection({
         <div className="flex flex-col justify-between gap-10 lg:flex-row lg:items-center lg:gap-16">
           <div>
             <h2 className="h2 max-w-[20ch]">{headline}</h2>
-            <p className="body mt-5">{description}</p>
+            <p className="body mt-5 max-w-[60ch]">{description}</p>
           </div>
 
-          <div className="shrink-0">
-            <div className="flex flex-wrap gap-3.5">
-              <Button href={primaryHref}>{primaryCta}</Button>
+          <div className="flex shrink-0 flex-wrap gap-3.5">
+            <Button href={primaryHref}>{primaryCta}</Button>
+            {secondaryCta && secondaryHref && (
               <Button href={secondaryHref} variant="secondary">
                 {secondaryCta}
               </Button>
-            </div>
-            <p className="small mt-5 max-w-[38ch]">
-              Most clients book their first paid engagement within 2 weeks of their gap analysis call.
-            </p>
+            )}
           </div>
         </div>
       </div>
