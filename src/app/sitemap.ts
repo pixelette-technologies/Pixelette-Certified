@@ -6,7 +6,7 @@ import { SITE_CONFIG } from "@/lib/constants";
 
 // Update when site structure or content materially changes, so lastmod stays
 // honest rather than stamping the request time on every fetch.
-const SITE_LAST_MODIFIED = new Date("2026-10-06");
+const SITE_LAST_MODIFIED = new Date("2026-10-14");
 
 /*
  * Every list below is derived from the data that drives the routes, so a page

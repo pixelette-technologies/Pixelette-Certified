@@ -1,9 +1,11 @@
 import Button from "@/components/ui/Button";
 import AssuranceSystem from "@/components/visuals/AssuranceSystem";
+import { HOMEPAGE_POSITIONING } from "@/content/company";
 import { PRIMARY_CTA } from "@/lib/constants";
 
 /**
  * Homepage hero. The H1 is the approved brand promise and is not rewritten.
+ * Kept in step with HOMEPAGE_POSITIONING (social card + alt text).
  * The diagram is the memorable element; the copy stays to two sentences.
  */
 export default function HomeHero() {
@@ -15,9 +17,7 @@ export default function HomeHero() {
             Cyber security, compliance and AI governance
           </p>
 
-          <h1 className="h1 mt-6 max-w-[16ch]">
-            Build the assurance your customers, regulators and partners expect
-          </h1>
+          <h1 className="h1 mt-6 max-w-[16ch]">{HOMEPAGE_POSITIONING.h1}</h1>
 
           <p className="lead mt-7 max-w-[48ch]">
             Pixelette Certified helps organisations meet cyber security, compliance and AI governance

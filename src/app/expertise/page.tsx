@@ -7,21 +7,15 @@ import { publishedCredentials, CREDENTIAL_FOOTNOTE } from "@/data/credentials";
 import { experienceAreas } from "@/data/experience";
 import { caseStudies, EVIDENCE_STATEMENT } from "@/data/caseStudies";
 import { markets, marketHref } from "@/data/markets";
-import { SITE_CONFIG } from "@/lib/constants";
+import { pageMetadata } from "@/lib/seo";
 import { ArrowRight } from "@/components/ui/icons";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Expertise",
   description:
     "Practitioner credentials, selected practitioner experience, and how specialist capability is assigned to the requirement.",
-  alternates: { canonical: `${SITE_CONFIG.url}/expertise` },
-  openGraph: {
-    title: "Expertise | Pixelette Certified",
-    description:
-      "Practitioner credentials and delivery experience across cyber security, privacy, AI governance and regulatory programmes.",
-    url: `${SITE_CONFIG.url}/expertise`,
-  },
-};
+  path: "/expertise",
+});
 
 const FRAMEWORKS: Record<string, string> = {
   uk: "ISO 27001, Cyber Essentials, UK GDPR, AI governance",

@@ -92,6 +92,7 @@ Build gotcha: `.next/dev/types` from an old dev session referenced deleted pages
 | 6 October 2026, later still | Public geography restated as international support, with the UK, United States and GCC kept as routes. See [[International-Positioning-2026-10-06]]. Go-live prerequisites unchanged. |
 | 6 October 2026, evening | Markets index map replaced by a scope instrument. See [[Markets-Header-2026-10-06]]. Homepage hero redrawn as orbiting marks. See [[Hero-Marks-2026-10-06]]. Go-live prerequisites unchanged. |
 | 12 October 2026 | Alice replaced by Pix C. New Supabase org/project wired; assistant and contact migrations applied. See [[Pix-C-and-Supabase-Cutover-2026-10-12]]. |
+| 14 October 2026 | Sitemap lastmod and Open Graph/Twitter wiring updated; obsolete OG asset removed; registered office aligned to Fulham Palace Road. See [[Metadata-and-Sitemap-2026-10-14]]. Go-live prerequisites unchanged. |
 
 ## Related
 
@@ -103,4 +104,5 @@ Build gotcha: `.next/dev/types` from an old dev session referenced deleted pages
 - [[Markets-Header-2026-10-06]]
 - [[Hero-Marks-2026-10-06]]
 - [[Pix-C-and-Supabase-Cutover-2026-10-12]]
+- [[Metadata-and-Sitemap-2026-10-14]]
 

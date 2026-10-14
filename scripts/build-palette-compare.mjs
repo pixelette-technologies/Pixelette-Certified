@@ -397,7 +397,7 @@ function composition() {
     <div class="cmp-footer-cols">
       <div>
         <div class="eyebrow">Pixelette Certified</div>
-        <p class="cmp-footer-body">Compliance. Governance. Cyber Trust.<br>66 Paul Street, London, EC2A 4NA</p>
+        <p class="cmp-footer-body">Compliance. Governance. Cyber Trust.<br>77 Fulham Palace Road, London W6 8JA</p>
       </div>
       <div><div class="eyebrow">Standards</div><p class="cmp-footer-links"><a href="#0" class="flink">ISO 27001</a><a href="#0" class="flink">ISO 42001</a><a href="#0" class="flink">ISO 9001</a></p></div>
       <div><div class="eyebrow">Services</div><p class="cmp-footer-links"><a href="#0" class="flink">vCISO</a><a href="#0" class="flink">vDPO</a><a href="#0" class="flink">Penetration testing</a></p></div>

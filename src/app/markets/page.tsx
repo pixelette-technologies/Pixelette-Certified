@@ -6,20 +6,14 @@ import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import CTASection from "@/components/sections/CTASection";
 import MarketsScope from "@/components/visuals/MarketsScope";
 import { ArrowRight } from "@/components/ui/icons";
-import { SITE_CONFIG } from "@/lib/constants";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Markets",
   description:
     "Cyber security, compliance and AI governance support for organisations internationally. Requirements often vary by jurisdiction.",
-  alternates: { canonical: `${SITE_CONFIG.url}/markets` },
-  openGraph: {
-    title: "Markets | Pixelette Certified",
-    description:
-      "Support for organisations internationally. Explore requirements in the United Kingdom, the United States, the GCC, or elsewhere.",
-    url: `${SITE_CONFIG.url}/markets`,
-  },
-};
+  path: "/markets",
+});
 
 /*
  * Market routes. The United Kingdom, the United States and the GCC explain

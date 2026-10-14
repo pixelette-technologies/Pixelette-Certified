@@ -8,27 +8,16 @@ import ExpertiseStrip from "@/components/sections/home/ExpertiseStrip";
 import CTASection from "@/components/sections/CTASection";
 import JsonLd from "@/components/seo/JsonLd";
 import { SITE_CONFIG } from "@/lib/constants";
+import { pageMetadata } from "@/lib/seo";
 
 /** Extractable for the site assistant KB builder (exact literals only). */
-const pageMetadata = (m: { title: string; description: string; path: string }) => m;
-const homeMeta = pageMetadata({
+export const metadata: Metadata = pageMetadata({
   title: "Pixelette Certified | Cyber Security, Compliance & AI Governance",
   description:
     "Pixelette Certified helps organisations meet cyber security, compliance and AI governance requirements. We support organisations internationally, adapting each engagement to the relevant standard, customer requirement and jurisdiction.",
   path: "/",
+  absoluteTitle: true,
 });
-
-export const metadata: Metadata = {
-  /*
-   * `absolute` because the root layout applies a "%s | Pixelette Certified"
-   * template, which would otherwise repeat the name.
-   */
-  title: {
-    absolute: homeMeta.title,
-  },
-  description: homeMeta.description,
-  alternates: { canonical: SITE_CONFIG.url },
-};
 
 const faqs = [
   {

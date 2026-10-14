@@ -10,6 +10,7 @@ import Button from "@/components/ui/Button";
 import CTASection from "@/components/sections/CTASection";
 import { ArrowRight } from "@/components/ui/icons";
 import { SITE_CONFIG, PRIMARY_CTA } from "@/lib/constants";
+import { pageMetadata } from "@/lib/seo";
 
 export const dynamicParams = false;
 
@@ -25,13 +26,11 @@ export async function generateMetadata({
   const { market: path } = await params;
   const market = getMarketByPath(path);
   if (!market) return {};
-  const url = `${SITE_CONFIG.url}/markets/${market.path}`;
-  return {
+  return pageMetadata({
     title: market.seo.title,
     description: market.seo.description,
-    alternates: { canonical: url },
-    openGraph: { title: `${market.seo.title} | Pixelette Certified`, description: market.seo.description, url },
-  };
+    path: `/markets/${market.path}`,
+  });
 }
 
 /*

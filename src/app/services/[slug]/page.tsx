@@ -5,6 +5,7 @@ import ServicePageTemplate from "@/components/sections/ServicePageTemplate";
 import JsonLd from "@/components/seo/JsonLd";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import { SITE_CONFIG } from "@/lib/constants";
+import { pageMetadata } from "@/lib/seo";
 
 /*
  * One route for every service, replacing eleven near-identical page files.
@@ -28,17 +29,11 @@ export async function generateMetadata({
   const service = getServiceBySlug(slug);
   if (!service) return {};
 
-  const url = `${SITE_CONFIG.url}/services/${service.slug}`;
-  return {
+  return pageMetadata({
     title: service.seo.title,
     description: service.seo.description,
-    openGraph: {
-      title: `${service.seo.title} | Pixelette Certified`,
-      description: service.seo.description,
-      url,
-    },
-    alternates: { canonical: url },
-  };
+    path: `/services/${service.slug}`,
+  });
 }
 
 export default async function ServicePage({

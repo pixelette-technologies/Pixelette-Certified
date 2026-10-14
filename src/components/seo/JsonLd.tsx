@@ -1,4 +1,4 @@
-import { SITE_CONFIG } from "@/lib/constants";
+import { OG_IMAGE, SITE_CONFIG } from "@/lib/constants";
 import { getCoreServices } from "@/data/services";
 
 interface JsonLdProps {
@@ -16,6 +16,7 @@ export default function JsonLd({ data }: JsonLdProps) {
 
 export function OrganizationSchema() {
   const url = SITE_CONFIG.url;
+  const office = SITE_CONFIG.registeredOffice;
   return (
     <JsonLd
       data={{
@@ -31,7 +32,7 @@ export function OrganizationSchema() {
           width: 200,
           height: 50,
         },
-        image: `${url}/images/og/default.png`,
+        image: `${url}${OG_IMAGE.url}`,
         email: SITE_CONFIG.email,
         /*
          * The closing sentence is the independence rule in machine-readable
@@ -43,11 +44,11 @@ export function OrganizationSchema() {
           "UK-headquartered cyber security, compliance, assurance and AI governance consultancy supporting organisations internationally. ISO 27001 readiness and implementation, AI governance and ISO 42001, SOC 2 readiness, cyber assurance and testing, privacy and data governance, vCISO and GRC advisory, business continuity and GCC regulatory compliance. Certification is issued by independent certification bodies and SOC 2 reports by licensed CPA firms, not by Pixelette Certified.",
         address: {
           "@type": "PostalAddress",
-          streetAddress: "66 Paul Street",
-          addressLocality: "London",
-          postalCode: "EC2A 4NA",
-          addressRegion: "England",
-          addressCountry: "GB",
+          streetAddress: office.streetAddress,
+          addressLocality: office.addressLocality,
+          postalCode: office.postalCode,
+          addressRegion: office.addressRegion,
+          addressCountry: office.addressCountry,
         },
         /*
          * No closed country list. A short areaServed of five countries would
@@ -82,7 +83,7 @@ export function OrganizationSchema() {
           "SAMA Cyber Security Framework",
           "Qatar National Information Assurance",
         ],
-        sameAs: ["https://www.linkedin.com/company/pixelette-certified", SITE_CONFIG.social.twitter],
+        sameAs: [SITE_CONFIG.social.linkedin, SITE_CONFIG.social.twitter],
         parentOrganization: {
           "@type": "Organization",
           name: "Pixelette Group",

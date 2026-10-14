@@ -16,7 +16,7 @@ import {
   filterInsights,
   insightsHref,
 } from "@/data/insights";
-import { SITE_CONFIG } from "@/lib/constants";
+import { pageMetadata } from "@/lib/seo";
 
 const INTRO =
   "Analysis of cyber security, compliance and AI governance requirements, including standards that apply internationally and rules that depend on the jurisdiction.";
@@ -39,38 +39,30 @@ export async function generateMetadata({
 
   if (q) {
     return {
-      title: "Insights",
-      description: INTRO,
+      ...pageMetadata({
+        title: "Insights",
+        description: INTRO,
+        path: "/blog",
+      }),
       robots: { index: false, follow: true },
     };
   }
 
   if (category) {
-    const url = `${SITE_CONFIG.url}${insightsHref({ category: categorySlug(category) })}`;
-    return {
+    const meta = pageMetadata({
       title: `${categoryLabel(category)} insights`,
       description: INTRO,
-      alternates: { canonical: url },
-      robots: more ? { index: false, follow: true } : undefined,
-      openGraph: {
-        title: `${categoryLabel(category)} | Insights | Pixelette Certified`,
-        description: INTRO,
-        url,
-      },
-    };
+      path: insightsHref({ category: categorySlug(category) }),
+    });
+    return more ? { ...meta, robots: { index: false, follow: true } } : meta;
   }
 
-  return {
+  const meta = pageMetadata({
     title: "Insights",
     description: INTRO,
-    alternates: { canonical: `${SITE_CONFIG.url}/blog` },
-    robots: more ? { index: false, follow: true } : undefined,
-    openGraph: {
-      title: "Insights | Pixelette Certified",
-      description: INTRO,
-      url: `${SITE_CONFIG.url}/blog`,
-    },
-  };
+    path: "/blog",
+  });
+  return more ? { ...meta, robots: { index: false, follow: true } } : meta;
 }
 
 export default async function InsightsPage({ searchParams }: { searchParams: Promise<Search> }) {

@@ -6,20 +6,14 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import CTASection from "@/components/sections/CTASection";
 import { ArrowRight } from "@/components/ui/icons";
-import { SITE_CONFIG } from "@/lib/constants";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Who We Help",
   description:
     "Typical requirements and relevant services for SaaS, AI, financial services, healthcare, professional services and regulated supply chains.",
-  alternates: { canonical: `${SITE_CONFIG.url}/who-we-help` },
-  openGraph: {
-    title: "Who We Help | Pixelette Certified",
-    description:
-      "Typical requirements and relevant services for six groups of organisations.",
-    url: `${SITE_CONFIG.url}/who-we-help`,
-  },
-};
+  path: "/who-we-help",
+});
 
 export default function WhoWeHelpPage() {
   return (

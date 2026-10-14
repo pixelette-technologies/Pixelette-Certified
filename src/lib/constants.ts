@@ -7,7 +7,15 @@ export const SITE_CONFIG = {
   email: "info@pixelettecertified.com",
   phone: "+44 20 7946 0958",
   phoneTel: "+442079460958",
+  /** Registered office. Footer, privacy, contact and schema. */
   address: "77 Fulham Palace Road, London W6 8JA",
+  registeredOffice: {
+    streetAddress: "77 Fulham Palace Road",
+    addressLocality: "London",
+    postalCode: "W6 8JA",
+    addressRegion: "England",
+    addressCountry: "GB",
+  },
 
   /*
    * GO-LIVE BLOCKER, and the last thing outstanding before this release ships.
@@ -30,9 +38,21 @@ export const SITE_CONFIG = {
   /** Navigation routes. Not a limit on where an engagement can be supported. */
   regions: ["United Kingdom", "United States", "GCC", "International"],
   social: {
-    linkedin: "https://www.linkedin.com/company/pixelette-certified/about/?viewAsMember=true",
+    linkedin: "https://www.linkedin.com/company/pixelette-certified",
     twitter: "https://twitter.com/pixelettecert",
   },
+} as const;
+
+/**
+ * Default share image — the build-time generated card at `/opengraph-image`.
+ * Prefer `pageMetadata` from `src/lib/seo.ts` on pages; this constant remains
+ * for Organization JSON-LD and any caller that needs the absolute path shape.
+ */
+export const OG_IMAGE = {
+  url: "/opengraph-image",
+  width: 1200,
+  height: 630,
+  alt: "Pixelette Certified",
 } as const;
 
 /**

@@ -1,9 +1,25 @@
 /**
- * Company facts for the site assistant — single source for Ada's context.
+ * Company facts for the site assistant — single source for Pix C context.
  * Keep in step with SITE_CONFIG in src/lib/constants.ts.
  */
 
 export const SITE_URL = 'https://pixelettecertified.com';
+
+/**
+ * Homepage H1, split for the default social card.
+ *
+ * The joined `h1` must stay byte-identical to the homepage `<h1>`. The three
+ * lines are the same words, broken for a 1200×630 thumbnail — change them
+ * together or the share card drifts from the page it advertises.
+ */
+export const HOMEPAGE_POSITIONING = {
+  lines: [
+    'Build the assurance',
+    'your customers, regulators',
+    'and partners expect',
+  ],
+  h1: 'Build the assurance your customers, regulators and partners expect',
+} as const;
 
 export const company = {
   legalName: 'Pixelette Certified',
@@ -13,6 +29,8 @@ export const company = {
   registeredIn: 'England and Wales',
   incorporated: 2024,
   addressLine: '77 Fulham Palace Road, London W6 8JA',
+  /** Same string as the homepage H1 / social-card alt. */
+  tagline: HOMEPAGE_POSITIONING.h1,
 } as const;
 
 /**
