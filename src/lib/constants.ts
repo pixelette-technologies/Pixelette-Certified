@@ -44,13 +44,12 @@ export const SITE_CONFIG = {
 } as const;
 
 /**
- * Default share image. Declared on the root layout (and re-applied wherever a
- * page overrides openGraph / twitter) so every indexable URL advertises the
- * same asset. Drop a 1200×630 PNG at this path when a new image is ready; until
- * then the meta tags remain so crawlers pick it up as soon as the file lands.
+ * Default share image — the build-time generated card at `/opengraph-image`.
+ * Prefer `pageMetadata` from `src/lib/seo.ts` on pages; this constant remains
+ * for Organization JSON-LD and any caller that needs the absolute path shape.
  */
 export const OG_IMAGE = {
-  url: "/images/og/default.png",
+  url: "/opengraph-image",
   width: 1200,
   height: 630,
   alt: "Pixelette Certified",

@@ -1,29 +1,18 @@
 import type { Metadata } from "next";
 import AboutContent from "./AboutContent";
 import JsonLd from "@/components/seo/JsonLd";
-import { OG_IMAGE, SITE_CONFIG } from "@/lib/constants";
+import { SITE_CONFIG } from "@/lib/constants";
+import { pageMetadata } from "@/lib/seo";
 
-const pageMetadata = (m: { title: string; description: string; path: string }) => m;
-pageMetadata({
+/** Extractable for the site assistant KB builder (exact literals only). */
+export const metadata: Metadata = pageMetadata({
   title: "About Pixelette Certified",
   description:
     "Pixelette Certified is a UK-headquartered cyber security, compliance, assurance and AI governance consultancy supporting organisations internationally.",
   path: "/about",
+  // Absolute: the title already carries the brand; the root template would repeat it.
+  absoluteTitle: true,
 });
-
-export const metadata: Metadata = {
-  title: "About",
-  description:
-    "Pixelette Certified is a UK-headquartered cyber security, compliance, assurance and AI governance consultancy supporting organisations internationally.",
-  openGraph: {
-    title: "About Pixelette Certified",
-    description:
-      "A UK-headquartered cyber security, compliance, assurance and AI governance consultancy supporting organisations internationally.",
-    images: [OG_IMAGE],
-  },
-  twitter: { card: "summary_large_image", images: [OG_IMAGE.url] },
-  alternates: { canonical: `${SITE_CONFIG.url}/about` },
-};
 
 const faqs = [
   {

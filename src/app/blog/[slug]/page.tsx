@@ -17,7 +17,8 @@ import {
   formatInsightDate,
   type InsightBlock,
 } from "@/data/insights";
-import { OG_IMAGE, SITE_CONFIG } from "@/lib/constants";
+import { SITE_CONFIG } from "@/lib/constants";
+import { pageMetadata } from "@/lib/seo";
 
 export const dynamicParams = false;
 
@@ -34,27 +35,16 @@ export async function generateMetadata({
   const insight = getInsight(slug);
   if (!insight) return {};
 
-  const url = `${SITE_CONFIG.url}/blog/${insight.slug}`;
-  return {
+  return pageMetadata({
     title: insight.seoTitle,
     description: insight.description,
-    alternates: { canonical: url },
-    openGraph: {
-      title: insight.title,
-      description: insight.description,
-      type: "article",
-      url,
+    path: `/blog/${insight.slug}`,
+    ogType: "article",
+    article: {
       publishedTime: insight.published,
       modifiedTime: insight.updated ?? insight.published,
-      images: [OG_IMAGE],
     },
-    twitter: {
-      card: "summary_large_image",
-      title: insight.title,
-      description: insight.description,
-      images: [OG_IMAGE.url],
-    },
-  };
+  });
 }
 
 function Block({ block }: { block: InsightBlock }) {

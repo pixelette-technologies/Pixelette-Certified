@@ -3,16 +3,14 @@ import Link from "next/link";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import PrivacyChoices from "@/components/privacy/PrivacyChoices";
 import { SITE_CONFIG } from "@/lib/constants";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Privacy Policy",
   description:
     "How Pixelette Certified uses, protects and manages personal information across this website and our work.",
-  robots: { index: true, follow: true },
-  alternates: {
-    canonical: `${SITE_CONFIG.url}/privacy-policy`,
-  },
-};
+  path: "/privacy-policy",
+});
 
 export default function PrivacyPolicyPage() {
   return (

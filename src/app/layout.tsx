@@ -8,10 +8,13 @@ import Footer from "@/components/layout/Footer";
 import ClientShell from "@/components/layout/ClientShell";
 import Analytics from "@/components/privacy/Analytics";
 import { OrganizationSchema } from "@/components/seo/JsonLd";
-import { OG_IMAGE, SITE_CONFIG } from "@/lib/constants";
+import { SITE_CONFIG } from "@/lib/constants";
+import { shareImageMetadata } from "@/lib/seo";
 import { AssistantBoundary } from "@/components/AssistantBoundary";
 import { SiteAssistant } from "@/components/SiteAssistant";
 import { pixContext } from "@/lib/pix/server-context";
+
+const { openGraphImages, twitterCard, twitterImages } = shareImageMetadata();
 
 /* Display serif. Variable, so one file covers 300/400/500, and the opsz axis
    (6..72) lets the browser adjust contrast with size — which is what the
@@ -72,15 +75,15 @@ export const metadata: Metadata = {
     siteName: SITE_CONFIG.name,
     title: "Pixelette Certified | Cyber Security, Compliance & AI Governance",
     description: SITE_CONFIG.description,
-    images: [OG_IMAGE],
+    images: openGraphImages,
   },
   twitter: {
-    card: "summary_large_image",
+    card: twitterCard,
     site: "@pixelettecert",
     creator: "@pixelettecert",
     title: "Pixelette Certified | Cyber Security, Compliance & AI Governance",
     description: SITE_CONFIG.description,
-    images: [OG_IMAGE.url],
+    images: twitterImages,
   },
   robots: {
     index: true,

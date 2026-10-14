@@ -7,30 +7,16 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
 import CTASection from "@/components/sections/CTASection";
 import { ArrowRight } from "@/components/ui/icons";
-import { OG_IMAGE, SITE_CONFIG } from "@/lib/constants";
+import { SITE_CONFIG } from "@/lib/constants";
+import { pageMetadata } from "@/lib/seo";
 
-const pageMetadata = (m: { title: string; description: string; path: string }) => m;
-pageMetadata({
+/** Extractable for the site assistant KB builder (exact literals only). */
+export const metadata: Metadata = pageMetadata({
   title: "Services",
   description:
     "ISO 27001, AI governance and ISO 42001, SOC 2 readiness, cyber assurance and testing, privacy, vCISO, business continuity and GCC regulatory compliance.",
   path: "/services",
 });
-
-export const metadata: Metadata = {
-  title: "Services",
-  description:
-    "ISO 27001, AI governance and ISO 42001, SOC 2 readiness, cyber assurance and testing, privacy, vCISO, business continuity and GCC regulatory compliance.",
-  openGraph: {
-    title: "Services | Pixelette Certified",
-    description:
-      "Cyber security, compliance, assurance and AI governance services. Many are available internationally, and jurisdiction-specific requirements are scoped to the applicable law.",
-    url: `${SITE_CONFIG.url}/services`,
-    images: [OG_IMAGE],
-  },
-  twitter: { card: "summary_large_image", images: [OG_IMAGE.url] },
-  alternates: { canonical: `${SITE_CONFIG.url}/services` },
-};
 
 const faqs = [
   {
