@@ -34,35 +34,29 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const params = await searchParams;
   const q = first(params.q)?.trim();
-  const more = first(params.more) === "1";
   const category = categoryFromParam(first(params.category));
 
   if (q) {
-    return {
-      ...pageMetadata({
-        title: "Insights",
-        description: INTRO,
-        path: "/blog",
-      }),
-      robots: { index: false, follow: true },
-    };
+    return pageMetadata({
+      title: "Insights",
+      description: INTRO,
+      path: "/blog",
+    });
   }
 
   if (category) {
-    const meta = pageMetadata({
+    return pageMetadata({
       title: `${categoryLabel(category)} insights`,
       description: INTRO,
       path: insightsHref({ category: categorySlug(category) }),
     });
-    return more ? { ...meta, robots: { index: false, follow: true } } : meta;
   }
 
-  const meta = pageMetadata({
+  return pageMetadata({
     title: "Insights",
     description: INTRO,
     path: "/blog",
   });
-  return more ? { ...meta, robots: { index: false, follow: true } } : meta;
 }
 
 export default async function InsightsPage({ searchParams }: { searchParams: Promise<Search> }) {
