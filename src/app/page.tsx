@@ -7,7 +7,7 @@ import AiGovernance from "@/components/sections/home/AiGovernance";
 import ExpertiseStrip from "@/components/sections/home/ExpertiseStrip";
 import CTASection from "@/components/sections/CTASection";
 import JsonLd from "@/components/seo/JsonLd";
-import { SITE_CONFIG } from "@/lib/constants";
+import { OG_IMAGE, SITE_CONFIG } from "@/lib/constants";
 
 /** Extractable for the site assistant KB builder (exact literals only). */
 const pageMetadata = (m: { title: string; description: string; path: string }) => m;
@@ -28,6 +28,18 @@ export const metadata: Metadata = {
   },
   description: homeMeta.description,
   alternates: { canonical: SITE_CONFIG.url },
+  openGraph: {
+    title: homeMeta.title,
+    description: homeMeta.description,
+    url: SITE_CONFIG.url,
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: homeMeta.title,
+    description: homeMeta.description,
+    images: [OG_IMAGE.url],
+  },
 };
 
 const faqs = [

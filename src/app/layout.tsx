@@ -8,7 +8,7 @@ import Footer from "@/components/layout/Footer";
 import ClientShell from "@/components/layout/ClientShell";
 import Analytics from "@/components/privacy/Analytics";
 import { OrganizationSchema } from "@/components/seo/JsonLd";
-import { SITE_CONFIG } from "@/lib/constants";
+import { OG_IMAGE, SITE_CONFIG } from "@/lib/constants";
 import { AssistantBoundary } from "@/components/AssistantBoundary";
 import { SiteAssistant } from "@/components/SiteAssistant";
 import { pixContext } from "@/lib/pix/server-context";
@@ -72,14 +72,7 @@ export const metadata: Metadata = {
     siteName: SITE_CONFIG.name,
     title: "Pixelette Certified | Cyber Security, Compliance & AI Governance",
     description: SITE_CONFIG.description,
-    images: [
-      {
-        url: "/images/og/default.png",
-        width: 1200,
-        height: 630,
-        alt: "Pixelette Certified",
-      },
-    ],
+    images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
@@ -87,7 +80,7 @@ export const metadata: Metadata = {
     creator: "@pixelettecert",
     title: "Pixelette Certified | Cyber Security, Compliance & AI Governance",
     description: SITE_CONFIG.description,
-    images: ["/images/og/default.png"],
+    images: [OG_IMAGE.url],
   },
   robots: {
     index: true,

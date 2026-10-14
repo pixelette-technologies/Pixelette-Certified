@@ -7,7 +7,7 @@ import { publishedCredentials, CREDENTIAL_FOOTNOTE } from "@/data/credentials";
 import { experienceAreas } from "@/data/experience";
 import { caseStudies, EVIDENCE_STATEMENT } from "@/data/caseStudies";
 import { markets, marketHref } from "@/data/markets";
-import { SITE_CONFIG } from "@/lib/constants";
+import { OG_IMAGE, SITE_CONFIG } from "@/lib/constants";
 import { ArrowRight } from "@/components/ui/icons";
 
 export const metadata: Metadata = {
@@ -20,7 +20,9 @@ export const metadata: Metadata = {
     description:
       "Practitioner credentials and delivery experience across cyber security, privacy, AI governance and regulatory programmes.",
     url: `${SITE_CONFIG.url}/expertise`,
+    images: [OG_IMAGE],
   },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE.url] },
 };
 
 const FRAMEWORKS: Record<string, string> = {

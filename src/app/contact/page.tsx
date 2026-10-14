@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import ContactContent from "./ContactContent";
 import JsonLd from "@/components/seo/JsonLd";
-import { SITE_CONFIG } from "@/lib/constants";
+import { OG_IMAGE, SITE_CONFIG } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -11,7 +11,9 @@ export const metadata: Metadata = {
     title: "Contact | Pixelette Certified",
     description: "Tell us what you need to achieve and where the requirement applies.",
     url: `${SITE_CONFIG.url}/contact`,
+    images: [OG_IMAGE],
   },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE.url] },
   alternates: { canonical: `${SITE_CONFIG.url}/contact` },
 };
 

@@ -6,7 +6,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import CTASection from "@/components/sections/CTASection";
 import { ArrowRight } from "@/components/ui/icons";
-import { SITE_CONFIG } from "@/lib/constants";
+import { OG_IMAGE, SITE_CONFIG } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Who We Help",
@@ -18,7 +18,9 @@ export const metadata: Metadata = {
     description:
       "Typical requirements and relevant services for six groups of organisations.",
     url: `${SITE_CONFIG.url}/who-we-help`,
+    images: [OG_IMAGE],
   },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE.url] },
 };
 
 export default function WhoWeHelpPage() {

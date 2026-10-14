@@ -16,7 +16,7 @@ import {
   filterInsights,
   insightsHref,
 } from "@/data/insights";
-import { SITE_CONFIG } from "@/lib/constants";
+import { OG_IMAGE, SITE_CONFIG } from "@/lib/constants";
 
 const INTRO =
   "Analysis of cyber security, compliance and AI governance requirements, including standards that apply internationally and rules that depend on the jurisdiction.";
@@ -56,7 +56,9 @@ export async function generateMetadata({
         title: `${categoryLabel(category)} | Insights | Pixelette Certified`,
         description: INTRO,
         url,
+        images: [OG_IMAGE],
       },
+      twitter: { card: "summary_large_image", images: [OG_IMAGE.url] },
     };
   }
 
@@ -69,7 +71,9 @@ export async function generateMetadata({
       title: "Insights | Pixelette Certified",
       description: INTRO,
       url: `${SITE_CONFIG.url}/blog`,
+      images: [OG_IMAGE],
     },
+    twitter: { card: "summary_large_image", images: [OG_IMAGE.url] },
   };
 }
 

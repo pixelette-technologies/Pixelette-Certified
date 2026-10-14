@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     "How Pixelette Certified uses, protects and manages personal information across this website and our work.",
   robots: { index: true, follow: true },
   alternates: {
-    canonical: "https://pixelettecertified.com/privacy-policy",
+    canonical: `${SITE_CONFIG.url}/privacy-policy`,
   },
 };
 

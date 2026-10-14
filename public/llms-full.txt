@@ -1,6 +1,6 @@
 # Pixelette Certified: full page directory
 
-> UK-headquartered cyber security, compliance, assurance and AI governance consultancy supporting organisations internationally. Office: 66 Paul Street, London, EC2A 4NA. Contact: info@pixelettecertified.com.
+> UK-headquartered cyber security, compliance, assurance and AI governance consultancy supporting organisations internationally. Office: 77 Fulham Palace Road, London W6 8JA. Contact: info@pixelettecertified.com.
 
 Pixelette Certified is a consultancy. It is not a certification body and does not issue certificates, SOC 2 reports or scheme certifications; those are issued by independent certification bodies, licensed CPA firms and authorised Certification Bodies respectively. Practitioner credentials are held by individuals within its specialist delivery network, not by the company. See /llms.txt for the summary version.
 
@@ -34,6 +34,7 @@ Pixelette Certified is a consultancy. It is not a certification body and does no
 - [Compliance and assurance for UK organisations](https://pixelettecertified.com/markets/united-kingdom)
 - [Security, compliance and assurance for US organisations](https://pixelettecertified.com/markets/united-states)
 - [Cyber, compliance and regulatory assurance across the GCC](https://pixelettecertified.com/markets/gcc)
+- [International compliance and assurance](https://pixelettecertified.com/markets/international)
 
 ## Insights
 

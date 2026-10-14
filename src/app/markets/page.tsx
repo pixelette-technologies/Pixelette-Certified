@@ -6,7 +6,7 @@ import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import CTASection from "@/components/sections/CTASection";
 import MarketsScope from "@/components/visuals/MarketsScope";
 import { ArrowRight } from "@/components/ui/icons";
-import { SITE_CONFIG } from "@/lib/constants";
+import { OG_IMAGE, SITE_CONFIG } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Markets",
@@ -18,7 +18,9 @@ export const metadata: Metadata = {
     description:
       "Support for organisations internationally. Explore requirements in the United Kingdom, the United States, the GCC, or elsewhere.",
     url: `${SITE_CONFIG.url}/markets`,
+    images: [OG_IMAGE],
   },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE.url] },
 };
 
 /*

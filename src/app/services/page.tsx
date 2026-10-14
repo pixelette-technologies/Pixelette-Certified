@@ -7,7 +7,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
 import CTASection from "@/components/sections/CTASection";
 import { ArrowRight } from "@/components/ui/icons";
-import { SITE_CONFIG } from "@/lib/constants";
+import { OG_IMAGE, SITE_CONFIG } from "@/lib/constants";
 
 const pageMetadata = (m: { title: string; description: string; path: string }) => m;
 pageMetadata({
@@ -26,7 +26,9 @@ export const metadata: Metadata = {
     description:
       "Cyber security, compliance, assurance and AI governance services. Many are available internationally, and jurisdiction-specific requirements are scoped to the applicable law.",
     url: `${SITE_CONFIG.url}/services`,
+    images: [OG_IMAGE],
   },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE.url] },
   alternates: { canonical: `${SITE_CONFIG.url}/services` },
 };
 

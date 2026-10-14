@@ -9,7 +9,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
 import CTASection from "@/components/sections/CTASection";
 import { ArrowRight } from "@/components/ui/icons";
-import { SITE_CONFIG, PRIMARY_CTA } from "@/lib/constants";
+import { OG_IMAGE, SITE_CONFIG, PRIMARY_CTA } from "@/lib/constants";
 
 export const dynamicParams = false;
 
@@ -30,7 +30,13 @@ export async function generateMetadata({
     title: market.seo.title,
     description: market.seo.description,
     alternates: { canonical: url },
-    openGraph: { title: `${market.seo.title} | Pixelette Certified`, description: market.seo.description, url },
+    openGraph: {
+      title: `${market.seo.title} | Pixelette Certified`,
+      description: market.seo.description,
+      url,
+      images: [OG_IMAGE],
+    },
+    twitter: { card: "summary_large_image", images: [OG_IMAGE.url] },
   };
 }
 

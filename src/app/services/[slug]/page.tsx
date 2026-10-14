@@ -4,7 +4,7 @@ import { services, getServiceBySlug } from "@/data/services";
 import ServicePageTemplate from "@/components/sections/ServicePageTemplate";
 import JsonLd from "@/components/seo/JsonLd";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
-import { SITE_CONFIG } from "@/lib/constants";
+import { OG_IMAGE, SITE_CONFIG } from "@/lib/constants";
 
 /*
  * One route for every service, replacing eleven near-identical page files.
@@ -36,7 +36,9 @@ export async function generateMetadata({
       title: `${service.seo.title} | Pixelette Certified`,
       description: service.seo.description,
       url,
+      images: [OG_IMAGE],
     },
+    twitter: { card: "summary_large_image", images: [OG_IMAGE.url] },
     alternates: { canonical: url },
   };
 }

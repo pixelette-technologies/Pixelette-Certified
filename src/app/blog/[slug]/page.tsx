@@ -17,7 +17,7 @@ import {
   formatInsightDate,
   type InsightBlock,
 } from "@/data/insights";
-import { SITE_CONFIG } from "@/lib/constants";
+import { OG_IMAGE, SITE_CONFIG } from "@/lib/constants";
 
 export const dynamicParams = false;
 
@@ -46,8 +46,14 @@ export async function generateMetadata({
       url,
       publishedTime: insight.published,
       modifiedTime: insight.updated ?? insight.published,
+      images: [OG_IMAGE],
     },
-    twitter: { card: "summary_large_image", title: insight.title, description: insight.description },
+    twitter: {
+      card: "summary_large_image",
+      title: insight.title,
+      description: insight.description,
+      images: [OG_IMAGE.url],
+    },
   };
 }
 

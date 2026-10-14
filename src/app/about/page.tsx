@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import AboutContent from "./AboutContent";
 import JsonLd from "@/components/seo/JsonLd";
-import { SITE_CONFIG } from "@/lib/constants";
+import { OG_IMAGE, SITE_CONFIG } from "@/lib/constants";
 
 const pageMetadata = (m: { title: string; description: string; path: string }) => m;
 pageMetadata({
@@ -19,7 +19,9 @@ export const metadata: Metadata = {
     title: "About Pixelette Certified",
     description:
       "A UK-headquartered cyber security, compliance, assurance and AI governance consultancy supporting organisations internationally.",
+    images: [OG_IMAGE],
   },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE.url] },
   alternates: { canonical: `${SITE_CONFIG.url}/about` },
 };
 

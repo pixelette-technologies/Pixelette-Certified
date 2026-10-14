@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     "How Pixelette Certified uses cookies and similar technologies on pixelettecertified.com.",
   robots: { index: true, follow: true },
   alternates: {
-    canonical: "https://pixelettecertified.com/cookie-policy",
+    canonical: `${SITE_CONFIG.url}/cookie-policy`,
   },
 };
 
